@@ -20,9 +20,9 @@ var _StyledGrommet = require('./StyledGrommet');
 
 var _StyledGrommet2 = _interopRequireDefault(_StyledGrommet);
 
-var _theme = require('../../theme');
+var _themes = require('../../themes');
 
-var _theme2 = _interopRequireDefault(_theme);
+var _themes2 = _interopRequireDefault(_themes);
 
 var _doc = require('./doc');
 
@@ -51,7 +51,7 @@ var Grommet = function (_Component) {
     var theme = this.props.theme;
 
 
-    var globalTheme = JSON.parse(JSON.stringify(_theme2.default));
+    var globalTheme = JSON.parse(JSON.stringify(_themes2.default));
     return {
       theme: (0, _deepAssign2.default)(globalTheme, theme)
     };
@@ -63,7 +63,7 @@ var Grommet = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'theme']);
 
-    var globalTheme = JSON.parse(JSON.stringify(_theme2.default));
+    var globalTheme = JSON.parse(JSON.stringify(_themes2.default));
     return _react2.default.createElement(
       _StyledGrommet2.default,
       _extends({}, rest, { theme: (0, _deepAssign2.default)(globalTheme, theme) }),

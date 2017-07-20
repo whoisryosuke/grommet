@@ -21,10 +21,8 @@ Object.defineProperty(exports, 'Grommet', {
   }
 });
 
-var _theme = require('./theme');
+var _themes = require('./themes');
 
 var theme = exports.theme = {
-  vanilla: _theme.vanilla, hpe: _theme.hpe
+  vanilla: _themes.vanilla, hpe: _themes.hpe
 };
-
-exports.default = _grommet.Grommet;
