@@ -132,6 +132,8 @@ Button.contextTypes = {
 };
 
 
-(0, _doc2.default)(Button);
+if (process.env.NODE_ENV !== 'production') {
+  (0, _doc2.default)(Button);
+}
 
 exports.default = (0, _hocs.withFocus)(Button);

@@ -114,6 +114,8 @@ Button.contextTypes = {
 };
 
 
-doc(Button);
+if (process.env.NODE_ENV !== 'production') {
+  doc(Button);
+}
 
 export default withFocus(Button);
