@@ -1,7 +1,4 @@
-'use strict';
-
-exports.__esModule = true;
-exports.default = {
+export default {
   brand: {
     font: {
       family: "'Metric', Arial, sans-serif",

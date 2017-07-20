@@ -1,5 +1,19 @@
-import Button from './Button';
+'use strict';
 
-export { default as Button } from './Button';
+exports.__esModule = true;
+exports.Button = undefined;
 
-export default Button;
+var _Button = require('./Button');
+
+Object.defineProperty(exports, 'Button', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Button).default;
+  }
+});
+
+var _Button2 = _interopRequireDefault(_Button);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Button2.default;

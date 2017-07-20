@@ -1,32 +1,4 @@
-'use strict';
-
-exports.__esModule = true;
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _deepAssign = require('deep-assign');
-
-var _deepAssign2 = _interopRequireDefault(_deepAssign);
-
-var _StyledButton = require('./StyledButton');
-
-var _StyledButton2 = _interopRequireDefault(_StyledButton);
-
-var _hocs = require('../hocs');
-
-var _doc = require('./doc');
-
-var _doc2 = _interopRequireDefault(_doc);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
@@ -35,6 +7,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+import React, { Children, Component } from 'react';
+import PropTypes from 'prop-types';
+import deepAssign from 'deep-assign';
+
+import StyledButton, { StyledLabel, StyledIcon } from './StyledButton';
+
+import { withFocus } from '../hocs';
+
+import doc from './doc';
 
 var Button = function (_Component) {
   _inherits(Button, _Component);
@@ -63,9 +45,9 @@ var Button = function (_Component) {
 
     var contextTheme = this.context.theme;
 
-    var localTheme = (0, _deepAssign2.default)(contextTheme, theme);
+    var localTheme = deepAssign(contextTheme, theme);
 
-    var Tag = _StyledButton2.default;
+    var Tag = StyledButton;
     if (href) {
       Tag = Tag.withComponent('a');
     }
@@ -82,8 +64,8 @@ var Button = function (_Component) {
 
     var buttonIcon = void 0;
     if (icon) {
-      buttonIcon = _react2.default.createElement(
-        _StyledButton.StyledIcon,
+      buttonIcon = React.createElement(
+        StyledIcon,
         { theme: localTheme },
         icon
       );
@@ -91,8 +73,8 @@ var Button = function (_Component) {
 
     var buttonLabel = void 0;
     if (label) {
-      buttonLabel = _react2.default.createElement(
-        _StyledButton.StyledLabel,
+      buttonLabel = React.createElement(
+        StyledLabel,
         { theme: localTheme },
         label
       );
@@ -103,9 +85,9 @@ var Button = function (_Component) {
 
     var disabled = !href && !onClick && ['reset', 'submit'].indexOf(type) === -1;
 
-    var plainProp = plain || box || _react.Children.count(children) > 0 || icon && !label;
+    var plainProp = plain || box || Children.count(children) > 0 || icon && !label;
 
-    return _react2.default.createElement(
+    return React.createElement(
       Tag,
       _extends({}, rest, boxProps, {
         'aria-label': a11yTitle,
@@ -125,13 +107,13 @@ var Button = function (_Component) {
   };
 
   return Button;
-}(_react.Component);
+}(Component);
 
 Button.contextTypes = {
-  theme: _propTypes2.default.object.isRequired
+  theme: PropTypes.object.isRequired
 };
 
 
-(0, _doc2.default)(Button);
+doc(Button);
 
-exports.default = (0, _hocs.withFocus)(Button);
+export default withFocus(Button);

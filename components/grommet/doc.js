@@ -1,15 +1,19 @@
-import { schema, PropTypes } from 'react-desc';
+'use strict';
 
-export default (function (Grommet) {
-  return schema(Grommet, {
+exports.__esModule = true;
+
+var _reactDesc = require('react-desc');
+
+exports.default = function (Grommet) {
+  return (0, _reactDesc.schema)(Grommet, {
     description: 'This is the primary Grommet container outer.',
     usage: 'import { Grommet } from \'grommet\';\n  <Grommet centered={true}>...</Grommet>',
     props: {
-      centered: [PropTypes.bool, 'Whether to centralize or not the content inside the container.', {
+      centered: [_reactDesc.PropTypes.bool, 'Whether to centralize or not the content inside the container.', {
         defaultProp: true
       }],
-      inline: [PropTypes.bool, 'Whether to render the app relative to the container (inline) or to the browser window.'],
-      theme: [PropTypes.object, 'Custom styles for Grommet app component.']
+      inline: [_reactDesc.PropTypes.bool, 'Whether to render the app relative to the container (inline) or to the browser window.'],
+      theme: [_reactDesc.PropTypes.object, 'Custom styles for Grommet app component.']
     }
   });
-});
+};

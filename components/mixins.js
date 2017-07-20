@@ -1,23 +1,25 @@
-var _templateObject = _taggedTemplateLiteral(['\n    font-size: ', ';\n    line-height: ', ';\n  '], ['\n    font-size: ', ';\n    line-height: ', ';\n  ']);
+'use strict';
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+exports.__esModule = true;
+exports.fontSize = fontSize;
+exports.lapAndUp = lapAndUp;
 
-import { css } from 'styled-components';
+var _styledComponents = require('styled-components');
 
-import { parseMetricToInt } from './utils';
+var _utils = require('./utils');
 
 var lapStart = '481px';
 
-export function fontSize(size, lineHeight) {
-  return css(_templateObject, function (props) {
-    return parseMetricToInt(size) / parseMetricToInt(props.theme.brand.font.size) * 1 + 'rem';
+function fontSize(size, lineHeight) {
+  return (0, _styledComponents.css)(['font-size:', ';line-height:', ';'], function (props) {
+    return (0, _utils.parseMetricToInt)(size) / (0, _utils.parseMetricToInt)(props.theme.brand.font.size) * 1 + 'rem';
   }, function (props) {
-    return lineHeight || Math.ceil(parseMetricToInt(size) / parseMetricToInt(props.theme.brand.lineHeight)) * (parseMetricToInt(props.theme.brand.lineHeight) / parseMetricToInt(size)) + 'px';
+    return lineHeight || Math.ceil((0, _utils.parseMetricToInt)(size) / (0, _utils.parseMetricToInt)(props.theme.brand.lineHeight)) * ((0, _utils.parseMetricToInt)(props.theme.brand.lineHeight) / (0, _utils.parseMetricToInt)(size)) + 'px';
   });
 }
 
-export function lapAndUp(content) {
+function lapAndUp(content) {
   return '\n    @media only screen and (min-width:' + lapStart + ') { ' + content + '; }\n  ';
 }
 
-export default { lapAndUp: lapAndUp };
+exports.default = { lapAndUp: lapAndUp };

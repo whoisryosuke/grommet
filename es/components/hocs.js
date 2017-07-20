@@ -1,15 +1,4 @@
-'use strict';
-
-exports.__esModule = true;
-exports.withFocus = undefined;
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -17,7 +6,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
+import React, { Component } from 'react';
+
+export var withFocus = function withFocus(WrappedComponent) {
   var FocusableComponent = function (_Component) {
     _inherits(FocusableComponent, _Component);
 
@@ -61,7 +52,7 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
 
       var focus = this.state.focus;
 
-      return _react2.default.createElement(WrappedComponent, _extends({
+      return React.createElement(WrappedComponent, _extends({
         focus: focus
       }, this.props, {
         onMouseDown: function onMouseDown(event) {
@@ -100,9 +91,9 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
     };
 
     return FocusableComponent;
-  }(_react.Component);
+  }(Component);
 
   return FocusableComponent;
 };
 
-exports.default = { withFocus: withFocus };
+export default { withFocus: withFocus };

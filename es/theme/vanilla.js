@@ -1,6 +1,3 @@
-'use strict';
-
-exports.__esModule = true;
 var accentColors = ['#00CCEB', '#FF7D28'];
 var neutralColors = ['#0A64A0', '#DC2878', '#501EB4', '#49516F'];
 var statusColors = {
@@ -20,7 +17,7 @@ var baseSpacing = 24;
 
 var borderWidth = 2;
 
-exports.default = {
+export default {
   brand: {
     centerColumnWidth: baseSpacing * 48 + 'px',
     control: {

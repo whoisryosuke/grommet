@@ -1,34 +1,4 @@
-'use strict';
-
-exports.__esModule = true;
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _deepAssign = require('deep-assign');
-
-var _deepAssign2 = _interopRequireDefault(_deepAssign);
-
-var _StyledGrommet = require('./StyledGrommet');
-
-var _StyledGrommet2 = _interopRequireDefault(_StyledGrommet);
-
-var _theme = require('../../theme');
-
-var _theme2 = _interopRequireDefault(_theme);
-
-var _doc = require('./doc');
-
-var _doc2 = _interopRequireDefault(_doc);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
@@ -37,6 +7,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import deepAssign from 'deep-assign';
+
+import StyledGrommet from './StyledGrommet';
+
+import baseTheme from '../../theme';
+
+import doc from './doc';
 
 var Grommet = function (_Component) {
   _inherits(Grommet, _Component);
@@ -51,9 +31,9 @@ var Grommet = function (_Component) {
     var theme = this.props.theme;
 
 
-    var globalTheme = JSON.parse(JSON.stringify(_theme2.default));
+    var globalTheme = JSON.parse(JSON.stringify(baseTheme));
     return {
-      theme: (0, _deepAssign2.default)(globalTheme, theme)
+      theme: deepAssign(globalTheme, theme)
     };
   };
 
@@ -63,19 +43,19 @@ var Grommet = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'theme']);
 
-    var globalTheme = JSON.parse(JSON.stringify(_theme2.default));
-    return _react2.default.createElement(
-      _StyledGrommet2.default,
-      _extends({}, rest, { theme: (0, _deepAssign2.default)(globalTheme, theme) }),
+    var globalTheme = JSON.parse(JSON.stringify(baseTheme));
+    return React.createElement(
+      StyledGrommet,
+      _extends({}, rest, { theme: deepAssign(globalTheme, theme) }),
       children
     );
   };
 
   return Grommet;
-}(_react.Component);
+}(Component);
 
 Grommet.childContextTypes = {
-  theme: _propTypes2.default.object
+  theme: PropTypes.object
 };
 Grommet.defaultProps = {
   centered: true,
@@ -83,6 +63,6 @@ Grommet.defaultProps = {
 };
 
 
-(0, _doc2.default)(Grommet);
+doc(Grommet);
 
-exports.default = Grommet;
+export default Grommet;

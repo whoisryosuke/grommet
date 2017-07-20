@@ -1,20 +1,23 @@
-var _templateObject = _taggedTemplateLiteral(['\n  border-color: ', ';\n  box-shadow: 0 0 1px 1px ', ';\n'], ['\n  border-color: ', ';\n  box-shadow: 0 0 1px 1px ', ';\n']);
+'use strict';
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+exports.__esModule = true;
+exports.focusStyle = undefined;
+exports.parseMetricToInt = parseMetricToInt;
+exports.findAllByType = findAllByType;
 
-import { css } from 'styled-components';
+var _styledComponents = require('styled-components');
 
-export var focusStyle = css(_templateObject, function (props) {
+var focusStyle = exports.focusStyle = (0, _styledComponents.css)(['border-color:', ';box-shadow:0 0 1px 1px ', ';'], function (props) {
   return props.theme.brand.focus.border.color || props.theme.colors.accent[0];
 }, function (props) {
   return props.theme.brand.focus.border.color || props.theme.colors.accent[0];
 });
 
-export function parseMetricToInt(fontAsString) {
+function parseMetricToInt(fontAsString) {
   return parseInt(fontAsString.replace(/[^0-9]/g, ''), 10);
 }
 
-export function findAllByType(component, type) {
+function findAllByType(component, type) {
   var matches = [];
 
   if (component.type === type) {
@@ -30,4 +33,4 @@ export function findAllByType(component, type) {
   return matches;
 }
 
-export default { findAllByType: findAllByType, focusStyle: focusStyle, parseMetricToInt: parseMetricToInt };
+exports.default = { findAllByType: findAllByType, focusStyle: focusStyle, parseMetricToInt: parseMetricToInt };

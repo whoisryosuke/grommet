@@ -1,6 +1,28 @@
-import vanilla from './vanilla';
+'use strict';
 
-export { default as vanilla } from './vanilla';
-export { default as hpe } from './hpe';
+exports.__esModule = true;
+exports.hpe = exports.vanilla = undefined;
 
-export default vanilla;
+var _vanilla = require('./vanilla');
+
+Object.defineProperty(exports, 'vanilla', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_vanilla).default;
+  }
+});
+
+var _hpe = require('./hpe');
+
+Object.defineProperty(exports, 'hpe', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_hpe).default;
+  }
+});
+
+var _vanilla2 = _interopRequireDefault(_vanilla);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vanilla2.default;

@@ -1,11 +1,30 @@
-import { hpe, vanilla } from './theme';
-import { Grommet } from './components/grommet';
+'use strict';
 
-export { Button } from './components/button';
-export { Grommet } from './components/grommet';
+exports.__esModule = true;
+exports.theme = exports.Grommet = exports.Button = undefined;
 
-export var theme = {
-  vanilla: vanilla, hpe: hpe
+var _button = require('./components/button');
+
+Object.defineProperty(exports, 'Button', {
+  enumerable: true,
+  get: function get() {
+    return _button.Button;
+  }
+});
+
+var _grommet = require('./components/grommet');
+
+Object.defineProperty(exports, 'Grommet', {
+  enumerable: true,
+  get: function get() {
+    return _grommet.Grommet;
+  }
+});
+
+var _theme = require('./theme');
+
+var theme = exports.theme = {
+  vanilla: _theme.vanilla, hpe: _theme.hpe
 };
 
-export default Grommet;
+exports.default = _grommet.Grommet;
