@@ -1,28 +1,27 @@
 'use strict';
 
 exports.__esModule = true;
-exports.theme = exports.Grommet = exports.Button = undefined;
 
-var _button = require('./components/button');
+var _components = require('./components');
 
-Object.defineProperty(exports, 'Button', {
-  enumerable: true,
-  get: function get() {
-    return _button.Button;
-  }
-});
-
-var _grommet = require('./components/grommet');
-
-Object.defineProperty(exports, 'Grommet', {
-  enumerable: true,
-  get: function get() {
-    return _grommet.Grommet;
-  }
+Object.keys(_components).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _components[key];
+    }
+  });
 });
 
 var _themes = require('./themes');
 
-var theme = exports.theme = {
-  vanilla: _themes.vanilla, hpe: _themes.hpe
-};
+Object.keys(_themes).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _themes[key];
+    }
+  });
+});
