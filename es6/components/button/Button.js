@@ -104,6 +104,13 @@ var Button = function (_Component) {
   return Button;
 }(Component);
 
-doc(Button);
+Button.defaultProps = {
+  type: 'button'
+};
+
+
+if (process.env.NODE_ENV !== 'production') {
+  doc(Button);
+}
 
 export default compose(withFocus, withTheme)(Button);

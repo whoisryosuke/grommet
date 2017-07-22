@@ -117,6 +117,13 @@ var Button = function (_Component) {
   return Button;
 }(_react.Component);
 
-(0, _doc2.default)(Button);
+Button.defaultProps = {
+  type: 'button'
+};
+
+
+if (process.env.NODE_ENV !== 'production') {
+  (0, _doc2.default)(Button);
+}
 
 exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme)(Button);
