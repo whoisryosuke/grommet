@@ -1,5 +1,7 @@
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -7,6 +9,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import deepAssign from 'deep-assign';
 
 export var withFocus = function withFocus(WrappedComponent) {
   var FocusableComponent = function (_Component) {
@@ -96,4 +100,37 @@ export var withFocus = function withFocus(WrappedComponent) {
   return FocusableComponent;
 };
 
-export default { withFocus: withFocus };
+var withTheme = function withTheme(WrappedComponent) {
+  var ThemedComponent = function (_Component2) {
+    _inherits(ThemedComponent, _Component2);
+
+    function ThemedComponent() {
+      _classCallCheck(this, ThemedComponent);
+
+      return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
+    }
+
+    ThemedComponent.prototype.render = function render() {
+      var _props = this.props,
+          theme = _props.theme,
+          rest = _objectWithoutProperties(_props, ['theme']);
+
+      var contextTheme = this.context.theme;
+
+      var localTheme = deepAssign(contextTheme, theme);
+      return React.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
+    };
+
+    return ThemedComponent;
+  }(Component);
+
+  ThemedComponent.contextTypes = {
+    theme: PropTypes.object.isRequired
+  };
+
+
+  return ThemedComponent;
+};
+
+export { withTheme };
+export default { withFocus: withFocus, withTheme: withTheme };

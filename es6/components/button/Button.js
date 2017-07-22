@@ -9,12 +9,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Children, Component } from 'react';
-import PropTypes from 'prop-types';
-import deepAssign from 'deep-assign';
+import { compose } from 'recompose';
 
 import StyledButton, { StyledLabel, StyledIcon } from './StyledButton';
 
-import { withFocus } from '../hocs';
+import { withFocus, withTheme } from '../hocs';
 
 import doc from './doc';
 
@@ -43,10 +42,6 @@ var Button = function (_Component) {
         type = _props.type,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'box', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
 
-    var contextTheme = this.context.theme;
-
-    var localTheme = deepAssign(contextTheme, theme);
-
     var Tag = StyledButton;
     if (href) {
       Tag = Tag.withComponent('a');
@@ -66,7 +61,7 @@ var Button = function (_Component) {
     if (icon) {
       buttonIcon = React.createElement(
         StyledIcon,
-        { theme: localTheme },
+        { theme: theme },
         icon
       );
     }
@@ -75,7 +70,7 @@ var Button = function (_Component) {
     if (label) {
       buttonLabel = React.createElement(
         StyledLabel,
-        { theme: localTheme },
+        { theme: theme },
         label
       );
     }
@@ -97,7 +92,7 @@ var Button = function (_Component) {
         href: href,
         onClick: onClick,
         plain: plainProp,
-        theme: localTheme,
+        theme: theme,
         type: type
       }),
       first,
@@ -109,13 +104,6 @@ var Button = function (_Component) {
   return Button;
 }(Component);
 
-Button.contextTypes = {
-  theme: PropTypes.object.isRequired
-};
+doc(Button);
 
-
-if (process.env.NODE_ENV !== 'production') {
-  doc(Button);
-}
-
-export default withFocus(Button);
+export default compose(withFocus, withTheme)(Button);

@@ -8,13 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _deepAssign = require('deep-assign');
-
-var _deepAssign2 = _interopRequireDefault(_deepAssign);
+var _recompose = require('recompose');
 
 var _StyledButton = require('./StyledButton');
 
@@ -61,10 +55,6 @@ var Button = function (_Component) {
         type = _props.type,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'box', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
 
-    var contextTheme = this.context.theme;
-
-    var localTheme = (0, _deepAssign2.default)(contextTheme, theme);
-
     var Tag = _StyledButton2.default;
     if (href) {
       Tag = Tag.withComponent('a');
@@ -84,7 +74,7 @@ var Button = function (_Component) {
     if (icon) {
       buttonIcon = _react2.default.createElement(
         _StyledButton.StyledIcon,
-        { theme: localTheme },
+        { theme: theme },
         icon
       );
     }
@@ -93,7 +83,7 @@ var Button = function (_Component) {
     if (label) {
       buttonLabel = _react2.default.createElement(
         _StyledButton.StyledLabel,
-        { theme: localTheme },
+        { theme: theme },
         label
       );
     }
@@ -115,7 +105,7 @@ var Button = function (_Component) {
         href: href,
         onClick: onClick,
         plain: plainProp,
-        theme: localTheme,
+        theme: theme,
         type: type
       }),
       first,
@@ -127,13 +117,6 @@ var Button = function (_Component) {
   return Button;
 }(_react.Component);
 
-Button.contextTypes = {
-  theme: _propTypes2.default.object.isRequired
-};
+(0, _doc2.default)(Button);
 
-
-if (process.env.NODE_ENV !== 'production') {
-  (0, _doc2.default)(Button);
-}
-
-exports.default = (0, _hocs.withFocus)(Button);
+exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme)(Button);

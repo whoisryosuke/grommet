@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.withFocus = undefined;
+exports.withTheme = exports.withFocus = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -9,7 +9,17 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _deepAssign = require('deep-assign');
+
+var _deepAssign2 = _interopRequireDefault(_deepAssign);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -105,4 +115,37 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
   return FocusableComponent;
 };
 
-exports.default = { withFocus: withFocus };
+var withTheme = function withTheme(WrappedComponent) {
+  var ThemedComponent = function (_Component2) {
+    _inherits(ThemedComponent, _Component2);
+
+    function ThemedComponent() {
+      _classCallCheck(this, ThemedComponent);
+
+      return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
+    }
+
+    ThemedComponent.prototype.render = function render() {
+      var _props = this.props,
+          theme = _props.theme,
+          rest = _objectWithoutProperties(_props, ['theme']);
+
+      var contextTheme = this.context.theme;
+
+      var localTheme = (0, _deepAssign2.default)(contextTheme, theme);
+      return _react2.default.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
+    };
+
+    return ThemedComponent;
+  }(_react.Component);
+
+  ThemedComponent.contextTypes = {
+    theme: _propTypes2.default.object.isRequired
+  };
+
+
+  return ThemedComponent;
+};
+
+exports.withTheme = withTheme;
+exports.default = { withFocus: withFocus, withTheme: withTheme };

@@ -83,8 +83,6 @@ Grommet.defaultProps = {
 };
 
 
-if (process.env.NODE_ENV !== 'production') {
-  (0, _doc2.default)(Grommet);
-}
+(0, _doc2.default)(Grommet);
 
 exports.default = Grommet;
