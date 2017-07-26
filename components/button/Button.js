@@ -30,6 +30,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var AnchorStyledButton = _StyledButton2.default.withComponent('a');
+// TODO: replace this with Box once we have it
+var BoxStyledButton = _StyledButton2.default.withComponent('div');
+
 var Button = function (_Component) {
   _inherits(Button, _Component);
 
@@ -55,10 +59,7 @@ var Button = function (_Component) {
         type = _props.type,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'box', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
 
-    var Tag = _StyledButton2.default;
-    if (href) {
-      Tag = Tag.withComponent('a');
-    }
+    var Tag = href ? AnchorStyledButton : _StyledButton2.default;
 
     var boxProps = void 0;
     if (box) {
@@ -66,8 +67,7 @@ var Button = function (_Component) {
       boxProps = {
         tag: href ? 'a' : 'button'
       };
-      // TODO: replace it with Box
-      Tag = Tag.withComponent('div');
+      Tag = BoxStyledButton;
     }
 
     var buttonIcon = void 0;
@@ -106,7 +106,7 @@ var Button = function (_Component) {
         onClick: onClick,
         plain: plainProp,
         theme: theme,
-        type: type
+        type: !href ? type : undefined
       }),
       first,
       second,

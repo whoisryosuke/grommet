@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.Button = undefined;
+exports.RoutedButton = exports.Button = undefined;
 
 var _Button = require('./Button');
 
@@ -9,6 +9,15 @@ Object.defineProperty(exports, 'Button', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_Button).default;
+  }
+});
+
+var _RoutedButton = require('./RoutedButton');
+
+Object.defineProperty(exports, 'RoutedButton', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_RoutedButton).default;
   }
 });
 

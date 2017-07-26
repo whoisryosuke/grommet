@@ -12,7 +12,6 @@ exports.default = function (Grommet) {
       centered: [_reactDesc.PropTypes.bool, 'Whether to centralize or not the content inside the container.', {
         defaultProp: true
       }],
-      inline: [_reactDesc.PropTypes.bool, 'Whether to render the app relative to the container (inline) or to the browser window.'],
       theme: [_reactDesc.PropTypes.object, 'Custom styles for Grommet app component.']
     }
   });

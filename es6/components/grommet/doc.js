@@ -8,7 +8,6 @@ export default (function (Grommet) {
       centered: [PropTypes.bool, 'Whether to centralize or not the content inside the container.', {
         defaultProp: true
       }],
-      inline: [PropTypes.bool, 'Whether to render the app relative to the container (inline) or to the browser window.'],
       theme: [PropTypes.object, 'Custom styles for Grommet app component.']
     }
   });

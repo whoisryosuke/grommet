@@ -1,8 +1,24 @@
 'use strict';
 
 exports.__esModule = true;
+exports.routedButton = routedButton;
 
 var _reactDesc = require('react-desc');
+
+function routedButton(RoutedButton) {
+  return (0, _reactDesc.schema)(RoutedButton, {
+    description: 'A button with support for React Router.',
+    usage: 'import { RoutedButton } from \'grommet\';\n    <RoutedButton primary={true} href="/documentation" />',
+    props: {
+      path: [_reactDesc.PropTypes.string, 'Indicates the path to be used for react-router link.', {
+        required: true
+      }],
+      method: [_reactDesc.PropTypes.oneOf(['push', 'replace']), 'Indicates whether the browser history should be appended to or replaced.', {
+        defaultProp: 'push'
+      }]
+    }
+  });
+}
 
 exports.default = function (Button) {
   return (0, _reactDesc.schema)(Button, {

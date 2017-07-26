@@ -17,6 +17,10 @@ import { withFocus, withTheme } from '../hocs';
 
 import doc from './doc';
 
+var AnchorStyledButton = StyledButton.withComponent('a');
+// TODO: replace this with Box once we have it
+var BoxStyledButton = StyledButton.withComponent('div');
+
 var Button = function (_Component) {
   _inherits(Button, _Component);
 
@@ -42,10 +46,7 @@ var Button = function (_Component) {
         type = _props.type,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'box', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
 
-    var Tag = StyledButton;
-    if (href) {
-      Tag = Tag.withComponent('a');
-    }
+    var Tag = href ? AnchorStyledButton : StyledButton;
 
     var boxProps = void 0;
     if (box) {
@@ -53,8 +54,7 @@ var Button = function (_Component) {
       boxProps = {
         tag: href ? 'a' : 'button'
       };
-      // TODO: replace it with Box
-      Tag = Tag.withComponent('div');
+      Tag = BoxStyledButton;
     }
 
     var buttonIcon = void 0;
@@ -93,7 +93,7 @@ var Button = function (_Component) {
         onClick: onClick,
         plain: plainProp,
         theme: theme,
-        type: type
+        type: !href ? type : undefined
       }),
       first,
       second,
