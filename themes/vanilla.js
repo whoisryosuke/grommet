@@ -45,7 +45,16 @@ exports.default = {
       textColor: '#000000'
     },
     lineHeight: '24px',
-    spacing: baseSpacing + 'px'
+    spacing: baseSpacing + 'px',
+    size: {
+      xxsmall: baseSpacing * 2 + 'px',
+      xsmall: baseSpacing * 4 + 'px',
+      small: baseSpacing * 8 + 'px',
+      medium: baseSpacing * 16 + 'px',
+      large: baseSpacing * 24 + 'px',
+      xlarge: baseSpacing * 30 + 'px',
+      xxlarge: baseSpacing * 40 + 'px'
+    }
   },
   colors: {
     accent: accentColors,
