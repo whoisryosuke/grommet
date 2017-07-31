@@ -8,9 +8,9 @@ exports.findAllByType = findAllByType;
 var _styledComponents = require('styled-components');
 
 var focusStyle = exports.focusStyle = (0, _styledComponents.css)(['border-color:', ';box-shadow:0 0 1px 1px ', ';'], function (props) {
-  return props.theme.brand.focus.border.color || props.theme.colors.accent[0];
+  return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
 }, function (props) {
-  return props.theme.brand.focus.border.color || props.theme.colors.accent[0];
+  return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
 });
 
 function parseMetricToInt(fontAsString) {

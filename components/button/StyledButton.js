@@ -22,13 +22,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
 var primaryStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';svg{fill:', ';stroke:', ';transition:none;}'], function (props) {
-  return props.theme.colors.brand;
+  return props.theme.global.colors.brand;
 }, function (props) {
-  return props.theme.colors.activeTextColor;
+  return props.theme.global.colors.activeTextColor;
 }, function (props) {
-  return props.theme.colors.activeTextColor;
+  return props.theme.global.colors.activeTextColor;
 }, function (props) {
-  return props.theme.colors.activeTextColor;
+  return props.theme.global.colors.activeTextColor;
 });
 
 var accentStyle = (0, _styledComponents.css)(['border-color:', ';'], function (props) {
@@ -53,33 +53,33 @@ function getHoverColor(props) {
   } else if (props.secondary) {
     return props.theme.button.colors.secondary;
   }
-  return props.theme.button.border.color || props.theme.colors.brand;
+  return props.theme.button.border.color || props.theme.global.colors.brand;
 }
 
 function getHoverIndicatorStyle(hoverIndicator, theme) {
-  var backgroundColor = theme.brand.hover.backgroundColor;
+  var backgroundColor = theme.global.hover.backgroundColor;
   if ((typeof hoverIndicator === 'undefined' ? 'undefined' : _typeof(hoverIndicator)) === 'object') {
     if (typeof hoverIndicator.background === 'string') {
       var colorGroup = hoverIndicator.background.split('-');
       var colorType = colorGroup[0];
-      if (!theme.colors[colorType]) {
+      if (!theme.global.colors[colorType]) {
         console.warn('Invalid color ' + hoverIndicator.background + ', using ' + backgroundColor + ' instead');
       } else if (colorGroup.length > 1) {
         // subtract one to use the array
         var colorIndex = colorGroup[1] - 1;
-        if (theme.colors[colorType].length < colorGroup[1]) {
+        if (theme.global.colors[colorType].length < colorGroup[1]) {
           console.warn('Invalid color ' + hoverIndicator.background + ', using ' + backgroundColor + ' instead');
         } else {
-          backgroundColor = (0, _polished.rgba)(theme.colors[colorType][colorIndex], 0.3) + ';';
+          backgroundColor = (0, _polished.rgba)(theme.global.colors[colorType][colorIndex], 0.3) + ';';
         }
-      } else if (typeof theme.colors[colorType] !== 'string') {
+      } else if (typeof theme.global.colors[colorType] !== 'string') {
         console.warn('Invalid color ' + hoverIndicator.background + ', using ' + backgroundColor + ' instead');
       } else {
-        backgroundColor = (0, _polished.rgba)(theme.colors[colorType], 0.3) + ';';
+        backgroundColor = (0, _polished.rgba)(theme.global.colors[colorType], 0.3) + ';';
       }
     }
   }
-  return (0, _styledComponents.css)(['background-color:', ';color:', ';'], backgroundColor, theme.brand.hover.textColor);
+  return (0, _styledComponents.css)(['background-color:', ';color:', ';'], backgroundColor, theme.global.hover.textColor);
 }
 
 var hoverStyle = (0, _styledComponents.css)(['&:hover{', ' ', ' ', '}'], function (props) {
@@ -87,19 +87,19 @@ var hoverStyle = (0, _styledComponents.css)(['&:hover{', ' ', ' ', '}'], functio
 }, function (props) {
   return !props.plain && 'box-shadow: 0px 0px 0px 2px ' + getHoverColor(props) + ';';
 }, function (props) {
-  return !props.plain && !props.primary && '\n        // TODO: revisit this\n        svg {\n          fill: ' + props.theme.colors.hoverTextColor + ';\n          stroke: ' + props.theme.colors.hoverTextColor + ';\n          transition: none;\n        }\n      ';
+  return !props.plain && !props.primary && '\n        // TODO: revisit this\n        svg {\n          fill: ' + props.theme.global.colors.hoverTextColor + ';\n          stroke: ' + props.theme.global.colors.hoverTextColor + ';\n          transition: none;\n        }\n      ';
 });
 
 var StyledButton = _styledComponents2.default.button.withConfig({
   displayName: 'StyledButton__StyledButton'
 })(['cursor:pointer;outline:none;font:inherit;text-decoration:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
-  return !props.plain && (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';margin:0;overflow:visible;text-transform:none;background-color:transparent;font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color || props.theme.colors.brand, props.theme.button.border.radius, props.theme.button.color || props.theme.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.brand.control.font.weight);
+  return !props.plain && (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';margin:0;overflow:visible;text-transform:none;background-color:transparent;font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color || props.theme.global.colors.brand, props.theme.button.border.radius, props.theme.button.color || props.theme.global.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
 }, function (props) {
   return !props.disabled && !props.focus && hoverStyle;
 }, function (props) {
   return props.disabled && disabledStyle;
 }, function (props) {
-  return (0, _mixins.fontSize)(props.theme.brand.control.font.size, props.theme.brand.spacing);
+  return (0, _mixins.fontSize)(props.theme.global.control.font.size, props.theme.global.spacing);
 }, function (props) {
   return !props.plain && !props.box && 'padding: ' + props.theme.button.padding.vertical + ' ' + props.theme.button.padding.horizontal + ';';
 }, function (props) {
@@ -120,13 +120,13 @@ var StyledButton = _styledComponents2.default.button.withConfig({
 var StyledLabel = exports.StyledLabel = _styledComponents2.default.span.withConfig({
   displayName: 'StyledButton__StyledLabel'
 })(['&:first-child:not(:last-child){margin-right:', 'px;}'], function (props) {
-  return (0, _utils.parseMetricToInt)(props.theme.brand.spacing) / 2;
+  return (0, _utils.parseMetricToInt)(props.theme.global.spacing) / 2;
 });
 
 var StyledIcon = exports.StyledIcon = _styledComponents2.default.span.withConfig({
   displayName: 'StyledButton__StyledIcon'
 })(['display:inline-block;&:first-child:not(:last-child){margin-right:', 'px;}> *{vertical-align:bottom;}'], function (props) {
-  return (0, _utils.parseMetricToInt)(props.theme.brand.spacing) / 2;
+  return (0, _utils.parseMetricToInt)(props.theme.global.spacing) / 2;
 });
 
 exports.default = StyledButton.extend(_templateObject, function (props) {

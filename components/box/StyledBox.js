@@ -60,7 +60,7 @@ var BASIS_MAP = {
 };
 
 var basisStyle = (0, _styledComponents.css)(['flex-basis:', ';'], function (props) {
-  return BASIS_MAP[props.basis] || props.theme.brand.size[props.basis];
+  return BASIS_MAP[props.basis] || props.theme.global.size[props.basis];
 });
 
 var directionStyle = (0, _styledComponents.css)(['flex-direction:', ';'], function (props) {
@@ -101,25 +101,25 @@ var wrapStyle = 'flex-wrap: true;';
 
 var edgeStyle = function edgeStyle(kind, data, theme) {
   if (typeof data === 'string') {
-    return kind + ': ' + theme.brand.edgeSize[data] + ';';
+    return kind + ': ' + theme.global.edgeSize[data] + ';';
   }
   if (data.horizontal) {
-    return '\n      ' + kind + '-left: ' + theme.brand.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.brand.edgeSize[data.horizontal] + ';\n    ';
+    return '\n      ' + kind + '-left: ' + theme.global.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.global.edgeSize[data.horizontal] + ';\n    ';
   }
   if (data.vertical) {
-    return '\n      ' + kind + '-top: ' + theme.brand.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.brand.edgeSize[data.vertical] + ';\n    ';
+    return '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
   }
   if (data.top) {
-    return kind + '-top: ' + theme.brand.edgeSize[data.top] + ';';
+    return kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
   }
   if (data.bottom) {
-    return kind + '-bottom: ' + theme.brand.edgeSize[data.bottom] + ';';
+    return kind + '-bottom: ' + theme.global.edgeSize[data.bottom] + ';';
   }
   if (data.left) {
-    return kind + '-left: ' + theme.brand.edgeSize[data.left] + ';';
+    return kind + '-left: ' + theme.global.edgeSize[data.left] + ';';
   }
   if (data.right) {
-    return kind + '-right: ' + theme.brand.edgeSize[data.right] + ';';
+    return kind + '-right: ' + theme.global.edgeSize[data.right] + ';';
   }
   return '';
 };
