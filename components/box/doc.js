@@ -9,15 +9,48 @@ exports.default = function (Box) {
     description: 'A box.',
     usage: 'import { Box } from \'grommet\';\n  <Box/>',
     props: {
+      // a11yTitle - removed
       align: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']), 'How to align the contents along the cross axis.'],
       alignContent: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']), 'How to align the contents when there is extra space in the cross axis.\n      Defaults to stretch'],
       alignSelf: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align within its container along the cross axis.'],
+      // appCentered - removed
       basis: [_reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4']), 'A fixed or relative size along its container\'s main axis.'],
       border: [_reactDesc.PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']), 'Include a border.'],
+      // colorIndex - TODO
       direction: [_reactDesc.PropTypes.oneOf(['row', 'column']), 'The orientation to layout the child components in. Defaults to column.'],
+      // focusable - removed
+      flex: [_reactDesc.PropTypes.oneOf(['grow', 'shrink', true, false]), 'Whether flex-grow and/or flex-shrink is true.'],
+      // full - removed
       justify: [_reactDesc.PropTypes.oneOf(['start', 'center', 'between', 'end']), 'How to align the contents along the main axis.'],
+      // onClick - removed
+      margin: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none', 'small', 'medium', 'large']), _reactDesc.PropTypes.shape({
+        bottom: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        horizontal: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        left: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        right: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        top: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        vertical: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
+      })]), 'The amount of margin around the box. An object can be specified to\n      distinguish horizontal margin, vertical margin, and margin on a\n      particular side of the box'],
+      pad: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none', 'small', 'medium', 'large']), _reactDesc.PropTypes.shape({
+        bottom: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        horizontal: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        left: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        right: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        top: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
+        vertical: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
+      })]), 'The amount of padding around the box contents. An object can be specified to\n      distinguish horizontal padding, vertical padding, and padding on a\n      particular side of the box'],
+      // responsive: [
+      //   PropTypes.bool,
+      //   `Whether children laid out in a row direction should be switched
+      //   to a column layout when the display area narrows. Defaults to true.`,
+      // ],
       reverse: [_reactDesc.PropTypes.bool, 'Whether to reverse the order of the child components.'],
-      tag: [_reactDesc.PropTypes.string, 'The DOM tag to use for the element. Defaults to div.']
+      // separator - moved to border
+      // size - removed, use basis
+      tag: [_reactDesc.PropTypes.string, 'The DOM tag to use for the element. Defaults to div.'],
+      textAlign: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end']), 'How to align the text inside the box.'],
+      // texture - TODO
+      wrap: [_reactDesc.PropTypes.bool, 'Whether children can wrap if they can\'t all fit. Defaults to false.']
     }
   });
 };

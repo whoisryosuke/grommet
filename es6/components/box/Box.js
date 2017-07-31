@@ -46,6 +46,7 @@ var Box = function (_Component) {
 }(Component);
 
 Box.defaultProps = {
+  direction: 'column',
   tag: 'div'
 };
 

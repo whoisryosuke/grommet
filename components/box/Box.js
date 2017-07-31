@@ -59,6 +59,7 @@ var Box = function (_Component) {
 }(_react.Component);
 
 Box.defaultProps = {
+  direction: 'column',
   tag: 'div'
 };
 
