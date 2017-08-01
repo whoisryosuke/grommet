@@ -12,14 +12,14 @@ import React, { Children, Component } from 'react';
 import { compose } from 'recompose';
 
 import StyledButton, { StyledLabel, StyledIcon } from './StyledButton';
+import { Box } from '../box';
 
 import { withFocus, withTheme } from '../hocs';
 
 import doc from './doc';
 
 var AnchorStyledButton = StyledButton.withComponent('a');
-// TODO: replace this with Box once we have it
-var BoxStyledButton = StyledButton.withComponent('div');
+var BoxStyledButton = StyledButton.withComponent(Box);
 
 var Button = function (_Component) {
   _inherits(Button, _Component);

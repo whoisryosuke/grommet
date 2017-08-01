@@ -81,8 +81,10 @@ var hoverStyle = css(['&:hover{', ' ', ' ', '}'], function (props) {
 
 var StyledButton = styled.button.withConfig({
   displayName: 'StyledButton__StyledButton'
-})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
-  return !props.plain && css(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';margin:0;overflow:visible;text-transform:none;background-color:transparent;font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color || props.theme.global.colors.brand, props.theme.button.border.radius, props.theme.button.color || props.theme.global.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
+})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;border:', ' solid transparent;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+  return props.theme.button.border.width;
+}, function (props) {
+  return !props.plain && css(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color || props.theme.global.colors.brand, props.theme.button.border.radius, props.theme.button.color || props.theme.global.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
 }, function (props) {
   return !props.disabled && !props.focus && hoverStyle;
 }, function (props) {

@@ -14,6 +14,8 @@ var _StyledButton = require('./StyledButton');
 
 var _StyledButton2 = _interopRequireDefault(_StyledButton);
 
+var _box = require('../box');
+
 var _hocs = require('../hocs');
 
 var _doc = require('./doc');
@@ -31,8 +33,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var AnchorStyledButton = _StyledButton2.default.withComponent('a');
-// TODO: replace this with Box once we have it
-var BoxStyledButton = _StyledButton2.default.withComponent('div');
+var BoxStyledButton = _StyledButton2.default.withComponent(_box.Box);
 
 var Button = function (_Component) {
   _inherits(Button, _Component);
