@@ -4,8 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-import { lapAndUp } from '../mixins';
-import { parseMetricToInt } from '../utils';
+import { lapAndUp, parseMetricToInt } from '../utils';
 
 var centeredStyle = css(['width:100%;max-width:', ';margin-left:auto;margin-right:auto;'], function (props) {
   return props.theme.global.centerColumnWidth;

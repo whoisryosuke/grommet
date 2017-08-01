@@ -8,8 +8,6 @@ var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _mixins = require('../mixins');
-
 var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -32,7 +30,7 @@ var StyledGrommet = _styledComponents2.default.div.withConfig({
   return props.theme.global.colors.text;
 }, function (props) {
   return props.theme.global.colors.background;
-}, (0, _mixins.lapAndUp)('\n    top: 0px;\n    bottom: 0px;\n    left: 0px;\n    right: 0px;\n    height: 100%;\n    width: 100%;\n    overflow: visible;\n  '), function (props) {
+}, (0, _utils.lapAndUp)('\n    top: 0px;\n    bottom: 0px;\n    left: 0px;\n    right: 0px;\n    height: 100%;\n    width: 100%;\n    overflow: visible;\n  '), function (props) {
   return props.centered && centeredStyle;
 }, function (props) {
   return props.theme.global.font.face;

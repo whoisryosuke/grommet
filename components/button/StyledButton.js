@@ -13,8 +13,6 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _polished = require('polished');
 
-var _mixins = require('../mixins');
-
 var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -101,7 +99,7 @@ var StyledButton = _styledComponents2.default.button.withConfig({
 }, function (props) {
   return props.disabled && disabledStyle;
 }, function (props) {
-  return (0, _mixins.fontSize)(props.theme.global.control.font.size, props.theme.global.spacing);
+  return (0, _utils.fontSize)(props.theme.global.control.font.size, props.theme.global.spacing);
 }, function (props) {
   return !props.plain && !props.box && 'padding: ' + props.theme.button.padding.vertical + ' ' + props.theme.button.padding.horizontal + ';';
 }, function (props) {
@@ -117,7 +115,7 @@ var StyledButton = _styledComponents2.default.button.withConfig({
   return '';
 }, function (props) {
   return props.focus && _utils.focusStyle;
-}, (0, _mixins.lapAndUp)('\n    transition: 0.1s ease-in-out;\n  '));
+}, (0, _utils.lapAndUp)('\n    transition: 0.1s ease-in-out;\n  '));
 
 var StyledLabel = exports.StyledLabel = _styledComponents2.default.span.withConfig({
   displayName: 'StyledButton__StyledLabel'

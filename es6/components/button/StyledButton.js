@@ -7,8 +7,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 
-import { fontSize, lapAndUp } from '../mixins';
-import { focusStyle, parseMetricToInt } from '../utils';
+import { focusStyle, fontSize, lapAndUp, parseMetricToInt } from '../utils';
 
 var primaryStyle = css(['background-color:', ';color:', ';svg{fill:', ';stroke:', ';transition:none;}'], function (props) {
   return props.theme.global.colors.brand;
