@@ -33,7 +33,7 @@ var sizeStyle = function sizeStyle(props) {
   // size is a combination of the level and size properties
   var size = props.size || 'medium';
   var data = props.theme.heading.level[props.level][size];
-  return (0, _styledComponents.css)(['font-size:', ';line-height:', ';'], data.size, data.height);
+  return (0, _styledComponents.css)(['font-size:', ';line-height:', ';font-weight:', ';'], data.size, data.height, props.theme.heading.weight);
 };
 
 var TEXT_ALIGN_MAP = {
