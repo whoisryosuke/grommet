@@ -12,7 +12,7 @@ exports.default = function (Box) {
       // a11yTitle - removed
       align: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']), 'How to align the contents along the cross axis.'],
       alignContent: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']), 'How to align the contents when there is extra space in the cross axis.\n      Defaults to stretch'],
-      alignSelf: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align within its container along the cross axis.'],
+      alignSelf: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align along the cross axis when contained in a Box or along\n      the column axis when contained in a Grid.'],
       // appCentered - removed
       background: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.shape({
         dark: _reactDesc.PropTypes.bool,
@@ -24,8 +24,10 @@ exports.default = function (Box) {
       direction: [_reactDesc.PropTypes.oneOf(['row', 'column']), 'The orientation to layout the child components in. Defaults to column.'],
       // focusable - removed
       flex: [_reactDesc.PropTypes.oneOf(['grow', 'shrink', true, false]), 'Whether flex-grow and/or flex-shrink is true.'],
+      gridArea: [_reactDesc.PropTypes.string, 'The name of the area to place this Box in inside a parent Grid.'],
       // full - removed
       justify: [_reactDesc.PropTypes.oneOf(['start', 'center', 'between', 'end']), 'How to align the contents along the main axis.'],
+      justifySelf: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align along the row axis when contained in a Grid.'],
       // onClick - removed
       margin: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none', 'small', 'medium', 'large']), _reactDesc.PropTypes.shape({
         bottom: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),

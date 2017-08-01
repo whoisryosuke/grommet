@@ -8,7 +8,7 @@ export default (function (Box) {
       // a11yTitle - removed
       align: [PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']), 'How to align the contents along the cross axis.'],
       alignContent: [PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']), 'How to align the contents when there is extra space in the cross axis.\n      Defaults to stretch'],
-      alignSelf: [PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align within its container along the cross axis.'],
+      alignSelf: [PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align along the cross axis when contained in a Box or along\n      the column axis when contained in a Grid.'],
       // appCentered - removed
       background: [PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
         dark: PropTypes.bool,
@@ -20,8 +20,10 @@ export default (function (Box) {
       direction: [PropTypes.oneOf(['row', 'column']), 'The orientation to layout the child components in. Defaults to column.'],
       // focusable - removed
       flex: [PropTypes.oneOf(['grow', 'shrink', true, false]), 'Whether flex-grow and/or flex-shrink is true.'],
+      gridArea: [PropTypes.string, 'The name of the area to place this Box in inside a parent Grid.'],
       // full - removed
       justify: [PropTypes.oneOf(['start', 'center', 'between', 'end']), 'How to align the contents along the main axis.'],
+      justifySelf: [PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align along the row axis when contained in a Grid.'],
       // onClick - removed
       margin: [PropTypes.oneOfType([PropTypes.oneOf(['none', 'small', 'medium', 'large']), PropTypes.shape({
         bottom: PropTypes.oneOf(['small', 'medium', 'large']),

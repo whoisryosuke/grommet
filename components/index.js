@@ -26,6 +26,18 @@ Object.keys(_button).forEach(function (key) {
   });
 });
 
+var _grid = require('./grid');
+
+Object.keys(_grid).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _grid[key];
+    }
+  });
+});
+
 var _grommet = require('./grommet');
 
 Object.keys(_grommet).forEach(function (key) {
