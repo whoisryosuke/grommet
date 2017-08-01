@@ -1,5 +1,7 @@
 var _FLEX_MAP;
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']);
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
@@ -54,6 +56,58 @@ var BASIS_MAP = {
 var basisStyle = css(['flex-basis:', ';'], function (props) {
   return BASIS_MAP[props.basis] || props.theme.global.size[props.basis];
 });
+
+var colorIsDark = function colorIsDark(color) {
+  // https://stackoverflow.com/a/42429333
+  var _color$match$map = color.match(/[A-Za-z0-9]{2}/g).map(function (v) {
+    return parseInt(v, 16);
+  }),
+      red = _color$match$map[0],
+      green = _color$match$map[1],
+      blue = _color$match$map[2];
+  // http://www.had2know.com/technology/
+  //  color-contrast-calculator-web-design.html
+
+
+  var brightness = (299 * red + 587 * green + 114 * blue) / 1000;
+  return brightness < 125;
+};
+
+var backgroundStyle = function backgroundStyle(background, theme) {
+  if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
+    if (background.image) {
+      var _color = void 0;
+      if (background.dark === false) {
+        _color = theme.global.colors.text;
+      } else if (background.dark) {
+        _color = theme.global.colors.darkBackgroundTextColor;
+      } else {
+        _color = 'inherit';
+      }
+      return css(['background:', ' no-repeat center center;background-size:cover;color:', ';'], background.image, _color);
+    }
+    return undefined;
+  }
+  if (background.lastIndexOf('url', 0) === 0) {
+    return css(['background:', ' no-repeat center center;background-size:cover;'], background);
+  }
+
+  var _background$split = background.split('-'),
+      kind = _background$split[0],
+      index = _background$split[1];
+
+  var colorSet = theme.global.colors[kind];
+  var color = void 0;
+  if (Array.isArray(colorSet)) {
+    color = theme.global.colors[kind][index];
+  } else if (typeof colorSet === 'string') {
+    color = colorSet;
+  }
+  if (color) {
+    return css(['background-color:', ';color:', ';'], color, colorIsDark(color) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
+  }
+  return undefined;
+};
 
 var directionStyle = css(['flex-direction:', ';'], function (props) {
   if (props.direction) {
@@ -118,7 +172,7 @@ var edgeStyle = function edgeStyle(kind, data, theme) {
 
 var StyledBox = styled.div.withConfig({
   displayName: 'StyledBox__StyledBox'
-})(['display:flex;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;
 }, function (props) {
   return props.alignContent && alignContentStyle;
@@ -126,6 +180,8 @@ var StyledBox = styled.div.withConfig({
   return props.alignSelf && alignSelfStyle;
 }, function (props) {
   return props.basis && basisStyle;
+}, function (props) {
+  return props.background && backgroundStyle(props.background, props.theme);
 }, function (props) {
   return (props.direction || props.reverse) && directionStyle;
 }, function (props) {

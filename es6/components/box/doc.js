@@ -10,9 +10,13 @@ export default (function (Box) {
       alignContent: [PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']), 'How to align the contents when there is extra space in the cross axis.\n      Defaults to stretch'],
       alignSelf: [PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align within its container along the cross axis.'],
       // appCentered - removed
+      background: [PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
+        dark: PropTypes.bool,
+        image: PropTypes.string
+      })]), 'Either a color identifier to use for the background color. For example:\n      \'neutral-1\'. Or, a \'url()\' for an image.'],
       basis: [PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4']), 'A fixed or relative size along its container\'s main axis.'],
       border: [PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']), 'Include a border.'],
-      // colorIndex - TODO
+      // colorIndex - moved to background
       direction: [PropTypes.oneOf(['row', 'column']), 'The orientation to layout the child components in. Defaults to column.'],
       // focusable - removed
       flex: [PropTypes.oneOf(['grow', 'shrink', true, false]), 'Whether flex-grow and/or flex-shrink is true.'],
@@ -45,7 +49,7 @@ export default (function (Box) {
       // size - removed, use basis
       tag: [PropTypes.string, 'The DOM tag to use for the element. Defaults to div.'],
       textAlign: [PropTypes.oneOf(['start', 'center', 'end']), 'How to align the text inside the box.'],
-      // texture - TODO
+      // texture - moved to background
       wrap: [PropTypes.bool, 'Whether children can wrap if they can\'t all fit. Defaults to false.']
     }
   });

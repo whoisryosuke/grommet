@@ -4,6 +4,7 @@ exports.__esModule = true;
 
 var _polished = require('polished');
 
+var brandColor = '#865CD6';
 var accentColors = ['#00CCEB', '#FF7D28'];
 var neutralColors = ['#0A64A0', '#DC2878', '#501EB4', '#49516F'];
 var statusColors = {
@@ -14,8 +15,9 @@ var statusColors = {
   unknown: '#a8a8a8',
   disabled: '#a8a8a8'
 };
+var darkColors = ['#333333', '#444444', '#555555', '#666666', '#777777', '#999999'];
+var lightColors = ['#F6F6F6', '#EEEEEE', '#DDDDDD', '#CCCCCC', '#BBBBBB', '#AAAAAA'];
 var backgroundColor = '#FFFFFF';
-var brandColor = '#865CD6';
 var textColor = '#333333';
 var fontPath = 'https://fonts.gstatic.com/s/worksans/v2';
 
@@ -30,11 +32,16 @@ exports.default = {
       accent: accentColors,
       activeTextColor: '#FFFFFF',
       background: backgroundColor,
+      black: '#000000',
       brand: brandColor,
+      dark: darkColors,
+      darkBackgroundTextColor: 'rgba(255, 255, 255, 0.85)',
       hoverTextColor: '#000000',
+      light: lightColors,
       neutral: neutralColors,
       status: statusColors,
-      text: textColor
+      text: textColor,
+      white: '#FFFFFF'
     },
     control: {
       font: {
