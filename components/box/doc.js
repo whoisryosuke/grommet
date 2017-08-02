@@ -6,7 +6,7 @@ var _reactDesc = require('react-desc');
 
 exports.default = function (Box) {
   return (0, _reactDesc.schema)(Box, {
-    description: 'A box.',
+    description: 'A flexible box that lays out its contents along a single\n    direction.',
     usage: 'import { Box } from \'grommet\';\n  <Box/>',
     props: {
       // a11yTitle - removed
@@ -24,6 +24,7 @@ exports.default = function (Box) {
       direction: [_reactDesc.PropTypes.oneOf(['row', 'column']), 'The orientation to layout the child components in. Defaults to column.'],
       // focusable - removed
       flex: [_reactDesc.PropTypes.oneOf(['grow', 'shrink', true, false]), 'Whether flex-grow and/or flex-shrink is true.'],
+      full: [_reactDesc.PropTypes.oneOf(['horizontal', 'vertical', true, false, 'grow']), 'Whether the width and/or height should take the full viewport size.'],
       gridArea: [_reactDesc.PropTypes.string, 'The name of the area to place this Box in inside a parent Grid.'],
       // full - removed
       justify: [_reactDesc.PropTypes.oneOf(['start', 'center', 'between', 'end']), 'How to align the contents along the main axis.'],

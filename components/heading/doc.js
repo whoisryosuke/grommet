@@ -6,7 +6,7 @@ var _reactDesc = require('react-desc');
 
 exports.default = function (Heading) {
   return (0, _reactDesc.schema)(Heading, {
-    description: 'A box.',
+    description: 'Heading text structed in levels.',
     usage: 'import { Heading } from \'grommet\';\n  <Heading/>',
     props: {
       level: [_reactDesc.PropTypes.oneOf([1, 2, 3, 4]), 'The heading level. It corresponds to the number after the \'H\' for\n      the DOM tag. Set the level for semantic accuracy and accessibility.\n      The sizing can be further adjusted using the size property.'],

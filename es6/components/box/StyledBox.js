@@ -122,6 +122,22 @@ var flexStyle = css(['flex:', ';'], function (props) {
   return FLEX_MAP[props.flex];
 });
 
+var fullStyle = function fullStyle(full) {
+  if (full === 'horizontal') {
+    return '\n      max-width: 100%;\n      width: 100vw;\n    ';
+  }
+  if (full === 'vertical') {
+    return '\n      height: 100vh;\n      max-height: 100%;\n      overflow: auto;\n    ';
+  }
+  if (full === 'grow') {
+    return '\n      max-width: 100%;\n      width: 100vw;\n      min-height: 100vh;\n    ';
+  }
+  if (full) {
+    return '\n      max-width: 100%;\n      width: 100vw;\n      height: 100vh;\n      max-height: 100%;\n      overflow: auto;\n    ';
+  }
+  return undefined;
+};
+
 var gridAreaStyle = css(['grid-area:', ';'], function (props) {
   return props.gridArea;
 });
@@ -176,7 +192,7 @@ var edgeStyle = function edgeStyle(kind, data, theme) {
 
 var StyledBox = styled.div.withConfig({
   displayName: 'StyledBox__StyledBox'
-})(['display:flex;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;
 }, function (props) {
   return props.alignContent && alignContentStyle;
@@ -190,6 +206,8 @@ var StyledBox = styled.div.withConfig({
   return (props.direction || props.reverse) && directionStyle;
 }, function (props) {
   return props.flex !== undefined && flexStyle;
+}, function (props) {
+  return props.full && fullStyle(props.full);
 }, function (props) {
   return props.gridArea && gridAreaStyle;
 }, function (props) {

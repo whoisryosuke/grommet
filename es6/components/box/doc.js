@@ -2,7 +2,7 @@ import { schema, PropTypes } from 'react-desc';
 
 export default (function (Box) {
   return schema(Box, {
-    description: 'A box.',
+    description: 'A flexible box that lays out its contents along a single\n    direction.',
     usage: 'import { Box } from \'grommet\';\n  <Box/>',
     props: {
       // a11yTitle - removed
@@ -20,6 +20,7 @@ export default (function (Box) {
       direction: [PropTypes.oneOf(['row', 'column']), 'The orientation to layout the child components in. Defaults to column.'],
       // focusable - removed
       flex: [PropTypes.oneOf(['grow', 'shrink', true, false]), 'Whether flex-grow and/or flex-shrink is true.'],
+      full: [PropTypes.oneOf(['horizontal', 'vertical', true, false, 'grow']), 'Whether the width and/or height should take the full viewport size.'],
       gridArea: [PropTypes.string, 'The name of the area to place this Box in inside a parent Grid.'],
       // full - removed
       justify: [PropTypes.oneOf(['start', 'center', 'between', 'end']), 'How to align the contents along the main axis.'],
