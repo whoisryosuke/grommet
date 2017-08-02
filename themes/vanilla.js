@@ -49,6 +49,14 @@ exports.default = {
         size: '19px'
       }
     },
+    drop: {
+      backgroundColor: '#f8f8f8',
+      boxShadow: 'none',
+      border: {
+        width: '0px',
+        radius: '0px'
+      }
+    },
     edgeSize: {
       small: baseSpacing / 2 + 'px',
       medium: baseSpacing + 'px',
