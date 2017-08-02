@@ -90,7 +90,7 @@ var hoverStyle = (0, _styledComponents.css)(['&:hover{', ' ', ' ', '}'], functio
 
 var StyledButton = _styledComponents2.default.button.withConfig({
   displayName: 'StyledButton__StyledButton'
-})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;border:', ' solid transparent;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;border:', ' solid transparent;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.theme.button.border.width;
 }, function (props) {
   return !props.plain && (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color || props.theme.global.colors.brand, props.theme.button.border.radius, props.theme.button.color || props.theme.global.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
@@ -99,7 +99,7 @@ var StyledButton = _styledComponents2.default.button.withConfig({
 }, function (props) {
   return props.disabled && disabledStyle;
 }, function (props) {
-  return (0, _utils.fontSize)(props.theme.global.control.font.size, props.theme.global.spacing);
+  return !props.plain && (0, _utils.fontSize)(props.theme.global.control.font.size, props.theme.global.spacing);
 }, function (props) {
   return !props.plain && !props.box && 'padding: ' + props.theme.button.padding.vertical + ' ' + props.theme.button.padding.horizontal + ';';
 }, function (props) {
@@ -115,7 +115,9 @@ var StyledButton = _styledComponents2.default.button.withConfig({
   return '';
 }, function (props) {
   return props.focus && _utils.focusStyle;
-}, (0, _utils.lapAndUp)('\n    transition: 0.1s ease-in-out;\n  '));
+}, (0, _utils.lapAndUp)('\n    transition: 0.1s ease-in-out;\n  '), function (props) {
+  return props.plain && 'color: inherit;';
+});
 
 var StyledLabel = exports.StyledLabel = _styledComponents2.default.span.withConfig({
   displayName: 'StyledButton__StyledLabel'

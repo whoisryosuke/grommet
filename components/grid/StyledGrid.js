@@ -107,8 +107,8 @@ var areasStyle = function areasStyle(props) {
     });
   });
   props.areas.forEach(function (area) {
-    for (var row = area.start[0]; row <= area.end[0]; row += 1) {
-      for (var column = area.start[1]; column <= area.end[1]; column += 1) {
+    for (var row = area.start[1]; row <= area.end[1]; row += 1) {
+      for (var column = area.start[0]; column <= area.end[0]; column += 1) {
         cells[row][column] = area.name;
       }
     }
