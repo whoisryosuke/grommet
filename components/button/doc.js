@@ -27,7 +27,7 @@ exports.default = function (Button) {
     props: {
       a11yTitle: [_reactDesc.PropTypes.string, 'Custom title used by screen readers.'],
       accent: [_reactDesc.PropTypes.bool, 'Whether this is a accent button.'],
-      align: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end']), 'How to align the contents along the cross axis.'],
+      align: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align the contents along the cross axis.'],
       box: [_reactDesc.PropTypes.bool, 'Whether the button should support Box props. \n      This is useful if you want your children to be a \n      flexbox container.'],
       centered: [_reactDesc.PropTypes.bool, 'Whether this is an accent button.'],
       critical: [_reactDesc.PropTypes.bool, 'Whether this is an critical button.'],

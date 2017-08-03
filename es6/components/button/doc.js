@@ -22,7 +22,7 @@ export default (function (Button) {
     props: {
       a11yTitle: [PropTypes.string, 'Custom title used by screen readers.'],
       accent: [PropTypes.bool, 'Whether this is a accent button.'],
-      align: [PropTypes.oneOf(['start', 'center', 'end']), 'How to align the contents along the cross axis.'],
+      align: [PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align the contents along the cross axis.'],
       box: [PropTypes.bool, 'Whether the button should support Box props. \n      This is useful if you want your children to be a \n      flexbox container.'],
       centered: [PropTypes.bool, 'Whether this is an accent button.'],
       critical: [PropTypes.bool, 'Whether this is an critical button.'],

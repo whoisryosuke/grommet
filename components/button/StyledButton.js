@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.StyledIcon = exports.StyledLabel = undefined;
+exports.StyledIcon = exports.StyledLabel = exports.textAlignStyle = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -22,11 +22,11 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 var primaryStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';svg{fill:', ';stroke:', ';transition:none;}'], function (props) {
   return props.theme.global.colors.brand;
 }, function (props) {
-  return props.theme.global.colors.activeTextColor;
+  return props.theme.global.colors.white;
 }, function (props) {
-  return props.theme.global.colors.activeTextColor;
+  return props.theme.global.colors.white;
 }, function (props) {
-  return props.theme.global.colors.activeTextColor;
+  return props.theme.global.colors.white;
 });
 
 var accentStyle = (0, _styledComponents.css)(['border-color:', ';'], function (props) {
@@ -85,14 +85,32 @@ var hoverStyle = (0, _styledComponents.css)(['&:hover{', ' ', ' ', '}'], functio
 }, function (props) {
   return !props.plain && 'box-shadow: 0px 0px 0px 2px ' + getHoverColor(props) + ';';
 }, function (props) {
-  return !props.plain && !props.primary && '\n        // TODO: revisit this\n        svg {\n          fill: ' + props.theme.global.colors.hoverTextColor + ';\n          stroke: ' + props.theme.global.colors.hoverTextColor + ';\n          transition: none;\n        }\n      ';
+  return !props.plain && !props.primary && '\n        // TODO: revisit this\n        svg {\n          fill: ' + props.theme.global.hover.textColor + ';\n          stroke: ' + props.theme.global.hover.textColor + ';\n          transition: none;\n        }\n      ';
+});
+
+var fillStyle = '\n  width: 100%;\n  max-width: none;\n  flex-grow: 1;\n';
+
+var plainFocusStyle = (0, _styledComponents.css)(['box-shadow:0 0 3px 3px ', ';'], function (props) {
+  return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
+});
+
+var plainStyle = (0, _styledComponents.css)(['color:inherit;border:none;padding:0;', ''], function (props) {
+  return props.focus && plainFocusStyle;
+});
+
+var TEXT_ALIGN_MAP = {
+  center: 'center',
+  end: 'right',
+  start: 'left'
+};
+
+var textAlignStyle = exports.textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (props) {
+  return TEXT_ALIGN_MAP[props.align];
 });
 
 var StyledButton = _styledComponents2.default.button.withConfig({
   displayName: 'StyledButton__StyledButton'
-})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;border:', ' solid transparent;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
-  return props.theme.button.border.width;
-}, function (props) {
+})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.plain && (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color || props.theme.global.colors.brand, props.theme.button.border.radius, props.theme.button.color || props.theme.global.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
 }, function (props) {
   return !props.disabled && !props.focus && hoverStyle;
@@ -116,7 +134,11 @@ var StyledButton = _styledComponents2.default.button.withConfig({
 }, function (props) {
   return props.focus && _utils.focusStyle;
 }, (0, _utils.lapAndUp)('\n    transition: 0.1s ease-in-out;\n  '), function (props) {
-  return props.plain && 'color: inherit;';
+  return props.plain && plainStyle;
+}, function (props) {
+  return props.fill && fillStyle;
+}, function (props) {
+  return props.align && textAlignStyle;
 });
 
 var StyledLabel = exports.StyledLabel = _styledComponents2.default.span.withConfig({

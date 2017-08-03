@@ -21,7 +21,7 @@ var _reactDom = require('react-dom');
 
 var _DOM = require('./DOM');
 
-var _styles = require('./styles');
+var _grommet = require('../grommet');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37,7 +37,7 @@ var HORIZONTAL_ALIGN_OPTIONS = ['right', 'left'];
 
 var DropContainer = _styledComponents2.default.div.withConfig({
   displayName: 'Drop__DropContainer'
-})(['', ' position:fixed;z-index:20;border-radius:', ';overflow:auto;background-color:', ';'], _styles.baseStyle, function (props) {
+})(['position:fixed;z-index:20;border-radius:', ';overflow:auto;background-color:', ';'], function (props) {
   return props.theme.global.drop.border.radius;
 }, function (props) {
   return props.background ? props.theme.global.colors[props.background] : props.theme.global.drop.backgroundColor;
@@ -79,8 +79,6 @@ var normalizeOptions = function normalizeOptions(options) {
 // className: PropTypes.string
 // background: PropTypes.string
 //    Background color
-// context: PropTypes.object
-//    React context to pass through
 // focusControl: PropTypes.bool
 //    Whether to focus inside the dropped content when added
 // responsive: PropTypes.bool
@@ -110,15 +108,19 @@ var Drop = function () {
     document.body.insertBefore(container, document.body.firstChild);
 
     (0, _reactDom.render)(_react2.default.createElement(
-      DropContainer,
-      {
-        ref: function ref(_ref) {
-          _this.dropContainerRef = _ref;
+      _grommet.Grommet,
+      { theme: options.theme },
+      _react2.default.createElement(
+        DropContainer,
+        {
+          ref: function ref(_ref) {
+            _this.dropContainerRef = _ref;
+          },
+          theme: options.theme,
+          background: options.background
         },
-        theme: options.theme,
-        background: options.background
-      },
-      content
+        content
+      )
     ), container);
 
     var scrollParents = (0, _DOM.findScrollParents)(control);
@@ -313,15 +315,19 @@ var Drop = function () {
     // TODO: handle focus control better
 
     (0, _reactDom.render)(_react2.default.createElement(
-      DropContainer,
-      {
-        ref: function ref(_ref2) {
-          _this4.dropContainerRef = _ref2;
+      _grommet.Grommet,
+      { theme: theme },
+      _react2.default.createElement(
+        DropContainer,
+        {
+          ref: function ref(_ref2) {
+            _this4.dropContainerRef = _ref2;
+          },
+          theme: theme,
+          background: background
         },
-        theme: theme,
-        background: background
-      },
-      content
+        content
+      )
     ), container, function () {
       // this.place();
       // // reset container to its original scroll position

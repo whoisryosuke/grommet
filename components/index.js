@@ -62,6 +62,18 @@ Object.keys(_heading).forEach(function (key) {
   });
 });
 
+var _keyboard = require('./keyboard');
+
+Object.keys(_keyboard).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _keyboard[key];
+    }
+  });
+});
+
 var _paragraph = require('./paragraph');
 
 Object.keys(_paragraph).forEach(function (key) {

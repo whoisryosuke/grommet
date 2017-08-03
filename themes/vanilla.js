@@ -30,13 +30,11 @@ exports.default = {
     centerColumnWidth: baseSpacing * 48 + 'px',
     colors: {
       accent: accentColors,
-      activeTextColor: '#FFFFFF',
       background: backgroundColor,
       black: '#000000',
       brand: brandColor,
       dark: darkColors,
       darkBackgroundTextColor: 'rgba(255, 255, 255, 0.85)',
-      hoverTextColor: '#000000',
       light: lightColors,
       neutral: neutralColors,
       status: statusColors,
@@ -84,6 +82,10 @@ exports.default = {
     lineHeight: '24px',
     placeholder: {
       color: '#AAAAAA'
+    },
+    selected: {
+      backgroundColor: undefined,
+      textColor: textColor
     },
     spacing: baseSpacing + 'px',
     size: {

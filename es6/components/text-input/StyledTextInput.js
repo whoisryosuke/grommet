@@ -3,6 +3,7 @@ var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
 import styled, { css } from 'styled-components';
+import { lighten } from 'polished';
 
 import { focusStyle, inputStyle, parseMetricToInt } from '../utils';
 
@@ -13,17 +14,25 @@ var StyledTextInput = styled.input.withConfig({
   displayName: 'StyledTextInput__StyledTextInput'
 })(['', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, placeholderColor, placeholderColor, placeholderColor, focusStyle);
 
-// TODO: remove cursor pointer and hover when using button
-var suggestionBackgroundStyle = css(['background-color:', ';'], function (props) {
+var activeStyle = css(['background-color:', ';color:', ';'], function (props) {
   return props.theme.global.hover.backgroundColor;
+}, function (props) {
+  return props.theme.global.hover.textColor;
+});
+var selectedStyle = css(['background-color:', ';color:', ';'], function (props) {
+  return props.theme.global.selected.backgroundColor || lighten(0.23, props.theme.global.colors.brand);
+}, function (props) {
+  return props.theme.global.selected.textColor;
 });
 
-export var StyledSuggestion = styled.li.withConfig({
+export var StyledSuggestion = styled.div.withConfig({
   displayName: 'StyledTextInput__StyledSuggestion'
-})(['padding:', ';cursor:pointer;&:hover{', '}', ''], function (props) {
+})(['padding:', ';', ' ', ''], function (props) {
   return parseMetricToInt(props.theme.global.spacing) / 4 + 'px ' + props.theme.global.spacing;
-}, suggestionBackgroundStyle, function (props) {
-  return props.active && suggestionBackgroundStyle;
+}, function (props) {
+  return props.selected && selectedStyle;
+}, function (props) {
+  return props.active && activeStyle;
 });
 
 export var StyledSuggestions = styled.ol.withConfig({
