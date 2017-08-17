@@ -3,7 +3,6 @@ var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
 import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
 
 import { focusStyle, inputStyle, parseMetricToInt } from '../utils';
 
@@ -20,7 +19,7 @@ var activeStyle = css(['background-color:', ';color:', ';'], function (props) {
   return props.theme.global.hover.textColor;
 });
 var selectedStyle = css(['background-color:', ';color:', ';'], function (props) {
-  return props.theme.global.selected.backgroundColor || lighten(0.23, props.theme.global.colors.brand);
+  return props.theme.global.selected.backgroundColor;
 }, function (props) {
   return props.theme.global.selected.textColor;
 });

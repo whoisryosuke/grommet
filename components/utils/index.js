@@ -37,14 +37,3 @@ Object.keys(_DOM).forEach(function (key) {
     }
   });
 });
-
-var _Drop = require('./Drop');
-
-Object.defineProperty(exports, 'Drop', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Drop).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

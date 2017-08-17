@@ -93,7 +93,8 @@ var Button = function (_Component) {
         onClick: onClick,
         plain: plainProp,
         theme: theme,
-        type: !href ? type : undefined
+        type: !href ? type : undefined,
+        tabIndex: '0'
       }),
       first,
       second,

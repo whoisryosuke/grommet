@@ -84,7 +84,7 @@ exports.default = {
       color: '#AAAAAA'
     },
     selected: {
-      backgroundColor: undefined,
+      backgroundColor: (0, _polished.lighten)(0.23, brandColor),
       textColor: textColor
     },
     spacing: baseSpacing + 'px',

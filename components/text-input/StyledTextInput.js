@@ -9,8 +9,6 @@ var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _polished = require('polished');
-
 var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -30,7 +28,7 @@ var activeStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';
   return props.theme.global.hover.textColor;
 });
 var selectedStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';'], function (props) {
-  return props.theme.global.selected.backgroundColor || (0, _polished.lighten)(0.23, props.theme.global.colors.brand);
+  return props.theme.global.selected.backgroundColor;
 }, function (props) {
   return props.theme.global.selected.textColor;
 });

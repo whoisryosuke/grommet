@@ -1,4 +1,4 @@
-import { rgba } from 'polished';
+import { lighten, rgba } from 'polished';
 
 var brandColor = '#865CD6';
 var accentColors = ['#00CCEB', '#FF7D28'];
@@ -80,7 +80,7 @@ export default {
       color: '#AAAAAA'
     },
     selected: {
-      backgroundColor: undefined,
+      backgroundColor: lighten(0.23, brandColor),
       textColor: textColor
     },
     spacing: baseSpacing + 'px',

@@ -1,6 +1,46 @@
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 import { css } from 'styled-components';
 
-import { parseMetricToInt } from './mixins';
+import { colorIsDark, parseMetricToInt } from './mixins';
+
+export var backgroundStyle = function backgroundStyle(background, theme) {
+  if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
+    if (background.image) {
+      var _color = void 0;
+      if (background.dark === false) {
+        _color = theme.global.colors.text;
+      } else if (background.dark) {
+        _color = theme.global.colors.darkBackgroundTextColor;
+      } else {
+        _color = 'inherit';
+      }
+      return css(['background:', ' no-repeat center center;background-size:cover;color:', ';'], background.image, _color);
+    }
+    return undefined;
+  }
+  if (background.lastIndexOf('url', 0) === 0) {
+    return css(['background:', ' no-repeat center center;background-size:cover;'], background);
+  }
+
+  var _background$split = background.split('-'),
+      kind = _background$split[0],
+      index = _background$split[1];
+
+  var colorSet = theme.global.colors[kind];
+  var color = void 0;
+  if (Array.isArray(colorSet)) {
+    color = theme.global.colors[kind][index];
+  } else if (typeof colorSet === 'string') {
+    color = colorSet;
+  } else {
+    color = background;
+  }
+  if (color) {
+    return css(['background-color:', ';color:', ';'], color, colorIsDark(color) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
+  }
+  return undefined;
+};
 
 export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';color:', ';background-color:', ';box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;*{box-sizing:inherit;}'], function (props) {
   return props.theme.global.font.family;
@@ -14,7 +54,10 @@ export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';co
   return props.theme.global.colors.background;
 });
 
-export var focusStyle = css(['border-color:', ';box-shadow:0 0 1px 1px ', ';'], function (props) {
+// focus also supports clickable elements inside svg
+export var focusStyle = css(['>:not(svg){circle,ellipse,line,path,polygon,polyline,rect{outline:', ' solid 2px;}}border-color:', ';box-shadow:0 0 1px 1px ', ';'], function (props) {
+  return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
+}, function (props) {
   return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
 }, function (props) {
   return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
@@ -33,5 +76,5 @@ export var inputStyle = css(['padding:', 'px;border:', ' solid ', ';border-radiu
 });
 
 export default {
-  baseStyle: baseStyle, inputStyle: inputStyle, focusStyle: focusStyle
+  backgroundStyle: backgroundStyle, baseStyle: baseStyle, inputStyle: inputStyle, focusStyle: focusStyle
 };

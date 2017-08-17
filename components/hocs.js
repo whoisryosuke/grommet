@@ -132,7 +132,7 @@ var withTheme = function withTheme(WrappedComponent) {
 
       var contextTheme = this.context.theme;
 
-      contextTheme = JSON.parse(JSON.stringify(contextTheme));
+      contextTheme = contextTheme ? JSON.parse(JSON.stringify(contextTheme)) : {};
       var localTheme = (0, _deepAssign2.default)(contextTheme, theme);
       return _react2.default.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
     };
@@ -141,7 +141,7 @@ var withTheme = function withTheme(WrappedComponent) {
   }(_react.Component);
 
   ThemedComponent.contextTypes = {
-    theme: _propTypes2.default.object.isRequired
+    theme: _propTypes2.default.object
   };
 
 

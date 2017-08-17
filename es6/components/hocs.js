@@ -117,7 +117,7 @@ var withTheme = function withTheme(WrappedComponent) {
 
       var contextTheme = this.context.theme;
 
-      contextTheme = JSON.parse(JSON.stringify(contextTheme));
+      contextTheme = contextTheme ? JSON.parse(JSON.stringify(contextTheme)) : {};
       var localTheme = deepAssign(contextTheme, theme);
       return React.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
     };
@@ -126,7 +126,7 @@ var withTheme = function withTheme(WrappedComponent) {
   }(Component);
 
   ThemedComponent.contextTypes = {
-    theme: PropTypes.object.isRequired
+    theme: PropTypes.object
   };
 
 
