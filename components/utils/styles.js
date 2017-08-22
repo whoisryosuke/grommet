@@ -9,6 +9,8 @@ var _styledComponents = require('styled-components');
 
 var _mixins = require('./mixins');
 
+var _colors = require('./colors');
+
 var backgroundStyle = exports.backgroundStyle = function backgroundStyle(background, theme) {
   if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
     if (background.image) {
@@ -42,7 +44,7 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
     color = background;
   }
   if (color) {
-    return (0, _styledComponents.css)(['background-color:', ';color:', ';'], color, (0, _mixins.colorIsDark)(color) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
+    return (0, _styledComponents.css)(['background-color:', ';color:', ';'], color, (0, _colors.colorIsDark)(color) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
   }
   return undefined;
 };

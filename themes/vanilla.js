@@ -56,9 +56,11 @@ exports.default = {
       }
     },
     edgeSize: {
+      xsmall: baseSpacing / 4 + 'px',
       small: baseSpacing / 2 + 'px',
       medium: baseSpacing + 'px',
-      large: baseSpacing * 2 + 'px'
+      large: baseSpacing * 2 + 'px',
+      xlarge: baseSpacing * 4 + 'px'
     },
     focus: {
       border: {}
@@ -95,7 +97,8 @@ exports.default = {
       medium: baseSpacing * 16 + 'px',
       large: baseSpacing * 24 + 'px',
       xlarge: baseSpacing * 30 + 'px',
-      xxlarge: baseSpacing * 40 + 'px'
+      xxlarge: baseSpacing * 40 + 'px',
+      full: '100%'
     }
   },
   button: {

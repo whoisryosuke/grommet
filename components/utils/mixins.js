@@ -1,7 +1,6 @@
 'use strict';
 
 exports.__esModule = true;
-exports.colorIsDark = undefined;
 exports.parseMetricToInt = parseMetricToInt;
 exports.fontSize = fontSize;
 exports.lapAndUp = lapAndUp;
@@ -12,22 +11,6 @@ var _styledComponents = require('styled-components');
 function parseMetricToInt(fontAsString) {
   return parseInt(fontAsString.replace(/[^0-9]/g, ''), 10);
 }
-
-var colorIsDark = exports.colorIsDark = function colorIsDark(color) {
-  // https://stackoverflow.com/a/42429333
-  var _color$match$map = color.match(/[A-Za-z0-9]{2}/g).map(function (v) {
-    return parseInt(v, 16);
-  }),
-      red = _color$match$map[0],
-      green = _color$match$map[1],
-      blue = _color$match$map[2];
-  // http://www.had2know.com/technology/
-  //  color-contrast-calculator-web-design.html
-
-
-  var brightness = (299 * red + 587 * green + 114 * blue) / 1000;
-  return brightness < 125;
-};
 
 function fontSize(size, lineHeight) {
   return (0, _styledComponents.css)(['font-size:', ';line-height:', ';'], function (props) {
@@ -59,5 +42,5 @@ function findAllByType(component, type) {
 }
 
 exports.default = {
-  colorIsDark: colorIsDark, fontSize: fontSize, findAllByType: findAllByType, lapAndUp: lapAndUp
+  fontSize: fontSize, findAllByType: findAllByType, lapAndUp: lapAndUp
 };

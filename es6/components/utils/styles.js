@@ -2,7 +2,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 import { css } from 'styled-components';
 
-import { colorIsDark, parseMetricToInt } from './mixins';
+import { parseMetricToInt } from './mixins';
+import { colorIsDark } from './colors';
 
 export var backgroundStyle = function backgroundStyle(background, theme) {
   if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {

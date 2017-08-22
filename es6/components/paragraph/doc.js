@@ -2,7 +2,7 @@ import { schema, PropTypes } from 'react-desc';
 
 export default (function (Paragraph) {
   return schema(Paragraph, {
-    description: 'A box.',
+    description: 'A paragraph of text.',
     usage: 'import { Paragraph } from \'grommet\';\n  <Paragraph/>',
     props: {
       margin: [PropTypes.oneOfType([PropTypes.oneOf(['none', 'small', 'medium', 'large']), PropTypes.shape({

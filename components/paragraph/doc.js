@@ -6,7 +6,7 @@ var _reactDesc = require('react-desc');
 
 exports.default = function (Paragraph) {
   return (0, _reactDesc.schema)(Paragraph, {
-    description: 'A box.',
+    description: 'A paragraph of text.',
     usage: 'import { Paragraph } from \'grommet\';\n  <Paragraph/>',
     props: {
       margin: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none', 'small', 'medium', 'large']), _reactDesc.PropTypes.shape({
