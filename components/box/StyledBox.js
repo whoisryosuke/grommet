@@ -146,9 +146,17 @@ var edgeStyle = function edgeStyle(kind, data, theme) {
   return '';
 };
 
+var ROUND_MAP = {
+  'full': '100%'
+};
+
+var roundStyle = (0, _styledComponents.css)(['border-radius:', ';'], function (props) {
+  return ROUND_MAP[props.round] || props.theme.global.edgeSize[props.round];
+});
+
 var StyledBox = _styledComponents2.default.div.withConfig({
   displayName: 'StyledBox__StyledBox'
-})(['display:flex;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;
 }, function (props) {
   return props.alignContent && alignContentStyle;
@@ -172,6 +180,8 @@ var StyledBox = _styledComponents2.default.div.withConfig({
   return props.margin && edgeStyle('margin', props.margin, props.theme);
 }, function (props) {
   return props.pad && edgeStyle('padding', props.pad, props.theme);
+}, function (props) {
+  return props.round && roundStyle;
 }, function (props) {
   return props.textAlign && textAlignStyle;
 }, function (props) {

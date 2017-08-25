@@ -48,6 +48,7 @@ export default (function (Box) {
       //   to a column layout when the display area narrows. Defaults to true.`,
       // ],
       reverse: [PropTypes.bool, 'Whether to reverse the order of the child components.'],
+      round: [PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']), 'How much to round the corners.'],
       // separator - moved to border
       // size - removed, use basis
       tag: [PropTypes.string, 'The DOM tag to use for the element. Defaults to div.'],

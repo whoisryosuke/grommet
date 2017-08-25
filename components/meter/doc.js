@@ -16,10 +16,12 @@ exports.default = function (Meter) {
       type: [_reactDesc.PropTypes.oneOf(['bar', 'circle']), 'The visual type of meter.'],
       values: [_reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.shape({
         color: _reactDesc.PropTypes.string,
+        highlight: _reactDesc.PropTypes.bool,
         label: _reactDesc.PropTypes.string.isRequired, // for a11y
         onClick: _reactDesc.PropTypes.func,
+        onHover: _reactDesc.PropTypes.func,
         value: _reactDesc.PropTypes.number.isRequired
-      })), 'Values to visualize']
+      })), 'Array of value objects describing the data.\n      \'value\' is the actual numeric value.\n      \'label\' is a text string describing it.\n      \'color\' indicates the color name to use. If not specified a default one\n      will be chosen.\n      \'onClick\' will be called when the user clicks on it.\n      Set \'highlight\' to call attention to it.\n      \'onHover\' will be called with a boolean argument indicating when the\n      user hovers onto or away from it.']
     }
   });
 };

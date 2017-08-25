@@ -35,27 +35,45 @@ var Bar = function (_Component) {
     var height = parseMetricToInt(theme.global.edgeSize[thickness]);
     var mid = height / 2;
     var max = 100;
+    var someHighlight = (values || []).some(function (v) {
+      return v.highlight;
+    });
 
     var start = 0;
     var paths = (values || []).map(function (valueArg, index) {
-      var value = valueArg.value,
+      var color = valueArg.color,
+          highlight = valueArg.highlight,
           label = valueArg.label,
-          color = valueArg.color,
-          rest = _objectWithoutProperties(valueArg, ['value', 'label', 'color']);
+          onHover = valueArg.onHover,
+          value = valueArg.value,
+          rest = _objectWithoutProperties(valueArg, ['color', 'highlight', 'label', 'onHover', 'value']);
 
       var key = 'p-' + index;
       var delta = value * width / max;
       var d = 'M ' + start + ',' + mid + ' L ' + (start + delta) + ',' + mid;
       var colorName = color || 'neutral-' + (index + 1);
+      var hoverProps = void 0;
+      if (onHover) {
+        hoverProps = {
+          onMouseOver: function onMouseOver() {
+            return onHover(true);
+          },
+          onMouseLeave: function onMouseLeave() {
+            return onHover(false);
+          }
+        };
+      }
       start += delta;
+
       return React.createElement('path', _extends({
         key: key,
         d: d,
         fill: 'none',
         stroke: colorForName(colorName, theme),
         strokeWidth: height,
-        strokeLinecap: cap
-      }, rest));
+        strokeLinecap: cap,
+        strokeOpacity: someHighlight && !highlight ? 0.5 : 1
+      }, hoverProps, rest));
     }).reverse(); // reverse so the caps looks right
 
     return React.createElement(
