@@ -2,8 +2,6 @@
 
 exports.__esModule = true;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -45,24 +43,24 @@ var Text = function (_Component) {
 
   Text.prototype.render = function render() {
     var _props = this.props,
-        level = _props.level,
-        rest = _objectWithoutProperties(_props, ['level']);
+        tag = _props.tag,
+        rest = _objectWithoutProperties(_props, ['tag']);
 
-    var tag = 'span';
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
       StyledComponent = _StyledText2.default.withComponent(tag);
       styledComponents[tag] = StyledComponent;
     }
 
-    return _react2.default.createElement(StyledComponent, _extends({ level: level }, rest));
+    return _react2.default.createElement(StyledComponent, rest);
   };
 
   return Text;
 }(_react.Component);
 
 Text.defaultProps = {
-  level: 1
+  level: 1,
+  tag: 'span'
 };
 
 
