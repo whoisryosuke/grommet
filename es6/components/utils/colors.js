@@ -7,7 +7,7 @@ export var colorForName = function colorForName(name, theme) {
   var colorSet = theme.global.colors[kind];
   var color = void 0;
   if (Array.isArray(colorSet)) {
-    color = theme.global.colors[kind][index];
+    color = theme.global.colors[kind][index - 1];
   } else if (typeof colorSet === 'string') {
     color = colorSet;
   } else {

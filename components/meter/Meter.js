@@ -60,6 +60,8 @@ var Meter = function (_Component) {
 }(_react.Component);
 
 Meter.defaultProps = {
+  background: 'light-1',
+  color: 'accent-1',
   size: 'medium',
   thickness: 'medium',
   type: 'bar'

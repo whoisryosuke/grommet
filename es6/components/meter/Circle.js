@@ -26,7 +26,7 @@ var Circle = function (_Component) {
   Circle.prototype.render = function render() {
     var _props = this.props,
         background = _props.background,
-        cap = _props.cap,
+        round = _props.round,
         size = _props.size,
         theme = _props.theme,
         thickness = _props.thickness,
@@ -53,7 +53,7 @@ var Circle = function (_Component) {
           rest = _objectWithoutProperties(valueArg, ['color', 'highlight', 'label', 'onHover', 'value']);
 
       var key = 'p-' + index;
-      var colorName = color || 'neutral-' + (index + 1);
+      var colorName = color || (index === values.length - 1 ? 'accent-1' : 'neutral-' + (index + 1));
 
       var endAngle = void 0;
       if (startValue + value >= max) {
@@ -82,7 +82,7 @@ var Circle = function (_Component) {
         fill: 'none',
         stroke: colorForName(colorName, theme),
         strokeWidth: height,
-        strokeLinecap: cap,
+        strokeLinecap: round ? 'round' : 'square',
         strokeOpacity: someHighlight && !highlight ? 0.5 : 1
       }, hoverProps, rest));
     }).reverse(); // reverse so the caps looks right
@@ -100,7 +100,7 @@ var Circle = function (_Component) {
         r: radius,
         stroke: colorForName(background, theme),
         strokeWidth: height,
-        strokeLinecap: cap,
+        strokeLinecap: round ? 'round' : 'square',
         fill: 'none'
       }),
       paths
@@ -110,8 +110,4 @@ var Circle = function (_Component) {
   return Circle;
 }(Component);
 
-Circle.defaultProps = {
-  background: 'light-1',
-  cap: 'square'
-};
 export default Circle;

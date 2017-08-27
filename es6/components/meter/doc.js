@@ -6,14 +6,14 @@ export default (function (Meter) {
     usage: 'import { Meter } from \'grommet\';\n  <Meter/>',
     props: {
       background: [PropTypes.string, 'A color identifier to use for the background color. For example:\n      \'light-1\'.'],
-      cap: [PropTypes.oneOf(['round', 'square']), 'The end of line cap. Defaults to square.'],
+      round: [PropTypes.bool, 'Whether to round the line ends'],
       size: [PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full']), 'The size of the Meter. Defaults to medium.'],
       thickness: [PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']), 'The size of the Meter. Defaults to medium.'],
       type: [PropTypes.oneOf(['bar', 'circle']), 'The visual type of meter.'],
       values: [PropTypes.arrayOf(PropTypes.shape({
         color: PropTypes.string,
         highlight: PropTypes.bool,
-        label: PropTypes.string.isRequired, // for a11y
+        label: PropTypes.string.isRequired, // for accessibility
         onClick: PropTypes.func,
         onHover: PropTypes.func,
         value: PropTypes.number.isRequired

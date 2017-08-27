@@ -24,73 +24,75 @@ var Bar = function (_Component) {
 
   Bar.prototype.render = function render() {
     var _props = this.props,
-        background = _props.background,
-        round = _props.round,
+        initialBounds = _props.bounds,
+        color = _props.color,
+        cap = _props.cap,
         size = _props.size,
         theme = _props.theme,
         thickness = _props.thickness,
+        title = _props.title,
         values = _props.values;
 
-    var width = size === 'full' ? 288 : parseMetricToInt(theme.global.size[size]);
-    var height = parseMetricToInt(theme.global.edgeSize[thickness]);
-    var mid = height / 2;
-    var max = 100;
-    var someHighlight = (values || []).some(function (v) {
-      return v.highlight;
-    });
 
-    var start = 0;
+    var bounds = initialBounds;
+    if (!bounds) {
+      // derive from values, TODO: move outside of render()
+      bounds = [[], []];
+      (values || []).forEach(function (value) {
+        bounds[0][0] = Math.min(bounds[0][0], value[0]);
+        bounds[0][1] = Math.max(bounds[0][1], value[0]);
+        bounds[1][0] = Math.min(bounds[1][0], value[1]);
+        bounds[1][1] = Math.max(bounds[1][1], value[1]);
+      });
+    }
+
+    var sizeWidth = typeof size === 'string' ? size : size.width;
+    var sizeHeight = typeof size === 'string' ? size : size.height;
+    var width = sizeWidth === 'full' ? bounds[0][1] - bounds[0][0] : parseMetricToInt(theme.global.size[sizeWidth]);
+    var height = sizeHeight === 'full' ? bounds[1][1] - bounds[1][0] : parseMetricToInt(theme.global.size[sizeHeight]);
+    var strokeWidth = parseMetricToInt(theme.global.edgeSize[thickness]);
+    var scaleX = width / (bounds[0][1] - bounds[0][0]);
+    var scaleY = height / (bounds[1][1] - bounds[1][0]);
+
     var paths = (values || []).map(function (valueArg, index) {
-      var color = valueArg.color,
-          highlight = valueArg.highlight,
-          label = valueArg.label,
-          onHover = valueArg.onHover,
+      var label = valueArg.label,
           value = valueArg.value,
-          rest = _objectWithoutProperties(valueArg, ['color', 'highlight', 'label', 'onHover', 'value']);
+          rest = _objectWithoutProperties(valueArg, ['label', 'value']);
 
       var key = 'p-' + index;
-      var delta = value * width / max;
-      var d = 'M ' + start + ',' + mid + ' L ' + (start + delta) + ',' + mid;
-      var colorName = color || (index === values.length - 1 ? 'accent-1' : 'neutral-' + (index + 1));
-      var hoverProps = void 0;
-      if (onHover) {
-        hoverProps = {
-          onMouseOver: function onMouseOver() {
-            return onHover(true);
-          },
-          onMouseLeave: function onMouseLeave() {
-            return onHover(false);
-          }
-        };
-      }
-      start += delta;
+      var d = 'M ' + value[0] * scaleX + ',' + (height - bounds[1][0] * scaleY) + '\n        L ' + value[0] * scaleX + ',' + (height - value[1] * scaleY);
 
-      return React.createElement('path', _extends({
-        key: key,
-        d: d,
-        fill: 'none',
-        stroke: colorForName(colorName, theme),
-        strokeWidth: height,
-        strokeLinecap: round ? 'round' : 'square',
-        strokeOpacity: someHighlight && !highlight ? 0.5 : 1
-      }, hoverProps, rest));
-    }).reverse(); // reverse so the caps looks right
+      return React.createElement(
+        'g',
+        {
+          key: key,
+          fill: 'none',
+          stroke: colorForName(color, theme),
+          strokeWidth: strokeWidth,
+          strokeLinecap: cap
+        },
+        React.createElement(
+          'title',
+          null,
+          label
+        ),
+        React.createElement('path', _extends({ d: d }, rest))
+      );
+    });
 
     return React.createElement(
       'svg',
       {
-        viewBox: '0 0 ' + width + ' ' + height,
+        viewBox: '-' + strokeWidth / 2 + ' -' + strokeWidth / 2 + ' ' + (width + strokeWidth) + ' ' + (height + strokeWidth),
         preserveAspectRatio: 'none',
         width: size === 'full' ? '100%' : width,
         height: height
       },
-      React.createElement('path', {
-        d: 'M 0,' + mid + ' L ' + width + ',' + mid,
-        fill: 'none',
-        stroke: colorForName(background, theme),
-        strokeWidth: height,
-        strokeLinecap: round ? 'round' : 'square'
-      }),
+      React.createElement(
+        'title',
+        null,
+        title
+      ),
       paths
     );
   };
@@ -98,7 +100,4 @@ var Bar = function (_Component) {
   return Bar;
 }(Component);
 
-Bar.defaultProps = {
-  background: 'light-1'
-};
 export default Bar;

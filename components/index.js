@@ -26,6 +26,18 @@ Object.keys(_button).forEach(function (key) {
   });
 });
 
+var _chart = require('./chart');
+
+Object.keys(_chart).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _chart[key];
+    }
+  });
+});
+
 var _grid = require('./grid');
 
 Object.keys(_grid).forEach(function (key) {
