@@ -1,6 +1,9 @@
 'use strict';
 
 exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var colorForName = exports.colorForName = function colorForName(name, theme) {
   var _name$split = name.split('-'),
       kind = _name$split[0],
@@ -9,7 +12,9 @@ var colorForName = exports.colorForName = function colorForName(name, theme) {
   var colorSet = theme.global.colors[kind];
   var color = void 0;
   if (Array.isArray(colorSet)) {
-    color = theme.global.colors[kind][index - 1];
+    color = colorSet[index - 1];
+  } else if ((typeof colorSet === 'undefined' ? 'undefined' : _typeof(colorSet)) === 'object') {
+    color = colorSet[index];
   } else if (typeof colorSet === 'string') {
     color = colorSet;
   } else {

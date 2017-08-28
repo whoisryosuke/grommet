@@ -3,7 +3,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 import { css } from 'styled-components';
 
 import { parseMetricToInt } from './mixins';
-import { colorIsDark } from './colors';
+import { colorForName, colorIsDark } from './colors';
 
 export var backgroundStyle = function backgroundStyle(background, theme) {
   if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
@@ -23,20 +23,7 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
   if (background.lastIndexOf('url', 0) === 0) {
     return css(['background:', ' no-repeat center center;background-size:cover;'], background);
   }
-
-  var _background$split = background.split('-'),
-      kind = _background$split[0],
-      index = _background$split[1];
-
-  var colorSet = theme.global.colors[kind];
-  var color = void 0;
-  if (Array.isArray(colorSet)) {
-    color = theme.global.colors[kind][index - 1];
-  } else if (typeof colorSet === 'string') {
-    color = colorSet;
-  } else {
-    color = background;
-  }
+  var color = colorForName(background, theme);
   if (color) {
     return css(['background-color:', ';color:', ';'], color, colorIsDark(color) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
   }

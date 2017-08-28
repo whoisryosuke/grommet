@@ -29,20 +29,7 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
   if (background.lastIndexOf('url', 0) === 0) {
     return (0, _styledComponents.css)(['background:', ' no-repeat center center;background-size:cover;'], background);
   }
-
-  var _background$split = background.split('-'),
-      kind = _background$split[0],
-      index = _background$split[1];
-
-  var colorSet = theme.global.colors[kind];
-  var color = void 0;
-  if (Array.isArray(colorSet)) {
-    color = theme.global.colors[kind][index - 1];
-  } else if (typeof colorSet === 'string') {
-    color = colorSet;
-  } else {
-    color = background;
-  }
+  var color = (0, _colors.colorForName)(background, theme);
   if (color) {
     return (0, _styledComponents.css)(['background-color:', ';color:', ';'], color, (0, _colors.colorIsDark)(color) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
   }
