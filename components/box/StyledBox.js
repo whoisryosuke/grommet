@@ -119,7 +119,22 @@ var textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (
   return TEXT_ALIGN_MAP[props.textAlign];
 });
 
-var wrapStyle = 'flex-wrap: true;';
+var wrapStyle = 'flex-wrap: wrap;';
+
+var borderStyle = function borderStyle(data, theme) {
+  var color = (0, _utils.colorForName)(data.color || 'light-2', theme);
+  var size = data.size || 'small';
+  var side = typeof data === 'string' ? data : data.side || 'all';
+  var value = 'solid ' + theme.global.borderSize[size] + ' ' + color;
+  if (side === 'top' || side === 'bottom' || side === 'left' || side === 'right') {
+    return 'border-' + data + ': ' + value + ';';
+  } else if (side === 'horizontal') {
+    return '\n      border-left: ' + value + ';\n      border-right: ' + value + ';\n    ';
+  } else if (side === 'vertical') {
+    return '\n      border-top: ' + value + ';\n      border-bottom: ' + value + ';\n    ';
+  }
+  return 'border: ' + value + ';';
+};
 
 var edgeStyle = function edgeStyle(kind, data, theme) {
   if (typeof data === 'string') {
@@ -131,19 +146,20 @@ var edgeStyle = function edgeStyle(kind, data, theme) {
   if (data.vertical) {
     return '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
   }
+  var result = '';
   if (data.top) {
-    return kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
+    result += kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
   }
   if (data.bottom) {
-    return kind + '-bottom: ' + theme.global.edgeSize[data.bottom] + ';';
+    result += kind + '-bottom: ' + theme.global.edgeSize[data.bottom] + ';';
   }
   if (data.left) {
-    return kind + '-left: ' + theme.global.edgeSize[data.left] + ';';
+    result += kind + '-left: ' + theme.global.edgeSize[data.left] + ';';
   }
   if (data.right) {
-    return kind + '-right: ' + theme.global.edgeSize[data.right] + ';';
+    result += kind + '-right: ' + theme.global.edgeSize[data.right] + ';';
   }
-  return '';
+  return result;
 };
 
 var ROUND_MAP = {
@@ -156,7 +172,7 @@ var roundStyle = (0, _styledComponents.css)(['border-radius:', ';'], function (p
 
 var StyledBox = _styledComponents2.default.div.withConfig({
   displayName: 'StyledBox__StyledBox'
-})(['display:flex;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;
 }, function (props) {
   return props.alignContent && alignContentStyle;
@@ -166,6 +182,8 @@ var StyledBox = _styledComponents2.default.div.withConfig({
   return props.basis && basisStyle;
 }, function (props) {
   return props.background && (0, _utils.backgroundStyle)(props.background, props.theme);
+}, function (props) {
+  return props.border && borderStyle(props.border, props.theme);
 }, function (props) {
   return (props.direction || props.reverse) && directionStyle;
 }, function (props) {

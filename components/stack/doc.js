@@ -8,6 +8,8 @@ exports.default = function (Stack) {
   return (0, _reactDesc.schema)(Stack, {
     description: 'Stacks components on top of the first child component.',
     usage: 'import { Stack } from \'grommet\';\n  <Stack/>',
-    props: {}
+    props: {
+      anchor: [_reactDesc.PropTypes.oneOf(['center', 'left', 'right', 'top', 'bottom', 'top-left', 'bottom-left', 'top-right', 'bottom-right']), 'Where to anchor children from. The default is \'center\'']
+    }
   });
 };

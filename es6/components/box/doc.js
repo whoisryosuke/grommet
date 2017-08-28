@@ -15,7 +15,11 @@ export default (function (Box) {
         image: PropTypes.string
       })]), 'Either a color identifier to use for the background color. For example:\n      \'neutral-1\'. Or, a \'url()\' for an image.'],
       basis: [PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4']), 'A fixed or relative size along its container\'s main axis.'],
-      border: [PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']), 'Include a border.'],
+      border: [PropTypes.oneOfType([PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']), PropTypes.shape({
+        color: PropTypes.string,
+        side: PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']),
+        size: PropTypes.oneOf(['small', 'medium', 'large'])
+      })]), 'Include a border.'],
       // colorIndex - moved to background
       direction: [PropTypes.oneOf(['row', 'column']), 'The orientation to layout the child components in. Defaults to column.'],
       // focusable - removed
