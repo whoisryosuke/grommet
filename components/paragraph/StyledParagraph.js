@@ -46,7 +46,7 @@ var textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (
 });
 
 var StyledParagraph = _styledComponents2.default.p.withConfig({
-  displayName: 'StyledParagraph__StyledParagraph'
+  displayName: 'StyledParagraph'
 })(['', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
 }, function (props) {
@@ -56,5 +56,5 @@ var StyledParagraph = _styledComponents2.default.p.withConfig({
 });
 
 exports.default = StyledParagraph.extend(_templateObject, function (props) {
-  return props.theme.box && props.theme.box.extend;
+  return props.theme.paragraph && props.theme.paragraph.extend;
 });

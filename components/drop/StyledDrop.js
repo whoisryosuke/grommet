@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
 var StyledDrop = _styledComponents2.default.div.withConfig({
-  displayName: 'StyledDrop__StyledDrop'
+  displayName: 'StyledDrop'
 })(['', ' max-height:0px;position:fixed;z-index:20;border-radius:', ';overflow:auto;transition:all .5s ease-in-out;', ''], _utils.baseStyle, function (props) {
   return props.theme.global.drop.border.radius;
 }, function (props) {

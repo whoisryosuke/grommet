@@ -111,7 +111,7 @@ var areasStyle = function areasStyle(props) {
 };
 
 var StyledGrid = styled.div.withConfig({
-  displayName: 'StyledGrid__StyledGrid'
+  displayName: 'StyledGrid'
 })(['display:grid;height:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;
 }, function (props) {

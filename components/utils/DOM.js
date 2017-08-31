@@ -1,7 +1,24 @@
-"use strict";
+'use strict';
 
 exports.__esModule = true;
+exports.filterByFocusable = filterByFocusable;
 exports.findScrollParents = findScrollParents;
+exports.getBodyChildElements = getBodyChildElements;
+exports.getNewContainer = getNewContainer;
+function filterByFocusable(elements) {
+  return Array.prototype.filter.call(elements || [], function (element) {
+    var currentTag = element.tagName.toLowerCase();
+    var validTags = /(svg|a|area|input|select|textarea|button|iframe|div)$/;
+    var isValidTag = currentTag.match(validTags) && element.focus;
+    if (currentTag === 'a') {
+      return isValidTag && element.childNodes.length > 0 && element.getAttribute('href');
+    } else if (currentTag === 'svg' || currentTag === 'div') {
+      return isValidTag && element.hasAttribute('tabindex');
+    }
+    return isValidTag;
+  });
+}
+
 function findScrollParents(element, horizontal) {
   var result = [];
   if (element) {
@@ -27,6 +44,28 @@ function findScrollParents(element, horizontal) {
   return result;
 }
 
+function getBodyChildElements() {
+  var excludeMatch = /^(script|link)$/i;
+  var children = [];
+  [].forEach.call(document.body.children, function (node) {
+    if (!excludeMatch.test(node.tagName)) {
+      children.push(node);
+    }
+  });
+  return children;
+}
+
+function getNewContainer() {
+  // setup DOM
+  var container = document.createElement('div');
+  // prepend in body to avoid browser scroll issues
+  document.body.insertBefore(container, document.body.firstChild);
+  return container;
+}
+
 exports.default = {
-  findScrollParents: findScrollParents
+  filterByFocusable: filterByFocusable,
+  findScrollParents: findScrollParents,
+  getBodyChildElements: getBodyChildElements,
+  getNewContainer: getNewContainer
 };

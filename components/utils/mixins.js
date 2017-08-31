@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.parseMetricToInt = parseMetricToInt;
 exports.fontSize = fontSize;
 exports.lapAndUp = lapAndUp;
+exports.palm = palm;
 exports.findAllByType = findAllByType;
 
 var _styledComponents = require('styled-components');
@@ -25,6 +26,11 @@ function lapAndUp(content) {
   return '\n    @media only screen and (min-width:' + lapStart + ') { ' + content + '; }\n  ';
 }
 
+var palmEnd = '480px';
+function palm(content) {
+  return '\n    @media only screen and (max-width:' + palmEnd + ') { ' + content + '; }\n  ';
+}
+
 function findAllByType(component, type) {
   var matches = [];
 
@@ -42,5 +48,5 @@ function findAllByType(component, type) {
 }
 
 exports.default = {
-  fontSize: fontSize, findAllByType: findAllByType, lapAndUp: lapAndUp
+  fontSize: fontSize, findAllByType: findAllByType, lapAndUp: lapAndUp, palm: palm
 };

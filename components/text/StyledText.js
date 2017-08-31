@@ -61,7 +61,7 @@ var textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (
 var truncateStyle = '\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n';
 
 var StyledText = _styledComponents2.default.span.withConfig({
-  displayName: 'StyledText__StyledText'
+  displayName: 'StyledText'
 })(['', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
 }, function (props) {

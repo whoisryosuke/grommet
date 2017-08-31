@@ -163,7 +163,7 @@ var roundStyle = css(['border-radius:', ';'], function (props) {
 });
 
 var StyledBox = styled.div.withConfig({
-  displayName: 'StyledBox__StyledBox'
+  displayName: 'StyledBox'
 })(['display:flex;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;
 }, function (props) {

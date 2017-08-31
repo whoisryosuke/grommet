@@ -19,7 +19,7 @@ var placeholderColor = (0, _styledComponents.css)(['color:', ';'], function (pro
   return props.theme.global.placeholder.color;
 });
 var StyledTextInput = _styledComponents2.default.input.withConfig({
-  displayName: 'StyledTextInput__StyledTextInput'
+  displayName: 'StyledTextInput'
 })(['', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, placeholderColor, placeholderColor, placeholderColor, _utils.focusStyle);
 
 var activeStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';'], function (props) {

@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
 var StyledStack = _styledComponents2.default.div.withConfig({
-  displayName: 'StyledStack__StyledStack'
+  displayName: 'StyledStack'
 })(['position:relative;']);
 
 exports.default = StyledStack.extend(_templateObject, function (props) {

@@ -41,7 +41,7 @@ var textAlignStyle = css(['text-align:', ';'], function (props) {
 var truncateStyle = '\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n';
 
 var StyledHeading = styled.h1.withConfig({
-  displayName: 'StyledHeading__StyledHeading'
+  displayName: 'StyledHeading'
 })(['', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
 }, function (props) {

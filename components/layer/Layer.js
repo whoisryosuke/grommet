@@ -8,9 +8,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
-var _DropContainer = require('./DropContainer');
+var _LayerContainer = require('./LayerContainer');
 
-var _DropContainer2 = _interopRequireDefault(_DropContainer);
+var _LayerContainer2 = _interopRequireDefault(_LayerContainer);
 
 var _doc = require('./doc');
 
@@ -26,50 +26,58 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Drop = function (_Component) {
-  _inherits(Drop, _Component);
+var Layer = function (_Component) {
+  _inherits(Layer, _Component);
 
-  function Drop() {
-    _classCallCheck(this, Drop);
+  function Layer() {
+    _classCallCheck(this, Layer);
 
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  Drop.prototype.componentDidMount = function componentDidMount() {
-    this.dropContainer = (0, _utils.getNewContainer)();
-    this.renderDrop();
+  Layer.prototype.componentDidMount = function componentDidMount() {
+    this.originalFocusedElement = document.activeElement;
+    this.layerContainer = (0, _utils.getNewContainer)();
+    this.renderLayer();
   };
 
-  Drop.prototype.componentDidUpdate = function componentDidUpdate() {
-    this.renderDrop();
+  Layer.prototype.componentWillUnmount = function componentWillUnmount() {
+    var _this2 = this;
+
+    if (this.originalFocusedElement) {
+      if (this.originalFocusedElement.focus) {
+        // wait for the fixed positioning to come back to normal
+        // see layer styling for reference
+        setTimeout(function () {
+          _this2.originalFocusedElement.focus();
+        }, 0);
+      } else if (this.originalFocusedElement.parentNode && this.originalFocusedElement.parentNode.focus) {
+        // required for IE11 and Edge
+        this.originalFocusedElement.parentNode.focus();
+      }
+    }
+    (0, _reactDom.unmountComponentAtNode)(this.layerContainer);
+    document.body.removeChild(this.layerContainer);
   };
 
-  Drop.prototype.componentWillUnmount = function componentWillUnmount() {
-    (0, _reactDom.unmountComponentAtNode)(this.dropContainer);
-    document.body.removeChild(this.dropContainer);
+  Layer.prototype.renderLayer = function renderLayer() {
+    (0, _reactDom.render)(_react2.default.createElement(_LayerContainer2.default, this.props), this.layerContainer);
   };
 
-  Drop.prototype.renderDrop = function renderDrop() {
-    (0, _reactDom.render)(_react2.default.createElement(_DropContainer2.default, this.props), this.dropContainer);
-  };
-
-  Drop.prototype.render = function render() {
+  Layer.prototype.render = function render() {
     return _react2.default.createElement('span', { style: { display: 'none' } });
   };
 
-  return Drop;
+  return Layer;
 }(_react.Component);
 
-Drop.defaultProps = {
-  align: {
-    top: 'top',
-    left: 'left'
-  }
+Layer.defaultProps = {
+  align: 'center'
 };
 
 
 if (process.env.NODE_ENV !== 'production') {
-  (0, _doc2.default)(Drop);
+  (0, _doc2.default)(Layer);
 }
 
-exports.default = Drop;
+exports.default = Layer;

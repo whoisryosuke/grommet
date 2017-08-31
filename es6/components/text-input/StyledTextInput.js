@@ -10,7 +10,7 @@ var placeholderColor = css(['color:', ';'], function (props) {
   return props.theme.global.placeholder.color;
 });
 var StyledTextInput = styled.input.withConfig({
-  displayName: 'StyledTextInput__StyledTextInput'
+  displayName: 'StyledTextInput'
 })(['', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, placeholderColor, placeholderColor, placeholderColor, focusStyle);
 
 var activeStyle = css(['background-color:', ';color:', ';'], function (props) {

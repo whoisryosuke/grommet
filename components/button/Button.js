@@ -98,7 +98,9 @@ var Button = function (_Component) {
 
     return _react2.default.createElement(
       Tag,
-      _extends({}, rest, boxProps, {
+      _extends({
+        tabIndex: '0'
+      }, rest, boxProps, {
         'aria-label': a11yTitle,
         box: box,
         disabled: disabled,
@@ -107,8 +109,7 @@ var Button = function (_Component) {
         onClick: onClick,
         plain: plainProp,
         theme: theme,
-        type: !href ? type : undefined,
-        tabIndex: '0'
+        type: !href ? type : undefined
       }),
       first,
       second,

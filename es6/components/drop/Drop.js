@@ -11,13 +11,7 @@ import DropContainer from './DropContainer';
 
 import doc from './doc';
 
-function getDropContainer() {
-  // setup DOM
-  var container = document.createElement('div');
-  // prepend in body to avoid browser scroll issues
-  document.body.insertBefore(container, document.body.firstChild);
-  return container;
-}
+import { getNewContainer } from '../utils';
 
 var Drop = function (_Component) {
   _inherits(Drop, _Component);
@@ -29,7 +23,7 @@ var Drop = function (_Component) {
   }
 
   Drop.prototype.componentDidMount = function componentDidMount() {
-    this.dropContainer = getDropContainer();
+    this.dropContainer = getNewContainer();
     this.renderDrop();
   };
 

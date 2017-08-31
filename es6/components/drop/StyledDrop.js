@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { backgroundStyle, baseStyle } from '../utils';
 
 var StyledDrop = styled.div.withConfig({
-  displayName: 'StyledDrop__StyledDrop'
+  displayName: 'StyledDrop'
 })(['', ' max-height:0px;position:fixed;z-index:20;border-radius:', ';overflow:auto;transition:all .5s ease-in-out;', ''], baseStyle, function (props) {
   return props.theme.global.drop.border.radius;
 }, function (props) {
