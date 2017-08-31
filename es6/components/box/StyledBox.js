@@ -132,13 +132,13 @@ var edgeStyle = function edgeStyle(kind, data, theme) {
   if (typeof data === 'string') {
     return kind + ': ' + theme.global.edgeSize[data] + ';';
   }
+  var result = '';
   if (data.horizontal) {
-    return '\n      ' + kind + '-left: ' + theme.global.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.global.edgeSize[data.horizontal] + ';\n    ';
+    result += '\n      ' + kind + '-left: ' + theme.global.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.global.edgeSize[data.horizontal] + ';\n    ';
   }
   if (data.vertical) {
-    return '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
+    result += '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
   }
-  var result = '';
   if (data.top) {
     result += kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
   }
