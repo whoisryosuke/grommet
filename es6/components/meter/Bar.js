@@ -10,6 +10,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 
+import StyledMeter from './StyledMeter';
+
 import { parseMetricToInt } from '../utils/mixins';
 import { colorForName } from '../utils/colors';
 
@@ -77,7 +79,7 @@ var Bar = function (_Component) {
     }).reverse(); // reverse so the caps looks right
 
     return React.createElement(
-      'svg',
+      StyledMeter,
       {
         viewBox: '0 0 ' + width + ' ' + height,
         preserveAspectRatio: 'none',

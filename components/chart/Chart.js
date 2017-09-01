@@ -10,6 +10,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _StyledChart = require('./StyledChart');
+
+var _StyledChart2 = _interopRequireDefault(_StyledChart);
+
 var _mixins = require('../utils/mixins');
 
 var _colors = require('../utils/colors');
@@ -138,7 +142,7 @@ var Chart = function (_Component) {
     }
 
     return _react2.default.createElement(
-      'svg',
+      _StyledChart2.default,
       _extends({
         viewBox: '-' + strokeWidth / 2 + ' -' + strokeWidth / 2 + '\n          ' + (width + strokeWidth) + ' ' + (height + strokeWidth),
         preserveAspectRatio: 'none',

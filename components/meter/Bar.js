@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _StyledMeter = require('./StyledMeter');
+
+var _StyledMeter2 = _interopRequireDefault(_StyledMeter);
+
 var _mixins = require('../utils/mixins');
 
 var _colors = require('../utils/colors');
@@ -86,7 +90,7 @@ var Bar = function (_Component) {
     }).reverse(); // reverse so the caps looks right
 
     return _react2.default.createElement(
-      'svg',
+      _StyledMeter2.default,
       {
         viewBox: '0 0 ' + width + ' ' + height,
         preserveAspectRatio: 'none',

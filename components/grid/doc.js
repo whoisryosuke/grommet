@@ -4,7 +4,7 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
-var sizes = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4', 'flex'];
+var sizes = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4', 'flex'];
 var edgeSizes = ['small', 'medium', 'large', 'none'];
 
 exports.default = function (Grid) {

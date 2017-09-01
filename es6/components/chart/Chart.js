@@ -11,6 +11,8 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
+import StyledChart from './StyledChart';
+
 import { parseMetricToInt } from '../utils/mixins';
 import { colorForName } from '../utils/colors';
 
@@ -126,7 +128,7 @@ var Chart = function (_Component) {
     }
 
     return React.createElement(
-      'svg',
+      StyledChart,
       _extends({
         viewBox: '-' + strokeWidth / 2 + ' -' + strokeWidth / 2 + '\n          ' + (width + strokeWidth) + ' ' + (height + strokeWidth),
         preserveAspectRatio: 'none',
