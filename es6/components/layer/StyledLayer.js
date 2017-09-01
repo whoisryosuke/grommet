@@ -2,7 +2,7 @@ var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { baseStyle, lapAndUp, palm } from '../utils';
 
@@ -11,12 +11,6 @@ var StyledLayer = styled.div.withConfig({
 })(['', ' position:relative;z-index:10;height:100vh;overflow:auto;background-color:', ';', ''], baseStyle, function (props) {
   return props.theme.layer.overlayBackgroundColor;
 }, lapAndUp('\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n  '));
-
-export var StyledCloser = styled.div.withConfig({
-  displayName: 'StyledLayer__StyledCloser'
-})(['position:absolute;top:0px;right:0px;z-index:1;padding:', ''], function (props) {
-  return props.theme.global.edgeSize.small;
-});
 
 var leftAlignStyle = '\n  top: 0px;\n  bottom: 0px;\n  left: 0px;\n\n  animation: slide-left 0.2s ease-in-out forwards;\n  \n  @keyframes slide-left {\n    0% {\n      left: -100%;\n    }\n\n    100% {\n      left: 0px;\n    }\n  }\n';
 
@@ -37,12 +31,20 @@ function getAlignStyle(props) {
   return ALIGN_MAP[props.align] || '';
 }
 
+var sizeStyle = css(['min-width:', ';'], function (props) {
+  return props.theme.global.size[props.size];
+});
+
 export var StyledContainer = styled.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
-})(['display:flex;flex-direction:column;background-color:', ';', ' ', ''], function (props) {
+})(['display:flex;flex-direction:column;min-height:', ';', ' background-color:', ';', ' ', ''], function (props) {
+  return props.theme.global.size.xxsmall;
+}, function (props) {
+  return props.size && sizeStyle;
+}, function (props) {
   return props.theme.layer.backgroundColor;
 }, palm('\n    min-height: 100%;\n    min-width: 100%;\n  '), function (props) {
-  return lapAndUp('\n    position: absolute;\n    max-height: 100%;\n    max-width: 100%;\n    overflow: auto;\n    border-radius: ' + props.theme.layer.border.radius + ';\n\n    ' + getAlignStyle(props) + '\n  ');
+  return lapAndUp('\n    position: absolute;\n    max-height: 100%;\n    max-width: 100%;\n    overflow: auto;\n    outline: none;\n    border-radius: ' + props.theme.layer.border.radius + ';\n\n    ' + getAlignStyle(props) + '\n  ');
 });
 
 export default StyledLayer.extend(_templateObject, function (props) {

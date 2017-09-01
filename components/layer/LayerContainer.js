@@ -4,8 +4,6 @@ exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -24,8 +22,6 @@ var _StyledLayer = require('./StyledLayer');
 
 var _StyledLayer2 = _interopRequireDefault(_StyledLayer);
 
-var _button = require('../button');
-
 var _keyboard = require('../keyboard');
 
 var _vanilla = require('../../themes/vanilla');
@@ -43,26 +39,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// TODO: replace with grommet-icons
-var CloseIcon = function CloseIcon() {
-  return _react2.default.createElement(
-    'svg',
-    {
-      version: '1.1',
-      viewBox: '0 0 24 24',
-      width: '24px',
-      height: '24px',
-      role: 'img'
-    },
-    _react2.default.createElement('path', {
-      fill: 'none',
-      stroke: '#333',
-      strokeWidth: '2',
-      d: 'M3,3 L21,21 M3,21 L21,3'
-    })
-  );
-};
 
 var LayerContainer = function (_Component) {
   _inherits(LayerContainer, _Component);
@@ -134,35 +110,16 @@ var LayerContainer = function (_Component) {
 
     var _props = this.props,
         children = _props.children,
-        closer = _props.closer,
-        _props$messages = _props.messages,
-        messages = _props$messages === undefined ? {} : _props$messages,
-        onClose = _props.onClose,
+        onEsc = _props.onEsc,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'closer', 'messages', 'onClose', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'theme']);
 
     var globalTheme = JSON.parse(JSON.stringify(_vanilla2.default));
     var localTheme = (0, _deepAssign2.default)(globalTheme, theme);
 
-    var closerNode = void 0;
-    if ((typeof closer === 'undefined' ? 'undefined' : _typeof(closer)) === 'object') {
-      closerNode = closer;
-    } else if (onClose) {
-      closerNode = _react2.default.createElement(
-        _StyledLayer.StyledCloser,
-        { theme: localTheme },
-        _react2.default.createElement(_button.Button, {
-          a11yTitle: messages.closeLayer || 'Close Layer',
-          icon: _react2.default.createElement(CloseIcon, null),
-          onClick: onClose,
-          plain: true
-        })
-      );
-    }
-
     return _react2.default.createElement(
       _keyboard.Keyboard,
-      { onEsc: onClose },
+      { onEsc: onEsc },
       _react2.default.createElement(
         _StyledLayer2.default,
         {
@@ -176,10 +133,8 @@ var LayerContainer = function (_Component) {
           _StyledLayer.StyledContainer,
           _extends({}, rest, {
             theme: localTheme,
-            tabIndex: '-1',
-            'aria-hidden': 'true'
+            tabIndex: '-1'
           }),
-          closerNode,
           children
         )
       )
