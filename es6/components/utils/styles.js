@@ -43,7 +43,7 @@ export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';co
 });
 
 // focus also supports clickable elements inside svg
-export var focusStyle = css(['>:not(svg){circle,ellipse,line,path,polygon,polyline,rect{outline:', ' solid 2px;}}border-color:', ';box-shadow:0 0 1px 1px ', ';'], function (props) {
+export var focusStyle = css(['> circle,> ellipse,> line,> path,> polygon,> polyline,> rect{outline:', ' solid 2px;}border-color:', ';box-shadow:0 0 1px 1px ', ';'], function (props) {
   return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
 }, function (props) {
   return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
