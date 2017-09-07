@@ -132,8 +132,7 @@ var withTheme = function withTheme(WrappedComponent) {
 
       var contextTheme = this.context.theme;
 
-      contextTheme = contextTheme ? JSON.parse(JSON.stringify(contextTheme)) : {};
-      var localTheme = (0, _deepAssign2.default)(contextTheme, theme);
+      var localTheme = (0, _deepAssign2.default)({}, contextTheme, theme);
       return _react2.default.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
     };
 

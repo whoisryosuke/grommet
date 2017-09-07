@@ -117,8 +117,7 @@ var withTheme = function withTheme(WrappedComponent) {
 
       var contextTheme = this.context.theme;
 
-      contextTheme = contextTheme ? JSON.parse(JSON.stringify(contextTheme)) : {};
-      var localTheme = deepAssign(contextTheme, theme);
+      var localTheme = deepAssign({}, contextTheme, theme);
       return React.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
     };
 
