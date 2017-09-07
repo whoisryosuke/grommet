@@ -2,170 +2,170 @@
 
 exports.__esModule = true;
 
-var _box = require('./box');
+var _Box = require('./Box');
 
-Object.keys(_box).forEach(function (key) {
+Object.keys(_Box).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _box[key];
+      return _Box[key];
     }
   });
 });
 
-var _button = require('./button');
+var _Button = require('./Button');
 
-Object.keys(_button).forEach(function (key) {
+Object.keys(_Button).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _button[key];
+      return _Button[key];
     }
   });
 });
 
-var _chart = require('./chart');
+var _Chart = require('./Chart');
 
-Object.keys(_chart).forEach(function (key) {
+Object.keys(_Chart).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _chart[key];
+      return _Chart[key];
     }
   });
 });
 
-var _grid = require('./grid');
+var _Grid = require('./Grid');
 
-Object.keys(_grid).forEach(function (key) {
+Object.keys(_Grid).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _grid[key];
+      return _Grid[key];
     }
   });
 });
 
-var _grommet = require('./grommet');
+var _Grommet = require('./Grommet');
 
-Object.keys(_grommet).forEach(function (key) {
+Object.keys(_Grommet).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _grommet[key];
+      return _Grommet[key];
     }
   });
 });
 
-var _heading = require('./heading');
+var _Heading = require('./Heading');
 
-Object.keys(_heading).forEach(function (key) {
+Object.keys(_Heading).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _heading[key];
+      return _Heading[key];
     }
   });
 });
 
-var _keyboard = require('./keyboard');
+var _Keyboard = require('./Keyboard');
 
-Object.keys(_keyboard).forEach(function (key) {
+Object.keys(_Keyboard).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _keyboard[key];
+      return _Keyboard[key];
     }
   });
 });
 
-var _layer = require('./layer');
+var _Layer = require('./Layer');
 
-Object.keys(_layer).forEach(function (key) {
+Object.keys(_Layer).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _layer[key];
+      return _Layer[key];
     }
   });
 });
 
-var _markdown = require('./markdown');
+var _Markdown = require('./Markdown');
 
-Object.keys(_markdown).forEach(function (key) {
+Object.keys(_Markdown).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _markdown[key];
+      return _Markdown[key];
     }
   });
 });
 
-var _meter = require('./meter');
+var _Meter = require('./Meter');
 
-Object.keys(_meter).forEach(function (key) {
+Object.keys(_Meter).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _meter[key];
+      return _Meter[key];
     }
   });
 });
 
-var _paragraph = require('./paragraph');
+var _Paragraph = require('./Paragraph');
 
-Object.keys(_paragraph).forEach(function (key) {
+Object.keys(_Paragraph).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _paragraph[key];
+      return _Paragraph[key];
     }
   });
 });
 
-var _stack = require('./stack');
+var _Stack = require('./Stack');
 
-Object.keys(_stack).forEach(function (key) {
+Object.keys(_Stack).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _stack[key];
+      return _Stack[key];
     }
   });
 });
 
-var _text = require('./text');
+var _Text = require('./Text');
 
-Object.keys(_text).forEach(function (key) {
+Object.keys(_Text).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _text[key];
+      return _Text[key];
     }
   });
 });
 
-var _textInput = require('./text-input');
+var _TextInput = require('./TextInput');
 
-Object.keys(_textInput).forEach(function (key) {
+Object.keys(_TextInput).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _textInput[key];
+      return _TextInput[key];
     }
   });
 });

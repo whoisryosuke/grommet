@@ -18,13 +18,9 @@ var _deepAssign = require('deep-assign');
 
 var _deepAssign2 = _interopRequireDefault(_deepAssign);
 
-var _Heading = require('../heading/Heading');
+var _Heading = require('../Heading');
 
-var _Heading2 = _interopRequireDefault(_Heading);
-
-var _Paragraph = require('../paragraph/Paragraph');
-
-var _Paragraph2 = _interopRequireDefault(_Paragraph);
+var _Paragraph = require('../Paragraph');
 
 var _hocs = require('../hocs');
 
@@ -58,14 +54,14 @@ var GrommetMarkdown = function (_Component) {
     var heading = [1, 2, 3, 4].reduce(function (obj, level) {
       var result = _extends({}, obj);
       result['h' + level] = {
-        component: _Heading2.default,
+        component: _Heading.Heading,
         props: { level: level }
       };
       return result;
     }, {});
 
     var overrides = (0, _deepAssign2.default)({
-      p: { component: _Paragraph2.default }
+      p: { component: _Paragraph.Paragraph }
     }, heading, components);
 
     return _react2.default.createElement(

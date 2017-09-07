@@ -16,11 +16,11 @@ var _StyledTextInput = require('./StyledTextInput');
 
 var _StyledTextInput2 = _interopRequireDefault(_StyledTextInput);
 
-var _button = require('../button');
+var _Button = require('../Button');
 
-var _keyboard = require('../keyboard');
+var _Keyboard = require('../Keyboard');
 
-var _drop = require('../drop');
+var _Drop = require('../Drop');
 
 var _hocs = require('../hocs');
 
@@ -159,7 +159,7 @@ var TextInput = function (_Component) {
           'li',
           { key: renderLabel(suggestion) },
           _react2.default.createElement(
-            _button.Button,
+            _Button.Button,
             {
               plain: true,
               fill: true,
@@ -250,7 +250,7 @@ var TextInput = function (_Component) {
     var drop = void 0;
     if (showDrop) {
       drop = _react2.default.createElement(
-        _drop.Drop,
+        _Drop.Drop,
         {
           align: { top: 'bottom', left: 'left' },
           responsive: false,
@@ -267,7 +267,7 @@ var TextInput = function (_Component) {
       'div',
       null,
       _react2.default.createElement(
-        _keyboard.Keyboard,
+        _Keyboard.Keyboard,
         {
           onEnter: onEnterSuggestionHandler,
           onEsc: function onEsc() {

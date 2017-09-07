@@ -22,7 +22,7 @@ var _StyledLayer = require('./StyledLayer');
 
 var _StyledLayer2 = _interopRequireDefault(_StyledLayer);
 
-var _keyboard = require('../keyboard');
+var _Keyboard = require('../Keyboard');
 
 var _vanilla = require('../../themes/vanilla');
 
@@ -118,7 +118,7 @@ var LayerContainer = function (_Component) {
     var localTheme = (0, _deepAssign2.default)(globalTheme, theme);
 
     return _react2.default.createElement(
-      _keyboard.Keyboard,
+      _Keyboard.Keyboard,
       { onEsc: onEsc },
       _react2.default.createElement(
         _StyledLayer2.default,
