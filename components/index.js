@@ -74,6 +74,18 @@ Object.keys(_Heading).forEach(function (key) {
   });
 });
 
+var _Image = require('./Image');
+
+Object.keys(_Image).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Image[key];
+    }
+  });
+});
+
 var _Keyboard = require('./Keyboard');
 
 Object.keys(_Keyboard).forEach(function (key) {
