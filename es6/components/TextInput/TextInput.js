@@ -48,7 +48,7 @@ var TextInput = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  TextInput.prototype.onInputChange = function onInputChange() {
+  TextInput.prototype.resetSuggestions = function resetSuggestions() {
     var suggestions = this.props.suggestions;
 
 
@@ -180,9 +180,11 @@ var TextInput = function (_Component) {
     var _props3 = this.props,
         defaultValue = _props3.defaultValue,
         value = _props3.value,
+        _onInput = _props3.onInput,
         onKeyDown = _props3.onKeyDown,
-        rest = _objectWithoutProperties(_props3, ['defaultValue', 'value', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props3, ['defaultValue', 'value', 'onInput', 'onKeyDown']);
 
+    delete rest.onInput; // se we can manage in onInputChange()
     var showDrop = this.state.showDrop;
     // needed so that styled components does not invoke
     // onSelect when text input is clicked
@@ -273,13 +275,9 @@ var TextInput = function (_Component) {
           defaultValue: renderLabel(defaultValue),
           value: renderLabel(value),
           onInput: function onInput(event) {
-            var onDOMChange = _this3.props.onDOMChange;
-
-
-            _this3.onInputChange();
-
-            if (onDOMChange) {
-              onDOMChange(event);
+            _this3.resetSuggestions();
+            if (_onInput) {
+              _onInput(event);
             }
           }
         }))
