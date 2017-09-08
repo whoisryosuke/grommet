@@ -64,7 +64,7 @@ var directionStyle = css(['flex-direction:', ';'], function (props) {
   return 'column-reverse';
 });
 
-var FLEX_MAP = (_FLEX_MAP = {}, _FLEX_MAP[true] = '1 1', _FLEX_MAP[false] = '0 0 auto', _FLEX_MAP.grow = '1 0', _FLEX_MAP.shrink = '0 1', _FLEX_MAP);
+var FLEX_MAP = (_FLEX_MAP = {}, _FLEX_MAP[true] = '1 1', _FLEX_MAP[false] = '0 0', _FLEX_MAP.grow = '1 0', _FLEX_MAP.shrink = '0 1', _FLEX_MAP);
 
 var flexStyle = css(['flex:', ';'], function (props) {
   return FLEX_MAP[props.flex];
@@ -162,6 +162,7 @@ var roundStyle = css(['border-radius:', ';'], function (props) {
   return ROUND_MAP[props.round] || props.theme.global.edgeSize[props.round];
 });
 
+// NOTE: basis must be after flex! Otherwise, flex overrides basis
 var StyledBox = styled.div.withConfig({
   displayName: 'StyledBox'
 })(['display:flex;max-width:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
@@ -171,8 +172,6 @@ var StyledBox = styled.div.withConfig({
 }, function (props) {
   return props.alignSelf && alignSelfStyle;
 }, function (props) {
-  return props.basis && basisStyle;
-}, function (props) {
   return props.background && backgroundStyle(props.background, props.theme);
 }, function (props) {
   return props.border && borderStyle(props.border, props.theme);
@@ -180,6 +179,8 @@ var StyledBox = styled.div.withConfig({
   return (props.direction || props.reverse) && directionStyle;
 }, function (props) {
   return props.flex !== undefined && flexStyle;
+}, function (props) {
+  return props.basis && basisStyle;
 }, function (props) {
   return props.full && fullStyle(props.full);
 }, function (props) {
