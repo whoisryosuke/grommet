@@ -14,7 +14,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var StyledMeter = _styledComponents2.default.svg.withConfig({
   displayName: 'StyledMeter'
-})(['max-width:100%;']);
+})(['max-width:100%;path{transition:all 0.3s;}']);
 
 exports.default = StyledMeter.extend(_templateObject, function (props) {
   return props.theme.meter && props.theme.meter.extend;

@@ -82,10 +82,9 @@ var Bar = function (_Component) {
         key: key,
         d: d,
         fill: 'none',
-        stroke: (0, _colors.colorForName)(colorName, theme),
+        stroke: (0, _colors.colorForName)(someHighlight && !highlight ? background : colorName, theme),
         strokeWidth: height,
-        strokeLinecap: round ? 'round' : 'square',
-        strokeOpacity: someHighlight && !highlight ? 0.5 : 1
+        strokeLinecap: round ? 'round' : 'square'
       }, hoverProps, rest));
     }).reverse(); // reverse so the caps looks right
 
