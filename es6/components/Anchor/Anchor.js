@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
-import { CoreNextLink } from 'grommet-icons';
+import { LinkNext } from 'grommet-icons';
 
 import StyledAnchor, { StyledIcon } from './StyledAnchor';
 
@@ -60,7 +60,7 @@ var Anchor = function (_Component) {
     if (icon) {
       anchorIcon = icon;
     } else if (primary) {
-      anchorIcon = React.createElement(CoreNextLink, { color: primary ? 'brand' : undefined });
+      anchorIcon = React.createElement(LinkNext, { color: primary ? 'brand' : undefined });
     }
 
     if (anchorIcon) {

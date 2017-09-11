@@ -76,7 +76,7 @@ var Anchor = function (_Component) {
     if (icon) {
       anchorIcon = icon;
     } else if (primary) {
-      anchorIcon = _react2.default.createElement(_grommetIcons.CoreNextLink, { color: primary ? 'brand' : undefined });
+      anchorIcon = _react2.default.createElement(_grommetIcons.LinkNext, { color: primary ? 'brand' : undefined });
     }
 
     if (anchorIcon) {
