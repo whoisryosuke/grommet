@@ -4,6 +4,10 @@ exports.__esModule = true;
 
 var _polished = require('polished');
 
+var _styledComponents = require('styled-components');
+
+var _utils = require('../components/utils');
+
 var brandColor = '#865CD6';
 var accentColors = ['#00CCEB', '#FF7D28'];
 var neutralColors = ['#0A64A0', '#DC2878', '#501EB4', '#49516F'];
@@ -69,7 +73,9 @@ exports.default = {
       xlarge: baseSpacing * 4 + 'px'
     },
     focus: {
-      border: {}
+      border: {
+        width: '2px'
+      }
     },
     font: {
       family: "'Work Sans', Arial, sans-serif",
@@ -105,6 +111,11 @@ exports.default = {
       xlarge: baseSpacing * 48 + 'px', // 1152
       full: '100%'
     }
+  },
+  anchor: {
+    textDecoration: 'none',
+    fontWeight: 600,
+    color: brandColor
   },
   button: {
     border: {
@@ -148,6 +159,11 @@ exports.default = {
       }
     },
     weight: 300
+  },
+  icon: {
+    extend: (0, _styledComponents.css)(['', ''], function (props) {
+      return props.color && props.color !== 'plain' && '\n        fill: ' + (0, _utils.colorForName)(props.color, props.theme) + ';\n        stroke: ' + (0, _utils.colorForName)(props.color, props.theme) + ';\n      ';
+    })
   },
   layer: {
     backgroundColor: '#FFFFFF',

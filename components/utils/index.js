@@ -14,6 +14,18 @@ Object.keys(_colors).forEach(function (key) {
   });
 });
 
+var _DOM = require('./DOM');
+
+Object.keys(_DOM).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _DOM[key];
+    }
+  });
+});
+
 var _graphics = require('./graphics');
 
 Object.keys(_graphics).forEach(function (key) {
@@ -50,14 +62,14 @@ Object.keys(_mixins).forEach(function (key) {
   });
 });
 
-var _DOM = require('./DOM');
+var _router = require('./router');
 
-Object.keys(_DOM).forEach(function (key) {
+Object.keys(_router).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
-      return _DOM[key];
+      return _router[key];
     }
   });
 });

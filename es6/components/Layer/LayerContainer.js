@@ -13,6 +13,7 @@ import { findDOMNode } from 'react-dom';
 
 import PropTypes from 'prop-types';
 import deepAssign from 'deep-assign';
+import cloneDeep from 'clone-deep';
 
 import StyledLayer, { StyledContainer } from './StyledLayer';
 
@@ -33,12 +34,12 @@ var LayerContainer = function (_Component) {
 
   LayerContainer.prototype.getChildContext = function getChildContext() {
     var theme = this.props.theme;
+    var contextTheme = this.context.theme;
 
 
-    var globalTheme = JSON.parse(JSON.stringify(baseTheme));
-    return {
-      theme: deepAssign(globalTheme, theme)
-    };
+    return _extends({}, this.context, {
+      theme: contextTheme || deepAssign(cloneDeep(baseTheme), theme)
+    });
   };
 
   LayerContainer.prototype.componentDidMount = function componentDidMount() {
@@ -127,6 +128,9 @@ var LayerContainer = function (_Component) {
 }(Component);
 
 LayerContainer.childContextTypes = {
+  theme: PropTypes.object
+};
+LayerContainer.contextTypes = {
   theme: PropTypes.object
 };
 LayerContainer.defaultProps = {

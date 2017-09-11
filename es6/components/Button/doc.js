@@ -1,17 +1,14 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 import { schema, PropTypes } from 'react-desc';
+
+import { ROUTER_PROPS } from '../utils';
 
 export function routedButton(RoutedButton) {
   return schema(RoutedButton, {
     description: 'A button with support for React Router.',
-    usage: 'import { RoutedButton } from \'grommet\';\n    <RoutedButton primary={true} href="/documentation" />',
-    props: {
-      path: [PropTypes.string, 'Indicates the path to be used for react-router link.', {
-        required: true
-      }],
-      method: [PropTypes.oneOf(['push', 'replace']), 'Indicates whether the browser history should be appended to or replaced.', {
-        defaultProp: 'push'
-      }]
-    }
+    usage: 'import { RoutedButton } from \'grommet\';\n    <RoutedButton primary={true} path="/documentation" />',
+    props: _extends({}, ROUTER_PROPS)
   });
 }
 
@@ -20,9 +17,8 @@ export default (function (Button) {
     description: 'A button. We have a separate component \n  from the browser base so we can style it.',
     usage: 'import { Button } from \'grommet\';\n  <Button primary={true} label="Label" />',
     props: {
-      a11yTitle: [PropTypes.string, 'Custom title used by screen readers.'],
+      a11yTitle: [PropTypes.string, 'Custom title to be used by screen readers.'],
       accent: [PropTypes.bool, 'Whether this is a accent button.'],
-      align: [PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align the contents along the cross axis.'],
       box: [PropTypes.bool, 'Whether the button should support Box props. \n      This is useful if you want your children to be a \n      flexbox container.'],
       centered: [PropTypes.bool, 'Whether this is an accent button.'],
       critical: [PropTypes.bool, 'Whether this is an critical button.'],

@@ -12,25 +12,11 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _deepAssign = require('deep-assign');
+var _Anchor = require('./Anchor');
 
-var _deepAssign2 = _interopRequireDefault(_deepAssign);
-
-var _cloneDeep = require('clone-deep');
-
-var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
-
-var _StyledGrommet = require('./StyledGrommet');
-
-var _StyledGrommet2 = _interopRequireDefault(_StyledGrommet);
-
-var _vanilla = require('../../themes/vanilla');
-
-var _vanilla2 = _interopRequireDefault(_vanilla);
+var _Anchor2 = _interopRequireDefault(_Anchor);
 
 var _doc = require('./doc');
-
-var _doc2 = _interopRequireDefault(_doc);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42,54 +28,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Grommet = function (_Component) {
-  _inherits(Grommet, _Component);
+var RoutedAnchor = function (_Component) {
+  _inherits(RoutedAnchor, _Component);
 
-  function Grommet() {
-    _classCallCheck(this, Grommet);
+  function RoutedAnchor() {
+    _classCallCheck(this, RoutedAnchor);
 
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  Grommet.prototype.getChildContext = function getChildContext() {
-    var theme = this.props.theme;
+  RoutedAnchor.prototype.render = function render() {
+    var _this2 = this;
 
-
-    var globalTheme = (0, _cloneDeep2.default)(_vanilla2.default);
-
-    return {
-      theme: (0, _deepAssign2.default)(globalTheme, theme)
-    };
-  };
-
-  Grommet.prototype.render = function render() {
     var _props = this.props,
-        children = _props.children,
-        theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'theme']);
+        path = _props.path,
+        method = _props.method,
+        rest = _objectWithoutProperties(_props, ['path', 'method']);
 
-    var globalTheme = (0, _cloneDeep2.default)(_vanilla2.default);
-    return _react2.default.createElement(
-      _StyledGrommet2.default,
-      _extends({}, rest, { theme: (0, _deepAssign2.default)(globalTheme, theme) }),
-      children
-    );
+    return _react2.default.createElement(_Anchor2.default, _extends({}, rest, {
+      href: path,
+      onClick: function onClick(event) {
+        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
+
+        var onClick = _this2.props.onClick;
+        var router = _this2.context.router;
+
+        if (event) {
+          var modifierKey = event.ctrlKey || event.metaKey;
+
+          // if the user right-clicked in the Anchor we should let it go
+          if (modifierKey) {
+            return;
+          }
+        }
+        if (router) {
+          event.preventDefault();
+          (router.history || router)[method](path);
+        }
+        if (onClick) {
+          onClick.apply(undefined, [event].concat(args));
+        }
+      }
+    }));
   };
 
-  return Grommet;
+  return RoutedAnchor;
 }(_react.Component);
 
-Grommet.childContextTypes = {
-  theme: _propTypes2.default.object
+RoutedAnchor.contextTypes = {
+  router: _propTypes2.default.object.isRequired
 };
-Grommet.defaultProps = {
-  centered: true,
-  theme: undefined
+RoutedAnchor.defaultProps = {
+  method: 'push'
 };
 
 
 if (process.env.NODE_ENV !== 'production') {
-  (0, _doc2.default)(Grommet);
+  (0, _doc.routedAnchor)(RoutedAnchor);
 }
 
-exports.default = Grommet;
+exports.default = RoutedAnchor;

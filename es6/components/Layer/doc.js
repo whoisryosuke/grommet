@@ -8,7 +8,8 @@ export default (function (Layer) {
       align: [PropTypes.oneOf(['center', 'top', 'bottom', 'left', 'right']), 'Which direction the layer contents should emanate from.', {
         defaultProp: 'center'
       }],
-      onEsc: [PropTypes.func, 'Function that will be called when the user presses the escape key inside the Layer'],
+      context: [PropTypes.object, 'Object with the context variables to be passed to the Layer.'],
+      onEsc: [PropTypes.func, 'Function that will be called when the user presses the escape key inside the Layer.'],
       size: [PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge', 'full']), 'Optional size for the Layer.']
     }
   });

@@ -11,6 +11,7 @@ import LayerContainer from './LayerContainer';
 
 import doc from './doc';
 
+import { createContextProvider } from '../hocs';
 import { getNewContainer } from '../utils';
 
 var Layer = function (_Component) {
@@ -48,7 +49,12 @@ var Layer = function (_Component) {
   };
 
   Layer.prototype.renderLayer = function renderLayer() {
-    render(React.createElement(LayerContainer, this.props), this.layerContainer);
+    var ContextProvider = createContextProvider(this.props.context);
+    render(React.createElement(
+      ContextProvider,
+      null,
+      React.createElement(LayerContainer, this.props)
+    ), this.layerContainer);
   };
 
   Layer.prototype.render = function render() {

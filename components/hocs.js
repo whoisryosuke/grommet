@@ -5,6 +5,8 @@ exports.withTheme = exports.withFocus = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+exports.createContextProvider = createContextProvider;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -27,12 +29,44 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function createContextProvider(context) {
+  var childContextTypes = {};
+  Object.keys(context || {}).forEach(function (key) {
+    childContextTypes[key] = _propTypes2.default.any.isRequired;
+  });
+
+  var ContextProvider = function (_React$Component) {
+    _inherits(ContextProvider, _React$Component);
+
+    function ContextProvider() {
+      _classCallCheck(this, ContextProvider);
+
+      return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+    }
+
+    ContextProvider.prototype.getChildContext = function getChildContext() {
+      return context;
+    };
+
+    ContextProvider.prototype.render = function render() {
+      return this.props.children;
+    };
+
+    return ContextProvider;
+  }(_react2.default.Component);
+
+  ContextProvider.childContextTypes = childContextTypes;
+
+
+  return ContextProvider;
+}
+
 var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
   var FocusableComponent = function (_Component) {
     _inherits(FocusableComponent, _Component);
 
     function FocusableComponent() {
-      var _temp, _this, _ret;
+      var _temp, _this2, _ret;
 
       _classCallCheck(this, FocusableComponent);
 
@@ -40,10 +74,10 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
         args[_key] = arguments[_key];
       }
 
-      return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this2), _this2.state = {
         mouseActive: false,
         focus: false
-      }, _temp), _possibleConstructorReturn(_this, _ret);
+      }, _temp), _possibleConstructorReturn(_this2, _ret);
     }
 
     FocusableComponent.prototype.setMouseActive = function setMouseActive() {
@@ -67,7 +101,7 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
     };
 
     FocusableComponent.prototype.render = function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var focus = this.state.focus;
 
@@ -75,32 +109,32 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
         focus: focus
       }, this.props, {
         onMouseDown: function onMouseDown(event) {
-          _this2.setMouseActive();
-          var onMouseDown = _this2.props.onMouseDown;
+          _this3.setMouseActive();
+          var onMouseDown = _this3.props.onMouseDown;
 
           if (onMouseDown) {
             onMouseDown(event);
           }
         },
         onMouseUp: function onMouseUp(event) {
-          _this2.resetMouseActive();
-          var onMouseUp = _this2.props.onMouseUp;
+          _this3.resetMouseActive();
+          var onMouseUp = _this3.props.onMouseUp;
 
           if (onMouseUp) {
             onMouseUp(event);
           }
         },
         onFocus: function onFocus(event) {
-          _this2.setFocus();
-          var onFocus = _this2.props.onFocus;
+          _this3.setFocus();
+          var onFocus = _this3.props.onFocus;
 
           if (onFocus) {
             onFocus(event);
           }
         },
         onBlur: function onBlur(event) {
-          _this2.resetFocus();
-          var onBlur = _this2.props.onBlur;
+          _this3.resetFocus();
+          var onBlur = _this3.props.onBlur;
 
           if (onBlur) {
             onBlur(event);
@@ -148,4 +182,4 @@ var withTheme = function withTheme(WrappedComponent) {
 };
 
 exports.withTheme = withTheme;
-exports.default = { withFocus: withFocus, withTheme: withTheme };
+exports.default = { createContextProvider: createContextProvider, withFocus: withFocus, withTheme: withTheme };

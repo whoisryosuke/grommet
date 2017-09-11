@@ -18,6 +18,10 @@ var _deepAssign = require('deep-assign');
 
 var _deepAssign2 = _interopRequireDefault(_deepAssign);
 
+var _cloneDeep = require('clone-deep');
+
+var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
+
 var _StyledDrop = require('./StyledDrop');
 
 var _StyledDrop2 = _interopRequireDefault(_StyledDrop);
@@ -56,7 +60,7 @@ var DropContainer = function (_Component) {
     var theme = this.props.theme;
 
 
-    var globalTheme = JSON.parse(JSON.stringify(_vanilla2.default));
+    var globalTheme = (0, _cloneDeep2.default)(_vanilla2.default);
     return {
       theme: (0, _deepAssign2.default)(globalTheme, theme)
     };
@@ -229,7 +233,7 @@ var DropContainer = function (_Component) {
         theme = _props2.theme,
         rest = _objectWithoutProperties(_props2, ['children', 'theme']);
 
-    var globalTheme = JSON.parse(JSON.stringify(_vanilla2.default));
+    var globalTheme = (0, _cloneDeep2.default)(_vanilla2.default);
     return _react2.default.createElement(
       _StyledDrop2.default,
       _extends({

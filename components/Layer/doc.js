@@ -12,7 +12,8 @@ exports.default = function (Layer) {
       align: [_reactDesc.PropTypes.oneOf(['center', 'top', 'bottom', 'left', 'right']), 'Which direction the layer contents should emanate from.', {
         defaultProp: 'center'
       }],
-      onEsc: [_reactDesc.PropTypes.func, 'Function that will be called when the user presses the escape key inside the Layer'],
+      context: [_reactDesc.PropTypes.object, 'Object with the context variables to be passed to the Layer.'],
+      onEsc: [_reactDesc.PropTypes.func, 'Function that will be called when the user presses the escape key inside the Layer.'],
       size: [_reactDesc.PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge', 'full']), 'Optional size for the Layer.']
     }
   });

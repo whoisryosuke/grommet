@@ -1,4 +1,7 @@
 import { lighten, rgba } from 'polished';
+import { css } from 'styled-components';
+
+import { colorForName } from '../components/utils';
 
 var brandColor = '#865CD6';
 var accentColors = ['#00CCEB', '#FF7D28'];
@@ -65,7 +68,9 @@ export default {
       xlarge: baseSpacing * 4 + 'px'
     },
     focus: {
-      border: {}
+      border: {
+        width: '2px'
+      }
     },
     font: {
       family: "'Work Sans', Arial, sans-serif",
@@ -101,6 +106,11 @@ export default {
       xlarge: baseSpacing * 48 + 'px', // 1152
       full: '100%'
     }
+  },
+  anchor: {
+    textDecoration: 'none',
+    fontWeight: 600,
+    color: brandColor
   },
   button: {
     border: {
@@ -144,6 +154,11 @@ export default {
       }
     },
     weight: 300
+  },
+  icon: {
+    extend: css(['', ''], function (props) {
+      return props.color && props.color !== 'plain' && '\n        fill: ' + colorForName(props.color, props.theme) + ';\n        stroke: ' + colorForName(props.color, props.theme) + ';\n      ';
+    })
   },
   layer: {
     backgroundColor: '#FFFFFF',

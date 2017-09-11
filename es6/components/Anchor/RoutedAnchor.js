@@ -10,63 +10,70 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import deepAssign from 'deep-assign';
-import cloneDeep from 'clone-deep';
 
-import StyledGrommet from './StyledGrommet';
+import Anchor from './Anchor';
 
-import baseTheme from '../../themes/vanilla';
+import { routedAnchor } from './doc';
 
-import doc from './doc';
+var RoutedAnchor = function (_Component) {
+  _inherits(RoutedAnchor, _Component);
 
-var Grommet = function (_Component) {
-  _inherits(Grommet, _Component);
-
-  function Grommet() {
-    _classCallCheck(this, Grommet);
+  function RoutedAnchor() {
+    _classCallCheck(this, RoutedAnchor);
 
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  Grommet.prototype.getChildContext = function getChildContext() {
-    var theme = this.props.theme;
+  RoutedAnchor.prototype.render = function render() {
+    var _this2 = this;
 
-
-    var globalTheme = cloneDeep(baseTheme);
-
-    return {
-      theme: deepAssign(globalTheme, theme)
-    };
-  };
-
-  Grommet.prototype.render = function render() {
     var _props = this.props,
-        children = _props.children,
-        theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'theme']);
+        path = _props.path,
+        method = _props.method,
+        rest = _objectWithoutProperties(_props, ['path', 'method']);
 
-    var globalTheme = cloneDeep(baseTheme);
-    return React.createElement(
-      StyledGrommet,
-      _extends({}, rest, { theme: deepAssign(globalTheme, theme) }),
-      children
-    );
+    return React.createElement(Anchor, _extends({}, rest, {
+      href: path,
+      onClick: function onClick(event) {
+        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
+
+        var onClick = _this2.props.onClick;
+        var router = _this2.context.router;
+
+        if (event) {
+          var modifierKey = event.ctrlKey || event.metaKey;
+
+          // if the user right-clicked in the Anchor we should let it go
+          if (modifierKey) {
+            return;
+          }
+        }
+        if (router) {
+          event.preventDefault();
+          (router.history || router)[method](path);
+        }
+        if (onClick) {
+          onClick.apply(undefined, [event].concat(args));
+        }
+      }
+    }));
   };
 
-  return Grommet;
+  return RoutedAnchor;
 }(Component);
 
-Grommet.childContextTypes = {
-  theme: PropTypes.object
+RoutedAnchor.contextTypes = {
+  router: PropTypes.object.isRequired
 };
-Grommet.defaultProps = {
-  centered: true,
-  theme: undefined
+RoutedAnchor.defaultProps = {
+  method: 'push'
 };
 
 
 if (process.env.NODE_ENV !== 'production') {
-  doc(Grommet);
+  routedAnchor(RoutedAnchor);
 }
 
-export default Grommet;
+export default RoutedAnchor;

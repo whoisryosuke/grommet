@@ -18,6 +18,10 @@ var _deepAssign = require('deep-assign');
 
 var _deepAssign2 = _interopRequireDefault(_deepAssign);
 
+var _cloneDeep = require('clone-deep');
+
+var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
+
 var _StyledLayer = require('./StyledLayer');
 
 var _StyledLayer2 = _interopRequireDefault(_StyledLayer);
@@ -51,12 +55,12 @@ var LayerContainer = function (_Component) {
 
   LayerContainer.prototype.getChildContext = function getChildContext() {
     var theme = this.props.theme;
+    var contextTheme = this.context.theme;
 
 
-    var globalTheme = JSON.parse(JSON.stringify(_vanilla2.default));
-    return {
-      theme: (0, _deepAssign2.default)(globalTheme, theme)
-    };
+    return _extends({}, this.context, {
+      theme: contextTheme || (0, _deepAssign2.default)((0, _cloneDeep2.default)(_vanilla2.default), theme)
+    });
   };
 
   LayerContainer.prototype.componentDidMount = function componentDidMount() {
@@ -145,6 +149,9 @@ var LayerContainer = function (_Component) {
 }(_react.Component);
 
 LayerContainer.childContextTypes = {
+  theme: _propTypes2.default.object
+};
+LayerContainer.contextTypes = {
   theme: _propTypes2.default.object
 };
 LayerContainer.defaultProps = {

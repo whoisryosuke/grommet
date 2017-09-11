@@ -7,7 +7,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 
-import { focusStyle, fontSize, lapAndUp, parseMetricToInt } from '../utils';
+import { focusStyle, fontSize, lapAndUp } from '../utils';
 
 var primaryStyle = css(['background-color:', ';color:', ';svg{fill:', ';stroke:', ';transition:none;}'], function (props) {
   return props.theme.global.colors.brand;
@@ -80,7 +80,11 @@ var hoverStyle = css(['&:hover{', ' ', ' ', '}'], function (props) {
 
 var fillStyle = '\n  width: 100%;\n  max-width: none;\n  flex-grow: 1;\n';
 
-var plainFocusStyle = css(['box-shadow:0 0 3px 3px ', ';'], function (props) {
+var plainFocusStyle = css(['box-shadow:0 0 ', ' ', ' ', ';'], function (props) {
+  return props.theme.global.focus.border.width;
+}, function (props) {
+  return props.theme.global.focus.border.width;
+}, function (props) {
   return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
 });
 
@@ -88,21 +92,9 @@ var plainStyle = css(['color:inherit;border:none;padding:0;', ''], function (pro
   return props.focus && plainFocusStyle;
 });
 
-var TEXT_ALIGN_MAP = {
-  center: 'center',
-  end: 'right',
-  start: 'left'
-};
-
-export var textAlignStyle = css(['text-align:', ';'], function (props) {
-  return TEXT_ALIGN_MAP[props.align];
-});
-
 var StyledButton = styled.button.withConfig({
   displayName: 'StyledButton'
-})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
-  return props.icon && !props.label && '\n    min-height: 48px;\n    min-width: 48px;\n  ';
-}, function (props) {
+})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.plain && css(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color || props.theme.global.colors.brand, props.theme.button.border.radius, props.theme.button.color || props.theme.global.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
 }, function (props) {
   return !props.disabled && !props.focus && hoverStyle;
@@ -130,19 +122,19 @@ var StyledButton = styled.button.withConfig({
 }, function (props) {
   return props.fill && fillStyle;
 }, function (props) {
-  return props.align && textAlignStyle;
+  return props.icon && !props.label && '\n    padding: ' + props.theme.global.edgeSize.small + ';\n  ';
 });
 
 export var StyledLabel = styled.span.withConfig({
   displayName: 'StyledButton__StyledLabel'
-})(['&:first-child:not(:last-child){margin-right:', 'px;}'], function (props) {
-  return parseMetricToInt(props.theme.global.spacing) / 2;
+})(['&:first-child:not(:last-child){margin-right:', ';}'], function (props) {
+  return props.theme.global.edgeSize.small;
 });
 
 export var StyledIcon = styled.span.withConfig({
   displayName: 'StyledButton__StyledIcon'
-})(['display:inline-block;&:first-child:not(:last-child){margin-right:', 'px;}> *{vertical-align:bottom;}'], function (props) {
-  return parseMetricToInt(props.theme.global.spacing) / 2;
+})(['display:inline-block;&:first-child:not(:last-child){margin-right:', ';}> *{vertical-align:bottom;}'], function (props) {
+  return props.theme.global.edgeSize.small;
 });
 
 export default StyledButton.extend(_templateObject, function (props) {
