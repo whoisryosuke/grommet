@@ -17,7 +17,7 @@ var disabledStyle = '\n  opacity: 0.3;\n  cursor: default;\n  text-decoration: n
 var StyledAnchor = styled.a.withConfig({
   displayName: 'StyledAnchor'
 })(['color:', ';text-decoration:', ';cursor:pointer;outline:none;', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
-  return props.theme.anchor.color;
+  return props.grommet.dark ? props.theme.global.colors.darkBackgroundTextColor : props.theme.anchor.color;
 }, function (props) {
   return props.theme.anchor.textDecoration;
 }, function (props) {

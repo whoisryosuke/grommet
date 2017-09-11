@@ -9,6 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { CoreNextLink } from 'grommet-icons';
@@ -52,6 +53,9 @@ var Anchor = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'href', 'icon', 'focus', 'label', 'primary', 'onClick', 'reverse', 'theme']);
 
+    var grommet = this.context.grommet;
+
+
     var anchorIcon = void 0;
     if (icon) {
       anchorIcon = icon;
@@ -81,6 +85,7 @@ var Anchor = function (_Component) {
         primary: primary,
         reverse: reverse,
         theme: theme,
+        grommet: grommet,
         href: !disabled ? href : undefined,
         onClick: !disabled ? onClick : undefined
       }),
@@ -90,6 +95,11 @@ var Anchor = function (_Component) {
 
   return Anchor;
 }(Component);
+
+Anchor.contextTypes = {
+  grommet: PropTypes.object.isRequired
+};
+
 
 if (process.env.NODE_ENV !== 'production') {
   doc(Anchor);

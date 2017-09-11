@@ -58,6 +58,7 @@ var Grommet = function (_Component) {
     var globalTheme = (0, _cloneDeep2.default)(_vanilla2.default);
 
     return {
+      grommet: {},
       theme: (0, _deepAssign2.default)(globalTheme, theme)
     };
   };
@@ -80,6 +81,7 @@ var Grommet = function (_Component) {
 }(_react.Component);
 
 Grommet.childContextTypes = {
+  grommet: _propTypes2.default.object,
   theme: _propTypes2.default.object
 };
 Grommet.defaultProps = {

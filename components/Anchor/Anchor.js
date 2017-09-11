@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _recompose = require('recompose');
 
 var _grommetIcons = require('grommet-icons');
@@ -65,6 +69,9 @@ var Anchor = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'href', 'icon', 'focus', 'label', 'primary', 'onClick', 'reverse', 'theme']);
 
+    var grommet = this.context.grommet;
+
+
     var anchorIcon = void 0;
     if (icon) {
       anchorIcon = icon;
@@ -94,6 +101,7 @@ var Anchor = function (_Component) {
         primary: primary,
         reverse: reverse,
         theme: theme,
+        grommet: grommet,
         href: !disabled ? href : undefined,
         onClick: !disabled ? onClick : undefined
       }),
@@ -103,6 +111,11 @@ var Anchor = function (_Component) {
 
   return Anchor;
 }(_react.Component);
+
+Anchor.contextTypes = {
+  grommet: _propTypes2.default.object.isRequired
+};
+
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Anchor);

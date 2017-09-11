@@ -1,3 +1,7 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7,8 +11,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
+import { colorForName, colorIsDark } from '../utils';
 import StyledBox from './StyledBox';
 
 import { withTheme } from '../hocs';
@@ -28,10 +34,33 @@ var Box = function (_Component) {
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  Box.prototype.render = function render() {
+  Box.prototype.getChildContext = function getChildContext() {
+    var grommet = this.context.grommet;
     var _props = this.props,
-        tag = _props.tag,
-        rest = _objectWithoutProperties(_props, ['tag']);
+        background = _props.background,
+        theme = _props.theme;
+
+    var dark = false;
+    if (background) {
+      if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
+        dark = background.dark;
+      } else {
+        var color = colorForName(background, theme);
+        if (color) {
+          dark = colorIsDark(color);
+        }
+      }
+      return {
+        grommet: _extends({}, grommet, { dark: dark })
+      };
+    }
+    return undefined;
+  };
+
+  Box.prototype.render = function render() {
+    var _props2 = this.props,
+        tag = _props2.tag,
+        rest = _objectWithoutProperties(_props2, ['tag']);
 
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
@@ -45,6 +74,12 @@ var Box = function (_Component) {
   return Box;
 }(Component);
 
+Box.contextTypes = {
+  grommet: PropTypes.object.isRequired
+};
+Box.childContextTypes = {
+  grommet: PropTypes.object
+};
 Box.defaultProps = {
   direction: 'column',
   tag: 'div'

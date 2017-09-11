@@ -35,6 +35,7 @@ var Grommet = function (_Component) {
     var globalTheme = cloneDeep(baseTheme);
 
     return {
+      grommet: {},
       theme: deepAssign(globalTheme, theme)
     };
   };
@@ -57,6 +58,7 @@ var Grommet = function (_Component) {
 }(Component);
 
 Grommet.childContextTypes = {
+  grommet: PropTypes.object,
   theme: PropTypes.object
 };
 Grommet.defaultProps = {

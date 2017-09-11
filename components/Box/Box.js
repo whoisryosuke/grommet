@@ -2,11 +2,21 @@
 
 exports.__esModule = true;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _recompose = require('recompose');
+
+var _utils = require('../utils');
 
 var _StyledBox = require('./StyledBox');
 
@@ -41,10 +51,33 @@ var Box = function (_Component) {
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  Box.prototype.render = function render() {
+  Box.prototype.getChildContext = function getChildContext() {
+    var grommet = this.context.grommet;
     var _props = this.props,
-        tag = _props.tag,
-        rest = _objectWithoutProperties(_props, ['tag']);
+        background = _props.background,
+        theme = _props.theme;
+
+    var dark = false;
+    if (background) {
+      if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
+        dark = background.dark;
+      } else {
+        var color = (0, _utils.colorForName)(background, theme);
+        if (color) {
+          dark = (0, _utils.colorIsDark)(color);
+        }
+      }
+      return {
+        grommet: _extends({}, grommet, { dark: dark })
+      };
+    }
+    return undefined;
+  };
+
+  Box.prototype.render = function render() {
+    var _props2 = this.props,
+        tag = _props2.tag,
+        rest = _objectWithoutProperties(_props2, ['tag']);
 
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
@@ -58,6 +91,12 @@ var Box = function (_Component) {
   return Box;
 }(_react.Component);
 
+Box.contextTypes = {
+  grommet: _propTypes2.default.object.isRequired
+};
+Box.childContextTypes = {
+  grommet: _propTypes2.default.object
+};
 Box.defaultProps = {
   direction: 'column',
   tag: 'div'
