@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.StyledSuggestions = exports.StyledSuggestion = undefined;
+exports.StyledSuggestions = exports.StyledSuggestion = exports.StyledTextInputContainer = undefined;
 
 var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']);
 
@@ -18,9 +18,27 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 var placeholderColor = (0, _styledComponents.css)(['color:', ';'], function (props) {
   return props.theme.global.placeholder.color;
 });
+
+var sizeStyle = function sizeStyle(props) {
+  var data = props.theme.text[props.size];
+  return (0, _styledComponents.css)(['font-size:', ';line-height:', ';'], data.size, data.height);
+};
+
+var plainStyle = (0, _styledComponents.css)(['border:none;width:100%;']);
+
 var StyledTextInput = _styledComponents2.default.input.withConfig({
   displayName: 'StyledTextInput'
-})(['', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, placeholderColor, placeholderColor, placeholderColor, _utils.focusStyle);
+})(['', ' ', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, function (props) {
+  return props.size && sizeStyle(props);
+}, function (props) {
+  return props.plain && plainStyle;
+}, placeholderColor, placeholderColor, placeholderColor, _utils.focusStyle);
+
+var StyledTextInputContainer = exports.StyledTextInputContainer = _styledComponents2.default.div.withConfig({
+  displayName: 'StyledTextInput__StyledTextInputContainer'
+})(['', ''], function (props) {
+  return props.plain && (0, _styledComponents.css)(['width:100%']);
+});
 
 var activeStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';'], function (props) {
   return props.theme.global.hover.backgroundColor;

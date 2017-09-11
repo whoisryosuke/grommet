@@ -11,6 +11,8 @@ export default (function (TextInput) {
       onInput: [PropTypes.func, 'Function that will be called when the user types in the input.'],
       onSelect: [PropTypes.func, 'Function that will be called when the user selects a suggestion.\n      The suggestion contains the object chosen from the supplied suggestions.'],
       placeholder: [PropTypes.string, 'Placeholder text to use when the input is empty.'],
+      plain: [PropTypes.bool, 'Whether this is a plain input with no border or padding.\n      Only use this when the containing context provides sufficient affordance'],
+      size: [PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']), 'The size of the TextInput.'],
       suggestions: [PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.shape({
         label: PropTypes.node,
         value: PropTypes.any

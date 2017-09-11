@@ -13,7 +13,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
-import StyledTextInput, { StyledSuggestion, StyledSuggestions } from './StyledTextInput';
+import StyledTextInput, { StyledTextInputContainer, StyledSuggestion, StyledSuggestions } from './StyledTextInput';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { Drop } from '../Drop';
@@ -250,8 +250,8 @@ var TextInput = function (_Component) {
       );
     }
     return React.createElement(
-      'div',
-      null,
+      StyledTextInputContainer,
+      { plain: rest.plain },
       React.createElement(
         Keyboard,
         {

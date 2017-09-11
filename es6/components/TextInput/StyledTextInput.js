@@ -9,9 +9,27 @@ import { focusStyle, inputStyle, parseMetricToInt } from '../utils';
 var placeholderColor = css(['color:', ';'], function (props) {
   return props.theme.global.placeholder.color;
 });
+
+var sizeStyle = function sizeStyle(props) {
+  var data = props.theme.text[props.size];
+  return css(['font-size:', ';line-height:', ';'], data.size, data.height);
+};
+
+var plainStyle = css(['border:none;width:100%;']);
+
 var StyledTextInput = styled.input.withConfig({
   displayName: 'StyledTextInput'
-})(['', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, placeholderColor, placeholderColor, placeholderColor, focusStyle);
+})(['', ' ', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
+  return props.size && sizeStyle(props);
+}, function (props) {
+  return props.plain && plainStyle;
+}, placeholderColor, placeholderColor, placeholderColor, focusStyle);
+
+export var StyledTextInputContainer = styled.div.withConfig({
+  displayName: 'StyledTextInput__StyledTextInputContainer'
+})(['', ''], function (props) {
+  return props.plain && css(['width:100%']);
+});
 
 var activeStyle = css(['background-color:', ';color:', ';'], function (props) {
   return props.theme.global.hover.backgroundColor;

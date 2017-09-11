@@ -266,8 +266,8 @@ var TextInput = function (_Component) {
       );
     }
     return _react2.default.createElement(
-      'div',
-      null,
+      _StyledTextInput.StyledTextInputContainer,
+      { plain: rest.plain },
       _react2.default.createElement(
         _Keyboard.Keyboard,
         {

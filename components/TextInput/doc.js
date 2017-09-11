@@ -15,6 +15,8 @@ exports.default = function (TextInput) {
       onInput: [_reactDesc.PropTypes.func, 'Function that will be called when the user types in the input.'],
       onSelect: [_reactDesc.PropTypes.func, 'Function that will be called when the user selects a suggestion.\n      The suggestion contains the object chosen from the supplied suggestions.'],
       placeholder: [_reactDesc.PropTypes.string, 'Placeholder text to use when the input is empty.'],
+      plain: [_reactDesc.PropTypes.bool, 'Whether this is a plain input with no border or padding.\n      Only use this when the containing context provides sufficient affordance'],
+      size: [_reactDesc.PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']), 'The size of the TextInput.'],
       suggestions: [_reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.shape({
         label: _reactDesc.PropTypes.node,
         value: _reactDesc.PropTypes.any
