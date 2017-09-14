@@ -89,6 +89,11 @@ export default {
       }
     },
     lineHeight: '24px',
+    opacity: {
+      weak: '0.8',
+      medium: '0.4',
+      strong: '0.1'
+    },
     placeholder: {
       color: '#AAAAAA'
     },
@@ -156,8 +161,10 @@ export default {
     weight: 300
   },
   icon: {
-    extend: css(['', ''], function (props) {
+    extend: css(['', ' ', ''], function (props) {
       return props.color && props.color !== 'plain' && '\n        fill: ' + colorForName(props.color, props.theme) + ';\n        stroke: ' + colorForName(props.color, props.theme) + ';\n      ';
+    }, function (props) {
+      return props.dark && '\n        fill: ' + props.theme.global.colors.darkBackgroundTextColor + ';\n        stroke: ' + props.theme.global.colors.darkBackgroundTextColor + ';\n      ';
     })
   },
   layer: {

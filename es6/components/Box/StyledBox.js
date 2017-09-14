@@ -114,18 +114,22 @@ var textAlignStyle = css(['text-align:', ';'], function (props) {
 var wrapStyle = 'flex-wrap: wrap;';
 
 var borderStyle = function borderStyle(data, theme) {
-  var color = colorForName(data.color || 'light-2', theme);
-  var size = data.size || 'small';
-  var side = typeof data === 'string' ? data : data.side || 'all';
-  var value = 'solid ' + theme.global.borderSize[size] + ' ' + color;
-  if (side === 'top' || side === 'bottom' || side === 'left' || side === 'right') {
-    return 'border-' + data + ': ' + value + ';';
-  } else if (side === 'horizontal') {
-    return '\n      border-left: ' + value + ';\n      border-right: ' + value + ';\n    ';
-  } else if (side === 'vertical') {
-    return '\n      border-top: ' + value + ';\n      border-bottom: ' + value + ';\n    ';
+  var style = '';
+  if (data.color) {
+    var color = colorForName(data.color || 'light-2', theme);
+    var size = data.size || 'small';
+    var side = typeof data === 'string' ? data : data.side || 'all';
+    var value = 'solid ' + theme.global.borderSize[size] + ' ' + color;
+    if (side === 'top' || side === 'bottom' || side === 'left' || side === 'right') {
+      style = 'border-' + data + ': ' + value + ';';
+    } else if (side === 'horizontal') {
+      style = '\n        border-left: ' + value + ';\n        border-right: ' + value + ';\n      ';
+    } else if (side === 'vertical') {
+      style = '\n        border-top: ' + value + ';\n        border-bottom: ' + value + ';\n      ';
+    }
+    style = 'border: ' + value + ';';
   }
-  return 'border: ' + value + ';';
+  return '\n    ' + style + '\n\n    ' + (data.radius ? 'border-radius: ' + theme.global.borderSize[data.radius] + ';' : '') + '\n  ';
 };
 
 var edgeStyle = function edgeStyle(kind, data, theme) {

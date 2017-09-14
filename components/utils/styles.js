@@ -29,6 +29,12 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
         _color = 'inherit';
       }
       return (0, _styledComponents.css)(['background:', ' no-repeat center center;background-size:cover;color:', ';'], background.image, _color);
+    } else if (background.color) {
+      var _color2 = (0, _colors.colorForName)(background.color, theme);
+      var rgba = (0, _colors.getRGBA)(_color2, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
+      if (rgba) {
+        return (0, _styledComponents.css)(['background-color:', ';color:', ';'], rgba, (0, _colors.colorIsDark)(rgba) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
+      }
     }
     return undefined;
   }

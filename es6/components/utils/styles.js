@@ -3,7 +3,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 import { css } from 'styled-components';
 
 import { parseMetricToInt } from './mixins';
-import { colorForName, colorIsDark } from './colors';
+import { colorForName, colorIsDark, getRGBA } from './colors';
 
 export var activeStyle = css(['background-color:', ';color:', ';'], function (props) {
   return props.theme.global.hover.backgroundColor;
@@ -23,6 +23,12 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
         _color = 'inherit';
       }
       return css(['background:', ' no-repeat center center;background-size:cover;color:', ';'], background.image, _color);
+    } else if (background.color) {
+      var _color2 = colorForName(background.color, theme);
+      var rgba = getRGBA(_color2, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
+      if (rgba) {
+        return css(['background-color:', ';color:', ';'], rgba, colorIsDark(rgba) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
+      }
     }
     return undefined;
   }
