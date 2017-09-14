@@ -66,13 +66,22 @@ var Anchor = function (_Component) {
     if (anchorIcon) {
       anchorIcon = React.createElement(
         StyledIcon,
-        { key: 'styled-icon', reverse: reverse, label: label, theme: theme },
+        { reverse: reverse, label: label, theme: theme },
         anchorIcon
       );
     }
 
-    var first = reverse ? label : anchorIcon;
-    var second = reverse ? anchorIcon : label;
+    var first = void 0;
+    var second = void 0;
+    if (children) {
+      first = children;
+    } else if (reverse) {
+      first = label || null;
+      second = anchorIcon || null;
+    } else {
+      first = anchorIcon || null;
+      second = label || null;
+    }
 
     return React.createElement(
       StyledAnchor,
@@ -89,7 +98,8 @@ var Anchor = function (_Component) {
         href: !disabled ? href : undefined,
         onClick: !disabled ? onClick : undefined
       }),
-      first || second ? [first, second] : children
+      first,
+      second
     );
   };
 
