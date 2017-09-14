@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-import { focusStyle, inputStyle, parseMetricToInt } from '../utils';
+import { focusStyle, inputStyle } from '../utils';
 
 var placeholderColor = css(['color:', ';'], function (props) {
   return props.theme.global.placeholder.color;
@@ -31,11 +31,6 @@ export var StyledTextInputContainer = styled.div.withConfig({
   return props.plain && css(['width:100%']);
 });
 
-var activeStyle = css(['background-color:', ';color:', ';'], function (props) {
-  return props.theme.global.hover.backgroundColor;
-}, function (props) {
-  return props.theme.global.hover.textColor;
-});
 var selectedStyle = css(['background-color:', ';color:', ';'], function (props) {
   return props.theme.global.selected.backgroundColor;
 }, function (props) {
@@ -44,12 +39,8 @@ var selectedStyle = css(['background-color:', ';color:', ';'], function (props) 
 
 export var StyledSuggestion = styled.div.withConfig({
   displayName: 'StyledTextInput__StyledSuggestion'
-})(['padding:', ';', ' ', ''], function (props) {
-  return parseMetricToInt(props.theme.global.spacing) / 4 + 'px ' + props.theme.global.spacing;
-}, function (props) {
+})(['', ''], function (props) {
   return props.selected && selectedStyle;
-}, function (props) {
-  return props.active && activeStyle;
 });
 
 export var StyledSuggestions = styled.ol.withConfig({

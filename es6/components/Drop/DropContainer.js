@@ -37,12 +37,12 @@ var DropContainer = function (_Component) {
 
   DropContainer.prototype.getChildContext = function getChildContext() {
     var theme = this.props.theme;
+    var contextTheme = this.context.theme;
 
 
-    var globalTheme = cloneDeep(baseTheme);
-    return {
-      theme: deepAssign(globalTheme, theme)
-    };
+    return _extends({}, this.context, {
+      theme: contextTheme || deepAssign(cloneDeep(baseTheme), theme)
+    });
   };
 
   DropContainer.prototype.componentDidMount = function componentDidMount() {
@@ -212,6 +212,9 @@ var DropContainer = function (_Component) {
         theme = _props2.theme,
         rest = _objectWithoutProperties(_props2, ['children', 'theme']);
 
+    var contextTheme = this.context.theme;
+
+
     var globalTheme = cloneDeep(baseTheme);
     return React.createElement(
       StyledDrop,
@@ -220,7 +223,7 @@ var DropContainer = function (_Component) {
           _this4.componentRef = _ref;
         }
       }, rest, {
-        theme: deepAssign(globalTheme, theme)
+        theme: deepAssign(globalTheme, contextTheme, theme)
       }),
       children
     );
@@ -230,6 +233,9 @@ var DropContainer = function (_Component) {
 }(Component);
 
 DropContainer.childContextTypes = {
+  theme: PropTypes.object
+};
+DropContainer.contextTypes = {
   theme: PropTypes.object
 };
 DropContainer.defaultProps = {

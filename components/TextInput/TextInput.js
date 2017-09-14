@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _recompose = require('recompose');
 
 var _StyledTextInput = require('./StyledTextInput');
@@ -161,18 +165,19 @@ var TextInput = function (_Component) {
           _react2.default.createElement(
             _Button.Button,
             {
-              plain: true,
+              pad: 'small',
+              box: true,
+              active: activeSuggestionIndex === index,
               fill: true,
               align: 'start',
+              hoverIndicator: 'background',
               onClick: function onClick() {
                 return _this2.onClickSuggestion(suggestion);
-              },
-              hoverIndicator: 'background'
+              }
             },
             _react2.default.createElement(
               _StyledTextInput.StyledSuggestion,
               {
-                active: activeSuggestionIndex === index,
                 selected: selectedSuggestionIndex === index,
                 theme: theme
               },
@@ -256,7 +261,7 @@ var TextInput = function (_Component) {
         {
           align: { top: 'bottom', left: 'left' },
           responsive: false,
-          theme: this.props.theme,
+          context: _extends({}, this.context),
           control: this.componentRef,
           onClose: function onClose() {
             return _this3.setState({ showDrop: false });
@@ -304,6 +309,12 @@ var TextInput = function (_Component) {
 
   return TextInput;
 }(_react.Component);
+
+TextInput.contextTypes = {
+  grommet: _propTypes2.default.object,
+  theme: _propTypes2.default.object
+};
+
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(TextInput);

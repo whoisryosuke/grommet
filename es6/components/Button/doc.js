@@ -19,6 +19,7 @@ export default (function (Button) {
     props: {
       a11yTitle: [PropTypes.string, 'Custom title to be used by screen readers.'],
       accent: [PropTypes.bool, 'Whether this is a accent button.'],
+      active: [PropTypes.bool, 'Whether the button is active.'],
       box: [PropTypes.bool, 'Whether the button should support Box props. \n      This is useful if you want your children to be a \n      flexbox container.'],
       centered: [PropTypes.bool, 'Whether this is an accent button.'],
       critical: [PropTypes.bool, 'Whether this is an critical button.'],

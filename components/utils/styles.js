@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.inputStyle = exports.focusStyle = exports.baseStyle = exports.backgroundStyle = undefined;
+exports.inputStyle = exports.focusStyle = exports.baseStyle = exports.backgroundStyle = exports.activeStyle = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -10,6 +10,12 @@ var _styledComponents = require('styled-components');
 var _mixins = require('./mixins');
 
 var _colors = require('./colors');
+
+var activeStyle = exports.activeStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';'], function (props) {
+  return props.theme.global.hover.backgroundColor;
+}, function (props) {
+  return props.theme.global.hover.textColor;
+});
 
 var backgroundStyle = exports.backgroundStyle = function backgroundStyle(background, theme) {
   if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
@@ -70,5 +76,5 @@ var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['padding:', 'p
 });
 
 exports.default = {
-  backgroundStyle: backgroundStyle, baseStyle: baseStyle, inputStyle: inputStyle, focusStyle: focusStyle
+  activeStyle: activeStyle, backgroundStyle: backgroundStyle, baseStyle: baseStyle, inputStyle: inputStyle, focusStyle: focusStyle
 };

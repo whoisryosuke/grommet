@@ -5,6 +5,12 @@ import { css } from 'styled-components';
 import { parseMetricToInt } from './mixins';
 import { colorForName, colorIsDark } from './colors';
 
+export var activeStyle = css(['background-color:', ';color:', ';'], function (props) {
+  return props.theme.global.hover.backgroundColor;
+}, function (props) {
+  return props.theme.global.hover.textColor;
+});
+
 export var backgroundStyle = function backgroundStyle(background, theme) {
   if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
     if (background.image) {
@@ -64,5 +70,5 @@ export var inputStyle = css(['padding:', 'px;border:', ' solid ', ';border-radiu
 });
 
 export default {
-  backgroundStyle: backgroundStyle, baseStyle: baseStyle, inputStyle: inputStyle, focusStyle: focusStyle
+  activeStyle: activeStyle, backgroundStyle: backgroundStyle, baseStyle: baseStyle, inputStyle: inputStyle, focusStyle: focusStyle
 };

@@ -20,6 +20,7 @@ export default (function (Drop) {
         dark: PropTypes.bool,
         image: PropTypes.string
       })]), 'Either a color identifier to use for the background color. For example:\n      \'neutral-1\'. Or, a \'url()\' for an image.'],
+      context: [PropTypes.object, 'Object with the context variables to be passed to the Drop.'],
       control: [PropTypes.object, 'Target container where the drop will be aligned.', {
         required: true
       }],

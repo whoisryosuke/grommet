@@ -25,6 +25,7 @@ exports.default = function (Button) {
     props: {
       a11yTitle: [_reactDesc.PropTypes.string, 'Custom title to be used by screen readers.'],
       accent: [_reactDesc.PropTypes.bool, 'Whether this is a accent button.'],
+      active: [_reactDesc.PropTypes.bool, 'Whether the button is active.'],
       box: [_reactDesc.PropTypes.bool, 'Whether the button should support Box props. \n      This is useful if you want your children to be a \n      flexbox container.'],
       centered: [_reactDesc.PropTypes.bool, 'Whether this is an accent button.'],
       critical: [_reactDesc.PropTypes.bool, 'Whether this is an critical button.'],

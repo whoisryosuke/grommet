@@ -118,8 +118,11 @@ var LayerContainer = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'theme']);
 
-    var globalTheme = JSON.parse(JSON.stringify(_vanilla2.default));
-    var localTheme = (0, _deepAssign2.default)(globalTheme, theme);
+    var contextTheme = this.context.theme;
+
+
+    var globalTheme = (0, _cloneDeep2.default)(_vanilla2.default);
+    var localTheme = (0, _deepAssign2.default)(globalTheme, contextTheme, theme);
 
     return _react2.default.createElement(
       _Keyboard.Keyboard,

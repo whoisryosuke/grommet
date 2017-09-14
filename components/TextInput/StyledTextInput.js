@@ -40,11 +40,6 @@ var StyledTextInputContainer = exports.StyledTextInputContainer = _styledCompone
   return props.plain && (0, _styledComponents.css)(['width:100%']);
 });
 
-var activeStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';'], function (props) {
-  return props.theme.global.hover.backgroundColor;
-}, function (props) {
-  return props.theme.global.hover.textColor;
-});
 var selectedStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';'], function (props) {
   return props.theme.global.selected.backgroundColor;
 }, function (props) {
@@ -53,12 +48,8 @@ var selectedStyle = (0, _styledComponents.css)(['background-color:', ';color:', 
 
 var StyledSuggestion = exports.StyledSuggestion = _styledComponents2.default.div.withConfig({
   displayName: 'StyledTextInput__StyledSuggestion'
-})(['padding:', ';', ' ', ''], function (props) {
-  return (0, _utils.parseMetricToInt)(props.theme.global.spacing) / 4 + 'px ' + props.theme.global.spacing;
-}, function (props) {
+})(['', ''], function (props) {
   return props.selected && selectedStyle;
-}, function (props) {
-  return props.active && activeStyle;
 });
 
 var StyledSuggestions = exports.StyledSuggestions = _styledComponents2.default.ol.withConfig({

@@ -7,7 +7,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 
-import { focusStyle, fontSize, lapAndUp } from '../utils';
+import { activeStyle, focusStyle, fontSize, lapAndUp } from '../utils';
 
 var primaryStyle = css(['background-color:', ';color:', ';svg{fill:', ';stroke:', ';transition:none;}'], function (props) {
   return props.theme.global.colors.brand;
@@ -94,10 +94,12 @@ var plainStyle = css(['color:inherit;border:none;padding:0;', ''], function (pro
 
 var StyledButton = styled.button.withConfig({
   displayName: 'StyledButton'
-})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.plain && css(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color || props.theme.global.colors.brand, props.theme.button.border.radius, props.theme.button.color || props.theme.global.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
 }, function (props) {
   return !props.disabled && !props.focus && hoverStyle;
+}, function (props) {
+  return !props.disabled && props.active && activeStyle;
 }, function (props) {
   return props.disabled && disabledStyle;
 }, function (props) {

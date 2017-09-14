@@ -24,6 +24,7 @@ exports.default = function (Drop) {
         dark: _reactDesc.PropTypes.bool,
         image: _reactDesc.PropTypes.string
       })]), 'Either a color identifier to use for the background color. For example:\n      \'neutral-1\'. Or, a \'url()\' for an image.'],
+      context: [_reactDesc.PropTypes.object, 'Object with the context variables to be passed to the Drop.'],
       control: [_reactDesc.PropTypes.object, 'Target container where the drop will be aligned.', {
         required: true
       }],

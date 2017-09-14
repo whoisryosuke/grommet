@@ -16,7 +16,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var StyledDrop = _styledComponents2.default.div.withConfig({
   displayName: 'StyledDrop'
-})(['', ' max-height:0px;position:fixed;z-index:20;border-radius:', ';overflow:auto;transition:all .5s ease-in-out;', ''], _utils.baseStyle, function (props) {
+})(['', ' max-height:0px;position:fixed;z-index:20;border-radius:', ';overflow:auto;', ''], _utils.baseStyle, function (props) {
   return props.theme.global.drop.border.radius;
 }, function (props) {
   return (0, _utils.backgroundStyle)(props.background || props.theme.global.drop.backgroundColor, props.theme);

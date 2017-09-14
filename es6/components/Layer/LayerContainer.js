@@ -97,8 +97,11 @@ var LayerContainer = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'theme']);
 
-    var globalTheme = JSON.parse(JSON.stringify(baseTheme));
-    var localTheme = deepAssign(globalTheme, theme);
+    var contextTheme = this.context.theme;
+
+
+    var globalTheme = cloneDeep(baseTheme);
+    var localTheme = deepAssign(globalTheme, contextTheme, theme);
 
     return React.createElement(
       Keyboard,

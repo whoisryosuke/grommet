@@ -11,6 +11,7 @@ import DropContainer from './DropContainer';
 
 import doc from './doc';
 
+import { createContextProvider } from '../hocs';
 import { getNewContainer } from '../utils';
 
 var Drop = function (_Component) {
@@ -37,7 +38,12 @@ var Drop = function (_Component) {
   };
 
   Drop.prototype.renderDrop = function renderDrop() {
-    render(React.createElement(DropContainer, this.props), this.dropContainer);
+    var ContextProvider = createContextProvider(this.props.context);
+    render(React.createElement(
+      ContextProvider,
+      null,
+      React.createElement(DropContainer, this.props)
+    ), this.dropContainer);
   };
 
   Drop.prototype.render = function render() {

@@ -16,6 +16,8 @@ var _doc = require('./doc');
 
 var _doc2 = _interopRequireDefault(_doc);
 
+var _hocs = require('../hocs');
+
 var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -50,7 +52,12 @@ var Drop = function (_Component) {
   };
 
   Drop.prototype.renderDrop = function renderDrop() {
-    (0, _reactDom.render)(_react2.default.createElement(_DropContainer2.default, this.props), this.dropContainer);
+    var ContextProvider = (0, _hocs.createContextProvider)(this.props.context);
+    (0, _reactDom.render)(_react2.default.createElement(
+      ContextProvider,
+      null,
+      _react2.default.createElement(_DropContainer2.default, this.props)
+    ), this.dropContainer);
   };
 
   Drop.prototype.render = function render() {

@@ -134,6 +134,18 @@ Object.keys(_Markdown).forEach(function (key) {
   });
 });
 
+var _Menu = require('./Menu');
+
+Object.keys(_Menu).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Menu[key];
+    }
+  });
+});
+
 var _Meter = require('./Meter');
 
 Object.keys(_Meter).forEach(function (key) {

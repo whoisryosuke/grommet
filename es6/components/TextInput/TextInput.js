@@ -11,6 +11,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import StyledTextInput, { StyledTextInputContainer, StyledSuggestion, StyledSuggestions } from './StyledTextInput';
@@ -145,18 +146,19 @@ var TextInput = function (_Component) {
           React.createElement(
             Button,
             {
-              plain: true,
+              pad: 'small',
+              box: true,
+              active: activeSuggestionIndex === index,
               fill: true,
               align: 'start',
+              hoverIndicator: 'background',
               onClick: function onClick() {
                 return _this2.onClickSuggestion(suggestion);
-              },
-              hoverIndicator: 'background'
+              }
             },
             React.createElement(
               StyledSuggestion,
               {
-                active: activeSuggestionIndex === index,
                 selected: selectedSuggestionIndex === index,
                 theme: theme
               },
@@ -240,7 +242,7 @@ var TextInput = function (_Component) {
         {
           align: { top: 'bottom', left: 'left' },
           responsive: false,
-          theme: this.props.theme,
+          context: _extends({}, this.context),
           control: this.componentRef,
           onClose: function onClose() {
             return _this3.setState({ showDrop: false });
@@ -288,6 +290,12 @@ var TextInput = function (_Component) {
 
   return TextInput;
 }(Component);
+
+TextInput.contextTypes = {
+  grommet: PropTypes.object,
+  theme: PropTypes.object
+};
+
 
 if (process.env.NODE_ENV !== 'production') {
   doc(TextInput);
