@@ -24,7 +24,7 @@ var sizeStyle = function sizeStyle(props) {
   return (0, _styledComponents.css)(['font-size:', ';line-height:', ';'], data.size, data.height);
 };
 
-var plainStyle = (0, _styledComponents.css)(['border:none;width:100%;']);
+var plainStyle = (0, _styledComponents.css)(['border:none;width:100%;-webkit-appearance:none;']);
 
 var StyledTextInput = _styledComponents2.default.input.withConfig({
   displayName: 'StyledTextInput'

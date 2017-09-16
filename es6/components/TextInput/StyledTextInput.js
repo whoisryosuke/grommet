@@ -15,7 +15,7 @@ var sizeStyle = function sizeStyle(props) {
   return css(['font-size:', ';line-height:', ';'], data.size, data.height);
 };
 
-var plainStyle = css(['border:none;width:100%;']);
+var plainStyle = css(['border:none;width:100%;-webkit-appearance:none;']);
 
 var StyledTextInput = styled.input.withConfig({
   displayName: 'StyledTextInput'
