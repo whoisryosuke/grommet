@@ -129,13 +129,14 @@ var borderStyle = function borderStyle(data, theme) {
     var side = typeof data === 'string' ? data : data.side || 'all';
     var value = 'solid ' + theme.global.borderSize[size] + ' ' + color;
     if (side === 'top' || side === 'bottom' || side === 'left' || side === 'right') {
-      style = 'border-' + data + ': ' + value + ';';
+      style = 'border-' + side + ': ' + value + ';';
     } else if (side === 'horizontal') {
       style = '\n        border-left: ' + value + ';\n        border-right: ' + value + ';\n      ';
     } else if (side === 'vertical') {
       style = '\n        border-top: ' + value + ';\n        border-bottom: ' + value + ';\n      ';
+    } else {
+      style = 'border: ' + value + ';';
     }
-    style = 'border: ' + value + ';';
   }
   return '\n    ' + style + '\n\n    ' + (data.radius ? 'border-radius: ' + theme.global.borderSize[data.radius] + ';' : '') + '\n  ';
 };
@@ -174,10 +175,14 @@ var roundStyle = (0, _styledComponents.css)(['border-radius:', ';'], function (p
   return ROUND_MAP[props.round] || props.theme.global.edgeSize[props.round];
 });
 
+var responsiveStyle = (0, _styledComponents.css)(['', '}'], function (props) {
+  return (0, _utils.palm)('\n    flex-direction: column;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n    ' + (props.reverse && 'flex-direction: column-reverse') + '\n  ');
+});
+
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 var StyledBox = _styledComponents2.default.div.withConfig({
   displayName: 'StyledBox'
-})(['display:flex;max-width:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;max-width:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;
 }, function (props) {
   return props.alignContent && alignContentStyle;
@@ -209,6 +214,8 @@ var StyledBox = _styledComponents2.default.div.withConfig({
   return props.textAlign && textAlignStyle;
 }, function (props) {
   return props.wrap && wrapStyle;
+}, function (props) {
+  return props.responsive && responsiveStyle;
 });
 
 exports.default = StyledBox.extend(_templateObject, function (props) {

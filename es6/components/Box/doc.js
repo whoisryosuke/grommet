@@ -43,6 +43,7 @@ export default (function (Box) {
         top: PropTypes.oneOf(['small', 'medium', 'large']),
         vertical: PropTypes.oneOf(['small', 'medium', 'large'])
       })]), 'The amount of padding around the box contents. An object can be specified to\n      distinguish horizontal padding, vertical padding, and padding on a\n      particular side of the box'],
+      responsive: [PropTypes.bool, 'Whether children laid out in a row direction should be switched to a \n      column layout when the display area narrows.'],
       reverse: [PropTypes.bool, 'Whether to reverse the order of the child components.'],
       round: [PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']), 'How much to round the corners.'],
       tag: [PropTypes.string, 'The DOM tag to use for the element. Defaults to div.'],

@@ -23,12 +23,14 @@ var StyledTextInput = styled.input.withConfig({
   return props.size && sizeStyle(props);
 }, function (props) {
   return props.plain && plainStyle;
-}, placeholderColor, placeholderColor, placeholderColor, focusStyle);
+}, placeholderColor, placeholderColor, placeholderColor, function (props) {
+  return !props.plain && focusStyle;
+});
 
 export var StyledTextInputContainer = styled.div.withConfig({
   displayName: 'StyledTextInput__StyledTextInputContainer'
 })(['', ''], function (props) {
-  return props.plain && css(['width:100%']);
+  return props.plain && 'width: 100%';
 });
 
 var selectedStyle = css(['background-color:', ';color:', ';'], function (props) {

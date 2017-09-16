@@ -84,7 +84,7 @@ var Button = function (_Component) {
     if (icon) {
       buttonIcon = _react2.default.createElement(
         _StyledButton.StyledIcon,
-        { key: 'styled-icon', theme: theme },
+        { 'aria-hidden': true, key: 'styled-icon', theme: theme },
         icon
       );
     }

@@ -70,7 +70,7 @@ var Button = function (_Component) {
     if (icon) {
       buttonIcon = React.createElement(
         StyledIcon,
-        { key: 'styled-icon', theme: theme },
+        { 'aria-hidden': true, key: 'styled-icon', theme: theme },
         icon
       );
     }

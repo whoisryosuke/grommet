@@ -32,12 +32,14 @@ var StyledTextInput = _styledComponents2.default.input.withConfig({
   return props.size && sizeStyle(props);
 }, function (props) {
   return props.plain && plainStyle;
-}, placeholderColor, placeholderColor, placeholderColor, _utils.focusStyle);
+}, placeholderColor, placeholderColor, placeholderColor, function (props) {
+  return !props.plain && _utils.focusStyle;
+});
 
 var StyledTextInputContainer = exports.StyledTextInputContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledTextInput__StyledTextInputContainer'
 })(['', ''], function (props) {
-  return props.plain && (0, _styledComponents.css)(['width:100%']);
+  return props.plain && 'width: 100%';
 });
 
 var selectedStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';'], function (props) {

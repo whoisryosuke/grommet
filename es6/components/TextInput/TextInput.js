@@ -181,10 +181,12 @@ var TextInput = function (_Component) {
 
     var _props3 = this.props,
         defaultValue = _props3.defaultValue,
+        focus = _props3.focus,
+        plain = _props3.plain,
         value = _props3.value,
         _onInput = _props3.onInput,
         onKeyDown = _props3.onKeyDown,
-        rest = _objectWithoutProperties(_props3, ['defaultValue', 'value', 'onInput', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props3, ['defaultValue', 'focus', 'plain', 'value', 'onInput', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
     var showDrop = this.state.showDrop;
@@ -253,7 +255,7 @@ var TextInput = function (_Component) {
     }
     return React.createElement(
       StyledTextInputContainer,
-      { plain: rest.plain },
+      { plain: plain },
       React.createElement(
         Keyboard,
         {
@@ -272,8 +274,10 @@ var TextInput = function (_Component) {
           ref: function ref(_ref) {
             _this3.componentRef = _ref;
           },
-          autoComplete: 'off'
+          autoComplete: 'off',
+          plain: plain
         }, rest, {
+          focus: !plain && focus,
           defaultValue: renderLabel(defaultValue),
           value: renderLabel(value),
           onInput: function onInput(event) {
