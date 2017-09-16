@@ -176,7 +176,7 @@ var roundStyle = (0, _styledComponents.css)(['border-radius:', ';'], function (p
 });
 
 var responsiveStyle = (0, _styledComponents.css)(['', '}'], function (props) {
-  return (0, _utils.palm)('\n    flex-direction: column;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n    ' + (props.reverse && 'flex-direction: column-reverse') + '\n  ');
+  return (0, _utils.palm)('\n    flex-direction: column;\n    flex-basis: auto;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n    ' + (props.reverse && 'flex-direction: column-reverse') + '\n  ');
 });
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis

@@ -168,7 +168,7 @@ var roundStyle = css(['border-radius:', ';'], function (props) {
 });
 
 var responsiveStyle = css(['', '}'], function (props) {
-  return palm('\n    flex-direction: column;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n    ' + (props.reverse && 'flex-direction: column-reverse') + '\n  ');
+  return palm('\n    flex-direction: column;\n    flex-basis: auto;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n    ' + (props.reverse && 'flex-direction: column-reverse') + '\n  ');
 });
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
