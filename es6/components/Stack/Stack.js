@@ -1,3 +1,5 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14,6 +16,8 @@ import StyledStack from './StyledStack';
 import { withTheme } from '../hocs';
 
 import doc from './doc';
+
+import styleMap from './styleMap';
 
 var Stack = function (_Component) {
   _inherits(Stack, _Component);
@@ -37,43 +41,10 @@ var Stack = function (_Component) {
       if (index === 0) {
         return child;
       }
-      var style = {
+      var style = _extends({
         position: 'absolute',
         overflow: 'hidden'
-      };
-      if (anchor === 'center') {
-        style.top = '50%';
-        style.left = '50%';
-        style.transform = 'translate(-50%, -50%)';
-      } else if (anchor === 'left') {
-        style.top = '50%';
-        style.left = '0';
-        style.transform = 'translateY(-50%)';
-      } else if (anchor === 'right') {
-        style.top = '50%';
-        style.right = '0';
-        style.transform = 'translateY(-50%)';
-      } else if (anchor === 'top') {
-        style.top = '0';
-        style.right = '50%';
-        style.transform = 'translateX(-50%)';
-      } else if (anchor === 'bottom') {
-        style.top = '0';
-        style.right = '50%';
-        style.transform = 'translateX(-50%)';
-      } else if (anchor === 'top-left') {
-        style.top = '0';
-        style.left = '0';
-      } else if (anchor === 'bottom-left') {
-        style.bottom = '0';
-        style.left = '0';
-      } else if (anchor === 'top-right') {
-        style.top = '0';
-        style.right = '0';
-      } else if (anchor === 'bottom-right') {
-        style.bottom = '0';
-        style.right = '0';
-      }
+      }, styleMap[anchor]);
       return React.cloneElement(child, { style: style });
     });
 
