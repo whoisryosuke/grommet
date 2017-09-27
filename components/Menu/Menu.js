@@ -92,12 +92,23 @@ var Menu = function (_Component) {
   };
 
   Menu.prototype.onPreviousMenuItem = function onPreviousMenuItem() {
-    var activeItemIndex = this.state.activeItemIndex;
+    var _state2 = this.state,
+        showDrop = _state2.showDrop,
+        activeItemIndex = _state2.activeItemIndex;
 
-    var index = Math.max(activeItemIndex - 1, 0);
-    this.setState({ activeItemIndex: index });
-    // this.setState({ activeSuggestionIndex: index },
-    //   this._announceSuggestion.bind(this, index));
+    if (!showDrop) {
+      this.setState({
+        showDrop: true,
+        activeItemIndex: -1
+      });
+    } else {
+      var items = this.props.items;
+
+      var index = activeItemIndex === -1 ? items.length - 1 : Math.max(activeItemIndex - 1, 0);
+      this.setState({ activeItemIndex: index });
+      // this.setState({ activeSuggestionIndex: index },
+      //   this._announceSuggestion.bind(this, index));
+    }
   };
 
   Menu.prototype.render = function render() {
@@ -115,12 +126,27 @@ var Menu = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
 
-    var _state2 = this.state,
-        activeItemIndex = _state2.activeItemIndex,
-        showDrop = _state2.showDrop;
+    var _state3 = this.state,
+        activeItemIndex = _state3.activeItemIndex,
+        showDrop = _state3.showDrop;
 
 
     var menuIcon = icon || _react2.default.createElement(_grommetIcons.FormDown, null);
+
+    var controlMirror = _react2.default.createElement(_Button.Button, {
+      justify: dropAlign.right ? 'end' : 'start',
+      fill: true,
+      a11yTitle: messages.closeMenu || 'Close Menu',
+      box: true,
+      reverse: true,
+      icon: menuIcon,
+      label: label,
+      direction: 'row',
+      pad: 'small',
+      onClick: function onClick() {
+        return _this2.onDropClose();
+      }
+    });
 
     var drop = void 0;
     if (showDrop) {
@@ -138,20 +164,7 @@ var Menu = function (_Component) {
             return _this2.onDropClose();
           }
         },
-        _react2.default.createElement(_Button.Button, {
-          justify: dropAlign.right ? 'end' : 'start',
-          fill: true,
-          a11yTitle: messages.closeMenu || 'Close Menu',
-          box: true,
-          reverse: true,
-          icon: menuIcon,
-          label: label,
-          direction: 'row',
-          pad: 'small',
-          onClick: function onClick() {
-            return _this2.onDropClose();
-          }
-        }),
+        dropAlign.top === 'top' ? controlMirror : undefined,
         items.map(function (item, index) {
           return _react2.default.createElement(_Button.Button, _extends({
             ref: function ref(_ref) {
@@ -165,12 +178,15 @@ var Menu = function (_Component) {
             align: 'start',
             hoverIndicator: 'background'
           }, item, {
-            onClick: function onClick() {
+            onClick: item.onClick ? function () {
               item.onClick.apply(item, arguments);
-              _this2.onDropClose();
-            }
+              if (item.close !== false) {
+                _this2.onDropClose();
+              }
+            } : undefined
           }));
-        })
+        }),
+        dropAlign.bottom === 'bottom' ? controlMirror : undefined
       );
     }
 

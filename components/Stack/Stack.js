@@ -56,11 +56,16 @@ var Stack = function (_Component) {
       if (index === 0) {
         return child;
       }
-      var style = _extends({
-        position: 'absolute',
-        overflow: 'hidden'
-      }, _styleMap2.default[anchor]);
-      return _react2.default.cloneElement(child, { style: style });
+
+      if (child) {
+        var style = _extends({
+          position: 'absolute',
+          overflow: 'hidden'
+        }, _styleMap2.default[anchor || 'fill']);
+        return _react2.default.cloneElement(child, { style: style });
+      }
+
+      return child;
     });
 
     return _react2.default.createElement(
@@ -72,11 +77,6 @@ var Stack = function (_Component) {
 
   return Stack;
 }(_react.Component);
-
-Stack.defaultProps = {
-  anchor: 'center'
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Stack);

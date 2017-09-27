@@ -115,20 +115,18 @@ var wrapStyle = 'flex-wrap: wrap;';
 
 var borderStyle = function borderStyle(data, theme) {
   var style = '';
-  if (data.color) {
-    var color = colorForName(data.color || 'light-2', theme);
-    var size = data.size || 'small';
-    var side = typeof data === 'string' ? data : data.side || 'all';
-    var value = 'solid ' + theme.global.borderSize[size] + ' ' + color;
-    if (side === 'top' || side === 'bottom' || side === 'left' || side === 'right') {
-      style = 'border-' + side + ': ' + value + ';';
-    } else if (side === 'horizontal') {
-      style = '\n        border-left: ' + value + ';\n        border-right: ' + value + ';\n      ';
-    } else if (side === 'vertical') {
-      style = '\n        border-top: ' + value + ';\n        border-bottom: ' + value + ';\n      ';
-    } else {
-      style = 'border: ' + value + ';';
-    }
+  var color = colorForName(data.color || 'light-2', theme);
+  var size = data.size || 'small';
+  var side = typeof data === 'string' ? data : data.side || 'all';
+  var value = 'solid ' + theme.global.borderSize[size] + ' ' + color;
+  if (side === 'top' || side === 'bottom' || side === 'left' || side === 'right') {
+    style = 'border-' + side + ': ' + value + ';';
+  } else if (side === 'horizontal') {
+    style = '\n      border-left: ' + value + ';\n      border-right: ' + value + ';\n    ';
+  } else if (side === 'vertical') {
+    style = '\n      border-top: ' + value + ';\n      border-bottom: ' + value + ';\n    ';
+  } else {
+    style = 'border: ' + value + ';';
   }
   return '\n    ' + style + '\n\n    ' + (data.radius ? 'border-radius: ' + theme.global.borderSize[data.radius] + ';' : '') + '\n  ';
 };

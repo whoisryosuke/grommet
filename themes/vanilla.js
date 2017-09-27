@@ -192,5 +192,10 @@ exports.default = {
     large: { size: '24px', height: 1.167 },
     xlarge: { size: '32px', height: 1.1875 },
     xxlarge: { size: '48px', height: 1.125 }
+  },
+  video: {
+    captions: {
+      background: (0, _polished.rgba)(0, 0, 0, 0.7)
+    }
   }
 };

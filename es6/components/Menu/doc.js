@@ -8,15 +8,18 @@ export default (function (Menu) {
     description: 'Presents a list of choices within a drop down via a control that\n  opens it.',
     usage: 'import { Menu } from \'grommet\';\n  <Menu/>',
     props: {
-      background: [PropTypes.string, 'Background color when drop is active'],
+      background: [PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
+        color: PropTypes.string,
+        opacity: PropTypes.oneOfType([PropTypes.oneOf(['weak', 'medium', 'strong']), PropTypes.bool])
+      })]), 'Background color when drop is active'],
       dropAlign: [PropTypes.shape({
         top: PropTypes.oneOf(VERTICAL_ALIGN_OPTIONS),
         bottom: PropTypes.oneOf(VERTICAL_ALIGN_OPTIONS),
         left: PropTypes.oneOf(HORIZONTAL_ALIGN_OPTIONS),
         right: PropTypes.oneOf(HORIZONTAL_ALIGN_OPTIONS)
-      }), 'Where to place the drop down. The keys correspond to a side of the drop down.\n      The values correspond to a side of the control. For instance,\n      {left: \'left\', top: \'bottom\'} would align the left edges and the top of \n      the drop down to the bottom of the control. At most one of left or right and\n      one of top or bottom should be specified.'],
+      }), 'Where to place the drop down. The keys correspond to a side of the drop down.\n      The values correspond to a side of the control. For instance,\n      {left: \'left\', top: \'bottom\'} would align the left edges and the top of\n      the drop down to the bottom of the control. At most one of left or right and\n      one of top or bottom should be specified.'],
       icon: [PropTypes.node, 'Indicates the icon shown as a control to open it.'],
-      items: [PropTypes.arrayOf(PropTypes.object), 'Menu items to be placed inside the drop down. \n      The object values can be any Button prop, for example: label and onClick.', {
+      items: [PropTypes.arrayOf(PropTypes.object), 'Menu items to be placed inside the drop down.\n      The object values can be any Button prop, for example: label and onClick.', {
         required: true
       }],
       label: [PropTypes.oneOfType([PropTypes.string, PropTypes.node]), 'Indicates the label shown as a control to open it.'],

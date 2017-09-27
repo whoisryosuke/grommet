@@ -53,7 +53,9 @@ var Bar = function (_Component) {
     });
 
     var start = 0;
-    var paths = (values || []).map(function (valueArg, index) {
+    var paths = (values || []).filter(function (v) {
+      return v.value > 0;
+    }).map(function (valueArg, index) {
       var color = valueArg.color,
           highlight = valueArg.highlight,
           label = valueArg.label,
