@@ -16,14 +16,14 @@ exports.default = function (Chart) {
         height: _reactDesc.PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full']),
         width: _reactDesc.PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full'])
       })]), 'The size of the Chart. Defaults to { width: "medium", height: "small" }.'],
-      thickness: [_reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']), 'The size of the lines or bars. Defaults to medium.'],
+      thickness: [_reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']), 'The width of the stroke. Defaults to medium.'],
       title: [_reactDesc.PropTypes.string, // .isRequired isn't working?
       'Accessible title of the chart.'],
       type: [_reactDesc.PropTypes.oneOf(['bar', 'line', 'area']), 'The visual type of meter. The default is bar'],
       values: [_reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.shape({
         label: _reactDesc.PropTypes.string, // for accessibility of bars
         value: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.number).isRequired
-      })), 'Array of value objects describing the data.\n      \'value\' is a tuple indicating the coordinate of the value.\n      \'label\' is a text string describing it.']
+      })), 'Array of value objects describing the data.\n      \'value\' is a tuple indicating the coordinate of the value or a triple\n      indicating the x coordinate and a range of two y coordinates.\n      \'label\' is a text string describing it.']
     }
   });
 };

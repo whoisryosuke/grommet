@@ -41,18 +41,23 @@ var renderBars = function renderBars(values, bounds, scale, height) {
         rest = _objectWithoutProperties(valueArg, ['label', 'value']);
 
     var key = 'p-' + index;
-    var d = 'M ' + value[0] * scale[0] + ',' + (height - bounds[1][0] * scale[1]) + '\n      L ' + value[0] * scale[0] + ',' + (height - value[1] * scale[1]);
+    var bottom = value.length === 2 ? bounds[1][0] : value[1];
+    var top = value.length === 2 ? value[1] : value[2];
+    if (top !== 0) {
+      var d = 'M ' + value[0] * scale[0] + ',' + (height - bottom * scale[1]) + (' L ' + value[0] * scale[0] + ',' + (height - top * scale[1]));
 
-    return _react2.default.createElement(
-      'g',
-      { key: key, fill: 'none' },
-      _react2.default.createElement(
-        'title',
-        null,
-        label
-      ),
-      _react2.default.createElement('path', _extends({ d: d }, rest))
-    );
+      return _react2.default.createElement(
+        'g',
+        { key: key, fill: 'none' },
+        _react2.default.createElement(
+          'title',
+          null,
+          label
+        ),
+        _react2.default.createElement('path', _extends({ d: d }, rest))
+      );
+    }
+    return undefined;
   });
 };
 
@@ -61,7 +66,7 @@ var renderLine = function renderLine(values, bounds, scale, height) {
   (values || []).forEach(function (_ref, index) {
     var value = _ref.value;
 
-    d += (index ? ' L' : 'M') + '\n      ' + value[0] * scale[0] + ',' + (height - value[1] * scale[1]);
+    d += (index ? ' L' : 'M') + ' ' + value[0] * scale[0] + ',' + (height - value[1] * scale[1]);
   });
   return _react2.default.createElement(
     'g',
@@ -74,16 +79,20 @@ var renderArea = function renderArea(values, bounds, scale, height, props) {
   var color = props.color,
       theme = props.theme;
 
-  var d = 'M 0,' + height;
+  var d = '';
   (values || []).forEach(function (_ref2, index) {
     var value = _ref2.value;
 
-    if (!index) {
-      d += 'M ' + value[0] * scale[0] + ',' + height;
-    }
-    d += ' L ' + value[0] * scale[0] + ',' + (height - value[1] * scale[1]);
+    var top = value.length === 2 ? value[1] : value[2];
+    d += (!index ? 'M' : ' L') + ' ' + value[0] * scale[0] + ',' + (height - top * scale[1]);
   });
-  d += 'L ' + values[values.length - 1].value[0] * scale[0] + ',' + height + ' Z';
+  (values || []).reverse().forEach(function (_ref3) {
+    var value = _ref3.value;
+
+    var bottom = value.length === 2 ? bounds[1][0] : value[1];
+    d += ' L ' + value[0] * scale[0] + ',' + (height - bottom * scale[1]);
+  });
+  d += ' Z';
   return _react2.default.createElement(
     'g',
     { fill: (0, _colors.colorForName)(color, theme) },
@@ -91,18 +100,38 @@ var renderArea = function renderArea(values, bounds, scale, height, props) {
   );
 };
 
+var normalizeBounds = function normalizeBounds(props) {
+  var bounds = props.bounds;
+  if (!bounds) {
+    bounds = [[0, 1], [0, 1]];
+    (props.values || []).forEach(function (value) {
+      bounds[0][0] = Math.min(bounds[0][0], value.value[0]);
+      bounds[0][1] = Math.max(bounds[0][1], value.value[0]);
+      bounds[1][0] = Math.min(bounds[1][0], value.value[1]);
+      bounds[1][1] = Math.max(bounds[1][1], value.value[1]);
+    });
+  }
+  return bounds;
+};
+
 var Chart = function (_Component) {
   _inherits(Chart, _Component);
 
-  function Chart() {
+  function Chart(props) {
     _classCallCheck(this, Chart);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+    _this.state = { bounds: normalizeBounds(props) };
+    return _this;
   }
+
+  Chart.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    this.setState({ bounds: normalizeBounds(nextProps) });
+  };
 
   Chart.prototype.render = function render() {
     var _props = this.props,
-        initialBounds = _props.bounds,
         color = _props.color,
         round = _props.round,
         size = _props.size,
@@ -111,19 +140,10 @@ var Chart = function (_Component) {
         title = _props.title,
         type = _props.type,
         values = _props.values,
-        rest = _objectWithoutProperties(_props, ['bounds', 'color', 'round', 'size', 'theme', 'thickness', 'title', 'type', 'values']);
+        rest = _objectWithoutProperties(_props, ['color', 'round', 'size', 'theme', 'thickness', 'title', 'type', 'values']);
 
-    var bounds = initialBounds;
-    if (!bounds) {
-      // derive from values, TODO: move outside of render()
-      bounds = [[], []];
-      (values || []).forEach(function (value) {
-        bounds[0][0] = Math.min(bounds[0][0], value[0]);
-        bounds[0][1] = Math.max(bounds[0][1], value[0]);
-        bounds[1][0] = Math.min(bounds[1][0], value[1]);
-        bounds[1][1] = Math.max(bounds[1][1], value[1]);
-      });
-    }
+    var bounds = this.state.bounds;
+
 
     var sizeWidth = typeof size === 'string' ? size : size.width;
     var sizeHeight = typeof size === 'string' ? size : size.height;
@@ -159,7 +179,7 @@ var Chart = function (_Component) {
         {
           stroke: (0, _colors.colorForName)(color, theme),
           strokeWidth: strokeWidth,
-          strokeLinecap: round ? 'round' : 'square',
+          strokeLinecap: round ? 'round' : 'butt',
           strokeLinejoin: round ? 'round' : 'miter'
         },
         contents
