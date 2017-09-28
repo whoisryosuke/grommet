@@ -12,13 +12,22 @@ var marginStyle = function marginStyle(props) {
     var margin = props.theme.global.edgeSize[props.margin];
     return '\n      margin-top: ' + margin + ';\n      margin-bottom: ' + margin + ';\n    ';
   }
+  var result = '';
   if (props.margin.top) {
-    return 'margin-top: ' + props.theme.global.edgeSize[props.margin.top] + ';';
+    if (props.margin.top === 'none') {
+      result += 'margin-top: 0;';
+    } else {
+      result += 'margin-top: ' + props.theme.global.edgeSize[props.margin.top] + ';';
+    }
   }
   if (props.margin.bottom) {
-    return 'margin-bottom: ' + props.theme.global.edgeSize[props.margin.bottom] + ';';
+    if (props.margin.bottom === 'none') {
+      result += 'margin-bottom: 0;';
+    } else {
+      result += 'margin-bottom: ' + props.theme.global.edgeSize[props.margin.bottom] + ';';
+    }
   }
-  return '';
+  return result;
 };
 
 var sizeStyle = function sizeStyle(props) {
