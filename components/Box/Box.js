@@ -71,7 +71,7 @@ var Box = function (_Component) {
         grommet: _extends({}, grommet, { dark: dark })
       };
     }
-    return undefined;
+    return {};
   };
 
   Box.prototype.render = function render() {

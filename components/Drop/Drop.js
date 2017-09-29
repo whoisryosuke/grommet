@@ -47,8 +47,10 @@ var Drop = function (_Component) {
   };
 
   Drop.prototype.componentWillUnmount = function componentWillUnmount() {
-    (0, _reactDom.unmountComponentAtNode)(this.dropContainer);
-    document.body.removeChild(this.dropContainer);
+    if (this.dropContainer) {
+      (0, _reactDom.unmountComponentAtNode)(this.dropContainer);
+      document.body.removeChild(this.dropContainer);
+    }
   };
 
   Drop.prototype.renderDrop = function renderDrop() {

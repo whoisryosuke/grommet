@@ -103,10 +103,10 @@ var normalizeBounds = function normalizeBounds(props) {
 var Chart = function (_Component) {
   _inherits(Chart, _Component);
 
-  function Chart(props) {
+  function Chart(props, context) {
     _classCallCheck(this, Chart);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
     _this.state = { bounds: normalizeBounds(props) };
     return _this;

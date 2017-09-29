@@ -33,18 +33,6 @@ export var StyledTextInputContainer = styled.div.withConfig({
   return props.plain && 'width: 100%';
 });
 
-var selectedStyle = css(['background-color:', ';color:', ';'], function (props) {
-  return props.theme.global.selected.backgroundColor;
-}, function (props) {
-  return props.theme.global.selected.textColor;
-});
-
-export var StyledSuggestion = styled.div.withConfig({
-  displayName: 'StyledTextInput__StyledSuggestion'
-})(['', ''], function (props) {
-  return props.selected && selectedStyle;
-});
-
 export var StyledSuggestions = styled.ol.withConfig({
   displayName: 'StyledTextInput__StyledSuggestions'
 })(['border-top-left-radius:0;border-top-right-radius:0;margin:0;padding:0;list-style-type:none;']);

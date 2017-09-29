@@ -18,6 +18,8 @@ var _recompose = require('recompose');
 
 var _grommetIcons = require('grommet-icons');
 
+var _Box = require('../Box');
+
 var _Button = require('../Button');
 
 var _Keyboard = require('../Keyboard');
@@ -116,13 +118,14 @@ var Menu = function (_Component) {
         background = _props.background,
         dropAlign = _props.dropAlign,
         icon = _props.icon,
+        id = _props.id,
         items = _props.items,
         label = _props.label,
         _props$messages = _props.messages,
         messages = _props$messages === undefined ? {} : _props$messages,
         onKeyDown = _props.onKeyDown,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
+        rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'id', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
@@ -131,24 +134,39 @@ var Menu = function (_Component) {
 
     var menuIcon = icon || _react2.default.createElement(_grommetIcons.FormDown, null);
 
-    var controlMirror = _react2.default.createElement(_Button.Button, {
-      justify: dropAlign.right ? 'end' : 'start',
-      fill: true,
-      a11yTitle: messages.closeMenu || 'Close Menu',
-      box: true,
-      reverse: true,
-      icon: menuIcon,
-      label: label,
-      direction: 'row',
-      pad: 'small',
-      onClick: this.onDropClose
-    });
+    var labelNode = void 0;
+    if (label) {
+      labelNode = _react2.default.createElement(
+        _Box.Box,
+        { margin: { right: 'small' } },
+        label
+      );
+    }
+    var controlMirror = _react2.default.createElement(
+      _Button.Button,
+      {
+        fill: true,
+        a11yTitle: messages.closeMenu || 'Close Menu',
+        onClick: this.onDropClose
+      },
+      _react2.default.createElement(
+        _Box.Box,
+        {
+          pad: 'small',
+          direction: 'row',
+          justify: dropAlign.right ? 'end' : 'start'
+        },
+        labelNode,
+        menuIcon
+      )
+    );
 
     var drop = void 0;
     if (showDrop) {
       drop = _react2.default.createElement(
         _Drop.Drop,
         {
+          id: id ? 'menu-drop__' + id : undefined,
           align: dropAlign,
           background: background,
           ref: function ref(_ref2) {
@@ -159,27 +177,35 @@ var Menu = function (_Component) {
           onClose: this.onDropClose
         },
         dropAlign.top === 'top' ? controlMirror : undefined,
-        items.map(function (item, index) {
-          return _react2.default.createElement(_Button.Button, _extends({
-            ref: function ref(_ref) {
-              _this2.buttonRefs[index] = _ref;
-            },
-            active: activeItemIndex === index,
-            box: true,
-            pad: 'small',
-            key: 'menuItem_' + index,
-            fill: true,
-            align: 'start',
-            hoverIndicator: 'background'
-          }, item, {
-            onClick: item.onClick ? function () {
-              item.onClick.apply(item, arguments);
-              if (item.close !== false) {
-                _this2.onDropClose();
-              }
-            } : undefined
-          }));
-        }),
+        _react2.default.createElement(
+          _Box.Box,
+          null,
+          items.map(function (item, index) {
+            return _react2.default.createElement(
+              _Button.Button,
+              {
+                ref: function ref(_ref) {
+                  _this2.buttonRefs[index] = _ref;
+                },
+                active: activeItemIndex === index,
+                key: 'menuItem_' + index,
+                hoverIndicator: 'background',
+                onClick: item.onClick ? function () {
+                  item.onClick.apply(item, arguments);
+                  if (item.close !== false) {
+                    _this2.onDropClose();
+                  }
+                } : undefined
+              },
+              _react2.default.createElement(
+                _Box.Box,
+                { align: 'start', pad: 'small', direction: 'row' },
+                item.icon,
+                item.label
+              )
+            );
+          })
+        ),
         dropAlign.bottom === 'bottom' ? controlMirror : undefined
       );
     }
@@ -198,22 +224,25 @@ var Menu = function (_Component) {
       _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Button.Button, _extends({
-          ref: function ref(_ref3) {
-            _this2.componentRef = _ref3;
-          },
-          a11yTitle: messages.openMenu || 'Open Menu',
-          align: 'start',
-          box: true,
-          reverse: true,
-          icon: menuIcon,
-          label: label,
-          onClick: function onClick() {
-            return _this2.setState({ activeItemIndex: -1, showDrop: !_this2.state.showDrop });
-          },
-          direction: 'row',
-          pad: 'small'
-        }, rest)),
+        _react2.default.createElement(
+          _Button.Button,
+          _extends({
+            id: id,
+            ref: function ref(_ref3) {
+              _this2.componentRef = _ref3;
+            },
+            a11yTitle: messages.openMenu || 'Open Menu',
+            onClick: function onClick() {
+              return _this2.setState({ activeItemIndex: -1, showDrop: !_this2.state.showDrop });
+            }
+          }, rest),
+          _react2.default.createElement(
+            _Box.Box,
+            { align: 'start', direction: 'row', pad: 'small' },
+            labelNode,
+            menuIcon
+          )
+        ),
         drop
       )
     );

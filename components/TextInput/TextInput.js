@@ -20,6 +20,8 @@ var _StyledTextInput = require('./StyledTextInput');
 
 var _StyledTextInput2 = _interopRequireDefault(_StyledTextInput);
 
+var _Box = require('../Box');
+
 var _Button = require('../Button');
 
 var _Keyboard = require('../Keyboard');
@@ -178,21 +180,19 @@ var TextInput = function (_Component) {
             _react2.default.createElement(
               _Button.Button,
               {
-                pad: 'small',
-                box: true,
                 active: activeSuggestionIndex === index,
                 fill: true,
-                align: 'start',
                 hoverIndicator: 'background',
                 onClick: function onClick() {
                   return _this.onClickSuggestion(suggestion);
                 }
               },
               _react2.default.createElement(
-                _StyledTextInput.StyledSuggestion,
+                _Box.Box,
                 {
-                  selected: selectedSuggestionIndex === index,
-                  theme: theme
+                  align: 'start',
+                  pad: 'small',
+                  background: selectedSuggestionIndex === index ? theme.global.selected.backgroundColor : undefined
                 },
                 renderLabel(suggestion)
               )
@@ -300,4 +300,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(TextInput);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme)(TextInput);
+exports.default = (0, _recompose.compose)(_hocs.withTheme)(TextInput);

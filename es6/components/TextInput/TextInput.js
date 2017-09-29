@@ -14,12 +14,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
-import StyledTextInput, { StyledTextInputContainer, StyledSuggestion, StyledSuggestions } from './StyledTextInput';
+import StyledTextInput, { StyledTextInputContainer, StyledSuggestions } from './StyledTextInput';
+import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { Drop } from '../Drop';
 
-import { withFocus, withTheme } from '../hocs';
+import { withTheme } from '../hocs';
 
 import doc from './doc';
 
@@ -159,21 +160,19 @@ var TextInput = function (_Component) {
             React.createElement(
               Button,
               {
-                pad: 'small',
-                box: true,
                 active: activeSuggestionIndex === index,
                 fill: true,
-                align: 'start',
                 hoverIndicator: 'background',
                 onClick: function onClick() {
                   return _this.onClickSuggestion(suggestion);
                 }
               },
               React.createElement(
-                StyledSuggestion,
+                Box,
                 {
-                  selected: selectedSuggestionIndex === index,
-                  theme: theme
+                  align: 'start',
+                  pad: 'small',
+                  background: selectedSuggestionIndex === index ? theme.global.selected.backgroundColor : undefined
                 },
                 renderLabel(suggestion)
               )
@@ -281,4 +280,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(TextInput);
 }
 
-export default compose(withFocus, withTheme)(TextInput);
+export default compose(withTheme)(TextInput);

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.StyledSuggestions = exports.StyledSuggestion = exports.StyledTextInputContainer = undefined;
+exports.StyledSuggestions = exports.StyledTextInputContainer = undefined;
 
 var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']);
 
@@ -40,18 +40,6 @@ var StyledTextInputContainer = exports.StyledTextInputContainer = _styledCompone
   displayName: 'StyledTextInput__StyledTextInputContainer'
 })(['', ''], function (props) {
   return props.plain && 'width: 100%';
-});
-
-var selectedStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';'], function (props) {
-  return props.theme.global.selected.backgroundColor;
-}, function (props) {
-  return props.theme.global.selected.textColor;
-});
-
-var StyledSuggestion = exports.StyledSuggestion = _styledComponents2.default.div.withConfig({
-  displayName: 'StyledTextInput__StyledSuggestion'
-})(['', ''], function (props) {
-  return props.selected && selectedStyle;
 });
 
 var StyledSuggestions = exports.StyledSuggestions = _styledComponents2.default.ol.withConfig({
