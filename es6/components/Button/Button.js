@@ -12,14 +12,12 @@ import React, { Children, Component } from 'react';
 import { compose } from 'recompose';
 
 import StyledButton, { StyledLabel, StyledIcon } from './StyledButton';
-import { Box } from '../Box';
 
 import { withFocus, withTheme } from '../hocs';
 
 import doc from './doc';
 
 var AnchorStyledButton = StyledButton.withComponent('a');
-var BoxStyledButton = StyledButton.withComponent(Box);
 
 var Button = function (_Component) {
   _inherits(Button, _Component);
@@ -42,7 +40,6 @@ var Button = function (_Component) {
   Button.prototype.render = function render() {
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
-        box = _props.box,
         children = _props.children,
         icon = _props.icon,
         focus = _props.focus,
@@ -53,18 +50,9 @@ var Button = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         type = _props.type,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'box', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
 
     var Tag = href ? AnchorStyledButton : StyledButton;
-
-    var boxProps = void 0;
-    if (box) {
-      // Let the root element of the Button be a Box element with tag prop
-      boxProps = {
-        tag: href ? 'a' : 'button'
-      };
-      Tag = BoxStyledButton;
-    }
 
     var buttonIcon = void 0;
     if (icon) {
@@ -89,15 +77,14 @@ var Button = function (_Component) {
 
     var disabled = !href && !onClick && ['reset', 'submit'].indexOf(type) === -1;
 
-    var plainProp = plain || box || Children.count(children) > 0 || icon && !label;
+    var plainProp = plain || Children.count(children) > 0 || icon && !label;
 
     return React.createElement(
       Tag,
       _extends({
         tabIndex: '0'
-      }, rest, boxProps, {
+      }, rest, {
         'aria-label': a11yTitle,
-        box: box,
         disabled: disabled,
         icon: icon,
         focus: focus,

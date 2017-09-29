@@ -136,7 +136,7 @@ var borderStyle = function borderStyle(data, theme) {
   } else {
     style = 'border: ' + value + ';';
   }
-  return '\n    ' + style + '\n\n    ' + (data.radius ? 'border-radius: ' + theme.global.borderSize[data.radius] + ';' : '') + '\n  ';
+  return style;
 };
 
 var edgeStyle = function edgeStyle(kind, data, theme) {

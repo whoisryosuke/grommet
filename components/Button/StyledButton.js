@@ -115,7 +115,7 @@ var StyledButton = _styledComponents2.default.button.withConfig({
 }, function (props) {
   return !props.plain && (0, _utils.fontSize)(props.theme.global.control.font.size, props.theme.global.spacing);
 }, function (props) {
-  return !props.plain && !props.box && 'padding: ' + props.theme.button.padding.vertical + ' ' + props.theme.button.padding.horizontal + ';';
+  return !props.plain && 'padding: ' + props.theme.button.padding.vertical + ' ' + props.theme.button.padding.horizontal + ';';
 }, function (props) {
   if (props.primary) {
     return primaryStyle;

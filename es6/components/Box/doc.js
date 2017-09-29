@@ -18,8 +18,7 @@ export default (function (Box) {
       border: [PropTypes.oneOfType([PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']), PropTypes.shape({
         color: PropTypes.string,
         side: PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']),
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        radius: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge'])
+        size: PropTypes.oneOf(['small', 'medium', 'large'])
       })]), 'Include a border.'],
       direction: [PropTypes.oneOf(['row', 'column']), 'The orientation to layout the child components in. Defaults to column.'],
       flex: [PropTypes.oneOf(['grow', 'shrink', true, false]), 'Whether flex-grow and/or flex-shrink is true.'],
@@ -43,7 +42,7 @@ export default (function (Box) {
         top: PropTypes.oneOf(['small', 'medium', 'large']),
         vertical: PropTypes.oneOf(['small', 'medium', 'large'])
       })]), 'The amount of padding around the box contents. An object can be specified to\n      distinguish horizontal padding, vertical padding, and padding on a\n      particular side of the box'],
-      responsive: [PropTypes.bool, 'Whether children laid out in a row direction should be switched to a \n      column layout when the display area narrows.'],
+      responsive: [PropTypes.bool, 'Whether children laid out in a row direction should be switched to a\n      column layout when the display area narrows.'],
       reverse: [PropTypes.bool, 'Whether to reverse the order of the child components.'],
       round: [PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']), 'How much to round the corners.'],
       tag: [PropTypes.string, 'The DOM tag to use for the element. Defaults to div.'],

@@ -14,8 +14,6 @@ var _StyledButton = require('./StyledButton');
 
 var _StyledButton2 = _interopRequireDefault(_StyledButton);
 
-var _Box = require('../Box');
-
 var _hocs = require('../hocs');
 
 var _doc = require('./doc');
@@ -33,7 +31,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var AnchorStyledButton = _StyledButton2.default.withComponent('a');
-var BoxStyledButton = _StyledButton2.default.withComponent(_Box.Box);
 
 var Button = function (_Component) {
   _inherits(Button, _Component);
@@ -56,7 +53,6 @@ var Button = function (_Component) {
   Button.prototype.render = function render() {
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
-        box = _props.box,
         children = _props.children,
         icon = _props.icon,
         focus = _props.focus,
@@ -67,18 +63,9 @@ var Button = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         type = _props.type,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'box', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
 
     var Tag = href ? AnchorStyledButton : _StyledButton2.default;
-
-    var boxProps = void 0;
-    if (box) {
-      // Let the root element of the Button be a Box element with tag prop
-      boxProps = {
-        tag: href ? 'a' : 'button'
-      };
-      Tag = BoxStyledButton;
-    }
 
     var buttonIcon = void 0;
     if (icon) {
@@ -103,15 +90,14 @@ var Button = function (_Component) {
 
     var disabled = !href && !onClick && ['reset', 'submit'].indexOf(type) === -1;
 
-    var plainProp = plain || box || _react.Children.count(children) > 0 || icon && !label;
+    var plainProp = plain || _react.Children.count(children) > 0 || icon && !label;
 
     return _react2.default.createElement(
       Tag,
       _extends({
         tabIndex: '0'
-      }, rest, boxProps, {
+      }, rest, {
         'aria-label': a11yTitle,
-        box: box,
         disabled: disabled,
         icon: icon,
         focus: focus,

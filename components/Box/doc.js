@@ -22,8 +22,7 @@ exports.default = function (Box) {
       border: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']), _reactDesc.PropTypes.shape({
         color: _reactDesc.PropTypes.string,
         side: _reactDesc.PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']),
-        size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        radius: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large', 'xlarge'])
+        size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
       })]), 'Include a border.'],
       direction: [_reactDesc.PropTypes.oneOf(['row', 'column']), 'The orientation to layout the child components in. Defaults to column.'],
       flex: [_reactDesc.PropTypes.oneOf(['grow', 'shrink', true, false]), 'Whether flex-grow and/or flex-shrink is true.'],
@@ -47,7 +46,7 @@ exports.default = function (Box) {
         top: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
         vertical: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
       })]), 'The amount of padding around the box contents. An object can be specified to\n      distinguish horizontal padding, vertical padding, and padding on a\n      particular side of the box'],
-      responsive: [_reactDesc.PropTypes.bool, 'Whether children laid out in a row direction should be switched to a \n      column layout when the display area narrows.'],
+      responsive: [_reactDesc.PropTypes.bool, 'Whether children laid out in a row direction should be switched to a\n      column layout when the display area narrows.'],
       reverse: [_reactDesc.PropTypes.bool, 'Whether to reverse the order of the child components.'],
       round: [_reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']), 'How much to round the corners.'],
       tag: [_reactDesc.PropTypes.string, 'The DOM tag to use for the element. Defaults to div.'],
