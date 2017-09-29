@@ -116,9 +116,9 @@ var wrapStyle = 'flex-wrap: wrap;';
 var borderStyle = function borderStyle(data, theme) {
   var style = '';
   var color = colorForName(data.color || 'light-2', theme);
-  var size = data.size || 'small';
+  var borderSize = data.size || 'xsmall';
   var side = typeof data === 'string' ? data : data.side || 'all';
-  var value = 'solid ' + theme.global.borderSize[size] + ' ' + color;
+  var value = 'solid ' + theme.global.borderSize[borderSize] + ' ' + color;
   if (side === 'top' || side === 'bottom' || side === 'left' || side === 'right') {
     style = 'border-' + side + ': ' + value + ';';
   } else if (side === 'horizontal') {
