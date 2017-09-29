@@ -4,6 +4,8 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
+var PAD_SIZES = ['xsmall', 'small', 'medium', 'large'];
+
 exports.default = function (Box) {
   return (0, _reactDesc.schema)(Box, {
     description: 'A flexible box that lays out its contents along a single\n    direction.',
@@ -30,21 +32,21 @@ exports.default = function (Box) {
       gridArea: [_reactDesc.PropTypes.string, 'The name of the area to place this Box in inside a parent Grid.'],
       justify: [_reactDesc.PropTypes.oneOf(['start', 'center', 'between', 'end']), 'How to align the contents along the main axis.'],
       justifySelf: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align along the row axis when contained in a Grid.'],
-      margin: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none', 'small', 'medium', 'large']), _reactDesc.PropTypes.shape({
-        bottom: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        horizontal: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        left: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        right: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        top: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        vertical: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
+      margin: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none'].concat(PAD_SIZES)), _reactDesc.PropTypes.shape({
+        bottom: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        horizontal: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        left: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        right: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        top: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        vertical: _reactDesc.PropTypes.oneOf(PAD_SIZES)
       })]), 'The amount of margin around the box. An object can be specified to\n      distinguish horizontal margin, vertical margin, and margin on a\n      particular side of the box'],
-      pad: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none', 'small', 'medium', 'large']), _reactDesc.PropTypes.shape({
-        bottom: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        horizontal: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        left: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        right: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        top: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
-        vertical: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
+      pad: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none'].concat(PAD_SIZES)), _reactDesc.PropTypes.shape({
+        bottom: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        horizontal: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        left: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        right: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        top: _reactDesc.PropTypes.oneOf(PAD_SIZES),
+        vertical: _reactDesc.PropTypes.oneOf(PAD_SIZES)
       })]), 'The amount of padding around the box contents. An object can be specified to\n      distinguish horizontal padding, vertical padding, and padding on a\n      particular side of the box'],
       responsive: [_reactDesc.PropTypes.bool, 'Whether children laid out in a row direction should be switched to a\n      column layout when the display area narrows.'],
       reverse: [_reactDesc.PropTypes.bool, 'Whether to reverse the order of the child components.'],

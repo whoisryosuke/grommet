@@ -1,5 +1,7 @@
 import { schema, PropTypes } from 'react-desc';
 
+var PAD_SIZES = ['xsmall', 'small', 'medium', 'large'];
+
 export default (function (Box) {
   return schema(Box, {
     description: 'A flexible box that lays out its contents along a single\n    direction.',
@@ -26,21 +28,21 @@ export default (function (Box) {
       gridArea: [PropTypes.string, 'The name of the area to place this Box in inside a parent Grid.'],
       justify: [PropTypes.oneOf(['start', 'center', 'between', 'end']), 'How to align the contents along the main axis.'],
       justifySelf: [PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align along the row axis when contained in a Grid.'],
-      margin: [PropTypes.oneOfType([PropTypes.oneOf(['none', 'small', 'medium', 'large']), PropTypes.shape({
-        bottom: PropTypes.oneOf(['small', 'medium', 'large']),
-        horizontal: PropTypes.oneOf(['small', 'medium', 'large']),
-        left: PropTypes.oneOf(['small', 'medium', 'large']),
-        right: PropTypes.oneOf(['small', 'medium', 'large']),
-        top: PropTypes.oneOf(['small', 'medium', 'large']),
-        vertical: PropTypes.oneOf(['small', 'medium', 'large'])
+      margin: [PropTypes.oneOfType([PropTypes.oneOf(['none'].concat(PAD_SIZES)), PropTypes.shape({
+        bottom: PropTypes.oneOf(PAD_SIZES),
+        horizontal: PropTypes.oneOf(PAD_SIZES),
+        left: PropTypes.oneOf(PAD_SIZES),
+        right: PropTypes.oneOf(PAD_SIZES),
+        top: PropTypes.oneOf(PAD_SIZES),
+        vertical: PropTypes.oneOf(PAD_SIZES)
       })]), 'The amount of margin around the box. An object can be specified to\n      distinguish horizontal margin, vertical margin, and margin on a\n      particular side of the box'],
-      pad: [PropTypes.oneOfType([PropTypes.oneOf(['none', 'small', 'medium', 'large']), PropTypes.shape({
-        bottom: PropTypes.oneOf(['small', 'medium', 'large']),
-        horizontal: PropTypes.oneOf(['small', 'medium', 'large']),
-        left: PropTypes.oneOf(['small', 'medium', 'large']),
-        right: PropTypes.oneOf(['small', 'medium', 'large']),
-        top: PropTypes.oneOf(['small', 'medium', 'large']),
-        vertical: PropTypes.oneOf(['small', 'medium', 'large'])
+      pad: [PropTypes.oneOfType([PropTypes.oneOf(['none'].concat(PAD_SIZES)), PropTypes.shape({
+        bottom: PropTypes.oneOf(PAD_SIZES),
+        horizontal: PropTypes.oneOf(PAD_SIZES),
+        left: PropTypes.oneOf(PAD_SIZES),
+        right: PropTypes.oneOf(PAD_SIZES),
+        top: PropTypes.oneOf(PAD_SIZES),
+        vertical: PropTypes.oneOf(PAD_SIZES)
       })]), 'The amount of padding around the box contents. An object can be specified to\n      distinguish horizontal padding, vertical padding, and padding on a\n      particular side of the box'],
       responsive: [PropTypes.bool, 'Whether children laid out in a row direction should be switched to a\n      column layout when the display area narrows.'],
       reverse: [PropTypes.bool, 'Whether to reverse the order of the child components.'],
