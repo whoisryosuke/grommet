@@ -46,22 +46,149 @@ var TextInput = function (_Component) {
       activeSuggestionIndex: -1,
       announceChange: false,
       showDrop: false
+    }, _this.resetSuggestions = function () {
+      var suggestions = _this.props.suggestions;
+
+
+      if (suggestions && suggestions.length) {
+        _this.setState({
+          activeSuggestionIndex: -1,
+          announceChange: true,
+          showDrop: true,
+          selectedSuggestionIndex: -1
+        });
+      }
+    }, _this.getSelectedSuggestionIndex = function () {
+      var _this$props = _this.props,
+          suggestions = _this$props.suggestions,
+          value = _this$props.value;
+
+      var suggestionValues = suggestions.map(function (suggestion) {
+        if ((typeof suggestion === 'undefined' ? 'undefined' : _typeof(suggestion)) === 'object') {
+          return suggestion.value;
+        }
+        return suggestion;
+      });
+      return suggestionValues.indexOf(value);
+    }, _this.onShowSuggestions = function () {
+      // Get values of suggestions, so we can highlight selected suggestion
+      var selectedSuggestionIndex = _this.getSelectedSuggestionIndex();
+
+      _this.setState({
+        showDrop: true,
+        activeSuggestionIndex: -1,
+        selectedSuggestionIndex: selectedSuggestionIndex
+      });
+    }, _this.onNextSuggestion = function (event) {
+      var suggestions = _this.props.suggestions;
+      var _this$state = _this.state,
+          activeSuggestionIndex = _this$state.activeSuggestionIndex,
+          showDrop = _this$state.showDrop;
+
+      if (suggestions && suggestions.length > 0) {
+        if (!showDrop) {
+          _this.onShowSuggestions();
+        } else {
+          event.preventDefault();
+          var index = Math.min(activeSuggestionIndex + 1, suggestions.length - 1);
+          _this.setState({ activeSuggestionIndex: index });
+          // this.setState({ activeSuggestionIndex: index },
+          //   this._announceSuggestion.bind(this, index));
+        }
+      }
+    }, _this.onPreviousSuggestion = function (event) {
+      var suggestions = _this.props.suggestions;
+      var _this$state2 = _this.state,
+          activeSuggestionIndex = _this$state2.activeSuggestionIndex,
+          showDrop = _this$state2.showDrop;
+
+      if (suggestions && suggestions.length > 0 && showDrop) {
+        event.preventDefault();
+        var index = Math.max(activeSuggestionIndex - 1, 0);
+        _this.setState({ activeSuggestionIndex: index });
+        // this.setState({ activeSuggestionIndex: index },
+        //   this._announceSuggestion.bind(this, index));
+      }
+    }, _this.onClickSuggestion = function (suggestion) {
+      var onSelect = _this.props.onSelect;
+
+      _this.setState({ value: suggestion, showDrop: false });
+      if (onSelect) {
+        onSelect({
+          target: _this.componentRef, suggestion: suggestion
+        });
+      }
+    }, _this.onSuggestionSelect = function (event) {
+      var _this$props2 = _this.props,
+          onSelect = _this$props2.onSelect,
+          suggestions = _this$props2.suggestions;
+      var activeSuggestionIndex = _this.state.activeSuggestionIndex;
+
+      _this.setState({ showDrop: false });
+      if (activeSuggestionIndex >= 0) {
+        event.preventDefault(); // prevent submitting forms
+        var suggestion = suggestions[activeSuggestionIndex];
+        _this.setState({ value: suggestion });
+        // this.setState({ value: suggestion }, () => {
+        //   const suggestionMessage = this._renderLabel(suggestion);
+        //   const selectedMessage = Intl.getMessage(intl, 'Selected');
+        //   announce(`${suggestionMessage} ${selectedMessage}`);
+        // });
+        if (onSelect) {
+          onSelect({
+            target: _this.componentRef, suggestion: suggestion
+          });
+        }
+      }
+    }, _this.onDropClose = function () {
+      _this.setState({ showDrop: false });
+    }, _this.renderSuggestions = function () {
+      var _this$props3 = _this.props,
+          suggestions = _this$props3.suggestions,
+          theme = _this$props3.theme;
+      var _this$state3 = _this.state,
+          activeSuggestionIndex = _this$state3.activeSuggestionIndex,
+          selectedSuggestionIndex = _this$state3.selectedSuggestionIndex;
+
+      var items = void 0;
+      if (suggestions && suggestions.length > 0) {
+        items = suggestions.map(function (suggestion, index) {
+          return React.createElement(
+            'li',
+            { key: renderLabel(suggestion) },
+            React.createElement(
+              Button,
+              {
+                pad: 'small',
+                box: true,
+                active: activeSuggestionIndex === index,
+                fill: true,
+                align: 'start',
+                hoverIndicator: 'background',
+                onClick: function onClick() {
+                  return _this.onClickSuggestion(suggestion);
+                }
+              },
+              React.createElement(
+                StyledSuggestion,
+                {
+                  selected: selectedSuggestionIndex === index,
+                  theme: theme
+                },
+                renderLabel(suggestion)
+              )
+            )
+          );
+        });
+      }
+
+      return React.createElement(
+        StyledSuggestions,
+        { theme: theme },
+        items
+      );
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
-
-  TextInput.prototype.resetSuggestions = function resetSuggestions() {
-    var suggestions = this.props.suggestions;
-
-
-    if (suggestions && suggestions.length) {
-      this.setState({
-        activeSuggestionIndex: -1,
-        announceChange: true,
-        showDrop: true,
-        selectedSuggestionIndex: -1
-      });
-    }
-  };
 
   // announceSuggestion(index) {
   //   const { suggestions } = this.props;
@@ -72,121 +199,17 @@ var TextInput = function (_Component) {
   //   }
   // }
 
-  TextInput.prototype.getSelectedSuggestionIndex = function getSelectedSuggestionIndex() {
-    var _props = this.props,
-        suggestions = _props.suggestions,
-        value = _props.value;
-
-    var suggestionValues = suggestions.map(function (suggestion) {
-      if ((typeof suggestion === 'undefined' ? 'undefined' : _typeof(suggestion)) === 'object') {
-        return suggestion.value;
-      }
-      return suggestion;
-    });
-    return suggestionValues.indexOf(value);
-  };
-
-  TextInput.prototype.onShowSuggestions = function onShowSuggestions() {
-    // Get values of suggestions, so we can highlight selected suggestion
-    var selectedSuggestionIndex = this.getSelectedSuggestionIndex();
-
-    this.setState({
-      showDrop: true,
-      activeSuggestionIndex: -1,
-      selectedSuggestionIndex: selectedSuggestionIndex
-    });
-  };
-
-  TextInput.prototype.onNextSuggestion = function onNextSuggestion() {
-    var suggestions = this.props.suggestions;
-    var activeSuggestionIndex = this.state.activeSuggestionIndex;
-
-    var index = Math.min(activeSuggestionIndex + 1, suggestions.length - 1);
-    this.setState({ activeSuggestionIndex: index });
-    // this.setState({ activeSuggestionIndex: index },
-    //   this._announceSuggestion.bind(this, index));
-  };
-
-  TextInput.prototype.onPreviousSuggestion = function onPreviousSuggestion() {
-    var activeSuggestionIndex = this.state.activeSuggestionIndex;
-
-    var index = Math.max(activeSuggestionIndex - 1, 0);
-    this.setState({ activeSuggestionIndex: index });
-    // this.setState({ activeSuggestionIndex: index },
-    //   this._announceSuggestion.bind(this, index));
-  };
-
-  TextInput.prototype.onClickSuggestion = function onClickSuggestion(suggestion) {
-    var onSelect = this.props.onSelect;
-
-    this.setState({ value: suggestion, showDrop: false });
-    if (onSelect) {
-      onSelect({
-        target: this.componentRef, suggestion: suggestion
-      });
-    }
-  };
-
-  TextInput.prototype.renderSuggestions = function renderSuggestions() {
+  TextInput.prototype.render = function render() {
     var _this2 = this;
 
-    var _props2 = this.props,
-        suggestions = _props2.suggestions,
-        theme = _props2.theme;
-    var _state = this.state,
-        activeSuggestionIndex = _state.activeSuggestionIndex,
-        selectedSuggestionIndex = _state.selectedSuggestionIndex;
-
-    var items = void 0;
-    if (suggestions && suggestions.length > 0) {
-      items = suggestions.map(function (suggestion, index) {
-        return React.createElement(
-          'li',
-          { key: renderLabel(suggestion) },
-          React.createElement(
-            Button,
-            {
-              pad: 'small',
-              box: true,
-              active: activeSuggestionIndex === index,
-              fill: true,
-              align: 'start',
-              hoverIndicator: 'background',
-              onClick: function onClick() {
-                return _this2.onClickSuggestion(suggestion);
-              }
-            },
-            React.createElement(
-              StyledSuggestion,
-              {
-                selected: selectedSuggestionIndex === index,
-                theme: theme
-              },
-              renderLabel(suggestion)
-            )
-          )
-        );
-      });
-    }
-
-    return React.createElement(
-      StyledSuggestions,
-      { theme: theme },
-      items
-    );
-  };
-
-  TextInput.prototype.render = function render() {
-    var _this3 = this;
-
-    var _props3 = this.props,
-        defaultValue = _props3.defaultValue,
-        focus = _props3.focus,
-        plain = _props3.plain,
-        value = _props3.value,
-        _onInput = _props3.onInput,
-        onKeyDown = _props3.onKeyDown,
-        rest = _objectWithoutProperties(_props3, ['defaultValue', 'focus', 'plain', 'value', 'onInput', 'onKeyDown']);
+    var _props = this.props,
+        defaultValue = _props.defaultValue,
+        focus = _props.focus,
+        plain = _props.plain,
+        value = _props.value,
+        _onInput = _props.onInput,
+        onKeyDown = _props.onKeyDown,
+        rest = _objectWithoutProperties(_props, ['defaultValue', 'focus', 'plain', 'value', 'onInput', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
     var showDrop = this.state.showDrop;
@@ -194,49 +217,6 @@ var TextInput = function (_Component) {
     // onSelect when text input is clicked
 
     delete rest.onSelect;
-    var previousSuggestionHandler = function previousSuggestionHandler(event) {
-      var suggestions = _this3.props.suggestions;
-
-      if (suggestions && suggestions.length > 0 && showDrop) {
-        event.preventDefault();
-        _this3.onPreviousSuggestion();
-      }
-    };
-    var nextSuggestionHandler = function nextSuggestionHandler(event) {
-      var suggestions = _this3.props.suggestions;
-
-      if (suggestions && suggestions.length > 0) {
-        if (!showDrop) {
-          _this3.onShowSuggestions();
-        } else {
-          event.preventDefault();
-          _this3.onNextSuggestion();
-        }
-      }
-    };
-    var onEnterSuggestionHandler = function onEnterSuggestionHandler(event) {
-      var _props4 = _this3.props,
-          onSelect = _props4.onSelect,
-          suggestions = _props4.suggestions;
-      var activeSuggestionIndex = _this3.state.activeSuggestionIndex;
-
-      _this3.setState({ showDrop: false });
-      if (activeSuggestionIndex >= 0) {
-        event.preventDefault(); // prevent submitting forms
-        var suggestion = suggestions[activeSuggestionIndex];
-        _this3.setState({ value: suggestion });
-        // this.setState({ value: suggestion }, () => {
-        //   const suggestionMessage = this._renderLabel(suggestion);
-        //   const selectedMessage = Intl.getMessage(intl, 'Selected');
-        //   announce(`${suggestionMessage} ${selectedMessage}`);
-        // });
-        if (onSelect) {
-          onSelect({
-            target: _this3.componentRef, suggestion: suggestion
-          });
-        }
-      }
-    };
     var drop = void 0;
     if (showDrop) {
       drop = React.createElement(
@@ -247,7 +227,7 @@ var TextInput = function (_Component) {
           context: _extends({}, this.context),
           control: this.componentRef,
           onClose: function onClose() {
-            return _this3.setState({ showDrop: false });
+            return _this2.setState({ showDrop: false });
           }
         },
         this.renderSuggestions()
@@ -259,20 +239,16 @@ var TextInput = function (_Component) {
       React.createElement(
         Keyboard,
         {
-          onEnter: onEnterSuggestionHandler,
-          onEsc: function onEsc() {
-            return _this3.setState({ showDrop: false });
-          },
-          onTab: function onTab() {
-            return _this3.setState({ showDrop: false });
-          },
-          onUp: previousSuggestionHandler,
-          onDown: nextSuggestionHandler,
+          onEnter: this.onSuggestionSelect,
+          onEsc: this.onDropClose,
+          onTab: this.onDropClose,
+          onUp: this.onPreviousSuggestion,
+          onDown: this.onNextSuggestion,
           onKeyDown: onKeyDown
         },
         React.createElement(StyledTextInput, _extends({
           ref: function ref(_ref) {
-            _this3.componentRef = _ref;
+            _this2.componentRef = _ref;
           },
           autoComplete: 'off',
           plain: plain
@@ -281,7 +257,7 @@ var TextInput = function (_Component) {
           defaultValue: renderLabel(defaultValue),
           value: renderLabel(value),
           onInput: function onInput(event) {
-            _this3.resetSuggestions();
+            _this2.resetSuggestions();
             if (_onInput) {
               _onInput(event);
             }

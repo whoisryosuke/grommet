@@ -46,14 +46,146 @@ var DropContainer = function (_Component) {
   _inherits(DropContainer, _Component);
 
   function DropContainer() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, DropContainer);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.place = _this.place.bind(_this);
-    _this.onResize = _this.onResize.bind(_this);
-    _this.onRemoveDrop = _this.onRemoveDrop.bind(_this);
-    return _this;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.addScrollListener = function () {
+      var control = _this.props.control;
+
+      _this.scrollParents = (0, _utils.findScrollParents)(control);
+      _this.scrollParents.forEach(function (scrollParent) {
+        return scrollParent.addEventListener('scroll', _this.place);
+      });
+    }, _this.removeScrollListener = function () {
+      _this.scrollParents.forEach(function (scrollParent) {
+        return scrollParent.removeEventListener('scroll', _this.place);
+      });
+    }, _this.onRemoveDrop = function (event) {
+      var onClose = _this.props.onClose;
+
+      if (!(0, _reactDom.findDOMNode)(_this.componentRef).contains(event.target)) {
+        if (onClose) {
+          onClose();
+        }
+      }
+    }, _this.onResize = function () {
+      _this.removeScrollListener();
+      _this.addScrollListener();
+      _this.place();
+    }, _this.place = function () {
+      var _this$props = _this.props,
+          align = _this$props.align,
+          responsive = _this$props.responsive;
+
+      var windowWidth = window.innerWidth;
+      var windowHeight = window.innerHeight;
+
+      var control = (0, _reactDom.findDOMNode)(_this.props.control);
+      var container = (0, _reactDom.findDOMNode)(_this.componentRef);
+      if (container && control) {
+        // clear prior styling
+        container.style.left = '';
+        container.style.width = '';
+        container.style.top = '';
+        container.style.maxHeight = '';
+
+        // get bounds
+        var controlRect = control.getBoundingClientRect();
+        var containerRect = container.getBoundingClientRect();
+
+        // determine width
+        var width = Math.min(Math.max(controlRect.width, containerRect.width), windowWidth);
+
+        // set left position
+        var left = void 0;
+        if (align.left) {
+          if (align.left === 'left') {
+            left = controlRect.left;
+          } else if (align.left === 'right') {
+            left = controlRect.left - width;
+          }
+        } else if (align.right) {
+          if (align.right === 'left') {
+            left = controlRect.left - width;
+          } else if (align.right === 'right') {
+            left = controlRect.left + controlRect.width - width;
+          }
+        }
+
+        if (left + width > windowWidth) {
+          left -= left + width - windowWidth;
+        } else if (left < 0) {
+          left = 0;
+        }
+
+        // set top position
+        var top = void 0;
+        var maxHeight = void 0;
+        if (align.top) {
+          if (align.top === 'top') {
+            top = controlRect.top;
+            maxHeight = Math.min(windowHeight - controlRect.top, windowHeight);
+          } else {
+            top = controlRect.bottom;
+            maxHeight = Math.min(windowHeight - controlRect.bottom, windowHeight - controlRect.height);
+          }
+        } else if (align.bottom) {
+          if (align.bottom === 'bottom') {
+            top = controlRect.bottom - containerRect.height;
+            maxHeight = Math.max(controlRect.bottom, 0);
+          } else {
+            top = controlRect.top - containerRect.height;
+            maxHeight = Math.max(controlRect.top, 0);
+          }
+        }
+
+        // if we can't fit it all, see if there's more room the other direction
+        if (containerRect.height > maxHeight) {
+          // We need more room than we have.
+          if (align.top && top > windowHeight / 2) {
+            // We put it below, but there's more room above, put it above
+            if (align.top === 'bottom') {
+              if (responsive) {
+                top = Math.max(controlRect.top - containerRect.height, 0);
+              }
+              maxHeight = controlRect.top;
+            } else {
+              if (responsive) {
+                top = Math.max(controlRect.bottom - containerRect.height, 0);
+              }
+              maxHeight = controlRect.bottom;
+            }
+          } else if (align.bottom && maxHeight < windowHeight / 2) {
+            // We put it above but there's more room below, put it below
+            if (align.bottom === 'bottom') {
+              if (responsive) {
+                top = controlRect.top;
+              }
+              maxHeight = Math.min(windowHeight - top, windowHeight);
+            } else {
+              if (responsive) {
+                top = controlRect.bottom;
+              }
+              maxHeight = Math.min(windowHeight - top, windowHeight - controlRect.height);
+            }
+          }
+        }
+
+        container.style.left = left + 'px';
+        // offset width by 0.1 to avoid a bug in ie11 that
+        // unnecessarily wraps the text if width is the same
+        container.style.width = width + 0.1 + 'px';
+        // the (position:absolute + scrollTop)
+        // is presenting issues with desktop scroll flickering
+        container.style.top = top + 'px';
+        container.style.maxHeight = windowHeight - top + 'px';
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   DropContainer.prototype.getChildContext = function getChildContext() {
@@ -80,158 +212,13 @@ var DropContainer = function (_Component) {
     document.removeEventListener('click', this.onRemoveDrop);
   };
 
-  DropContainer.prototype.addScrollListener = function addScrollListener() {
+  DropContainer.prototype.render = function render() {
     var _this2 = this;
 
-    var control = this.props.control;
-
-    this.scrollParents = (0, _utils.findScrollParents)(control);
-    this.scrollParents.forEach(function (scrollParent) {
-      return scrollParent.addEventListener('scroll', _this2.place);
-    });
-  };
-
-  DropContainer.prototype.removeScrollListener = function removeScrollListener() {
-    var _this3 = this;
-
-    this.scrollParents.forEach(function (scrollParent) {
-      return scrollParent.removeEventListener('scroll', _this3.place);
-    });
-  };
-
-  DropContainer.prototype.onRemoveDrop = function onRemoveDrop(event) {
-    var onClose = this.props.onClose;
-
-    if (!(0, _reactDom.findDOMNode)(this.componentRef).contains(event.target)) {
-      if (onClose) {
-        onClose();
-      }
-    }
-  };
-
-  DropContainer.prototype.onResize = function onResize() {
-    this.removeScrollListener();
-    this.addScrollListener();
-    this.place();
-  };
-
-  DropContainer.prototype.place = function place() {
     var _props = this.props,
-        align = _props.align,
-        responsive = _props.responsive;
-
-    var windowWidth = window.innerWidth;
-    var windowHeight = window.innerHeight;
-
-    var control = (0, _reactDom.findDOMNode)(this.props.control);
-    var container = (0, _reactDom.findDOMNode)(this.componentRef);
-    if (container && control) {
-      // clear prior styling
-      container.style.left = '';
-      container.style.width = '';
-      container.style.top = '';
-      container.style.maxHeight = '';
-
-      // get bounds
-      var controlRect = control.getBoundingClientRect();
-      var containerRect = container.getBoundingClientRect();
-
-      // determine width
-      var width = Math.min(Math.max(controlRect.width, containerRect.width), windowWidth);
-
-      // set left position
-      var left = void 0;
-      if (align.left) {
-        if (align.left === 'left') {
-          left = controlRect.left;
-        } else if (align.left === 'right') {
-          left = controlRect.left - width;
-        }
-      } else if (align.right) {
-        if (align.right === 'left') {
-          left = controlRect.left - width;
-        } else if (align.right === 'right') {
-          left = controlRect.left + controlRect.width - width;
-        }
-      }
-
-      if (left + width > windowWidth) {
-        left -= left + width - windowWidth;
-      } else if (left < 0) {
-        left = 0;
-      }
-
-      // set top position
-      var top = void 0;
-      var maxHeight = void 0;
-      if (align.top) {
-        if (align.top === 'top') {
-          top = controlRect.top;
-          maxHeight = Math.min(windowHeight - controlRect.top, windowHeight);
-        } else {
-          top = controlRect.bottom;
-          maxHeight = Math.min(windowHeight - controlRect.bottom, windowHeight - controlRect.height);
-        }
-      } else if (align.bottom) {
-        if (align.bottom === 'bottom') {
-          top = controlRect.bottom - containerRect.height;
-          maxHeight = Math.max(controlRect.bottom, 0);
-        } else {
-          top = controlRect.top - containerRect.height;
-          maxHeight = Math.max(controlRect.top, 0);
-        }
-      }
-
-      // if we can't fit it all, see if there's more room the other direction
-      if (containerRect.height > maxHeight) {
-        // We need more room than we have.
-        if (align.top && top > windowHeight / 2) {
-          // We put it below, but there's more room above, put it above
-          if (align.top === 'bottom') {
-            if (responsive) {
-              top = Math.max(controlRect.top - containerRect.height, 0);
-            }
-            maxHeight = controlRect.top;
-          } else {
-            if (responsive) {
-              top = Math.max(controlRect.bottom - containerRect.height, 0);
-            }
-            maxHeight = controlRect.bottom;
-          }
-        } else if (align.bottom && maxHeight < windowHeight / 2) {
-          // We put it above but there's more room below, put it below
-          if (align.bottom === 'bottom') {
-            if (responsive) {
-              top = controlRect.top;
-            }
-            maxHeight = Math.min(windowHeight - top, windowHeight);
-          } else {
-            if (responsive) {
-              top = controlRect.bottom;
-            }
-            maxHeight = Math.min(windowHeight - top, windowHeight - controlRect.height);
-          }
-        }
-      }
-
-      container.style.left = left + 'px';
-      // offset width by 0.1 to avoid a bug in ie11 that
-      // unnecessarily wraps the text if width is the same
-      container.style.width = width + 0.1 + 'px';
-      // the (position:absolute + scrollTop)
-      // is presenting issues with desktop scroll flickering
-      container.style.top = top + 'px';
-      container.style.maxHeight = windowHeight - top + 'px';
-    }
-  };
-
-  DropContainer.prototype.render = function render() {
-    var _this4 = this;
-
-    var _props2 = this.props,
-        children = _props2.children,
-        theme = _props2.theme,
-        rest = _objectWithoutProperties(_props2, ['children', 'theme']);
+        children = _props.children,
+        theme = _props.theme,
+        rest = _objectWithoutProperties(_props, ['children', 'theme']);
 
     var contextTheme = this.context.theme;
 
@@ -241,7 +228,7 @@ var DropContainer = function (_Component) {
       _StyledDrop2.default,
       _extends({
         ref: function ref(_ref) {
-          _this4.componentRef = _ref;
+          _this2.componentRef = _ref;
         }
       }, rest, {
         theme: (0, _deepAssign2.default)(globalTheme, contextTheme, theme)

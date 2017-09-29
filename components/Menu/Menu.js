@@ -55,61 +55,59 @@ var Menu = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
       activeItemIndex: -1,
       showDrop: false
-    }, _this.buttonRefs = {}, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _this.buttonRefs = {}, _this.onDropClose = function () {
+      _this.setState({
+        activeItemIndex: -1,
+        showDrop: false
+      });
+    }, _this.onSelectMenuItem = function (event) {
+      var activeItemIndex = _this.state.activeItemIndex;
+
+      if (activeItemIndex >= 0) {
+        event.preventDefault();
+        event.stopPropagation();
+        (0, _reactDom.findDOMNode)(_this.buttonRefs[activeItemIndex]).click();
+      }
+    }, _this.onNextMenuItem = function (event) {
+      event.preventDefault();
+      var _this$state = _this.state,
+          showDrop = _this$state.showDrop,
+          activeItemIndex = _this$state.activeItemIndex;
+
+      if (!showDrop) {
+        _this.setState({
+          showDrop: true,
+          activeItemIndex: -1
+        });
+      } else {
+        var items = _this.props.items;
+
+        var index = Math.min(activeItemIndex + 1, items.length - 1);
+        _this.setState({ activeItemIndex: index });
+        // this.setState({ activeSuggestionIndex: index },
+        //   this._announceSuggestion.bind(this, index));
+      }
+    }, _this.onPreviousMenuItem = function (event) {
+      event.preventDefault();
+      var _this$state2 = _this.state,
+          showDrop = _this$state2.showDrop,
+          activeItemIndex = _this$state2.activeItemIndex;
+
+      if (!showDrop) {
+        _this.setState({
+          showDrop: true,
+          activeItemIndex: -1
+        });
+      } else {
+        var items = _this.props.items;
+
+        var index = activeItemIndex === -1 ? items.length - 1 : Math.max(activeItemIndex - 1, 0);
+        _this.setState({ activeItemIndex: index });
+        // this.setState({ activeSuggestionIndex: index },
+        //   this._announceSuggestion.bind(this, index));
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
-
-  Menu.prototype.onDropClose = function onDropClose() {
-    this.setState({
-      activeItemIndex: -1,
-      showDrop: false
-    });
-  };
-
-  Menu.prototype.onSelectMenuItem = function onSelectMenuItem() {
-    var activeItemIndex = this.state.activeItemIndex;
-
-    (0, _reactDom.findDOMNode)(this.buttonRefs[activeItemIndex]).click();
-  };
-
-  Menu.prototype.onNextMenuItem = function onNextMenuItem() {
-    var _state = this.state,
-        showDrop = _state.showDrop,
-        activeItemIndex = _state.activeItemIndex;
-
-    if (!showDrop) {
-      this.setState({
-        showDrop: true,
-        activeItemIndex: -1
-      });
-    } else {
-      var items = this.props.items;
-
-      var index = Math.min(activeItemIndex + 1, items.length - 1);
-      this.setState({ activeItemIndex: index });
-      // this.setState({ activeSuggestionIndex: index },
-      //   this._announceSuggestion.bind(this, index));
-    }
-  };
-
-  Menu.prototype.onPreviousMenuItem = function onPreviousMenuItem() {
-    var _state2 = this.state,
-        showDrop = _state2.showDrop,
-        activeItemIndex = _state2.activeItemIndex;
-
-    if (!showDrop) {
-      this.setState({
-        showDrop: true,
-        activeItemIndex: -1
-      });
-    } else {
-      var items = this.props.items;
-
-      var index = activeItemIndex === -1 ? items.length - 1 : Math.max(activeItemIndex - 1, 0);
-      this.setState({ activeItemIndex: index });
-      // this.setState({ activeSuggestionIndex: index },
-      //   this._announceSuggestion.bind(this, index));
-    }
-  };
 
   Menu.prototype.render = function render() {
     var _this2 = this;
@@ -126,9 +124,9 @@ var Menu = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
 
-    var _state3 = this.state,
-        activeItemIndex = _state3.activeItemIndex,
-        showDrop = _state3.showDrop;
+    var _state = this.state,
+        activeItemIndex = _state.activeItemIndex,
+        showDrop = _state.showDrop;
 
 
     var menuIcon = icon || _react2.default.createElement(_grommetIcons.FormDown, null);
@@ -143,9 +141,7 @@ var Menu = function (_Component) {
       label: label,
       direction: 'row',
       pad: 'small',
-      onClick: function onClick() {
-        return _this2.onDropClose();
-      }
+      onClick: this.onDropClose
     });
 
     var drop = void 0;
@@ -160,9 +156,7 @@ var Menu = function (_Component) {
           },
           context: _extends({}, this.context),
           control: this.componentRef,
-          onClose: function onClose() {
-            return _this2.onDropClose();
-          }
+          onClose: this.onDropClose
         },
         dropAlign.top === 'top' ? controlMirror : undefined,
         items.map(function (item, index) {
@@ -190,33 +184,15 @@ var Menu = function (_Component) {
       );
     }
 
-    var clickHandler = function clickHandler(event) {
-      if (activeItemIndex >= 0) {
-        event.preventDefault();
-        event.stopPropagation();
-        _this2.onSelectMenuItem();
-      }
-    };
-
     return _react2.default.createElement(
       _Keyboard.Keyboard,
       {
-        onEnter: clickHandler,
-        onSpace: clickHandler,
-        onDown: function onDown(event) {
-          event.preventDefault();
-          _this2.onNextMenuItem();
-        },
-        onUp: function onUp(event) {
-          event.preventDefault();
-          _this2.onPreviousMenuItem();
-        },
-        onEsc: function onEsc() {
-          return _this2.onDropClose();
-        },
-        onTab: function onTab() {
-          return _this2.onDropClose();
-        },
+        onEnter: this.onSelectMenuItem,
+        onSpace: this.onSelectMenuItem,
+        onDown: this.onNextMenuItem,
+        onUp: this.onPreviousMenuItem,
+        onEsc: this.onDropClose,
+        onTab: this.onDropClose,
         onKeyDown: onKeyDown
       },
       _react2.default.createElement(
