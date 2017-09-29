@@ -50,6 +50,18 @@ Object.keys(_Chart).forEach(function (key) {
   });
 });
 
+var _CheckBox = require('./CheckBox');
+
+Object.keys(_CheckBox).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _CheckBox[key];
+    }
+  });
+});
+
 var _Grid = require('./Grid');
 
 Object.keys(_Grid).forEach(function (key) {
