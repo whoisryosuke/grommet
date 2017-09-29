@@ -5,6 +5,7 @@ export default (function (Text) {
     description: 'Arbitrary text.',
     usage: 'import { Text } from \'grommet\';\n  <Text/>',
     props: {
+      color: [PropTypes.string, 'A color identifier to use for the text color. For example:\n      \'status-critical\'.'],
       margin: [PropTypes.oneOfType([PropTypes.oneOf(['none', 'small', 'medium', 'large']), PropTypes.shape({
         bottom: PropTypes.oneOf(['small', 'medium', 'large']),
         top: PropTypes.oneOf(['small', 'medium', 'large'])

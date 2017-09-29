@@ -9,6 +9,7 @@ exports.default = function (Text) {
     description: 'Arbitrary text.',
     usage: 'import { Text } from \'grommet\';\n  <Text/>',
     props: {
+      color: [_reactDesc.PropTypes.string, 'A color identifier to use for the text color. For example:\n      \'status-critical\'.'],
       margin: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none', 'small', 'medium', 'large']), _reactDesc.PropTypes.shape({
         bottom: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
         top: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])

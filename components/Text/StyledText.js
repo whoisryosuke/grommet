@@ -8,6 +8,8 @@ var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
+var _utils = require('../utils');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
@@ -60,9 +62,13 @@ var textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (
 
 var truncateStyle = '\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n';
 
+var colorStyle = (0, _styledComponents.css)(['color:', ''], function (props) {
+  return (0, _utils.colorForName)(props.color, props.theme);
+});
+
 var StyledText = _styledComponents2.default.span.withConfig({
   displayName: 'StyledText'
-})(['', ' ', ' ', ' ', ''], function (props) {
+})(['', ' ', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
 }, function (props) {
   return props.margin && marginStyle(props);
@@ -70,6 +76,8 @@ var StyledText = _styledComponents2.default.span.withConfig({
   return props.textAlign && textAlignStyle;
 }, function (props) {
   return props.truncate && truncateStyle;
+}, function (props) {
+  return props.color && colorStyle;
 });
 
 exports.default = StyledText.extend(_templateObject, function (props) {
