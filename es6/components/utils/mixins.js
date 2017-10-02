@@ -12,14 +12,16 @@ export function fontSize(size, lineHeight) {
   });
 }
 
-var lapStart = '481px';
 export function lapAndUp(content) {
-  return '\n    @media only screen and (min-width:' + lapStart + ') { ' + content + '; }\n  ';
+  return css(['@media only screen and (min-width:', '){', ';}'], function (props) {
+    return props.theme.global.breakpoints.narrow + 1 + 'px';
+  }, content);
 }
 
-var palmEnd = '480px';
 export function palm(content) {
-  return '\n    @media only screen and (max-width:' + palmEnd + ') { ' + content + '; }\n  ';
+  return css(['@media only screen and (max-width:', '){', ';}'], function (props) {
+    return props.theme.global.breakpoints.narrow + 'px';
+  }, content);
 }
 
 export function findAllByType(component, type) {

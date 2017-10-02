@@ -58,6 +58,8 @@ var Box = function (_Component) {
   };
 
   Box.prototype.render = function render() {
+    var _this2 = this;
+
     var _props2 = this.props,
         tag = _props2.tag,
         rest = _objectWithoutProperties(_props2, ['tag']);
@@ -68,7 +70,9 @@ var Box = function (_Component) {
       styledComponents[tag] = StyledComponent;
     }
 
-    return React.createElement(StyledComponent, rest);
+    return React.createElement(StyledComponent, _extends({ ref: function ref(_ref) {
+        _this2.componentRef = _ref;
+      } }, rest));
   };
 
   return Box;

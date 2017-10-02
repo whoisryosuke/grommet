@@ -21,14 +21,16 @@ function fontSize(size, lineHeight) {
   });
 }
 
-var lapStart = '481px';
 function lapAndUp(content) {
-  return '\n    @media only screen and (min-width:' + lapStart + ') { ' + content + '; }\n  ';
+  return (0, _styledComponents.css)(['@media only screen and (min-width:', '){', ';}'], function (props) {
+    return props.theme.global.breakpoints.narrow + 1 + 'px';
+  }, content);
 }
 
-var palmEnd = '480px';
 function palm(content) {
-  return '\n    @media only screen and (max-width:' + palmEnd + ') { ' + content + '; }\n  ';
+  return (0, _styledComponents.css)(['@media only screen and (max-width:', '){', ';}'], function (props) {
+    return props.theme.global.breakpoints.narrow + 'px';
+  }, content);
 }
 
 function findAllByType(component, type) {

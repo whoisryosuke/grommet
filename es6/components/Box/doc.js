@@ -2,6 +2,13 @@ import { schema, PropTypes } from 'react-desc';
 
 var PAD_SIZES = ['xsmall', 'small', 'medium', 'large'];
 
+var ANIMATION_TYPE = PropTypes.oneOf(['fadeIn', 'fadeOut', 'slideUp', 'slideDown', 'slideLeft', 'slideRight', 'zoomIn', 'zoomOut']);
+var ANIMATION_SHAPE = PropTypes.shape({
+  type: ANIMATION_TYPE,
+  delay: PropTypes.number,
+  duration: PropTypes.number
+});
+
 export default (function (Box) {
   return schema(Box, {
     description: 'A flexible box that lays out its contents along a single\n    direction.',
@@ -10,6 +17,7 @@ export default (function (Box) {
       align: [PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']), 'How to align the contents along the cross axis.'],
       alignContent: [PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']), 'How to align the contents when there is extra space in the cross axis.\n      Defaults to stretch'],
       alignSelf: [PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align along the cross axis when contained in a Box or along\n      the column axis when contained in a Grid.'],
+      animation: [PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE, PropTypes.arrayOf(PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE]))]), 'Animation effect(s) to use. \'duration\' and \'delay\' should be in milliseconds.'],
       background: [PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
         color: PropTypes.string,
         dark: PropTypes.bool,

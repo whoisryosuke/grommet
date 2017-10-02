@@ -31,12 +31,18 @@ var borderWidth = 2;
 
 exports.default = {
   global: {
+    animation: {
+      duration: '1s'
+    },
     borderSize: {
       xsmall: '1px',
       small: '2px',
       medium: baseSpacing / 8 + 'px',
       large: baseSpacing / 4 + 'px',
       xlarge: baseSpacing + 'px'
+    },
+    breakpoints: {
+      narrow: 699
     },
     centerColumnWidth: baseSpacing * 48 + 'px',
     colors: {

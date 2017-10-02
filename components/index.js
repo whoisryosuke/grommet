@@ -182,6 +182,18 @@ Object.keys(_Paragraph).forEach(function (key) {
   });
 });
 
+var _Responsive = require('./Responsive');
+
+Object.keys(_Responsive).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Responsive[key];
+    }
+  });
+});
+
 var _Stack = require('./Stack');
 
 Object.keys(_Stack).forEach(function (key) {

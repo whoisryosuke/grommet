@@ -1,0 +1,11 @@
+import { schema, PropTypes } from 'react-desc';
+
+export default (function (Responsive) {
+  return schema(Responsive, {
+    description: 'A react component that handles responsive breakpoints.',
+    usage: 'import { Responsive } from \'grommet\';\n  <Responsive onChange={() => {}} />',
+    props: {
+      onChange: [PropTypes.func, 'Function that will be called when the browser window crosses a responsive\n      breakpoint. It will be passed the current media size name, either\n      \'narrow\' or \'wide\'']
+    }
+  });
+});

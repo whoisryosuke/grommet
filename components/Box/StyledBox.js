@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _FLEX_MAP;
 
 var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']);
@@ -177,10 +179,80 @@ var responsiveStyle = (0, _styledComponents.css)(['', '}'], function (props) {
   return (0, _utils.palm)('\n    flex-direction: column;\n    flex-basis: auto;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n    ' + (props.reverse && 'flex-direction: column-reverse') + '\n  ');
 });
 
+var INITIAL_ANIMATION_STATE = {
+  fadeIn: 'opacity: 0;',
+  fadeOut: 'opacity: 1;',
+  slideDown: 'transform: translateY(-20%);',
+  slideLeft: 'transform: translateX(20%);',
+  slideRight: 'transform: translateX(-20%);',
+  slideUp: 'transform: translateY(20%);',
+  zoomIn: 'transform: scale(0.9);',
+  zoomOut: 'transform: scale(1.1);'
+};
+
+var KEYFRAMES = {
+  fadeIn: (0, _styledComponents.keyframes)(['from{', '}to{opacity:1;}'], INITIAL_ANIMATION_STATE.fadeIn),
+  fadeOut: (0, _styledComponents.keyframes)(['from{', '}to{opacity:0;}'], INITIAL_ANIMATION_STATE.fadeOut),
+  slideDown: (0, _styledComponents.keyframes)(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.slideDown),
+  slideLeft: (0, _styledComponents.keyframes)(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.slideLeft),
+  slideRight: (0, _styledComponents.keyframes)(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.slideRight),
+  slideUp: (0, _styledComponents.keyframes)(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.slideUp),
+  zoomIn: (0, _styledComponents.keyframes)(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.zoomIn),
+  zoomOut: (0, _styledComponents.keyframes)(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.zoomOut)
+};
+
+var normalizeTiming = function normalizeTiming(time, defaultTiming) {
+  return time ? time / 1000.0 + 's' : defaultTiming;
+};
+
+var animationObjectStyle = function animationObjectStyle(animation, theme) {
+  if (KEYFRAMES[animation.type]) {
+    return KEYFRAMES[animation.type] + ' ' + normalizeTiming(animation.duration, theme.global.animation.duration) + ' ' + normalizeTiming(animation.delay, '0s') + ' forwards';
+  }
+  return '';
+};
+
+var animationItemStyle = function animationItemStyle(item, theme) {
+  if (typeof item === 'string') {
+    return animationObjectStyle({ type: item }, theme);
+  } else if (Array.isArray(item)) {
+    return item.map(function (a) {
+      return animationItemStyle(a, theme);
+    }).join(', ');
+  } else if ((typeof item === 'undefined' ? 'undefined' : _typeof(item)) === 'object') {
+    return animationObjectStyle(item, theme);
+  }
+  return '';
+};
+
+var animationObjectInitialStyle = function animationObjectInitialStyle(animation) {
+  if (KEYFRAMES[animation.type]) {
+    return INITIAL_ANIMATION_STATE[animation.type];
+  }
+  return '';
+};
+
+var animationInitialStyle = function animationInitialStyle(item) {
+  if (typeof item === 'string') {
+    return animationObjectInitialStyle({ type: item });
+  } else if (Array.isArray(item)) {
+    return item.map(function (a) {
+      return animationObjectInitialStyle(a);
+    }).join('');
+  } else if ((typeof item === 'undefined' ? 'undefined' : _typeof(item)) === 'object') {
+    return animationObjectInitialStyle(item);
+  }
+  return '';
+};
+
+var animationStyle = (0, _styledComponents.css)(['', ''], function (props) {
+  return '\n    ' + animationInitialStyle(props.animation) + '\n    animation: ' + animationItemStyle(props.animation, props.theme) + ';\n  ';
+});
+
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 var StyledBox = _styledComponents2.default.div.withConfig({
   displayName: 'StyledBox'
-})(['display:flex;max-width:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;max-width:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;
 }, function (props) {
   return props.alignContent && alignContentStyle;
@@ -214,6 +286,8 @@ var StyledBox = _styledComponents2.default.div.withConfig({
   return props.wrap && wrapStyle;
 }, function (props) {
   return props.responsive && responsiveStyle;
+}, function (props) {
+  return props.animation && animationStyle;
 });
 
 exports.default = StyledBox.extend(_templateObject, function (props) {

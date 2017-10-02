@@ -6,6 +6,13 @@ var _reactDesc = require('react-desc');
 
 var PAD_SIZES = ['xsmall', 'small', 'medium', 'large'];
 
+var ANIMATION_TYPE = _reactDesc.PropTypes.oneOf(['fadeIn', 'fadeOut', 'slideUp', 'slideDown', 'slideLeft', 'slideRight', 'zoomIn', 'zoomOut']);
+var ANIMATION_SHAPE = _reactDesc.PropTypes.shape({
+  type: ANIMATION_TYPE,
+  delay: _reactDesc.PropTypes.number,
+  duration: _reactDesc.PropTypes.number
+});
+
 exports.default = function (Box) {
   return (0, _reactDesc.schema)(Box, {
     description: 'A flexible box that lays out its contents along a single\n    direction.',
@@ -14,6 +21,7 @@ exports.default = function (Box) {
       align: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']), 'How to align the contents along the cross axis.'],
       alignContent: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']), 'How to align the contents when there is extra space in the cross axis.\n      Defaults to stretch'],
       alignSelf: [_reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']), 'How to align along the cross axis when contained in a Box or along\n      the column axis when contained in a Grid.'],
+      animation: [_reactDesc.PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE]))]), 'Animation effect(s) to use. \'duration\' and \'delay\' should be in milliseconds.'],
       background: [_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.shape({
         color: _reactDesc.PropTypes.string,
         dark: _reactDesc.PropTypes.bool,
