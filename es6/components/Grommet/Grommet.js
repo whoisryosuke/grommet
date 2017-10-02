@@ -10,14 +10,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import deepAssign from 'deep-assign';
-import cloneDeep from 'clone-deep';
 
 import StyledGrommet from './StyledGrommet';
 
-import baseTheme from '../../themes/vanilla';
-
 import doc from './doc';
+
+import baseTheme from '../../themes/vanilla';
+import { deepMerge } from '../../utils';
 
 var Grommet = function (_Component) {
   _inherits(Grommet, _Component);
@@ -32,11 +31,9 @@ var Grommet = function (_Component) {
     var theme = this.props.theme;
 
 
-    var globalTheme = cloneDeep(baseTheme);
-
     return {
       grommet: {},
-      theme: deepAssign(globalTheme, theme)
+      theme: deepMerge(baseTheme, theme)
     };
   };
 
@@ -46,10 +43,9 @@ var Grommet = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'theme']);
 
-    var globalTheme = cloneDeep(baseTheme);
     return React.createElement(
       StyledGrommet,
-      _extends({}, rest, { theme: deepAssign(globalTheme, theme) }),
+      _extends({}, rest, { theme: deepMerge(baseTheme, theme) }),
       children
     );
   };

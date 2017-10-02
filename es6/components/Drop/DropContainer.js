@@ -12,14 +12,13 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
 import PropTypes from 'prop-types';
-import deepAssign from 'deep-assign';
-import cloneDeep from 'clone-deep';
 
 import StyledDrop from './StyledDrop';
 
-import baseTheme from '../../themes/vanilla';
-
 import { findScrollParents } from '../utils';
+
+import baseTheme from '../../themes/vanilla';
+import { deepMerge } from '../../utils';
 
 var DropContainer = function (_Component) {
   _inherits(DropContainer, _Component);
@@ -173,7 +172,7 @@ var DropContainer = function (_Component) {
 
 
     return _extends({}, this.context, {
-      theme: contextTheme || deepAssign(cloneDeep(baseTheme), theme)
+      theme: contextTheme || deepMerge(baseTheme, theme)
     });
   };
 
@@ -202,7 +201,6 @@ var DropContainer = function (_Component) {
     var contextTheme = this.context.theme;
 
 
-    var globalTheme = cloneDeep(baseTheme);
     return React.createElement(
       StyledDrop,
       _extends({
@@ -210,7 +208,7 @@ var DropContainer = function (_Component) {
           _this2.componentRef = _ref;
         }
       }, rest, {
-        theme: deepAssign(globalTheme, contextTheme, theme)
+        theme: deepMerge(baseTheme, contextTheme, theme)
       }),
       children
     );

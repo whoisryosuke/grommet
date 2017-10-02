@@ -9,14 +9,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import Markdown from 'markdown-to-jsx';
-import deepAssign from 'deep-assign';
+
+import doc from './doc';
 
 import { Heading } from '../Heading';
 import { Paragraph } from '../Paragraph';
-
 import { withTheme } from '../hocs';
 
-import doc from './doc';
+import { deepMerge } from '../../utils';
 
 var GrommetMarkdown = function (_Component) {
   _inherits(GrommetMarkdown, _Component);
@@ -42,7 +42,7 @@ var GrommetMarkdown = function (_Component) {
       return result;
     }, {});
 
-    var overrides = deepAssign({
+    var overrides = deepMerge({
       p: { component: Paragraph }
     }, heading, components);
 

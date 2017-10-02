@@ -14,14 +14,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _deepAssign = require('deep-assign');
-
-var _deepAssign2 = _interopRequireDefault(_deepAssign);
-
-var _cloneDeep = require('clone-deep');
-
-var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
-
 var _StyledLayer = require('./StyledLayer');
 
 var _StyledLayer2 = _interopRequireDefault(_StyledLayer);
@@ -31,6 +23,8 @@ var _Keyboard = require('../Keyboard');
 var _vanilla = require('../../themes/vanilla');
 
 var _vanilla2 = _interopRequireDefault(_vanilla);
+
+var _utils = require('../../utils');
 
 var _DOM = require('../utils/DOM');
 
@@ -59,7 +53,7 @@ var LayerContainer = function (_Component) {
 
 
     return _extends({}, this.context, {
-      theme: contextTheme || (0, _deepAssign2.default)((0, _cloneDeep2.default)(_vanilla2.default), theme)
+      theme: contextTheme || (0, _utils.deepMerge)(_vanilla2.default, theme)
     });
   };
 
@@ -121,8 +115,7 @@ var LayerContainer = function (_Component) {
     var contextTheme = this.context.theme;
 
 
-    var globalTheme = (0, _cloneDeep2.default)(_vanilla2.default);
-    var localTheme = (0, _deepAssign2.default)(globalTheme, contextTheme, theme);
+    var localTheme = (0, _utils.deepMerge)(_vanilla2.default, contextTheme, theme);
 
     return _react2.default.createElement(
       _Keyboard.Keyboard,

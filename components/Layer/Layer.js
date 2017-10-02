@@ -6,6 +6,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactDom = require('react-dom');
 
 var _LayerContainer = require('./LayerContainer');
@@ -19,6 +23,8 @@ var _doc2 = _interopRequireDefault(_doc);
 var _hocs = require('../hocs');
 
 var _utils = require('../utils');
+
+var _utils2 = require('../../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,7 +69,7 @@ var Layer = function (_Component) {
   };
 
   Layer.prototype.renderLayer = function renderLayer() {
-    var ContextProvider = (0, _hocs.createContextProvider)(this.props.context);
+    var ContextProvider = (0, _hocs.createContextProvider)((0, _utils2.deepMerge)(this.context, this.props.context));
     (0, _reactDom.render)(_react2.default.createElement(
       ContextProvider,
       null,
@@ -78,6 +84,10 @@ var Layer = function (_Component) {
   return Layer;
 }(_react.Component);
 
+Layer.contextTypes = {
+  grommet: _propTypes2.default.object,
+  theme: _propTypes2.default.object
+};
 Layer.defaultProps = {
   align: 'center'
 };

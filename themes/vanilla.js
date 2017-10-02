@@ -8,6 +8,8 @@ var _styledComponents = require('styled-components');
 
 var _utils = require('../components/utils');
 
+var _utils2 = require('../utils');
+
 var brandColor = '#865CD6';
 var accentColors = ['#00CCEB', '#FF7D28'];
 var neutralColors = ['#0A64A0', '#DC2878', '#501EB4', '#49516F'];
@@ -29,7 +31,7 @@ var baseSpacing = 24;
 
 var borderWidth = 2;
 
-exports.default = {
+exports.default = (0, _utils2.deepFreeze)({
   global: {
     animation: {
       duration: '1s'
@@ -228,4 +230,4 @@ exports.default = {
       background: (0, _polished.rgba)(0, 0, 0, 0.7)
     }
   }
-};
+});

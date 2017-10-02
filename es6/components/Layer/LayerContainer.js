@@ -12,14 +12,13 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
 import PropTypes from 'prop-types';
-import deepAssign from 'deep-assign';
-import cloneDeep from 'clone-deep';
 
 import StyledLayer, { StyledContainer } from './StyledLayer';
 
 import { Keyboard } from '../Keyboard';
 
 import baseTheme from '../../themes/vanilla';
+import { deepMerge } from '../../utils';
 
 import { filterByFocusable, getBodyChildElements } from '../utils/DOM';
 
@@ -38,7 +37,7 @@ var LayerContainer = function (_Component) {
 
 
     return _extends({}, this.context, {
-      theme: contextTheme || deepAssign(cloneDeep(baseTheme), theme)
+      theme: contextTheme || deepMerge(baseTheme, theme)
     });
   };
 
@@ -100,8 +99,7 @@ var LayerContainer = function (_Component) {
     var contextTheme = this.context.theme;
 
 
-    var globalTheme = cloneDeep(baseTheme);
-    var localTheme = deepAssign(globalTheme, contextTheme, theme);
+    var localTheme = deepMerge(baseTheme, contextTheme, theme);
 
     return React.createElement(
       Keyboard,

@@ -15,9 +15,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _deepAssign = require('deep-assign');
-
-var _deepAssign2 = _interopRequireDefault(_deepAssign);
+var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -166,7 +164,7 @@ var withTheme = function withTheme(WrappedComponent) {
 
       var contextTheme = this.context.theme;
 
-      var localTheme = (0, _deepAssign2.default)({}, contextTheme, theme);
+      var localTheme = (0, _utils.deepMerge)(contextTheme, theme);
       return _react2.default.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
     };
 

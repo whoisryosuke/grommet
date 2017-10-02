@@ -10,7 +10,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import deepAssign from 'deep-assign';
+
+import { deepMerge } from '../utils';
 
 export function createContextProvider(context) {
   var childContextTypes = {};
@@ -149,7 +150,7 @@ var withTheme = function withTheme(WrappedComponent) {
 
       var contextTheme = this.context.theme;
 
-      var localTheme = deepAssign({}, contextTheme, theme);
+      var localTheme = deepMerge(contextTheme, theme);
       return React.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
     };
 

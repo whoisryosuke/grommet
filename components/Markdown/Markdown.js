@@ -14,9 +14,9 @@ var _markdownToJsx = require('markdown-to-jsx');
 
 var _markdownToJsx2 = _interopRequireDefault(_markdownToJsx);
 
-var _deepAssign = require('deep-assign');
+var _doc = require('./doc');
 
-var _deepAssign2 = _interopRequireDefault(_deepAssign);
+var _doc2 = _interopRequireDefault(_doc);
 
 var _Heading = require('../Heading');
 
@@ -24,9 +24,7 @@ var _Paragraph = require('../Paragraph');
 
 var _hocs = require('../hocs');
 
-var _doc = require('./doc');
-
-var _doc2 = _interopRequireDefault(_doc);
+var _utils = require('../../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60,7 +58,7 @@ var GrommetMarkdown = function (_Component) {
       return result;
     }, {});
 
-    var overrides = (0, _deepAssign2.default)({
+    var overrides = (0, _utils.deepMerge)({
       p: { component: _Paragraph.Paragraph }
     }, heading, components);
 

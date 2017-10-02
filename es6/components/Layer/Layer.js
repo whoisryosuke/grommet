@@ -5,6 +5,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { render, unmountComponentAtNode } from 'react-dom';
 
 import LayerContainer from './LayerContainer';
@@ -13,6 +14,8 @@ import doc from './doc';
 
 import { createContextProvider } from '../hocs';
 import { getNewContainer } from '../utils';
+
+import { deepMerge } from '../../utils';
 
 var Layer = function (_Component) {
   _inherits(Layer, _Component);
@@ -49,7 +52,7 @@ var Layer = function (_Component) {
   };
 
   Layer.prototype.renderLayer = function renderLayer() {
-    var ContextProvider = createContextProvider(this.props.context);
+    var ContextProvider = createContextProvider(deepMerge(this.context, this.props.context));
     render(React.createElement(
       ContextProvider,
       null,
@@ -64,6 +67,10 @@ var Layer = function (_Component) {
   return Layer;
 }(Component);
 
+Layer.contextTypes = {
+  grommet: PropTypes.object,
+  theme: PropTypes.object
+};
 Layer.defaultProps = {
   align: 'center'
 };

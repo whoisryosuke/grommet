@@ -14,23 +14,17 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _deepAssign = require('deep-assign');
-
-var _deepAssign2 = _interopRequireDefault(_deepAssign);
-
-var _cloneDeep = require('clone-deep');
-
-var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
-
 var _StyledDrop = require('./StyledDrop');
 
 var _StyledDrop2 = _interopRequireDefault(_StyledDrop);
+
+var _utils = require('../utils');
 
 var _vanilla = require('../../themes/vanilla');
 
 var _vanilla2 = _interopRequireDefault(_vanilla);
 
-var _utils = require('../utils');
+var _utils2 = require('../../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -194,7 +188,7 @@ var DropContainer = function (_Component) {
 
 
     return _extends({}, this.context, {
-      theme: contextTheme || (0, _deepAssign2.default)((0, _cloneDeep2.default)(_vanilla2.default), theme)
+      theme: contextTheme || (0, _utils2.deepMerge)(_vanilla2.default, theme)
     });
   };
 
@@ -223,7 +217,6 @@ var DropContainer = function (_Component) {
     var contextTheme = this.context.theme;
 
 
-    var globalTheme = (0, _cloneDeep2.default)(_vanilla2.default);
     return _react2.default.createElement(
       _StyledDrop2.default,
       _extends({
@@ -231,7 +224,7 @@ var DropContainer = function (_Component) {
           _this2.componentRef = _ref;
         }
       }, rest, {
-        theme: (0, _deepAssign2.default)(globalTheme, contextTheme, theme)
+        theme: (0, _utils2.deepMerge)(_vanilla2.default, contextTheme, theme)
       }),
       children
     );

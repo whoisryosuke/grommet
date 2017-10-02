@@ -1,7 +1,10 @@
 'use strict';
 
 exports.__esModule = true;
-exports.default = {
+
+var _utils = require('../utils');
+
+exports.default = (0, _utils.deepFreeze)({
   global: {
     colors: {
       accent: ['#2AD2C9', '#614767', '#ff8d6d'],
@@ -34,4 +37,4 @@ exports.default = {
     },
     extend: 'letter-spacing: 0.04167em;'
   }
-};
+});
