@@ -8,7 +8,7 @@ import { focusStyle } from '../utils';
 
 export var StyledCheckBoxContainer = styled.label.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxContainer'
-})(['display:flex;flex-direction:', ';align-items:center;cursor:pointer;user-select:none;> div:first-child{', '}:hover input + div,:hover input + span{border-color:', ';}'], function (props) {
+})(['display:flex;flex-direction:', ';align-items:center;cursor:pointer;user-select:none;> div:first-child{', '}:hover input:not([disabled]) + div,:hover input:not([disabled]) + span{border-color:', ';}'], function (props) {
   return props.reverse ? 'row-reverse' : 'row';
 }, function (props) {
   return props.reverse ? 'margin-left: ' + props.theme.global.edgeSize.small + ';' : 'margin-right: ' + props.theme.global.edgeSize.small + ';';
@@ -59,7 +59,7 @@ export var StyledCheckBoxToggle = styled.span.withConfig({
 }, function (props) {
   return props.theme.checkBox.border.color[props.grommet.dark ? 'dark' : 'light'];
 }, function (props) {
-  return props.theme.checkBox.size;
+  return props.theme.checkBox.toggle.radius;
 });
 
 export var StyledCheckBoxKnob = styled.span.withConfig({
@@ -75,7 +75,7 @@ export var StyledCheckBoxKnob = styled.span.withConfig({
 }, function (props) {
   return props.theme.checkBox.toggle.color;
 }, function (props) {
-  return props.theme.checkBox.size;
+  return props.theme.checkBox.toggle.radius;
 });
 
 var StyledCheckBox = styled.div.withConfig({
