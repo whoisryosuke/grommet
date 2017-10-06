@@ -13,8 +13,6 @@ export default (function (Chart) {
         width: PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full'])
       })]), 'The size of the Chart. Defaults to { width: "medium", height: "small" }.'],
       thickness: [PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']), 'The width of the stroke. Defaults to medium.'],
-      title: [PropTypes.string, // .isRequired isn't working?
-      'Accessible title of the chart.'],
       type: [PropTypes.oneOf(['bar', 'line', 'area']), 'The visual type of meter. The default is bar'],
       values: [PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string, // for accessibility of bars

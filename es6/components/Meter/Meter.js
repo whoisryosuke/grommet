@@ -45,7 +45,6 @@ var Meter = function (_Component) {
 
 Meter.defaultProps = {
   background: 'light-1',
-  color: 'accent-1',
   size: 'medium',
   thickness: 'medium',
   type: 'bar'

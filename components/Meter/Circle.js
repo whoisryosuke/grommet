@@ -44,7 +44,8 @@ var Circle = function (_Component) {
         size = _props.size,
         theme = _props.theme,
         thickness = _props.thickness,
-        values = _props.values;
+        values = _props.values,
+        rest = _objectWithoutProperties(_props, ['background', 'round', 'size', 'theme', 'thickness', 'values']);
 
     var width = size === 'full' ? 288 : (0, _mixins.parseMetricToInt)(theme.global.size[size]);
     var height = (0, _mixins.parseMetricToInt)(theme.global.edgeSize[thickness]);
@@ -66,7 +67,7 @@ var Circle = function (_Component) {
           label = valueArg.label,
           onHover = valueArg.onHover,
           value = valueArg.value,
-          rest = _objectWithoutProperties(valueArg, ['color', 'highlight', 'label', 'onHover', 'value']);
+          pathRest = _objectWithoutProperties(valueArg, ['color', 'highlight', 'label', 'onHover', 'value']);
 
       var key = 'p-' + index;
       var colorName = color || (index === values.length - 1 ? 'accent-1' : 'neutral-' + (index + 1));
@@ -99,16 +100,16 @@ var Circle = function (_Component) {
         stroke: (0, _colors.colorForName)(someHighlight && !highlight ? background : colorName, theme),
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square'
-      }, hoverProps, rest));
+      }, hoverProps, pathRest));
     }).reverse(); // reverse so the caps looks right
 
     return _react2.default.createElement(
       _StyledMeter2.default,
-      {
+      _extends({
         viewBox: '0 0 ' + width + ' ' + width,
         width: size === 'full' ? '100%' : width,
         height: size === 'full' ? '100%' : width
-      },
+      }, rest),
       _react2.default.createElement('circle', {
         cx: mid,
         cy: mid,

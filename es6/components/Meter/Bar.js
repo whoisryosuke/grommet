@@ -31,7 +31,8 @@ var Bar = function (_Component) {
         size = _props.size,
         theme = _props.theme,
         thickness = _props.thickness,
-        values = _props.values;
+        values = _props.values,
+        rest = _objectWithoutProperties(_props, ['background', 'round', 'size', 'theme', 'thickness', 'values']);
 
     var width = size === 'full' ? 288 : parseMetricToInt(theme.global.size[size]);
     var height = parseMetricToInt(theme.global.edgeSize[thickness]);
@@ -50,7 +51,7 @@ var Bar = function (_Component) {
           label = valueArg.label,
           onHover = valueArg.onHover,
           value = valueArg.value,
-          rest = _objectWithoutProperties(valueArg, ['color', 'highlight', 'label', 'onHover', 'value']);
+          pathRest = _objectWithoutProperties(valueArg, ['color', 'highlight', 'label', 'onHover', 'value']);
 
       var key = 'p-' + index;
       var delta = value * width / max;
@@ -76,17 +77,17 @@ var Bar = function (_Component) {
         stroke: colorForName(someHighlight && !highlight ? background : colorName, theme),
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square'
-      }, hoverProps, rest));
+      }, hoverProps, pathRest));
     }).reverse(); // reverse so the caps looks right
 
     return React.createElement(
       StyledMeter,
-      {
+      _extends({
         viewBox: '0 0 ' + width + ' ' + height,
         preserveAspectRatio: 'none',
         width: size === 'full' ? '100%' : width,
         height: height
-      },
+      }, rest),
       React.createElement('path', {
         d: 'M 0,' + mid + ' L ' + width + ',' + mid,
         fill: 'none',

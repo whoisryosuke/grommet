@@ -310,6 +310,7 @@ var Video = function (_Component) {
               _Stack.Stack,
               null,
               _react2.default.createElement(_Meter.Meter, {
+                'aria-label': 'Video progress',
                 background: over ? 'dark-3' : undefined,
                 size: 'full',
                 thickness: 'small',

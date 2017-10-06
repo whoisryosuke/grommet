@@ -137,10 +137,9 @@ var Chart = function (_Component) {
         size = _props.size,
         theme = _props.theme,
         thickness = _props.thickness,
-        title = _props.title,
         type = _props.type,
         values = _props.values,
-        rest = _objectWithoutProperties(_props, ['color', 'round', 'size', 'theme', 'thickness', 'title', 'type', 'values']);
+        rest = _objectWithoutProperties(_props, ['color', 'round', 'size', 'theme', 'thickness', 'type', 'values']);
 
     var bounds = this.state.bounds;
 
@@ -169,11 +168,6 @@ var Chart = function (_Component) {
         width: size === 'full' ? '100%' : width,
         height: height
       }, rest),
-      _react2.default.createElement(
-        'title',
-        null,
-        title
-      ),
       _react2.default.createElement(
         'g',
         {
