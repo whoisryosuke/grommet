@@ -10,21 +10,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
-var _propTypes = require('prop-types');
+var _hocs = require('../hocs');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _utils = require('../utils');
 
 var _StyledDrop = require('./StyledDrop');
 
 var _StyledDrop2 = _interopRequireDefault(_StyledDrop);
-
-var _utils = require('../utils');
-
-var _vanilla = require('../../themes/vanilla');
-
-var _vanilla2 = _interopRequireDefault(_vanilla);
-
-var _utils2 = require('../../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -62,7 +54,7 @@ var DropContainer = function (_Component) {
     }, _this.onRemoveDrop = function (event) {
       var onClose = _this.props.onClose;
 
-      if (!(0, _reactDom.findDOMNode)(_this.componentRef).contains(event.target)) {
+      if (!(0, _reactDom.findDOMNode)(_this.dropRef).contains(event.target)) {
         if (onClose) {
           onClose();
         }
@@ -80,7 +72,7 @@ var DropContainer = function (_Component) {
       var windowHeight = window.innerHeight;
 
       var control = (0, _reactDom.findDOMNode)(_this.props.control);
-      var container = (0, _reactDom.findDOMNode)(_this.componentRef);
+      var container = (0, _reactDom.findDOMNode)(_this.dropRef);
       if (container && control) {
         // clear prior styling
         container.style.left = '';
@@ -182,22 +174,18 @@ var DropContainer = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  DropContainer.prototype.getChildContext = function getChildContext() {
-    var theme = this.props.theme;
-    var contextTheme = this.context.theme;
-
-
-    return _extends({}, this.context, {
-      theme: contextTheme || (0, _utils2.deepMerge)(_vanilla2.default, theme)
-    });
-  };
-
   DropContainer.prototype.componentDidMount = function componentDidMount() {
+    var restrictFocus = this.props.restrictFocus;
+
     this.addScrollListener();
     window.addEventListener('resize', this.onResize);
     document.addEventListener('click', this.onRemoveDrop);
 
     this.place();
+
+    if (restrictFocus) {
+      (0, _reactDom.findDOMNode)(this.dropRef).focus();
+    }
   };
 
   DropContainer.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -214,18 +202,15 @@ var DropContainer = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'theme']);
 
-    var contextTheme = this.context.theme;
-
-
     return _react2.default.createElement(
       _StyledDrop2.default,
       _extends({
+        tabIndex: '-1',
         ref: function ref(_ref) {
-          _this2.componentRef = _ref;
-        }
-      }, rest, {
-        theme: (0, _utils2.deepMerge)(_vanilla2.default, contextTheme, theme)
-      }),
+          _this2.dropRef = _ref;
+        },
+        theme: theme
+      }, rest),
       children
     );
   };
@@ -233,14 +218,7 @@ var DropContainer = function (_Component) {
   return DropContainer;
 }(_react.Component);
 
-DropContainer.childContextTypes = {
-  theme: _propTypes2.default.object
-};
-DropContainer.contextTypes = {
-  theme: _propTypes2.default.object
-};
 DropContainer.defaultProps = {
-  centered: true,
-  theme: undefined
+  centered: true
 };
-exports.default = DropContainer;
+exports.default = (0, _hocs.restrictFocusTo)(DropContainer);

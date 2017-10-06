@@ -8,6 +8,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
+var _hocs = require('../hocs');
+
 var _DropContainer = require('./DropContainer');
 
 var _DropContainer2 = _interopRequireDefault(_DropContainer);
@@ -15,8 +17,6 @@ var _DropContainer2 = _interopRequireDefault(_DropContainer);
 var _doc = require('./doc');
 
 var _doc2 = _interopRequireDefault(_doc);
-
-var _hocs = require('../hocs');
 
 var _utils = require('../utils');
 
@@ -32,38 +32,39 @@ var Drop = function (_Component) {
   _inherits(Drop, _Component);
 
   function Drop() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Drop);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.originalFocusedElement = document.activeElement, _this.dropContainer = (0, _utils.getNewContainer)(), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Drop.prototype.componentDidMount = function componentDidMount() {
-    this.dropContainer = (0, _utils.getNewContainer)();
-    this.renderDrop();
-  };
-
-  Drop.prototype.componentDidUpdate = function componentDidUpdate() {
-    this.renderDrop();
-  };
-
   Drop.prototype.componentWillUnmount = function componentWillUnmount() {
-    if (this.dropContainer) {
-      (0, _reactDom.unmountComponentAtNode)(this.dropContainer);
-      document.body.removeChild(this.dropContainer);
-    }
-  };
+    var _this2 = this;
 
-  Drop.prototype.renderDrop = function renderDrop() {
-    var ContextProvider = (0, _hocs.createContextProvider)(this.props.context);
-    (0, _reactDom.render)(_react2.default.createElement(
-      ContextProvider,
-      null,
-      _react2.default.createElement(_DropContainer2.default, this.props)
-    ), this.dropContainer);
+    var restrictFocus = this.props.restrictFocus;
+
+    if (restrictFocus && this.originalFocusedElement) {
+      if (this.originalFocusedElement.focus) {
+        // wait for the fixed positioning to come back to normal
+        // see layer styling for reference
+        setTimeout(function () {
+          _this2.originalFocusedElement.focus();
+        }, 0);
+      } else if (this.originalFocusedElement.parentNode && this.originalFocusedElement.parentNode.focus) {
+        // required for IE11 and Edge
+        this.originalFocusedElement.parentNode.focus();
+      }
+    }
+    document.body.removeChild(this.dropContainer);
   };
 
   Drop.prototype.render = function render() {
-    return _react2.default.createElement('span', { style: { display: 'none' } });
+    return (0, _reactDom.createPortal)(_react2.default.createElement(_DropContainer2.default, this.props), this.dropContainer);
   };
 
   return Drop;
@@ -81,4 +82,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Drop);
 }
 
-exports.default = Drop;
+exports.default = (0, _hocs.withTheme)(Drop);

@@ -1,21 +1,23 @@
 'use strict';
 
 exports.__esModule = true;
-exports.withTheme = exports.withFocus = undefined;
+exports.restrictFocusTo = exports.withRestrictScroll = exports.withTheme = exports.withFocus = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-exports.createContextProvider = createContextProvider;
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
 
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _utils = require('../utils');
+
+var _utils2 = require('./utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27,44 +29,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function createContextProvider(context) {
-  var childContextTypes = {};
-  Object.keys(context || {}).forEach(function (key) {
-    childContextTypes[key] = _propTypes2.default.any.isRequired;
-  });
-
-  var ContextProvider = function (_React$Component) {
-    _inherits(ContextProvider, _React$Component);
-
-    function ContextProvider() {
-      _classCallCheck(this, ContextProvider);
-
-      return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
-    }
-
-    ContextProvider.prototype.getChildContext = function getChildContext() {
-      return context;
-    };
-
-    ContextProvider.prototype.render = function render() {
-      return this.props.children;
-    };
-
-    return ContextProvider;
-  }(_react2.default.Component);
-
-  ContextProvider.childContextTypes = childContextTypes;
-
-
-  return ContextProvider;
-}
-
 var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
   var FocusableComponent = function (_Component) {
     _inherits(FocusableComponent, _Component);
 
     function FocusableComponent() {
-      var _temp, _this2, _ret;
+      var _temp, _this, _ret;
 
       _classCallCheck(this, FocusableComponent);
 
@@ -72,10 +42,10 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
         args[_key] = arguments[_key];
       }
 
-      return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this2), _this2.state = {
+      return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
         mouseActive: false,
         focus: false
-      }, _temp), _possibleConstructorReturn(_this2, _ret);
+      }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     FocusableComponent.prototype.setMouseActive = function setMouseActive() {
@@ -99,7 +69,7 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
     };
 
     FocusableComponent.prototype.render = function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var focus = this.state.focus;
 
@@ -107,32 +77,32 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
         focus: focus
       }, this.props, {
         onMouseDown: function onMouseDown(event) {
-          _this3.setMouseActive();
-          var onMouseDown = _this3.props.onMouseDown;
+          _this2.setMouseActive();
+          var onMouseDown = _this2.props.onMouseDown;
 
           if (onMouseDown) {
             onMouseDown(event);
           }
         },
         onMouseUp: function onMouseUp(event) {
-          _this3.resetMouseActive();
-          var onMouseUp = _this3.props.onMouseUp;
+          _this2.resetMouseActive();
+          var onMouseUp = _this2.props.onMouseUp;
 
           if (onMouseUp) {
             onMouseUp(event);
           }
         },
         onFocus: function onFocus(event) {
-          _this3.setFocus();
-          var onFocus = _this3.props.onFocus;
+          _this2.setFocus();
+          var onFocus = _this2.props.onFocus;
 
           if (onFocus) {
             onFocus(event);
           }
         },
         onBlur: function onBlur(event) {
-          _this3.resetFocus();
-          var onBlur = _this3.props.onBlur;
+          _this2.resetFocus();
+          var onBlur = _this2.props.onBlur;
 
           if (onBlur) {
             onBlur(event);
@@ -180,4 +150,75 @@ var withTheme = function withTheme(WrappedComponent) {
 };
 
 exports.withTheme = withTheme;
-exports.default = { createContextProvider: createContextProvider, withFocus: withFocus, withTheme: withTheme };
+var isNotAncestorOf = function isNotAncestorOf(child) {
+  return function (parent) {
+    return !parent.contains(child);
+  };
+};
+
+var withRestrictScroll = exports.withRestrictScroll = function withRestrictScroll(WrappedComponent) {
+  var RestrictScrollContainer = function (_Component3) {
+    _inherits(RestrictScrollContainer, _Component3);
+
+    function RestrictScrollContainer() {
+      _classCallCheck(this, RestrictScrollContainer);
+
+      return _possibleConstructorReturn(this, _Component3.apply(this, arguments));
+    }
+
+    RestrictScrollContainer.prototype.render = function render() {
+      return _react2.default.createElement(WrappedComponent, _extends({}, this.props, { restrictScroll: true }));
+    };
+
+    return RestrictScrollContainer;
+  }(_react.Component);
+
+  return RestrictScrollContainer;
+};
+
+var restrictFocusTo = exports.restrictFocusTo = function restrictFocusTo(WrappedComponent) {
+  var FocusedContainer = function (_Component4) {
+    _inherits(FocusedContainer, _Component4);
+
+    function FocusedContainer() {
+      _classCallCheck(this, FocusedContainer);
+
+      return _possibleConstructorReturn(this, _Component4.apply(this, arguments));
+    }
+
+    FocusedContainer.prototype.componentDidMount = function componentDidMount() {
+      var restrictScroll = this.props.restrictScroll;
+
+      var child = (0, _reactDom.findDOMNode)(this.ref);
+      (0, _utils2.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils2.makeNodeUnfocusable);
+
+      if (restrictScroll) {
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    FocusedContainer.prototype.componentWillUnmount = function componentWillUnmount() {
+      var restrictScroll = this.props.restrictScroll;
+
+      var child = (0, _reactDom.findDOMNode)(this.ref);
+      (0, _utils2.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils2.makeNodeFocusable);
+      if (restrictScroll) {
+        document.body.style.overflow = 'scroll';
+      }
+    };
+
+    FocusedContainer.prototype.render = function render() {
+      var _this6 = this;
+
+      return _react2.default.createElement(WrappedComponent, _extends({ ref: function ref(_ref) {
+          _this6.ref = _ref;
+        } }, this.props));
+    };
+
+    return FocusedContainer;
+  }(_react.Component);
+
+  return FocusedContainer;
+};
+
+exports.default = { withFocus: withFocus, withRestrictScroll: withRestrictScroll, withTheme: withTheme, restrictFocusTo: restrictFocusTo };

@@ -11,14 +11,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
-import PropTypes from 'prop-types';
-
-import StyledDrop from './StyledDrop';
-
+import { restrictFocusTo } from '../hocs';
 import { findScrollParents } from '../utils';
 
-import baseTheme from '../../themes/vanilla';
-import { deepMerge } from '../../utils';
+import StyledDrop from './StyledDrop';
 
 var DropContainer = function (_Component) {
   _inherits(DropContainer, _Component);
@@ -46,7 +42,7 @@ var DropContainer = function (_Component) {
     }, _this.onRemoveDrop = function (event) {
       var onClose = _this.props.onClose;
 
-      if (!findDOMNode(_this.componentRef).contains(event.target)) {
+      if (!findDOMNode(_this.dropRef).contains(event.target)) {
         if (onClose) {
           onClose();
         }
@@ -64,7 +60,7 @@ var DropContainer = function (_Component) {
       var windowHeight = window.innerHeight;
 
       var control = findDOMNode(_this.props.control);
-      var container = findDOMNode(_this.componentRef);
+      var container = findDOMNode(_this.dropRef);
       if (container && control) {
         // clear prior styling
         container.style.left = '';
@@ -166,22 +162,18 @@ var DropContainer = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  DropContainer.prototype.getChildContext = function getChildContext() {
-    var theme = this.props.theme;
-    var contextTheme = this.context.theme;
-
-
-    return _extends({}, this.context, {
-      theme: contextTheme || deepMerge(baseTheme, theme)
-    });
-  };
-
   DropContainer.prototype.componentDidMount = function componentDidMount() {
+    var restrictFocus = this.props.restrictFocus;
+
     this.addScrollListener();
     window.addEventListener('resize', this.onResize);
     document.addEventListener('click', this.onRemoveDrop);
 
     this.place();
+
+    if (restrictFocus) {
+      findDOMNode(this.dropRef).focus();
+    }
   };
 
   DropContainer.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -198,18 +190,15 @@ var DropContainer = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'theme']);
 
-    var contextTheme = this.context.theme;
-
-
     return React.createElement(
       StyledDrop,
       _extends({
+        tabIndex: '-1',
         ref: function ref(_ref) {
-          _this2.componentRef = _ref;
-        }
-      }, rest, {
-        theme: deepMerge(baseTheme, contextTheme, theme)
-      }),
+          _this2.dropRef = _ref;
+        },
+        theme: theme
+      }, rest),
       children
     );
   };
@@ -217,16 +206,9 @@ var DropContainer = function (_Component) {
   return DropContainer;
 }(Component);
 
-DropContainer.childContextTypes = {
-  theme: PropTypes.object
-};
-DropContainer.contextTypes = {
-  theme: PropTypes.object
-};
 DropContainer.defaultProps = {
-  centered: true,
-  theme: undefined
+  centered: true
 };
 
 
-export default DropContainer;
+export default restrictFocusTo(DropContainer);

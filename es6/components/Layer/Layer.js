@@ -5,32 +5,30 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { render, unmountComponentAtNode } from 'react-dom';
+import { createPortal } from 'react-dom';
+
+import { withTheme } from '../hocs';
 
 import LayerContainer from './LayerContainer';
 
 import doc from './doc';
 
-import { createContextProvider } from '../hocs';
 import { getNewContainer } from '../utils';
-
-import { deepMerge } from '../../utils';
 
 var Layer = function (_Component) {
   _inherits(Layer, _Component);
 
   function Layer() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Layer);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
-  }
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-  Layer.prototype.componentDidMount = function componentDidMount() {
-    this.originalFocusedElement = document.activeElement;
-    this.layerContainer = getNewContainer();
-    this.renderLayer();
-  };
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.originalFocusedElement = document.activeElement, _this.layerContainer = getNewContainer(), _temp), _possibleConstructorReturn(_this, _ret);
+  }
 
   Layer.prototype.componentWillUnmount = function componentWillUnmount() {
     var _this2 = this;
@@ -47,30 +45,16 @@ var Layer = function (_Component) {
         this.originalFocusedElement.parentNode.focus();
       }
     }
-    unmountComponentAtNode(this.layerContainer);
     document.body.removeChild(this.layerContainer);
   };
 
-  Layer.prototype.renderLayer = function renderLayer() {
-    var ContextProvider = createContextProvider(deepMerge(this.context, this.props.context));
-    render(React.createElement(
-      ContextProvider,
-      null,
-      React.createElement(LayerContainer, this.props)
-    ), this.layerContainer);
-  };
-
   Layer.prototype.render = function render() {
-    return React.createElement('span', { style: { display: 'none' } });
+    return createPortal(React.createElement(LayerContainer, this.props), this.layerContainer);
   };
 
   return Layer;
 }(Component);
 
-Layer.contextTypes = {
-  grommet: PropTypes.object,
-  theme: PropTypes.object
-};
 Layer.defaultProps = {
   align: 'center'
 };
@@ -80,4 +64,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Layer);
 }
 
-export default Layer;
+export default withTheme(Layer);

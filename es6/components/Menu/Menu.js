@@ -154,7 +154,6 @@ var Menu = function (_Component) {
           ref: function ref(_ref2) {
             _this2.dropRef = _ref2;
           },
-          context: _extends({}, this.context),
           control: this.componentRef,
           onClose: this.onDropClose
         },

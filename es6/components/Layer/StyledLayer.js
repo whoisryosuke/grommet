@@ -37,14 +37,14 @@ var sizeStyle = css(['min-width:', ';'], function (props) {
 
 export var StyledContainer = styled.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
-})(['display:flex;flex-direction:column;min-height:', ';', ' background-color:', ';', ' ', ''], function (props) {
+})(['display:flex;flex-direction:column;min-height:', ';outline:none;', ' background-color:', ';', ' ', ''], function (props) {
   return props.theme.global.size.xxsmall;
 }, function (props) {
   return props.size && sizeStyle;
 }, function (props) {
   return props.theme.layer.backgroundColor;
 }, palm('\n    min-height: 100%;\n    min-width: 100%;\n  '), function (props) {
-  return lapAndUp('\n    position: absolute;\n    max-height: 100%;\n    max-width: 100%;\n    overflow: auto;\n    outline: none;\n    border-radius: ' + props.theme.layer.border.radius + ';\n\n    ' + getAlignStyle(props) + '\n  ');
+  return lapAndUp('\n    position: absolute;\n    max-height: 100%;\n    max-width: 100%;\n    overflow: auto;\n    border-radius: ' + props.theme.layer.border.radius + ';\n\n    ' + getAlignStyle(props) + '\n  ');
 });
 
 export default StyledLayer.extend(_templateObject, function (props) {

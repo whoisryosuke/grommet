@@ -10,17 +10,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
+import { compose } from 'recompose';
 
-import PropTypes from 'prop-types';
-
-import StyledLayer, { StyledContainer } from './StyledLayer';
+import { restrictFocusTo, withRestrictScroll } from '../hocs';
 
 import { Keyboard } from '../Keyboard';
 
-import baseTheme from '../../themes/vanilla';
-import { deepMerge } from '../../utils';
-
-import { filterByFocusable, getBodyChildElements } from '../utils/DOM';
+import StyledLayer, { StyledContainer } from './StyledLayer';
 
 var LayerContainer = function (_Component) {
   _inherits(LayerContainer, _Component);
@@ -31,64 +27,16 @@ var LayerContainer = function (_Component) {
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  LayerContainer.prototype.getChildContext = function getChildContext() {
-    var theme = this.props.theme;
-    var contextTheme = this.context.theme;
-
-
-    return _extends({}, this.context, {
-      theme: contextTheme || deepMerge(baseTheme, theme)
-    });
-  };
-
   LayerContainer.prototype.componentDidMount = function componentDidMount() {
-    var layerNode = findDOMNode(this.layerRef);
-    // go over all the body children to remove focus when layer is opened
-    getBodyChildElements().forEach(function (node) {
-      if (!node.contains(layerNode)) {
-        node.setAttribute('aria-hidden', true);
-        // prevent children to receive focus
-        filterByFocusable(node.getElementsByTagName('*')).forEach(function (element) {
-          var originalTabIndex = element.getAttribute('tabindex');
-          if (originalTabIndex) {
-            element.setAttribute('data-tabindex', originalTabIndex);
-          }
-          element.setAttribute('tabindex', -1);
-        });
-      }
-    });
-    document.body.style.overflow = 'hidden';
+    var layerNode = findDOMNode(this.layerNodeRef);
+    layerNode.focus();
     if (layerNode.scrollIntoView) {
       layerNode.scrollIntoView();
     }
-    layerNode.focus();
-  };
-
-  LayerContainer.prototype.componentWillUnmount = function componentWillUnmount() {
-    var _this2 = this;
-
-    // go over all the body children to reset focus when layer is closed
-    getBodyChildElements().forEach(function (node) {
-      if (!node.contains(findDOMNode(_this2.layerRef))) {
-        node.setAttribute('aria-hidden', false);
-
-        // reset node focus
-        filterByFocusable(node.getElementsByTagName('*')).forEach(function (element) {
-          var originalTabIndex = element.getAttribute('data-tabindex');
-          if (originalTabIndex) {
-            element.setAttribute('tabindex', originalTabIndex);
-            element.removeAttribute('data-tabindex');
-          } else {
-            element.removeAttribute('tabindex', -1);
-          }
-        });
-      }
-    });
-    document.body.style.overflow = 'scroll';
   };
 
   LayerContainer.prototype.render = function render() {
-    var _this3 = this;
+    var _this2 = this;
 
     var _props = this.props,
         children = _props.children,
@@ -96,29 +44,17 @@ var LayerContainer = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'theme']);
 
-    var contextTheme = this.context.theme;
-
-
-    var localTheme = deepMerge(baseTheme, contextTheme, theme);
-
     return React.createElement(
       Keyboard,
       { onEsc: onEsc },
       React.createElement(
         StyledLayer,
-        {
-          tabIndex: '-1',
-          ref: function ref(_ref) {
-            _this3.layerRef = _ref;
-          },
-          theme: localTheme
-        },
+        { theme: theme, tabIndex: '-1', ref: function ref(_ref) {
+            _this2.layerNodeRef = _ref;
+          } },
         React.createElement(
           StyledContainer,
-          _extends({}, rest, {
-            theme: localTheme,
-            tabIndex: '-1'
-          }),
+          _extends({}, rest, { theme: theme }),
           children
         )
       )
@@ -128,15 +64,4 @@ var LayerContainer = function (_Component) {
   return LayerContainer;
 }(Component);
 
-LayerContainer.childContextTypes = {
-  theme: PropTypes.object
-};
-LayerContainer.contextTypes = {
-  theme: PropTypes.object
-};
-LayerContainer.defaultProps = {
-  theme: undefined
-};
-
-
-export default LayerContainer;
+export default compose(withRestrictScroll, restrictFocusTo)(LayerContainer);

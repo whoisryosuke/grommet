@@ -223,7 +223,6 @@ var TextInput = function (_Component) {
         {
           align: { top: 'bottom', left: 'left' },
           responsive: false,
-          context: _extends({}, this.context),
           control: this.componentRef,
           onClose: function onClose() {
             return _this2.setState({ showDrop: false });

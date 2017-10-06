@@ -6,11 +6,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _reactDom = require('react-dom');
+
+var _hocs = require('../hocs');
 
 var _LayerContainer = require('./LayerContainer');
 
@@ -20,11 +18,7 @@ var _doc = require('./doc');
 
 var _doc2 = _interopRequireDefault(_doc);
 
-var _hocs = require('../hocs');
-
 var _utils = require('../utils');
-
-var _utils2 = require('../../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,16 +32,16 @@ var Layer = function (_Component) {
   _inherits(Layer, _Component);
 
   function Layer() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Layer);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
-  }
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-  Layer.prototype.componentDidMount = function componentDidMount() {
-    this.originalFocusedElement = document.activeElement;
-    this.layerContainer = (0, _utils.getNewContainer)();
-    this.renderLayer();
-  };
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.originalFocusedElement = document.activeElement, _this.layerContainer = (0, _utils.getNewContainer)(), _temp), _possibleConstructorReturn(_this, _ret);
+  }
 
   Layer.prototype.componentWillUnmount = function componentWillUnmount() {
     var _this2 = this;
@@ -64,30 +58,16 @@ var Layer = function (_Component) {
         this.originalFocusedElement.parentNode.focus();
       }
     }
-    (0, _reactDom.unmountComponentAtNode)(this.layerContainer);
     document.body.removeChild(this.layerContainer);
   };
 
-  Layer.prototype.renderLayer = function renderLayer() {
-    var ContextProvider = (0, _hocs.createContextProvider)((0, _utils2.deepMerge)(this.context, this.props.context));
-    (0, _reactDom.render)(_react2.default.createElement(
-      ContextProvider,
-      null,
-      _react2.default.createElement(_LayerContainer2.default, this.props)
-    ), this.layerContainer);
-  };
-
   Layer.prototype.render = function render() {
-    return _react2.default.createElement('span', { style: { display: 'none' } });
+    return (0, _reactDom.createPortal)(_react2.default.createElement(_LayerContainer2.default, this.props), this.layerContainer);
   };
 
   return Layer;
 }(_react.Component);
 
-Layer.contextTypes = {
-  grommet: _propTypes2.default.object,
-  theme: _propTypes2.default.object
-};
 Layer.defaultProps = {
   align: 'center'
 };
@@ -97,4 +77,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Layer);
 }
 
-exports.default = Layer;
+exports.default = (0, _hocs.withTheme)(Layer);

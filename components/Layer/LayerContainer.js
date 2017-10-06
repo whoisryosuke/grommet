@@ -10,23 +10,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
-var _propTypes = require('prop-types');
+var _recompose = require('recompose');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _hocs = require('../hocs');
+
+var _Keyboard = require('../Keyboard');
 
 var _StyledLayer = require('./StyledLayer');
 
 var _StyledLayer2 = _interopRequireDefault(_StyledLayer);
-
-var _Keyboard = require('../Keyboard');
-
-var _vanilla = require('../../themes/vanilla');
-
-var _vanilla2 = _interopRequireDefault(_vanilla);
-
-var _utils = require('../../utils');
-
-var _DOM = require('../utils/DOM');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47,64 +39,16 @@ var LayerContainer = function (_Component) {
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  LayerContainer.prototype.getChildContext = function getChildContext() {
-    var theme = this.props.theme;
-    var contextTheme = this.context.theme;
-
-
-    return _extends({}, this.context, {
-      theme: contextTheme || (0, _utils.deepMerge)(_vanilla2.default, theme)
-    });
-  };
-
   LayerContainer.prototype.componentDidMount = function componentDidMount() {
-    var layerNode = (0, _reactDom.findDOMNode)(this.layerRef);
-    // go over all the body children to remove focus when layer is opened
-    (0, _DOM.getBodyChildElements)().forEach(function (node) {
-      if (!node.contains(layerNode)) {
-        node.setAttribute('aria-hidden', true);
-        // prevent children to receive focus
-        (0, _DOM.filterByFocusable)(node.getElementsByTagName('*')).forEach(function (element) {
-          var originalTabIndex = element.getAttribute('tabindex');
-          if (originalTabIndex) {
-            element.setAttribute('data-tabindex', originalTabIndex);
-          }
-          element.setAttribute('tabindex', -1);
-        });
-      }
-    });
-    document.body.style.overflow = 'hidden';
+    var layerNode = (0, _reactDom.findDOMNode)(this.layerNodeRef);
+    layerNode.focus();
     if (layerNode.scrollIntoView) {
       layerNode.scrollIntoView();
     }
-    layerNode.focus();
-  };
-
-  LayerContainer.prototype.componentWillUnmount = function componentWillUnmount() {
-    var _this2 = this;
-
-    // go over all the body children to reset focus when layer is closed
-    (0, _DOM.getBodyChildElements)().forEach(function (node) {
-      if (!node.contains((0, _reactDom.findDOMNode)(_this2.layerRef))) {
-        node.setAttribute('aria-hidden', false);
-
-        // reset node focus
-        (0, _DOM.filterByFocusable)(node.getElementsByTagName('*')).forEach(function (element) {
-          var originalTabIndex = element.getAttribute('data-tabindex');
-          if (originalTabIndex) {
-            element.setAttribute('tabindex', originalTabIndex);
-            element.removeAttribute('data-tabindex');
-          } else {
-            element.removeAttribute('tabindex', -1);
-          }
-        });
-      }
-    });
-    document.body.style.overflow = 'scroll';
   };
 
   LayerContainer.prototype.render = function render() {
-    var _this3 = this;
+    var _this2 = this;
 
     var _props = this.props,
         children = _props.children,
@@ -112,29 +56,17 @@ var LayerContainer = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'theme']);
 
-    var contextTheme = this.context.theme;
-
-
-    var localTheme = (0, _utils.deepMerge)(_vanilla2.default, contextTheme, theme);
-
     return _react2.default.createElement(
       _Keyboard.Keyboard,
       { onEsc: onEsc },
       _react2.default.createElement(
         _StyledLayer2.default,
-        {
-          tabIndex: '-1',
-          ref: function ref(_ref) {
-            _this3.layerRef = _ref;
-          },
-          theme: localTheme
-        },
+        { theme: theme, tabIndex: '-1', ref: function ref(_ref) {
+            _this2.layerNodeRef = _ref;
+          } },
         _react2.default.createElement(
           _StyledLayer.StyledContainer,
-          _extends({}, rest, {
-            theme: localTheme,
-            tabIndex: '-1'
-          }),
+          _extends({}, rest, { theme: theme }),
           children
         )
       )
@@ -144,13 +76,4 @@ var LayerContainer = function (_Component) {
   return LayerContainer;
 }(_react.Component);
 
-LayerContainer.childContextTypes = {
-  theme: _propTypes2.default.object
-};
-LayerContainer.contextTypes = {
-  theme: _propTypes2.default.object
-};
-LayerContainer.defaultProps = {
-  theme: undefined
-};
-exports.default = LayerContainer;
+exports.default = (0, _recompose.compose)(_hocs.withRestrictScroll, _hocs.restrictFocusTo)(LayerContainer);

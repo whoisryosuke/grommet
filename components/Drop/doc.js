@@ -24,11 +24,11 @@ exports.default = function (Drop) {
         dark: _reactDesc.PropTypes.bool,
         image: _reactDesc.PropTypes.string
       })]), 'Either a color identifier to use for the background color. For example:\n      \'neutral-1\'. Or, a \'url()\' for an image.'],
-      context: [_reactDesc.PropTypes.object, 'Object with the context variables to be passed to the Drop.'],
       control: [_reactDesc.PropTypes.object, 'Target container where the drop will be aligned.', {
         required: true
       }],
       dir: [_reactDesc.PropTypes.oneOf(['rtl', 'ltr']), 'Whether text should be rendered right to left or not. Defaults to\n      inherit from the document context.'],
+      restrictFocus: [_reactDesc.PropTypes.bool, 'Whether the drop should control focus.'],
       onClose: [_reactDesc.PropTypes.func, 'Function that will be invoked when the user clicks outside the drop area.'],
       responsive: [_reactDesc.PropTypes.bool, 'Whether to dynamically re-place when resized.', {
         defaultProp: true

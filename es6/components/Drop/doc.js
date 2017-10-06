@@ -20,11 +20,11 @@ export default (function (Drop) {
         dark: PropTypes.bool,
         image: PropTypes.string
       })]), 'Either a color identifier to use for the background color. For example:\n      \'neutral-1\'. Or, a \'url()\' for an image.'],
-      context: [PropTypes.object, 'Object with the context variables to be passed to the Drop.'],
       control: [PropTypes.object, 'Target container where the drop will be aligned.', {
         required: true
       }],
       dir: [PropTypes.oneOf(['rtl', 'ltr']), 'Whether text should be rendered right to left or not. Defaults to\n      inherit from the document context.'],
+      restrictFocus: [PropTypes.bool, 'Whether the drop should control focus.'],
       onClose: [PropTypes.func, 'Function that will be invoked when the user clicks outside the drop area.'],
       responsive: [PropTypes.bool, 'Whether to dynamically re-place when resized.', {
         defaultProp: true

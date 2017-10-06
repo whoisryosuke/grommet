@@ -51,14 +51,51 @@ export function getBodyChildElements() {
 export function getNewContainer() {
   // setup DOM
   var container = document.createElement('div');
-  // prepend in body to avoid browser scroll issues
-  document.body.insertBefore(container, document.body.firstChild);
+  document.body.appendChild(container, document.body.firstChild);
   return container;
 }
 
+export var setTabIndex = function setTabIndex(tabIndex) {
+  return function (element) {
+    element.setAttribute('tabindex', tabIndex);
+  };
+};
+
+export var copyAttribute = function copyAttribute(source) {
+  return function (target) {
+    return function (element) {
+      return element.setAttribute(target, element.getAttribute(source));
+    };
+  };
+};
+
+var unsetTabIndex = setTabIndex(-1);
+var saveTabIndex = copyAttribute('tabindex')('data-g-tabindex');
+var restoreTabIndex = copyAttribute('data-g-tabindex')('tabindex');
+
+export var makeNodeFocusable = function makeNodeFocusable(node) {
+  node.setAttribute('aria-hidden', false);
+  // allow children to receive focus again
+  filterByFocusable(node.getElementsByTagName('*')).forEach(restoreTabIndex);
+};
+
+export var makeNodeUnfocusable = function makeNodeUnfocusable(node) {
+  node.setAttribute('aria-hidden', true);
+  // prevent children to receive focus
+  filterByFocusable(node.getElementsByTagName('*')).forEach(function (child) {
+    saveTabIndex(child);
+    unsetTabIndex(child);
+  });
+};
+
 export default {
+  copyAttribute: copyAttribute,
   filterByFocusable: filterByFocusable,
   findScrollParents: findScrollParents,
+  makeNodeFocusable: makeNodeFocusable,
+  makeNodeUnfocusable: makeNodeUnfocusable,
   getBodyChildElements: getBodyChildElements,
-  getNewContainer: getNewContainer
+  getNewContainer: getNewContainer,
+  setTabIndex: setTabIndex,
+  unsetTabIndex: unsetTabIndex
 };

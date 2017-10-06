@@ -8,7 +8,7 @@ import { backgroundStyle, baseStyle } from '../utils';
 
 var StyledDrop = styled.div.withConfig({
   displayName: 'StyledDrop'
-})(['', ' position:fixed;z-index:20;border-radius:', ';overflow:auto;', ''], baseStyle, function (props) {
+})(['', ' position:fixed;z-index:20;border-radius:', ';overflow:auto;outline:none;', ''], baseStyle, function (props) {
   return props.theme.global.drop.border.radius;
 }, function (props) {
   return backgroundStyle(props.background || props.theme.global.drop.backgroundColor, props.theme);
