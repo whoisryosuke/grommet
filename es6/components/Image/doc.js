@@ -1,11 +1,11 @@
-import { schema, PropTypes } from 'react-desc';
+import { describe, PropTypes } from 'react-desc';
 
 export default (function (Image) {
-  return schema(Image, {
-    description: 'An image.',
-    usage: 'import { Image } from \'grommet\';\n  <Image/>',
-    props: {
-      fit: [PropTypes.oneOf(['cover', 'contain']), 'How the image fills its container.']
-    }
-  });
+  var DocumentedImage = describe(Image).description('An image.').usage('import { Image } from \'grommet\';\n    <Image/>');
+
+  DocumentedImage.propTypes = {
+    fit: PropTypes.oneOf(['cover', 'contain']).description('How the image fills its container.')
+  };
+
+  return DocumentedImage;
 });

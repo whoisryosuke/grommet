@@ -5,11 +5,11 @@ exports.__esModule = true;
 var _reactDesc = require('react-desc');
 
 exports.default = function (Image) {
-  return (0, _reactDesc.schema)(Image, {
-    description: 'An image.',
-    usage: 'import { Image } from \'grommet\';\n  <Image/>',
-    props: {
-      fit: [_reactDesc.PropTypes.oneOf(['cover', 'contain']), 'How the image fills its container.']
-    }
-  });
+  var DocumentedImage = (0, _reactDesc.describe)(Image).description('An image.').usage('import { Image } from \'grommet\';\n    <Image/>');
+
+  DocumentedImage.propTypes = {
+    fit: _reactDesc.PropTypes.oneOf(['cover', 'contain']).description('How the image fills its container.')
+  };
+
+  return DocumentedImage;
 };

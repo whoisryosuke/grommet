@@ -1,17 +1,17 @@
-import { schema, PropTypes } from 'react-desc';
+import { describe, PropTypes } from 'react-desc';
 
 export default (function (RadioButton) {
-  return schema(RadioButton, {
-    description: 'A radio button control.',
-    usage: 'import { RadioButton } from \'grommet\';\n  <RadioButton />',
-    props: {
-      checked: [PropTypes.bool, 'Same as React <input checked={} />'],
-      defaultChecked: [PropTypes.bool, 'Same as React <input defaultChecked={} />'],
-      disabled: [PropTypes.bool, 'Same as React <input disabled={} />. Also adds a hidden input element\n      with the same name so form submissions work.'],
-      id: [PropTypes.string, 'The DOM id attribute value to use for the underlying <input/> element.'],
-      label: [PropTypes.node, 'Label text to place next to the control.'],
-      name: [PropTypes.string, 'The DOM name attribute value to use for the underlying <input/> element.'],
-      onChange: [PropTypes.func, 'Same as React <input onChange={} />']
-    }
-  });
+  var DocumentedRadioButton = describe(RadioButton).description('A radio button control.').usage('import { RadioButton } from \'grommet\';\n    <RadioButton />');
+
+  DocumentedRadioButton.propTypes = {
+    checked: PropTypes.bool.description('Same as React <input checked={} />'),
+    defaultChecked: PropTypes.bool.description('Same as React <input defaultChecked={} />'),
+    disabled: PropTypes.bool.description('Same as React <input disabled={} />. Also adds a hidden input element\n      with the same name so form submissions work.'),
+    id: PropTypes.string.description('The DOM id attribute value to use for the underlying <input/> element.'),
+    label: PropTypes.node.description('Label text to place next to the control.'),
+    name: PropTypes.string.description('The DOM name attribute value to use for the underlying <input/> element.'),
+    onChange: PropTypes.func.description('Same as React <input onChange={} />')
+  };
+
+  return DocumentedRadioButton;
 });
