@@ -244,7 +244,9 @@ var animationStyle = css(['', ''], function (props) {
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 var StyledBox = styled.div.withConfig({
   displayName: 'StyledBox'
-})(['display:flex;max-width:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+  return !props.basis && 'max-width: 100%;';
+}, function (props) {
   return props.align && alignStyle;
 }, function (props) {
   return props.alignContent && alignContentStyle;
@@ -278,6 +280,8 @@ var StyledBox = styled.div.withConfig({
   return props.wrap && wrapStyle;
 }, function (props) {
   return props.responsive && responsiveStyle;
+}, function (props) {
+  return props.overflow && 'overflow: ' + props.overflow + ';';
 }, function (props) {
   return props.animation && animationStyle;
 });

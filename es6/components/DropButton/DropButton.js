@@ -27,8 +27,14 @@ var DropButton = function (_Component) {
     var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
     _this.onDropClose = function () {
+      var onClose = _this.props.onClose;
+
       _this.setState({
         showDrop: false
+      }, function () {
+        if (onClose) {
+          onClose();
+        }
       });
     };
 
@@ -51,14 +57,13 @@ var DropButton = function (_Component) {
     var _this2 = this;
 
     var _props = this.props,
+        a11yTitle = _props.a11yTitle,
         background = _props.background,
         children = _props.children,
         control = _props.control,
         id = _props.id,
-        _props$messages = _props.messages,
-        messages = _props$messages === undefined ? {} : _props$messages,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['background', 'children', 'control', 'id', 'messages', 'theme']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'background', 'children', 'control', 'id', 'theme']);
 
     var showDrop = this.state.showDrop;
 
@@ -86,12 +91,13 @@ var DropButton = function (_Component) {
     return [React.createElement(
       Button,
       _extends({
+        fill: true,
         key: 'drop-button__button',
         id: id,
         ref: function ref(_ref3) {
           _this2.componentRef = _ref3;
         },
-        a11yTitle: messages.openMenu || 'Open Drop',
+        a11yTitle: a11yTitle || 'Open Drop',
         onClick: function onClick() {
           return _this2.setState({ showDrop: !_this2.state.showDrop });
         }

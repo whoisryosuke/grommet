@@ -13,6 +13,7 @@ import { findDOMNode } from 'react-dom';
 
 import { restrictFocusTo } from '../hocs';
 import { findScrollParents } from '../utils';
+import { Keyboard } from '../Keyboard';
 
 import StyledDrop from './StyledDrop';
 
@@ -187,19 +188,24 @@ var DropContainer = function (_Component) {
 
     var _props = this.props,
         children = _props.children,
+        onClose = _props.onClose,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'onClose', 'theme']);
 
     return React.createElement(
-      StyledDrop,
-      _extends({
-        tabIndex: '-1',
-        ref: function ref(_ref) {
-          _this2.dropRef = _ref;
-        },
-        theme: theme
-      }, rest),
-      children
+      Keyboard,
+      { onEsc: onClose },
+      React.createElement(
+        StyledDrop,
+        _extends({
+          tabIndex: '-1',
+          ref: function ref(_ref) {
+            _this2.dropRef = _ref;
+          },
+          theme: theme
+        }, rest),
+        children
+      )
     );
   };
 

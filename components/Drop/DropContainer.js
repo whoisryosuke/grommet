@@ -14,6 +14,8 @@ var _hocs = require('../hocs');
 
 var _utils = require('../utils');
 
+var _Keyboard = require('../Keyboard');
+
 var _StyledDrop = require('./StyledDrop');
 
 var _StyledDrop2 = _interopRequireDefault(_StyledDrop);
@@ -199,19 +201,24 @@ var DropContainer = function (_Component) {
 
     var _props = this.props,
         children = _props.children,
+        onClose = _props.onClose,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'onClose', 'theme']);
 
     return _react2.default.createElement(
-      _StyledDrop2.default,
-      _extends({
-        tabIndex: '-1',
-        ref: function ref(_ref) {
-          _this2.dropRef = _ref;
-        },
-        theme: theme
-      }, rest),
-      children
+      _Keyboard.Keyboard,
+      { onEsc: onClose },
+      _react2.default.createElement(
+        _StyledDrop2.default,
+        _extends({
+          tabIndex: '-1',
+          ref: function ref(_ref) {
+            _this2.dropRef = _ref;
+          },
+          theme: theme
+        }, rest),
+        children
+      )
     );
   };
 

@@ -46,6 +46,7 @@ exports.default = function (Box) {
       top: _reactDesc.PropTypes.oneOf(PAD_SIZES),
       vertical: _reactDesc.PropTypes.oneOf(PAD_SIZES)
     })]).description('The amount of margin around the box. An object can be specified to\n      distinguish horizontal margin, vertical margin, and margin on a\n      particular side of the box'),
+    overflow: _reactDesc.PropTypes.oneOf(['auto', 'hidden', 'scroll']).description('box overflow.'),
     pad: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none'].concat(PAD_SIZES)), _reactDesc.PropTypes.shape({
       bottom: _reactDesc.PropTypes.oneOf(PAD_SIZES),
       horizontal: _reactDesc.PropTypes.oneOf(PAD_SIZES),

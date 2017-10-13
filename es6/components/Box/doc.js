@@ -42,6 +42,7 @@ export default (function (Box) {
       top: PropTypes.oneOf(PAD_SIZES),
       vertical: PropTypes.oneOf(PAD_SIZES)
     })]).description('The amount of margin around the box. An object can be specified to\n      distinguish horizontal margin, vertical margin, and margin on a\n      particular side of the box'),
+    overflow: PropTypes.oneOf(['auto', 'hidden', 'scroll']).description('box overflow.'),
     pad: PropTypes.oneOfType([PropTypes.oneOf(['none'].concat(PAD_SIZES)), PropTypes.shape({
       bottom: PropTypes.oneOf(PAD_SIZES),
       horizontal: PropTypes.oneOf(PAD_SIZES),
