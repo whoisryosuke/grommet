@@ -21,12 +21,18 @@ import doc from './doc';
 var DropButton = function (_Component) {
   _inherits(DropButton, _Component);
 
-  function DropButton(props, context) {
+  function DropButton() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, DropButton);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.onDropClose = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      showDrop: false
+    }, _this.onDropClose = function () {
       var onClose = _this.props.onClose;
 
       _this.setState({
@@ -36,12 +42,7 @@ var DropButton = function (_Component) {
           onClose();
         }
       });
-    };
-
-    _this.state = {
-      showDrop: props.open
-    };
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   DropButton.prototype.componentWillReceiveProps = function componentWillReceiveProps(_ref) {
@@ -50,6 +51,18 @@ var DropButton = function (_Component) {
 
     if (open !== showDrop) {
       this.setState({ showDrop: open });
+    }
+  };
+
+  DropButton.prototype.componentDidMount = function componentDidMount() {
+    var open = this.props.open;
+    // if the drop is open during first mount we need to call render again to retreive
+    // the right ref
+
+    if (open) {
+      /* eslint-disable react/no-did-mount-set-state */
+      this.setState({ showDrop: true });
+      /* eslint-enable react/no-did-mount-set-state */
     }
   };
 

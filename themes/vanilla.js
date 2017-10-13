@@ -68,11 +68,11 @@ exports.default = (0, _utils2.deepFreeze)({
     },
     drop: {
       backgroundColor: '#f8f8f8',
-      boxShadow: 'none',
       border: {
         width: '0px',
         radius: '0px'
-      }
+      },
+      shadow: '0px 3px 8px rgba(100, 100, 100, 0.50)'
     },
     edgeSize: {
       xsmall: baseSpacing / 4 + 'px',
