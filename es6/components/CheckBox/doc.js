@@ -11,8 +11,8 @@ export default (function (CheckBox) {
     label: PropTypes.node.description('Label text to place next to the control.'),
     name: PropTypes.string.description('The DOM name attribute value to use for the underlying <input/> element.'),
     onChange: PropTypes.func.description('Same as React <input onChange={} />'),
-    reverse: PropTypes.bool.description('Whether to show the label in front of the checkbox. Defaults to false.'),
-    toggle: PropTypes.bool.description('Whether to visualize it as a toggle switch. Defaults to false.')
+    reverse: PropTypes.bool.description('Whether to show the label in front of the checkbox.'),
+    toggle: PropTypes.bool.description('Whether to visualize it as a toggle switch.')
   };
 
   return DocumentedCheckBox;

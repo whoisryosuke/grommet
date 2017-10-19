@@ -11,6 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
+import getDisplayName from 'recompose/getDisplayName';
 
 import { deepMerge } from '../utils';
 import { getBodyChildElements, makeNodeFocusable, makeNodeUnfocusable } from './utils';
@@ -100,6 +101,7 @@ export var withFocus = function withFocus(WrappedComponent) {
     return FocusableComponent;
   }(Component);
 
+  FocusableComponent.displayName = getDisplayName(WrappedComponent);
   return FocusableComponent;
 };
 
@@ -132,6 +134,7 @@ var withTheme = function withTheme(WrappedComponent) {
   };
 
 
+  ThemedComponent.displayName = getDisplayName(WrappedComponent);
   return ThemedComponent;
 };
 
@@ -159,6 +162,7 @@ export var withRestrictScroll = function withRestrictScroll(WrappedComponent) {
     return RestrictScrollContainer;
   }(Component);
 
+  RestrictScrollContainer.displayName = getDisplayName(WrappedComponent);
   return RestrictScrollContainer;
 };
 
@@ -204,6 +208,7 @@ export var restrictFocusTo = function restrictFocusTo(WrappedComponent) {
     return FocusedContainer;
   }(Component);
 
+  FocusedContainer.displayName = getDisplayName(WrappedComponent);
   return FocusedContainer;
 };
 

@@ -20,7 +20,7 @@ exports.default = function (Box) {
   DocumentedBox.propTypes = {
     a11yTitle: _utils.a11yTitlePropType,
     align: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']).description('How to align the contents along the cross axis.'),
-    alignContent: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in the cross axis.\n        Defaults to stretch'),
+    alignContent: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in the cross axis.').defaultProp('stretch'),
     alignSelf: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the cross axis when contained in a Box or along\n      the column axis when contained in a Grid.'),
     animation: _reactDesc.PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE]))]).description('Animation effect(s) to use. \'duration\' and \'delay\' should be in milliseconds.'),
     background: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.shape({
@@ -35,7 +35,7 @@ exports.default = function (Box) {
       side: _reactDesc.PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']),
       size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
     })]).description('Include a border.'),
-    direction: _reactDesc.PropTypes.oneOf(['row', 'column']).description('The orientation to layout the child components in. Defaults to column.'),
+    direction: _reactDesc.PropTypes.oneOf(['row', 'column']).description('The orientation to layout the child components in.').defaultProp('column'),
     flex: _reactDesc.PropTypes.oneOf(['grow', 'shrink', true, false]).description('Whether flex-grow and/or flex-shrink is true.'),
     full: _reactDesc.PropTypes.oneOf(['horizontal', 'vertical', true, false, 'grow']).description('Whether the width and/or height should take the full viewport size.'),
     gridArea: _reactDesc.PropTypes.string.description('The name of the area to place this Box in inside a parent Grid.'),
@@ -61,9 +61,9 @@ exports.default = function (Box) {
     responsive: _reactDesc.PropTypes.bool.description('Whether children laid out in a row direction should be switched to a\n      column layout when the display area narrows.'),
     reverse: _reactDesc.PropTypes.bool.description('Whether to reverse the order of the child components.'),
     round: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']).description('How much to round the corners.'),
-    tag: _reactDesc.PropTypes.string.description('The DOM tag to use for the element. Defaults to div.'),
+    tag: _reactDesc.PropTypes.string.description('The DOM tag to use for the element.').defaultProp('div'),
     textAlign: _reactDesc.PropTypes.oneOf(['start', 'center', 'end']).description('How to align the text inside the box.'),
-    wrap: _reactDesc.PropTypes.bool.description('Whether children can wrap if they can\'t all fit. Defaults to false.')
+    wrap: _reactDesc.PropTypes.bool.description('Whether children can wrap if they can\'t all fit.')
   };
   return DocumentedBox;
 };

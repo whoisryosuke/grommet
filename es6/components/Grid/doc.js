@@ -7,7 +7,7 @@ export default (function (Grid) {
   var DocumentedGrid = describe(Grid).description('A grid system for laying out content. To use, define the\n    rows and columns, create area names for adjacent cells, and then\n    place Box components inside those areas using the Box.gridArea property.\n    See https://css-tricks.com/snippets/css/complete-guide-grid/.').usage('import { Grid } from \'grommet\';\n    <Grid/>');
 
   DocumentedGrid.propTypes = {
-    align: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align the individual items inside the grid when there is extra\n      space in the column axis. Defaults to stretch'),
+    align: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align the individual items inside the grid when there is extra\n      space in the column axis.').defaultProp('stretch'),
     alignContent: PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents along the column axis.'),
     areas: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
@@ -19,10 +19,10 @@ export default (function (Grid) {
       horizontal: PropTypes.oneOf(edgeSizes),
       vertical: PropTypes.oneOf(edgeSizes)
     })]).description('Gap sizes between rows and/or columns.'),
-    justify: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align the individual items inside the grid when there is extra\n      space in the row axis. Defaults to stretch'),
+    justify: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align the individual items inside the grid when there is extra\n      space in the row axis.').defaultProp('stretch'),
     justifyContent: PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents along the row axis.'),
     rows: PropTypes.arrayOf(PropTypes.oneOf(sizes)).description('Row sizes.'),
-    tag: PropTypes.string.description('The DOM tag to use for the element. Defaults to div.')
+    tag: PropTypes.string.description('The DOM tag to use for the element.').defaultProp('div')
   };
 
   return DocumentedGrid;

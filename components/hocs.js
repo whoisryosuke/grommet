@@ -15,6 +15,10 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _getDisplayName = require('recompose/getDisplayName');
+
+var _getDisplayName2 = _interopRequireDefault(_getDisplayName);
+
 var _utils = require('../utils');
 
 var _utils2 = require('./utils');
@@ -114,6 +118,7 @@ var withFocus = exports.withFocus = function withFocus(WrappedComponent) {
     return FocusableComponent;
   }(_react.Component);
 
+  FocusableComponent.displayName = (0, _getDisplayName2.default)(WrappedComponent);
   return FocusableComponent;
 };
 
@@ -146,6 +151,7 @@ var withTheme = function withTheme(WrappedComponent) {
   };
 
 
+  ThemedComponent.displayName = (0, _getDisplayName2.default)(WrappedComponent);
   return ThemedComponent;
 };
 
@@ -173,6 +179,7 @@ var withRestrictScroll = exports.withRestrictScroll = function withRestrictScrol
     return RestrictScrollContainer;
   }(_react.Component);
 
+  RestrictScrollContainer.displayName = (0, _getDisplayName2.default)(WrappedComponent);
   return RestrictScrollContainer;
 };
 
@@ -218,6 +225,7 @@ var restrictFocusTo = exports.restrictFocusTo = function restrictFocusTo(Wrapped
     return FocusedContainer;
   }(_react.Component);
 
+  FocusedContainer.displayName = (0, _getDisplayName2.default)(WrappedComponent);
   return FocusedContainer;
 };
 

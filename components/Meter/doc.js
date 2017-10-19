@@ -10,8 +10,8 @@ exports.default = function (Meter) {
   DocumentedMeter.propTypes = {
     background: _reactDesc.PropTypes.string.description('A color identifier to use for the background color. For example:\n      \'light-1\'.'),
     round: _reactDesc.PropTypes.bool.description('Whether to round the line ends'),
-    size: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full']).description('The size of the Meter. Defaults to medium.'),
-    thickness: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The size of the Meter. Defaults to medium.'),
+    size: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full']).description('The size of the Meter.').defaultProp('medium'),
+    thickness: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The size of the Meter.').defaultProp('medium'),
     type: _reactDesc.PropTypes.oneOf(['bar', 'circle']).description('The visual type of meter.'),
     values: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.shape({
       color: _reactDesc.PropTypes.string,

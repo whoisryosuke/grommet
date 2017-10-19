@@ -12,7 +12,7 @@ exports.default = function (Paragraph) {
       bottom: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']),
       top: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
     })]).description('The amount of margin above and/or below the paragraph. An object can be\n      specified to distinguish top margin and bottom margin.'),
-    size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']).description('The size of the Paragraph text. Defaults to medium.'),
+    size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']).description('The size of the Paragraph text.').defaultProp('medium'),
     textAlign: _reactDesc.PropTypes.oneOf(['start', 'center', 'end']).description('How to align the text inside the paragraph.')
   };
 

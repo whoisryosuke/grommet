@@ -21,7 +21,7 @@ export default (function (Button) {
     fill: PropTypes.bool.description('Whether the button expands to fill all of the available width and height.'),
     hoverIndicator: PropTypes.oneOfType([PropTypes.oneOf(['background']), PropTypes.shape({
       background: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
-    })]).description('Optional. The hover indicator to apply when the user is mousing over the\n      button. An object can be also be specified for color index support:\n      {background: \'neutral-2\'}. This prop is meant to be used only\n      with plain Buttons.'),
+    })]).description('The hover indicator to apply when the user is mousing over the\n      button. An object can be also be specified for color index support:\n      {background: \'neutral-2\'}. This prop is meant to be used only\n      with plain Buttons.'),
     href: PropTypes.string.description('If specified, the button will behave like an anchor tag.'),
     icon: PropTypes.element.description('Icon element to place in the button.'),
     label: PropTypes.node.description('Label text to place in the button.'),

@@ -27,7 +27,7 @@ exports.default = function (Button) {
     fill: _reactDesc.PropTypes.bool.description('Whether the button expands to fill all of the available width and height.'),
     hoverIndicator: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['background']), _reactDesc.PropTypes.shape({
       background: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.bool, _reactDesc.PropTypes.string])
-    })]).description('Optional. The hover indicator to apply when the user is mousing over the\n      button. An object can be also be specified for color index support:\n      {background: \'neutral-2\'}. This prop is meant to be used only\n      with plain Buttons.'),
+    })]).description('The hover indicator to apply when the user is mousing over the\n      button. An object can be also be specified for color index support:\n      {background: \'neutral-2\'}. This prop is meant to be used only\n      with plain Buttons.'),
     href: _reactDesc.PropTypes.string.description('If specified, the button will behave like an anchor tag.'),
     icon: _reactDesc.PropTypes.element.description('Icon element to place in the button.'),
     label: _reactDesc.PropTypes.node.description('Label text to place in the button.'),

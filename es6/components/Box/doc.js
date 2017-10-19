@@ -16,7 +16,7 @@ export default (function (Box) {
   DocumentedBox.propTypes = {
     a11yTitle: a11yTitlePropType,
     align: PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']).description('How to align the contents along the cross axis.'),
-    alignContent: PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in the cross axis.\n        Defaults to stretch'),
+    alignContent: PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in the cross axis.').defaultProp('stretch'),
     alignSelf: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the cross axis when contained in a Box or along\n      the column axis when contained in a Grid.'),
     animation: PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE, PropTypes.arrayOf(PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE]))]).description('Animation effect(s) to use. \'duration\' and \'delay\' should be in milliseconds.'),
     background: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
@@ -31,7 +31,7 @@ export default (function (Box) {
       side: PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']),
       size: PropTypes.oneOf(['small', 'medium', 'large'])
     })]).description('Include a border.'),
-    direction: PropTypes.oneOf(['row', 'column']).description('The orientation to layout the child components in. Defaults to column.'),
+    direction: PropTypes.oneOf(['row', 'column']).description('The orientation to layout the child components in.').defaultProp('column'),
     flex: PropTypes.oneOf(['grow', 'shrink', true, false]).description('Whether flex-grow and/or flex-shrink is true.'),
     full: PropTypes.oneOf(['horizontal', 'vertical', true, false, 'grow']).description('Whether the width and/or height should take the full viewport size.'),
     gridArea: PropTypes.string.description('The name of the area to place this Box in inside a parent Grid.'),
@@ -57,9 +57,9 @@ export default (function (Box) {
     responsive: PropTypes.bool.description('Whether children laid out in a row direction should be switched to a\n      column layout when the display area narrows.'),
     reverse: PropTypes.bool.description('Whether to reverse the order of the child components.'),
     round: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']).description('How much to round the corners.'),
-    tag: PropTypes.string.description('The DOM tag to use for the element. Defaults to div.'),
+    tag: PropTypes.string.description('The DOM tag to use for the element.').defaultProp('div'),
     textAlign: PropTypes.oneOf(['start', 'center', 'end']).description('How to align the text inside the box.'),
-    wrap: PropTypes.bool.description('Whether children can wrap if they can\'t all fit. Defaults to false.')
+    wrap: PropTypes.bool.description('Whether children can wrap if they can\'t all fit.')
   };
   return DocumentedBox;
 });
