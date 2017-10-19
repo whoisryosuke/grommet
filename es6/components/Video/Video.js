@@ -358,9 +358,26 @@ var Video = function (_Component) {
       };
     }
 
+    var style = void 0;
+    if (rest.fit === 'contain' && controls === 'over' && this.videoRef) {
+      // constrain the size to fit the aspect ratio so the controls overlap correctly
+      var video = findDOMNode(this.videoRef);
+      if (video.videoHeight) {
+        var rect = video.getBoundingClientRect();
+        var ratio = rect.width / rect.height;
+        var videoRatio = video.videoWidth / video.videoHeight;
+        style = {};
+        if (videoRatio > ratio) {
+          style.height = rect.width / videoRatio;
+        } else {
+          style.width = rect.height * videoRatio;
+        }
+      }
+    }
+
     return React.createElement(
       StyledVideoContainer,
-      mouseEventListeners,
+      _extends({}, mouseEventListeners, { style: style }),
       React.createElement(
         StyledVideo,
         _extends({

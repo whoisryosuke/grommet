@@ -20,10 +20,8 @@ var FIT_MAP = {
   contain: 'contain'
 };
 
-var fitStyle = (0, _styledComponents.css)(['flex:1 1;object-fit:', ';', ''], function (props) {
+var fitStyle = (0, _styledComponents.css)(['flex:1 1;min-height:0;object-fit:', ';'], function (props) {
   return FIT_MAP[props.fit];
-}, function (props) {
-  return props.fit === 'contain' && 'object-position: 50% 100%;';
 });
 
 var StyledVideo = _styledComponents2.default.video.withConfig({
