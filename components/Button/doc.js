@@ -36,7 +36,7 @@ exports.default = function (Button) {
     primary: _reactDesc.PropTypes.bool.description('Whether this is a primary button. There should be at most one\n      per page or screen.'),
     reverse: _reactDesc.PropTypes.bool.description('Whether an icon and label should be reversed so that the icon is at the\n      end of the anchor.'),
     secondary: _reactDesc.PropTypes.bool.description('Whether this is a secondary button.'),
-    type: _reactDesc.PropTypes.oneOf(['button', 'reset', 'submit']).description('The type of button. Set the type to submit for the default button\n      on forms.').defaultProp('button')
+    type: _reactDesc.PropTypes.oneOf(['button', 'reset', 'submit']).description('The type of button. Set the type to submit for the default button\n      on forms.').defaultValue('button')
   };
 
   return DocumentedButton;

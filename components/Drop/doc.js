@@ -13,7 +13,7 @@ exports.default = function (Drop) {
       bottom: _reactDesc.PropTypes.oneOf(['top', 'bottom']),
       right: _reactDesc.PropTypes.oneOf(['left', 'right']),
       left: _reactDesc.PropTypes.oneOf(['left', 'right'])
-    }).description('How to align the drop with respect to the target element.').defaultProp({
+    }).description('How to align the drop with respect to the target element.').defaultValue({
       defaultProp: {
         top: 'top',
         left: 'left'
@@ -23,7 +23,7 @@ exports.default = function (Drop) {
     dir: _reactDesc.PropTypes.oneOf(['rtl', 'ltr']).description('Whether text should be rendered right to left or not. Defaults to\n      inherit from the document context.'),
     restrictFocus: _reactDesc.PropTypes.bool.description('Whether the drop should control focus.'),
     onClose: _reactDesc.PropTypes.func.description('Function that will be invoked when the user clicks outside the drop area.'),
-    responsive: _reactDesc.PropTypes.bool.description('Whether to dynamically re-place when resized.').defaultProp({
+    responsive: _reactDesc.PropTypes.bool.description('Whether to dynamically re-place when resized.').defaultValue({
       defaultProp: true
     }),
     theme: _reactDesc.PropTypes.object.description('Custom styles for Drop component.')

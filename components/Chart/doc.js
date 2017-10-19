@@ -9,14 +9,14 @@ exports.default = function (Chart) {
 
   DocumentedChart.propTypes = {
     bounds: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.number)).description('The limits for the values, specified as a two dimensional array.\n      If not specified, the bounds will automatically be set to fit\n      the provided values.'),
-    color: _reactDesc.PropTypes.string.description('A color identifier to use for the graphic color.').defaultProp('accent-1'),
+    color: _reactDesc.PropTypes.string.description('A color identifier to use for the graphic color.').defaultValue('accent-1'),
     round: _reactDesc.PropTypes.bool.description('Whether to round the line ends.'),
     size: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full']), _reactDesc.PropTypes.shape({
       height: _reactDesc.PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full']),
       width: _reactDesc.PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full'])
-    })]).description('The size of the Chart.').defaultProp({ width: 'medium', height: 'small' }),
-    thickness: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The width of the stroke.').defaultProp('medium'),
-    type: _reactDesc.PropTypes.oneOf(['bar', 'line', 'area']).description('The visual type of meter.').defaultProp('bar'),
+    })]).description('The size of the Chart.').defaultValue({ width: 'medium', height: 'small' }),
+    thickness: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The width of the stroke.').defaultValue('medium'),
+    type: _reactDesc.PropTypes.oneOf(['bar', 'line', 'area']).description('The visual type of meter.').defaultValue('bar'),
     values: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.shape({
       label: _reactDesc.PropTypes.string, // for accessibility of bars
       value: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.number).isRequired

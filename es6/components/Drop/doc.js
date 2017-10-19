@@ -9,7 +9,7 @@ export default (function (Drop) {
       bottom: PropTypes.oneOf(['top', 'bottom']),
       right: PropTypes.oneOf(['left', 'right']),
       left: PropTypes.oneOf(['left', 'right'])
-    }).description('How to align the drop with respect to the target element.').defaultProp({
+    }).description('How to align the drop with respect to the target element.').defaultValue({
       defaultProp: {
         top: 'top',
         left: 'left'
@@ -19,7 +19,7 @@ export default (function (Drop) {
     dir: PropTypes.oneOf(['rtl', 'ltr']).description('Whether text should be rendered right to left or not. Defaults to\n      inherit from the document context.'),
     restrictFocus: PropTypes.bool.description('Whether the drop should control focus.'),
     onClose: PropTypes.func.description('Function that will be invoked when the user clicks outside the drop area.'),
-    responsive: PropTypes.bool.description('Whether to dynamically re-place when resized.').defaultProp({
+    responsive: PropTypes.bool.description('Whether to dynamically re-place when resized.').defaultValue({
       defaultProp: true
     }),
     theme: PropTypes.object.description('Custom styles for Drop component.')

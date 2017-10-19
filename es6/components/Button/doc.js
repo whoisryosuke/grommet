@@ -30,7 +30,7 @@ export default (function (Button) {
     primary: PropTypes.bool.description('Whether this is a primary button. There should be at most one\n      per page or screen.'),
     reverse: PropTypes.bool.description('Whether an icon and label should be reversed so that the icon is at the\n      end of the anchor.'),
     secondary: PropTypes.bool.description('Whether this is a secondary button.'),
-    type: PropTypes.oneOf(['button', 'reset', 'submit']).description('The type of button. Set the type to submit for the default button\n      on forms.').defaultProp('button')
+    type: PropTypes.oneOf(['button', 'reset', 'submit']).description('The type of button. Set the type to submit for the default button\n      on forms.').defaultValue('button')
   };
 
   return DocumentedButton;
