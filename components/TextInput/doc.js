@@ -10,10 +10,11 @@ exports.default = function (TextInput) {
   DocumentedTextInput.propTypes = {
     defaultValue: _reactDesc.PropTypes.string.description('What text to start with in the input.'),
     id: _reactDesc.PropTypes.string.description('The id attribute of the input.'),
+    focusIndicator: _reactDesc.PropTypes.bool.description('Whether the plain text input should receive a focus outline.'),
     name: _reactDesc.PropTypes.string.description('The name attribute of the input.'),
     onInput: _reactDesc.PropTypes.func.description('Function that will be called when the user types in the input.'),
     onSelect: _reactDesc.PropTypes.func.description('Function that will be called when the user selects a suggestion.\n      The suggestion contains the object chosen from the supplied suggestions.'),
-    placeholder: _reactDesc.PropTypes.string.description('Placeholder text to use when the input is empty.'),
+    placeholder: _reactDesc.PropTypes.string.description('Placeholder text to use when no value is provided.'),
     plain: _reactDesc.PropTypes.bool.description('Whether this is a plain input with no border or padding.\n      Only use this when the containing context provides sufficient affordance'),
     size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']).description('The size of the TextInput.'),
     suggestions: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.shape({

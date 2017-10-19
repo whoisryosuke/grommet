@@ -24,7 +24,7 @@ var StyledTextInput = styled.input.withConfig({
 }, function (props) {
   return props.plain && plainStyle;
 }, placeholderColor, placeholderColor, placeholderColor, function (props) {
-  return !props.plain && focusStyle;
+  return (!props.plain || props.focusIndicator) && focusStyle;
 });
 
 export var StyledTextInputContainer = styled.div.withConfig({

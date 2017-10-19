@@ -24,7 +24,7 @@ var StyledDrop = styled.div.withConfig({
 }, function (props) {
   return props.theme.global.drop.shadow;
 }, function (props) {
-  return backgroundStyle(props.background || props.theme.global.drop.backgroundColor, props.theme);
+  return backgroundStyle(props.theme.global.drop.backgroundColor, props.theme);
 }, function (props) {
   return getTransformOriginStyle(props.align);
 });

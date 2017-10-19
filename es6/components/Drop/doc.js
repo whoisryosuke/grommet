@@ -15,10 +15,6 @@ export default (function (Drop) {
         left: 'left'
       }
     }),
-    background: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
-      dark: PropTypes.bool,
-      image: PropTypes.string
-    })]).description('Either a color identifier to use for the background color. For example:\n      \'neutral-1\'. Or, a \'url()\' for an image.'),
     control: PropTypes.object.description('Target container where the drop will be aligned.').isRequired,
     dir: PropTypes.oneOf(['rtl', 'ltr']).description('Whether text should be rendered right to left or not. Defaults to\n      inherit from the document context.'),
     restrictFocus: PropTypes.bool.description('Whether the drop should control focus.'),

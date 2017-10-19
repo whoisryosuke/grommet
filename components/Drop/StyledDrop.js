@@ -32,7 +32,7 @@ var StyledDrop = _styledComponents2.default.div.withConfig({
 }, function (props) {
   return props.theme.global.drop.shadow;
 }, function (props) {
-  return (0, _utils.backgroundStyle)(props.background || props.theme.global.drop.backgroundColor, props.theme);
+  return (0, _utils.backgroundStyle)(props.theme.global.drop.backgroundColor, props.theme);
 }, function (props) {
   return getTransformOriginStyle(props.align);
 });

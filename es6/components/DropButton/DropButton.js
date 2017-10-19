@@ -71,12 +71,11 @@ var DropButton = function (_Component) {
 
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
-        background = _props.background,
         children = _props.children,
         control = _props.control,
         id = _props.id,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'background', 'children', 'control', 'id', 'theme']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'control', 'id', 'theme']);
 
     var showDrop = this.state.showDrop;
 
@@ -90,7 +89,6 @@ var DropButton = function (_Component) {
           restrictFocus: true,
           id: id ? 'drop-button__' + id : undefined,
           align: { top: 'bottom', left: 'left' },
-          background: background,
           ref: function ref(_ref2) {
             _this2.dropRef = _ref2;
           },

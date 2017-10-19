@@ -8,13 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _reactDom = require('react-dom');
-
-var _recompose = require('recompose');
 
 var _grommetIcons = require('grommet-icons');
 
@@ -25,8 +19,6 @@ var _Button = require('../Button');
 var _Keyboard = require('../Keyboard');
 
 var _Drop = require('../Drop');
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 
@@ -124,8 +116,7 @@ var Menu = function (_Component) {
         _props$messages = _props.messages,
         messages = _props$messages === undefined ? {} : _props$messages,
         onKeyDown = _props.onKeyDown,
-        theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'id', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
+        rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'id', 'items', 'label', 'messages', 'onKeyDown']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
@@ -168,44 +159,47 @@ var Menu = function (_Component) {
         {
           id: id ? 'menu-drop__' + id : undefined,
           align: dropAlign,
-          background: background,
           ref: function ref(_ref2) {
             _this2.dropRef = _ref2;
           },
           control: this.componentRef,
           onClose: this.onDropClose
         },
-        dropAlign.top === 'top' ? controlMirror : undefined,
         _react2.default.createElement(
           _Box.Box,
-          null,
-          items.map(function (item, index) {
-            return _react2.default.createElement(
-              _Button.Button,
-              {
-                ref: function ref(_ref) {
-                  _this2.buttonRefs[index] = _ref;
+          { background: background },
+          dropAlign.top === 'top' ? controlMirror : undefined,
+          _react2.default.createElement(
+            _Box.Box,
+            null,
+            items.map(function (item, index) {
+              return _react2.default.createElement(
+                _Button.Button,
+                {
+                  ref: function ref(_ref) {
+                    _this2.buttonRefs[index] = _ref;
+                  },
+                  active: activeItemIndex === index,
+                  key: 'menuItem_' + index,
+                  hoverIndicator: 'background',
+                  onClick: item.onClick ? function () {
+                    item.onClick.apply(item, arguments);
+                    if (item.close !== false) {
+                      _this2.onDropClose();
+                    }
+                  } : undefined
                 },
-                active: activeItemIndex === index,
-                key: 'menuItem_' + index,
-                hoverIndicator: 'background',
-                onClick: item.onClick ? function () {
-                  item.onClick.apply(item, arguments);
-                  if (item.close !== false) {
-                    _this2.onDropClose();
-                  }
-                } : undefined
-              },
-              _react2.default.createElement(
-                _Box.Box,
-                { align: 'start', pad: 'small', direction: 'row' },
-                item.icon,
-                item.label
-              )
-            );
-          })
-        ),
-        dropAlign.bottom === 'bottom' ? controlMirror : undefined
+                _react2.default.createElement(
+                  _Box.Box,
+                  { align: 'start', pad: 'small', direction: 'row' },
+                  item.icon,
+                  item.label
+                )
+              );
+            })
+          ),
+          dropAlign.bottom === 'bottom' ? controlMirror : undefined
+        )
       );
     }
 
@@ -250,11 +244,6 @@ var Menu = function (_Component) {
   return Menu;
 }(_react.Component);
 
-Menu.contextTypes = {
-  grommet: _propTypes2.default.object,
-  theme: _propTypes2.default.object,
-  router: _propTypes2.default.any
-};
 Menu.defaultProps = {
   dropAlign: { top: 'top', left: 'left' }
 };
@@ -264,4 +253,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Menu);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme)(Menu);
+exports.default = Menu;

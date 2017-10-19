@@ -22,7 +22,7 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 
 import { withTheme } from '../hocs';
-import throttle from '../utils/throttle';
+import { throttle } from '../utils';
 
 import StyledVideo, { StyledVideoContainer, StyledVideoControls, StyledVideoScrubber } from './StyledVideo';
 

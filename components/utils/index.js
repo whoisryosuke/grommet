@@ -14,6 +14,18 @@ Object.keys(_colors).forEach(function (key) {
   });
 });
 
+var _debounce = require('./debounce');
+
+Object.keys(_debounce).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _debounce[key];
+    }
+  });
+});
+
 var _DOM = require('./DOM');
 
 Object.keys(_DOM).forEach(function (key) {
@@ -34,6 +46,18 @@ Object.keys(_graphics).forEach(function (key) {
     enumerable: true,
     get: function get() {
       return _graphics[key];
+    }
+  });
+});
+
+var _propTypes = require('./prop-types');
+
+Object.keys(_propTypes).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _propTypes[key];
     }
   });
 });
@@ -70,6 +94,18 @@ Object.keys(_router).forEach(function (key) {
     enumerable: true,
     get: function get() {
       return _router[key];
+    }
+  });
+});
+
+var _throttle = require('./throttle');
+
+Object.keys(_throttle).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _throttle[key];
     }
   });
 });

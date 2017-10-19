@@ -67,7 +67,13 @@ var basisStyle = (0, _styledComponents.css)(['flex-basis:', ';'], function (prop
   return BASIS_MAP[props.basis] || props.theme.global.size[props.basis];
 });
 
-var directionStyle = (0, _styledComponents.css)(['flex-direction:', ';'], function (props) {
+// min-width and min-height needed because of this
+// https://stackoverflow.com/questions/36247140/why-doesnt-flex-item-shrink-past-content-size
+var directionStyle = (0, _styledComponents.css)(['', ' ', ' flex-direction:', ';'], function (props) {
+  return props.direction === 'row' && 'min-width: 0;';
+}, function (props) {
+  return props.direction === 'column' && 'min-height: 0;';
+}, function (props) {
   if (props.direction) {
     return props.reverse ? props.direction + '-reverse' : props.direction;
   }
@@ -125,7 +131,7 @@ var wrapStyle = 'flex-wrap: wrap;';
 
 var borderStyle = function borderStyle(data, theme) {
   var style = '';
-  var color = (0, _utils.colorForName)(data.color || 'light-2', theme);
+  var color = (0, _utils.colorForName)(data.color || 'border', theme);
   var borderSize = data.size || 'xsmall';
   var side = typeof data === 'string' ? data : data.side || 'all';
   var value = 'solid ' + theme.global.borderSize[borderSize] + ' ' + color;

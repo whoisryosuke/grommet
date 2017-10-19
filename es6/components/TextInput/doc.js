@@ -6,10 +6,11 @@ export default (function (TextInput) {
   DocumentedTextInput.propTypes = {
     defaultValue: PropTypes.string.description('What text to start with in the input.'),
     id: PropTypes.string.description('The id attribute of the input.'),
+    focusIndicator: PropTypes.bool.description('Whether the plain text input should receive a focus outline.'),
     name: PropTypes.string.description('The name attribute of the input.'),
     onInput: PropTypes.func.description('Function that will be called when the user types in the input.'),
     onSelect: PropTypes.func.description('Function that will be called when the user selects a suggestion.\n      The suggestion contains the object chosen from the supplied suggestions.'),
-    placeholder: PropTypes.string.description('Placeholder text to use when the input is empty.'),
+    placeholder: PropTypes.string.description('Placeholder text to use when no value is provided.'),
     plain: PropTypes.bool.description('Whether this is a plain input with no border or padding.\n      Only use this when the containing context provides sufficient affordance'),
     size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']).description('The size of the TextInput.'),
     suggestions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.shape({

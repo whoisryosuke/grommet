@@ -78,8 +78,9 @@ var Box = function (_Component) {
     var _this2 = this;
 
     var _props2 = this.props,
+        a11yTitle = _props2.a11yTitle,
         tag = _props2.tag,
-        rest = _objectWithoutProperties(_props2, ['tag']);
+        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'tag']);
 
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
@@ -87,9 +88,12 @@ var Box = function (_Component) {
       styledComponents[tag] = StyledComponent;
     }
 
-    return _react2.default.createElement(StyledComponent, _extends({ ref: function ref(_ref) {
+    return _react2.default.createElement(StyledComponent, _extends({
+      'aria-label': a11yTitle,
+      ref: function ref(_ref) {
         _this2.componentRef = _ref;
-      } }, rest));
+      }
+    }, rest));
   };
 
   return Box;

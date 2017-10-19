@@ -1,5 +1,7 @@
 import { describe, PropTypes } from 'react-desc';
 
+import { a11yTitlePropType } from '../utils';
+
 var PAD_SIZES = ['xsmall', 'small', 'medium', 'large'];
 
 var ANIMATION_TYPE = PropTypes.oneOf(['fadeIn', 'fadeOut', 'slideUp', 'slideDown', 'slideLeft', 'slideRight', 'zoomIn', 'zoomOut']);
@@ -12,6 +14,7 @@ var ANIMATION_SHAPE = PropTypes.shape({
 export default (function (Box) {
   var DocumentedBox = describe(Box).description('A flexible box that lays out its contents along a single\n      direction.').usage('import { Box } from \'grommet\';\n      <Box/>');
   DocumentedBox.propTypes = {
+    a11yTitle: a11yTitlePropType,
     align: PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']).description('How to align the contents along the cross axis.'),
     alignContent: PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in the cross axis.\n        Defaults to stretch'),
     alignSelf: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the cross axis when contained in a Box or along\n      the column axis when contained in a Grid.'),

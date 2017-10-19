@@ -20,9 +20,15 @@ var topAlignStyle = '\n  left: 50%;\n  transform: translateX(-50%);\n\n  animati
 
 var bottomAlignStyle = '\n  bottom: 0px;\n  right: 50%;\n  transform: translateX(50%);\n\n  animation: slide-up 0.2s ease-in-out forwards;\n  \n  @keyframes slide-up {\n    0% {\n      margin-bottom: -200px;\n    }\n  \n    100% {\n      margin-bottom: 0px;\n    }\n  }\n';
 
+var centerAlignStyle = css(['bottom:50%;right:50%;transform:translate(50%,50%);max-height:calc(100vh - ', ');max-width:calc(100vw - ', ');animation:grow-box 0.1s forwards;@keyframes grow-box{0%{transform:scale(0);}100%{transform:scale(1);}}'], function (props) {
+  return props.theme.global.edgeSize.large;
+}, function (props) {
+  return props.theme.global.edgeSize.large;
+});
+
 function getAlignStyle(props) {
   var ALIGN_MAP = {
-    'center': '\n      bottom: 50%;\n      right: 50%;\n      transform: translate(50%, 50%);\n      max-height: calc(100vh - ' + props.theme.global.edgeSize.large + ');\n      max-width: calc(100vw - ' + props.theme.global.edgeSize.large + ');\n    ',
+    'center': centerAlignStyle,
     'left': leftAlignStyle,
     'right': rightAlignStyle,
     'top': topAlignStyle,

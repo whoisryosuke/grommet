@@ -25,6 +25,8 @@ var darkColors = ['#333333', '#444444', '#555555', '#666666', '#777777', '#99999
 var lightColors = ['#F6F6F6', '#EEEEEE', '#DDDDDD', '#CCCCCC', '#BBBBBB', '#AAAAAA'];
 var backgroundColor = '#FFFFFF';
 var textColor = '#333333';
+var borderColor = 'rgba(0, 0, 0, 0.15)';
+var activeColor = (0, _polished.rgba)('#DDDDDD', 0.5);
 var fontPath = 'https://fonts.gstatic.com/s/worksans/v2';
 
 var baseSpacing = 24;
@@ -48,9 +50,11 @@ exports.default = (0, _utils2.deepFreeze)({
     },
     centerColumnWidth: baseSpacing * 48 + 'px',
     colors: {
+      active: activeColor,
       accent: accentColors,
       background: backgroundColor,
       black: '#000000',
+      border: borderColor,
       brand: brandColor,
       dark: darkColors,
       darkBackgroundTextColor: 'rgba(255, 255, 255, 0.85)',
@@ -92,14 +96,14 @@ exports.default = (0, _utils2.deepFreeze)({
       size: '16px'
     },
     hover: {
-      backgroundColor: (0, _polished.rgba)('#DDDDDD', 0.5),
+      backgroundColor: activeColor,
       textColor: '#000000'
     },
     input: {
       border: {
         width: '1px',
         radius: '4px',
-        color: 'rgba(0, 0, 0, 0.15)'
+        color: borderColor
       }
     },
     lineHeight: '24px',

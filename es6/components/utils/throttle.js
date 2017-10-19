@@ -1,8 +1,10 @@
+var _this = this;
+
 // (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
-export default function (fn) {
+export var throttle = function throttle(fn) {
   var threshhold = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 250;
-  var scope = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this;
+  var scope = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _this;
 
   var last = void 0;
   var deferTimer = void 0;
@@ -24,4 +26,6 @@ export default function (fn) {
       fn.apply(scope, args);
     }
   };
-}
+};
+
+export default throttle;

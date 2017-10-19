@@ -4,6 +4,8 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
+var _utils = require('../utils');
+
 var PAD_SIZES = ['xsmall', 'small', 'medium', 'large'];
 
 var ANIMATION_TYPE = _reactDesc.PropTypes.oneOf(['fadeIn', 'fadeOut', 'slideUp', 'slideDown', 'slideLeft', 'slideRight', 'zoomIn', 'zoomOut']);
@@ -16,6 +18,7 @@ var ANIMATION_SHAPE = _reactDesc.PropTypes.shape({
 exports.default = function (Box) {
   var DocumentedBox = (0, _reactDesc.describe)(Box).description('A flexible box that lays out its contents along a single\n      direction.').usage('import { Box } from \'grommet\';\n      <Box/>');
   DocumentedBox.propTypes = {
+    a11yTitle: _utils.a11yTitlePropType,
     align: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']).description('How to align the contents along the cross axis.'),
     alignContent: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in the cross axis.\n        Defaults to stretch'),
     alignSelf: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the cross axis when contained in a Box or along\n      the column axis when contained in a Grid.'),

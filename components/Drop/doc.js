@@ -19,10 +19,6 @@ exports.default = function (Drop) {
         left: 'left'
       }
     }),
-    background: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.shape({
-      dark: _reactDesc.PropTypes.bool,
-      image: _reactDesc.PropTypes.string
-    })]).description('Either a color identifier to use for the background color. For example:\n      \'neutral-1\'. Or, a \'url()\' for an image.'),
     control: _reactDesc.PropTypes.object.description('Target container where the drop will be aligned.').isRequired,
     dir: _reactDesc.PropTypes.oneOf(['rtl', 'ltr']).description('Whether text should be rendered right to left or not. Defaults to\n      inherit from the document context.'),
     restrictFocus: _reactDesc.PropTypes.bool.description('Whether the drop should control focus.'),

@@ -32,9 +32,7 @@ var _Text = require('../Text');
 
 var _hocs = require('../hocs');
 
-var _throttle = require('../utils/throttle');
-
-var _throttle2 = _interopRequireDefault(_throttle);
+var _utils = require('../utils');
 
 var _StyledVideo = require('./StyledVideo');
 
@@ -181,7 +179,7 @@ var Video = function (_Component) {
   }
 
   Video.prototype.componentWillMount = function componentWillMount() {
-    this.update = (0, _throttle2.default)(this.update, 100, this);
+    this.update = (0, _utils.throttle)(this.update, 100, this);
     this.mediaEventProps = this.injectUpdateVideoEvents();
   };
 

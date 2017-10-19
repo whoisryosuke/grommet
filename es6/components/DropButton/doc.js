@@ -5,10 +5,6 @@ export default (function (DropButton) {
 
   DocumentedDropButton.propTypes = {
     a11yTitle: PropTypes.string.description('Custom title to be used by screen readers.'),
-    background: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
-      color: PropTypes.string,
-      opacity: PropTypes.oneOfType([PropTypes.oneOf(['weak', 'medium', 'strong']), PropTypes.bool])
-    })]).description('Background color when drop is active'),
     control: PropTypes.element.description('React node to open/close the drop content.').isRequired,
     onClose: PropTypes.func.description('Callback for when the drop is closed'),
     open: PropTypes.bool.description('Whether the drop should be open or not.')

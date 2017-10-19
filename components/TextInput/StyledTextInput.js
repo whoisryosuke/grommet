@@ -33,7 +33,7 @@ var StyledTextInput = _styledComponents2.default.input.withConfig({
 }, function (props) {
   return props.plain && plainStyle;
 }, placeholderColor, placeholderColor, placeholderColor, function (props) {
-  return !props.plain && _utils.focusStyle;
+  return (!props.plain || props.focusIndicator) && _utils.focusStyle;
 });
 
 var StyledTextInputContainer = exports.StyledTextInputContainer = _styledComponents2.default.div.withConfig({

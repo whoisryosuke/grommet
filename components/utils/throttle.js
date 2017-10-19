@@ -1,10 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
+// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
-exports.default = function (fn) {
+var throttle = exports.throttle = function throttle(fn) {
   var threshhold = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 250;
-  var scope = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this;
+  var scope = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
 
   var last = void 0;
   var deferTimer = void 0;
@@ -27,3 +28,5 @@ exports.default = function (fn) {
     }
   };
 };
+
+exports.default = throttle;

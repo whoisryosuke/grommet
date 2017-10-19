@@ -9,9 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { compose } from 'recompose';
 
 import { FormDown } from 'grommet-icons';
 
@@ -19,8 +17,6 @@ import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { Drop } from '../Drop';
-
-import { withTheme } from '../hocs';
 
 import doc from './doc';
 
@@ -106,8 +102,7 @@ var Menu = function (_Component) {
         _props$messages = _props.messages,
         messages = _props$messages === undefined ? {} : _props$messages,
         onKeyDown = _props.onKeyDown,
-        theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'id', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
+        rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'id', 'items', 'label', 'messages', 'onKeyDown']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
@@ -150,44 +145,47 @@ var Menu = function (_Component) {
         {
           id: id ? 'menu-drop__' + id : undefined,
           align: dropAlign,
-          background: background,
           ref: function ref(_ref2) {
             _this2.dropRef = _ref2;
           },
           control: this.componentRef,
           onClose: this.onDropClose
         },
-        dropAlign.top === 'top' ? controlMirror : undefined,
         React.createElement(
           Box,
-          null,
-          items.map(function (item, index) {
-            return React.createElement(
-              Button,
-              {
-                ref: function ref(_ref) {
-                  _this2.buttonRefs[index] = _ref;
+          { background: background },
+          dropAlign.top === 'top' ? controlMirror : undefined,
+          React.createElement(
+            Box,
+            null,
+            items.map(function (item, index) {
+              return React.createElement(
+                Button,
+                {
+                  ref: function ref(_ref) {
+                    _this2.buttonRefs[index] = _ref;
+                  },
+                  active: activeItemIndex === index,
+                  key: 'menuItem_' + index,
+                  hoverIndicator: 'background',
+                  onClick: item.onClick ? function () {
+                    item.onClick.apply(item, arguments);
+                    if (item.close !== false) {
+                      _this2.onDropClose();
+                    }
+                  } : undefined
                 },
-                active: activeItemIndex === index,
-                key: 'menuItem_' + index,
-                hoverIndicator: 'background',
-                onClick: item.onClick ? function () {
-                  item.onClick.apply(item, arguments);
-                  if (item.close !== false) {
-                    _this2.onDropClose();
-                  }
-                } : undefined
-              },
-              React.createElement(
-                Box,
-                { align: 'start', pad: 'small', direction: 'row' },
-                item.icon,
-                item.label
-              )
-            );
-          })
-        ),
-        dropAlign.bottom === 'bottom' ? controlMirror : undefined
+                React.createElement(
+                  Box,
+                  { align: 'start', pad: 'small', direction: 'row' },
+                  item.icon,
+                  item.label
+                )
+              );
+            })
+          ),
+          dropAlign.bottom === 'bottom' ? controlMirror : undefined
+        )
       );
     }
 
@@ -232,11 +230,6 @@ var Menu = function (_Component) {
   return Menu;
 }(Component);
 
-Menu.contextTypes = {
-  grommet: PropTypes.object,
-  theme: PropTypes.object,
-  router: PropTypes.any
-};
 Menu.defaultProps = {
   dropAlign: { top: 'top', left: 'left' }
 };
@@ -246,4 +239,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Menu);
 }
 
-export default compose(withTheme)(Menu);
+export default Menu;

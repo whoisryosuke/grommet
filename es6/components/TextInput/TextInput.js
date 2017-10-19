@@ -203,12 +203,11 @@ var TextInput = function (_Component) {
 
     var _props = this.props,
         defaultValue = _props.defaultValue,
-        focus = _props.focus,
         plain = _props.plain,
         value = _props.value,
         _onInput = _props.onInput,
         onKeyDown = _props.onKeyDown,
-        rest = _objectWithoutProperties(_props, ['defaultValue', 'focus', 'plain', 'value', 'onInput', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props, ['defaultValue', 'plain', 'value', 'onInput', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
     var showDrop = this.state.showDrop;
@@ -251,7 +250,6 @@ var TextInput = function (_Component) {
           autoComplete: 'off',
           plain: plain
         }, rest, {
-          focus: !plain && focus,
           defaultValue: renderLabel(defaultValue),
           value: renderLabel(value),
           onInput: function onInput(event) {
