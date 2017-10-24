@@ -4,8 +4,10 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
+var _utils = require('../utils');
+
 exports.default = function (Meter) {
-  var DocumentedMeter = (0, _reactDesc.describe)(Meter).description('A graphical meter.').usage('import { Meter } from \'grommet\';\n    <Meter/>');
+  var DocumentedMeter = (0, _reactDesc.describe)(Meter).availableAt((0, _utils.getAvailableAtBadge)('Meter')).description('A graphical meter.').usage('import { Meter } from \'grommet\';\n<Meter />');
 
   DocumentedMeter.propTypes = {
     background: _reactDesc.PropTypes.string.description('A color identifier to use for the background color. For example:\n      \'light-1\'.'),

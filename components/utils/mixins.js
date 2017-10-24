@@ -6,6 +6,7 @@ exports.fontSize = fontSize;
 exports.lapAndUp = lapAndUp;
 exports.palm = palm;
 exports.findAllByType = findAllByType;
+exports.getAvailableAtBadge = getAvailableAtBadge;
 
 var _styledComponents = require('styled-components');
 
@@ -49,6 +50,13 @@ function findAllByType(component, type) {
   return matches;
 }
 
+function getAvailableAtBadge(availableAt) {
+  return {
+    url: 'https://codesandbox.io/s/github/grommet/grommet-site?initialpath=' + availableAt.toLowerCase() + '&amp;module=%2Fscreens%2F' + availableAt + '.js',
+    badge: 'https://codesandbox.io/static/img/play-codesandbox.svg'
+  };
+}
+
 exports.default = {
-  fontSize: fontSize, findAllByType: findAllByType, lapAndUp: lapAndUp, palm: palm
+  fontSize: fontSize, findAllByType: findAllByType, getAvailableAtBadge: getAvailableAtBadge, lapAndUp: lapAndUp, palm: palm
 };

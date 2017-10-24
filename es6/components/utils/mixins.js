@@ -40,6 +40,13 @@ export function findAllByType(component, type) {
   return matches;
 }
 
+export function getAvailableAtBadge(availableAt) {
+  return {
+    url: 'https://codesandbox.io/s/github/grommet/grommet-site?initialpath=' + availableAt.toLowerCase() + '&amp;module=%2Fscreens%2F' + availableAt + '.js',
+    badge: 'https://codesandbox.io/static/img/play-codesandbox.svg'
+  };
+}
+
 export default {
-  fontSize: fontSize, findAllByType: findAllByType, lapAndUp: lapAndUp, palm: palm
+  fontSize: fontSize, findAllByType: findAllByType, getAvailableAtBadge: getAvailableAtBadge, lapAndUp: lapAndUp, palm: palm
 };

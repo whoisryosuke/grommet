@@ -4,8 +4,10 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
+var _utils = require('../utils');
+
 exports.default = function (Video) {
-  var DocumentedVideo = (0, _reactDesc.describe)(Video).description('A video player.').usage('import { Video } from \'grommet\';\n    <Video/>');
+  var DocumentedVideo = (0, _reactDesc.describe)(Video).availableAt((0, _utils.getAvailableAtBadge)('Video')).description('A video player.').usage('import { Video } from \'grommet\';\n<Video />');
 
   DocumentedVideo.propTypes = {
     autoPlay: _reactDesc.PropTypes.bool.description('Enables automatic playback of the video as soon as it is loaded.'),

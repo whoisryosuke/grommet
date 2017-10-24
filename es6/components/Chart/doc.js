@@ -1,7 +1,9 @@
 import { describe, PropTypes } from 'react-desc';
 
+import { getAvailableAtBadge } from '../utils';
+
 export default (function (Chart) {
-  var DocumentedChart = describe(Chart).description('A graphical chart.').usage('import { Chart } from \'grommet\';\n    <Chart/>');
+  var DocumentedChart = describe(Chart).availableAt(getAvailableAtBadge('Chart')).description('A graphical chart.').usage("import { Chart } from 'grommet';\n<Chart />");
 
   DocumentedChart.propTypes = {
     bounds: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).description('The limits for the values, specified as a two dimensional array.\n      If not specified, the bounds will automatically be set to fit\n      the provided values.'),

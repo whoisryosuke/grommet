@@ -1,6 +1,6 @@
 import { describe, PropTypes } from 'react-desc';
 
-import { a11yTitlePropType } from '../utils';
+import { a11yTitlePropType, getAvailableAtBadge } from '../utils';
 
 var PAD_SIZES = ['xsmall', 'small', 'medium', 'large'];
 
@@ -12,19 +12,19 @@ var ANIMATION_SHAPE = PropTypes.shape({
 });
 
 export default (function (Box) {
-  var DocumentedBox = describe(Box).description('A flexible box that lays out its contents along a single\n      direction.').usage('import { Box } from \'grommet\';\n      <Box/>');
+  var DocumentedBox = describe(Box).availableAt(getAvailableAtBadge('Box')).description('A flexible box that lays out its contents along a single direction.').usage("import { Box } from 'grommet';\n<Box />");
   DocumentedBox.propTypes = {
     a11yTitle: a11yTitlePropType,
     align: PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']).description('How to align the contents along the cross axis.'),
     alignContent: PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in the cross axis.').defaultValue('stretch'),
-    alignSelf: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the cross axis when contained in a Box or along\n      the column axis when contained in a Grid.'),
+    alignSelf: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the cross axis when contained in a Box or along\nthe column axis when contained in a Grid.'),
     animation: PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE, PropTypes.arrayOf(PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE]))]).description('Animation effect(s) to use. \'duration\' and \'delay\' should be in milliseconds.'),
     background: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
       color: PropTypes.string,
       dark: PropTypes.bool,
       image: PropTypes.string,
       opacity: PropTypes.oneOfType([PropTypes.oneOf(['weak', 'medium', 'strong']), PropTypes.bool])
-    })]).description('Either a color identifier to use for the background color. For example:\n      \'neutral-1\'. Or, a \'url()\' for an image. Dark is not needed if color is provided.'),
+    })]).description('Either a color identifier to use for the background color. For example:\n\'neutral-1\'. Or, a \'url()\' for an image. Dark is not needed if color is provided.'),
     basis: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4']).description('A fixed or relative size along its container\'s main axis.'),
     border: PropTypes.oneOfType([PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']), PropTypes.shape({
       color: PropTypes.string,
@@ -44,7 +44,7 @@ export default (function (Box) {
       right: PropTypes.oneOf(PAD_SIZES),
       top: PropTypes.oneOf(PAD_SIZES),
       vertical: PropTypes.oneOf(PAD_SIZES)
-    })]).description('The amount of margin around the box. An object can be specified to\n      distinguish horizontal margin, vertical margin, and margin on a\n      particular side of the box'),
+    })]).description('The amount of margin around the box. An object can be specified to\ndistinguish horizontal margin, vertical margin, and margin on a\nparticular side of the box'),
     overflow: PropTypes.oneOf(['auto', 'hidden', 'scroll']).description('box overflow.'),
     pad: PropTypes.oneOfType([PropTypes.oneOf(['none'].concat(PAD_SIZES)), PropTypes.shape({
       bottom: PropTypes.oneOf(PAD_SIZES),
@@ -53,8 +53,8 @@ export default (function (Box) {
       right: PropTypes.oneOf(PAD_SIZES),
       top: PropTypes.oneOf(PAD_SIZES),
       vertical: PropTypes.oneOf(PAD_SIZES)
-    })]).description('The amount of padding around the box contents. An object can be specified to\n      distinguish horizontal padding, vertical padding, and padding on a\n      particular side of the box'),
-    responsive: PropTypes.bool.description('Whether children laid out in a row direction should be switched to a\n      column layout when the display area narrows.'),
+    })]).description('The amount of padding around the box contents. An object can be specified to\ndistinguish horizontal padding, vertical padding, and padding on a\nparticular side of the box'),
+    responsive: PropTypes.bool.description('Whether children laid out in a row direction should be switched to a\ncolumn layout when the display area narrows.'),
     reverse: PropTypes.bool.description('Whether to reverse the order of the child components.'),
     round: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']).description('How much to round the corners.'),
     tag: PropTypes.string.description('The DOM tag to use for the element.').defaultValue('div'),

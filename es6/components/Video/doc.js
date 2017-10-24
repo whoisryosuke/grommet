@@ -1,7 +1,9 @@
 import { describe, PropTypes } from 'react-desc';
 
+import { getAvailableAtBadge } from '../utils';
+
 export default (function (Video) {
-  var DocumentedVideo = describe(Video).description('A video player.').usage('import { Video } from \'grommet\';\n    <Video/>');
+  var DocumentedVideo = describe(Video).availableAt(getAvailableAtBadge('Video')).description('A video player.').usage('import { Video } from \'grommet\';\n<Video />');
 
   DocumentedVideo.propTypes = {
     autoPlay: PropTypes.bool.description('Enables automatic playback of the video as soon as it is loaded.'),

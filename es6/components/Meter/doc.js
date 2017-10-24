@@ -1,7 +1,9 @@
 import { describe, PropTypes } from 'react-desc';
 
+import { getAvailableAtBadge } from '../utils';
+
 export default (function (Meter) {
-  var DocumentedMeter = describe(Meter).description('A graphical meter.').usage('import { Meter } from \'grommet\';\n    <Meter/>');
+  var DocumentedMeter = describe(Meter).availableAt(getAvailableAtBadge('Meter')).description('A graphical meter.').usage('import { Meter } from \'grommet\';\n<Meter />');
 
   DocumentedMeter.propTypes = {
     background: PropTypes.string.description('A color identifier to use for the background color. For example:\n      \'light-1\'.'),

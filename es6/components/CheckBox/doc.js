@@ -1,7 +1,9 @@
 import { describe, PropTypes } from 'react-desc';
 
+import { getAvailableAtBadge } from '../utils';
+
 export default (function (CheckBox) {
-  var DocumentedCheckBox = describe(CheckBox).description('A checkbox toggle control.').usage('import { CheckBox } from \'grommet\';\n    <CheckBox/>');
+  var DocumentedCheckBox = describe(CheckBox).availableAt(getAvailableAtBadge('CheckBox')).description('A checkbox toggle control.').usage('import { CheckBox } from \'grommet\';\n<CheckBox />');
 
   DocumentedCheckBox.propTypes = {
     checked: PropTypes.bool.description('Same as React <input checked={} />'),
