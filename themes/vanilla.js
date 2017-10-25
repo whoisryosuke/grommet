@@ -152,7 +152,7 @@ exports.default = (0, _utils.deepFreeze)({
   },
   checkBox: {
     check: {
-      color: brandColor,
+      color: undefined,
       width: '4px'
     },
     border: {
@@ -222,7 +222,7 @@ exports.default = (0, _utils.deepFreeze)({
   },
   radioButton: {
     check: {
-      color: brandColor
+      color: undefined
     },
     border: {
       color: {

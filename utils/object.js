@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 exports.isObject = isObject;
@@ -27,13 +29,13 @@ function deepMerge(target) {
     return target;
   }
   // making sure to not change target (immutable)
-  var output = Object.assign({}, target);
+  var output = _extends({}, target);
   var source = sources.shift();
   if (isObject(output) && isObject(source)) {
     Object.keys(source).forEach(function (key) {
       if (isObject(source[key])) {
         if (!output[key]) {
-          output[key] = Object.assign({}, source[key]);
+          output[key] = _extends({}, source[key]);
         } else {
           output[key] = deepMerge({}, output[key], source[key]);
         }
