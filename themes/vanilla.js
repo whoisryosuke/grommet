@@ -114,7 +114,6 @@ exports.default = (0, _utils.deepFreeze)({
       color: '#AAAAAA'
     },
     selected: {
-      backgroundColor: (0, _polished.lighten)(0.23, brandColor),
       textColor: textColor
     },
     spacing: baseSpacing + 'px',
@@ -131,7 +130,9 @@ exports.default = (0, _utils.deepFreeze)({
   anchor: {
     textDecoration: 'none',
     fontWeight: 600,
-    color: brandColor
+    color: (0, _styledComponents.css)(['', ''], function (props) {
+      return (0, _utils.colorForName)('brand', props.theme);
+    })
   },
   button: {
     border: {
@@ -152,7 +153,9 @@ exports.default = (0, _utils.deepFreeze)({
   },
   checkBox: {
     check: {
-      color: undefined,
+      color: (0, _styledComponents.css)(['', ''], function (props) {
+        return (0, _utils.colorForName)('brand', props.theme);
+      }),
       width: '4px'
     },
     border: {
@@ -222,7 +225,9 @@ exports.default = (0, _utils.deepFreeze)({
   },
   radioButton: {
     check: {
-      color: undefined
+      color: (0, _styledComponents.css)(['', ''], function (props) {
+        return (0, _utils.colorForName)('brand', props.theme);
+      })
     },
     border: {
       color: {

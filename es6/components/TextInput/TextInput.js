@@ -159,7 +159,7 @@ var TextInput = function (_Component) {
             React.createElement(
               Button,
               {
-                active: activeSuggestionIndex === index,
+                active: activeSuggestionIndex === index || selectedSuggestionIndex === index,
                 fill: true,
                 hoverIndicator: 'background',
                 onClick: function onClick() {
@@ -168,11 +168,7 @@ var TextInput = function (_Component) {
               },
               React.createElement(
                 Box,
-                {
-                  align: 'start',
-                  pad: 'small',
-                  background: selectedSuggestionIndex === index ? theme.global.selected.backgroundColor : undefined
-                },
+                { align: 'start', pad: 'small' },
                 renderLabel(suggestion)
               )
             )
