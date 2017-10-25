@@ -14,10 +14,9 @@ import { compose } from 'recompose';
 
 import { LinkNext } from 'grommet-icons';
 
-import StyledAnchor, { StyledIcon } from './StyledAnchor';
-
 import { withFocus, withTheme } from '../hocs';
 
+import StyledAnchor, { StyledIcon } from './StyledAnchor';
 import doc from './doc';
 
 var Anchor = function (_Component) {

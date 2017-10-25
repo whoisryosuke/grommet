@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled from 'styled-components';
 
-import { focusStyle } from '../utils';
+import { focusStyle } from '../../utils';
 
 export var StyledRadioButtonContainer = styled.label.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonContainer'

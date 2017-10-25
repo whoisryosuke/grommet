@@ -6,9 +6,7 @@ var _polished = require('polished');
 
 var _styledComponents = require('styled-components');
 
-var _utils = require('../components/utils');
-
-var _utils2 = require('../utils');
+var _utils = require('../utils');
 
 var brandColor = '#865CD6';
 var accentColors = ['#00CCEB', '#FF7D28'];
@@ -33,7 +31,7 @@ var baseSpacing = 24;
 
 var borderWidth = 2;
 
-exports.default = (0, _utils2.deepFreeze)({
+exports.default = (0, _utils.deepFreeze)({
   global: {
     animation: {
       duration: '1s'

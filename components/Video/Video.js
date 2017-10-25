@@ -32,7 +32,7 @@ var _Text = require('../Text');
 
 var _hocs = require('../hocs');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 var _StyledVideo = require('./StyledVideo');
 

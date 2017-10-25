@@ -12,7 +12,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Anchor from './Anchor';
-
 import { routedAnchor } from './doc';
 
 var RoutedAnchor = function (_Component) {

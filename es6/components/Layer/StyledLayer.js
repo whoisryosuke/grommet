@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-import { baseStyle, lapAndUp, palm } from '../utils';
+import { baseStyle, lapAndUp, palm } from '../../utils';
 
 var StyledLayer = styled.div.withConfig({
   displayName: 'StyledLayer'

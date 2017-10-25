@@ -4,7 +4,7 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 exports.default = function (Video) {
   var DocumentedVideo = (0, _reactDesc.describe)(Video).availableAt((0, _utils.getAvailableAtBadge)('Video')).description('A video player.').usage('import { Video } from \'grommet\';\n<Video />');

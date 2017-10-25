@@ -8,13 +8,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _utils = require('../../utils');
+
 var _StyledMeter = require('./StyledMeter');
 
 var _StyledMeter2 = _interopRequireDefault(_StyledMeter);
-
-var _mixins = require('../utils/mixins');
-
-var _colors = require('../utils/colors');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45,8 +43,8 @@ var Bar = function (_Component) {
         values = _props.values,
         rest = _objectWithoutProperties(_props, ['background', 'round', 'size', 'theme', 'thickness', 'values']);
 
-    var width = size === 'full' ? 288 : (0, _mixins.parseMetricToInt)(theme.global.size[size]);
-    var height = (0, _mixins.parseMetricToInt)(theme.global.edgeSize[thickness]);
+    var width = size === 'full' ? 288 : (0, _utils.parseMetricToInt)(theme.global.size[size]);
+    var height = (0, _utils.parseMetricToInt)(theme.global.edgeSize[thickness]);
     var mid = height / 2;
     var max = 100;
     var someHighlight = (values || []).some(function (v) {
@@ -85,7 +83,7 @@ var Bar = function (_Component) {
         key: key,
         d: d,
         fill: 'none',
-        stroke: (0, _colors.colorForName)(someHighlight && !highlight ? background : colorName, theme),
+        stroke: (0, _utils.colorForName)(someHighlight && !highlight ? background : colorName, theme),
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square'
       }, hoverProps, pathRest));
@@ -102,7 +100,7 @@ var Bar = function (_Component) {
       _react2.default.createElement('path', {
         d: 'M 0,' + mid + ' L ' + width + ',' + mid,
         fill: 'none',
-        stroke: (0, _colors.colorForName)(background, theme),
+        stroke: (0, _utils.colorForName)(background, theme),
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square'
       }),

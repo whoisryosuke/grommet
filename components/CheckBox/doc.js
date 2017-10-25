@@ -4,7 +4,7 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 exports.default = function (CheckBox) {
   var DocumentedCheckBox = (0, _reactDesc.describe)(CheckBox).availableAt((0, _utils.getAvailableAtBadge)('CheckBox')).description('A checkbox toggle control.').usage('import { CheckBox } from \'grommet\';\n<CheckBox />');

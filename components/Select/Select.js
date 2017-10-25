@@ -16,13 +16,13 @@ var _DropButton = require('../DropButton');
 
 var _TextInput = require('../TextInput');
 
-var _doc = require('./doc');
-
-var _doc2 = _interopRequireDefault(_doc);
-
 var _SelectContainer = require('./SelectContainer');
 
 var _SelectContainer2 = _interopRequireDefault(_SelectContainer);
+
+var _doc = require('./doc');
+
+var _doc2 = _interopRequireDefault(_doc);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

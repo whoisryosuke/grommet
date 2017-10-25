@@ -10,15 +10,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _utils = require('../../utils');
+
+var _hocs = require('../hocs');
+
 var _StyledChart = require('./StyledChart');
 
 var _StyledChart2 = _interopRequireDefault(_StyledChart);
-
-var _mixins = require('../utils/mixins');
-
-var _colors = require('../utils/colors');
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 
@@ -95,7 +93,7 @@ var renderArea = function renderArea(values, bounds, scale, height, props) {
   d += ' Z';
   return _react2.default.createElement(
     'g',
-    { fill: (0, _colors.colorForName)(color, theme) },
+    { fill: (0, _utils.colorForName)(color, theme) },
     _react2.default.createElement('path', { d: d })
   );
 };
@@ -146,9 +144,9 @@ var Chart = function (_Component) {
 
     var sizeWidth = typeof size === 'string' ? size : size.width;
     var sizeHeight = typeof size === 'string' ? size : size.height;
-    var width = sizeWidth === 'full' ? bounds[0][1] - bounds[0][0] : (0, _mixins.parseMetricToInt)(theme.global.size[sizeWidth]);
-    var height = sizeHeight === 'full' ? bounds[1][1] - bounds[1][0] : (0, _mixins.parseMetricToInt)(theme.global.size[sizeHeight]);
-    var strokeWidth = (0, _mixins.parseMetricToInt)(theme.global.edgeSize[thickness]);
+    var width = sizeWidth === 'full' ? bounds[0][1] - bounds[0][0] : (0, _utils.parseMetricToInt)(theme.global.size[sizeWidth]);
+    var height = sizeHeight === 'full' ? bounds[1][1] - bounds[1][0] : (0, _utils.parseMetricToInt)(theme.global.size[sizeHeight]);
+    var strokeWidth = (0, _utils.parseMetricToInt)(theme.global.edgeSize[thickness]);
     var scale = [width / (bounds[0][1] - bounds[0][0]), height / (bounds[1][1] - bounds[1][0])];
 
     var contents = void 0;
@@ -171,7 +169,7 @@ var Chart = function (_Component) {
       _react2.default.createElement(
         'g',
         {
-          stroke: (0, _colors.colorForName)(color, theme),
+          stroke: (0, _utils.colorForName)(color, theme),
           strokeWidth: strokeWidth,
           strokeLinecap: round ? 'round' : 'butt',
           strokeLinejoin: round ? 'round' : 'miter'

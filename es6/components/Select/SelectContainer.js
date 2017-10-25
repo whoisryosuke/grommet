@@ -13,13 +13,13 @@ import { findDOMNode } from 'react-dom';
 
 import { Down } from 'grommet-icons';
 
+import { debounce } from '../../utils';
+
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { Text } from '../Text';
 import { TextInput } from '../TextInput';
-
-import { debounce } from '../utils';
 
 var SelectContainer = function (_Component) {
   _inherits(SelectContainer, _Component);

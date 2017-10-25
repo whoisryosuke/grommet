@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-import { focusStyle, fontSize } from '../utils';
+import { focusStyle, fontSize } from '../../utils';
 
 var primaryIconLabelStyle = css(['', ' font-weight:', ';'], function (props) {
   return fontSize(props.theme.global.control.font.size, props.theme.global.spacing);

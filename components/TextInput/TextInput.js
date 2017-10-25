@@ -16,10 +16,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _recompose = require('recompose');
 
-var _StyledTextInput = require('./StyledTextInput');
-
-var _StyledTextInput2 = _interopRequireDefault(_StyledTextInput);
-
 var _Box = require('../Box');
 
 var _Button = require('../Button');
@@ -29,6 +25,10 @@ var _Keyboard = require('../Keyboard');
 var _Drop = require('../Drop');
 
 var _hocs = require('../hocs');
+
+var _StyledTextInput = require('./StyledTextInput');
+
+var _StyledTextInput2 = _interopRequireDefault(_StyledTextInput);
 
 var _doc = require('./doc');
 

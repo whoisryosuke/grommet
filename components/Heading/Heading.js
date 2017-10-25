@@ -10,11 +10,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _hocs = require('../hocs');
+
 var _StyledHeading = require('./StyledHeading');
 
 var _StyledHeading2 = _interopRequireDefault(_StyledHeading);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

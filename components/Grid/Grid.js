@@ -8,11 +8,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _hocs = require('../hocs');
+
 var _StyledGrid = require('./StyledGrid');
 
 var _StyledGrid2 = _interopRequireDefault(_StyledGrid);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

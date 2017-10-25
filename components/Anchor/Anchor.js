@@ -16,11 +16,11 @@ var _recompose = require('recompose');
 
 var _grommetIcons = require('grommet-icons');
 
+var _hocs = require('../hocs');
+
 var _StyledAnchor = require('./StyledAnchor');
 
 var _StyledAnchor2 = _interopRequireDefault(_StyledAnchor);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

@@ -10,13 +10,13 @@ import React, { Component } from 'react';
 import { compose } from 'recompose';
 import Markdown from 'markdown-to-jsx';
 
-import doc from './doc';
+import { deepMerge } from '../../utils';
 
 import { Heading } from '../Heading';
 import { Paragraph } from '../Paragraph';
 import { withTheme } from '../hocs';
 
-import { deepMerge } from '../../utils';
+import doc from './doc';
 
 var GrommetMarkdown = function (_Component) {
   _inherits(GrommetMarkdown, _Component);

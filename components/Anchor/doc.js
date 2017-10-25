@@ -8,7 +8,7 @@ exports.routedAnchor = routedAnchor;
 
 var _reactDesc = require('react-desc');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 function routedAnchor(RoutedAnchor) {
   var DocumentedRoutedAnchor = (0, _reactDesc.describe)(RoutedAnchor).availableAt((0, _utils.getAvailableAtBadge)('RoutedAnchor')).description('An Anchor with support for React Router.').usage("import { RoutedAnchor } from 'grommet';\n<RoutedAnchor primary={true} path='/documentation' />");

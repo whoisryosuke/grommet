@@ -1,6 +1,6 @@
 import { describe, PropTypes } from 'react-desc';
 
-import { getAvailableAtBadge } from '../utils';
+import { getAvailableAtBadge } from '../../utils';
 
 export default (function (Video) {
   var DocumentedVideo = describe(Video).availableAt(getAvailableAtBadge('Video')).description('A video player.').usage('import { Video } from \'grommet\';\n<Video />');

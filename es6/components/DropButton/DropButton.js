@@ -13,7 +13,6 @@ import { compose } from 'recompose';
 
 import { Button } from '../Button';
 import { Drop } from '../Drop';
-
 import { withTheme } from '../hocs';
 
 import doc from './doc';

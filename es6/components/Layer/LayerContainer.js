@@ -13,7 +13,6 @@ import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
 
 import { restrictFocusTo, withRestrictScroll } from '../hocs';
-
 import { Keyboard } from '../Keyboard';
 
 import StyledLayer, { StyledContainer } from './StyledLayer';

@@ -9,11 +9,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
-import Bar from './Bar';
-import Circle from './Circle';
-
 import { withTheme } from '../hocs';
 
+import Bar from './Bar';
+import Circle from './Circle';
 import doc from './doc';
 
 var Meter = function (_Component) {

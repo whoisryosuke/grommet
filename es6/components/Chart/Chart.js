@@ -11,12 +11,11 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
-import StyledChart from './StyledChart';
-
-import { parseMetricToInt } from '../utils/mixins';
-import { colorForName } from '../utils/colors';
+import { colorForName, parseMetricToInt } from '../../utils';
 
 import { withTheme } from '../hocs';
+
+import StyledChart from './StyledChart';
 
 import doc from './doc';
 

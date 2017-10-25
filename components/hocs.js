@@ -21,8 +21,6 @@ var _getDisplayName2 = _interopRequireDefault(_getDisplayName);
 
 var _utils = require('../utils');
 
-var _utils2 = require('./utils');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -197,7 +195,7 @@ var restrictFocusTo = exports.restrictFocusTo = function restrictFocusTo(Wrapped
       var restrictScroll = this.props.restrictScroll;
 
       var child = (0, _reactDom.findDOMNode)(this.ref);
-      (0, _utils2.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils2.makeNodeUnfocusable);
+      (0, _utils.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils.makeNodeUnfocusable);
 
       if (restrictScroll) {
         document.body.style.overflow = 'hidden';
@@ -208,7 +206,7 @@ var restrictFocusTo = exports.restrictFocusTo = function restrictFocusTo(Wrapped
       var restrictScroll = this.props.restrictScroll;
 
       var child = (0, _reactDom.findDOMNode)(this.ref);
-      (0, _utils2.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils2.makeNodeFocusable);
+      (0, _utils.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils.makeNodeFocusable);
       if (restrictScroll) {
         document.body.style.overflow = 'scroll';
       }

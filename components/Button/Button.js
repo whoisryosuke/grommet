@@ -10,11 +10,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _hocs = require('../hocs');
+
 var _StyledButton = require('./StyledButton');
 
 var _StyledButton2 = _interopRequireDefault(_StyledButton);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

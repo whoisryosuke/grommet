@@ -14,11 +14,11 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _recompose = require('recompose');
 
+var _hocs = require('../hocs');
+
 var _StyledCheckBox = require('./StyledCheckBox');
 
 var _StyledCheckBox2 = _interopRequireDefault(_StyledCheckBox);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

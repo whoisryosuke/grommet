@@ -10,10 +10,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 
-import StyledMeter from './StyledMeter';
+import { colorForName, parseMetricToInt } from '../../utils';
 
-import { parseMetricToInt } from '../utils/mixins';
-import { colorForName } from '../utils/colors';
+import StyledMeter from './StyledMeter';
 
 var Bar = function (_Component) {
   _inherits(Bar, _Component);

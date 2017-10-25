@@ -12,6 +12,12 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _vanilla = require('../../themes/vanilla');
+
+var _vanilla2 = _interopRequireDefault(_vanilla);
+
+var _utils = require('../../utils');
+
 var _StyledGrommet = require('./StyledGrommet');
 
 var _StyledGrommet2 = _interopRequireDefault(_StyledGrommet);
@@ -19,12 +25,6 @@ var _StyledGrommet2 = _interopRequireDefault(_StyledGrommet);
 var _doc = require('./doc');
 
 var _doc2 = _interopRequireDefault(_doc);
-
-var _vanilla = require('../../themes/vanilla');
-
-var _vanilla2 = _interopRequireDefault(_vanilla);
-
-var _utils = require('../../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

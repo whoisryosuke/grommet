@@ -8,11 +8,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _hocs = require('../hocs');
+
 var _StyledImage = require('./StyledImage');
 
 var _StyledImage2 = _interopRequireDefault(_StyledImage);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

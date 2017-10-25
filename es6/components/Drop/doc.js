@@ -1,6 +1,6 @@
 import { describe, PropTypes } from 'react-desc';
 
-import { getAvailableAtBadge } from '../utils';
+import { getAvailableAtBadge } from '../../utils';
 
 export default (function (Drop) {
   var DocumentedDrop = describe(Drop).availableAt(getAvailableAtBadge('Drop')).description('A drop container that opens next to a target.').usage('import { Drop } from \'grommet\';\n<Drop target={element}>...</Drop>');

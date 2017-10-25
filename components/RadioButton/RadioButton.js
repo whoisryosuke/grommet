@@ -14,11 +14,11 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _recompose = require('recompose');
 
+var _hocs = require('../hocs');
+
 var _StyledRadioButton = require('./StyledRadioButton');
 
 var _StyledRadioButton2 = _interopRequireDefault(_StyledRadioButton);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

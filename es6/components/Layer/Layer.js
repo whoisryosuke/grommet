@@ -7,13 +7,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 
+import { getNewContainer } from '../../utils';
+
 import { withTheme } from '../hocs';
 
 import LayerContainer from './LayerContainer';
-
 import doc from './doc';
-
-import { getNewContainer } from '../utils';
 
 var Layer = function (_Component) {
   _inherits(Layer, _Component);

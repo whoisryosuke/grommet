@@ -10,11 +10,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 
-import StyledMeter from './StyledMeter';
+import { arcCommands, colorForName, parseMetricToInt, translateEndAngle } from '../../utils';
 
-import { parseMetricToInt } from '../utils/mixins';
-import { colorForName } from '../utils/colors';
-import { translateEndAngle, arcCommands } from '../utils/graphics';
+import StyledMeter from './StyledMeter';
 
 var Circle = function (_Component) {
   _inherits(Circle, _Component);

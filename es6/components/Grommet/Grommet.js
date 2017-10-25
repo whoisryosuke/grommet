@@ -11,12 +11,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import StyledGrommet from './StyledGrommet';
-
-import doc from './doc';
-
 import baseTheme from '../../themes/vanilla';
 import { deepMerge } from '../../utils';
+
+import StyledGrommet from './StyledGrommet';
+import doc from './doc';
 
 var Grommet = function (_Component) {
   _inherits(Grommet, _Component);

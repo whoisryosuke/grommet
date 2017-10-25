@@ -12,7 +12,7 @@ var _reactDom = require('react-dom');
 
 var _hocs = require('../hocs');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 var _Keyboard = require('../Keyboard');
 

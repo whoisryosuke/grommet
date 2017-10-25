@@ -14,9 +14,7 @@ var _markdownToJsx = require('markdown-to-jsx');
 
 var _markdownToJsx2 = _interopRequireDefault(_markdownToJsx);
 
-var _doc = require('./doc');
-
-var _doc2 = _interopRequireDefault(_doc);
+var _utils = require('../../utils');
 
 var _Heading = require('../Heading');
 
@@ -24,7 +22,9 @@ var _Paragraph = require('../Paragraph');
 
 var _hocs = require('../hocs');
 
-var _utils = require('../../utils');
+var _doc = require('./doc');
+
+var _doc2 = _interopRequireDefault(_doc);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

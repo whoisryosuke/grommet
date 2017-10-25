@@ -9,10 +9,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
-import StyledParagraph from './StyledParagraph';
-
 import { withTheme } from '../hocs';
 
+import StyledParagraph from './StyledParagraph';
 import doc from './doc';
 
 var Paragraph = function (_Component) {

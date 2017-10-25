@@ -4,7 +4,7 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 exports.default = function (Meter) {
   var DocumentedMeter = (0, _reactDesc.describe)(Meter).availableAt((0, _utils.getAvailableAtBadge)('Meter')).description('A graphical meter.').usage('import { Meter } from \'grommet\';\n<Meter />');

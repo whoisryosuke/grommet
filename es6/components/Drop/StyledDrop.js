@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled from 'styled-components';
 
-import { backgroundStyle, baseStyle } from '../utils';
+import { backgroundStyle, baseStyle } from '../../utils';
 
 function getTransformOriginStyle(align) {
   var vertical = 'top';

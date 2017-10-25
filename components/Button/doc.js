@@ -8,7 +8,7 @@ exports.routedButton = routedButton;
 
 var _reactDesc = require('react-desc');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 function routedButton(RoutedButton) {
   var DocumentedRoutedButton = (0, _reactDesc.describe)(RoutedButton).availableAt((0, _utils.getAvailableAtBadge)('RoutedButton')).description('A button with support for React Router.').usage('import { RoutedButton } from \'grommet\';\n<RoutedButton primary={true} path=\'/documentation\' />');

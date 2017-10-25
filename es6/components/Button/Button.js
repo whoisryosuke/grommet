@@ -11,10 +11,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Children, Component } from 'react';
 import { compose } from 'recompose';
 
-import StyledButton, { StyledLabel, StyledIcon } from './StyledButton';
-
 import { withFocus, withTheme } from '../hocs';
 
+import StyledButton, { StyledLabel, StyledIcon } from './StyledButton';
 import doc from './doc';
 
 var AnchorStyledButton = StyledButton.withComponent('a');

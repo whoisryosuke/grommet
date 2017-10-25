@@ -8,15 +8,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _utils = require('../../utils');
+
 var _StyledMeter = require('./StyledMeter');
 
 var _StyledMeter2 = _interopRequireDefault(_StyledMeter);
-
-var _mixins = require('../utils/mixins');
-
-var _colors = require('../utils/colors');
-
-var _graphics = require('../utils/graphics');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47,8 +43,8 @@ var Circle = function (_Component) {
         values = _props.values,
         rest = _objectWithoutProperties(_props, ['background', 'round', 'size', 'theme', 'thickness', 'values']);
 
-    var width = size === 'full' ? 288 : (0, _mixins.parseMetricToInt)(theme.global.size[size]);
-    var height = (0, _mixins.parseMetricToInt)(theme.global.edgeSize[thickness]);
+    var width = size === 'full' ? 288 : (0, _utils.parseMetricToInt)(theme.global.size[size]);
+    var height = (0, _utils.parseMetricToInt)(theme.global.edgeSize[thickness]);
     var mid = width / 2;
     var radius = width / 2 - height / 2;
     var max = 100;
@@ -76,9 +72,9 @@ var Circle = function (_Component) {
       if (startValue + value >= max) {
         endAngle = 360;
       } else {
-        endAngle = Math.min(360, (0, _graphics.translateEndAngle)(startAngle, anglePer, value));
+        endAngle = Math.min(360, (0, _utils.translateEndAngle)(startAngle, anglePer, value));
       }
-      var d = (0, _graphics.arcCommands)(width / 2, width / 2, radius, startAngle, endAngle);
+      var d = (0, _utils.arcCommands)(width / 2, width / 2, radius, startAngle, endAngle);
       var hoverProps = void 0;
       if (onHover) {
         hoverProps = {
@@ -97,7 +93,7 @@ var Circle = function (_Component) {
         key: key,
         d: d,
         fill: 'none',
-        stroke: (0, _colors.colorForName)(someHighlight && !highlight ? background : colorName, theme),
+        stroke: (0, _utils.colorForName)(someHighlight && !highlight ? background : colorName, theme),
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square'
       }, hoverProps, pathRest));
@@ -114,7 +110,7 @@ var Circle = function (_Component) {
         cx: mid,
         cy: mid,
         r: radius,
-        stroke: (0, _colors.colorForName)(background, theme),
+        stroke: (0, _utils.colorForName)(background, theme),
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square',
         fill: 'none'

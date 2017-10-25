@@ -8,7 +8,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css, keyframes } from 'styled-components';
 
-import { backgroundStyle, colorForName, palm } from '../utils';
+import { backgroundStyle, colorForName, palm } from '../../utils';
 
 var ALIGN_MAP = {
   baseline: 'baseline',

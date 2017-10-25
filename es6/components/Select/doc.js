@@ -1,6 +1,6 @@
 import { describe, PropTypes } from 'react-desc';
 
-import { a11yTitlePropType, backgroundPropType, getAvailableAtBadge } from '../utils';
+import { a11yTitlePropType, backgroundPropType, getAvailableAtBadge } from '../../utils';
 
 export default (function (Select) {
   var DocumentedSelect = describe(Select).availableAt(getAvailableAtBadge('Select')).description('An select-like field with optional search capability.').usage('import { Select } from \'grommet\';\n<Select />');

@@ -4,7 +4,7 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 exports.default = function (Select) {
   var DocumentedSelect = (0, _reactDesc.describe)(Select).availableAt((0, _utils.getAvailableAtBadge)('Select')).description('An select-like field with optional search capability.').usage('import { Select } from \'grommet\';\n<Select />');

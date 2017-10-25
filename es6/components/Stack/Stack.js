@@ -11,12 +11,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
-import StyledStack from './StyledStack';
-
 import { withTheme } from '../hocs';
 
+import StyledStack from './StyledStack';
 import doc from './doc';
-
 import styleMap from './styleMap';
 
 var Stack = function (_Component) {

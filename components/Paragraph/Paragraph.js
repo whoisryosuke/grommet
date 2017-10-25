@@ -8,11 +8,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _hocs = require('../hocs');
+
 var _StyledParagraph = require('./StyledParagraph');
 
 var _StyledParagraph2 = _interopRequireDefault(_StyledParagraph);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

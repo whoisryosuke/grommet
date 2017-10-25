@@ -12,6 +12,8 @@ var _reactDom = require('react-dom');
 
 var _grommetIcons = require('grommet-icons');
 
+var _utils = require('../../utils');
+
 var _Box = require('../Box');
 
 var _Button = require('../Button');
@@ -21,8 +23,6 @@ var _Keyboard = require('../Keyboard');
 var _Text = require('../Text');
 
 var _TextInput = require('../TextInput');
-
-var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

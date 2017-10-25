@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-import { focusStyle, inputStyle } from '../utils';
+import { focusStyle, inputStyle } from '../../utils';
 
 var placeholderColor = css(['color:', ';'], function (props) {
   return props.theme.global.placeholder.color;

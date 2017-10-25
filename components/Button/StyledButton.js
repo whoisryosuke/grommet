@@ -13,7 +13,7 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _polished = require('polished');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

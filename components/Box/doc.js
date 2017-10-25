@@ -4,7 +4,7 @@ exports.__esModule = true;
 
 var _reactDesc = require('react-desc');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 var PAD_SIZES = ['xsmall', 'small', 'medium', 'large'];
 

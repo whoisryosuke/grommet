@@ -16,13 +16,13 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _recompose = require('recompose');
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
+
+var _hocs = require('../hocs');
 
 var _StyledBox = require('./StyledBox');
 
 var _StyledBox2 = _interopRequireDefault(_StyledBox);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

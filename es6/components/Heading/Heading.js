@@ -11,10 +11,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
-import StyledHeading from './StyledHeading';
-
 import { withTheme } from '../hocs';
 
+import StyledHeading from './StyledHeading';
 import doc from './doc';
 
 var styledComponents = {

@@ -8,6 +8,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _hocs = require('../hocs');
+
 var _Bar = require('./Bar');
 
 var _Bar2 = _interopRequireDefault(_Bar);
@@ -15,8 +17,6 @@ var _Bar2 = _interopRequireDefault(_Bar);
 var _Circle = require('./Circle');
 
 var _Circle2 = _interopRequireDefault(_Circle);
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 

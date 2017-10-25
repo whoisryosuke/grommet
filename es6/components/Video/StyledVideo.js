@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-import { colorForName } from '../utils';
+import { colorForName } from '../../utils';
 
 var FIT_MAP = {
   cover: 'cover',

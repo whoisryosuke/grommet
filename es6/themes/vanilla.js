@@ -1,9 +1,7 @@
 import { lighten, rgba } from 'polished';
 import { css } from 'styled-components';
 
-import { colorForName } from '../components/utils';
-
-import { deepFreeze } from '../utils';
+import { colorForName, deepFreeze } from '../utils';
 
 var brandColor = '#865CD6';
 var accentColors = ['#00CCEB', '#FF7D28'];
