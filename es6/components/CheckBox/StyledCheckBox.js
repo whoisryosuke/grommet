@@ -19,11 +19,11 @@ export var StyledCheckBoxContainer = styled.label.withConfig({
 export var StyledCheckBoxInput = styled.input.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxInput'
 })(['opacity:0;width:0;height:0;margin:0;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], focusStyle, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color || props.theme.global.colors.brand;
+  return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 }, function (props) {
   return props.theme.checkBox.size;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color || props.theme.global.colors.brand;
+  return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 });
 
 export var StyledCheckBoxBox = styled.div.withConfig({
@@ -45,7 +45,7 @@ export var StyledCheckBoxBox = styled.div.withConfig({
 }, function (props) {
   return props.theme.checkBox.check.width;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color || props.theme.global.colors.brand;
+  return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 });
 
 export var StyledCheckBoxToggle = styled.span.withConfig({

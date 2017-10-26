@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
 var placeholderColor = (0, _styledComponents.css)(['color:', ';'], function (props) {
-  return props.theme.global.placeholder.color;
+  return props.theme.global.colors.placeholder;
 });
 
 var sizeStyle = function sizeStyle(props) {

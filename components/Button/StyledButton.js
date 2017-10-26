@@ -51,7 +51,7 @@ function getHoverColor(props) {
   } else if (props.secondary) {
     return props.theme.button.colors.secondary;
   }
-  return props.theme.button.border.color || props.theme.global.colors.brand;
+  return props.theme.button.border.color;
 }
 
 function getHoverIndicatorStyle(hoverIndicator, theme) {
@@ -83,9 +83,9 @@ function getHoverIndicatorStyle(hoverIndicator, theme) {
 var hoverStyle = (0, _styledComponents.css)(['&:hover{', ' ', ' ', '}'], function (props) {
   return props.hoverIndicator && getHoverIndicatorStyle(props.hoverIndicator, props.theme);
 }, function (props) {
-  return !props.plain && 'box-shadow: 0px 0px 0px 2px ' + getHoverColor(props) + ';';
+  return !props.plain && (0, _styledComponents.css)(['box-shadow:0px 0px 0px 2px ', ';'], getHoverColor(props));
 }, function (props) {
-  return !props.plain && !props.primary && '\n        // TODO: revisit this\n        svg {\n          fill: ' + props.theme.global.hover.textColor + ';\n          stroke: ' + props.theme.global.hover.textColor + ';\n          transition: none;\n        }\n      ';
+  return !props.plain && !props.primary && (0, _styledComponents.css)(['svg{fill:', ';stroke:', ';transition:none;}'], props.theme.global.hover.textColor, props.theme.global.hover.textColor);
 });
 
 var fillStyle = '\n  width: 100%;\n  max-width: none;\n  flex-grow: 1;\n';
@@ -95,7 +95,7 @@ var plainFocusStyle = (0, _styledComponents.css)(['box-shadow:0 0 ', ' ', ' ', '
 }, function (props) {
   return props.theme.global.focus.border.width;
 }, function (props) {
-  return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
+  return props.theme.global.focus.border.color;
 });
 
 var plainStyle = (0, _styledComponents.css)(['color:inherit;border:none;padding:0;', ''], function (props) {
@@ -105,7 +105,7 @@ var plainStyle = (0, _styledComponents.css)(['color:inherit;border:none;padding:
 var StyledButton = _styledComponents2.default.button.withConfig({
   displayName: 'StyledButton'
 })(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
-  return !props.plain && (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color || props.theme.global.colors.brand, props.theme.button.border.radius, props.theme.button.color || props.theme.global.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
+  return !props.plain && (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color, props.theme.button.border.radius, props.theme.button.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
 }, function (props) {
   return !props.disabled && !props.focus && hoverStyle;
 }, function (props) {

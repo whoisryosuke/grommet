@@ -18,7 +18,7 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
       if (background.dark === false) {
         _color = theme.global.colors.text;
       } else if (background.dark) {
-        _color = theme.global.colors.darkBackgroundTextColor;
+        _color = theme.global.colors.darkBackground.text;
       } else {
         _color = 'inherit';
       }
@@ -27,7 +27,7 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
       var _color2 = colorForName(background.color, theme);
       var rgba = getRGBA(_color2, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
       if (rgba) {
-        return css(['background-color:', ';color:', ';'], rgba, colorIsDark(rgba) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
+        return css(['background-color:', ';color:', ';'], rgba, colorIsDark(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
       }
     }
     return undefined;
@@ -37,7 +37,7 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
   }
   var color = colorForName(background, theme);
   if (color) {
-    return css(['background-color:', ';color:', ';'], color, colorIsDark(color) ? theme.global.colors.darkBackgroundTextColor : theme.global.colors.text);
+    return css(['background-color:', ';color:', ';'], color, colorIsDark(color) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
   }
   return undefined;
 };
@@ -56,11 +56,11 @@ export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';co
 
 // focus also supports clickable elements inside svg
 export var focusStyle = css(['> circle,> ellipse,> line,> path,> polygon,> polyline,> rect{outline:', ' solid 2px;}border-color:', ';box-shadow:0 0 2px 2px ', ';'], function (props) {
-  return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
+  return props.theme.global.focus.border.color;
 }, function (props) {
-  return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
+  return props.theme.global.focus.border.color;
 }, function (props) {
-  return props.theme.global.focus.border.color || props.theme.global.colors.accent[0];
+  return props.theme.global.focus.border.color;
 });
 
 export var inputStyle = css(['padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;font:inherit;margin:0;'], function (props) {

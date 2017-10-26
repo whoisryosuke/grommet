@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components';
 import { focusStyle, inputStyle } from '../../utils';
 
 var placeholderColor = css(['color:', ';'], function (props) {
-  return props.theme.global.placeholder.color;
+  return props.theme.global.colors.placeholder;
 });
 
 var sizeStyle = function sizeStyle(props) {

@@ -55,9 +55,12 @@ exports.default = (0, _utils.deepFreeze)({
       border: borderColor,
       brand: brandColor,
       dark: darkColors,
-      darkBackgroundTextColor: 'rgba(255, 255, 255, 0.85)',
+      darkBackground: {
+        text: 'rgba(255, 255, 255, 0.85)'
+      },
       light: lightColors,
       neutral: neutralColors,
+      placeholder: '#AAAAAA',
       status: statusColors,
       text: textColor,
       white: '#FFFFFF'
@@ -85,6 +88,9 @@ exports.default = (0, _utils.deepFreeze)({
     },
     focus: {
       border: {
+        color: (0, _styledComponents.css)(['', ''], function (props) {
+          return (0, _utils.colorForName)('accent-1', props.theme);
+        }),
         width: '2px'
       }
     },
@@ -94,14 +100,18 @@ exports.default = (0, _utils.deepFreeze)({
       size: '16px'
     },
     hover: {
-      backgroundColor: activeColor,
+      backgroundColor: (0, _styledComponents.css)(['', ''], function (props) {
+        return props.theme.global.colors.active;
+      }),
       textColor: '#000000'
     },
     input: {
       border: {
         width: '1px',
         radius: '4px',
-        color: borderColor
+        color: (0, _styledComponents.css)(['', ''], function (props) {
+          return props.theme.global.colors.border;
+        })
       }
     },
     lineHeight: '24px',
@@ -109,12 +119,6 @@ exports.default = (0, _utils.deepFreeze)({
       weak: '0.8',
       medium: '0.4',
       strong: '0.1'
-    },
-    placeholder: {
-      color: '#AAAAAA'
-    },
-    selected: {
-      textColor: textColor
     },
     spacing: baseSpacing + 'px',
     size: {
@@ -131,18 +135,30 @@ exports.default = (0, _utils.deepFreeze)({
     textDecoration: 'none',
     fontWeight: 600,
     color: (0, _styledComponents.css)(['', ''], function (props) {
-      return (0, _utils.colorForName)('brand', props.theme);
+      return props.theme.global.colors.brand;
     })
   },
   button: {
     border: {
+      color: (0, _styledComponents.css)(['', ''], function (props) {
+        return props.theme.global.colors.brand;
+      }),
       width: borderWidth + 'px',
       radius: '5px'
     },
     colors: {
-      accent: accentColors[0],
-      critical: statusColors.critical,
-      secondary: neutralColors[1]
+      accent: (0, _styledComponents.css)(['', ''], function (props) {
+        return (0, _utils.colorForName)('accent-1', props.theme);
+      }),
+      critical: (0, _styledComponents.css)(['', ''], function (props) {
+        return props.theme.global.colors.status.critical;
+      }),
+      secondary: (0, _styledComponents.css)(['', ''], function (props) {
+        return (0, _utils.colorForName)('neutral-2', props.theme);
+      }),
+      text: (0, _styledComponents.css)(['', ''], function (props) {
+        return props.theme.global.colors.text;
+      })
     },
     minWidth: baseSpacing * 4 + 'px',
     maxWidth: baseSpacing * 16 + 'px',
@@ -154,7 +170,7 @@ exports.default = (0, _utils.deepFreeze)({
   checkBox: {
     check: {
       color: (0, _styledComponents.css)(['', ''], function (props) {
-        return (0, _utils.colorForName)('brand', props.theme);
+        return props.theme.global.colors.brand;
       }),
       width: '4px'
     },
@@ -205,7 +221,7 @@ exports.default = (0, _utils.deepFreeze)({
     extend: (0, _styledComponents.css)(['', ' ', ''], function (props) {
       return props.color && props.color !== 'plain' && '\n        fill: ' + (0, _utils.colorForName)(props.color, props.theme) + ';\n        stroke: ' + (0, _utils.colorForName)(props.color, props.theme) + ';\n      ';
     }, function (props) {
-      return props.dark && '\n        fill: ' + props.theme.global.colors.darkBackgroundTextColor + ';\n        stroke: ' + props.theme.global.colors.darkBackgroundTextColor + ';\n      ';
+      return props.dark && '\n        fill: ' + props.theme.global.colors.darkBackground.text + ';\n        stroke: ' + props.theme.global.colors.darkBackground.text + ';\n      ';
     })
   },
   layer: {
@@ -226,7 +242,7 @@ exports.default = (0, _utils.deepFreeze)({
   radioButton: {
     check: {
       color: (0, _styledComponents.css)(['', ''], function (props) {
-        return (0, _utils.colorForName)('brand', props.theme);
+        return props.theme.global.colors.brand;
       })
     },
     border: {
