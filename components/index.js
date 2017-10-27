@@ -218,6 +218,18 @@ Object.keys(_RadioButton).forEach(function (key) {
   });
 });
 
+var _RangeInput = require('./RangeInput');
+
+Object.keys(_RangeInput).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _RangeInput[key];
+    }
+  });
+});
+
 var _Responsive = require('./Responsive');
 
 Object.keys(_Responsive).forEach(function (key) {

@@ -66,6 +66,9 @@ exports.default = (0, _utils.deepFreeze)({
       white: '#FFFFFF'
     },
     control: {
+      border: {
+        width: '2px'
+      },
       font: {
         weight: 600,
         size: '19px'
@@ -254,6 +257,13 @@ exports.default = (0, _utils.deepFreeze)({
       width: '2px'
     },
     size: baseSpacing + 'px'
+  },
+  rangeInput: {
+    track: {
+      color: (0, _styledComponents.css)(['', ''], function (props) {
+        return (0, _polished.rgba)(props.theme.global.colors.text, 0.2);
+      })
+    }
   },
   text: {
     medium: { size: '16px', height: 1.375 },
