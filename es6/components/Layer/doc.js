@@ -8,7 +8,7 @@ export default (function (Layer) {
   DocumentedLayer.propTypes = {
     align: PropTypes.oneOf(['center', 'top', 'bottom', 'left', 'right']).description('Which direction the layer contents should emanate from.').defaultValue('center'),
     onEsc: PropTypes.func.description('Function that will be called when the user presses the escape key inside the Layer.'),
-    size: PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge', 'full']).description('Size for the Layer.')
+    plain: PropTypes.bool.description('Whether this is a plain Layer with no background color or border.')
   };
 
   return DocumentedLayer;

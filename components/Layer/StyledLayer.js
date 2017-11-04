@@ -18,7 +18,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 var StyledLayer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer'
 })(['', ' position:relative;z-index:10;height:100vh;overflow:auto;background-color:', ';', ''], _utils.baseStyle, function (props) {
-  return props.theme.layer.overlayBackgroundColor;
+  return props.plain ? 'transparent' : props.theme.layer.overlayBackgroundColor;
 }, (0, _utils.lapAndUp)('\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n  '));
 
 var leftAlignStyle = '\n  top: 0px;\n  bottom: 0px;\n  left: 0px;\n\n  animation: slide-left 0.2s ease-in-out forwards;\n  \n  @keyframes slide-left {\n    0% {\n      left: -100%;\n    }\n\n    100% {\n      left: 0px;\n    }\n  }\n';
@@ -29,11 +29,7 @@ var topAlignStyle = '\n  left: 50%;\n  transform: translateX(-50%);\n\n  animati
 
 var bottomAlignStyle = '\n  bottom: 0px;\n  right: 50%;\n  transform: translateX(50%);\n\n  animation: slide-up 0.2s ease-in-out forwards;\n  \n  @keyframes slide-up {\n    0% {\n      margin-bottom: -200px;\n    }\n  \n    100% {\n      margin-bottom: 0px;\n    }\n  }\n';
 
-var centerAlignStyle = (0, _styledComponents.css)(['bottom:50%;right:50%;transform:translate(50%,50%);max-height:calc(100vh - ', ');max-width:calc(100vw - ', ');animation:grow-box 0.1s forwards;@keyframes grow-box{0%{transform:scale(0);}100%{transform:scale(1);}}'], function (props) {
-  return props.theme.global.edgeSize.large;
-}, function (props) {
-  return props.theme.global.edgeSize.large;
-});
+var centerAlignStyle = (0, _styledComponents.css)(['bottom:50%;right:50%;animation:grow-box 0.1s forwards;@keyframes grow-box{0%{transform:translate(50%,50%) scale(0.8);}100%{transform:translate(50%,50%) scale(1);}}']);
 
 function getAlignStyle(props) {
   var ALIGN_MAP = {
@@ -46,20 +42,14 @@ function getAlignStyle(props) {
   return ALIGN_MAP[props.align] || '';
 }
 
-var sizeStyle = (0, _styledComponents.css)(['min-width:', ';'], function (props) {
-  return props.theme.global.size[props.size];
-});
-
 var StyledContainer = exports.StyledContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
-})(['display:flex;flex-direction:column;min-height:', ';outline:none;', ' background-color:', ';', ' ', ''], function (props) {
+})(['display:flex;flex-direction:column;min-height:', ';outline:none;background-color:', ';', ' ', ''], function (props) {
   return props.theme.global.size.xxsmall;
 }, function (props) {
-  return props.size && sizeStyle;
-}, function (props) {
-  return props.theme.layer.backgroundColor;
+  return props.plain ? 'transparent' : props.theme.layer.backgroundColor;
 }, (0, _utils.palm)('\n    min-height: 100%;\n    min-width: 100%;\n  '), function (props) {
-  return (0, _utils.lapAndUp)('\n    position: absolute;\n    max-height: 100%;\n    max-width: 100%;\n    overflow: auto;\n    border-radius: ' + props.theme.layer.border.radius + ';\n\n    ' + getAlignStyle(props) + '\n  ');
+  return (0, _utils.lapAndUp)('\n    position: absolute;\n    max-height: 100%;\n    max-width: 100%;\n    overflow: auto;\n    border-radius: ' + (props.plain ? 'none' : props.theme.layer.border.radius) + ';\n\n    ' + getAlignStyle(props) + '\n  ');
 });
 
 exports.default = StyledLayer.extend(_templateObject, function (props) {

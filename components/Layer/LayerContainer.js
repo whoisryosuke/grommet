@@ -53,20 +53,26 @@ var LayerContainer = function (_Component) {
     var _props = this.props,
         children = _props.children,
         onEsc = _props.onEsc,
+        plain = _props.plain,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'plain', 'theme']);
 
     return _react2.default.createElement(
       _Keyboard.Keyboard,
       { onEsc: onEsc },
       _react2.default.createElement(
         _StyledLayer2.default,
-        { theme: theme, tabIndex: '-1', ref: function ref(_ref) {
+        {
+          plain: plain,
+          theme: theme,
+          tabIndex: '-1',
+          ref: function ref(_ref) {
             _this2.layerNodeRef = _ref;
-          } },
+          }
+        },
         _react2.default.createElement(
           _StyledLayer.StyledContainer,
-          _extends({}, rest, { theme: theme }),
+          _extends({}, rest, { theme: theme, plain: plain }),
           children
         )
       )
