@@ -26,36 +26,58 @@ var Keyboard = function (_Component) {
   _inherits(Keyboard, _Component);
 
   function Keyboard() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Keyboard);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.onKeyDown = function (event) {
+      for (var _len2 = arguments.length, rest = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        rest[_key2 - 1] = arguments[_key2];
+      }
+
+      var onKeyDown = _this.props.onKeyDown;
+
+      var key = event.keyCode ? event.keyCode : event.which;
+      var callbackName = KEYS[key];
+      if (callbackName && _this.props[callbackName]) {
+        var _this$props;
+
+        (_this$props = _this.props)[callbackName].apply(_this$props, [event].concat(rest));
+      }
+      if (onKeyDown) {
+        onKeyDown.apply(undefined, [event].concat(rest));
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Keyboard.prototype.render = function render() {
-    var _this2 = this;
+  Keyboard.prototype.componentDidMount = function componentDidMount() {
+    var target = this.props.target;
 
+    if (target === 'document') {
+      document.addEventListener('keydown', this.onKeyDown);
+    }
+  };
+
+  Keyboard.prototype.componentWillUnmount = function componentWillUnmount() {
+    var target = this.props.target;
+
+    if (target === 'document') {
+      document.removeEventListener('keydown', this.onKeyDown);
+    }
+  };
+
+  Keyboard.prototype.render = function render() {
     var _props = this.props,
         children = _props.children,
-        _onKeyDown = _props.onKeyDown;
+        target = _props.target;
 
 
-    return cloneElement(Children.only(children), {
-      onKeyDown: function onKeyDown(event) {
-        for (var _len = arguments.length, rest = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          rest[_key - 1] = arguments[_key];
-        }
-
-        var key = event.keyCode ? event.keyCode : event.which;
-        var callbackName = KEYS[key];
-        if (callbackName && _this2.props[callbackName]) {
-          var _props2;
-
-          (_props2 = _this2.props)[callbackName].apply(_props2, [event].concat(rest));
-        }
-        if (_onKeyDown) {
-          _onKeyDown.apply(undefined, [event].concat(rest));
-        }
-      }
+    return target === 'document' ? children : cloneElement(Children.only(children), {
+      onKeyDown: this.onKeyDown
     });
   };
 

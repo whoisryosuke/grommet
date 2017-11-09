@@ -69,7 +69,7 @@ var Layer = function (_Component) {
 }(_react.Component);
 
 Layer.defaultProps = {
-  align: 'center'
+  position: 'center'
 };
 
 

@@ -62,7 +62,7 @@ var Stack = function (_Component) {
           position: 'absolute',
           overflow: 'hidden'
         }, _styleMap2.default[anchor || 'fill']);
-        return _react2.default.cloneElement(child, { style: style });
+        return (0, _react.cloneElement)(child, { style: style });
       }
 
       return child;

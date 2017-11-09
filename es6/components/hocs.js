@@ -9,11 +9,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import getDisplayName from 'recompose/getDisplayName';
 
-import { deepMerge, getBodyChildElements, makeNodeFocusable, makeNodeUnfocusable } from '../utils';
+import { deepMerge } from '../utils';
 
 export var withFocus = function withFocus(WrappedComponent) {
   var FocusableComponent = function (_Component) {
@@ -138,77 +137,4 @@ var withTheme = function withTheme(WrappedComponent) {
 };
 
 export { withTheme };
-var isNotAncestorOf = function isNotAncestorOf(child) {
-  return function (parent) {
-    return !parent.contains(child);
-  };
-};
-
-export var withRestrictScroll = function withRestrictScroll(WrappedComponent) {
-  var RestrictScrollContainer = function (_Component3) {
-    _inherits(RestrictScrollContainer, _Component3);
-
-    function RestrictScrollContainer() {
-      _classCallCheck(this, RestrictScrollContainer);
-
-      return _possibleConstructorReturn(this, _Component3.apply(this, arguments));
-    }
-
-    RestrictScrollContainer.prototype.render = function render() {
-      return React.createElement(WrappedComponent, _extends({}, this.props, { restrictScroll: true }));
-    };
-
-    return RestrictScrollContainer;
-  }(Component);
-
-  RestrictScrollContainer.displayName = getDisplayName(WrappedComponent);
-  return RestrictScrollContainer;
-};
-
-export var restrictFocusTo = function restrictFocusTo(WrappedComponent) {
-  var FocusedContainer = function (_Component4) {
-    _inherits(FocusedContainer, _Component4);
-
-    function FocusedContainer() {
-      _classCallCheck(this, FocusedContainer);
-
-      return _possibleConstructorReturn(this, _Component4.apply(this, arguments));
-    }
-
-    FocusedContainer.prototype.componentDidMount = function componentDidMount() {
-      var restrictScroll = this.props.restrictScroll;
-
-      var child = findDOMNode(this.ref);
-      getBodyChildElements().filter(isNotAncestorOf(child)).forEach(makeNodeUnfocusable);
-
-      if (restrictScroll) {
-        document.body.style.overflow = 'hidden';
-      }
-    };
-
-    FocusedContainer.prototype.componentWillUnmount = function componentWillUnmount() {
-      var restrictScroll = this.props.restrictScroll;
-
-      var child = findDOMNode(this.ref);
-      getBodyChildElements().filter(isNotAncestorOf(child)).forEach(makeNodeFocusable);
-      if (restrictScroll) {
-        document.body.style.overflow = 'scroll';
-      }
-    };
-
-    FocusedContainer.prototype.render = function render() {
-      var _this6 = this;
-
-      return React.createElement(WrappedComponent, _extends({ ref: function ref(_ref) {
-          _this6.ref = _ref;
-        } }, this.props));
-    };
-
-    return FocusedContainer;
-  }(Component);
-
-  FocusedContainer.displayName = getDisplayName(WrappedComponent);
-  return FocusedContainer;
-};
-
-export default { withFocus: withFocus, withRestrictScroll: withRestrictScroll, withTheme: withTheme, restrictFocusTo: restrictFocusTo };
+export default { withFocus: withFocus, withTheme: withTheme };

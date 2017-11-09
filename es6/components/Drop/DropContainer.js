@@ -11,7 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
-import { restrictFocusTo } from '../hocs';
+import FocusedContainer from '../FocusedContainer';
 import { findScrollParents } from '../../utils';
 import { Keyboard } from '../Keyboard';
 
@@ -193,18 +193,22 @@ var DropContainer = function (_Component) {
         rest = _objectWithoutProperties(_props, ['children', 'onClose', 'theme']);
 
     return React.createElement(
-      Keyboard,
-      { onEsc: onClose },
+      FocusedContainer,
+      null,
       React.createElement(
-        StyledDrop,
-        _extends({
-          tabIndex: '-1',
-          ref: function ref(_ref) {
-            _this2.dropRef = _ref;
-          },
-          theme: theme
-        }, rest),
-        children
+        Keyboard,
+        { onEsc: onClose },
+        React.createElement(
+          StyledDrop,
+          _extends({
+            tabIndex: '-1',
+            ref: function ref(_ref) {
+              _this2.dropRef = _ref;
+            },
+            theme: theme
+          }, rest),
+          children
+        )
       )
     );
   };
@@ -217,4 +221,4 @@ DropContainer.defaultProps = {
 };
 
 
-export default restrictFocusTo(DropContainer);
+export default DropContainer;

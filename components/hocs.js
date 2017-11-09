@@ -1,15 +1,13 @@
 'use strict';
 
 exports.__esModule = true;
-exports.restrictFocusTo = exports.withRestrictScroll = exports.withTheme = exports.withFocus = undefined;
+exports.withTheme = exports.withFocus = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = require('react-dom');
 
 var _propTypes = require('prop-types');
 
@@ -154,77 +152,4 @@ var withTheme = function withTheme(WrappedComponent) {
 };
 
 exports.withTheme = withTheme;
-var isNotAncestorOf = function isNotAncestorOf(child) {
-  return function (parent) {
-    return !parent.contains(child);
-  };
-};
-
-var withRestrictScroll = exports.withRestrictScroll = function withRestrictScroll(WrappedComponent) {
-  var RestrictScrollContainer = function (_Component3) {
-    _inherits(RestrictScrollContainer, _Component3);
-
-    function RestrictScrollContainer() {
-      _classCallCheck(this, RestrictScrollContainer);
-
-      return _possibleConstructorReturn(this, _Component3.apply(this, arguments));
-    }
-
-    RestrictScrollContainer.prototype.render = function render() {
-      return _react2.default.createElement(WrappedComponent, _extends({}, this.props, { restrictScroll: true }));
-    };
-
-    return RestrictScrollContainer;
-  }(_react.Component);
-
-  RestrictScrollContainer.displayName = (0, _getDisplayName2.default)(WrappedComponent);
-  return RestrictScrollContainer;
-};
-
-var restrictFocusTo = exports.restrictFocusTo = function restrictFocusTo(WrappedComponent) {
-  var FocusedContainer = function (_Component4) {
-    _inherits(FocusedContainer, _Component4);
-
-    function FocusedContainer() {
-      _classCallCheck(this, FocusedContainer);
-
-      return _possibleConstructorReturn(this, _Component4.apply(this, arguments));
-    }
-
-    FocusedContainer.prototype.componentDidMount = function componentDidMount() {
-      var restrictScroll = this.props.restrictScroll;
-
-      var child = (0, _reactDom.findDOMNode)(this.ref);
-      (0, _utils.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils.makeNodeUnfocusable);
-
-      if (restrictScroll) {
-        document.body.style.overflow = 'hidden';
-      }
-    };
-
-    FocusedContainer.prototype.componentWillUnmount = function componentWillUnmount() {
-      var restrictScroll = this.props.restrictScroll;
-
-      var child = (0, _reactDom.findDOMNode)(this.ref);
-      (0, _utils.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils.makeNodeFocusable);
-      if (restrictScroll) {
-        document.body.style.overflow = 'scroll';
-      }
-    };
-
-    FocusedContainer.prototype.render = function render() {
-      var _this6 = this;
-
-      return _react2.default.createElement(WrappedComponent, _extends({ ref: function ref(_ref) {
-          _this6.ref = _ref;
-        } }, this.props));
-    };
-
-    return FocusedContainer;
-  }(_react.Component);
-
-  FocusedContainer.displayName = (0, _getDisplayName2.default)(WrappedComponent);
-  return FocusedContainer;
-};
-
-exports.default = { withFocus: withFocus, withRestrictScroll: withRestrictScroll, withTheme: withTheme, restrictFocusTo: restrictFocusTo };
+exports.default = { withFocus: withFocus, withTheme: withTheme };

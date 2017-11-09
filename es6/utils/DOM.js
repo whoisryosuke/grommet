@@ -6,7 +6,7 @@ export function filterByFocusable(elements) {
     if (currentTag === 'a') {
       return isValidTag && element.childNodes.length > 0 && element.getAttribute('href');
     } else if (currentTag === 'svg' || currentTag === 'div') {
-      return isValidTag && element.hasAttribute('tabindex');
+      return isValidTag && element.hasAttribute('tabindex') && element.getAttribute('tabindex') !== '-1';
     }
     return isValidTag;
   });
@@ -51,7 +51,7 @@ export function getBodyChildElements() {
 export function getNewContainer() {
   // setup DOM
   var container = document.createElement('div');
-  document.body.appendChild(container, document.body.firstChild);
+  document.body.insertBefore(container, document.body.firstChild);
   return container;
 }
 

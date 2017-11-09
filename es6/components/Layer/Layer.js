@@ -55,7 +55,7 @@ var Layer = function (_Component) {
 }(Component);
 
 Layer.defaultProps = {
-  align: 'center'
+  position: 'center'
 };
 
 

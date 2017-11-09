@@ -10,9 +10,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import { compose } from 'recompose';
 
-import { restrictFocusTo, withRestrictScroll } from '../hocs';
+import FocusedContainer from '../FocusedContainer';
 import { Keyboard } from '../Keyboard';
 
 import StyledLayer, { StyledContainer } from './StyledLayer';
@@ -21,16 +20,35 @@ var LayerContainer = function (_Component) {
   _inherits(LayerContainer, _Component);
 
   function LayerContainer() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, LayerContainer);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.makeLayerVisible = function () {
+      var layerNode = findDOMNode(_this.layerNodeRef);
+      if (layerNode.scrollIntoView) {
+        layerNode.scrollIntoView();
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   LayerContainer.prototype.componentDidMount = function componentDidMount() {
-    var layerNode = findDOMNode(this.layerNodeRef);
-    layerNode.focus();
-    if (layerNode.scrollIntoView) {
-      layerNode.scrollIntoView();
+    var position = this.props.position;
+
+    if (position !== 'hidden') {
+      this.makeLayerVisible();
+    }
+  };
+
+  LayerContainer.prototype.componentWillReceiveProps = function componentWillReceiveProps(_ref) {
+    var position = _ref.position;
+
+    if (this.props.position !== position && position !== 'hidden') {
+      this.makeLayerVisible();
     }
   };
 
@@ -41,26 +59,32 @@ var LayerContainer = function (_Component) {
         children = _props.children,
         onEsc = _props.onEsc,
         plain = _props.plain,
+        position = _props.position,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'plain', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'plain', 'position', 'theme']);
 
     return React.createElement(
-      Keyboard,
-      { onEsc: onEsc },
+      FocusedContainer,
+      { hidden: position === 'hidden', restrictScroll: true },
       React.createElement(
-        StyledLayer,
-        {
-          plain: plain,
-          theme: theme,
-          tabIndex: '-1',
-          ref: function ref(_ref) {
-            _this2.layerNodeRef = _ref;
-          }
-        },
+        Keyboard,
+        { onEsc: onEsc },
         React.createElement(
-          StyledContainer,
-          _extends({}, rest, { theme: theme, plain: plain }),
-          children
+          StyledLayer,
+          {
+            plain: plain,
+            position: position,
+            theme: theme,
+            tabIndex: '-1',
+            ref: function ref(_ref2) {
+              _this2.layerNodeRef = _ref2;
+            }
+          },
+          React.createElement(
+            StyledContainer,
+            _extends({}, rest, { theme: theme, position: position, plain: plain }),
+            children
+          )
         )
       )
     );
@@ -69,4 +93,4 @@ var LayerContainer = function (_Component) {
   return LayerContainer;
 }(Component);
 
-export default compose(withRestrictScroll, restrictFocusTo)(LayerContainer);
+export default LayerContainer;

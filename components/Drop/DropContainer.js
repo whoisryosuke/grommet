@@ -10,7 +10,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
-var _hocs = require('../hocs');
+var _FocusedContainer = require('../FocusedContainer');
+
+var _FocusedContainer2 = _interopRequireDefault(_FocusedContainer);
 
 var _utils = require('../../utils');
 
@@ -206,18 +208,22 @@ var DropContainer = function (_Component) {
         rest = _objectWithoutProperties(_props, ['children', 'onClose', 'theme']);
 
     return _react2.default.createElement(
-      _Keyboard.Keyboard,
-      { onEsc: onClose },
+      _FocusedContainer2.default,
+      null,
       _react2.default.createElement(
-        _StyledDrop2.default,
-        _extends({
-          tabIndex: '-1',
-          ref: function ref(_ref) {
-            _this2.dropRef = _ref;
-          },
-          theme: theme
-        }, rest),
-        children
+        _Keyboard.Keyboard,
+        { onEsc: onClose },
+        _react2.default.createElement(
+          _StyledDrop2.default,
+          _extends({
+            tabIndex: '-1',
+            ref: function ref(_ref) {
+              _this2.dropRef = _ref;
+            },
+            theme: theme
+          }, rest),
+          children
+        )
       )
     );
   };
@@ -228,4 +234,4 @@ var DropContainer = function (_Component) {
 DropContainer.defaultProps = {
   centered: true
 };
-exports.default = (0, _hocs.restrictFocusTo)(DropContainer);
+exports.default = DropContainer;

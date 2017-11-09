@@ -4,6 +4,7 @@ export default (function (Keyboard) {
   var DocumentedKeyboard = describe(Keyboard).description('A react component that handles keyboard key presses.').usage('import { Keyboard } from \'grommet\';\n<Keyboard onUp={() => {}} />');
 
   DocumentedKeyboard.propTypes = {
+    target: PropTypes.oneOf(['component', 'document']).description('Where to listen for the keyboard presses.').defaultValue('component'),
     onBackspace: PropTypes.func.description('Function that will be called when the user presses the backspace key.'),
     onComma: PropTypes.func.description('Function that will be called when the user presses the comma key.'),
     onDown: PropTypes.func.description('Function that will be called when the user presses the down key.'),
