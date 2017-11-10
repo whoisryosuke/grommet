@@ -9,7 +9,7 @@ import { focusStyle, parseMetricToInt } from '../../utils';
 var rangeTrackStyle = css(['width:100%;height:', ';background-color:', ';'], function (props) {
   return props.theme.global.focus.border.width;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.rangeInput.trackColor;
+  return props.grommet.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
 });
 
 var rangeThumbStyle = css(['position:relative;border:', ' solid ', ';border-radius:', ';height:', ';width:', ';overflow:visible;background-color:', ';-webkit-appearance:none;cursor:pointer;'], function (props) {
@@ -43,9 +43,9 @@ var StyledRangeInput = styled.input.withConfig({
 }, rangeTrackStyle, firefoxMicrosoftThumbStyle, firefoxMicrosoftThumbStyle, function (props) {
   return !props.disabled && css(['&:hover::-moz-range-thumb{border-color:', ';}&:hover::-ms-thumb{border-color:', ';}'], props.grommet.dark ? props.theme.global.colors.white : props.theme.global.hover.textColor, props.grommet.dark ? props.theme.global.colors.white : props.theme.global.hover.textColor);
 }, rangeTrackStyle, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.rangeInput.trackColor;
+  return props.grommet.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.rangeInput.trackColor;
+  return props.grommet.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
 }, function (props) {
   return props.focus && focusStyle;
 });
