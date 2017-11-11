@@ -46,6 +46,28 @@ var TextInput = function (_Component) {
       activeSuggestionIndex: -1,
       announceChange: false,
       showDrop: false
+    }, _this.announce = function (message, mode) {
+      var suggestions = _this.props.suggestions;
+      var grommet = _this.context.grommet;
+
+      var announce = grommet && grommet.announce;
+      if (announce && suggestions && suggestions.length > 0) {
+        announce(message, mode);
+      }
+    }, _this.announceSuggestionsCount = function () {
+      var _this$props = _this.props,
+          suggestions = _this$props.suggestions,
+          suggestionsCount = _this$props.messages.suggestionsCount;
+
+      _this.announce(suggestions.length + ' ' + suggestionsCount);
+    }, _this.announceSuggestionsExist = function () {
+      var suggestionsExist = _this.props.messages.suggestionsExist;
+
+      _this.announce(suggestionsExist);
+    }, _this.announceSuggestionsIsOpen = function () {
+      var suggestionIsOpen = _this.props.messages.suggestionIsOpen;
+
+      _this.announce(suggestionIsOpen);
     }, _this.resetSuggestions = function () {
       var suggestions = _this.props.suggestions;
 
@@ -56,12 +78,12 @@ var TextInput = function (_Component) {
           announceChange: true,
           showDrop: true,
           selectedSuggestionIndex: -1
-        });
+        }, _this.announceSuggestionsCount);
       }
     }, _this.getSelectedSuggestionIndex = function () {
-      var _this$props = _this.props,
-          suggestions = _this$props.suggestions,
-          value = _this$props.value;
+      var _this$props2 = _this.props,
+          suggestions = _this$props2.suggestions,
+          value = _this$props2.value;
 
       var suggestionValues = suggestions.map(function (suggestion) {
         if ((typeof suggestion === 'undefined' ? 'undefined' : _typeof(suggestion)) === 'object') {
@@ -78,7 +100,7 @@ var TextInput = function (_Component) {
         showDrop: true,
         activeSuggestionIndex: -1,
         selectedSuggestionIndex: selectedSuggestionIndex
-      });
+      }, _this.announceSuggestionsIsOpen);
     }, _this.onNextSuggestion = function (event) {
       var suggestions = _this.props.suggestions;
       var _this$state = _this.state,
@@ -91,9 +113,9 @@ var TextInput = function (_Component) {
         } else {
           event.preventDefault();
           var index = Math.min(activeSuggestionIndex + 1, suggestions.length - 1);
-          _this.setState({ activeSuggestionIndex: index });
-          // this.setState({ activeSuggestionIndex: index },
-          //   this._announceSuggestion.bind(this, index));
+          _this.setState({ activeSuggestionIndex: index }, function () {
+            return _this.announceSuggestion(index);
+          });
         }
       }
     }, _this.onPreviousSuggestion = function (event) {
@@ -105,9 +127,9 @@ var TextInput = function (_Component) {
       if (suggestions && suggestions.length > 0 && showDrop) {
         event.preventDefault();
         var index = Math.max(activeSuggestionIndex - 1, 0);
-        _this.setState({ activeSuggestionIndex: index });
-        // this.setState({ activeSuggestionIndex: index },
-        //   this._announceSuggestion.bind(this, index));
+        _this.setState({ activeSuggestionIndex: index }, function () {
+          return _this.announceSuggestion(index);
+        });
       }
     }, _this.onClickSuggestion = function (suggestion) {
       var onSelect = _this.props.onSelect;
@@ -119,9 +141,9 @@ var TextInput = function (_Component) {
         });
       }
     }, _this.onSuggestionSelect = function (event) {
-      var _this$props2 = _this.props,
-          onSelect = _this$props2.onSelect,
-          suggestions = _this$props2.suggestions;
+      var _this$props3 = _this.props,
+          onSelect = _this$props3.onSelect,
+          suggestions = _this$props3.suggestions;
       var activeSuggestionIndex = _this.state.activeSuggestionIndex;
 
       _this.setState({ showDrop: false });
@@ -129,11 +151,6 @@ var TextInput = function (_Component) {
         event.preventDefault(); // prevent submitting forms
         var suggestion = suggestions[activeSuggestionIndex];
         _this.setState({ value: suggestion });
-        // this.setState({ value: suggestion }, () => {
-        //   const suggestionMessage = this._renderLabel(suggestion);
-        //   const selectedMessage = Intl.getMessage(intl, 'Selected');
-        //   announce(`${suggestionMessage} ${selectedMessage}`);
-        // });
         if (onSelect) {
           onSelect({
             target: _this.componentRef, suggestion: suggestion
@@ -143,9 +160,9 @@ var TextInput = function (_Component) {
     }, _this.onDropClose = function () {
       _this.setState({ showDrop: false });
     }, _this.renderSuggestions = function () {
-      var _this$props3 = _this.props,
-          suggestions = _this$props3.suggestions,
-          theme = _this$props3.theme;
+      var _this$props4 = _this.props,
+          suggestions = _this$props4.suggestions,
+          theme = _this$props4.theme;
       var _this$state3 = _this.state,
           activeSuggestionIndex = _this$state3.activeSuggestionIndex,
           selectedSuggestionIndex = _this$state3.selectedSuggestionIndex;
@@ -184,25 +201,28 @@ var TextInput = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  // announceSuggestion(index) {
-  //   const { suggestions } = this.props;
-  //   if (suggestions && suggestions.length > 0) {
-  //     const labelMessage = this._renderLabel(suggestions[index]);
-  //     const enterSelectMessage = Intl.getMessage(intl, 'Enter Select');
-  //     announce(`${labelMessage} ${enterSelectMessage}`);
-  //   }
-  // }
+  TextInput.prototype.announceSuggestion = function announceSuggestion(index) {
+    var _props = this.props,
+        suggestions = _props.suggestions,
+        enterSelect = _props.messages.enterSelect;
+
+    if (suggestions && suggestions.length > 0) {
+      var labelMessage = renderLabel(suggestions[index]);
+      this.announce(labelMessage + ' ' + enterSelect);
+    }
+  };
 
   TextInput.prototype.render = function render() {
     var _this2 = this;
 
-    var _props = this.props,
-        defaultValue = _props.defaultValue,
-        plain = _props.plain,
-        value = _props.value,
-        _onInput = _props.onInput,
-        onKeyDown = _props.onKeyDown,
-        rest = _objectWithoutProperties(_props, ['defaultValue', 'plain', 'value', 'onInput', 'onKeyDown']);
+    var _props2 = this.props,
+        defaultValue = _props2.defaultValue,
+        plain = _props2.plain,
+        value = _props2.value,
+        _onFocus = _props2.onFocus,
+        _onInput = _props2.onInput,
+        onKeyDown = _props2.onKeyDown,
+        rest = _objectWithoutProperties(_props2, ['defaultValue', 'plain', 'value', 'onFocus', 'onInput', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
     var showDrop = this.state.showDrop;
@@ -247,6 +267,12 @@ var TextInput = function (_Component) {
         }, rest, {
           defaultValue: renderLabel(defaultValue),
           value: renderLabel(value),
+          onFocus: function onFocus(event) {
+            _this2.announceSuggestionsExist();
+            if (_onFocus) {
+              _onFocus(event);
+            }
+          },
           onInput: function onInput(event) {
             _this2.resetSuggestions();
             if (_onInput) {
@@ -265,6 +291,14 @@ var TextInput = function (_Component) {
 TextInput.contextTypes = {
   grommet: PropTypes.object,
   theme: PropTypes.object
+};
+TextInput.defaultProps = {
+  messages: {
+    enterSelect: '(Press Enter to Select)',
+    suggestionsCount: 'suggestions available',
+    suggestionsExist: 'This input has suggestions use arrow keys to navigate',
+    suggestionIsOpen: 'Suggestions drop is open, continue to use arrow keys to navigate'
+  }
 };
 
 

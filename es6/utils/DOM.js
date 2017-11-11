@@ -82,27 +82,33 @@ var deleteTabIndex = deleteAttribute('tabindex');
 var deleteTabIndexCopy = deleteAttribute('data-g-tabindex');
 
 export var makeNodeFocusable = function makeNodeFocusable(node) {
-  node.setAttribute('aria-hidden', false);
-  // allow children to receive focus again
-  filterByFocusable(node.getElementsByTagName('*')).forEach(function (child) {
-    if (child.hasAttribute('data-g-tabindex')) {
-      restoreTabIndex(child);
-    } else {
-      deleteTabIndex(child);
-    }
-    deleteTabIndexCopy(child);
-  });
+  // do not touch aria live containers so that announcements work
+  if (!node.hasAttribute('aria-live')) {
+    node.setAttribute('aria-hidden', false);
+    // allow children to receive focus again
+    filterByFocusable(node.getElementsByTagName('*')).forEach(function (child) {
+      if (child.hasAttribute('data-g-tabindex')) {
+        restoreTabIndex(child);
+      } else {
+        deleteTabIndex(child);
+      }
+      deleteTabIndexCopy(child);
+    });
+  }
 };
 
 export var makeNodeUnfocusable = function makeNodeUnfocusable(node) {
-  node.setAttribute('aria-hidden', true);
-  // prevent children to receive focus
-  filterByFocusable(node.getElementsByTagName('*')).forEach(function (child) {
-    if (child.hasAttribute('tabindex')) {
-      saveTabIndex(child);
-    }
-    unsetTabIndex(child);
-  });
+  // do not touch aria live containers so that announcements work
+  if (!node.hasAttribute('aria-live')) {
+    node.setAttribute('aria-hidden', true);
+    // prevent children to receive focus
+    filterByFocusable(node.getElementsByTagName('*')).forEach(function (child) {
+      if (child.hasAttribute('tabindex')) {
+        saveTabIndex(child);
+      }
+      unsetTabIndex(child);
+    });
+  }
 };
 
 export default {

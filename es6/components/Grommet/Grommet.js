@@ -17,13 +17,44 @@ import { deepMerge } from '../../utils';
 import StyledGrommet from './StyledGrommet';
 import doc from './doc';
 
+var createAnnouncer = function createAnnouncer() {
+  var announcer = document.createElement('div');
+  announcer.style.left = '-100%';
+  announcer.style.right = '100%';
+  announcer.style.position = 'fixed';
+  announcer.style['z-index'] = '-1';
+
+  document.body.insertBefore(announcer, document.body.firstChild);
+
+  return announcer;
+};
+
 var Grommet = function (_Component) {
   _inherits(Grommet, _Component);
 
   function Grommet() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Grommet);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.announce = function (message) {
+      var mode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'polite';
+
+      // we only create a new container if we don't have one already
+      // we create a separate node so that grommet does not set aria-hidden to it
+      var announcer = document.body.querySelector('[aria-live]') || createAnnouncer();
+
+      announcer.setAttribute('aria-live', 'off');
+      announcer.innerHTML = message;
+      announcer.setAttribute('aria-live', mode);
+      setTimeout(function () {
+        announcer.innerHTML = '';
+      }, 500);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   Grommet.prototype.getChildContext = function getChildContext() {
@@ -31,7 +62,9 @@ var Grommet = function (_Component) {
 
 
     return {
-      grommet: {},
+      grommet: {
+        announce: this.announce
+      },
       theme: deepMerge(baseTheme, theme)
     };
   };
