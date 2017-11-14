@@ -17,6 +17,10 @@ var _getDisplayName = require('recompose/getDisplayName');
 
 var _getDisplayName2 = _interopRequireDefault(_getDisplayName);
 
+var _vanilla = require('../themes/vanilla');
+
+var _vanilla2 = _interopRequireDefault(_vanilla);
+
 var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -136,6 +140,11 @@ var withTheme = function withTheme(WrappedComponent) {
       var contextTheme = this.context.theme;
 
       var localTheme = (0, _utils.deepMerge)(contextTheme, theme);
+      // fallback to vanilla theme if no theme is provided
+      // this is the case when you use a component with Grommet as a parent
+      if (!localTheme || !Object.keys(localTheme).length) {
+        localTheme = _extends({}, _vanilla2.default);
+      }
       return _react2.default.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
     };
 

@@ -4,7 +4,7 @@ import { css } from 'styled-components';
 import { colorForName, deepFreeze } from '../utils';
 
 var brandColor = '#865CD6';
-var accentColors = ['#00CCEB', '#FF7D28'];
+var accentColors = ['#00CCEB', '#FF7D28', '#915591'];
 var neutralColors = ['#0A64A0', '#DC2878', '#501EB4', '#49516F'];
 var statusColors = {
   critical: '#FF324D',
@@ -185,6 +185,65 @@ export default deepFreeze({
       color: '#d9d9d9',
       radius: baseSpacing + 'px',
       size: baseSpacing * 2 + 'px'
+    }
+  },
+  clock: {
+    circle: {
+      color: {
+        day: css(['', ''], function (props) {
+          return colorForName('light-3', props.theme);
+        }),
+        night: css(['', ''], function (props) {
+          return colorForName('dark-2', props.theme);
+        })
+      },
+      width: '2px'
+    },
+    hour: {
+      color: {
+        day: css(['', ''], function (props) {
+          return colorForName('dark-1', props.theme);
+        }),
+        night: css(['', ''], function (props) {
+          return colorForName('white', props.theme);
+        })
+      },
+      width: '3px',
+      size: baseSpacing + 'px',
+      shape: 'round'
+    },
+    minute: {
+      color: {
+        day: css(['', ''], function (props) {
+          return colorForName('dark-4', props.theme);
+        }),
+        night: css(['', ''], function (props) {
+          return colorForName('light-6', props.theme);
+        })
+      },
+      width: '2px',
+      size: Math.round(baseSpacing / 2) + 'px',
+      shape: 'round'
+    },
+    second: {
+      color: {
+        day: css(['', ''], function (props) {
+          return colorForName('accent-2', props.theme);
+        }),
+        night: css(['', ''], function (props) {
+          return colorForName('accent-2', props.theme);
+        })
+      },
+      width: '1px',
+      size: Math.round(baseSpacing / 2.666) + 'px',
+      shape: 'round'
+    },
+    size: {
+      small: baseSpacing * 3 + 'px',
+      medium: baseSpacing * 4 + 'px',
+      large: baseSpacing * 6 + 'px',
+      xlarge: baseSpacing * 9 + 'px',
+      huge: baseSpacing * 12 + 'px'
     }
   },
   grommet: {},

@@ -62,6 +62,18 @@ Object.keys(_CheckBox).forEach(function (key) {
   });
 });
 
+var _Clock = require('./Clock');
+
+Object.keys(_Clock).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Clock[key];
+    }
+  });
+});
+
 var _Drop = require('./Drop');
 
 Object.keys(_Drop).forEach(function (key) {

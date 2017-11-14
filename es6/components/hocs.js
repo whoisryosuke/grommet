@@ -12,6 +12,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getDisplayName from 'recompose/getDisplayName';
 
+import baseTheme from '../themes/vanilla';
 import { deepMerge } from '../utils';
 
 export var withFocus = function withFocus(WrappedComponent) {
@@ -121,6 +122,11 @@ var withTheme = function withTheme(WrappedComponent) {
       var contextTheme = this.context.theme;
 
       var localTheme = deepMerge(contextTheme, theme);
+      // fallback to vanilla theme if no theme is provided
+      // this is the case when you use a component with Grommet as a parent
+      if (!localTheme || !Object.keys(localTheme).length) {
+        localTheme = _extends({}, baseTheme);
+      }
       return React.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
     };
 

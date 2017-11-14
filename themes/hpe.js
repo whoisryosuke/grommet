@@ -36,5 +36,13 @@ exports.default = (0, _utils.deepFreeze)({
       secondary: 'rgba(51,51,51,0.6)'
     },
     extend: 'letter-spacing: 0.04167em;'
+  },
+  clock: {
+    second: {
+      color: {
+        day: '#01a982',
+        night: '#01a982'
+      }
+    }
   }
 });
