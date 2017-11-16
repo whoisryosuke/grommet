@@ -12,10 +12,8 @@ export default (function (Drop) {
       right: PropTypes.oneOf(['left', 'right']),
       left: PropTypes.oneOf(['left', 'right'])
     }).description('How to align the drop with respect to the target element.').defaultValue({
-      defaultProp: {
-        top: 'top',
-        left: 'left'
-      }
+      top: 'top',
+      left: 'left'
     }),
     control: PropTypes.object.description('Target container where the drop will be aligned.').isRequired,
     dir: PropTypes.oneOf(['rtl', 'ltr']).description('Whether text should be rendered right to left or not. Defaults to\n      inherit from the document context.'),
