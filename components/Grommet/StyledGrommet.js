@@ -16,7 +16,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var StyledGrommet = _styledComponents2.default.div.withConfig({
   displayName: 'StyledGrommet'
-})(['', ' ', ' ', ''], _utils.baseStyle, (0, _utils.lapAndUp)('\n    top: 0px;\n    bottom: 0px;\n    left: 0px;\n    right: 0px;\n    height: 100%;\n    width: 100%;\n    overflow: visible;\n  '), function (props) {
+})(['', ' ', ''], _utils.baseStyle, function (props) {
   return props.theme.global.font.face;
 });
 

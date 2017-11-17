@@ -4,11 +4,11 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled from 'styled-components';
 
-import { baseStyle, lapAndUp } from '../../utils';
+import { baseStyle } from '../../utils';
 
 var StyledGrommet = styled.div.withConfig({
   displayName: 'StyledGrommet'
-})(['', ' ', ' ', ''], baseStyle, lapAndUp('\n    top: 0px;\n    bottom: 0px;\n    left: 0px;\n    right: 0px;\n    height: 100%;\n    width: 100%;\n    overflow: visible;\n  '), function (props) {
+})(['', ' ', ''], baseStyle, function (props) {
   return props.theme.global.font.face;
 });
 
