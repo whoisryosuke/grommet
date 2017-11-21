@@ -86,7 +86,7 @@ var Bar = function (_Component) {
         preserveAspectRatio: 'none',
         width: size === 'full' ? '100%' : width,
         height: height,
-        round: round ? { size: size } : undefined,
+        round: round ? { size: thickness } : undefined,
         theme: theme
       }, rest),
       React.createElement('path', {
