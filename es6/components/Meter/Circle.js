@@ -94,7 +94,8 @@ var Circle = function (_Component) {
       _extends({
         viewBox: '0 0 ' + width + ' ' + width,
         width: size === 'full' ? '100%' : width,
-        height: size === 'full' ? '100%' : width
+        height: size === 'full' ? '100%' : width,
+        theme: theme
       }, rest),
       React.createElement('circle', {
         cx: mid,

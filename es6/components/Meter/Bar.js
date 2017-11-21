@@ -85,7 +85,9 @@ var Bar = function (_Component) {
         viewBox: '0 0 ' + width + ' ' + height,
         preserveAspectRatio: 'none',
         width: size === 'full' ? '100%' : width,
-        height: height
+        height: height,
+        round: round ? { size: size } : undefined,
+        theme: theme
       }, rest),
       React.createElement('path', {
         d: 'M 0,' + mid + ' L ' + width + ',' + mid,
