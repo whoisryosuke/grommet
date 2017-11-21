@@ -238,12 +238,13 @@ var TextInput = function (_Component) {
 
     var _props2 = this.props,
         defaultValue = _props2.defaultValue,
+        id = _props2.id,
         plain = _props2.plain,
         value = _props2.value,
         _onFocus = _props2.onFocus,
         _onInput = _props2.onInput,
         onKeyDown = _props2.onKeyDown,
-        rest = _objectWithoutProperties(_props2, ['defaultValue', 'plain', 'value', 'onFocus', 'onInput', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props2, ['defaultValue', 'id', 'plain', 'value', 'onFocus', 'onInput', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
     var showDrop = this.state.showDrop;
@@ -256,6 +257,7 @@ var TextInput = function (_Component) {
       drop = _react2.default.createElement(
         _Drop.Drop,
         {
+          id: id ? 'text-input-drop__' + id : undefined,
           align: { top: 'bottom', left: 'left' },
           responsive: false,
           control: this.componentRef,
@@ -280,6 +282,7 @@ var TextInput = function (_Component) {
           onKeyDown: onKeyDown
         },
         _react2.default.createElement(_StyledTextInput2.default, _extends({
+          id: id,
           ref: function ref(_ref) {
             _this2.componentRef = _ref;
           },

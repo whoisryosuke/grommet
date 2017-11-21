@@ -1,7 +1,3 @@
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -10,8 +6,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-
-import { Down } from 'grommet-icons';
 
 import { debounce } from '../../utils';
 
@@ -70,34 +64,6 @@ var SelectContainer = function (_Component) {
         event.preventDefault(); // prevent submitting forms
         _this.selectOption(options[selectedOptionIndex]);
       }
-    }, _this.selectControl = function () {
-      var _this$props = _this.props,
-          placeholder = _this$props.placeholder,
-          value = _this$props.value,
-          rest = _objectWithoutProperties(_this$props, ['placeholder', 'value']);
-
-      delete rest.children;
-      var content = React.isValidElement(value) ? value : React.createElement(TextInput, _extends({
-        ref: function ref(_ref) {
-          _this.inputRef = _ref;
-        }
-      }, rest, {
-        type: 'text',
-        placeholder: placeholder,
-        plain: true,
-        readOnly: true,
-        value: value
-      }));
-      return React.createElement(
-        Box,
-        { align: 'center', direction: 'row', border: 'all' },
-        content,
-        React.createElement(
-          Box,
-          { margin: { horizontal: 'small' } },
-          React.createElement(Down, null)
-        )
-      );
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -121,7 +87,7 @@ var SelectContainer = function (_Component) {
     var selectedOptionIndex = this.state.selectedOptionIndex;
 
     var buttonNode = findDOMNode(this.optionsRef[selectedOptionIndex]);
-    if (selectedOptionIndex >= 0 && buttonNode) {
+    if (selectedOptionIndex >= 0 && buttonNode && buttonNode.scrollIntoView) {
       buttonNode.scrollIntoView();
     }
   };
@@ -134,6 +100,7 @@ var SelectContainer = function (_Component) {
         background = _props.background,
         children = _props.children,
         dropSize = _props.dropSize,
+        id = _props.id,
         name = _props.name,
         onKeyDown = _props.onKeyDown,
         onSearch = _props.onSearch,
@@ -154,7 +121,7 @@ var SelectContainer = function (_Component) {
       },
       React.createElement(
         Box,
-        { background: background },
+        { id: id ? 'select-drop__' + id : undefined, background: background },
         onSearch ? React.createElement(
           Box,
           { pad: 'xsmall' },
@@ -162,8 +129,8 @@ var SelectContainer = function (_Component) {
             focusIndicator: true,
             plain: true,
             size: 'small',
-            ref: function ref(_ref2) {
-              _this3.searchRef = _ref2;
+            ref: function ref(_ref) {
+              _this3.searchRef = _ref;
             },
             type: 'search',
             value: search,
@@ -176,16 +143,16 @@ var SelectContainer = function (_Component) {
           { basis: dropSize, overflow: 'auto' },
           React.createElement(
             Box,
-            { flex: false, role: 'menubar', tabIndex: '-1', ref: function ref(_ref4) {
-                _this3.selectRef = _ref4;
+            { flex: false, role: 'menubar', tabIndex: '-1', ref: function ref(_ref3) {
+                _this3.selectRef = _ref3;
               } },
             options.map(function (option, index) {
               return React.createElement(
                 Button,
                 {
                   role: 'menuitem',
-                  ref: function ref(_ref3) {
-                    _this3.optionsRef[index] = _ref3;
+                  ref: function ref(_ref2) {
+                    _this3.optionsRef[index] = _ref2;
                   },
                   active: activeOptionIndex === index || selectedOptionIndex === index || option === value,
                   key: 'option_' + (name || '') + '_' + index,

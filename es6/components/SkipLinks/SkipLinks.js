@@ -47,12 +47,14 @@ var SkipLinks = function (_Component) {
 
     var _props = this.props,
         children = _props.children,
+        id = _props.id,
         messages = _props.messages;
     var showLayer = this.state.showLayer;
 
     return React.createElement(
       Layer,
       {
+        id: id,
         position: showLayer ? 'top' : 'hidden',
         ref: function ref(_ref) {
           _this2.layerRef = _ref;

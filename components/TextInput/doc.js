@@ -19,12 +19,10 @@ exports.default = function (TextInput) {
       suggestionsExist: _reactDesc.PropTypes.string,
       suggestionIsOpen: _reactDesc.PropTypes.string
     }).description('Custom messages for TextInput. Used for accessibility by screen readers.').defaultValue({
-      messages: {
-        enterSelect: '(Press Enter to Select)',
-        suggestionsCount: 'suggestions available',
-        suggestionsExist: 'This input has suggestions use arrow keys to navigate',
-        suggestionIsOpen: 'Suggestions drop is open, continue to use arrow keys to navigate'
-      }
+      enterSelect: '(Press Enter to Select)',
+      suggestionsCount: 'suggestions available',
+      suggestionsExist: 'This input has suggestions use arrow keys to navigate',
+      suggestionIsOpen: 'Suggestions drop is open, continue to use arrow keys to navigate'
     }),
     name: _reactDesc.PropTypes.string.description('The name attribute of the input.'),
     onInput: _reactDesc.PropTypes.func.description('Function that will be called when the user types in the input.'),

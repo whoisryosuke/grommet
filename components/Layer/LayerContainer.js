@@ -16,6 +16,8 @@ var _FocusedContainer2 = _interopRequireDefault(_FocusedContainer);
 
 var _Keyboard = require('../Keyboard');
 
+var _hocs = require('../hocs');
+
 var _StyledLayer = require('./StyledLayer');
 
 var _StyledLayer2 = _interopRequireDefault(_StyledLayer);
@@ -71,11 +73,12 @@ var LayerContainer = function (_Component) {
 
     var _props = this.props,
         children = _props.children,
+        id = _props.id,
         onEsc = _props.onEsc,
         plain = _props.plain,
         position = _props.position,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'plain', 'position', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'id', 'onEsc', 'plain', 'position', 'theme']);
 
     return _react2.default.createElement(
       _FocusedContainer2.default,
@@ -86,6 +89,7 @@ var LayerContainer = function (_Component) {
         _react2.default.createElement(
           _StyledLayer2.default,
           {
+            id: id,
             plain: plain,
             position: position,
             theme: theme,
@@ -107,4 +111,4 @@ var LayerContainer = function (_Component) {
   return LayerContainer;
 }(_react.Component);
 
-exports.default = LayerContainer;
+exports.default = (0, _hocs.withTheme)(LayerContainer);

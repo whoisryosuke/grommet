@@ -13,6 +13,7 @@ import { findDOMNode } from 'react-dom';
 
 import FocusedContainer from '../FocusedContainer';
 import { Keyboard } from '../Keyboard';
+import { withTheme } from '../hocs';
 
 import StyledLayer, { StyledContainer } from './StyledLayer';
 
@@ -57,11 +58,12 @@ var LayerContainer = function (_Component) {
 
     var _props = this.props,
         children = _props.children,
+        id = _props.id,
         onEsc = _props.onEsc,
         plain = _props.plain,
         position = _props.position,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'onEsc', 'plain', 'position', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'id', 'onEsc', 'plain', 'position', 'theme']);
 
     return React.createElement(
       FocusedContainer,
@@ -72,6 +74,7 @@ var LayerContainer = function (_Component) {
         React.createElement(
           StyledLayer,
           {
+            id: id,
             plain: plain,
             position: position,
             theme: theme,
@@ -93,4 +96,4 @@ var LayerContainer = function (_Component) {
   return LayerContainer;
 }(Component);
 
-export default LayerContainer;
+export default withTheme(LayerContainer);
