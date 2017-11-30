@@ -290,6 +290,18 @@ Object.keys(_Stack).forEach(function (key) {
   });
 });
 
+var _Tabs = require('./Tabs');
+
+Object.keys(_Tabs).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Tabs[key];
+    }
+  });
+});
+
 var _Text = require('./Text');
 
 Object.keys(_Text).forEach(function (key) {
