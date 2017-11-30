@@ -55,7 +55,7 @@ var Select = function (_Component) {
 
       delete rest.children;
       var content = _react2.default.isValidElement(value) ? value : _react2.default.createElement(_TextInput.TextInput, _extends({
-        margin: 'none',
+        style: { cursor: 'pointer' },
         ref: function ref(_ref) {
           _this.inputRef = _ref;
         }

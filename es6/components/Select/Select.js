@@ -40,7 +40,7 @@ var Select = function (_Component) {
 
       delete rest.children;
       var content = React.isValidElement(value) ? value : React.createElement(TextInput, _extends({
-        margin: 'none',
+        style: { cursor: 'pointer' },
         ref: function ref(_ref) {
           _this.inputRef = _ref;
         }

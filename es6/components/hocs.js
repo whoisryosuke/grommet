@@ -101,6 +101,7 @@ export var withFocus = function withFocus(WrappedComponent) {
   }(Component);
 
   FocusableComponent.displayName = getDisplayName(WrappedComponent);
+
   return FocusableComponent;
 };
 
@@ -121,12 +122,7 @@ var withTheme = function withTheme(WrappedComponent) {
 
       var contextTheme = this.context.theme;
 
-      var localTheme = deepMerge(contextTheme, theme);
-      // fallback to vanilla theme if no theme is provided
-      // this is the case when you use a component with Grommet as a parent
-      if (!localTheme || !Object.keys(localTheme).length) {
-        localTheme = _extends({}, baseTheme);
-      }
+      var localTheme = deepMerge(baseTheme, contextTheme, theme);
       return React.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
     };
 
@@ -139,6 +135,7 @@ var withTheme = function withTheme(WrappedComponent) {
 
 
   ThemedComponent.displayName = getDisplayName(WrappedComponent);
+
   return ThemedComponent;
 };
 
