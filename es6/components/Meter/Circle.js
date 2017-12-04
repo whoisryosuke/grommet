@@ -45,9 +45,11 @@ var Circle = function (_Component) {
 
     var startValue = 0;
     var startAngle = 0;
-    var paths = (values || []).filter(function (v) {
+    var paths = [];
+    var pathCaps = [];
+    (values || []).filter(function (v) {
       return v.value > 0;
-    }).map(function (valueArg, index) {
+    }).forEach(function (valueArg, index) {
       var color = valueArg.color,
           highlight = valueArg.highlight,
           label = valueArg.label,
@@ -64,7 +66,6 @@ var Circle = function (_Component) {
       } else {
         endAngle = Math.min(360, translateEndAngle(startAngle, anglePer, value));
       }
-      var d = arcCommands(width / 2, width / 2, radius, startAngle, endAngle);
       var hoverProps = void 0;
       if (onHover) {
         hoverProps = {
@@ -76,18 +77,50 @@ var Circle = function (_Component) {
           }
         };
       }
+      var stroke = colorForName(someHighlight && !highlight ? background : colorName, theme);
+
+      if (round) {
+        var d1 = arcCommands(width / 2, width / 2, radius, startAngle, endAngle);
+        paths.unshift(React.createElement('path', _extends({
+          key: key,
+          d: d1,
+          fill: 'none',
+          stroke: stroke,
+          strokeWidth: height,
+          strokeLinecap: 'round'
+        }, hoverProps, pathRest)));
+
+        // To handle situations where the last values are small, redraw
+        // a dot at the end.
+        var d2 = arcCommands(width / 2, width / 2, radius, endAngle, endAngle);
+        var pathCap = React.createElement('path', _extends({
+          key: key + '-',
+          d: d2,
+          fill: 'none',
+          stroke: stroke,
+          strokeWidth: height,
+          strokeLinecap: 'round'
+        }, hoverProps, pathRest));
+        // If we are on a large enough path to not need re-drawing previous ones,
+        // clear the pathCaps we've collected already.
+        if (endAngle - startAngle > 2 * anglePer) {
+          pathCaps = [];
+        }
+        pathCaps.unshift(pathCap);
+      } else {
+        var d = arcCommands(width / 2, width / 2, radius, startAngle, endAngle);
+        paths.push(React.createElement('path', _extends({
+          key: key,
+          d: d,
+          fill: 'none',
+          stroke: stroke,
+          strokeWidth: height,
+          strokeLinecap: 'butt'
+        }, hoverProps, pathRest)));
+      }
       startValue += value;
       startAngle = endAngle;
-
-      return React.createElement('path', _extends({
-        key: key,
-        d: d,
-        fill: 'none',
-        stroke: colorForName(someHighlight && !highlight ? background : colorName, theme),
-        strokeWidth: height,
-        strokeLinecap: round ? 'round' : 'square'
-      }, hoverProps, pathRest));
-    }).reverse(); // reverse so the caps looks right
+    });
 
     return React.createElement(
       StyledMeter,
@@ -106,7 +139,8 @@ var Circle = function (_Component) {
         strokeLinecap: round ? 'round' : 'square',
         fill: 'none'
       }),
-      paths
+      paths,
+      pathCaps
     );
   };
 

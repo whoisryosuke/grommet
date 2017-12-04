@@ -35,13 +35,15 @@ var Bar = function (_Component) {
 
     var width = size === 'full' ? 288 : parseMetricToInt(theme.global.size[size]);
     var height = parseMetricToInt(theme.global.edgeSize[thickness]);
+    // account for the round cap, if any
+    var capOffset = round ? height / 2 : 0;
     var mid = height / 2;
     var max = 100;
     var someHighlight = (values || []).some(function (v) {
       return v.highlight;
     });
 
-    var start = 0;
+    var start = capOffset;
     var paths = (values || []).filter(function (v) {
       return v.value > 0;
     }).map(function (valueArg, index) {
@@ -53,7 +55,7 @@ var Bar = function (_Component) {
           pathRest = _objectWithoutProperties(valueArg, ['color', 'highlight', 'label', 'onHover', 'value']);
 
       var key = 'p-' + index;
-      var delta = value * width / max;
+      var delta = value * (width - 2 * capOffset) / max;
       var d = 'M ' + start + ',' + mid + ' L ' + (start + delta) + ',' + mid;
       var colorName = color || (index === values.length - 1 ? 'accent-1' : 'neutral-' + (index + 1));
       var hoverProps = void 0;
@@ -75,7 +77,7 @@ var Bar = function (_Component) {
         fill: 'none',
         stroke: colorForName(someHighlight && !highlight ? background : colorName, theme),
         strokeWidth: height,
-        strokeLinecap: round ? 'round' : 'square'
+        strokeLinecap: round ? 'round' : 'butt'
       }, hoverProps, pathRest));
     }).reverse(); // reverse so the caps looks right
 
@@ -90,7 +92,7 @@ var Bar = function (_Component) {
         theme: theme
       }, rest),
       React.createElement('path', {
-        d: 'M 0,' + mid + ' L ' + width + ',' + mid,
+        d: 'M ' + capOffset + ',' + mid + ' L ' + (width - capOffset) + ',' + mid,
         fill: 'none',
         stroke: colorForName(background, theme),
         strokeWidth: height,
