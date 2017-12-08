@@ -145,6 +145,6 @@ var Tab = function (_Component) {
 }(_react.Component);
 
 Tab.contextTypes = {
-  grommet: _propTypes2.default.object.isRequired
+  grommet: _propTypes2.default.object
 };
 exports.default = (0, _recompose.compose)(_hocs.withTheme)(Tab);

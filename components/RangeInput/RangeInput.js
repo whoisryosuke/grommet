@@ -51,7 +51,7 @@ var RangeInput = function (_Component) {
 }(_react.Component);
 
 RangeInput.contextTypes = {
-  grommet: _propTypes2.default.object.isRequired
+  grommet: _propTypes2.default.object
 };
 
 

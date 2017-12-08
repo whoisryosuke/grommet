@@ -34,7 +34,7 @@ var RangeInput = function (_Component) {
 }(Component);
 
 RangeInput.contextTypes = {
-  grommet: PropTypes.object.isRequired
+  grommet: PropTypes.object
 };
 
 

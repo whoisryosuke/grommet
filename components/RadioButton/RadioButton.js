@@ -102,7 +102,7 @@ var RadioButton = function (_Component) {
 }(_react.Component);
 
 RadioButton.contextTypes = {
-  grommet: _propTypes2.default.object.isRequired
+  grommet: _propTypes2.default.object
 };
 
 

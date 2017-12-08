@@ -84,7 +84,7 @@ var Box = function (_Component) {
 }(Component);
 
 Box.contextTypes = {
-  grommet: PropTypes.object.isRequired
+  grommet: PropTypes.object
 };
 Box.childContextTypes = {
   grommet: PropTypes.object

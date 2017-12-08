@@ -106,7 +106,7 @@ var Anchor = function (_Component) {
 }(Component);
 
 Anchor.contextTypes = {
-  grommet: PropTypes.object.isRequired
+  grommet: PropTypes.object
 };
 
 

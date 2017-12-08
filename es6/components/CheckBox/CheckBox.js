@@ -100,7 +100,7 @@ var CheckBox = function (_Component) {
 }(Component);
 
 CheckBox.contextTypes = {
-  grommet: PropTypes.object.isRequired
+  grommet: PropTypes.object
 };
 
 

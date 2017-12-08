@@ -85,7 +85,7 @@ var RadioButton = function (_Component) {
 }(Component);
 
 RadioButton.contextTypes = {
-  grommet: PropTypes.object.isRequired
+  grommet: PropTypes.object
 };
 
 

@@ -131,7 +131,7 @@ var Tab = function (_Component) {
 }(Component);
 
 Tab.contextTypes = {
-  grommet: PropTypes.object.isRequired
+  grommet: PropTypes.object
 };
 
 

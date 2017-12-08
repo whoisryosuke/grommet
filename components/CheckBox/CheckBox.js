@@ -117,7 +117,7 @@ var CheckBox = function (_Component) {
 }(_react.Component);
 
 CheckBox.contextTypes = {
-  grommet: _propTypes2.default.object.isRequired
+  grommet: _propTypes2.default.object
 };
 
 
