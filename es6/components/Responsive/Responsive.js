@@ -30,7 +30,7 @@ var Responsive = function (_Component) {
       var narrow = _this.state.narrow;
 
       if (window.innerWidth > theme.global.breakpoints.narrow) {
-        if (narrow) {
+        if (narrow !== false) {
           _this.setState({ narrow: false }, function () {
             return onChange('wide');
           });
