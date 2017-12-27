@@ -60,7 +60,7 @@ var DropButton = function (_Component) {
     var open = _ref.open;
     var showDrop = this.state.showDrop;
 
-    if (open !== showDrop) {
+    if (open !== undefined && open !== showDrop) {
       this.setState({ showDrop: open });
     }
   };
