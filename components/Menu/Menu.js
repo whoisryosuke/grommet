@@ -187,7 +187,8 @@ var Menu = function (_Component) {
                     if (item.close !== false) {
                       _this2.onDropClose();
                     }
-                  } : undefined
+                  } : undefined,
+                  href: item.href
                 },
                 _react2.default.createElement(
                   _Box.Box,
