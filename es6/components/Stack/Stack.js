@@ -30,18 +30,29 @@ var Stack = function (_Component) {
     var _props = this.props,
         anchor = _props.anchor,
         children = _props.children,
-        rest = _objectWithoutProperties(_props, ['anchor', 'children']);
+        guidingChild = _props.guidingChild,
+        rest = _objectWithoutProperties(_props, ['anchor', 'children', 'guidingChild']);
 
     // make all children but the first absolutely positioned
 
 
+    var lastIndex = React.Children.count(children) - 1;
+    var guidingIndex = guidingChild;
+    if (guidingIndex === 'first' || !guidingIndex) {
+      guidingIndex = 0;
+    } else if (guidingIndex === 'last') {
+      guidingIndex = lastIndex;
+    }
     var styledChildren = React.Children.map(children, function (child, index) {
-      if (index === 0) {
-        return child;
-      }
-
       if (child) {
-        var style = _extends({
+        if (index === guidingIndex) {
+          var _style = _extends({}, (child.props || {}).style, {
+            position: 'relative'
+          });
+          return cloneElement(child, { style: _style });
+        }
+
+        var style = _extends({}, (child.props || {}).style, {
           position: 'absolute',
           overflow: 'hidden'
         }, styleMap[anchor || 'fill']);
