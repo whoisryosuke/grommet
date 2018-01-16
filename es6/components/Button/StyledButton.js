@@ -7,39 +7,21 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 
-import { activeStyle, focusStyle, fontSize, lapAndUp } from '../../utils';
+import { activeStyle, backgroundStyle, colorForName, focusStyle, fontSize, lapAndUp } from '../../utils';
 
-var primaryStyle = css(['background-color:', ';color:', ';svg{fill:', ';stroke:', ';transition:none;}'], function (props) {
-  return props.theme.global.colors.brand;
-}, function (props) {
-  return props.theme.global.colors.white;
-}, function (props) {
-  return props.theme.global.colors.white;
-}, function (props) {
-  return props.theme.global.colors.white;
-});
+var basicStyle = function basicStyle(props) {
+  return css(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? colorForName(props.color, props.theme) : props.theme.button.border.color, props.theme.button.border.radius, props.theme.button.colors.text);
+};
 
-var accentStyle = css(['border-color:', ';'], function (props) {
-  return props.theme.button.colors.accent;
-});
-
-var criticalStyle = css(['border-color:', ';'], function (props) {
-  return props.theme.button.colors.critical;
-});
-
-var secondaryStyle = css(['border-color:', ';'], function (props) {
-  return props.theme.button.colors.secondary;
-});
+var primaryStyle = function primaryStyle(props) {
+  return css(['', ' border:none;svg{fill:', ';stroke:', ';transition:none;}'], backgroundStyle(props.color || 'brand', props.theme), props.theme.global.colors.white, props.theme.global.colors.white);
+};
 
 var disabledStyle = '\n  opacity: 0.3;\n  cursor: default;\n';
 
 function getHoverColor(props) {
-  if (props.accent) {
-    return props.theme.button.colors.accent;
-  } else if (props.critical) {
-    return props.theme.button.colors.critical;
-  } else if (props.secondary) {
-    return props.theme.button.colors.secondary;
+  if (props.color) {
+    return colorForName(props.color, props.theme);
   }
   return props.theme.button.border.color;
 }
@@ -94,8 +76,12 @@ var plainStyle = css(['color:inherit;border:none;padding:0;', ''], function (pro
 
 var StyledButton = styled.button.withConfig({
   displayName: 'StyledButton'
-})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
-  return !props.plain && css(['border:', ' solid ', ';border-radius:', ';color:', ';text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.border.width, props.theme.button.border.color, props.theme.button.border.radius, props.theme.button.colors.text, props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
+})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+  return !props.plain && css(['text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
+}, function (props) {
+  return !props.plain && !props.primary && basicStyle(props);
+}, function (props) {
+  return !props.plain && props.primary && primaryStyle(props);
 }, function (props) {
   return !props.disabled && !props.focus && hoverStyle;
 }, function (props) {
@@ -106,17 +92,6 @@ var StyledButton = styled.button.withConfig({
   return !props.plain && fontSize(props.theme.global.control.font.size, props.theme.global.spacing);
 }, function (props) {
   return !props.plain && 'padding: ' + props.theme.button.padding.vertical + ' ' + props.theme.button.padding.horizontal + ';';
-}, function (props) {
-  if (props.primary) {
-    return primaryStyle;
-  } else if (props.accent) {
-    return accentStyle;
-  } else if (props.critical) {
-    return criticalStyle;
-  } else if (props.secondary) {
-    return secondaryStyle;
-  }
-  return '';
 }, function (props) {
   return props.focus && focusStyle;
 }, lapAndUp('\n    transition: 0.1s ease-in-out;\n  '), function (props) {
