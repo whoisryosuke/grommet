@@ -173,7 +173,7 @@ var DropContainer = function (_Component) {
         // the (position:absolute + scrollTop)
         // is presenting issues with desktop scroll flickering
         container.style.top = top + 'px';
-        container.style.maxHeight = windowHeight - top + 'px';
+        container.style.maxHeight = windowHeight - (top || 0) + 'px';
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
