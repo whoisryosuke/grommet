@@ -35,6 +35,10 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
       if (rgba) {
         return (0, _styledComponents.css)(['background-color:', ';color:', ';'], rgba, (0, _colors.colorIsDark)(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
       }
+    } else if (background.dark === false) {
+      return (0, _styledComponents.css)(['color:', ';'], theme.global.colors.text);
+    } else if (background.dark) {
+      return (0, _styledComponents.css)(['color:', ';'], theme.global.colors.darkBackground.text);
     }
     return undefined;
   }

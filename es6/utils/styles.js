@@ -29,6 +29,10 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
       if (rgba) {
         return css(['background-color:', ';color:', ';'], rgba, colorIsDark(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
       }
+    } else if (background.dark === false) {
+      return css(['color:', ';'], theme.global.colors.text);
+    } else if (background.dark) {
+      return css(['color:', ';'], theme.global.colors.darkBackground.text);
     }
     return undefined;
   }
