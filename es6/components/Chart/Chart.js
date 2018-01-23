@@ -29,7 +29,7 @@ var renderBars = function renderBars(values, bounds, scale, height) {
     var bottom = value.length === 2 ? bounds[1][0] : value[1];
     var top = value.length === 2 ? value[1] : value[2];
     if (top !== 0) {
-      var d = 'M ' + value[0] * scale[0] + ',' + (height - bottom * scale[1]) + (' L ' + value[0] * scale[0] + ',' + (height - top * scale[1]));
+      var d = 'M ' + (value[0] - bounds[0][0]) * scale[0] + ',' + ('' + (height - (bottom - bounds[1][0]) * scale[1])) + (' L ' + (value[0] - bounds[0][0]) * scale[0] + ',') + ('' + (height - (top - bounds[1][0]) * scale[1]));
 
       return React.createElement(
         'g',
@@ -51,7 +51,7 @@ var renderLine = function renderLine(values, bounds, scale, height) {
   (values || []).forEach(function (_ref, index) {
     var value = _ref.value;
 
-    d += (index ? ' L' : 'M') + ' ' + value[0] * scale[0] + ',' + (height - value[1] * scale[1]);
+    d += (index ? ' L' : 'M') + ' ' + (value[0] - bounds[0][0]) * scale[0] + ',' + ('' + (height - (value[1] - bounds[1][0]) * scale[1]));
   });
   return React.createElement(
     'g',
@@ -69,13 +69,13 @@ var renderArea = function renderArea(values, bounds, scale, height, props) {
     var value = _ref2.value;
 
     var top = value.length === 2 ? value[1] : value[2];
-    d += (!index ? 'M' : ' L') + ' ' + value[0] * scale[0] + ',' + (height - top * scale[1]);
+    d += (!index ? 'M' : ' L') + ' ' + (value[0] - bounds[0][0]) * scale[0] + ',' + ('' + (height - (top - bounds[1][0]) * scale[1]));
   });
   (values || []).reverse().forEach(function (_ref3) {
     var value = _ref3.value;
 
     var bottom = value.length === 2 ? bounds[1][0] : value[1];
-    d += ' L ' + value[0] * scale[0] + ',' + (height - bottom * scale[1]);
+    d += ' L ' + value[0] * scale[0] + ',' + ('' + (height - (bottom - bounds[1][0]) * scale[1]));
   });
   d += ' Z';
   return React.createElement(
