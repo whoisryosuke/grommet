@@ -86,9 +86,9 @@ var Video = function (_Component) {
 
       return videoEvents.reduce(function (previousValue, currentValue) {
         var nextValue = _extends({}, previousValue);
-        nextValue[currentValue] = function () {
+        nextValue[currentValue] = function (e) {
           if (currentValue in _this.props && typeof _this.props[currentValue] === 'function') {
-            _this.props[currentValue]();
+            _this.props[currentValue](e);
           }
           _this.update();
         };
