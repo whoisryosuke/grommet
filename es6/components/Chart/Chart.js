@@ -9,6 +9,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
 
 import { colorForName, parseMetricToInt } from '../../utils';
@@ -107,15 +108,34 @@ var Chart = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
-    _this.state = { bounds: normalizeBounds(props) };
+    _this.onResize = function () {
+      var parent = findDOMNode(_this.containerRef).parentNode;
+      if (parent) {
+        var rect = parent.getBoundingClientRect();
+        _this.setState({ containerWidth: rect.width, containerHeight: rect.height });
+      }
+    };
+
+    _this.state = { bounds: normalizeBounds(props), containerWidth: 0, containerHeight: 0 };
     return _this;
   }
+
+  Chart.prototype.componentDidMount = function componentDidMount() {
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
+  };
 
   Chart.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
     this.setState({ bounds: normalizeBounds(nextProps) });
   };
 
+  Chart.prototype.componentWillUnmount = function componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+  };
+
   Chart.prototype.render = function render() {
+    var _this2 = this;
+
     var _props = this.props,
         color = _props.color,
         round = _props.round,
@@ -126,13 +146,16 @@ var Chart = function (_Component) {
         values = _props.values,
         rest = _objectWithoutProperties(_props, ['color', 'round', 'size', 'theme', 'thickness', 'type', 'values']);
 
-    var bounds = this.state.bounds;
+    var _state = this.state,
+        bounds = _state.bounds,
+        containerWidth = _state.containerWidth,
+        containerHeight = _state.containerHeight;
 
 
-    var sizeWidth = typeof size === 'string' ? size : size.width;
-    var sizeHeight = typeof size === 'string' ? size : size.height;
-    var width = sizeWidth === 'full' ? bounds[0][1] - bounds[0][0] : parseMetricToInt(theme.global.size[sizeWidth]);
-    var height = sizeHeight === 'full' ? bounds[1][1] - bounds[1][0] : parseMetricToInt(theme.global.size[sizeHeight]);
+    var sizeWidth = typeof size === 'string' ? size : size.width || 'medium';
+    var sizeHeight = typeof size === 'string' ? size : size.height || 'medium';
+    var width = sizeWidth === 'full' ? containerWidth : parseMetricToInt(theme.global.size[sizeWidth]);
+    var height = sizeHeight === 'full' ? containerHeight : parseMetricToInt(theme.global.size[sizeHeight]);
     var strokeWidth = parseMetricToInt(theme.global.edgeSize[thickness]);
     var scale = [width / (bounds[0][1] - bounds[0][0]), height / (bounds[1][1] - bounds[1][0])];
 
@@ -148,10 +171,13 @@ var Chart = function (_Component) {
     return React.createElement(
       StyledChart,
       _extends({
+        ref: function ref(_ref4) {
+          _this2.containerRef = _ref4;
+        },
         viewBox: '-' + strokeWidth / 2 + ' -' + strokeWidth / 2 + '\n          ' + (width + strokeWidth) + ' ' + (height + strokeWidth),
-        preserveAspectRatio: 'none',
+        preserveAspectRatio: 'xMinYMin meet',
         width: size === 'full' ? '100%' : width,
-        height: height
+        height: size === 'full' ? '100%' : height
       }, rest),
       React.createElement(
         'g',
