@@ -59,11 +59,12 @@ var LayerContainer = function (_Component) {
     var _props = this.props,
         children = _props.children,
         id = _props.id,
+        onClickOverlay = _props.onClickOverlay,
         onEsc = _props.onEsc,
         plain = _props.plain,
         position = _props.position,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'id', 'onEsc', 'plain', 'position', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'id', 'onClickOverlay', 'onEsc', 'plain', 'position', 'theme']);
 
     return React.createElement(
       FocusedContainer,
@@ -75,6 +76,7 @@ var LayerContainer = function (_Component) {
           StyledLayer,
           {
             id: id,
+            onClick: onClickOverlay,
             plain: plain,
             position: position,
             theme: theme,
