@@ -331,5 +331,15 @@ export default deepFreeze({
     captions: {
       background: rgba(0, 0, 0, 0.7)
     }
+  },
+  worldMap: {
+    continent: {
+      active: '8px',
+      base: '6px'
+    },
+    place: {
+      active: '20px',
+      base: '8px'
+    }
   }
 });

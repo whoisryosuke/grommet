@@ -89,6 +89,7 @@ var Diagram = function (_Component) {
         height = _state.height,
         width = _state.width;
 
+    console.log('!!! render', this.containerRef !== undefined);
 
     var paths = void 0;
     if (this.containerRef) {
@@ -117,7 +118,7 @@ var Diagram = function (_Component) {
           var fromPoint = [fromRect.x - containerRect.x + fromRect.width / 2, fromRect.y - containerRect.y + fromRect.height / 2];
           var toPoint = [toRect.x - containerRect.x + toRect.width / 2, toRect.y - containerRect.y + toRect.height / 2];
           var offsetWidth = offset ? parseMetricToInt(theme.global.edgeSize[offset]) : 0;
-          var d = COMMANDS[type](fromPoint, toPoint, offsetWidth);
+          var d = COMMANDS[type || 'curved'](fromPoint, toPoint, offsetWidth);
           var strokeWidth = thickness ? parseMetricToInt(theme.global.edgeSize[thickness]) : 1;
           path = React.createElement('path', {
             key: fromId + '-' + toId + '-' + index,
