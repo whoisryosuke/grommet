@@ -4,11 +4,12 @@ import { a11yTitlePropType, getAvailableAtBadge } from '../../utils';
 
 var PAD_SIZES = ['xsmall', 'small', 'medium', 'large'];
 
-var ANIMATION_TYPE = PropTypes.oneOf(['fadeIn', 'fadeOut', 'slideUp', 'slideDown', 'slideLeft', 'slideRight', 'zoomIn', 'zoomOut']);
+var ANIMATION_TYPE = PropTypes.oneOf(['fadeIn', 'fadeOut', 'jiggle', 'pulse', 'slideUp', 'slideDown', 'slideLeft', 'slideRight', 'zoomIn', 'zoomOut']);
 var ANIMATION_SHAPE = PropTypes.shape({
   type: ANIMATION_TYPE,
   delay: PropTypes.number,
-  duration: PropTypes.number
+  duration: PropTypes.number,
+  size: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge'])
 });
 
 export default (function (Box) {
@@ -18,7 +19,7 @@ export default (function (Box) {
     align: PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']).description('How to align the contents along the cross axis.'),
     alignContent: PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in the cross axis.').defaultValue('stretch'),
     alignSelf: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the cross axis when contained in a Box or along\nthe column axis when contained in a Grid.'),
-    animation: PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE, PropTypes.arrayOf(PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE]))]).description('Animation effect(s) to use. \'duration\' and \'delay\' should be in milliseconds.'),
+    animation: PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE, PropTypes.arrayOf(PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE]))]).description('Animation effect(s) to use.\n      \'duration\' and \'delay\' should be in milliseconds.\n      \'jiggle\' and \'pulse\' types are intended for small elements, like icons.'),
     background: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
       color: PropTypes.string,
       dark: PropTypes.bool,

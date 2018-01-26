@@ -179,35 +179,99 @@ var responsiveStyle = css(['', '}'], function (props) {
   return palm('\n    flex-direction: column;\n    flex-basis: auto;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n    ' + (props.reverse && 'flex-direction: column-reverse') + '\n  ');
 });
 
-var INITIAL_ANIMATION_STATE = {
-  fadeIn: 'opacity: 0;',
-  fadeOut: 'opacity: 1;',
-  slideDown: 'transform: translateY(-10%);',
-  slideLeft: 'transform: translateX(10%);',
-  slideRight: 'transform: translateX(-10%);',
-  slideUp: 'transform: translateY(10%);',
-  zoomIn: 'transform: scale(0.95);',
-  zoomOut: 'transform: scale(1.05);'
+var SLIDE_SIZES = {
+  xsmall: 1,
+  small: 5,
+  medium: 10,
+  large: 50,
+  xlarge: 200
 };
 
-var KEYFRAMES = {
-  fadeIn: keyframes(['from{', '}to{opacity:1;}'], INITIAL_ANIMATION_STATE.fadeIn),
-  fadeOut: keyframes(['from{', '}to{opacity:0;}'], INITIAL_ANIMATION_STATE.fadeOut),
-  slideDown: keyframes(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.slideDown),
-  slideLeft: keyframes(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.slideLeft),
-  slideRight: keyframes(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.slideRight),
-  slideUp: keyframes(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.slideUp),
-  zoomIn: keyframes(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.zoomIn),
-  zoomOut: keyframes(['from{', '}to{transform:none;}'], INITIAL_ANIMATION_STATE.zoomOut)
+var PULSE_SIZES = {
+  xsmall: 1.001,
+  small: 1.01,
+  medium: 1.1,
+  large: 1.5,
+  xlarge: 2
+};
+
+var JIGGLE_SIZES = {
+  xsmall: 0.1,
+  small: 1,
+  medium: 5,
+  large: 400,
+  xlarge: 1000
+};
+
+var ZOOM_SIZES = {
+  xsmall: 0.001,
+  small: 0.01,
+  medium: 0.05,
+  large: 0.1,
+  xlarge: 0.5
+};
+
+var animationBounds = function animationBounds(type) {
+  var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'medium';
+
+  if (type === 'fadeIn') {
+    return ['opacity: 0;', 'opacity: 1;'];
+  }
+  if (type === 'fadeOut') {
+    return ['opacity: 1;', 'opacity: 0;'];
+  }
+  if (type === 'jiggle') {
+    var deg = JIGGLE_SIZES[size];
+    return ['transform: rotate(-' + deg + 'deg);', 'transform: rotate(' + deg + 'deg);'];
+  }
+  if (type === 'pulse') {
+    return ['transform: scale(1);', 'transform: scale(' + PULSE_SIZES[size] + ')'];
+  }
+  if (type === 'flipIn') {
+    return ['transform: rotateY(90deg);', 'transform: rotateY(0);'];
+  }
+  if (type === 'flipOut') {
+    return ['transform: rotateY(0);', 'transform: rotateY(90deg);'];
+  }
+  if (type === 'slideDown') {
+    return ['transform: translateY(-' + SLIDE_SIZES[size] + '%);', 'transform: none;'];
+  }
+  if (type === 'slideLeft') {
+    return ['transform: translateX(' + SLIDE_SIZES[size] + '%);', 'transform: none;'];
+  }
+  if (type === 'slideRight') {
+    return ['transform: translateX(-' + SLIDE_SIZES[size] + '%);', 'transform: none;'];
+  }
+  if (type === 'slideUp') {
+    return ['transform: translateY(' + SLIDE_SIZES[size] + '%);', 'transform: none;'];
+  }
+  if (type === 'zoomIn') {
+    return ['transform: scale(' + (1 - ZOOM_SIZES[size]) + ');', 'transform: none;'];
+  }
+  if (type === 'zoomOut') {
+    return ['transform: scale(' + (1 + ZOOM_SIZES[size]) + ');', 'transform: none;'];
+  }
+  return [];
 };
 
 var normalizeTiming = function normalizeTiming(time, defaultTiming) {
   return time ? time / 1000.0 + 's' : defaultTiming;
 };
 
+var animationEnding = function animationEnding(type) {
+  if (type === 'jiggle') {
+    return 'alternate infinite';
+  }
+  if (type === 'pulse') {
+    return 'alternate infinite';
+  }
+  return 'forwards';
+};
+
 var animationObjectStyle = function animationObjectStyle(animation, theme) {
-  if (KEYFRAMES[animation.type]) {
-    return KEYFRAMES[animation.type] + ' ' + normalizeTiming(animation.duration, theme.global.animation.duration) + ' ' + normalizeTiming(animation.delay, '0s') + ' forwards';
+  var bounds = animationBounds(animation.type, animation.size);
+  if (bounds) {
+    return keyframes(['from{', '}to{', '}'], bounds[0], bounds[1]) + '\n    ' + normalizeTiming(animation.duration, (theme.global.animation[animation.type] ? theme.global.animation[animation.type].duration : undefined) || theme.global.animation.duration) + '\n    ' + normalizeTiming(animation.delay, '0s') + '\n    ' + animationEnding(animation.type);
   }
   return '';
 };
@@ -225,9 +289,17 @@ var animationItemStyle = function animationItemStyle(item, theme) {
   return '';
 };
 
+var animationAncilaries = function animationAncilaries(animation) {
+  if (animation.type === 'flipIn' || animation.type === 'flipOut') {
+    return 'perspective: 1000px; transform-style: preserve-3d;';
+  }
+  return '';
+};
+
 var animationObjectInitialStyle = function animationObjectInitialStyle(animation) {
-  if (KEYFRAMES[animation.type]) {
-    return INITIAL_ANIMATION_STATE[animation.type];
+  var bounds = animationBounds(animation.type, animation.size);
+  if (bounds) {
+    return bounds[0] + ' ' + animationAncilaries(animation);
   }
   return '';
 };
@@ -237,7 +309,7 @@ var animationInitialStyle = function animationInitialStyle(item) {
     return animationObjectInitialStyle({ type: item });
   } else if (Array.isArray(item)) {
     return item.map(function (a) {
-      return animationObjectInitialStyle(a);
+      return typeof a === 'string' ? animationObjectInitialStyle({ type: a }) : animationObjectInitialStyle(a);
     }).join('');
   } else if ((typeof item === 'undefined' ? 'undefined' : _typeof(item)) === 'object') {
     return animationObjectInitialStyle(item);

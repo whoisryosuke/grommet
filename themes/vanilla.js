@@ -34,7 +34,10 @@ var borderWidth = 2;
 exports.default = (0, _utils.deepFreeze)({
   global: {
     animation: {
-      duration: '1s'
+      duration: '1s',
+      jiggle: {
+        duration: '0.1s'
+      }
     },
     borderSize: {
       xsmall: '1px',
