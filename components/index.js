@@ -74,6 +74,18 @@ Object.keys(_Clock).forEach(function (key) {
   });
 });
 
+var _Diagram = require('./Diagram');
+
+Object.keys(_Diagram).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Diagram[key];
+    }
+  });
+});
+
 var _Drop = require('./Drop');
 
 Object.keys(_Drop).forEach(function (key) {
