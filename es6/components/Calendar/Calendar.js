@@ -264,6 +264,7 @@ var Calendar = function (_Component) {
             ref: function ref(_ref) {
               _this2.dayRefs[dateString] = _ref;
             },
+            a11yTitle: day.format('LL'),
             plain: true,
             active: active && day.isSame(active, 'day'),
             hoverIndicator: !dayDisabled,
@@ -336,12 +337,14 @@ var Calendar = function (_Component) {
               Box,
               { direction: 'row', align: 'center' },
               React.createElement(Button, {
+                a11yTitle: previousMonth.format('MMMM YYYY'),
                 icon: size === 'small' ? React.createElement(FormPrevious, null) : React.createElement(Previous, { size: size }),
                 onClick: onSelect && between(previousMonth, bounds) ? function () {
                   return _this2.setReference(previousMonth);
                 } : undefined
               }),
               React.createElement(Button, {
+                a11yTitle: nextMonth.format('MMMM YYYY'),
                 icon: size === 'small' ? React.createElement(FormNext, null) : React.createElement(Next, { size: size }),
                 onClick: onSelect && between(nextMonth, bounds) ? function () {
                   return _this2.setReference(nextMonth);
