@@ -55,9 +55,9 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
 var baseStyle = exports.baseStyle = (0, _styledComponents.css)(['font-family:', ';font-size:', ';line-height:', ';color:', ';background-color:', ';box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;*{box-sizing:inherit;}'], function (props) {
   return props.theme.global.font.family;
 }, function (props) {
-  return (0, _mixins.parseMetricToInt)(props.theme.global.font.size) / 16 * 1 + 'em';
+  return (0, _mixins.parseMetricToNum)(props.theme.global.font.size) / 16 * 1 + 'em';
 }, function (props) {
-  return (0, _mixins.parseMetricToInt)(props.theme.global.lineHeight) / (0, _mixins.parseMetricToInt)(props.theme.global.font.size);
+  return (0, _mixins.parseMetricToNum)(props.theme.global.lineHeight) / (0, _mixins.parseMetricToNum)(props.theme.global.font.size);
 }, function (props) {
   return props.theme.global.colors.text;
 }, function (props) {
@@ -74,7 +74,7 @@ var focusStyle = exports.focusStyle = (0, _styledComponents.css)(['> circle,> el
 });
 
 var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;font:inherit;margin:0;'], function (props) {
-  return (0, _mixins.parseMetricToInt)(props.theme.global.spacing) / 2 - (0, _mixins.parseMetricToInt)(props.theme.global.input.border.width);
+  return (0, _mixins.parseMetricToNum)(props.theme.global.spacing) / 2 - (0, _mixins.parseMetricToNum)(props.theme.global.input.border.width);
 }, function (props) {
   return props.theme.global.input.border.width;
 }, function (props) {

@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
 
-import { colorForName, parseMetricToInt } from '../../utils';
+import { colorForName, parseMetricToNum } from '../../utils';
 
 import { withTheme } from '../hocs';
 
@@ -117,9 +117,9 @@ var Diagram = function (_Component) {
           var toRect = toElement.getBoundingClientRect();
           var fromPoint = [fromRect.x - containerRect.x + fromRect.width / 2, fromRect.y - containerRect.y + fromRect.height / 2];
           var toPoint = [toRect.x - containerRect.x + toRect.width / 2, toRect.y - containerRect.y + toRect.height / 2];
-          var offsetWidth = offset ? parseMetricToInt(theme.global.edgeSize[offset]) : 0;
+          var offsetWidth = offset ? parseMetricToNum(theme.global.edgeSize[offset]) : 0;
           var d = COMMANDS[type || 'curved'](fromPoint, toPoint, offsetWidth);
-          var strokeWidth = thickness ? parseMetricToInt(theme.global.edgeSize[thickness]) : 1;
+          var strokeWidth = thickness ? parseMetricToNum(theme.global.edgeSize[thickness]) : 1;
           path = React.createElement('path', {
             key: fromId + '-' + toId + '-' + index,
             stroke: colorForName(color, theme),

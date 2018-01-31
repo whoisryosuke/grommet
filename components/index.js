@@ -38,6 +38,18 @@ Object.keys(_Button).forEach(function (key) {
   });
 });
 
+var _Calendar = require('./Calendar');
+
+Object.keys(_Calendar).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Calendar[key];
+    }
+  });
+});
+
 var _Chart = require('./Chart');
 
 Object.keys(_Chart).forEach(function (key) {

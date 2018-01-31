@@ -2,7 +2,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 import { css } from 'styled-components';
 
-import { parseMetricToInt } from './mixins';
+import { parseMetricToNum } from './mixins';
 import { colorForName, colorIsDark, getRGBA } from './colors';
 
 export var activeStyle = css(['background-color:', ';color:', ';'], function (props) {
@@ -49,9 +49,9 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
 export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';color:', ';background-color:', ';box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;*{box-sizing:inherit;}'], function (props) {
   return props.theme.global.font.family;
 }, function (props) {
-  return parseMetricToInt(props.theme.global.font.size) / 16 * 1 + 'em';
+  return parseMetricToNum(props.theme.global.font.size) / 16 * 1 + 'em';
 }, function (props) {
-  return parseMetricToInt(props.theme.global.lineHeight) / parseMetricToInt(props.theme.global.font.size);
+  return parseMetricToNum(props.theme.global.lineHeight) / parseMetricToNum(props.theme.global.font.size);
 }, function (props) {
   return props.theme.global.colors.text;
 }, function (props) {
@@ -68,7 +68,7 @@ export var focusStyle = css(['> circle,> ellipse,> line,> path,> polygon,> polyl
 });
 
 export var inputStyle = css(['padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;font:inherit;margin:0;'], function (props) {
-  return parseMetricToInt(props.theme.global.spacing) / 2 - parseMetricToInt(props.theme.global.input.border.width);
+  return parseMetricToNum(props.theme.global.spacing) / 2 - parseMetricToNum(props.theme.global.input.border.width);
 }, function (props) {
   return props.theme.global.input.border.width;
 }, function (props) {

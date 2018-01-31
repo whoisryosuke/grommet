@@ -10,7 +10,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 
-import { arcCommands, colorForName, parseMetricToInt, translateEndAngle } from '../../utils';
+import { arcCommands, colorForName, parseMetricToNum, translateEndAngle } from '../../utils';
 
 import StyledMeter from './StyledMeter';
 
@@ -33,8 +33,8 @@ var Circle = function (_Component) {
         values = _props.values,
         rest = _objectWithoutProperties(_props, ['background', 'round', 'size', 'theme', 'thickness', 'values']);
 
-    var width = size === 'full' ? 288 : parseMetricToInt(theme.global.size[size]);
-    var height = parseMetricToInt(theme.global.edgeSize[thickness]);
+    var width = size === 'full' ? 288 : parseMetricToNum(theme.global.size[size]);
+    var height = parseMetricToNum(theme.global.edgeSize[thickness]);
     var mid = width / 2;
     var radius = width / 2 - height / 2;
     var max = 100;

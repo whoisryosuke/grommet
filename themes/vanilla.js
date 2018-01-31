@@ -173,6 +173,26 @@ exports.default = (0, _utils.deepFreeze)({
       horizontal: baseSpacing / 2 - borderWidth + 'px'
     }
   },
+  calendar: {
+    small: {
+      fontSize: '16px',
+      lineHeight: 1.375,
+      daySize: baseSpacing * 8 / 7 + 'px',
+      slideDuration: '0.2s'
+    },
+    medium: {
+      fontSize: '22px',
+      lineHeight: 1.45,
+      daySize: baseSpacing * 16 / 7 + 'px',
+      slideDuration: '0.5s'
+    },
+    large: {
+      fontSize: '36px',
+      lineHeight: 1.11,
+      daySize: baseSpacing * 32 / 7 + 'px',
+      slideDuration: '0.8s'
+    }
+  },
   checkBox: {
     check: {
       color: (0, _styledComponents.css)(['', ''], function (props) {

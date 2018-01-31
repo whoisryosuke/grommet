@@ -11,7 +11,7 @@ import 'date-time-format-timezone';
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
-import { parseMetricToInt } from '../../utils';
+import { parseMetricToNum } from '../../utils';
 
 import { withTheme } from '../hocs';
 
@@ -28,11 +28,11 @@ var NIGHT_FINISH = 6;
 
 var getClockDimensions = function getClockDimensions(theme) {
   return {
-    size: parseMetricToInt(theme.clock.size.medium),
-    secondSize: parseMetricToInt(theme.clock.second.size),
-    minuteSize: parseMetricToInt(theme.clock.minute.size),
-    hourSize: parseMetricToInt(theme.clock.hour.size),
-    stroke: parseMetricToInt(theme.clock.circle.width)
+    size: parseMetricToNum(theme.clock.size.medium),
+    secondSize: parseMetricToNum(theme.clock.second.size),
+    minuteSize: parseMetricToNum(theme.clock.minute.size),
+    hourSize: parseMetricToNum(theme.clock.hour.size),
+    stroke: parseMetricToNum(theme.clock.circle.width)
   };
 };
 

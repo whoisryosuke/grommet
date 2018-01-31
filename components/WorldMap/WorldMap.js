@@ -314,7 +314,7 @@ var WorldMap = function (_Component) {
         _react2.default.createElement('path', {
           d: dots,
           strokeLinecap: 'round',
-          strokeWidth: (0, _utils.parseMetricToInt)(theme.worldMap.continent[active ? 'active' : 'base']),
+          strokeWidth: (0, _utils.parseMetricToNum)(theme.worldMap.continent[active ? 'active' : 'base']),
           stroke: (0, _utils.colorForName)(continentColor || color || 'light-3', theme)
         })
       );
@@ -342,7 +342,7 @@ var WorldMap = function (_Component) {
       return _react2.default.createElement('path', _extends({
         key: key,
         strokeLinecap: 'round',
-        strokeWidth: (0, _utils.parseMetricToInt)(theme.worldMap.place[active ? 'active' : 'base']),
+        strokeWidth: (0, _utils.parseMetricToNum)(theme.worldMap.place[active ? 'active' : 'base']),
         stroke: (0, _utils.colorForName)(placeColor || color || 'light-3', theme)
       }, interactiveProps, restPlace, {
         d: d
@@ -375,7 +375,7 @@ var WorldMap = function (_Component) {
         },
         _react2.default.createElement('path', {
           strokeLinecap: 'round',
-          strokeWidth: (0, _utils.parseMetricToInt)(theme.worldMap.place.active),
+          strokeWidth: (0, _utils.parseMetricToNum)(theme.worldMap.place.active),
           stroke: (0, _utils.colorForName)(selectColor || color || 'light-4', theme),
           d: d
         })

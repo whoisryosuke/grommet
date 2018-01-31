@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
 
-import { colorForName, parseMetricToInt } from '../../utils';
+import { colorForName, parseMetricToNum } from '../../utils';
 
 import { withTheme } from '../hocs';
 
@@ -300,7 +300,7 @@ var WorldMap = function (_Component) {
         React.createElement('path', {
           d: dots,
           strokeLinecap: 'round',
-          strokeWidth: parseMetricToInt(theme.worldMap.continent[active ? 'active' : 'base']),
+          strokeWidth: parseMetricToNum(theme.worldMap.continent[active ? 'active' : 'base']),
           stroke: colorForName(continentColor || color || 'light-3', theme)
         })
       );
@@ -328,7 +328,7 @@ var WorldMap = function (_Component) {
       return React.createElement('path', _extends({
         key: key,
         strokeLinecap: 'round',
-        strokeWidth: parseMetricToInt(theme.worldMap.place[active ? 'active' : 'base']),
+        strokeWidth: parseMetricToNum(theme.worldMap.place[active ? 'active' : 'base']),
         stroke: colorForName(placeColor || color || 'light-3', theme)
       }, interactiveProps, restPlace, {
         d: d
@@ -361,7 +361,7 @@ var WorldMap = function (_Component) {
         },
         React.createElement('path', {
           strokeLinecap: 'round',
-          strokeWidth: parseMetricToInt(theme.worldMap.place.active),
+          strokeWidth: parseMetricToNum(theme.worldMap.place.active),
           stroke: colorForName(selectColor || color || 'light-4', theme),
           d: d
         })

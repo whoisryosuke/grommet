@@ -42,11 +42,11 @@ var NIGHT_FINISH = 6;
 
 var getClockDimensions = function getClockDimensions(theme) {
   return {
-    size: (0, _utils.parseMetricToInt)(theme.clock.size.medium),
-    secondSize: (0, _utils.parseMetricToInt)(theme.clock.second.size),
-    minuteSize: (0, _utils.parseMetricToInt)(theme.clock.minute.size),
-    hourSize: (0, _utils.parseMetricToInt)(theme.clock.hour.size),
-    stroke: (0, _utils.parseMetricToInt)(theme.clock.circle.width)
+    size: (0, _utils.parseMetricToNum)(theme.clock.size.medium),
+    secondSize: (0, _utils.parseMetricToNum)(theme.clock.second.size),
+    minuteSize: (0, _utils.parseMetricToNum)(theme.clock.minute.size),
+    hourSize: (0, _utils.parseMetricToNum)(theme.clock.hour.size),
+    stroke: (0, _utils.parseMetricToNum)(theme.clock.circle.width)
   };
 };
 

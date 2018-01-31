@@ -1,14 +1,14 @@
 import { css } from 'styled-components';
 
-export function parseMetricToInt(fontAsString) {
-  return parseInt(fontAsString.replace(/[^0-9]/g, ''), 10);
+export function parseMetricToNum(fontAsString) {
+  return parseFloat(fontAsString.replace(/[^0-9/.]/g, ''), 10);
 }
 
 export function fontSize(size, lineHeight) {
   return css(['font-size:', ';line-height:', ';'], function (props) {
-    return parseMetricToInt(size) / parseMetricToInt(props.theme.global.font.size) * 1 + 'rem';
+    return parseMetricToNum(size) / parseMetricToNum(props.theme.global.font.size) * 1 + 'rem';
   }, function (props) {
-    return lineHeight || Math.ceil(parseMetricToInt(size) / parseMetricToInt(props.theme.global.lineHeight)) * (parseMetricToInt(props.theme.global.lineHeight) / parseMetricToInt(size)) + 'px';
+    return lineHeight || Math.ceil(parseMetricToNum(size) / parseMetricToNum(props.theme.global.lineHeight)) * (parseMetricToNum(props.theme.global.lineHeight) / parseMetricToNum(size)) + 'px';
   });
 }
 

@@ -10,7 +10,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 
-import { colorForName, parseMetricToInt } from '../../utils';
+import { colorForName, parseMetricToNum } from '../../utils';
 
 import StyledMeter from './StyledMeter';
 
@@ -33,8 +33,8 @@ var Bar = function (_Component) {
         values = _props.values,
         rest = _objectWithoutProperties(_props, ['background', 'round', 'size', 'theme', 'thickness', 'values']);
 
-    var width = size === 'full' ? 288 : parseMetricToInt(theme.global.size[size]);
-    var height = parseMetricToInt(theme.global.edgeSize[thickness]);
+    var width = size === 'full' ? 288 : parseMetricToNum(theme.global.size[size]);
+    var height = parseMetricToNum(theme.global.edgeSize[thickness]);
     // account for the round cap, if any
     var capOffset = round ? height / 2 : 0;
     var mid = height / 2;

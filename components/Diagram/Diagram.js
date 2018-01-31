@@ -131,9 +131,9 @@ var Diagram = function (_Component) {
           var toRect = toElement.getBoundingClientRect();
           var fromPoint = [fromRect.x - containerRect.x + fromRect.width / 2, fromRect.y - containerRect.y + fromRect.height / 2];
           var toPoint = [toRect.x - containerRect.x + toRect.width / 2, toRect.y - containerRect.y + toRect.height / 2];
-          var offsetWidth = offset ? (0, _utils.parseMetricToInt)(theme.global.edgeSize[offset]) : 0;
+          var offsetWidth = offset ? (0, _utils.parseMetricToNum)(theme.global.edgeSize[offset]) : 0;
           var d = COMMANDS[type || 'curved'](fromPoint, toPoint, offsetWidth);
-          var strokeWidth = thickness ? (0, _utils.parseMetricToInt)(theme.global.edgeSize[thickness]) : 1;
+          var strokeWidth = thickness ? (0, _utils.parseMetricToNum)(theme.global.edgeSize[thickness]) : 1;
           path = _react2.default.createElement('path', {
             key: fromId + '-' + toId + '-' + index,
             stroke: (0, _utils.colorForName)(color, theme),

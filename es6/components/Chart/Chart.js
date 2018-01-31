@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
 
-import { colorForName, parseMetricToInt } from '../../utils';
+import { colorForName, parseMetricToNum } from '../../utils';
 
 import { withTheme } from '../hocs';
 
@@ -154,9 +154,9 @@ var Chart = function (_Component) {
 
     var sizeWidth = typeof size === 'string' ? size : size.width || 'medium';
     var sizeHeight = typeof size === 'string' ? size : size.height || 'medium';
-    var width = sizeWidth === 'full' ? containerWidth : parseMetricToInt(theme.global.size[sizeWidth]);
-    var height = sizeHeight === 'full' ? containerHeight : parseMetricToInt(theme.global.size[sizeHeight]);
-    var strokeWidth = parseMetricToInt(theme.global.edgeSize[thickness]);
+    var width = sizeWidth === 'full' ? containerWidth : parseMetricToNum(theme.global.size[sizeWidth]);
+    var height = sizeHeight === 'full' ? containerHeight : parseMetricToNum(theme.global.size[sizeHeight]);
+    var strokeWidth = parseMetricToNum(theme.global.edgeSize[thickness]);
     var scale = [width / (bounds[0][1] - bounds[0][0]), height / (bounds[1][1] - bounds[1][0])];
 
     var contents = void 0;

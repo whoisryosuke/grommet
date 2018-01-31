@@ -35,9 +35,9 @@ var rangeThumbStyle = (0, _styledComponents.css)(['position:relative;border:', '
 });
 
 var firefoxMicrosoftThumbStyle = (0, _styledComponents.css)(['', ' margin-top:0px;height:', 'px;width:', 'px;'], rangeThumbStyle, function (props) {
-  return (0, _utils.parseMetricToInt)(props.theme.global.spacing) - (0, _utils.parseMetricToInt)(props.theme.global.control.border.width) * 2;
+  return (0, _utils.parseMetricToNum)(props.theme.global.spacing) - (0, _utils.parseMetricToNum)(props.theme.global.control.border.width) * 2;
 }, function (props) {
-  return (0, _utils.parseMetricToInt)(props.theme.global.spacing) - (0, _utils.parseMetricToInt)(props.theme.global.control.border.width) * 2;
+  return (0, _utils.parseMetricToNum)(props.theme.global.spacing) - (0, _utils.parseMetricToNum)(props.theme.global.control.border.width) * 2;
 });
 
 var StyledRangeInput = _styledComponents2.default.input.withConfig({
@@ -45,7 +45,7 @@ var StyledRangeInput = _styledComponents2.default.input.withConfig({
 })(['position:relative;-webkit-appearance:none;border-color:transparent;height:', ';width:100%;padding:0px;cursor:pointer;overflow-x:hidden;background:transparent;&:focus{outline:none;}&::-moz-focus-inner{border:none;}&::-moz-focus-outer{border:none;}&::-webkit-slider-runnable-track{', '}&::-webkit-slider-thumb{', ' margin-top:-', 'px;', '}&::-moz-range-track{', '}&::-moz-range-thumb{', '}&::-ms-thumb{', '}', ' &::-ms-track{', ' border-color:transparent;color:transparent;}&::-ms-fill-lower{background:', ';border-color:transparent;}&::-ms-fill-upper{background:', ';border-color:transparent;}', ''], function (props) {
   return props.theme.global.spacing;
 }, rangeTrackStyle, rangeThumbStyle, function (props) {
-  return Math.round((0, _utils.parseMetricToInt)(props.theme.global.spacing) * 0.45);
+  return Math.round((0, _utils.parseMetricToNum)(props.theme.global.spacing) * 0.45);
 }, function (props) {
   return !props.disabled && (0, _styledComponents.css)(['&:hover{border-color:', ';}'], props.grommet.dark ? props.theme.global.colors.white : props.theme.global.hover.textColor);
 }, rangeTrackStyle, firefoxMicrosoftThumbStyle, firefoxMicrosoftThumbStyle, function (props) {
