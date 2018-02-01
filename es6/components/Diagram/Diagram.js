@@ -89,7 +89,6 @@ var Diagram = function (_Component) {
         height = _state.height,
         width = _state.width;
 
-    console.log('!!! render', this.containerRef !== undefined);
 
     var paths = void 0;
     if (this.containerRef) {
