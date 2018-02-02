@@ -111,10 +111,18 @@ export var makeNodeUnfocusable = function makeNodeUnfocusable(node) {
   }
 };
 
+export var findVisibleParent = function findVisibleParent(element) {
+  if (element) {
+    return element.offsetParent ? element : findVisibleParent(element.parentElement) || element;
+  }
+  return undefined;
+};
+
 export default {
   copyAttribute: copyAttribute,
   filterByFocusable: filterByFocusable,
   findScrollParents: findScrollParents,
+  findVisibleParent: findVisibleParent,
   makeNodeFocusable: makeNodeFocusable,
   makeNodeUnfocusable: makeNodeUnfocusable,
   getBodyChildElements: getBodyChildElements,

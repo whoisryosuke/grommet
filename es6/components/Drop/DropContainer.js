@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
 import FocusedContainer from '../FocusedContainer';
-import { findScrollParents } from '../../utils';
+import { findScrollParents, findVisibleParent } from '../../utils';
 import { Keyboard } from '../Keyboard';
 
 import StyledDrop from './StyledDrop';
@@ -70,7 +70,7 @@ var DropContainer = function (_Component) {
         container.style.maxHeight = '';
 
         // get bounds
-        var controlRect = control.getBoundingClientRect();
+        var controlRect = findVisibleParent(control).getBoundingClientRect();
         var containerRect = container.getBoundingClientRect();
 
         // determine width

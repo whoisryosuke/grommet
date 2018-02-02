@@ -118,10 +118,18 @@ var makeNodeUnfocusable = exports.makeNodeUnfocusable = function makeNodeUnfocus
   }
 };
 
+var findVisibleParent = exports.findVisibleParent = function findVisibleParent(element) {
+  if (element) {
+    return element.offsetParent ? element : findVisibleParent(element.parentElement) || element;
+  }
+  return undefined;
+};
+
 exports.default = {
   copyAttribute: copyAttribute,
   filterByFocusable: filterByFocusable,
   findScrollParents: findScrollParents,
+  findVisibleParent: findVisibleParent,
   makeNodeFocusable: makeNodeFocusable,
   makeNodeUnfocusable: makeNodeUnfocusable,
   getBodyChildElements: getBodyChildElements,

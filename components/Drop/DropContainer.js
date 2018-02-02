@@ -85,7 +85,7 @@ var DropContainer = function (_Component) {
         container.style.maxHeight = '';
 
         // get bounds
-        var controlRect = control.getBoundingClientRect();
+        var controlRect = (0, _utils.findVisibleParent)(control).getBoundingClientRect();
         var containerRect = container.getBoundingClientRect();
 
         // determine width
