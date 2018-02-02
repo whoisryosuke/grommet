@@ -15,6 +15,7 @@ exports.default = function (Select) {
     background: _utils.backgroundPropType,
     children: _reactDesc.PropTypes.func.description('Function that will be called when each option is rendered.'),
     dropSize: _reactDesc.PropTypes.string.description('Size of the options container inside the Select drop.'),
+    focusIndicator: _reactDesc.PropTypes.bool.description('Whether when \'plain\' it should receive a focus outline.'),
     onChange: _reactDesc.PropTypes.func.description('Function that will be called when the user selects an option.'),
     onClose: _reactDesc.PropTypes.func.description('Function that will be called when the Select drop closes.'),
     onSearch: _reactDesc.PropTypes.func.description('Function that will be called when the user types in the search input.\nIf this property is not provided, no search field will be rendered.'),

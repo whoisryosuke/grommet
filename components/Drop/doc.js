@@ -23,9 +23,7 @@ exports.default = function (Drop) {
     dir: _reactDesc.PropTypes.oneOf(['rtl', 'ltr']).description('Whether text should be rendered right to left or not. Defaults to\n      inherit from the document context.'),
     restrictFocus: _reactDesc.PropTypes.bool.description('Whether the drop should control focus.'),
     onClose: _reactDesc.PropTypes.func.description('Function that will be invoked when the user clicks outside the drop area.'),
-    responsive: _reactDesc.PropTypes.bool.description('Whether to dynamically re-place when resized.').defaultValue({
-      defaultProp: true
-    }),
+    responsive: _reactDesc.PropTypes.bool.description('Whether to dynamically re-place when resized.').defaultValue(true),
     theme: _reactDesc.PropTypes.object.description('Custom styles for Drop component.')
   };
 

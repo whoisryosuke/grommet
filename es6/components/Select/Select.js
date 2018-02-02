@@ -31,7 +31,7 @@ var Select = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.selectControl = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.selectControl = function () {
       var _this$props = _this.props,
           placeholder = _this$props.placeholder,
           plain = _this$props.plain,
@@ -64,31 +64,55 @@ var Select = function (_Component) {
         content,
         React.createElement(
           Box,
-          { margin: { horizontal: 'small' }, flex: false },
+          {
+            margin: { horizontal: 'small' },
+            flex: false,
+            style: { minWidth: 'auto' }
+          },
           React.createElement(FormDown, null)
         )
       );
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
+  Select.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    if (this.props.value !== nextProps.value) {
+      this.closeDrop = true;
+    }
+  };
+
+  Select.prototype.componentDidUpdate = function componentDidUpdate() {
+    if (this.closeDrop) {
+      this.closeDrop = false;
+    }
+  };
+
   Select.prototype.render = function render() {
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
         background = _props.background,
+        focusIndicator = _props.focusIndicator,
+        onBlur = _props.onBlur,
         onClose = _props.onClose,
+        onFocus = _props.onFocus,
         open = _props.open,
+        plain = _props.plain,
         tabIndex = _props.tabIndex,
         value = _props.value;
 
     return React.createElement(
       DropButton,
       {
-        open: open,
+        open: open || this.closeDrop ? false : undefined,
         tabIndex: tabIndex,
         a11yTitle: '' + a11yTitle + (typeof value === 'string' ? ', ' + value : ''),
         background: background,
+        plain: plain,
+        focusIndicator: focusIndicator,
         control: this.selectControl(),
-        onClose: onClose
+        onClose: onClose,
+        onFocus: onFocus,
+        onBlur: onBlur
       },
       React.createElement(SelectContainer, this.props)
     );

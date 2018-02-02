@@ -81,7 +81,7 @@ var plainFocusStyle = (0, _styledComponents.css)(['box-shadow:0 0 ', ' ', ' ', '
 });
 
 var plainStyle = (0, _styledComponents.css)(['color:inherit;border:none;padding:0;', ''], function (props) {
-  return props.focus && plainFocusStyle;
+  return props.focus && props.focusIndicator && plainFocusStyle;
 });
 
 var StyledButton = _styledComponents2.default.button.withConfig({
@@ -103,7 +103,7 @@ var StyledButton = _styledComponents2.default.button.withConfig({
 }, function (props) {
   return !props.plain && 'padding: ' + props.theme.button.padding.vertical + ' ' + props.theme.button.padding.horizontal + ';';
 }, function (props) {
-  return props.focus && _utils.focusStyle;
+  return props.focus && (!props.plain || props.focusIndicator) && _utils.focusStyle;
 }, (0, _utils.lapAndUp)('\n    transition: 0.1s ease-in-out;\n  '), function (props) {
   return props.plain && plainStyle;
 }, function (props) {
