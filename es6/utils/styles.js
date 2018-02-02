@@ -14,18 +14,18 @@ export var activeStyle = css(['background-color:', ';color:', ';'], function (pr
 export var backgroundStyle = function backgroundStyle(background, theme) {
   if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
     if (background.image) {
-      var _color = void 0;
+      var color = void 0;
       if (background.dark === false) {
-        _color = theme.global.colors.text;
+        color = theme.global.colors.text;
       } else if (background.dark) {
-        _color = theme.global.colors.darkBackground.text;
+        color = theme.global.colors.darkBackground.text;
       } else {
-        _color = 'inherit';
+        color = 'inherit';
       }
-      return css(['background:', ' no-repeat center center;background-size:cover;color:', ';'], background.image, _color);
+      return css(['background:', ' no-repeat center center;background-size:cover;color:', ';'], background.image, color);
     } else if (background.color) {
-      var _color2 = colorForName(background.color, theme);
-      var rgba = getRGBA(_color2, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
+      var _color = colorForName(background.color, theme);
+      var rgba = getRGBA(_color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
       if (rgba) {
         return css(['background-color:', ';color:', ';'], rgba, colorIsDark(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
       }
@@ -36,26 +36,28 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
     }
     return undefined;
   }
-  if (background.lastIndexOf('url', 0) === 0) {
-    return css(['background:', ' no-repeat center center;background-size:cover;'], background);
-  }
-  var color = colorForName(background, theme);
-  if (color) {
-    return css(['background-color:', ';color:', ';'], color, colorIsDark(color) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
+  if (background) {
+    if (background.lastIndexOf('url', 0) === 0) {
+      return css(['background:', ' no-repeat center center;background-size:cover;'], background);
+    }
+    var _color2 = colorForName(background, theme);
+    if (_color2) {
+      return css(['background-color:', ';color:', ';'], _color2, colorIsDark(_color2) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
+    }
   }
   return undefined;
 };
 
-export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';color:', ';background-color:', ';box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;*{box-sizing:inherit;}'], function (props) {
+export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';', ' ', ' box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;*{box-sizing:inherit;}'], function (props) {
   return props.theme.global.font.family;
 }, function (props) {
   return parseMetricToNum(props.theme.global.font.size) / 16 * 1 + 'em';
 }, function (props) {
   return parseMetricToNum(props.theme.global.lineHeight) / parseMetricToNum(props.theme.global.font.size);
 }, function (props) {
-  return props.theme.global.colors.text;
+  return props.theme.global.colors.text && 'color: ' + props.theme.global.colors.text + ';';
 }, function (props) {
-  return props.theme.global.colors.background;
+  return props.theme.global.colors.background && 'background-color: ' + props.theme.global.colors.background + ';';
 });
 
 // focus also supports clickable elements inside svg

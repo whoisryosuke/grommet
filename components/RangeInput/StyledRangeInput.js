@@ -31,7 +31,7 @@ var rangeThumbStyle = (0, _styledComponents.css)(['position:relative;border:', '
 }, function (props) {
   return props.theme.global.spacing;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.global.colors.background;
+  return props.grommet.dark ? props.theme.global.colors.black : props.theme.global.colors.white;
 });
 
 var firefoxMicrosoftThumbStyle = (0, _styledComponents.css)(['', ' margin-top:0px;height:', 'px;width:', 'px;'], rangeThumbStyle, function (props) {

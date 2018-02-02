@@ -48,7 +48,6 @@ export default deepFreeze({
     colors: {
       active: activeColor,
       accent: accentColors,
-      background: backgroundColor,
       black: '#000000',
       border: borderColor,
       brand: brandColor,
@@ -305,7 +304,7 @@ export default deepFreeze({
     })
   },
   layer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: backgroundColor,
     border: {
       radius: '4px'
     },
