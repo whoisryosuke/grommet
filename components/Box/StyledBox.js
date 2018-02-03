@@ -26,7 +26,7 @@ var ALIGN_MAP = {
   stretch: 'stretch'
 };
 
-var alignStyle = (0, _styledComponents.css)(['align-items:', ';'], function (props) {
+var alignStyle = /*#__PURE__*/(0, _styledComponents.css)(['align-items:', ';'], function (props) {
   return ALIGN_MAP[props.align];
 });
 
@@ -39,7 +39,7 @@ var ALIGN_CONTENT_MAP = {
   stretch: 'stretch'
 };
 
-var alignContentStyle = (0, _styledComponents.css)(['align-content:', ';'], function (props) {
+var alignContentStyle = /*#__PURE__*/(0, _styledComponents.css)(['align-content:', ';'], function (props) {
   return ALIGN_CONTENT_MAP[props.alignContent];
 });
 
@@ -50,7 +50,7 @@ var ALIGN_SELF_MAP = {
   stretch: 'stretch'
 };
 
-var alignSelfStyle = (0, _styledComponents.css)(['align-self:', ';'], function (props) {
+var alignSelfStyle = /*#__PURE__*/(0, _styledComponents.css)(['align-self:', ';'], function (props) {
   return ALIGN_SELF_MAP[props.alignSelf];
 });
 
@@ -63,7 +63,7 @@ var BASIS_MAP = {
   '2/3': '66.66%'
 };
 
-var basisStyle = (0, _styledComponents.css)(['flex-basis:', ';'], function (props) {
+var basisStyle = /*#__PURE__*/(0, _styledComponents.css)(['flex-basis:', ';'], function (props) {
   return BASIS_MAP[props.basis] || props.theme.global.size[props.basis];
 });
 
@@ -71,7 +71,7 @@ var basisStyle = (0, _styledComponents.css)(['flex-basis:', ';'], function (prop
 // https://stackoverflow.com/questions/36247140/why-doesnt-flex-item-shrink-past-content-size
 // we assume we are in the context of a Box going the other direction
 // TODO: revisit this
-var directionStyle = (0, _styledComponents.css)(['', ' ', ' flex-direction:', ';'], function (props) {
+var directionStyle = /*#__PURE__*/(0, _styledComponents.css)(['', ' ', ' flex-direction:', ';'], function (props) {
   return props.direction === 'row' && 'min-height: 0;';
 }, function (props) {
   return props.direction === 'column' && 'min-width: 0;';
@@ -84,7 +84,7 @@ var directionStyle = (0, _styledComponents.css)(['', ' ', ' flex-direction:', ';
 
 var FLEX_MAP = (_FLEX_MAP = {}, _FLEX_MAP[true] = '1 1', _FLEX_MAP[false] = '0 0', _FLEX_MAP.grow = '1 0', _FLEX_MAP.shrink = '0 1', _FLEX_MAP);
 
-var flexStyle = (0, _styledComponents.css)(['flex:', ';'], function (props) {
+var flexStyle = /*#__PURE__*/(0, _styledComponents.css)(['flex:', ';'], function (props) {
   return FLEX_MAP[props.flex];
 });
 
@@ -104,7 +104,7 @@ var fullStyle = function fullStyle(full) {
   return undefined;
 };
 
-var gridAreaStyle = (0, _styledComponents.css)(['grid-area:', ';'], function (props) {
+var gridAreaStyle = /*#__PURE__*/(0, _styledComponents.css)(['grid-area:', ';'], function (props) {
   return props.gridArea;
 });
 
@@ -115,7 +115,7 @@ var JUSTIFY_MAP = {
   start: 'flex-start'
 };
 
-var justifyStyle = (0, _styledComponents.css)(['justify-content:', ';'], function (props) {
+var justifyStyle = /*#__PURE__*/(0, _styledComponents.css)(['justify-content:', ';'], function (props) {
   return JUSTIFY_MAP[props.justify];
 });
 
@@ -125,7 +125,7 @@ var TEXT_ALIGN_MAP = {
   start: 'left'
 };
 
-var textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (props) {
+var textAlignStyle = /*#__PURE__*/(0, _styledComponents.css)(['text-align:', ';'], function (props) {
   return TEXT_ALIGN_MAP[props.textAlign];
 });
 
@@ -179,11 +179,11 @@ var ROUND_MAP = {
   'full': '100%'
 };
 
-var roundStyle = (0, _styledComponents.css)(['border-radius:', ';'], function (props) {
+var roundStyle = /*#__PURE__*/(0, _styledComponents.css)(['border-radius:', ';'], function (props) {
   return ROUND_MAP[props.round] || props.theme.global.edgeSize[props.round];
 });
 
-var responsiveStyle = (0, _styledComponents.css)(['', '}'], function (props) {
+var responsiveStyle = /*#__PURE__*/(0, _styledComponents.css)(['', '}'], function (props) {
   return (0, _utils.palm)('\n    flex-direction: column;\n    flex-basis: auto;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n    ' + (props.reverse && 'flex-direction: column-reverse') + '\n  ');
 });
 
@@ -325,12 +325,12 @@ var animationInitialStyle = function animationInitialStyle(item) {
   return '';
 };
 
-var animationStyle = (0, _styledComponents.css)(['', ''], function (props) {
+var animationStyle = /*#__PURE__*/(0, _styledComponents.css)(['', ''], function (props) {
   return '\n    ' + animationInitialStyle(props.animation) + '\n    animation: ' + animationItemStyle(props.animation, props.theme) + ';\n  ';
 });
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
-var StyledBox = _styledComponents2.default.div.withConfig({
+var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   displayName: 'StyledBox'
 })(['display:flex;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.basis && 'max-width: 100%;';

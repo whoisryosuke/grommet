@@ -51,13 +51,13 @@ var TEXT_ALIGN_MAP = {
   start: 'left'
 };
 
-var textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (props) {
+var textAlignStyle = /*#__PURE__*/(0, _styledComponents.css)(['text-align:', ';'], function (props) {
   return TEXT_ALIGN_MAP[props.textAlign];
 });
 
 var truncateStyle = '\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n';
 
-var StyledHeading = _styledComponents2.default.h1.withConfig({
+var StyledHeading = /*#__PURE__*/_styledComponents2.default.h1.withConfig({
   displayName: 'StyledHeading'
 })(['', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);

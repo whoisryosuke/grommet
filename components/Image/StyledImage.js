@@ -17,11 +17,11 @@ var FIT_MAP = {
   contain: 'contain'
 };
 
-var fitStyle = (0, _styledComponents.css)(['flex:1 1;overflow:hidden;object-fit:', ';'], function (props) {
+var fitStyle = /*#__PURE__*/(0, _styledComponents.css)(['flex:1 1;overflow:hidden;object-fit:', ';'], function (props) {
   return FIT_MAP[props.fit];
 });
 
-var StyledImage = _styledComponents2.default.img.withConfig({
+var StyledImage = /*#__PURE__*/_styledComponents2.default.img.withConfig({
   displayName: 'StyledImage'
 })(['', ''], function (props) {
   return props.fit && fitStyle;

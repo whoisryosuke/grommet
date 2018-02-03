@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var primaryIconLabelStyle = (0, _styledComponents.css)(['', ' font-weight:', ';'], function (props) {
+var primaryIconLabelStyle = /*#__PURE__*/(0, _styledComponents.css)(['', ' font-weight:', ';'], function (props) {
   return (0, _utils.fontSize)(props.theme.global.control.font.size, props.theme.global.spacing);
 }, function (props) {
   return props.theme.global.control.font.weight;
@@ -23,7 +23,7 @@ var primaryIconLabelStyle = (0, _styledComponents.css)(['', ' font-weight:', ';'
 
 var disabledStyle = '\n  opacity: 0.3;\n  cursor: default;\n  text-decoration: none;\n';
 
-var StyledAnchor = _styledComponents2.default.a.withConfig({
+var StyledAnchor = /*#__PURE__*/_styledComponents2.default.a.withConfig({
   displayName: 'StyledAnchor'
 })(['color:', ';text-decoration:', ';cursor:pointer;outline:none;', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.grommet && props.grommet.dark ? props.theme.global.colors.darkBackground.text : props.theme.anchor.color;
@@ -43,7 +43,7 @@ var StyledAnchor = _styledComponents2.default.a.withConfig({
   return props.focus && _utils.focusStyle;
 });
 
-var StyledIcon = exports.StyledIcon = _styledComponents2.default.span.withConfig({
+var StyledIcon = /*#__PURE__*/exports.StyledIcon = _styledComponents2.default.span.withConfig({
   displayName: 'StyledAnchor__StyledIcon'
 })(['display:inline-block;', ' > *{vertical-align:bottom;}'], function (props) {
   return props.label && '\n    ' + (props.reverse ? '\n      margin-left: ' + props.theme.global.edgeSize.small + ';\n    ' : '\n      margin-right: ' + props.theme.global.edgeSize.small + ';\n    ') + '\n  ';

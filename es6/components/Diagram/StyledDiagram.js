@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled from 'styled-components';
 
-var StyledDiagram = styled.svg.withConfig({
+var StyledDiagram = /*#__PURE__*/styled.svg.withConfig({
   displayName: 'StyledDiagram'
 })(['max-width:100%;']);
 

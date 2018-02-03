@@ -19,7 +19,7 @@ var ALIGN_MAP = {
   stretch: 'stretch'
 };
 
-var alignStyle = (0, _styledComponents.css)(['align-items:', ';'], function (props) {
+var alignStyle = /*#__PURE__*/(0, _styledComponents.css)(['align-items:', ';'], function (props) {
   return ALIGN_MAP[props.align];
 });
 
@@ -32,7 +32,7 @@ var ALIGN_CONTENT_MAP = {
   stretch: 'stretch'
 };
 
-var alignContentStyle = (0, _styledComponents.css)(['align-content:', ';'], function (props) {
+var alignContentStyle = /*#__PURE__*/(0, _styledComponents.css)(['align-content:', ';'], function (props) {
   return ALIGN_CONTENT_MAP[props.alignContent];
 });
 
@@ -43,7 +43,7 @@ var JUSTIFY_MAP = {
   stretch: 'stretch'
 };
 
-var justifyStyle = (0, _styledComponents.css)(['justify-content:', ';'], function (props) {
+var justifyStyle = /*#__PURE__*/(0, _styledComponents.css)(['justify-content:', ';'], function (props) {
   return JUSTIFY_MAP[props.justify];
 });
 
@@ -56,7 +56,7 @@ var JUSTIFY_CONTENT_MAP = {
   stretch: 'stretch'
 };
 
-var justifyContentStyle = (0, _styledComponents.css)(['justify-content:', ';'], function (props) {
+var justifyContentStyle = /*#__PURE__*/(0, _styledComponents.css)(['justify-content:', ';'], function (props) {
   return JUSTIFY_CONTENT_MAP[props.justifyContent];
 });
 
@@ -87,13 +87,13 @@ var SIZE_MAP = {
   '2/3': '66.66%'
 };
 
-var columnsStyle = (0, _styledComponents.css)(['grid-template-columns:', ';'], function (props) {
+var columnsStyle = /*#__PURE__*/(0, _styledComponents.css)(['grid-template-columns:', ';'], function (props) {
   return props.columns.map(function (s) {
     return SIZE_MAP[s] || props.theme.global.size[s];
   }).join(' ');
 });
 
-var rowsStyle = (0, _styledComponents.css)(['grid-template-rows:', ';'], function (props) {
+var rowsStyle = /*#__PURE__*/(0, _styledComponents.css)(['grid-template-rows:', ';'], function (props) {
   return props.rows.map(function (s) {
     return SIZE_MAP[s] || props.theme.global.size[s];
   }).join(' ');
@@ -118,7 +118,7 @@ var areasStyle = function areasStyle(props) {
   }).join(' ') + ';';
 };
 
-var StyledGrid = _styledComponents2.default.div.withConfig({
+var StyledGrid = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   displayName: 'StyledGrid'
 })(['display:grid;height:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;

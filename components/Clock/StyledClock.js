@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var StyledCircle = exports.StyledCircle = _styledComponents2.default.circle.withConfig({
+var StyledCircle = /*#__PURE__*/exports.StyledCircle = _styledComponents2.default.circle.withConfig({
   displayName: 'StyledClock__StyledCircle'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
   return props.theme.clock.circle.width;
@@ -23,7 +23,7 @@ var StyledCircle = exports.StyledCircle = _styledComponents2.default.circle.with
   return props.night && (0, _styledComponents.css)(['stroke:', ';fill:', ';transition:fill 1s ease;'], props.theme.clock.circle.color.night, props.theme.clock.circle.color.night);
 });
 
-var StyledHour = exports.StyledHour = _styledComponents2.default.line.withConfig({
+var StyledHour = /*#__PURE__*/exports.StyledHour = _styledComponents2.default.line.withConfig({
   displayName: 'StyledClock__StyledHour'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
   return props.theme.clock.hour.width;
@@ -33,7 +33,7 @@ var StyledHour = exports.StyledHour = _styledComponents2.default.line.withConfig
   return props.animate && '\n    animation: rotate 43200s infinite linear;\n  ';
 });
 
-var StyledMinute = exports.StyledMinute = _styledComponents2.default.line.withConfig({
+var StyledMinute = /*#__PURE__*/exports.StyledMinute = _styledComponents2.default.line.withConfig({
   displayName: 'StyledClock__StyledMinute'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
   return props.theme.clock.minute.width;
@@ -43,7 +43,7 @@ var StyledMinute = exports.StyledMinute = _styledComponents2.default.line.withCo
   return props.animate && '\n    animation: rotate 3600s infinite steps(60);\n    animation-delay: 1s;\n  ';
 });
 
-var StyledSecond = exports.StyledSecond = _styledComponents2.default.line.withConfig({
+var StyledSecond = /*#__PURE__*/exports.StyledSecond = _styledComponents2.default.line.withConfig({
   displayName: 'StyledClock__StyledSecond'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
   return props.theme.clock.second.width;
@@ -53,7 +53,7 @@ var StyledSecond = exports.StyledSecond = _styledComponents2.default.line.withCo
   return props.animate && '\n    animation: rotate 60s infinite steps(60);\n  ';
 });
 
-var StyledClock = _styledComponents2.default.svg.withConfig({
+var StyledClock = /*#__PURE__*/_styledComponents2.default.svg.withConfig({
   displayName: 'StyledClock'
 })(['width:', ';height:', ';@keyframes rotate{100%{transform:rotateZ(360deg);}}'], function (props) {
   return props.theme.clock.size[props.size];

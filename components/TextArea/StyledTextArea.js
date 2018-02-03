@@ -14,13 +14,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var placeholderColor = (0, _styledComponents.css)(['color:', ';'], function (props) {
+var placeholderColor = /*#__PURE__*/(0, _styledComponents.css)(['color:', ';'], function (props) {
   return props.theme.global.colors.placeholder;
 });
 
-var plainStyle = (0, _styledComponents.css)(['border:none;width:100%;-webkit-appearance:none;']);
+var plainStyle = /*#__PURE__*/(0, _styledComponents.css)(['border:none;width:100%;-webkit-appearance:none;']);
 
-var StyledTextArea = _styledComponents2.default.textarea.withConfig({
+var StyledTextArea = /*#__PURE__*/_styledComponents2.default.textarea.withConfig({
   displayName: 'StyledTextArea'
 })(['', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, function (props) {
   return props.plain && plainStyle;

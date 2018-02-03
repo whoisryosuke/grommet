@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled from 'styled-components';
 
-var StyledStack = styled.div.withConfig({
+var StyledStack = /*#__PURE__*/styled.div.withConfig({
   displayName: 'StyledStack'
 })(['position:relative;']);
 

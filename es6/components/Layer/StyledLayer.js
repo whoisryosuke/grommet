@@ -6,9 +6,9 @@ import styled, { css } from 'styled-components';
 
 import { baseStyle, lapAndUp, palm } from '../../utils';
 
-var hiddenPositionStyle = css(['left:-100%;right:100%;z-index:-1;position:fixed;']);
+var hiddenPositionStyle = /*#__PURE__*/css(['left:-100%;right:100%;z-index:-1;position:fixed;']);
 
-var StyledLayer = styled.div.withConfig({
+var StyledLayer = /*#__PURE__*/styled.div.withConfig({
   displayName: 'StyledLayer'
 })(['', ' position:relative;z-index:10;height:100vh;overflow:auto;background-color:', ';', ''], baseStyle, function (props) {
   return props.plain ? 'transparent' : props.theme.layer.overlayBackgroundColor;
@@ -24,7 +24,7 @@ var topPositionStyle = '\n  left: 50%;\n  transform: translateX(-50%);\n\n  anim
 
 var bottomPositionStyle = '\n  bottom: 0px;\n  right: 50%;\n  transform: translateX(50%);\n\n  animation: slide-up 0.2s ease-in-out forwards;\n  \n  @keyframes slide-up {\n    0% {\n      margin-bottom: -200px;\n    }\n  \n    100% {\n      margin-bottom: 0px;\n    }\n  }\n';
 
-var centerPositionStyle = css(['bottom:50%;right:50%;animation:grow-box 0.1s forwards;@keyframes grow-box{0%{transform:translate(50%,50%) scale(0.8);}100%{transform:translate(50%,50%) scale(1);}}']);
+var centerPositionStyle = /*#__PURE__*/css(['bottom:50%;right:50%;animation:grow-box 0.1s forwards;@keyframes grow-box{0%{transform:translate(50%,50%) scale(0.8);}100%{transform:translate(50%,50%) scale(1);}}']);
 
 function getPositionStyle(props) {
   var POSITION_MAP = {
@@ -37,7 +37,7 @@ function getPositionStyle(props) {
   return POSITION_MAP[props.position] || '';
 }
 
-export var StyledContainer = styled.div.withConfig({
+export var StyledContainer = /*#__PURE__*/styled.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
 })(['display:flex;flex-direction:column;min-height:', ';outline:none;background-color:', ';', ' ', ''], function (props) {
   return props.theme.global.size.xxsmall;

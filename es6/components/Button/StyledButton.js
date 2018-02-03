@@ -52,7 +52,7 @@ function getHoverIndicatorStyle(hoverIndicator, theme) {
   return css(['background-color:', ';color:', ';'], backgroundColor, theme.global.hover.textColor);
 }
 
-var hoverStyle = css(['&:hover{', ' ', ' ', '}'], function (props) {
+var hoverStyle = /*#__PURE__*/css(['&:hover{', ' ', ' ', '}'], function (props) {
   return props.hoverIndicator && getHoverIndicatorStyle(props.hoverIndicator, props.theme);
 }, function (props) {
   return !props.plain && css(['box-shadow:0px 0px 0px 2px ', ';'], getHoverColor(props));
@@ -62,7 +62,7 @@ var hoverStyle = css(['&:hover{', ' ', ' ', '}'], function (props) {
 
 var fillStyle = '\n  width: 100%;\n  max-width: none;\n  flex-grow: 1;\n';
 
-var plainFocusStyle = css(['box-shadow:0 0 ', ' ', ' ', ';'], function (props) {
+var plainFocusStyle = /*#__PURE__*/css(['box-shadow:0 0 ', ' ', ' ', ';'], function (props) {
   return props.theme.global.focus.border.width;
 }, function (props) {
   return props.theme.global.focus.border.width;
@@ -70,11 +70,11 @@ var plainFocusStyle = css(['box-shadow:0 0 ', ' ', ' ', ';'], function (props) {
   return props.theme.global.focus.border.color;
 });
 
-var plainStyle = css(['color:inherit;border:none;padding:0;', ''], function (props) {
+var plainStyle = /*#__PURE__*/css(['color:inherit;border:none;padding:0;', ''], function (props) {
   return props.focus && props.focusIndicator && plainFocusStyle;
 });
 
-var StyledButton = styled.button.withConfig({
+var StyledButton = /*#__PURE__*/styled.button.withConfig({
   displayName: 'StyledButton'
 })(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.plain && css(['text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
@@ -102,13 +102,13 @@ var StyledButton = styled.button.withConfig({
   return props.icon && !props.label && '\n    padding: ' + props.theme.global.edgeSize.small + ';\n  ';
 });
 
-export var StyledLabel = styled.span.withConfig({
+export var StyledLabel = /*#__PURE__*/styled.span.withConfig({
   displayName: 'StyledButton__StyledLabel'
 })(['&:first-child:not(:last-child){margin-right:', ';}'], function (props) {
   return props.theme.global.edgeSize.small;
 });
 
-export var StyledIcon = styled.span.withConfig({
+export var StyledIcon = /*#__PURE__*/styled.span.withConfig({
   displayName: 'StyledButton__StyledIcon'
 })(['display:inline-block;&:first-child:not(:last-child){margin-right:', ';}> *{vertical-align:bottom;}'], function (props) {
   return props.theme.global.edgeSize.small;

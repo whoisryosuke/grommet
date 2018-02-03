@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-export var StyledCircle = styled.circle.withConfig({
+export var StyledCircle = /*#__PURE__*/styled.circle.withConfig({
   displayName: 'StyledClock__StyledCircle'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
   return props.theme.clock.circle.width;
@@ -14,7 +14,7 @@ export var StyledCircle = styled.circle.withConfig({
   return props.night && css(['stroke:', ';fill:', ';transition:fill 1s ease;'], props.theme.clock.circle.color.night, props.theme.clock.circle.color.night);
 });
 
-export var StyledHour = styled.line.withConfig({
+export var StyledHour = /*#__PURE__*/styled.line.withConfig({
   displayName: 'StyledClock__StyledHour'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
   return props.theme.clock.hour.width;
@@ -24,7 +24,7 @@ export var StyledHour = styled.line.withConfig({
   return props.animate && '\n    animation: rotate 43200s infinite linear;\n  ';
 });
 
-export var StyledMinute = styled.line.withConfig({
+export var StyledMinute = /*#__PURE__*/styled.line.withConfig({
   displayName: 'StyledClock__StyledMinute'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
   return props.theme.clock.minute.width;
@@ -34,7 +34,7 @@ export var StyledMinute = styled.line.withConfig({
   return props.animate && '\n    animation: rotate 3600s infinite steps(60);\n    animation-delay: 1s;\n  ';
 });
 
-export var StyledSecond = styled.line.withConfig({
+export var StyledSecond = /*#__PURE__*/styled.line.withConfig({
   displayName: 'StyledClock__StyledSecond'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
   return props.theme.clock.second.width;
@@ -44,7 +44,7 @@ export var StyledSecond = styled.line.withConfig({
   return props.animate && '\n    animation: rotate 60s infinite steps(60);\n  ';
 });
 
-var StyledClock = styled.svg.withConfig({
+var StyledClock = /*#__PURE__*/styled.svg.withConfig({
   displayName: 'StyledClock'
 })(['width:', ';height:', ';@keyframes rotate{100%{transform:rotateZ(360deg);}}'], function (props) {
   return props.theme.clock.size[props.size];

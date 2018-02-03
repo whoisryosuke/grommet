@@ -33,11 +33,11 @@ var TEXT_ALIGN_MAP = {
   start: 'left'
 };
 
-var textAlignStyle = css(['text-align:', ';'], function (props) {
+var textAlignStyle = /*#__PURE__*/css(['text-align:', ';'], function (props) {
   return TEXT_ALIGN_MAP[props.textAlign];
 });
 
-var StyledParagraph = styled.p.withConfig({
+var StyledParagraph = /*#__PURE__*/styled.p.withConfig({
   displayName: 'StyledParagraph'
 })(['', ' ', ' ', ''], function (props) {
   return sizeStyle(props);

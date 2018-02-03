@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { baseStyle } from '../../utils';
 
-var StyledGrommet = styled.div.withConfig({
+var StyledGrommet = /*#__PURE__*/styled.div.withConfig({
   displayName: 'StyledGrommet'
 })(['', ' ', ''], baseStyle, function (props) {
   return props.theme.global.font.face;

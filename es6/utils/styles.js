@@ -5,7 +5,7 @@ import { css } from 'styled-components';
 import { parseMetricToNum } from './mixins';
 import { colorForName, colorIsDark, getRGBA } from './colors';
 
-export var activeStyle = css(['background-color:', ';color:', ';'], function (props) {
+export var activeStyle = /*#__PURE__*/css(['background-color:', ';color:', ';'], function (props) {
   return props.theme.global.hover.backgroundColor;
 }, function (props) {
   return props.theme.global.hover.textColor;
@@ -48,7 +48,7 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
   return undefined;
 };
 
-export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';', ' ', ' box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;*{box-sizing:inherit;}'], function (props) {
+export var baseStyle = /*#__PURE__*/css(['font-family:', ';font-size:', ';line-height:', ';', ' ', ' box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;*{box-sizing:inherit;}'], function (props) {
   return props.theme.global.font.family;
 }, function (props) {
   return parseMetricToNum(props.theme.global.font.size) / 16 * 1 + 'em';
@@ -61,7 +61,7 @@ export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';',
 });
 
 // focus also supports clickable elements inside svg
-export var focusStyle = css(['> circle,> ellipse,> line,> path,> polygon,> polyline,> rect{outline:', ' solid 2px;}border-color:', ';box-shadow:0 0 2px 2px ', ';'], function (props) {
+export var focusStyle = /*#__PURE__*/css(['> circle,> ellipse,> line,> path,> polygon,> polyline,> rect{outline:', ' solid 2px;}border-color:', ';box-shadow:0 0 2px 2px ', ';'], function (props) {
   return props.theme.global.focus.border.color;
 }, function (props) {
   return props.theme.global.focus.border.color;
@@ -69,7 +69,7 @@ export var focusStyle = css(['> circle,> ellipse,> line,> path,> polygon,> polyl
   return props.theme.global.focus.border.color;
 });
 
-export var inputStyle = css(['padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;font:inherit;margin:0;'], function (props) {
+export var inputStyle = /*#__PURE__*/css(['padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;font:inherit;margin:0;'], function (props) {
   return parseMetricToNum(props.theme.global.spacing) / 2 - parseMetricToNum(props.theme.global.input.border.width);
 }, function (props) {
   return props.theme.global.input.border.width;

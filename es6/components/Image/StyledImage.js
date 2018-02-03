@@ -9,11 +9,11 @@ var FIT_MAP = {
   contain: 'contain'
 };
 
-var fitStyle = css(['flex:1 1;overflow:hidden;object-fit:', ';'], function (props) {
+var fitStyle = /*#__PURE__*/css(['flex:1 1;overflow:hidden;object-fit:', ';'], function (props) {
   return FIT_MAP[props.fit];
 });
 
-var StyledImage = styled.img.withConfig({
+var StyledImage = /*#__PURE__*/styled.img.withConfig({
   displayName: 'StyledImage'
 })(['', ''], function (props) {
   return props.fit && fitStyle;

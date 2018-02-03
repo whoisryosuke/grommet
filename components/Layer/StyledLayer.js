@@ -15,9 +15,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var hiddenPositionStyle = (0, _styledComponents.css)(['left:-100%;right:100%;z-index:-1;position:fixed;']);
+var hiddenPositionStyle = /*#__PURE__*/(0, _styledComponents.css)(['left:-100%;right:100%;z-index:-1;position:fixed;']);
 
-var StyledLayer = _styledComponents2.default.div.withConfig({
+var StyledLayer = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer'
 })(['', ' position:relative;z-index:10;height:100vh;overflow:auto;background-color:', ';', ''], _utils.baseStyle, function (props) {
   return props.plain ? 'transparent' : props.theme.layer.overlayBackgroundColor;
@@ -33,7 +33,7 @@ var topPositionStyle = '\n  left: 50%;\n  transform: translateX(-50%);\n\n  anim
 
 var bottomPositionStyle = '\n  bottom: 0px;\n  right: 50%;\n  transform: translateX(50%);\n\n  animation: slide-up 0.2s ease-in-out forwards;\n  \n  @keyframes slide-up {\n    0% {\n      margin-bottom: -200px;\n    }\n  \n    100% {\n      margin-bottom: 0px;\n    }\n  }\n';
 
-var centerPositionStyle = (0, _styledComponents.css)(['bottom:50%;right:50%;animation:grow-box 0.1s forwards;@keyframes grow-box{0%{transform:translate(50%,50%) scale(0.8);}100%{transform:translate(50%,50%) scale(1);}}']);
+var centerPositionStyle = /*#__PURE__*/(0, _styledComponents.css)(['bottom:50%;right:50%;animation:grow-box 0.1s forwards;@keyframes grow-box{0%{transform:translate(50%,50%) scale(0.8);}100%{transform:translate(50%,50%) scale(1);}}']);
 
 function getPositionStyle(props) {
   var POSITION_MAP = {
@@ -46,7 +46,7 @@ function getPositionStyle(props) {
   return POSITION_MAP[props.position] || '';
 }
 
-var StyledContainer = exports.StyledContainer = _styledComponents2.default.div.withConfig({
+var StyledContainer = /*#__PURE__*/exports.StyledContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
 })(['display:flex;flex-direction:column;min-height:', ';outline:none;background-color:', ';', ' ', ''], function (props) {
   return props.theme.global.size.xxsmall;
