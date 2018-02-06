@@ -43,7 +43,7 @@ var Meter = function (_Component) {
 }(Component);
 
 Meter.defaultProps = {
-  background: 'light-1',
+  background: { color: 'light-1', opacity: 'medium' },
   size: 'medium',
   thickness: 'medium',
   type: 'bar'

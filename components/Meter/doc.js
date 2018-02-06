@@ -10,7 +10,7 @@ exports.default = function (Meter) {
   var DocumentedMeter = (0, _reactDesc.describe)(Meter).availableAt((0, _utils.getAvailableAtBadge)('Meter')).description('A graphical meter.').usage('import { Meter } from \'grommet\';\n<Meter />');
 
   DocumentedMeter.propTypes = {
-    background: _reactDesc.PropTypes.string.description('A color identifier to use for the background color. For example:\n      \'light-1\'.'),
+    background: _utils.backgroundPropType,
     round: _reactDesc.PropTypes.bool.description('Whether to round the line ends'),
     size: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full']).description('The size of the Meter.').defaultValue('medium'),
     thickness: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The size of the Meter.').defaultValue('medium'),

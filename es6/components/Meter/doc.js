@@ -1,12 +1,12 @@
 import { describe, PropTypes } from 'react-desc';
 
-import { getAvailableAtBadge } from '../../utils';
+import { backgroundPropType, getAvailableAtBadge } from '../../utils';
 
 export default (function (Meter) {
   var DocumentedMeter = describe(Meter).availableAt(getAvailableAtBadge('Meter')).description('A graphical meter.').usage('import { Meter } from \'grommet\';\n<Meter />');
 
   DocumentedMeter.propTypes = {
-    background: PropTypes.string.description('A color identifier to use for the background color. For example:\n      \'light-1\'.'),
+    background: backgroundPropType,
     round: PropTypes.bool.description('Whether to round the line ends'),
     size: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full']).description('The size of the Meter.').defaultValue('medium'),
     thickness: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The size of the Meter.').defaultValue('medium'),

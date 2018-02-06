@@ -14,6 +14,8 @@ var _StyledMeter = require('./StyledMeter');
 
 var _StyledMeter2 = _interopRequireDefault(_StyledMeter);
 
+var _utils2 = require('./utils');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -101,13 +103,13 @@ var Bar = function (_Component) {
         round: round ? { size: thickness } : undefined,
         theme: theme
       }, rest),
-      _react2.default.createElement('path', {
+      _react2.default.createElement('path', _extends({
         d: 'M ' + capOffset + ',' + mid + ' L ' + (width - capOffset) + ',' + mid,
-        fill: 'none',
-        stroke: (0, _utils.colorForName)(background, theme),
+        fill: 'none'
+      }, (0, _utils2.backgroundProps)(background, theme), {
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square'
-      }),
+      })),
       paths
     );
   };

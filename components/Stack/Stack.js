@@ -60,7 +60,7 @@ var Stack = function (_Component) {
     } else if (guidingIndex === 'last') {
       guidingIndex = lastIndex;
     }
-    var styledChildren = _react2.default.Children.map(children, function (child, index) {
+    var styledChildren = _react.Children.map(children, function (child, index) {
       if (child) {
         if (index === guidingIndex) {
           var _style = _extends({}, (child.props || {}).style, {

@@ -14,6 +14,8 @@ var _StyledMeter = require('./StyledMeter');
 
 var _StyledMeter2 = _interopRequireDefault(_StyledMeter);
 
+var _utils2 = require('./utils');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -140,15 +142,15 @@ var Circle = function (_Component) {
         height: size === 'full' ? '100%' : width,
         theme: theme
       }, rest),
-      _react2.default.createElement('circle', {
+      _react2.default.createElement('circle', _extends({
         cx: mid,
         cy: mid,
-        r: radius,
-        stroke: (0, _utils.colorForName)(background, theme),
+        r: radius
+      }, (0, _utils2.backgroundProps)(background, theme), {
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square',
         fill: 'none'
-      }),
+      })),
       paths,
       pathCaps
     );

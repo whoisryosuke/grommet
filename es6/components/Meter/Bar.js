@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import { colorForName, parseMetricToNum } from '../../utils';
 
 import StyledMeter from './StyledMeter';
+import { backgroundProps } from './utils';
 
 var Bar = function (_Component) {
   _inherits(Bar, _Component);
@@ -91,13 +92,13 @@ var Bar = function (_Component) {
         round: round ? { size: thickness } : undefined,
         theme: theme
       }, rest),
-      React.createElement('path', {
+      React.createElement('path', _extends({
         d: 'M ' + capOffset + ',' + mid + ' L ' + (width - capOffset) + ',' + mid,
-        fill: 'none',
-        stroke: colorForName(background, theme),
+        fill: 'none'
+      }, backgroundProps(background, theme), {
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square'
-      }),
+      })),
       paths
     );
   };

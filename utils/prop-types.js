@@ -10,6 +10,6 @@ var a11yTitlePropType = exports.a11yTitlePropType = _reactDesc.PropTypes.string.
 var backgroundPropType = exports.backgroundPropType = _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.shape({
   color: _reactDesc.PropTypes.string,
   opacity: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['weak', 'medium', 'strong']), _reactDesc.PropTypes.bool])
-})]).description('Background color when drop is active');
+})]).description('Background color');
 
 exports.default = { a11yTitlePropType: a11yTitlePropType, backgroundPropType: backgroundPropType };

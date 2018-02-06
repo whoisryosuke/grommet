@@ -8,7 +8,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import React, { cloneElement, Component } from 'react';
+import React, { Children, cloneElement, Component } from 'react';
 import { compose } from 'recompose';
 
 import { withTheme } from '../hocs';
@@ -43,7 +43,7 @@ var Stack = function (_Component) {
     } else if (guidingIndex === 'last') {
       guidingIndex = lastIndex;
     }
-    var styledChildren = React.Children.map(children, function (child, index) {
+    var styledChildren = Children.map(children, function (child, index) {
       if (child) {
         if (index === guidingIndex) {
           var _style = _extends({}, (child.props || {}).style, {
