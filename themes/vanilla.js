@@ -58,7 +58,7 @@ exports.default = (0, _utils.deepFreeze)({
       brand: brandColor,
       dark: darkColors,
       darkBackground: {
-        text: 'rgba(255, 255, 255, 0.85)'
+        text: '#FFFFFF'
       },
       light: lightColors,
       neutral: neutralColors,
