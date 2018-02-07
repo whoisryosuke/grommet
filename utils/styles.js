@@ -28,7 +28,7 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
       } else {
         color = 'inherit';
       }
-      return (0, _styledComponents.css)(['background:', ' no-repeat center center;background-size:cover;color:', ';'], background.image, color);
+      return (0, _styledComponents.css)(['background:', ' no-repeat;background-position:', ';background-size:cover;color:', ';'], background.image, background.position || 'center center', color);
     } else if (background.color) {
       var _color = (0, _colors.colorForName)(background.color, theme);
       var rgba = (0, _colors.getRGBA)(_color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);

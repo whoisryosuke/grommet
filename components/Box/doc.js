@@ -28,6 +28,7 @@ exports.default = function (Box) {
       color: _reactDesc.PropTypes.string,
       dark: _reactDesc.PropTypes.bool,
       image: _reactDesc.PropTypes.string,
+      position: _reactDesc.PropTypes.string,
       opacity: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['weak', 'medium', 'strong']), _reactDesc.PropTypes.bool])
     })]).description('Either a color identifier to use for the background color. For example:\n\'neutral-1\'. Or, a \'url()\' for an image. Dark is not needed if color is provided.'),
     basis: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4']).description('A fixed or relative size along its container\'s main axis.'),
