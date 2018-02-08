@@ -15,6 +15,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
+var growBoxKeyframe = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{transform:translate(50%,50%) scale(0.8);}100%{transform:translate(50%,50%) scale(1);}']);
+
+var slideUpKeyframe = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{margin-bottom:-200px;}100%{margin-bottom:0px;}']);
+
+var slideLeftKeyframe = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{left:-100%;}100%{left:0px;}']);
+
+var slideRightKeyframe = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{right:-200px;}100%{right:0px;}']);
+
+var slideDownKeyframe = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{top:-100vh;}100%{top:0px;}']);
+
 var hiddenPositionStyle = /*#__PURE__*/(0, _styledComponents.css)(['left:-100%;right:100%;z-index:-1;position:fixed;']);
 
 var StyledLayer = /*#__PURE__*/_styledComponents2.default.div.withConfig({
@@ -25,15 +35,15 @@ var StyledLayer = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   return props.position === 'hidden' ? hiddenPositionStyle : (0, _utils.lapAndUp)('\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n  ');
 });
 
-var leftPositionStyle = '\n  top: 0px;\n  bottom: 0px;\n  left: 0px;\n\n  animation: slide-left 0.2s ease-in-out forwards;\n  \n  @keyframes slide-left {\n    0% {\n      left: -100%;\n    }\n\n    100% {\n      left: 0px;\n    }\n  }\n';
+var leftPositionStyle = '\n  top: 0px;\n  bottom: 0px;\n  left: 0px;\n\n  animation: ' + slideLeftKeyframe + ' 0.2s ease-in-out forwards;\n';
 
-var rightPositionStyle = '\n  top: 0px;\n  bottom: 0px;\n  right: 0px;\n\n  animation: slide-right 0.2s ease-in-out forwards;\n  \n  @keyframes slide-right {\n    0% {\n      right: -200px;\n    }\n\n    100% {\n      right: 0px;\n    }\n  }\n';
+var rightPositionStyle = '\n  top: 0px;\n  bottom: 0px;\n  right: 0px;\n\n  animation: ' + slideRightKeyframe + ' 0.2s ease-in-out forwards;\n';
 
-var topPositionStyle = '\n  left: 50%;\n  transform: translateX(-50%);\n\n  animation: slide-down 0.2s ease-in-out forwards;\n  \n  @keyframes slide-down {\n    0% {\n      top: -100vh;\n    }\n  \n    100% {\n      top: 0px;\n    }\n  }\n';
+var topPositionStyle = '\n  left: 50%;\n  transform: translateX(-50%);\n  animation: ' + slideDownKeyframe + ' 0.2s ease-in-out forwards;\n';
 
-var bottomPositionStyle = '\n  bottom: 0px;\n  right: 50%;\n  transform: translateX(50%);\n\n  animation: slide-up 0.2s ease-in-out forwards;\n  \n  @keyframes slide-up {\n    0% {\n      margin-bottom: -200px;\n    }\n  \n    100% {\n      margin-bottom: 0px;\n    }\n  }\n';
+var bottomPositionStyle = '\n  bottom: 0px;\n  right: 50%;\n  transform: translateX(50%);\n  animation: ' + slideUpKeyframe + ' 0.2s ease-in-out forwards;\n';
 
-var centerPositionStyle = /*#__PURE__*/(0, _styledComponents.css)(['bottom:50%;right:50%;animation:grow-box 0.1s forwards;@keyframes grow-box{0%{transform:translate(50%,50%) scale(0.8);}100%{transform:translate(50%,50%) scale(1);}}']);
+var centerPositionStyle = /*#__PURE__*/(0, _styledComponents.css)(['bottom:50%;right:50%;animation:', ' 0.1s forwards;'], growBoxKeyframe);
 
 function getPositionStyle(props) {
   var POSITION_MAP = {

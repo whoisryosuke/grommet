@@ -2,7 +2,9 @@ var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+var rotateKeyframe = /*#__PURE__*/keyframes(['100%{transform:rotateZ(360deg);}']);
 
 export var StyledCircle = /*#__PURE__*/styled.circle.withConfig({
   displayName: 'StyledClock__StyledCircle'
@@ -21,7 +23,7 @@ export var StyledHour = /*#__PURE__*/styled.line.withConfig({
 }, function (props) {
   return props.night ? props.theme.clock.hour.color.night : props.theme.clock.hour.color.day;
 }, function (props) {
-  return props.animate && '\n    animation: rotate 43200s infinite linear;\n  ';
+  return props.animate && '\n    animation: ' + rotateKeyframe + ' 43200s infinite linear;\n  ';
 });
 
 export var StyledMinute = /*#__PURE__*/styled.line.withConfig({
@@ -31,7 +33,7 @@ export var StyledMinute = /*#__PURE__*/styled.line.withConfig({
 }, function (props) {
   return props.night ? props.theme.clock.minute.color.night : props.theme.clock.minute.color.day;
 }, function (props) {
-  return props.animate && '\n    animation: rotate 3600s infinite steps(60);\n    animation-delay: 1s;\n  ';
+  return props.animate && '\n    animation: ' + rotateKeyframe + ' 3600s infinite steps(60);\n    animation-delay: 1s;\n  ';
 });
 
 export var StyledSecond = /*#__PURE__*/styled.line.withConfig({
@@ -41,12 +43,12 @@ export var StyledSecond = /*#__PURE__*/styled.line.withConfig({
 }, function (props) {
   return props.night ? props.theme.clock.second.color.night : props.theme.clock.second.color.day;
 }, function (props) {
-  return props.animate && '\n    animation: rotate 60s infinite steps(60);\n  ';
+  return props.animate && '\n    animation: ' + rotateKeyframe + ' 60s infinite steps(60);\n  ';
 });
 
 var StyledClock = /*#__PURE__*/styled.svg.withConfig({
   displayName: 'StyledClock'
-})(['width:', ';height:', ';@keyframes rotate{100%{transform:rotateZ(360deg);}}'], function (props) {
+})(['width:', ';height:', ';'], function (props) {
   return props.theme.clock.size[props.size];
 }, function (props) {
   return props.theme.clock.size[props.size];

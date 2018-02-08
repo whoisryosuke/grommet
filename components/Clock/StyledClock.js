@@ -13,6 +13,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
+var rotateKeyframe = /*#__PURE__*/(0, _styledComponents.keyframes)(['100%{transform:rotateZ(360deg);}']);
+
 var StyledCircle = /*#__PURE__*/exports.StyledCircle = _styledComponents2.default.circle.withConfig({
   displayName: 'StyledClock__StyledCircle'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
@@ -30,7 +32,7 @@ var StyledHour = /*#__PURE__*/exports.StyledHour = _styledComponents2.default.li
 }, function (props) {
   return props.night ? props.theme.clock.hour.color.night : props.theme.clock.hour.color.day;
 }, function (props) {
-  return props.animate && '\n    animation: rotate 43200s infinite linear;\n  ';
+  return props.animate && '\n    animation: ' + rotateKeyframe + ' 43200s infinite linear;\n  ';
 });
 
 var StyledMinute = /*#__PURE__*/exports.StyledMinute = _styledComponents2.default.line.withConfig({
@@ -40,7 +42,7 @@ var StyledMinute = /*#__PURE__*/exports.StyledMinute = _styledComponents2.defaul
 }, function (props) {
   return props.night ? props.theme.clock.minute.color.night : props.theme.clock.minute.color.day;
 }, function (props) {
-  return props.animate && '\n    animation: rotate 3600s infinite steps(60);\n    animation-delay: 1s;\n  ';
+  return props.animate && '\n    animation: ' + rotateKeyframe + ' 3600s infinite steps(60);\n    animation-delay: 1s;\n  ';
 });
 
 var StyledSecond = /*#__PURE__*/exports.StyledSecond = _styledComponents2.default.line.withConfig({
@@ -50,12 +52,12 @@ var StyledSecond = /*#__PURE__*/exports.StyledSecond = _styledComponents2.defaul
 }, function (props) {
   return props.night ? props.theme.clock.second.color.night : props.theme.clock.second.color.day;
 }, function (props) {
-  return props.animate && '\n    animation: rotate 60s infinite steps(60);\n  ';
+  return props.animate && '\n    animation: ' + rotateKeyframe + ' 60s infinite steps(60);\n  ';
 });
 
 var StyledClock = /*#__PURE__*/_styledComponents2.default.svg.withConfig({
   displayName: 'StyledClock'
-})(['width:', ';height:', ';@keyframes rotate{100%{transform:rotateZ(360deg);}}'], function (props) {
+})(['width:', ';height:', ';'], function (props) {
   return props.theme.clock.size[props.size];
 }, function (props) {
   return props.theme.clock.size[props.size];
