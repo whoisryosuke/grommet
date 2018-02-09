@@ -11,7 +11,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
-import moment from 'moment';
 
 import { FormPrevious, FormNext, Previous, Next } from 'grommet-icons';
 
@@ -24,75 +23,41 @@ import { withTheme } from '../hocs';
 
 import StyledCalendar, { StyledDay, StyledDayContainer, StyledWeek, StyledWeeks, StyledWeeksContainer } from './StyledCalendar';
 import doc from './doc';
+import { addDays, addMonths, betweenDates, daysApart, sameDay, subtractDays, subtractMonths, withinDates } from './utils';
 
-var between = function between(date, dates) {
-  var result = void 0;
-  if (dates) {
-    var from = dates[0],
-        to = dates[1];
-
-    if (date.isSame(from, 'day') || date.isSame(to, 'day')) {
-      result = 2;
-    } else if (date.isSameOrAfter(from, 'day') && date.isSameOrBefore(to, 'day')) {
-      result = 1;
-    }
-  } else {
-    result = 1;
-  }
-  return result;
-};
-
-var within = function within(date, dates) {
-  var result = 0;
-  if (dates) {
-    if (Array.isArray(dates)) {
-      dates.some(function (d) {
-        if (typeof d === 'string') {
-          if (date.isSame(d, 'day')) {
-            result = 2;
-          }
-        } else {
-          result = between(date, d);
-        }
-        return result;
-      });
-    } else if (date.isSame(dates, 'day')) {
-      result = 2;
-    }
-  }
-  return result;
-};
-
-var buildStartEnd = function buildStartEnd(reference) {
-  var start = moment(reference).startOf('month').startOf('week');
-  var end = moment(start).add(5, 'weeks').endOf('week');
+var buildStartEnd = function buildStartEnd(reference, firstDayOfWeek) {
+  var start = new Date(reference);
+  start.setDate(1); // first of month
+  start = subtractDays(start, start.getDay() - firstDayOfWeek); // beginning of week
+  var end = addDays(start, 7 * 5 + 6); // 5 weeks to end of week
   return { start: start, end: end };
 };
 
 var buildState = function buildState(props) {
   var date = props.date,
-      dates = props.dates;
+      dates = props.dates,
+      firstDayOfWeek = props.firstDayOfWeek;
 
   var reference = void 0;
   if (date) {
-    reference = moment(date);
+    reference = new Date(date);
   } else if (dates && dates.length > 0) {
     if (typeof dates[0] === 'string') {
-      reference = moment(dates[0]);
+      reference = new Date(dates[0]);
     } else if (Array.isArray(dates[0])) {
-      reference = moment(dates[0][0]);
+      reference = new Date(dates[0][0]);
     } else {
-      reference = moment();
+      reference = new Date();
     }
   } else {
-    reference = moment();
+    reference = new Date();
   }
-  if (props.locale) {
-    reference.locale(props.locale);
-  }
-  return _extends({}, buildStartEnd(reference), {
+  // if (props.locale) {
+  //   reference.locale(props.locale);
+  // }
+  return _extends({}, buildStartEnd(reference, firstDayOfWeek), {
     reference: reference,
-    active: moment(reference)
+    active: new Date(reference)
   });
 };
 
@@ -104,35 +69,35 @@ var Calendar = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-    _this.dayRefs = {};
-
     _this.setReference = function (reference) {
-      var bounds = _this.props.bounds;
+      var _this$props = _this.props,
+          bounds = _this$props.bounds,
+          firstDayOfWeek = _this$props.firstDayOfWeek;
       var _this$state = _this.state,
           start = _this$state.start,
           end = _this$state.end;
 
-      if (between(reference, bounds)) {
-        var nextStartEnd = buildStartEnd(reference);
+      if (betweenDates(reference, bounds)) {
+        var nextStartEnd = buildStartEnd(reference, firstDayOfWeek);
         var nextState = {
           reference: reference,
           active: undefined
         };
-        if (nextStartEnd.start.isBefore(start)) {
+        if (nextStartEnd.start.getTime() < start.getTime()) {
           nextState.start = nextStartEnd.start;
           nextState.slide = {
             direction: 'down',
-            weeks: start.diff(nextStartEnd.start, 'weeks')
+            weeks: daysApart(start, nextStartEnd.start) / 7
           };
           clearTimeout(_this.timer);
           _this.timer = setTimeout(function () {
             return _this.setState({ end: nextStartEnd.end, slide: undefined });
           }, 1000);
-        } else if (nextStartEnd.end.isAfter(end)) {
+        } else if (nextStartEnd.end.getTime() > end.getTime()) {
           nextState.end = nextStartEnd.end;
           nextState.slide = {
             direction: 'up',
-            weeks: nextStartEnd.end.diff(end, 'weeks')
+            weeks: daysApart(nextStartEnd.end, end) / 7
           };
           clearTimeout(_this.timer);
           _this.timer = setTimeout(function () {
@@ -150,21 +115,30 @@ var Calendar = function (_Component) {
           reference = _this$state2.reference,
           end = _this$state2.end;
 
-      if (between(active, bounds)) {
+      if (betweenDates(active, bounds)) {
         var nextState = { active: active };
-        if (active.isBefore(start)) {
-          nextState.start = moment(start).subtract(1, 'week');
-          nextState.end = moment(end).subtract(1, 'week');
-        } else if (active.isAfter(end)) {
-          nextState.start = moment(start).add(1, 'week');
-          nextState.end = moment(end).add(1, 'week');
+        if (active.getTime() < start.getTime()) {
+          nextState.start = subtractDays(start, 7);
+          nextState.end = subtractDays(end, 7);
+        } else if (active.getTime() > end.getTime()) {
+          nextState.start = addDays(start, 7);
+          nextState.end = addDays(end, 7);
         }
-        if (!active.isSame(reference, 'month')) {
-          nextState.reference = moment(active);
+        if (active.getMonth() !== reference.getMonth()) {
+          nextState.reference = new Date(active);
         }
         _this.setFocus = true;
         _this.setState(nextState);
       }
+    };
+
+    _this.onClickDay = function (dateString) {
+      return function () {
+        var onSelect = _this.props.onSelect;
+
+        _this.setState({ active: new Date(dateString) });
+        onSelect(dateString);
+      };
     };
 
     _this.state = buildState(props);
@@ -176,13 +150,10 @@ var Calendar = function (_Component) {
   };
 
   Calendar.prototype.componentDidUpdate = function componentDidUpdate() {
-    var active = this.state.active;
-
     if (this.setFocus) {
       this.setFocus = false;
-      var ref = this.dayRefs[active.toISOString()];
-      if (ref) {
-        findDOMNode(ref).focus();
+      if (this.activeRef) {
+        findDOMNode(this.activeRef).focus();
       }
     }
   };
@@ -199,10 +170,12 @@ var Calendar = function (_Component) {
         date = _props.date,
         dates = _props.dates,
         disabled = _props.disabled,
+        firstDayOfWeek = _props.firstDayOfWeek,
+        locale = _props.locale,
         onSelect = _props.onSelect,
         size = _props.size,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['bounds', 'date', 'dates', 'disabled', 'onSelect', 'size', 'theme']);
+        rest = _objectWithoutProperties(_props, ['bounds', 'date', 'dates', 'disabled', 'firstDayOfWeek', 'locale', 'onSelect', 'size', 'theme']);
 
     var _state = this.state,
         active = _state.active,
@@ -212,19 +185,19 @@ var Calendar = function (_Component) {
         slide = _state.slide;
 
 
-    var previousMonth = moment(reference).subtract(1, 'month');
-    var nextMonth = moment(reference).add(1, 'month');
+    var previousMonth = subtractMonths(reference, 1);
+    var nextMonth = addMonths(reference, 1);
 
     var weeks = [];
-    var day = moment(start);
+    var day = new Date(start);
     var days = void 0;
 
     var _loop = function _loop() {
-      if (!day.weekday()) {
+      if (day.getDay() === firstDayOfWeek) {
         if (days) {
           weeks.push(React.createElement(
             StyledWeek,
-            { key: day.week(), theme: theme },
+            { key: day.getTime(), theme: theme },
             days
           ));
         }
@@ -232,18 +205,19 @@ var Calendar = function (_Component) {
       }
 
       var dateString = day.toISOString();
-      var content = day.format('D');
+      var content = day.getDate();
+      var isActive = active && sameDay(day, active);
       var selected = false;
       var inRange = false;
       var background = void 0;
 
-      var selectedState = within(day, date || dates);
+      var selectedState = withinDates(day, date || dates);
       if (selectedState === 2) {
         selected = true;
       } else if (selectedState === 1) {
         inRange = true;
       }
-      var dayDisabled = within(day, disabled);
+      var dayDisabled = withinDates(day, disabled);
       if (selected) {
         background = 'brand';
         content = React.createElement(
@@ -257,27 +231,24 @@ var Calendar = function (_Component) {
 
       days.push(React.createElement(
         StyledDayContainer,
-        { key: day.day(), size: size, theme: theme },
+        { key: day.getTime(), size: size, theme: theme },
         React.createElement(
           Button,
           {
             ref: function ref(_ref) {
-              _this2.dayRefs[dateString] = _ref;
+              if (isActive) _this2.activeRef = _ref;
             },
-            a11yTitle: day.format('LL'),
+            a11yTitle: day.toDateString(),
             plain: true,
-            active: active && day.isSame(active, 'day'),
+            active: isActive,
             hoverIndicator: !dayDisabled,
-            onClick: dayDisabled ? undefined : function () {
-              _this2.setState({ active: moment(dateString) });
-              onSelect(dateString);
-            }
+            onClick: dayDisabled ? undefined : _this2.onClickDay(dateString)
           },
           React.createElement(
             StyledDay,
             {
               background: background,
-              otherMonth: !day.isSame(reference, 'month'),
+              otherMonth: day.getMonth() !== reference.getMonth(),
               size: size,
               theme: theme
             },
@@ -285,15 +256,15 @@ var Calendar = function (_Component) {
           )
         )
       ));
-      day.add(1, 'day');
+      day = addDays(day, 1);
     };
 
-    while (day.isBefore(end)) {
+    while (day.getTime() < end.getTime()) {
       _loop();
     }
     weeks.push(React.createElement(
       StyledWeek,
-      { key: day.week(), theme: theme },
+      { key: day.getTime(), theme: theme },
       days
     ));
 
@@ -305,17 +276,17 @@ var Calendar = function (_Component) {
         {
           onUp: function onUp(event) {
             event.preventDefault();
-            _this2.setActive(moment(active).subtract(1, 'week'));
+            _this2.setActive(addDays(active, -7));
           },
           onDown: function onDown(event) {
             event.preventDefault();
-            _this2.setActive(moment(active).add(1, 'week'));
+            _this2.setActive(addDays(active, 7));
           },
           onLeft: function onLeft() {
-            return _this2.setActive(moment(active).subtract(1, 'day'));
+            return _this2.setActive(addDays(active, -1));
           },
           onRight: function onRight() {
-            return _this2.setActive(moment(active).add(1, 'day'));
+            return _this2.setActive(addDays(active, 1));
           }
         },
         React.createElement(
@@ -330,23 +301,23 @@ var Calendar = function (_Component) {
               React.createElement(
                 'strong',
                 null,
-                reference.format('MMMM YYYY')
+                reference.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
               )
             ),
             React.createElement(
               Box,
               { direction: 'row', align: 'center' },
               React.createElement(Button, {
-                a11yTitle: previousMonth.format('MMMM YYYY'),
+                a11yTitle: previousMonth.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
                 icon: size === 'small' ? React.createElement(FormPrevious, null) : React.createElement(Previous, { size: size }),
-                onClick: onSelect && between(previousMonth, bounds) ? function () {
+                onClick: onSelect && betweenDates(previousMonth, bounds) ? function () {
                   return _this2.setReference(previousMonth);
                 } : undefined
               }),
               React.createElement(Button, {
-                a11yTitle: nextMonth.format('MMMM YYYY'),
+                a11yTitle: nextMonth.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
                 icon: size === 'small' ? React.createElement(FormNext, null) : React.createElement(Next, { size: size }),
-                onClick: onSelect && between(nextMonth, bounds) ? function () {
+                onClick: onSelect && betweenDates(nextMonth, bounds) ? function () {
                   return _this2.setReference(nextMonth);
                 } : undefined
               })
@@ -370,6 +341,7 @@ var Calendar = function (_Component) {
 }(Component);
 
 Calendar.defaultProps = {
+  firstDayOfWeek: 0,
   size: 'medium'
 };
 
