@@ -54,7 +54,7 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
   return undefined;
 };
 
-var baseStyle = /*#__PURE__*/exports.baseStyle = (0, _styledComponents.css)(['font-family:', ';font-size:', ';line-height:', ';', ' ', ' box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;*{box-sizing:inherit;}'], function (props) {
+var baseStyle = /*#__PURE__*/exports.baseStyle = (0, _styledComponents.css)(['font-family:', ';font-size:', ';line-height:', ';', ' ', ' box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;'], function (props) {
   return props.theme.global.font.family;
 }, function (props) {
   return (0, _mixins.parseMetricToNum)(props.theme.global.font.size) / 16 * 1 + 'em';
@@ -75,7 +75,7 @@ var focusStyle = /*#__PURE__*/exports.focusStyle = (0, _styledComponents.css)(['
   return props.theme.global.focus.border.color;
 });
 
-var inputStyle = /*#__PURE__*/exports.inputStyle = (0, _styledComponents.css)(['padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;font:inherit;margin:0;'], function (props) {
+var inputStyle = /*#__PURE__*/exports.inputStyle = (0, _styledComponents.css)(['box-sizing:border-box;padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;font:inherit;margin:0;'], function (props) {
   return (0, _mixins.parseMetricToNum)(props.theme.global.spacing) / 2 - (0, _mixins.parseMetricToNum)(props.theme.global.input.border.width);
 }, function (props) {
   return props.theme.global.input.border.width;

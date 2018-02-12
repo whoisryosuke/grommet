@@ -76,7 +76,7 @@ var plainStyle = /*#__PURE__*/css(['color:inherit;border:none;padding:0;', ''], 
 
 var StyledButton = /*#__PURE__*/styled.button.withConfig({
   displayName: 'StyledButton'
-})(['cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['box-sizing:border-box;cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.plain && css(['text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
 }, function (props) {
   return !props.plain && !props.primary && basicStyle(props);

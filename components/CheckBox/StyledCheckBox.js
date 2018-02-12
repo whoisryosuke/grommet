@@ -37,7 +37,7 @@ var StyledCheckBoxInput = /*#__PURE__*/exports.StyledCheckBoxInput = _styledComp
 
 var StyledCheckBoxBox = /*#__PURE__*/exports.StyledCheckBoxBox = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxBox'
-})(['position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background-color:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';stroke-width:', ';stroke:', ';}'], function (props) {
+})(['box-sizing:border-box;position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background-color:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{box-sizing:border-box;position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';stroke-width:', ';stroke:', ';}'], function (props) {
   return props.theme.checkBox.size;
 }, function (props) {
   return props.theme.checkBox.size;
@@ -59,7 +59,7 @@ var StyledCheckBoxBox = /*#__PURE__*/exports.StyledCheckBoxBox = _styledComponen
 
 var StyledCheckBoxToggle = /*#__PURE__*/exports.StyledCheckBoxToggle = _styledComponents2.default.span.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxToggle'
-})(['position:relative;vertical-align:middle;display:inline-block;width:', ';height:', ';border:', ' solid;border-color:', ';border-radius:', ';'], function (props) {
+})(['box-sizing:border-box;position:relative;vertical-align:middle;display:inline-block;width:', ';height:', ';border:', ' solid;border-color:', ';border-radius:', ';'], function (props) {
   return props.theme.checkBox.toggle.size;
 }, function (props) {
   return props.theme.checkBox.size;
@@ -73,7 +73,7 @@ var StyledCheckBoxToggle = /*#__PURE__*/exports.StyledCheckBoxToggle = _styledCo
 
 var StyledCheckBoxKnob = /*#__PURE__*/exports.StyledCheckBoxKnob = _styledComponents2.default.span.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxKnob'
-})(['position:absolute;top:-', ';left:-', ';transition:all 0.3s;width:', ';height:', ';background-color:', ';border-radius:', ';'], function (props) {
+})(['box-sizing:border-box;position:absolute;top:-', ';left:-', ';transition:all 0.3s;width:', ';height:', ';background-color:', ';border-radius:', ';'], function (props) {
   return props.theme.checkBox.border.width;
 }, function (props) {
   return props.theme.checkBox.border.width;

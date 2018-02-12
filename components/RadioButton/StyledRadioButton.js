@@ -35,7 +35,7 @@ var StyledRadioButtonInput = /*#__PURE__*/exports.StyledRadioButtonInput = _styl
 
 var StyledRadioButtonButton = /*#__PURE__*/exports.StyledRadioButtonButton = _styledComponents2.default.div.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonButton'
-})(['position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background-color:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';fill:', ';}'], function (props) {
+})(['box-sizing:border-box;position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background-color:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{box-sizing:border-box;position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';fill:', ';}'], function (props) {
   return props.theme.radioButton.size;
 }, function (props) {
   return props.theme.radioButton.size;
