@@ -22,7 +22,7 @@ var plainStyle = /*#__PURE__*/(0, _styledComponents.css)(['border:none;width:100
 
 var StyledTextArea = /*#__PURE__*/_styledComponents2.default.textarea.withConfig({
   displayName: 'StyledTextArea'
-})(['', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, function (props) {
+})(['', ' width:100%;', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, function (props) {
   return props.plain && plainStyle;
 }, placeholderColor, placeholderColor, placeholderColor, function (props) {
   return (!props.plain || props.focusIndicator) && _utils.focusStyle;

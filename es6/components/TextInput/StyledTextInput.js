@@ -19,7 +19,7 @@ var plainStyle = /*#__PURE__*/css(['border:none;width:100%;-webkit-appearance:no
 
 var StyledTextInput = /*#__PURE__*/styled.input.withConfig({
   displayName: 'StyledTextInput'
-})(['', ' ', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
+})(['', ' width:100%;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
   return props.size && sizeStyle(props);
 }, function (props) {
   return props.plain && plainStyle;
@@ -29,9 +29,7 @@ var StyledTextInput = /*#__PURE__*/styled.input.withConfig({
 
 export var StyledTextInputContainer = /*#__PURE__*/styled.div.withConfig({
   displayName: 'StyledTextInput__StyledTextInputContainer'
-})(['', ''], function (props) {
-  return props.plain && 'width: 100%';
-});
+})(['width:100%;']);
 
 export var StyledSuggestions = /*#__PURE__*/styled.ol.withConfig({
   displayName: 'StyledTextInput__StyledSuggestions'

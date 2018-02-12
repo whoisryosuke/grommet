@@ -28,7 +28,7 @@ var plainStyle = /*#__PURE__*/(0, _styledComponents.css)(['border:none;width:100
 
 var StyledTextInput = /*#__PURE__*/_styledComponents2.default.input.withConfig({
   displayName: 'StyledTextInput'
-})(['', ' ', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, function (props) {
+})(['', ' width:100%;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, function (props) {
   return props.size && sizeStyle(props);
 }, function (props) {
   return props.plain && plainStyle;
@@ -38,9 +38,7 @@ var StyledTextInput = /*#__PURE__*/_styledComponents2.default.input.withConfig({
 
 var StyledTextInputContainer = /*#__PURE__*/exports.StyledTextInputContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledTextInput__StyledTextInputContainer'
-})(['', ''], function (props) {
-  return props.plain && 'width: 100%';
-});
+})(['width:100%;']);
 
 var StyledSuggestions = /*#__PURE__*/exports.StyledSuggestions = _styledComponents2.default.ol.withConfig({
   displayName: 'StyledTextInput__StyledSuggestions'

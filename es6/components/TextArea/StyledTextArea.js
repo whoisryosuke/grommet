@@ -14,7 +14,7 @@ var plainStyle = /*#__PURE__*/css(['border:none;width:100%;-webkit-appearance:no
 
 var StyledTextArea = /*#__PURE__*/styled.textarea.withConfig({
   displayName: 'StyledTextArea'
-})(['', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
+})(['', ' width:100%;', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
   return props.plain && plainStyle;
 }, placeholderColor, placeholderColor, placeholderColor, function (props) {
   return (!props.plain || props.focusIndicator) && focusStyle;
