@@ -13,14 +13,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
-import Actions from 'grommet-icons/icons/Actions';
-import ClosedCaption from 'grommet-icons/icons/ClosedCaption';
-import Expand from 'grommet-icons/icons/Expand';
-import Play from 'grommet-icons/icons/Play';
-import Pause from 'grommet-icons/icons/Pause';
-import Volume from 'grommet-icons/icons/Volume';
-import VolumeLow from 'grommet-icons/icons/VolumeLow';
-
+import { Actions, ClosedCaption, Expand, Play, Pause, Volume, VolumeLow } from 'grommet-icons';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Menu } from '../Menu';

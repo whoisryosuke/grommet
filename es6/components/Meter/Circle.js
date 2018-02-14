@@ -10,10 +10,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 
-import { arcCommands, parseMetricToNum, translateEndAngle } from '../../utils';
+import { arcCommands, colorForName, parseMetricToNum, translateEndAngle } from '../../utils';
 
 import StyledMeter from './StyledMeter';
-import { strokeProps } from './utils';
+import { backgroundProps } from './utils';
 
 var Circle = function (_Component) {
   _inherits(Circle, _Component);
@@ -78,15 +78,15 @@ var Circle = function (_Component) {
           }
         };
       }
-      var stroke = strokeProps(someHighlight && !highlight ? background : colorName, theme);
+      var stroke = colorForName(someHighlight && !highlight ? background : colorName, theme);
 
       if (round) {
         var d1 = arcCommands(width / 2, width / 2, radius, startAngle, endAngle);
         paths.unshift(React.createElement('path', _extends({
           key: key,
           d: d1,
-          fill: 'none'
-        }, stroke, {
+          fill: 'none',
+          stroke: stroke,
           strokeWidth: height,
           strokeLinecap: 'round'
         }, hoverProps, pathRest)));
@@ -113,8 +113,8 @@ var Circle = function (_Component) {
         paths.push(React.createElement('path', _extends({
           key: key,
           d: d,
-          fill: 'none'
-        }, stroke, {
+          fill: 'none',
+          stroke: stroke,
           strokeWidth: height,
           strokeLinecap: 'butt'
         }, hoverProps, pathRest)));
@@ -135,7 +135,7 @@ var Circle = function (_Component) {
         cx: mid,
         cy: mid,
         r: radius
-      }, strokeProps(background, theme), {
+      }, backgroundProps(background, theme), {
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square',
         fill: 'none'

@@ -12,21 +12,7 @@ var _reactDom = require('react-dom');
 
 var _recompose = require('recompose');
 
-var _FormPrevious = require('grommet-icons/icons/FormPrevious');
-
-var _FormPrevious2 = _interopRequireDefault(_FormPrevious);
-
-var _FormNext = require('grommet-icons/icons/FormNext');
-
-var _FormNext2 = _interopRequireDefault(_FormNext);
-
-var _Previous = require('grommet-icons/icons/Previous');
-
-var _Previous2 = _interopRequireDefault(_Previous);
-
-var _Next = require('grommet-icons/icons/Next');
-
-var _Next2 = _interopRequireDefault(_Next);
+var _grommetIcons = require('grommet-icons');
 
 var _Box = require('../Box');
 
@@ -342,14 +328,14 @@ var Calendar = function (_Component) {
               { direction: 'row', align: 'center' },
               _react2.default.createElement(_Button.Button, {
                 a11yTitle: previousMonth.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
-                icon: size === 'small' ? _react2.default.createElement(_FormPrevious2.default, null) : _react2.default.createElement(_Previous2.default, { size: size }),
+                icon: size === 'small' ? _react2.default.createElement(_grommetIcons.FormPrevious, null) : _react2.default.createElement(_grommetIcons.Previous, { size: size }),
                 onClick: onSelect && (0, _utils.betweenDates)(previousMonth, bounds) ? function () {
                   return _this2.setReference(previousMonth);
                 } : undefined
               }),
               _react2.default.createElement(_Button.Button, {
                 a11yTitle: nextMonth.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
-                icon: size === 'small' ? _react2.default.createElement(_FormNext2.default, null) : _react2.default.createElement(_Next2.default, { size: size }),
+                icon: size === 'small' ? _react2.default.createElement(_grommetIcons.FormNext, null) : _react2.default.createElement(_grommetIcons.Next, { size: size }),
                 onClick: onSelect && (0, _utils.betweenDates)(nextMonth, bounds) ? function () {
                   return _this2.setReference(nextMonth);
                 } : undefined

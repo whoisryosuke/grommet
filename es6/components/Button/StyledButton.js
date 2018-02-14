@@ -70,7 +70,7 @@ var plainFocusStyle = /*#__PURE__*/css(['box-shadow:0 0 ', ' ', ' ', ';'], funct
   return props.theme.global.focus.border.color;
 });
 
-var plainStyle = /*#__PURE__*/css(['color:inherit;border:none;padding:0;text-align:inherit;', ''], function (props) {
+var plainStyle = /*#__PURE__*/css(['color:inherit;border:none;padding:0;', ''], function (props) {
   return props.focus && props.focusIndicator && plainFocusStyle;
 });
 

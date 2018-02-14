@@ -47,7 +47,6 @@ var alignSelfStyle = /*#__PURE__*/css(['align-self:', ';'], function (props) {
 });
 
 var BASIS_MAP = {
-  'auto': 'auto',
   'full': '100%',
   '1/2': '50%',
   '1/4': '25%',

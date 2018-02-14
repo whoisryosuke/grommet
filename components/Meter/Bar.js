@@ -86,8 +86,8 @@ var Bar = function (_Component) {
       return _react2.default.createElement('path', _extends({
         key: key,
         d: d,
-        fill: 'none'
-      }, (0, _utils2.strokeProps)(someHighlight && !highlight ? background : colorName, theme), {
+        fill: 'none',
+        stroke: (0, _utils.colorForName)(someHighlight && !highlight ? background : colorName, theme),
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'butt'
       }, hoverProps, pathRest));
@@ -106,7 +106,7 @@ var Bar = function (_Component) {
       _react2.default.createElement('path', _extends({
         d: 'M ' + capOffset + ',' + mid + ' L ' + (width - capOffset) + ',' + mid,
         fill: 'none'
-      }, (0, _utils2.strokeProps)(background, theme), {
+      }, (0, _utils2.backgroundProps)(background, theme), {
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square'
       })),

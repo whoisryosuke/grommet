@@ -12,11 +12,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
 
-import FormPrevious from 'grommet-icons/icons/FormPrevious';
-import FormNext from 'grommet-icons/icons/FormNext';
-import Previous from 'grommet-icons/icons/Previous';
-import Next from 'grommet-icons/icons/Next';
-
+import { FormPrevious, FormNext, Previous, Next } from 'grommet-icons';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
