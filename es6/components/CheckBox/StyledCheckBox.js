@@ -18,7 +18,7 @@ export var StyledCheckBoxContainer = /*#__PURE__*/styled.label.withConfig({
 
 export var StyledCheckBoxInput = /*#__PURE__*/styled.input.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxInput'
-})(['opacity:0;width:0;height:0;margin:0;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], focusStyle, function (props) {
+})(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], focusStyle, function (props) {
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 }, function (props) {
   return props.theme.checkBox.size;
@@ -80,7 +80,7 @@ export var StyledCheckBoxKnob = /*#__PURE__*/styled.span.withConfig({
 
 var StyledCheckBox = /*#__PURE__*/styled.div.withConfig({
   displayName: 'StyledCheckBox'
-})(['']);
+})(['position:relative;']);
 
 export default StyledCheckBox.extend(_templateObject, function (props) {
   return props.theme.checkBox && props.theme.checkBox.extend;

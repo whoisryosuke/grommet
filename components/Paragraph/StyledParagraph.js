@@ -14,9 +14,6 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var marginStyle = function marginStyle(props) {
   if (typeof props.margin === 'string') {
-    if (props.margin === 'none') {
-      return '\n        margin-top: 0;\n        margin-bottom: 0;\n      ';
-    }
     var margin = props.theme.global.edgeSize[props.margin];
     return '\n      margin-top: ' + margin + ';\n      margin-bottom: ' + margin + ';\n    ';
   }

@@ -25,7 +25,7 @@ var StyledRadioButtonContainer = /*#__PURE__*/exports.StyledRadioButtonContainer
 
 var StyledRadioButtonInput = /*#__PURE__*/exports.StyledRadioButtonInput = _styledComponents2.default.input.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonInput'
-})(['opacity:0;width:0;height:0;margin:0;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], _utils.focusStyle, function (props) {
+})(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], _utils.focusStyle, function (props) {
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.radioButton.check.color;
 }, function (props) {
   return props.theme.radioButton.size;
@@ -55,7 +55,7 @@ var StyledRadioButtonButton = /*#__PURE__*/exports.StyledRadioButtonButton = _st
 
 var StyledRadioButton = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   displayName: 'StyledRadioButton'
-})(['']);
+})(['position:relative;']);
 
 exports.default = StyledRadioButton.extend(_templateObject, function (props) {
   return props.theme.radioButton && props.theme.radioButton.extend;

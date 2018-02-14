@@ -14,7 +14,9 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _recompose = require('recompose');
 
-var _grommetIcons = require('grommet-icons');
+var _LinkNext = require('grommet-icons/icons/LinkNext');
+
+var _LinkNext2 = _interopRequireDefault(_LinkNext);
 
 var _hocs = require('../hocs');
 
@@ -76,7 +78,7 @@ var Anchor = function (_Component) {
     if (icon) {
       anchorIcon = icon;
     } else if (primary) {
-      anchorIcon = _react2.default.createElement(_grommetIcons.LinkNext, { color: primary ? 'brand' : undefined });
+      anchorIcon = _react2.default.createElement(_LinkNext2.default, { color: primary ? 'brand' : undefined });
     }
 
     if (anchorIcon) {

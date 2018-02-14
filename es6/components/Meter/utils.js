@@ -2,19 +2,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 import { colorForName } from '../../utils';
 
-export var backgroundProps = function backgroundProps(background, theme) {
+export var strokeProps = function strokeProps(color, theme) {
   var result = {};
-  if (background) {
-    if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
-      result.stroke = colorForName(background.color, theme);
-      if (background.opacity) {
-        result.strokeOpacity = background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity];
+  if (color) {
+    if ((typeof color === 'undefined' ? 'undefined' : _typeof(color)) === 'object') {
+      result.stroke = colorForName(color.color, theme);
+      if (color.opacity) {
+        result.strokeOpacity = color.opacity === true ? theme.global.opacity.medium : theme.global.opacity[color.opacity];
       }
     } else {
-      result.stroke = colorForName(background, theme);
+      result.stroke = colorForName(color, theme);
     }
   }
   return result;
 };
 
-export default { backgroundProps: backgroundProps };
+export default { strokeProps: strokeProps };

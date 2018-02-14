@@ -55,6 +55,7 @@ var alignSelfStyle = /*#__PURE__*/(0, _styledComponents.css)(['align-self:', ';'
 });
 
 var BASIS_MAP = {
+  'auto': 'auto',
   'full': '100%',
   '1/2': '50%',
   '1/4': '25%',

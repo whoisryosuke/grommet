@@ -80,7 +80,7 @@ var plainFocusStyle = /*#__PURE__*/(0, _styledComponents.css)(['box-shadow:0 0 '
   return props.theme.global.focus.border.color;
 });
 
-var plainStyle = /*#__PURE__*/(0, _styledComponents.css)(['color:inherit;border:none;padding:0;', ''], function (props) {
+var plainStyle = /*#__PURE__*/(0, _styledComponents.css)(['color:inherit;border:none;padding:0;text-align:inherit;', ''], function (props) {
   return props.focus && props.focusIndicator && plainFocusStyle;
 });
 

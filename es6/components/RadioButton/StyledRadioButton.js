@@ -16,7 +16,7 @@ export var StyledRadioButtonContainer = /*#__PURE__*/styled.label.withConfig({
 
 export var StyledRadioButtonInput = /*#__PURE__*/styled.input.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonInput'
-})(['opacity:0;width:0;height:0;margin:0;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], focusStyle, function (props) {
+})(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], focusStyle, function (props) {
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.radioButton.check.color;
 }, function (props) {
   return props.theme.radioButton.size;
@@ -46,7 +46,7 @@ export var StyledRadioButtonButton = /*#__PURE__*/styled.div.withConfig({
 
 var StyledRadioButton = /*#__PURE__*/styled.div.withConfig({
   displayName: 'StyledRadioButton'
-})(['']);
+})(['position:relative;']);
 
 export default StyledRadioButton.extend(_templateObject, function (props) {
   return props.theme.radioButton && props.theme.radioButton.extend;
