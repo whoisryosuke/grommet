@@ -314,6 +314,18 @@ Object.keys(_Stack).forEach(function (key) {
   });
 });
 
+var _Table = require('./Table');
+
+Object.keys(_Table).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Table[key];
+    }
+  });
+});
+
 var _Tabs = require('./Tabs');
 
 Object.keys(_Tabs).forEach(function (key) {
