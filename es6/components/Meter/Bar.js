@@ -10,10 +10,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 
-import { colorForName, parseMetricToNum } from '../../utils';
+import { parseMetricToNum } from '../../utils';
 
 import StyledMeter from './StyledMeter';
-import { backgroundProps } from './utils';
+import { strokeProps } from './utils';
 
 var Bar = function (_Component) {
   _inherits(Bar, _Component);
@@ -75,8 +75,8 @@ var Bar = function (_Component) {
       return React.createElement('path', _extends({
         key: key,
         d: d,
-        fill: 'none',
-        stroke: colorForName(someHighlight && !highlight ? background : colorName, theme),
+        fill: 'none'
+      }, strokeProps(someHighlight && !highlight ? background : colorName, theme), {
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'butt'
       }, hoverProps, pathRest));
@@ -95,7 +95,7 @@ var Bar = function (_Component) {
       React.createElement('path', _extends({
         d: 'M ' + capOffset + ',' + mid + ' L ' + (width - capOffset) + ',' + mid,
         fill: 'none'
-      }, backgroundProps(background, theme), {
+      }, strokeProps(background, theme), {
         strokeWidth: height,
         strokeLinecap: round ? 'round' : 'square'
       })),

@@ -1,6 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
+exports.StyledBoxGap = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -55,6 +56,7 @@ var alignSelfStyle = /*#__PURE__*/(0, _styledComponents.css)(['align-self:', ';'
 });
 
 var BASIS_MAP = {
+  'auto': 'auto',
   'full': '100%',
   '1/2': '50%',
   '1/4': '25%',
@@ -376,4 +378,18 @@ var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
 
 exports.default = StyledBox.extend(_templateObject, function (props) {
   return props.theme.box && props.theme.box.extend;
+});
+
+
+var gapStyle = function gapStyle(gap, direction, theme) {
+  if (direction === 'column') {
+    return 'height: ' + theme.global.edgeSize[gap] + ';';
+  }
+  return 'width: ' + theme.global.edgeSize[gap] + ';';
+};
+
+var StyledBoxGap = /*#__PURE__*/exports.StyledBoxGap = _styledComponents2.default.div.withConfig({
+  displayName: 'StyledBox__StyledBoxGap'
+})(['', ';'], function (props) {
+  return props.gap && gapStyle(props.gap, props.direction, props.theme);
 });

@@ -75,12 +75,14 @@ var Box = function (_Component) {
   };
 
   Box.prototype.render = function render() {
-    var _this2 = this;
-
     var _props2 = this.props,
         a11yTitle = _props2.a11yTitle,
+        children = _props2.children,
+        direction = _props2.direction,
+        gap = _props2.gap,
         tag = _props2.tag,
-        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'tag']);
+        theme = _props2.theme,
+        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'gap', 'tag', 'theme']);
 
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
@@ -88,12 +90,36 @@ var Box = function (_Component) {
       styledComponents[tag] = StyledComponent;
     }
 
-    return _react2.default.createElement(StyledComponent, _extends({
-      'aria-label': a11yTitle,
-      ref: function ref(_ref) {
-        _this2.componentRef = _ref;
-      }
-    }, rest));
+    var contents = children;
+    if (gap) {
+      contents = [];
+      var firstIndex = void 0;
+      _react.Children.forEach(children, function (child, index) {
+        if (child) {
+          if (firstIndex === undefined) {
+            firstIndex = index;
+          } else {
+            contents.push(_react2.default.createElement(_StyledBox.StyledBoxGap, {
+              key: index,
+              gap: gap,
+              direction: direction,
+              theme: theme
+            }));
+          }
+        }
+        contents.push(child);
+      });
+    }
+
+    return _react2.default.createElement(
+      StyledComponent,
+      _extends({
+        'aria-label': a11yTitle,
+        direction: direction,
+        theme: theme
+      }, rest),
+      contents
+    );
   };
 
   return Box;
@@ -107,6 +133,8 @@ Box.childContextTypes = {
 };
 Box.defaultProps = {
   direction: 'column',
+  margin: 'none',
+  pad: 'none',
   tag: 'div'
 };
 

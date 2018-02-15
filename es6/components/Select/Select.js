@@ -10,7 +10,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 
-import { FormDown } from 'grommet-icons';
+import FormDown from 'grommet-icons/icons/FormDown';
+
 
 import { Box } from '../Box';
 import { DropButton } from '../DropButton';

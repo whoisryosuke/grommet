@@ -8,7 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _grommetIcons = require('grommet-icons');
+var _FormDown = require('grommet-icons/icons/FormDown');
+
+var _FormDown2 = _interopRequireDefault(_FormDown);
 
 var _Box = require('../Box');
 
@@ -84,7 +86,7 @@ var Select = function (_Component) {
             flex: false,
             style: { minWidth: 'auto' }
           },
-          _react2.default.createElement(_grommetIcons.FormDown, null)
+          _react2.default.createElement(_FormDown2.default, null)
         )
       );
     }, _temp), _possibleConstructorReturn(_this, _ret);

@@ -12,7 +12,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
-import { LinkNext } from 'grommet-icons';
+import LinkNext from 'grommet-icons/icons/LinkNext';
+
 
 import { withFocus, withTheme } from '../hocs';
 

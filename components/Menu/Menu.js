@@ -10,7 +10,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
-var _grommetIcons = require('grommet-icons');
+var _FormDown = require('grommet-icons/icons/FormDown');
+
+var _FormDown2 = _interopRequireDefault(_FormDown);
 
 var _Box = require('../Box');
 
@@ -123,7 +125,7 @@ var Menu = function (_Component) {
         showDrop = _state.showDrop;
 
 
-    var menuIcon = icon || _react2.default.createElement(_grommetIcons.FormDown, null);
+    var menuIcon = icon || _react2.default.createElement(_FormDown2.default, null);
 
     var labelNode = void 0;
     if (label) {

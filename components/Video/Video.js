@@ -16,7 +16,33 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _recompose = require('recompose');
 
-var _grommetIcons = require('grommet-icons');
+var _Actions = require('grommet-icons/icons/Actions');
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
+var _ClosedCaption = require('grommet-icons/icons/ClosedCaption');
+
+var _ClosedCaption2 = _interopRequireDefault(_ClosedCaption);
+
+var _Expand = require('grommet-icons/icons/Expand');
+
+var _Expand2 = _interopRequireDefault(_Expand);
+
+var _Play = require('grommet-icons/icons/Play');
+
+var _Play2 = _interopRequireDefault(_Play);
+
+var _Pause = require('grommet-icons/icons/Pause');
+
+var _Pause2 = _interopRequireDefault(_Pause);
+
+var _Volume = require('grommet-icons/icons/Volume');
+
+var _Volume2 = _interopRequireDefault(_Volume);
+
+var _VolumeLow = require('grommet-icons/icons/VolumeLow');
+
+var _VolumeLow2 = _interopRequireDefault(_VolumeLow);
 
 var _Box = require('../Box');
 
@@ -253,7 +279,7 @@ var Video = function (_Component) {
         if (textTracks.length === 1) {
           var active = textTracks[0].mode === 'showing';
           captionControls.push({
-            icon: _react2.default.createElement(_grommetIcons.ClosedCaption, { color: iconColor }),
+            icon: _react2.default.createElement(_ClosedCaption2.default, { color: iconColor }),
             active: active,
             onClick: function onClick() {
               return _this2.showCaptions(active ? -1 : 0);
@@ -294,7 +320,7 @@ var Video = function (_Component) {
           background: background
         },
         _react2.default.createElement(_Button.Button, {
-          icon: playing ? _react2.default.createElement(_grommetIcons.Pause, { color: iconColor }) : _react2.default.createElement(_grommetIcons.Play, { color: iconColor }),
+          icon: playing ? _react2.default.createElement(_Pause2.default, { color: iconColor }) : _react2.default.createElement(_Play2.default, { color: iconColor }),
           hoverIndicator: 'background',
           onClick: playing ? this.pause : this.play
         }),
@@ -341,19 +367,19 @@ var Video = function (_Component) {
           )
         ),
         _react2.default.createElement(_Menu.Menu, {
-          icon: _react2.default.createElement(_grommetIcons.Actions, { color: iconColor }),
+          icon: _react2.default.createElement(_Actions2.default, { color: iconColor }),
           dropAlign: { bottom: 'top', right: 'right' },
           background: background || { color: 'light-2', opacity: 'weak' },
           items: [{
-            icon: _react2.default.createElement(_grommetIcons.Volume, { color: iconColor }),
+            icon: _react2.default.createElement(_Volume2.default, { color: iconColor }),
             onClick: volume <= 1 - VOLUME_STEP ? this.louder : undefined,
             close: false
           }, {
-            icon: _react2.default.createElement(_grommetIcons.VolumeLow, { color: iconColor }),
+            icon: _react2.default.createElement(_VolumeLow2.default, { color: iconColor }),
             onClick: volume >= VOLUME_STEP ? this.quieter : undefined,
             close: false
           }].concat(captionControls, [{
-            icon: _react2.default.createElement(_grommetIcons.Expand, { color: iconColor }),
+            icon: _react2.default.createElement(_Expand2.default, { color: iconColor }),
             onClick: this.fullscreen
           }])
         })
