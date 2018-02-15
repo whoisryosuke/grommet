@@ -8,7 +8,7 @@ var _reactDesc = require('react-desc');
 var _utils = require('../../utils');
 
 var docTableCell = exports.docTableCell = function docTableCell(TableCell) {
-  var DocumentedTableCell = (0, _reactDesc.describe)(TableCell).availableAt((0, _utils.getAvailableAtBadge)('Table')).description('A cell of data in a table.').usage('import { TableCell } from \'grommet\';\n<TableCell />');
+  var DocumentedTableCell = (0, _reactDesc.describe)(TableCell).description('A cell of data in a table.').usage('import { TableCell } from \'grommet\';\n<TableCell />');
 
   DocumentedTableCell.propTypes = {
     plain: _reactDesc.PropTypes.bool.description('Whether default styling context should be removed.'),

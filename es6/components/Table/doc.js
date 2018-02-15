@@ -3,7 +3,7 @@ import { describe, PropTypes } from 'react-desc';
 import { getAvailableAtBadge } from '../../utils';
 
 export var docTableCell = function docTableCell(TableCell) {
-  var DocumentedTableCell = describe(TableCell).availableAt(getAvailableAtBadge('Table')).description('A cell of data in a table.').usage('import { TableCell } from \'grommet\';\n<TableCell />');
+  var DocumentedTableCell = describe(TableCell).description('A cell of data in a table.').usage('import { TableCell } from \'grommet\';\n<TableCell />');
 
   DocumentedTableCell.propTypes = {
     plain: PropTypes.bool.description('Whether default styling context should be removed.'),
