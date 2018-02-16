@@ -84,6 +84,10 @@ var directionStyle = /*#__PURE__*/(0, _styledComponents.css)(['', ' ', ' flex-di
   return 'column-reverse';
 });
 
+var elevationStyle = /*#__PURE__*/(0, _styledComponents.css)(['box-shadow:', ';'], function (props) {
+  return props.theme.global.elevation[props.elevation];
+});
+
 var FLEX_MAP = (_FLEX_MAP = {}, _FLEX_MAP[true] = '1 1', _FLEX_MAP[false] = '0 0', _FLEX_MAP.grow = '1 0', _FLEX_MAP.shrink = '0 1', _FLEX_MAP);
 
 var flexStyle = /*#__PURE__*/(0, _styledComponents.css)(['flex:', ';'], function (props) {
@@ -331,7 +335,7 @@ var animationStyle = /*#__PURE__*/(0, _styledComponents.css)(['', ''], function 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   displayName: 'StyledBox'
-})(['display:flex;box-sizing:border-box;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;box-sizing:border-box;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.basis && 'max-width: 100%;';
 }, function (props) {
   return props.align && alignStyle;
@@ -369,6 +373,8 @@ var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   return props.responsive && responsiveStyle;
 }, function (props) {
   return props.overflow && 'overflow: ' + props.overflow + ';';
+}, function (props) {
+  return props.elevation && elevationStyle;
 }, function (props) {
   return props.animation && animationStyle;
 });

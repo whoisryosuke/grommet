@@ -34,6 +34,7 @@ export default (function (Box) {
       size: PropTypes.oneOf(['small', 'medium', 'large'])
     })]).description('Include a border.'),
     direction: PropTypes.oneOf(['row', 'column']).description('The orientation to layout the child components in.').defaultValue('column'),
+    elevation: PropTypes.oneOf(['none', 'xsmall', 'small', 'medium', 'large', 'xlarge']).description('Elevated height above the underlying context, indicated via a drop shadow.').defaultValue('none'),
     flex: PropTypes.oneOf(['grow', 'shrink', true, false]).description('Whether flex-grow and/or flex-shrink is true.'),
     fill: PropTypes.oneOf(['horizontal', 'vertical', true, false]).description('Whether the width and/or height should fill the container.'),
     gap: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The amount of spacing between child elements.'),

@@ -38,6 +38,7 @@ exports.default = function (Box) {
       size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
     })]).description('Include a border.'),
     direction: _reactDesc.PropTypes.oneOf(['row', 'column']).description('The orientation to layout the child components in.').defaultValue('column'),
+    elevation: _reactDesc.PropTypes.oneOf(['none', 'xsmall', 'small', 'medium', 'large', 'xlarge']).description('Elevated height above the underlying context, indicated via a drop shadow.').defaultValue('none'),
     flex: _reactDesc.PropTypes.oneOf(['grow', 'shrink', true, false]).description('Whether flex-grow and/or flex-shrink is true.'),
     fill: _reactDesc.PropTypes.oneOf(['horizontal', 'vertical', true, false]).description('Whether the width and/or height should fill the container.'),
     gap: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The amount of spacing between child elements.'),
