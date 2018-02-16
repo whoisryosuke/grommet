@@ -60,7 +60,7 @@ var hoverStyle = /*#__PURE__*/css(['&:hover{', ' ', ' ', '}'], function (props) 
   return !props.plain && !props.primary && css(['svg{fill:', ';stroke:', ';transition:none;}'], props.theme.global.hover.textColor, props.theme.global.hover.textColor);
 });
 
-var fillStyle = '\n  width: 100%;\n  max-width: none;\n  flex-grow: 1;\n';
+var fillStyle = '\n  width: 100%;\n  height: 100%;\n  max-width: none;\n  flex-grow: 1;\n';
 
 var plainFocusStyle = /*#__PURE__*/css(['box-shadow:0 0 ', ' ', ' ', ';'], function (props) {
   return props.theme.global.focus.border.width;

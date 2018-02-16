@@ -35,7 +35,7 @@ export default (function (Box) {
     })]).description('Include a border.'),
     direction: PropTypes.oneOf(['row', 'column']).description('The orientation to layout the child components in.').defaultValue('column'),
     flex: PropTypes.oneOf(['grow', 'shrink', true, false]).description('Whether flex-grow and/or flex-shrink is true.'),
-    full: PropTypes.oneOf(['horizontal', 'vertical', true, false, 'grow']).description('Whether the width and/or height should take the full viewport size.'),
+    fill: PropTypes.oneOf(['horizontal', 'vertical', true, false]).description('Whether the width and/or height should fill the container.'),
     gap: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The amount of spacing between child elements.'),
     gridArea: PropTypes.string.description('The name of the area to place this Box in inside a parent Grid.'),
     justify: PropTypes.oneOf(['start', 'center', 'between', 'end']).description('How to align the contents along the main axis.'),

@@ -57,11 +57,12 @@ var DropButton = function (_Component) {
 
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
+        align = _props.align,
         children = _props.children,
         control = _props.control,
         id = _props.id,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'control', 'id', 'theme']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'align', 'children', 'control', 'id', 'theme']);
 
     var showDrop = this.state.showDrop;
 
@@ -71,13 +72,13 @@ var DropButton = function (_Component) {
       drop = React.createElement(
         Drop,
         {
-          key: 'drop-button__drop',
-          restrictFocus: true,
-          id: id ? 'drop-button__' + id : undefined,
-          align: { top: 'bottom', left: 'left' },
+          key: 'drop',
           ref: function ref(_ref2) {
             _this2.dropRef = _ref2;
           },
+          id: id ? 'drop-button__' + id : undefined,
+          restrictFocus: true,
+          align: align,
           control: this.componentRef,
           onClose: this.onDropClose
         },
@@ -88,8 +89,7 @@ var DropButton = function (_Component) {
     return [React.createElement(
       Button,
       _extends({
-        fill: true,
-        key: 'drop-button__button',
+        key: 'button',
         id: id,
         ref: function ref(_ref3) {
           _this2.componentRef = _ref3;

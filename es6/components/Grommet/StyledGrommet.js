@@ -2,13 +2,17 @@ var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { baseStyle } from '../../utils';
 
+var fullStyle = /*#__PURE__*/css(['width:100vw;height:100vh;']);
+
 var StyledGrommet = /*#__PURE__*/styled.div.withConfig({
   displayName: 'StyledGrommet'
-})(['', ' ', ''], baseStyle, function (props) {
+})(['', ' ', ' ', ''], baseStyle, function (props) {
+  return props.full && fullStyle;
+}, function (props) {
   return props.theme.global.font.face;
 });
 

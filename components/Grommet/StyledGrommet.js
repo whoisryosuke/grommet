@@ -14,9 +14,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
+var fullStyle = /*#__PURE__*/(0, _styledComponents.css)(['width:100vw;height:100vh;']);
+
 var StyledGrommet = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   displayName: 'StyledGrommet'
-})(['', ' ', ''], _utils.baseStyle, function (props) {
+})(['', ' ', ' ', ''], _utils.baseStyle, function (props) {
+  return props.full && fullStyle;
+}, function (props) {
   return props.theme.global.font.face;
 });
 

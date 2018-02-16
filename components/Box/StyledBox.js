@@ -90,18 +90,15 @@ var flexStyle = /*#__PURE__*/(0, _styledComponents.css)(['flex:', ';'], function
   return FLEX_MAP[props.flex];
 });
 
-var fullStyle = function fullStyle(full) {
-  if (full === 'horizontal') {
-    return '\n      max-width: 100%;\n      width: 100vw;\n    ';
+var fillStyle = function fillStyle(fill) {
+  if (fill === 'horizontal') {
+    return 'width: 100%;';
   }
-  if (full === 'vertical') {
-    return '\n      height: 100vh;\n      max-height: 100%;\n      overflow: auto;\n    ';
+  if (fill === 'vertical') {
+    return 'height: 100%;';
   }
-  if (full === 'grow') {
-    return '\n      max-width: 100%;\n      width: 100vw;\n      min-height: 100vh;\n    ';
-  }
-  if (full) {
-    return '\n      max-width: 100%;\n      width: 100vw;\n      height: 100vh;\n      max-height: 100%;\n      overflow: auto;\n    ';
+  if (fill) {
+    return '\n      width: 100%;\n      height: 100%;\n    ';
   }
   return undefined;
 };
@@ -353,7 +350,7 @@ var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
 }, function (props) {
   return props.basis && basisStyle;
 }, function (props) {
-  return props.full && fullStyle(props.full);
+  return props.fill && fillStyle(props.fill);
 }, function (props) {
   return props.gridArea && gridAreaStyle;
 }, function (props) {

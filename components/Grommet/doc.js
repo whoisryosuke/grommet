@@ -11,6 +11,7 @@ exports.default = function (Grommet) {
 
   DocumentedGrommet.propTypes = {
     dir: _reactDesc.PropTypes.oneOf(['rtl', 'ltr']).description('Whether text should be rendered right to left or not. Defaults to\n      inherit from the document context.'),
+    full: _reactDesc.PropTypes.bool.description('Whether to take the whole viewport.'),
     theme: _reactDesc.PropTypes.object.description('Custom styles for Grommet app component.')
   };
 
