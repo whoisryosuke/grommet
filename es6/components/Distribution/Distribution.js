@@ -41,8 +41,9 @@ var Distribution = function (_Component) {
         basis = _props.basis,
         children = _props.children,
         direction = _props.direction,
+        gap = _props.gap,
         values = _props.values,
-        rest = _objectWithoutProperties(_props, ['basis', 'children', 'direction', 'values']);
+        rest = _objectWithoutProperties(_props, ['basis', 'children', 'direction', 'gap', 'values']);
 
     if (values.length === 1) {
       var value = values[0];
@@ -94,14 +95,16 @@ var Distribution = function (_Component) {
           direction: direction,
           basis: basis,
           flex: basis ? 'shrink' : true,
-          overflow: 'hidden'
+          overflow: 'hidden',
+          gap: gap
         }, rest),
         React.createElement(
           Distribution,
           {
             values: values.slice(0, subIndex),
             basis: childBasis[0],
-            direction: direction === 'row' ? 'column' : 'row'
+            direction: direction === 'row' ? 'column' : 'row',
+            gap: gap
           },
           children
         ),
@@ -110,7 +113,8 @@ var Distribution = function (_Component) {
           {
             values: values.slice(subIndex),
             basis: childBasis[1],
-            direction: direction === 'row' ? 'column' : 'row'
+            direction: direction === 'row' ? 'column' : 'row',
+            gap: gap
           },
           children
         )
