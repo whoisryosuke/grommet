@@ -98,6 +98,18 @@ Object.keys(_Diagram).forEach(function (key) {
   });
 });
 
+var _Distribution = require('./Distribution');
+
+Object.keys(_Distribution).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Distribution[key];
+    }
+  });
+});
+
 var _Drop = require('./Drop');
 
 Object.keys(_Drop).forEach(function (key) {
