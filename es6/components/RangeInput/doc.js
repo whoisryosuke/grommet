@@ -7,10 +7,12 @@ export default (function (RangeInput) {
 
   DocumentedRangeInput.propTypes = {
     id: PropTypes.string.description('The id attribute of the range input.'),
-    min: PropTypes.string.description('The min attribute of the range input.'),
-    max: PropTypes.string.description('The max attribute of the range input.'),
+    min: PropTypes.number.description('The minimum value permitted.'),
+    max: PropTypes.number.description('The maximum value permitted.'),
     name: PropTypes.string.description('The name attribute of the range input.'),
-    value: PropTypes.string.description('The value attribute of the range input.')
+    onChange: PropTypes.func.description('Function that will be called when the user changes the value. It will\n      be passed an event object. The new input value will be available\n      via \'event.target.value\'.'),
+    step: PropTypes.number.description('The step interval between values.'),
+    value: PropTypes.number.description('The current value.')
   };
 
   return DocumentedRangeInput;
