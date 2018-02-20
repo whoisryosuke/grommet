@@ -41,7 +41,8 @@ var Heading = function (_Component) {
       styledComponents[tag] = StyledComponent;
     }
 
-    return React.createElement(StyledComponent, _extends({ level: level }, rest));
+    // enforce level to be a number
+    return React.createElement(StyledComponent, _extends({ level: +level }, rest));
   };
 
   return Heading;

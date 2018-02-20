@@ -6,7 +6,7 @@ export default (function (Heading) {
   var DocumentedHeading = describe(Heading).availableAt(getAvailableAtBadge('Heading')).description('Heading text structed in levels.').usage('import { Heading } from \'grommet\';\n<Heading />');
 
   DocumentedHeading.propTypes = {
-    level: PropTypes.oneOf([1, 2, 3, 4]).description('The heading level. It corresponds to the number after the \'H\' for\nthe DOM tag. Set the level for semantic accuracy and accessibility.\nThe sizing can be further adjusted using the size property.'),
+    level: PropTypes.oneOf([1, 2, 3, 4, '1', '2', '3', '4']).description('The heading level. It corresponds to the number after the \'H\' for\nthe DOM tag. Set the level for semantic accuracy and accessibility.\nThe sizing can be further adjusted using the size property.'),
     margin: PropTypes.oneOfType([PropTypes.oneOf(['none', 'small', 'medium', 'large']), PropTypes.shape({
       bottom: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
       top: PropTypes.oneOf(['none', 'small', 'medium', 'large'])
