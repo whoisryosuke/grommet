@@ -74,12 +74,12 @@ var LayerContainer = function (_Component) {
     var _props = this.props,
         children = _props.children,
         id = _props.id,
-        onClickOverlay = _props.onClickOverlay,
+        onClickOutside = _props.onClickOutside,
         onEsc = _props.onEsc,
         plain = _props.plain,
         position = _props.position,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'id', 'onClickOverlay', 'onEsc', 'plain', 'position', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'id', 'onClickOutside', 'onEsc', 'plain', 'position', 'theme']);
 
     return _react2.default.createElement(
       _FocusedContainer2.default,
@@ -91,7 +91,7 @@ var LayerContainer = function (_Component) {
           _StyledLayer2.default,
           {
             id: id,
-            onClick: onClickOverlay,
+            onClick: onClickOutside,
             plain: plain,
             position: position,
             theme: theme,

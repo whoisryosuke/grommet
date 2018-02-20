@@ -55,12 +55,12 @@ var DropContainer = function (_Component) {
       _this.scrollParents.forEach(function (scrollParent) {
         return scrollParent.removeEventListener('scroll', _this.place);
       });
-    }, _this.onRemoveDrop = function (event) {
-      var onClose = _this.props.onClose;
+    }, _this.onClickDocument = function (event) {
+      var onClickOutside = _this.props.onClickOutside;
 
       if (!(0, _reactDom.findDOMNode)(_this.dropRef).contains(event.target)) {
-        if (onClose) {
-          onClose();
+        if (onClickOutside) {
+          onClickOutside();
         }
       }
     }, _this.onResize = function () {
@@ -183,7 +183,7 @@ var DropContainer = function (_Component) {
 
     this.addScrollListener();
     window.addEventListener('resize', this.onResize);
-    document.addEventListener('click', this.onRemoveDrop);
+    document.addEventListener('click', this.onClickDocument);
 
     this.place();
 
@@ -195,7 +195,7 @@ var DropContainer = function (_Component) {
   DropContainer.prototype.componentWillUnmount = function componentWillUnmount() {
     this.removeScrollListener();
     window.removeEventListener('resize', this.onResize);
-    document.removeEventListener('click', this.onRemoveDrop);
+    document.removeEventListener('click', this.onClickDocument);
   };
 
   DropContainer.prototype.render = function render() {
@@ -203,16 +203,17 @@ var DropContainer = function (_Component) {
 
     var _props = this.props,
         children = _props.children,
-        onClose = _props.onClose,
+        onClickOutside = _props.onClickOutside,
+        onEsc = _props.onEsc,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'onClose', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'onClickOutside', 'onEsc', 'theme']);
 
     return _react2.default.createElement(
       _FocusedContainer2.default,
       null,
       _react2.default.createElement(
         _Keyboard.Keyboard,
-        { onEsc: onClose },
+        { onEsc: onEsc },
         _react2.default.createElement(
           _StyledDrop2.default,
           _extends({

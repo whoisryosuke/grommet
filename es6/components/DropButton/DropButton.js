@@ -80,7 +80,8 @@ var DropButton = function (_Component) {
           restrictFocus: true,
           align: align,
           control: this.componentRef,
-          onClose: this.onDropClose
+          onClickOutside: this.onDropClose,
+          onEsc: this.onDropClose
         },
         children
       );
