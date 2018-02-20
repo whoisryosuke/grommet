@@ -26,7 +26,6 @@ export default (function (Button) {
     icon: PropTypes.element.description('Icon element to place in the button.'),
     label: PropTypes.node.description('Label text to place in the button.'),
     onClick: PropTypes.func.description('Click handler. Not setting this property and not specifying a href\ncauses the Button to be disabled.'),
-    plain: PropTypes.bool.description('Whether this is a plain button with no border or padding.\nUse this when wrapping children that provide the complete visualization\nof the control. Do not use plain with label or icon properties.'),
     primary: PropTypes.bool.description('Whether this is a primary button. There should be at most one per page or screen.'),
     reverse: PropTypes.bool.description('Whether an icon and label should be reversed so that the icon is at the\nend of the anchor.'),
     type: PropTypes.oneOf(['button', 'reset', 'submit']).description('The type of button. Set the type to submit for the default button on forms.').defaultValue('button')

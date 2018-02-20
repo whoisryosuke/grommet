@@ -59,11 +59,10 @@ var Button = function (_Component) {
         href = _props.href,
         label = _props.label,
         onClick = _props.onClick,
-        plain = _props.plain,
         reverse = _props.reverse,
         theme = _props.theme,
         type = _props.type,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
 
     var Tag = href ? AnchorStyledButton : _StyledButton2.default;
 
@@ -90,8 +89,6 @@ var Button = function (_Component) {
 
     var disabled = !href && !onClick && ['reset', 'submit'].indexOf(type) === -1;
 
-    var plainProp = plain || _react.Children.count(children) > 0 || icon && !label;
-
     return _react2.default.createElement(
       Tag,
       _extends({
@@ -104,7 +101,7 @@ var Button = function (_Component) {
         href: href,
         label: label,
         onClick: onClick,
-        plain: plainProp,
+        plain: _react.Children.count(children) > 0 || icon && !label,
         theme: theme,
         type: !href ? type : undefined
       }),
