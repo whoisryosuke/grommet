@@ -4,6 +4,8 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
+import { colorForName } from '../../utils';
+
 var marginStyle = function marginStyle(props) {
   if (typeof props.margin === 'string') {
     var margin = props.theme.global.edgeSize[props.margin];
@@ -46,9 +48,13 @@ var textAlignStyle = /*#__PURE__*/css(['text-align:', ';'], function (props) {
 
 var truncateStyle = '\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n';
 
+var colorStyle = /*#__PURE__*/css(['color:', ''], function (props) {
+  return colorForName(props.color, props.theme);
+});
+
 var StyledHeading = /*#__PURE__*/styled.h1.withConfig({
   displayName: 'StyledHeading'
-})(['', ' ', ' ', ' ', ''], function (props) {
+})(['', ' ', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
 }, function (props) {
   return props.margin && marginStyle(props);
@@ -56,6 +62,8 @@ var StyledHeading = /*#__PURE__*/styled.h1.withConfig({
   return props.textAlign && textAlignStyle;
 }, function (props) {
   return props.truncate && truncateStyle;
+}, function (props) {
+  return props.color && colorStyle;
 });
 
 export default StyledHeading.extend(_templateObject, function (props) {

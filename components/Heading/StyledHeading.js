@@ -8,6 +8,8 @@ var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
+var _utils = require('../../utils');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
@@ -54,9 +56,13 @@ var textAlignStyle = /*#__PURE__*/(0, _styledComponents.css)(['text-align:', ';'
 
 var truncateStyle = '\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n';
 
+var colorStyle = /*#__PURE__*/(0, _styledComponents.css)(['color:', ''], function (props) {
+  return (0, _utils.colorForName)(props.color, props.theme);
+});
+
 var StyledHeading = /*#__PURE__*/_styledComponents2.default.h1.withConfig({
   displayName: 'StyledHeading'
-})(['', ' ', ' ', ' ', ''], function (props) {
+})(['', ' ', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
 }, function (props) {
   return props.margin && marginStyle(props);
@@ -64,6 +70,8 @@ var StyledHeading = /*#__PURE__*/_styledComponents2.default.h1.withConfig({
   return props.textAlign && textAlignStyle;
 }, function (props) {
   return props.truncate && truncateStyle;
+}, function (props) {
+  return props.color && colorStyle;
 });
 
 exports.default = StyledHeading.extend(_templateObject, function (props) {

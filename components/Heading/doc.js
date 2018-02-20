@@ -10,6 +10,7 @@ exports.default = function (Heading) {
   var DocumentedHeading = (0, _reactDesc.describe)(Heading).availableAt((0, _utils.getAvailableAtBadge)('Heading')).description('Heading text structed in levels.').usage('import { Heading } from \'grommet\';\n<Heading />');
 
   DocumentedHeading.propTypes = {
+    color: _reactDesc.PropTypes.string.description('A color identifier to use for the text color. For example:\n      \'brand\'.'),
     level: _reactDesc.PropTypes.oneOf([1, 2, 3, 4, '1', '2', '3', '4']).description('The heading level. It corresponds to the number after the \'H\' for\nthe DOM tag. Set the level for semantic accuracy and accessibility.\nThe sizing can be further adjusted using the size property.'),
     margin: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none', 'small', 'medium', 'large']), _reactDesc.PropTypes.shape({
       bottom: _reactDesc.PropTypes.oneOf(['none', 'small', 'medium', 'large']),
