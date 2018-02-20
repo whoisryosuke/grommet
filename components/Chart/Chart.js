@@ -37,14 +37,27 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 var renderBars = function renderBars(values, bounds, scale, height) {
   return (values || []).map(function (valueArg, index) {
     var label = valueArg.label,
+        onHover = valueArg.onHover,
         value = valueArg.value,
-        rest = _objectWithoutProperties(valueArg, ['label', 'value']);
+        rest = _objectWithoutProperties(valueArg, ['label', 'onHover', 'value']);
 
     var key = 'p-' + index;
     var bottom = value.length === 2 ? bounds[1][0] : value[1];
     var top = value.length === 2 ? value[1] : value[2];
     if (top !== 0) {
       var d = 'M ' + (value[0] - bounds[0][0]) * scale[0] + ',' + ('' + (height - (bottom - bounds[1][0]) * scale[1])) + (' L ' + (value[0] - bounds[0][0]) * scale[0] + ',') + ('' + (height - (top - bounds[1][0]) * scale[1]));
+
+      var hoverProps = void 0;
+      if (onHover) {
+        hoverProps = {
+          onMouseOver: function onMouseOver() {
+            return onHover(true);
+          },
+          onMouseLeave: function onMouseLeave() {
+            return onHover(false);
+          }
+        };
+      }
 
       return _react2.default.createElement(
         'g',
@@ -54,49 +67,88 @@ var renderBars = function renderBars(values, bounds, scale, height) {
           null,
           label
         ),
-        _react2.default.createElement('path', _extends({ d: d }, rest))
+        _react2.default.createElement('path', _extends({ d: d }, hoverProps, rest))
       );
     }
     return undefined;
   });
 };
 
-var renderLine = function renderLine(values, bounds, scale, height) {
-  var d = '';
-  (values || []).forEach(function (_ref, index) {
-    var value = _ref.value;
-
-    d += (index ? ' L' : 'M') + ' ' + (value[0] - bounds[0][0]) * scale[0] + ',' + ('' + (height - (value[1] - bounds[1][0]) * scale[1]));
-  });
-  return _react2.default.createElement(
-    'g',
-    { fill: 'none' },
-    _react2.default.createElement('path', { d: d })
-  );
-};
-
-var renderArea = function renderArea(values, bounds, scale, height, props) {
-  var color = props.color,
-      theme = props.theme;
+var renderLine = function renderLine(values, bounds, scale, height, _ref) {
+  var onClick = _ref.onClick,
+      onHover = _ref.onHover;
 
   var d = '';
   (values || []).forEach(function (_ref2, index) {
     var value = _ref2.value;
 
+    d += (index ? ' L' : 'M') + ' ' + (value[0] - bounds[0][0]) * scale[0] + ',' + ('' + (height - (value[1] - bounds[1][0]) * scale[1]));
+  });
+
+  var hoverProps = void 0;
+  if (onHover) {
+    hoverProps = {
+      onMouseOver: function onMouseOver() {
+        return onHover(true);
+      },
+      onMouseLeave: function onMouseLeave() {
+        return onHover(false);
+      }
+    };
+  }
+  var clickProps = void 0;
+  if (onClick) {
+    clickProps = { onClick: onClick };
+  }
+
+  return _react2.default.createElement(
+    'g',
+    { fill: 'none' },
+    _react2.default.createElement('path', _extends({ d: d }, hoverProps, clickProps))
+  );
+};
+
+var renderArea = function renderArea(values, bounds, scale, height, _ref3) {
+  var color = _ref3.color,
+      onClick = _ref3.onClick,
+      onHover = _ref3.onHover,
+      theme = _ref3.theme;
+
+  var d = '';
+  (values || []).forEach(function (_ref4, index) {
+    var value = _ref4.value;
+
     var top = value.length === 2 ? value[1] : value[2];
     d += (!index ? 'M' : ' L') + ' ' + (value[0] - bounds[0][0]) * scale[0] + ',' + ('' + (height - (top - bounds[1][0]) * scale[1]));
   });
-  (values || []).reverse().forEach(function (_ref3) {
-    var value = _ref3.value;
+  (values || []).reverse().forEach(function (_ref5) {
+    var value = _ref5.value;
 
     var bottom = value.length === 2 ? bounds[1][0] : value[1];
     d += ' L ' + value[0] * scale[0] + ',' + ('' + (height - (bottom - bounds[1][0]) * scale[1]));
   });
   d += ' Z';
+
+  var hoverProps = void 0;
+  if (onHover) {
+    hoverProps = {
+      onMouseOver: function onMouseOver() {
+        return onHover(true);
+      },
+      onMouseLeave: function onMouseLeave() {
+        return onHover(false);
+      }
+    };
+  }
+  var clickProps = void 0;
+  if (onClick) {
+    clickProps = { onClick: onClick };
+  }
+
   return _react2.default.createElement(
     'g',
     { fill: (0, _utils.colorForName)(color, theme) },
-    _react2.default.createElement('path', { d: d })
+    _react2.default.createElement('path', _extends({ d: d }, hoverProps, clickProps))
   );
 };
 
@@ -152,13 +204,15 @@ var Chart = function (_Component) {
 
     var _props = this.props,
         color = _props.color,
+        onClick = _props.onClick,
+        onHover = _props.onHover,
         round = _props.round,
         size = _props.size,
         theme = _props.theme,
         thickness = _props.thickness,
         type = _props.type,
         values = _props.values,
-        rest = _objectWithoutProperties(_props, ['color', 'round', 'size', 'theme', 'thickness', 'type', 'values']);
+        rest = _objectWithoutProperties(_props, ['color', 'onClick', 'onHover', 'round', 'size', 'theme', 'thickness', 'type', 'values']);
 
     var _state = this.state,
         bounds = _state.bounds,
@@ -177,7 +231,7 @@ var Chart = function (_Component) {
     if (type === 'bar') {
       contents = renderBars(values, bounds, scale, height);
     } else if (type === 'line') {
-      contents = renderLine(values, bounds, scale, height);
+      contents = renderLine(values, bounds, scale, height, this.props);
     } else if (type === 'area') {
       contents = renderArea(values, bounds, scale, height, this.props);
     }
@@ -185,8 +239,8 @@ var Chart = function (_Component) {
     return _react2.default.createElement(
       _StyledChart2.default,
       _extends({
-        ref: function ref(_ref4) {
-          _this2.containerRef = _ref4;
+        ref: function ref(_ref6) {
+          _this2.containerRef = _ref6;
         },
         viewBox: '-' + strokeWidth / 2 + ' -' + strokeWidth / 2 + '\n          ' + (width + strokeWidth) + ' ' + (height + strokeWidth),
         preserveAspectRatio: 'xMinYMin meet',
