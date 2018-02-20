@@ -69,10 +69,7 @@ var directionStyle = /*#__PURE__*/css(['', ' ', ' flex-direction:', ';'], functi
 }, function (props) {
   return props.direction === 'column' && 'min-width: 0;';
 }, function (props) {
-  if (props.direction) {
-    return props.reverse ? props.direction + '-reverse' : props.direction;
-  }
-  return 'column-reverse';
+  return props.direction;
 });
 
 var elevationStyle = /*#__PURE__*/css(['box-shadow:', ';'], function (props) {
@@ -111,16 +108,6 @@ var JUSTIFY_MAP = {
 
 var justifyStyle = /*#__PURE__*/css(['justify-content:', ';'], function (props) {
   return JUSTIFY_MAP[props.justify];
-});
-
-var TEXT_ALIGN_MAP = {
-  center: 'center',
-  end: 'right',
-  start: 'left'
-};
-
-var textAlignStyle = /*#__PURE__*/css(['text-align:', ';'], function (props) {
-  return TEXT_ALIGN_MAP[props.textAlign];
 });
 
 var wrapStyle = 'flex-wrap: wrap;';
@@ -178,7 +165,7 @@ var roundStyle = /*#__PURE__*/css(['border-radius:', ';'], function (props) {
 });
 
 var responsiveStyle = /*#__PURE__*/css(['', '}'], function (props) {
-  return palm('\n    flex-direction: column;\n    flex-basis: auto;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n    ' + (props.reverse && 'flex-direction: column-reverse') + '\n  ');
+  return palm('\n    flex-direction: column;\n    flex-basis: auto;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n  ');
 });
 
 var SLIDE_SIZES = {
@@ -326,7 +313,7 @@ var animationStyle = /*#__PURE__*/css(['', ''], function (props) {
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 var StyledBox = /*#__PURE__*/styled.div.withConfig({
   displayName: 'StyledBox'
-})(['display:flex;box-sizing:border-box;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;box-sizing:border-box;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.basis && 'max-width: 100%;';
 }, function (props) {
   return props.align && alignStyle;
@@ -339,7 +326,7 @@ var StyledBox = /*#__PURE__*/styled.div.withConfig({
 }, function (props) {
   return props.border && borderStyle(props.border, props.theme);
 }, function (props) {
-  return (props.direction || props.reverse) && directionStyle;
+  return props.direction && directionStyle;
 }, function (props) {
   return props.flex !== undefined && flexStyle;
 }, function (props) {
@@ -356,8 +343,6 @@ var StyledBox = /*#__PURE__*/styled.div.withConfig({
   return props.pad && edgeStyle('padding', props.pad, props.theme);
 }, function (props) {
   return props.round && roundStyle;
-}, function (props) {
-  return props.textAlign && textAlignStyle;
 }, function (props) {
   return props.wrap && wrapStyle;
 }, function (props) {
