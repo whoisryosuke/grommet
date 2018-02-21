@@ -79,7 +79,6 @@ var CheckBox = function (_Component) {
         StyledCheckBox,
         { theme: theme },
         React.createElement(StyledCheckBoxInput, _extends({}, rest, {
-          tabIndex: '0',
           id: id,
           name: name,
           type: 'checkbox',

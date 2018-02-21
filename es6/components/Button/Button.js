@@ -75,13 +75,9 @@ var Button = function (_Component) {
 
     var disabled = !href && !onClick && ['reset', 'submit'].indexOf(type) === -1;
 
-    // tabIndex is needed because you may use button inside an svg
-    // without tabIndex it does not work in that scenario
     return React.createElement(
       Tag,
-      _extends({
-        tabIndex: '0'
-      }, rest, {
+      _extends({}, rest, {
         'aria-label': a11yTitle,
         disabled: disabled,
         icon: icon,

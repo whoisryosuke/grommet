@@ -96,7 +96,6 @@ var CheckBox = function (_Component) {
         _StyledCheckBox2.default,
         { theme: theme },
         _react2.default.createElement(_StyledCheckBox.StyledCheckBoxInput, _extends({}, rest, {
-          tabIndex: '0',
           id: id,
           name: name,
           type: 'checkbox',

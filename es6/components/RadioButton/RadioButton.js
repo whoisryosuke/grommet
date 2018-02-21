@@ -57,7 +57,6 @@ var RadioButton = function (_Component) {
         StyledRadioButton,
         { theme: theme },
         React.createElement(StyledRadioButtonInput, _extends({}, rest, {
-          tabIndex: '0',
           id: id,
           name: name,
           type: 'radio',
