@@ -139,32 +139,6 @@ var borderStyle = function borderStyle(data, theme) {
   return style;
 };
 
-var edgeStyle = function edgeStyle(kind, data, theme) {
-  if (typeof data === 'string') {
-    return kind + ': ' + theme.global.edgeSize[data] + ';';
-  }
-  var result = '';
-  if (data.horizontal) {
-    result += '\n      ' + kind + '-left: ' + theme.global.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.global.edgeSize[data.horizontal] + ';\n    ';
-  }
-  if (data.vertical) {
-    result += '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
-  }
-  if (data.top) {
-    result += kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
-  }
-  if (data.bottom) {
-    result += kind + '-bottom: ' + theme.global.edgeSize[data.bottom] + ';';
-  }
-  if (data.left) {
-    result += kind + '-left: ' + theme.global.edgeSize[data.left] + ';';
-  }
-  if (data.right) {
-    result += kind + '-right: ' + theme.global.edgeSize[data.right] + ';';
-  }
-  return result;
-};
-
 var ROUND_MAP = {
   'full': '100%'
 };
@@ -347,9 +321,9 @@ var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
 }, function (props) {
   return props.justify && justifyStyle;
 }, function (props) {
-  return props.margin && edgeStyle('margin', props.margin, props.theme);
+  return props.margin && (0, _utils.edgeStyle)('margin', props.margin, props.theme);
 }, function (props) {
-  return props.pad && edgeStyle('padding', props.pad, props.theme);
+  return props.pad && (0, _utils.edgeStyle)('padding', props.pad, props.theme);
 }, function (props) {
   return props.round && roundStyle;
 }, function (props) {

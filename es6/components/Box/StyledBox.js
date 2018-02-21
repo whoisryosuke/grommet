@@ -8,7 +8,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css, keyframes } from 'styled-components';
 
-import { backgroundStyle, colorForName, palm } from '../../utils';
+import { backgroundStyle, colorForName, edgeStyle, palm } from '../../utils';
 
 var ALIGN_MAP = {
   baseline: 'baseline',
@@ -128,32 +128,6 @@ var borderStyle = function borderStyle(data, theme) {
     style = 'border: ' + value + ';';
   }
   return style;
-};
-
-var edgeStyle = function edgeStyle(kind, data, theme) {
-  if (typeof data === 'string') {
-    return kind + ': ' + theme.global.edgeSize[data] + ';';
-  }
-  var result = '';
-  if (data.horizontal) {
-    result += '\n      ' + kind + '-left: ' + theme.global.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.global.edgeSize[data.horizontal] + ';\n    ';
-  }
-  if (data.vertical) {
-    result += '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
-  }
-  if (data.top) {
-    result += kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
-  }
-  if (data.bottom) {
-    result += kind + '-bottom: ' + theme.global.edgeSize[data.bottom] + ';';
-  }
-  if (data.left) {
-    result += kind + '-left: ' + theme.global.edgeSize[data.left] + ';';
-  }
-  if (data.right) {
-    result += kind + '-right: ' + theme.global.edgeSize[data.right] + ';';
-  }
-  return result;
 };
 
 var ROUND_MAP = {

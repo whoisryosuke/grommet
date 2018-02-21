@@ -60,6 +60,32 @@ export var baseStyle = /*#__PURE__*/css(['font-family:', ';font-size:', ';line-h
   return props.theme.global.colors.background && 'background-color: ' + props.theme.global.colors.background + ';';
 });
 
+export var edgeStyle = function edgeStyle(kind, data, theme) {
+  if (typeof data === 'string') {
+    return kind + ': ' + theme.global.edgeSize[data] + ';';
+  }
+  var result = '';
+  if (data.horizontal) {
+    result += '\n      ' + kind + '-left: ' + theme.global.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.global.edgeSize[data.horizontal] + ';\n    ';
+  }
+  if (data.vertical) {
+    result += '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
+  }
+  if (data.top) {
+    result += kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
+  }
+  if (data.bottom) {
+    result += kind + '-bottom: ' + theme.global.edgeSize[data.bottom] + ';';
+  }
+  if (data.left) {
+    result += kind + '-left: ' + theme.global.edgeSize[data.left] + ';';
+  }
+  if (data.right) {
+    result += kind + '-right: ' + theme.global.edgeSize[data.right] + ';';
+  }
+  return result;
+};
+
 // focus also supports clickable elements inside svg
 export var focusStyle = /*#__PURE__*/css(['> circle,> ellipse,> line,> path,> polygon,> polyline,> rect{outline:', ' solid 2px;}border-color:', ';box-shadow:0 0 2px 2px ', ';'], function (props) {
   return props.theme.global.focus.border.color;
@@ -80,5 +106,5 @@ export var inputStyle = /*#__PURE__*/css(['box-sizing:border-box;padding:', 'px;
 });
 
 export default {
-  activeStyle: activeStyle, backgroundStyle: backgroundStyle, baseStyle: baseStyle, inputStyle: inputStyle, focusStyle: focusStyle
+  activeStyle: activeStyle, backgroundStyle: backgroundStyle, baseStyle: baseStyle, edgeStyle: edgeStyle, inputStyle: inputStyle, focusStyle: focusStyle
 };

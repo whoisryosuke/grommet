@@ -95,6 +95,7 @@ var FocusedContainer = function (_Component) {
         children = _props.children,
         rest = _objectWithoutProperties(_props, ['children']);
 
+    delete rest.restrictScroll;
     return _react2.default.createElement(
       'div',
       _extends({ ref: function ref(_ref2) {

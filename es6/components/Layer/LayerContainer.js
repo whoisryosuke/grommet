@@ -98,4 +98,11 @@ var LayerContainer = function (_Component) {
   return LayerContainer;
 }(Component);
 
+LayerContainer.defaultProps = {
+  full: false,
+  margin: 'none',
+  position: 'center'
+};
+
+
 export default withTheme(LayerContainer);

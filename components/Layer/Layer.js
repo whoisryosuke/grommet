@@ -69,6 +69,8 @@ var Layer = function (_Component) {
 }(_react.Component);
 
 Layer.defaultProps = {
+  full: false,
+  margin: 'none',
   position: 'center'
 };
 

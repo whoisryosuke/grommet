@@ -113,4 +113,9 @@ var LayerContainer = function (_Component) {
   return LayerContainer;
 }(_react.Component);
 
+LayerContainer.defaultProps = {
+  full: false,
+  margin: 'none',
+  position: 'center'
+};
 exports.default = (0, _hocs.withTheme)(LayerContainer);

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.inputStyle = exports.focusStyle = exports.baseStyle = exports.backgroundStyle = exports.activeStyle = undefined;
+exports.inputStyle = exports.focusStyle = exports.edgeStyle = exports.baseStyle = exports.backgroundStyle = exports.activeStyle = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -66,6 +66,32 @@ var baseStyle = /*#__PURE__*/exports.baseStyle = (0, _styledComponents.css)(['fo
   return props.theme.global.colors.background && 'background-color: ' + props.theme.global.colors.background + ';';
 });
 
+var edgeStyle = exports.edgeStyle = function edgeStyle(kind, data, theme) {
+  if (typeof data === 'string') {
+    return kind + ': ' + theme.global.edgeSize[data] + ';';
+  }
+  var result = '';
+  if (data.horizontal) {
+    result += '\n      ' + kind + '-left: ' + theme.global.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.global.edgeSize[data.horizontal] + ';\n    ';
+  }
+  if (data.vertical) {
+    result += '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
+  }
+  if (data.top) {
+    result += kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
+  }
+  if (data.bottom) {
+    result += kind + '-bottom: ' + theme.global.edgeSize[data.bottom] + ';';
+  }
+  if (data.left) {
+    result += kind + '-left: ' + theme.global.edgeSize[data.left] + ';';
+  }
+  if (data.right) {
+    result += kind + '-right: ' + theme.global.edgeSize[data.right] + ';';
+  }
+  return result;
+};
+
 // focus also supports clickable elements inside svg
 var focusStyle = /*#__PURE__*/exports.focusStyle = (0, _styledComponents.css)(['> circle,> ellipse,> line,> path,> polygon,> polyline,> rect{outline:', ' solid 2px;}border-color:', ';box-shadow:0 0 2px 2px ', ';'], function (props) {
   return props.theme.global.focus.border.color;
@@ -86,5 +112,5 @@ var inputStyle = /*#__PURE__*/exports.inputStyle = (0, _styledComponents.css)(['
 });
 
 exports.default = {
-  activeStyle: activeStyle, backgroundStyle: backgroundStyle, baseStyle: baseStyle, inputStyle: inputStyle, focusStyle: focusStyle
+  activeStyle: activeStyle, backgroundStyle: backgroundStyle, baseStyle: baseStyle, edgeStyle: edgeStyle, inputStyle: inputStyle, focusStyle: focusStyle
 };

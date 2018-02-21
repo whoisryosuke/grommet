@@ -55,6 +55,8 @@ var Layer = function (_Component) {
 }(Component);
 
 Layer.defaultProps = {
+  full: false,
+  margin: 'none',
   position: 'center'
 };
 
