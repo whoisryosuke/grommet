@@ -18,7 +18,7 @@ export default (function (Button) {
     active: PropTypes.bool.description('Whether the button is active.'),
     color: PropTypes.string.description('Fill color for primary, border color otherwise.'),
     fill: PropTypes.bool.description('Whether the button expands to fill all of the available width and height.'),
-    focusIndicator: PropTypes.bool.description('Whether when \'plain\' it should receive a focus outline.'),
+    focusIndicator: PropTypes.bool.description('Whether when \'plain\' it should receive a focus outline.').defaultValue(true),
     hoverIndicator: PropTypes.oneOfType([PropTypes.oneOf(['background']), PropTypes.shape({
       background: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
     })]).description('The hover indicator to apply when the user is mousing over the\nbutton. An object can be also be specified for color index support:\n{background: \'neutral-2\'}. This prop is meant to be used only\nwith plain Buttons.'),
