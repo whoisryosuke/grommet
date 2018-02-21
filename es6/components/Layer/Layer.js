@@ -57,6 +57,7 @@ var Layer = function (_Component) {
 Layer.defaultProps = {
   full: false,
   margin: 'none',
+  modal: true,
   position: 'center'
 };
 

@@ -45,9 +45,9 @@ var LayerContainer = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.makeLayerVisible = function () {
-      var layerNode = (0, _reactDom.findDOMNode)(_this.layerNodeRef);
-      if (layerNode.scrollIntoView) {
-        layerNode.scrollIntoView();
+      var node = (0, _reactDom.findDOMNode)(_this.layerRef || _this.containerRef);
+      if (node && node.scrollIntoView) {
+        node.scrollIntoView();
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -74,40 +74,65 @@ var LayerContainer = function (_Component) {
     var _props = this.props,
         children = _props.children,
         id = _props.id,
+        modal = _props.modal,
         onClickOutside = _props.onClickOutside,
         onEsc = _props.onEsc,
         plain = _props.plain,
         position = _props.position,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'id', 'onClickOutside', 'onEsc', 'plain', 'position', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'id', 'modal', 'onClickOutside', 'onEsc', 'plain', 'position', 'theme']);
 
-    return _react2.default.createElement(
-      _FocusedContainer2.default,
-      { hidden: position === 'hidden', restrictScroll: true },
-      _react2.default.createElement(
+    var content = _react2.default.createElement(
+      _StyledLayer.StyledContainer,
+      _extends({
+        id: id
+      }, rest, {
+        theme: theme,
+        position: position,
+        plain: plain,
+        ref: function ref(_ref2) {
+          _this2.containerRef = _ref2;
+        }
+      }),
+      children
+    );
+
+    if (modal) {
+      content = _react2.default.createElement(
+        _StyledLayer2.default,
+        {
+          id: id,
+          onClick: onClickOutside,
+          plain: plain,
+          position: position,
+          theme: theme,
+          tabIndex: '-1',
+          ref: function ref(_ref3) {
+            _this2.layerRef = _ref3;
+          }
+        },
+        _react2.default.createElement(_StyledLayer.StyledOverlay, { theme: theme }),
+        content
+      );
+    }
+
+    if (onEsc) {
+      content = _react2.default.createElement(
         _Keyboard.Keyboard,
         { onEsc: onEsc },
-        _react2.default.createElement(
-          _StyledLayer2.default,
-          {
-            id: id,
-            onClick: onClickOutside,
-            plain: plain,
-            position: position,
-            theme: theme,
-            tabIndex: '-1',
-            ref: function ref(_ref2) {
-              _this2.layerNodeRef = _ref2;
-            }
-          },
-          _react2.default.createElement(
-            _StyledLayer.StyledContainer,
-            _extends({}, rest, { theme: theme, position: position, plain: plain }),
-            children
-          )
-        )
-      )
-    );
+        content
+      );
+    }
+
+    if (modal) {
+      content = _react2.default.createElement(
+        _FocusedContainer2.default,
+        { hidden: position === 'hidden', restrictScroll: true },
+        content
+      );
+    }
+
+    return content;
   };
 
   return LayerContainer;
@@ -116,6 +141,7 @@ var LayerContainer = function (_Component) {
 LayerContainer.defaultProps = {
   full: false,
   margin: 'none',
+  modal: true,
   position: 'center'
 };
 exports.default = (0, _hocs.withTheme)(LayerContainer);

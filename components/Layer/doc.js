@@ -21,6 +21,7 @@ exports.default = function (Layer) {
       top: _reactDesc.PropTypes.oneOf(PAD_SIZES),
       vertical: _reactDesc.PropTypes.oneOf(PAD_SIZES)
     })]).description('The amount of margin around the Layer. An object can be specified to\ndistinguish horizontal margin, vertical margin, and margin on a\nparticular side of the layer'),
+    modal: _reactDesc.PropTypes.bool.description('Whether there should be an overlay preventing interaction underneath the layer.').defaultValue(true),
     onClickOutside: _reactDesc.PropTypes.bool.description('Function that will be invoked when the user clicks outside the layer.'),
     onEsc: _reactDesc.PropTypes.func.description('Function that will be called when the user presses the escape key inside the layer.'),
     plain: _reactDesc.PropTypes.bool.description('Whether this is a plain Layer with no background color or border.'),

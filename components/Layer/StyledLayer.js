@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.StyledContainer = undefined;
+exports.StyledContainer = exports.StyledOverlay = undefined;
 
 var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']);
 
@@ -19,10 +19,14 @@ var hiddenPositionStyle = /*#__PURE__*/(0, _styledComponents.css)(['left:-100%;r
 
 var StyledLayer = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer'
-})(['', ' position:relative;z-index:10;width:100vw;height:100vh;overflow:auto;background-color:', ';', ''], _utils.baseStyle, function (props) {
-  return props.plain ? 'transparent' : props.theme.layer.overlayBackgroundColor;
-}, function (props) {
+})(['', ' position:relative;z-index:10;width:100vw;height:100vh;overflow:auto;pointer-events:none;', ''], _utils.baseStyle, function (props) {
   return props.position === 'hidden' ? hiddenPositionStyle : (0, _utils.lapAndUp)('\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n  ');
+});
+
+var StyledOverlay = /*#__PURE__*/exports.StyledOverlay = _styledComponents2.default.div.withConfig({
+  displayName: 'StyledLayer__StyledOverlay'
+})(['position:absolute;top:0px;left:0px;right:0px;bottom:0px;background-color:', ';pointer-events:all;'], function (props) {
+  return props.theme.layer.overlayBackgroundColor;
 });
 
 var MARGINS = {
@@ -158,12 +162,14 @@ var POSITIONS = {
 
 var StyledContainer = /*#__PURE__*/exports.StyledContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
-})(['display:flex;flex-direction:column;min-height:', ';outline:none;background-color:', ';', ' ', ''], function (props) {
+})(['', ' display:flex;flex-direction:column;min-height:', ';background-color:', ';outline:none;pointer-events:all;z-index:15;', ' ', ''], function (props) {
+  return !props.modal ? _utils.baseStyle : '';
+}, function (props) {
   return props.theme.global.size.xxsmall;
 }, function (props) {
   return props.plain ? 'transparent' : props.theme.layer.backgroundColor;
 }, (0, _utils.palm)('\n    min-height: 100%;\n    min-width: 100%;\n  '), function (props) {
-  return (0, _utils.lapAndUp)('\n    position: absolute;\n    max-height: 100%;\n    max-width: 100%;\n    overflow: auto;\n    border-radius: ' + (props.plain ? 'none' : props.theme.layer.border.radius) + ';\n    ' + (props.position !== 'hidden' && POSITIONS[props.position][props.full](props.margin, props.theme) || '') + '\n  ');
+  return (0, _utils.lapAndUp)('\n    position: ' + (props.modal ? 'absolute' : 'fixed') + ';\n    max-height: 100%;\n    max-width: 100%;\n    overflow: auto;\n    border-radius: ' + (props.plain ? 'none' : props.theme.layer.border.radius) + ';\n    ' + (props.position !== 'hidden' && POSITIONS[props.position][props.full](props.margin, props.theme) || '') + '\n  ');
 });
 
 // ${props => props.full && fullStyle(props.full, props.margin, props.theme)}
