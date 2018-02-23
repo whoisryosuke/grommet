@@ -69,19 +69,19 @@ var Digit = function (_Component) {
         _react2.default.createElement(
           _StyledClock.StyledDigitalPrevious,
           { direction: direction },
-          previous
+          Math.floor(previous)
         ),
         _react2.default.createElement(
           _StyledClock.StyledDigitalNext,
           { direction: direction },
-          number
+          Math.floor(number)
         )
       );
     }
     return _react2.default.createElement(
       _StyledClock.StyledDigitalDigit,
       { size: size, theme: theme },
-      number
+      Math.floor(number)
     );
   };
 

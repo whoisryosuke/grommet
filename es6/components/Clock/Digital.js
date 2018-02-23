@@ -61,19 +61,19 @@ var Digit = function (_Component) {
         React.createElement(
           StyledDigitalPrevious,
           { direction: direction },
-          previous
+          Math.floor(previous)
         ),
         React.createElement(
           StyledDigitalNext,
           { direction: direction },
-          number
+          Math.floor(number)
         )
       );
     }
     return React.createElement(
       StyledDigitalDigit,
       { size: size, theme: theme },
-      number
+      Math.floor(number)
     );
   };
 
