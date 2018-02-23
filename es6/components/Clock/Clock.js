@@ -36,6 +36,9 @@ var parseTime = function parseTime(time, hourLimit) {
     match = TIME_REGEXP.exec(normalizedTime);
     if (match) {
       result.hours = parseFloat(match[1]);
+      if (hourLimit === 12) {
+        result.hours = result.hours > 12 ? result.hours - 12 : result.hours;
+      }
       result.minutes = parseFloat(match[2]) || 0;
       result.seconds = parseFloat(match[3]) || 0;
     } else {
