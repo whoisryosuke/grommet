@@ -108,10 +108,6 @@ Grommet.childContextTypes = {
   grommet: _propTypes2.default.object,
   theme: _propTypes2.default.object
 };
-Grommet.defaultProps = {
-  centered: true,
-  theme: undefined
-};
 
 
 if (process.env.NODE_ENV !== 'production') {
