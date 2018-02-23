@@ -4,56 +4,69 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css, keyframes } from 'styled-components';
 
-var rotateKeyframe = /*#__PURE__*/keyframes(['100%{transform:rotateZ(360deg);}']);
-
-export var StyledCircle = /*#__PURE__*/styled.circle.withConfig({
-  displayName: 'StyledClock__StyledCircle'
-})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
-  return props.theme.clock.circle.width;
-}, function (props) {
-  return props.theme.clock.circle.color.day;
-}, function (props) {
-  return props.night && css(['stroke:', ';fill:', ';transition:fill 1s ease;'], props.theme.clock.circle.color.night, props.theme.clock.circle.color.night);
-});
-
 export var StyledHour = /*#__PURE__*/styled.line.withConfig({
   displayName: 'StyledClock__StyledHour'
-})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
-  return props.theme.clock.hour.width;
+})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
+  return props.theme.clock.analog.hour.width;
 }, function (props) {
-  return props.night ? props.theme.clock.hour.color.night : props.theme.clock.hour.color.day;
-}, function (props) {
-  return props.animate && '\n    animation: ' + rotateKeyframe + ' 43200s infinite linear;\n  ';
+  return props.theme.clock.analog.hour.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
 export var StyledMinute = /*#__PURE__*/styled.line.withConfig({
   displayName: 'StyledClock__StyledMinute'
-})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
-  return props.theme.clock.minute.width;
+})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
+  return props.theme.clock.analog.minute.width;
 }, function (props) {
-  return props.night ? props.theme.clock.minute.color.night : props.theme.clock.minute.color.day;
-}, function (props) {
-  return props.animate && '\n    animation: ' + rotateKeyframe + ' 3600s infinite steps(60);\n    animation-delay: 1s;\n  ';
+  return props.theme.clock.analog.minute.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
 export var StyledSecond = /*#__PURE__*/styled.line.withConfig({
   displayName: 'StyledClock__StyledSecond'
-})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
-  return props.theme.clock.second.width;
+})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
+  return props.theme.clock.analog.second.width;
 }, function (props) {
-  return props.night ? props.theme.clock.second.color.night : props.theme.clock.second.color.day;
-}, function (props) {
-  return props.animate && '\n    animation: ' + rotateKeyframe + ' 60s infinite steps(60);\n  ';
+  return props.theme.clock.analog.second.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
-var StyledClock = /*#__PURE__*/styled.svg.withConfig({
-  displayName: 'StyledClock'
+export var StyledAnalog = styled.svg.withConfig({
+  displayName: 'StyledClock__StyledAnalog'
 })(['width:', ';height:', ';'], function (props) {
-  return props.theme.clock.size[props.size];
+  return props.theme.clock.analog.size[props.size];
 }, function (props) {
-  return props.theme.clock.size[props.size];
+  return props.theme.clock.analog.size[props.size];
+}).extend(_templateObject, function (props) {
+  return props.theme.clock.analog && props.theme.clock.analog.extend;
 });
 
-export default StyledClock.extend(_templateObject, function (props) {
-  return props.theme.clock && props.theme.clock.extend;
+var sizeStyle = function sizeStyle(props) {
+  // size is a combination of the level and size properties
+  var size = props.size || 'medium';
+  var data = props.theme.clock.digital.text[size];
+  return css(['font-size:', ';line-height:', ';'], data.size, data.height);
+};
+
+export var StyledDigitalDigit = /*#__PURE__*/styled.div.withConfig({
+  displayName: 'StyledClock__StyledDigitalDigit'
+})(['position:relative;width:0.8em;text-align:center;overflow:hidden;', ''], function (props) {
+  return sizeStyle(props);
+});
+
+var previousUp = /*#__PURE__*/keyframes(['0%{transform:translateY(0);}100%{transform:translateY(-100%);}']);
+
+var previousDown = /*#__PURE__*/keyframes(['0%{transform:translateY(0);}100%{transform:translateY(100%);}']);
+
+export var StyledDigitalPrevious = /*#__PURE__*/styled.div.withConfig({
+  displayName: 'StyledClock__StyledDigitalPrevious'
+})(['position:absolute;top:0;left:0;width:0.8em;text-align:center;animation:', ' 0.5s forwards;'], function (props) {
+  return props.direction === 'down' ? previousDown : previousUp;
+});
+
+var nextUp = /*#__PURE__*/keyframes(['0%{transform:translateY(100%);}100%{transform:translateY(0);}']);
+
+var nextDown = /*#__PURE__*/keyframes(['0%{transform:translateY(-100%);}100%{transform:translateY(0);}']);
+
+export var StyledDigitalNext = /*#__PURE__*/styled.div.withConfig({
+  displayName: 'StyledClock__StyledDigitalNext'
+})(['position:absolute;top:0;left:0;width:0.8em;text-align:center;animation:', ' 0.5s forwards;'], function (props) {
+  return props.direction === 'down' ? nextDown : nextUp;
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.StyledSecond = exports.StyledMinute = exports.StyledHour = exports.StyledCircle = undefined;
+exports.StyledDigitalNext = exports.StyledDigitalPrevious = exports.StyledDigitalDigit = exports.StyledAnalog = exports.StyledSecond = exports.StyledMinute = exports.StyledHour = undefined;
 
 var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']);
 
@@ -13,56 +13,69 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var rotateKeyframe = /*#__PURE__*/(0, _styledComponents.keyframes)(['100%{transform:rotateZ(360deg);}']);
-
-var StyledCircle = /*#__PURE__*/exports.StyledCircle = _styledComponents2.default.circle.withConfig({
-  displayName: 'StyledClock__StyledCircle'
-})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
-  return props.theme.clock.circle.width;
-}, function (props) {
-  return props.theme.clock.circle.color.day;
-}, function (props) {
-  return props.night && (0, _styledComponents.css)(['stroke:', ';fill:', ';transition:fill 1s ease;'], props.theme.clock.circle.color.night, props.theme.clock.circle.color.night);
-});
-
 var StyledHour = /*#__PURE__*/exports.StyledHour = _styledComponents2.default.line.withConfig({
   displayName: 'StyledClock__StyledHour'
-})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
-  return props.theme.clock.hour.width;
+})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
+  return props.theme.clock.analog.hour.width;
 }, function (props) {
-  return props.night ? props.theme.clock.hour.color.night : props.theme.clock.hour.color.day;
-}, function (props) {
-  return props.animate && '\n    animation: ' + rotateKeyframe + ' 43200s infinite linear;\n  ';
+  return props.theme.clock.analog.hour.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
 var StyledMinute = /*#__PURE__*/exports.StyledMinute = _styledComponents2.default.line.withConfig({
   displayName: 'StyledClock__StyledMinute'
-})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
-  return props.theme.clock.minute.width;
+})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
+  return props.theme.clock.analog.minute.width;
 }, function (props) {
-  return props.night ? props.theme.clock.minute.color.night : props.theme.clock.minute.color.day;
-}, function (props) {
-  return props.animate && '\n    animation: ' + rotateKeyframe + ' 3600s infinite steps(60);\n    animation-delay: 1s;\n  ';
+  return props.theme.clock.analog.minute.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
 var StyledSecond = /*#__PURE__*/exports.StyledSecond = _styledComponents2.default.line.withConfig({
   displayName: 'StyledClock__StyledSecond'
-})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;', ''], function (props) {
-  return props.theme.clock.second.width;
+})(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
+  return props.theme.clock.analog.second.width;
 }, function (props) {
-  return props.night ? props.theme.clock.second.color.night : props.theme.clock.second.color.day;
-}, function (props) {
-  return props.animate && '\n    animation: ' + rotateKeyframe + ' 60s infinite steps(60);\n  ';
+  return props.theme.clock.analog.second.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
-var StyledClock = /*#__PURE__*/_styledComponents2.default.svg.withConfig({
-  displayName: 'StyledClock'
+var StyledAnalog = exports.StyledAnalog = _styledComponents2.default.svg.withConfig({
+  displayName: 'StyledClock__StyledAnalog'
 })(['width:', ';height:', ';'], function (props) {
-  return props.theme.clock.size[props.size];
+  return props.theme.clock.analog.size[props.size];
 }, function (props) {
-  return props.theme.clock.size[props.size];
+  return props.theme.clock.analog.size[props.size];
+}).extend(_templateObject, function (props) {
+  return props.theme.clock.analog && props.theme.clock.analog.extend;
 });
 
-exports.default = StyledClock.extend(_templateObject, function (props) {
-  return props.theme.clock && props.theme.clock.extend;
+var sizeStyle = function sizeStyle(props) {
+  // size is a combination of the level and size properties
+  var size = props.size || 'medium';
+  var data = props.theme.clock.digital.text[size];
+  return (0, _styledComponents.css)(['font-size:', ';line-height:', ';'], data.size, data.height);
+};
+
+var StyledDigitalDigit = /*#__PURE__*/exports.StyledDigitalDigit = _styledComponents2.default.div.withConfig({
+  displayName: 'StyledClock__StyledDigitalDigit'
+})(['position:relative;width:0.8em;text-align:center;overflow:hidden;', ''], function (props) {
+  return sizeStyle(props);
+});
+
+var previousUp = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{transform:translateY(0);}100%{transform:translateY(-100%);}']);
+
+var previousDown = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{transform:translateY(0);}100%{transform:translateY(100%);}']);
+
+var StyledDigitalPrevious = /*#__PURE__*/exports.StyledDigitalPrevious = _styledComponents2.default.div.withConfig({
+  displayName: 'StyledClock__StyledDigitalPrevious'
+})(['position:absolute;top:0;left:0;width:0.8em;text-align:center;animation:', ' 0.5s forwards;'], function (props) {
+  return props.direction === 'down' ? previousDown : previousUp;
+});
+
+var nextUp = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{transform:translateY(100%);}100%{transform:translateY(0);}']);
+
+var nextDown = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{transform:translateY(-100%);}100%{transform:translateY(0);}']);
+
+var StyledDigitalNext = /*#__PURE__*/exports.StyledDigitalNext = _styledComponents2.default.div.withConfig({
+  displayName: 'StyledClock__StyledDigitalNext'
+})(['position:absolute;top:0;left:0;width:0.8em;text-align:center;animation:', ' 0.5s forwards;'], function (props) {
+  return props.direction === 'down' ? nextDown : nextUp;
 });

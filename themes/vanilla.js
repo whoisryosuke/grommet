@@ -224,62 +224,63 @@ exports.default = (0, _utils.deepFreeze)({
     }
   },
   clock: {
-    circle: {
-      color: {
-        day: (0, _styledComponents.css)(['', ''], function (props) {
-          return (0, _utils.colorForName)('light-3', props.theme);
-        }),
-        night: (0, _styledComponents.css)(['', ''], function (props) {
-          return (0, _utils.colorForName)('dark-2', props.theme);
-        })
+    analog: {
+      hour: {
+        color: {
+          dark: (0, _styledComponents.css)(['', ''], function (props) {
+            return (0, _utils.colorForName)('light-3', props.theme);
+          }),
+          light: (0, _styledComponents.css)(['', ''], function (props) {
+            return (0, _utils.colorForName)('dark-3', props.theme);
+          })
+        },
+        width: baseSpacing / 3 + 'px',
+        size: baseSpacing + 'px',
+        shape: 'round'
       },
-      width: '2px'
-    },
-    hour: {
-      color: {
-        day: (0, _styledComponents.css)(['', ''], function (props) {
-          return (0, _utils.colorForName)('dark-1', props.theme);
-        }),
-        night: (0, _styledComponents.css)(['', ''], function (props) {
-          return (0, _utils.colorForName)('white', props.theme);
-        })
+      minute: {
+        color: {
+          dark: (0, _styledComponents.css)(['', ''], function (props) {
+            return (0, _utils.colorForName)('light-5', props.theme);
+          }),
+          light: (0, _styledComponents.css)(['', ''], function (props) {
+            return (0, _utils.colorForName)('dark-5', props.theme);
+          })
+        },
+        width: baseSpacing / 6 + 'px',
+        size: Math.round(baseSpacing / 2) + 'px',
+        shape: 'round'
       },
-      width: '3px',
-      size: baseSpacing + 'px',
-      shape: 'round'
-    },
-    minute: {
-      color: {
-        day: (0, _styledComponents.css)(['', ''], function (props) {
-          return (0, _utils.colorForName)('dark-4', props.theme);
-        }),
-        night: (0, _styledComponents.css)(['', ''], function (props) {
-          return (0, _utils.colorForName)('light-6', props.theme);
-        })
+      second: {
+        color: {
+          dark: (0, _styledComponents.css)(['', ''], function (props) {
+            return (0, _utils.colorForName)('accent-2', props.theme);
+          }),
+          light: (0, _styledComponents.css)(['', ''], function (props) {
+            return (0, _utils.colorForName)('accent-2', props.theme);
+          })
+        },
+        width: baseSpacing / 8 + 'px',
+        size: Math.round(baseSpacing / 2.666) + 'px',
+        shape: 'round'
       },
-      width: '2px',
-      size: Math.round(baseSpacing / 2) + 'px',
-      shape: 'round'
+      size: {
+        small: baseSpacing * 3 + 'px',
+        medium: baseSpacing * 4 + 'px',
+        large: baseSpacing * 6 + 'px',
+        xlarge: baseSpacing * 9 + 'px',
+        huge: baseSpacing * 12 + 'px'
+      }
     },
-    second: {
-      color: {
-        day: (0, _styledComponents.css)(['', ''], function (props) {
-          return (0, _utils.colorForName)('accent-2', props.theme);
-        }),
-        night: (0, _styledComponents.css)(['', ''], function (props) {
-          return (0, _utils.colorForName)('accent-2', props.theme);
-        })
-      },
-      width: '1px',
-      size: Math.round(baseSpacing / 2.666) + 'px',
-      shape: 'round'
-    },
-    size: {
-      small: baseSpacing * 3 + 'px',
-      medium: baseSpacing * 4 + 'px',
-      large: baseSpacing * 6 + 'px',
-      xlarge: baseSpacing * 9 + 'px',
-      huge: baseSpacing * 12 + 'px'
+    digital: {
+      text: {
+        medium: { size: '16px', height: 1.375 },
+        xsmall: { size: '12px', height: 1.5 },
+        small: { size: '14px', height: 1.43 },
+        large: { size: '24px', height: 1.167 },
+        xlarge: { size: '32px', height: 1.1875 },
+        xxlarge: { size: '48px', height: 1.125 }
+      }
     }
   },
   grommet: {},

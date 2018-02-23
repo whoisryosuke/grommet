@@ -40,8 +40,8 @@ exports.default = (0, _utils.deepFreeze)({
   clock: {
     second: {
       color: {
-        day: '#01a982',
-        night: '#01a982'
+        dark: '#01a982',
+        light: '#01a982'
       }
     }
   }
