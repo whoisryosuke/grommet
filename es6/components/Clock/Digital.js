@@ -129,7 +129,7 @@ var Digital = function (_Component2) {
     return React.createElement(
       Box,
       _extends({ direction: 'row' }, rest),
-      React.createElement(Element, { number: elements.hours, run: run, size: size, theme: theme }),
+      React.createElement(Element, { number: elements.hours12 || elements.hours, run: run, size: size, theme: theme }),
       minutes,
       seconds
     );

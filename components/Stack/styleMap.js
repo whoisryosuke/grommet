@@ -25,12 +25,12 @@ exports.default = {
   },
   'top': {
     top: '0',
-    right: '50%',
+    left: '50%',
     transform: 'translateX(-50%)'
   },
   'bottom': {
-    top: '0',
-    right: '50%',
+    bottom: '0',
+    left: '50%',
     transform: 'translateX(-50%)'
   },
   'top-left': {

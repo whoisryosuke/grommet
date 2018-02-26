@@ -137,7 +137,7 @@ var Digital = function (_Component2) {
     return _react2.default.createElement(
       _Box.Box,
       _extends({ direction: 'row' }, rest),
-      _react2.default.createElement(Element, { number: elements.hours, run: run, size: size, theme: theme }),
+      _react2.default.createElement(Element, { number: elements.hours12 || elements.hours, run: run, size: size, theme: theme }),
       minutes,
       seconds
     );

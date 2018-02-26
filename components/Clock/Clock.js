@@ -38,29 +38,35 @@ var TIME_REGEXP = /T([0-9]{2}):([0-9]{2})(?::([0-9.,]{2,}))?/;
 var DURATION_REGEXP = /^(-|\+)?P.*T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?$/;
 
 var parseTime = function parseTime(time, hourLimit) {
-  var normalizedTime = time || new Date().toISOString();
   var result = {};
-  var match = DURATION_REGEXP.exec(normalizedTime);
-  if (match) {
-    result.hours = parseFloat(match[2]);
-    if (hourLimit === 12) {
-      result.hours = result.hours > 12 ? result.hours - 12 : result.hours;
-    }
-    result.minutes = parseFloat(match[3]) || 0;
-    result.seconds = parseFloat(match[4]) || 0;
-    result.duration = true;
-  } else {
-    match = TIME_REGEXP.exec(normalizedTime);
+  if (time) {
+    var match = DURATION_REGEXP.exec(time);
     if (match) {
-      result.hours = parseFloat(match[1]);
+      result.hours = parseFloat(match[2]);
       if (hourLimit === 12) {
-        result.hours = result.hours > 12 ? result.hours - 12 : result.hours;
+        result.hours12 = result.hours > 12 ? result.hours - 12 : result.hours;
       }
-      result.minutes = parseFloat(match[2]) || 0;
-      result.seconds = parseFloat(match[3]) || 0;
+      result.minutes = parseFloat(match[3]) || 0;
+      result.seconds = parseFloat(match[4]) || 0;
+      result.duration = true;
     } else {
-      console.error('Grommet Clock cannot parse \'' + time + '\'');
+      match = TIME_REGEXP.exec(time);
+      if (match) {
+        result.hours = parseFloat(match[1]);
+        if (hourLimit === 12) {
+          result.hours12 = result.hours > 12 ? result.hours - 12 : result.hours;
+        }
+        result.minutes = parseFloat(match[2]) || 0;
+        result.seconds = parseFloat(match[3]) || 0;
+      } else {
+        console.error('Grommet Clock cannot parse \'' + time + '\'');
+      }
     }
+  } else {
+    var date = new Date();
+    result.hours = date.getHours();
+    result.minutes = date.getMinutes();
+    result.seconds = date.getSeconds();
   }
   return result;
 };
@@ -157,8 +163,11 @@ var Clock = function (_Component) {
         nextElements.hours += Math.floor(nextElements.minutes / 60);
         nextElements.minutes = 59;
       }
-      if (nextElements.hours >= hourLimit || nextElements.hours < 0) {
+      if (nextElements.hours >= 24 || nextElements.hours < 0) {
         nextElements.hours = 0;
+      }
+      if (hourLimit === 12) {
+        nextElements.hours12 = nextElements.hours > 12 ? nextElements.hours - 12 : nextElements.hours;
       }
 
       _this2.setState({ elements: nextElements }, function () {
