@@ -3,22 +3,22 @@ import { describe, PropTypes } from 'react-desc';
 import { getAvailableAtBadge } from '../../utils';
 
 export default (function (DropButton) {
-  var DocumentedDropButton = describe(DropButton).availableAt(getAvailableAtBadge('DropButton')).description('A control that when clicked will render its children in a drop layer.\nWhen opened, the drop will control the focus so that the contents behind it\nare not focusable.\n      ').usage('import { DropButton } from \'grommet\';\n<DropButton control={element}>{dropContents...}</DropButton>');
+  var DocumentedDropButton = describe(DropButton).availableAt(getAvailableAtBadge('DropButton')).description('A Button that when clicked will a Drop with the specified \'dropContent\'.\n      When opened, the drop will control the focus so that the contents behind\n      it are not focusable. All properties of Button can be passed through.\n      ').usage('import { DropButton } from \'grommet\';\n<DropButton control={element}>{dropContents...}</DropButton>');
 
   DocumentedDropButton.propTypes = {
-    a11yTitle: PropTypes.string.description('Custom title to be used by\n      screen readers.'),
-    align: PropTypes.shape({
+    a11yTitle: PropTypes.string.description('Custom title to be used by screen readers.'),
+    dropAlign: PropTypes.shape({
       top: PropTypes.oneOf(['top', 'bottom']),
       bottom: PropTypes.oneOf(['top', 'bottom']),
       right: PropTypes.oneOf(['left', 'right']),
       left: PropTypes.oneOf(['left', 'right'])
-    }).description('How to align the drop with respect to the control.').defaultValue({
+    }).description('How to align the drop with respect to the button.').defaultValue({
       top: 'top',
       left: 'left'
     }),
-    control: PropTypes.element.description('React node to open/close the\n      drop content.').isRequired,
+    dropContent: PropTypes.element.description('Content to put inside the Drop.').isRequired,
     onClose: PropTypes.func.description('Callback for when the drop is closed'),
-    open: PropTypes.bool.description('Whether the drop should be open or not.')
+    open: PropTypes.bool.description('Whether the drop should be open or not. Setting it to \'false\' will\n      disable the button.')
   };
 
   return DocumentedDropButton;

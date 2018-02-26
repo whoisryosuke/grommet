@@ -8,8 +8,17 @@ export default (function (Select) {
   DocumentedSelect.propTypes = {
     a11yTitle: a11yTitlePropType,
     activeOptionIndex: PropTypes.number.description('Highlight a given option at the provided index.'),
-    background: backgroundPropType,
     children: PropTypes.func.description('Function that will be called when each option is rendered.'),
+    dropAlign: PropTypes.shape({
+      top: PropTypes.oneOf(['top', 'bottom']),
+      bottom: PropTypes.oneOf(['top', 'bottom']),
+      right: PropTypes.oneOf(['left', 'right']),
+      left: PropTypes.oneOf(['left', 'right'])
+    }).description('How to align the drop.').defaultValue({
+      top: 'top',
+      left: 'left'
+    }),
+    dropBackground: backgroundPropType,
     dropSize: PropTypes.string.description('Size of the options container inside the Select drop.'),
     focusIndicator: PropTypes.bool.description('Whether when \'plain\' it should receive a focus outline.'),
     onChange: PropTypes.func.description('Function that will be called when the user selects an option.'),

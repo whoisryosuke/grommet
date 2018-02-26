@@ -20,7 +20,7 @@ var _Button = require('../Button');
 
 var _Keyboard = require('../Keyboard');
 
-var _Drop = require('../Drop');
+var _DropButton = require('../DropButton');
 
 var _doc = require('./doc');
 
@@ -48,13 +48,10 @@ var Menu = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-      activeItemIndex: -1,
-      showDrop: false
-    }, _this.buttonRefs = {}, _this.onDropClose = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { activeItemIndex: -1 }, _this.buttonRefs = {}, _this.onDropClose = function () {
       _this.setState({
         activeItemIndex: -1,
-        showDrop: false
+        open: undefined
       });
     }, _this.onSelectMenuItem = function (event) {
       var activeItemIndex = _this.state.activeItemIndex;
@@ -67,12 +64,12 @@ var Menu = function (_Component) {
     }, _this.onNextMenuItem = function (event) {
       event.preventDefault();
       var _this$state = _this.state,
-          showDrop = _this$state.showDrop,
-          activeItemIndex = _this$state.activeItemIndex;
+          activeItemIndex = _this$state.activeItemIndex,
+          open = _this$state.open;
 
-      if (!showDrop) {
+      if (!open) {
         _this.setState({
-          showDrop: true,
+          open: true,
           activeItemIndex: -1
         });
       } else {
@@ -86,12 +83,12 @@ var Menu = function (_Component) {
     }, _this.onPreviousMenuItem = function (event) {
       event.preventDefault();
       var _this$state2 = _this.state,
-          showDrop = _this$state2.showDrop,
-          activeItemIndex = _this$state2.activeItemIndex;
+          activeItemIndex = _this$state2.activeItemIndex,
+          open = _this$state2.open;
 
-      if (!showDrop) {
+      if (!open) {
         _this.setState({
-          showDrop: true,
+          open: true,
           activeItemIndex: -1
         });
       } else {
@@ -109,32 +106,34 @@ var Menu = function (_Component) {
     var _this2 = this;
 
     var _props = this.props,
-        background = _props.background,
         dropAlign = _props.dropAlign,
         icon = _props.icon,
-        id = _props.id,
         items = _props.items,
         label = _props.label,
-        _props$messages = _props.messages,
-        messages = _props$messages === undefined ? {} : _props$messages,
+        messages = _props.messages,
         onKeyDown = _props.onKeyDown,
-        rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'id', 'items', 'label', 'messages', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props, ['dropAlign', 'icon', 'items', 'label', 'messages', 'onKeyDown']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
-        showDrop = _state.showDrop;
+        open = _state.open;
 
 
     var menuIcon = icon || _react2.default.createElement(_FormDown2.default, null);
 
-    var labelNode = void 0;
-    if (label) {
-      labelNode = _react2.default.createElement(
-        _Box.Box,
-        { margin: { right: 'small' } },
-        label
-      );
-    }
+    var content = _react2.default.createElement(
+      _Box.Box,
+      {
+        direction: 'row',
+        justify: 'start',
+        align: 'center',
+        pad: 'small',
+        gap: 'small'
+      },
+      label,
+      menuIcon
+    );
+
     var controlMirror = _react2.default.createElement(
       _Button.Button,
       {
@@ -142,69 +141,8 @@ var Menu = function (_Component) {
         a11yTitle: messages.closeMenu || 'Close Menu',
         onClick: this.onDropClose
       },
-      _react2.default.createElement(
-        _Box.Box,
-        {
-          pad: 'small',
-          direction: 'row',
-          justify: dropAlign.right ? 'end' : 'start'
-        },
-        labelNode,
-        menuIcon
-      )
+      content
     );
-
-    var drop = void 0;
-    if (showDrop) {
-      drop = _react2.default.createElement(
-        _Drop.Drop,
-        {
-          id: id ? 'menu-drop__' + id : undefined,
-          align: dropAlign,
-          ref: function ref(_ref2) {
-            _this2.dropRef = _ref2;
-          },
-          control: this.componentRef,
-          onClose: this.onDropClose
-        },
-        _react2.default.createElement(
-          _Box.Box,
-          { background: background },
-          dropAlign.top === 'top' ? controlMirror : undefined,
-          _react2.default.createElement(
-            _Box.Box,
-            null,
-            items.map(function (item, index) {
-              return _react2.default.createElement(
-                _Button.Button,
-                {
-                  ref: function ref(_ref) {
-                    _this2.buttonRefs[index] = _ref;
-                  },
-                  active: activeItemIndex === index,
-                  key: 'menuItem_' + index,
-                  hoverIndicator: 'background',
-                  onClick: item.onClick ? function () {
-                    item.onClick.apply(item, arguments);
-                    if (item.close !== false) {
-                      _this2.onDropClose();
-                    }
-                  } : undefined,
-                  href: item.href
-                },
-                _react2.default.createElement(
-                  _Box.Box,
-                  { align: 'start', pad: 'small', direction: 'row' },
-                  item.icon,
-                  item.label
-                )
-              );
-            })
-          ),
-          dropAlign.bottom === 'bottom' ? controlMirror : undefined
-        )
-      );
-    }
 
     return _react2.default.createElement(
       _Keyboard.Keyboard,
@@ -221,25 +159,53 @@ var Menu = function (_Component) {
         'div',
         null,
         _react2.default.createElement(
-          _Button.Button,
-          _extends({
-            id: id,
-            ref: function ref(_ref3) {
-              _this2.componentRef = _ref3;
-            },
+          _DropButton.DropButton,
+          _extends({}, rest, {
             a11yTitle: messages.openMenu || 'Open Menu',
-            onClick: function onClick() {
-              return _this2.setState({ activeItemIndex: -1, showDrop: !_this2.state.showDrop });
-            }
-          }, rest),
-          _react2.default.createElement(
-            _Box.Box,
-            { align: 'start', direction: 'row', pad: 'small' },
-            labelNode,
-            menuIcon
-          )
-        ),
-        drop
+            dropAlign: dropAlign,
+            open: open,
+            onClose: function onClose() {
+              return _this2.setState({ open: undefined });
+            },
+            dropContent: _react2.default.createElement(
+              _Box.Box,
+              null,
+              dropAlign.top === 'top' ? controlMirror : undefined,
+              _react2.default.createElement(
+                _Box.Box,
+                null,
+                items.map(function (item, index) {
+                  return _react2.default.createElement(
+                    _Button.Button,
+                    {
+                      ref: function ref(_ref) {
+                        _this2.buttonRefs[index] = _ref;
+                      },
+                      active: activeItemIndex === index,
+                      key: 'menuItem_' + index,
+                      hoverIndicator: 'background',
+                      onClick: item.onClick ? function () {
+                        item.onClick.apply(item, arguments);
+                        if (item.close !== false) {
+                          _this2.onDropClose();
+                        }
+                      } : undefined,
+                      href: item.href
+                    },
+                    _react2.default.createElement(
+                      _Box.Box,
+                      { align: 'start', pad: 'small', direction: 'row' },
+                      item.icon,
+                      item.label
+                    )
+                  );
+                })
+              ),
+              dropAlign.bottom === 'bottom' ? controlMirror : undefined
+            )
+          }),
+          content
+        )
       )
     );
   };
@@ -248,7 +214,8 @@ var Menu = function (_Component) {
 }(_react.Component);
 
 Menu.defaultProps = {
-  dropAlign: { top: 'top', left: 'left' }
+  dropAlign: { top: 'top', left: 'left' },
+  messages: { openMenu: 'Open Menu', closeMenu: 'Close Menu' }
 };
 
 

@@ -17,7 +17,7 @@ import FormDown from 'grommet-icons/icons/FormDown';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
-import { Drop } from '../Drop';
+import { DropButton } from '../DropButton';
 
 import doc from './doc';
 
@@ -33,13 +33,10 @@ var Menu = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-      activeItemIndex: -1,
-      showDrop: false
-    }, _this.buttonRefs = {}, _this.onDropClose = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { activeItemIndex: -1 }, _this.buttonRefs = {}, _this.onDropClose = function () {
       _this.setState({
         activeItemIndex: -1,
-        showDrop: false
+        open: undefined
       });
     }, _this.onSelectMenuItem = function (event) {
       var activeItemIndex = _this.state.activeItemIndex;
@@ -52,12 +49,12 @@ var Menu = function (_Component) {
     }, _this.onNextMenuItem = function (event) {
       event.preventDefault();
       var _this$state = _this.state,
-          showDrop = _this$state.showDrop,
-          activeItemIndex = _this$state.activeItemIndex;
+          activeItemIndex = _this$state.activeItemIndex,
+          open = _this$state.open;
 
-      if (!showDrop) {
+      if (!open) {
         _this.setState({
-          showDrop: true,
+          open: true,
           activeItemIndex: -1
         });
       } else {
@@ -71,12 +68,12 @@ var Menu = function (_Component) {
     }, _this.onPreviousMenuItem = function (event) {
       event.preventDefault();
       var _this$state2 = _this.state,
-          showDrop = _this$state2.showDrop,
-          activeItemIndex = _this$state2.activeItemIndex;
+          activeItemIndex = _this$state2.activeItemIndex,
+          open = _this$state2.open;
 
-      if (!showDrop) {
+      if (!open) {
         _this.setState({
-          showDrop: true,
+          open: true,
           activeItemIndex: -1
         });
       } else {
@@ -94,32 +91,34 @@ var Menu = function (_Component) {
     var _this2 = this;
 
     var _props = this.props,
-        background = _props.background,
         dropAlign = _props.dropAlign,
         icon = _props.icon,
-        id = _props.id,
         items = _props.items,
         label = _props.label,
-        _props$messages = _props.messages,
-        messages = _props$messages === undefined ? {} : _props$messages,
+        messages = _props.messages,
         onKeyDown = _props.onKeyDown,
-        rest = _objectWithoutProperties(_props, ['background', 'dropAlign', 'icon', 'id', 'items', 'label', 'messages', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props, ['dropAlign', 'icon', 'items', 'label', 'messages', 'onKeyDown']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
-        showDrop = _state.showDrop;
+        open = _state.open;
 
 
     var menuIcon = icon || React.createElement(FormDown, null);
 
-    var labelNode = void 0;
-    if (label) {
-      labelNode = React.createElement(
-        Box,
-        { margin: { right: 'small' } },
-        label
-      );
-    }
+    var content = React.createElement(
+      Box,
+      {
+        direction: 'row',
+        justify: 'start',
+        align: 'center',
+        pad: 'small',
+        gap: 'small'
+      },
+      label,
+      menuIcon
+    );
+
     var controlMirror = React.createElement(
       Button,
       {
@@ -127,69 +126,8 @@ var Menu = function (_Component) {
         a11yTitle: messages.closeMenu || 'Close Menu',
         onClick: this.onDropClose
       },
-      React.createElement(
-        Box,
-        {
-          pad: 'small',
-          direction: 'row',
-          justify: dropAlign.right ? 'end' : 'start'
-        },
-        labelNode,
-        menuIcon
-      )
+      content
     );
-
-    var drop = void 0;
-    if (showDrop) {
-      drop = React.createElement(
-        Drop,
-        {
-          id: id ? 'menu-drop__' + id : undefined,
-          align: dropAlign,
-          ref: function ref(_ref2) {
-            _this2.dropRef = _ref2;
-          },
-          control: this.componentRef,
-          onClose: this.onDropClose
-        },
-        React.createElement(
-          Box,
-          { background: background },
-          dropAlign.top === 'top' ? controlMirror : undefined,
-          React.createElement(
-            Box,
-            null,
-            items.map(function (item, index) {
-              return React.createElement(
-                Button,
-                {
-                  ref: function ref(_ref) {
-                    _this2.buttonRefs[index] = _ref;
-                  },
-                  active: activeItemIndex === index,
-                  key: 'menuItem_' + index,
-                  hoverIndicator: 'background',
-                  onClick: item.onClick ? function () {
-                    item.onClick.apply(item, arguments);
-                    if (item.close !== false) {
-                      _this2.onDropClose();
-                    }
-                  } : undefined,
-                  href: item.href
-                },
-                React.createElement(
-                  Box,
-                  { align: 'start', pad: 'small', direction: 'row' },
-                  item.icon,
-                  item.label
-                )
-              );
-            })
-          ),
-          dropAlign.bottom === 'bottom' ? controlMirror : undefined
-        )
-      );
-    }
 
     return React.createElement(
       Keyboard,
@@ -206,25 +144,53 @@ var Menu = function (_Component) {
         'div',
         null,
         React.createElement(
-          Button,
-          _extends({
-            id: id,
-            ref: function ref(_ref3) {
-              _this2.componentRef = _ref3;
-            },
+          DropButton,
+          _extends({}, rest, {
             a11yTitle: messages.openMenu || 'Open Menu',
-            onClick: function onClick() {
-              return _this2.setState({ activeItemIndex: -1, showDrop: !_this2.state.showDrop });
-            }
-          }, rest),
-          React.createElement(
-            Box,
-            { align: 'start', direction: 'row', pad: 'small' },
-            labelNode,
-            menuIcon
-          )
-        ),
-        drop
+            dropAlign: dropAlign,
+            open: open,
+            onClose: function onClose() {
+              return _this2.setState({ open: undefined });
+            },
+            dropContent: React.createElement(
+              Box,
+              null,
+              dropAlign.top === 'top' ? controlMirror : undefined,
+              React.createElement(
+                Box,
+                null,
+                items.map(function (item, index) {
+                  return React.createElement(
+                    Button,
+                    {
+                      ref: function ref(_ref) {
+                        _this2.buttonRefs[index] = _ref;
+                      },
+                      active: activeItemIndex === index,
+                      key: 'menuItem_' + index,
+                      hoverIndicator: 'background',
+                      onClick: item.onClick ? function () {
+                        item.onClick.apply(item, arguments);
+                        if (item.close !== false) {
+                          _this2.onDropClose();
+                        }
+                      } : undefined,
+                      href: item.href
+                    },
+                    React.createElement(
+                      Box,
+                      { align: 'start', pad: 'small', direction: 'row' },
+                      item.icon,
+                      item.label
+                    )
+                  );
+                })
+              ),
+              dropAlign.bottom === 'bottom' ? controlMirror : undefined
+            )
+          }),
+          content
+        )
       )
     );
   };
@@ -233,7 +199,8 @@ var Menu = function (_Component) {
 }(Component);
 
 Menu.defaultProps = {
-  dropAlign: { top: 'top', left: 'left' }
+  dropAlign: { top: 'top', left: 'left' },
+  messages: { openMenu: 'Open Menu', closeMenu: 'Close Menu' }
 };
 
 

@@ -205,15 +205,16 @@ var DropContainer = function (_Component) {
         children = _props.children,
         onClickOutside = _props.onClickOutside,
         onEsc = _props.onEsc,
+        onKeyDown = _props.onKeyDown,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'onClickOutside', 'onEsc', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'onClickOutside', 'onEsc', 'onKeyDown', 'theme']);
 
     return _react2.default.createElement(
       _FocusedContainer2.default,
       null,
       _react2.default.createElement(
         _Keyboard.Keyboard,
-        { onEsc: onEsc },
+        { onEsc: onEsc, onKeyDown: onKeyDown },
         _react2.default.createElement(
           _StyledDrop2.default,
           _extends({

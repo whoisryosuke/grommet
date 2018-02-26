@@ -15,6 +15,7 @@ import FormDown from 'grommet-icons/icons/FormDown';
 
 import { Box } from '../Box';
 import { DropButton } from '../DropButton';
+import { Keyboard } from '../Keyboard';
 import { TextInput } from '../TextInput';
 
 import SelectContainer from './SelectContainer';
@@ -32,90 +33,91 @@ var Select = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.selectControl = function () {
-      var _this$props = _this.props,
-          placeholder = _this$props.placeholder,
-          plain = _this$props.plain,
-          value = _this$props.value,
-          rest = _objectWithoutProperties(_this$props, ['placeholder', 'plain', 'value']);
-
-      delete rest.children;
-      var content = React.isValidElement(value) ? value : React.createElement(TextInput, _extends({
-        style: { cursor: 'pointer' },
-        ref: function ref(_ref) {
-          _this.inputRef = _ref;
-        }
-      }, rest, {
-        tabIndex: '-1',
-        type: 'text',
-        placeholder: placeholder,
-        plain: true,
-        readOnly: true,
-        value: value
-      }));
-      return React.createElement(
-        Box,
-        {
-          'aria-hidden': true,
-          align: 'center',
-          border: !plain ? 'all' : undefined,
-          direction: 'row',
-          justify: 'between'
-        },
-        content,
-        React.createElement(
-          Box,
-          {
-            margin: { horizontal: 'small' },
-            flex: false,
-            style: { minWidth: 'auto' }
-          },
-          React.createElement(FormDown, null)
-        )
-      );
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { open: undefined }, _this.onOpen = function () {
+      _this.setState({ open: true });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   Select.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    if (this.props.value !== nextProps.value) {
-      this.closeDrop = true;
-    }
-  };
+    var onClose = nextProps.onClose,
+        value = nextProps.value;
+    var open = this.state.open;
 
-  Select.prototype.componentDidUpdate = function componentDidUpdate() {
-    if (this.closeDrop) {
-      this.closeDrop = false;
+    if (value !== this.props.value) {
+      this.setState({ open: undefined });
+      if (onClose && open) {
+        onClose();
+      }
     }
   };
 
   Select.prototype.render = function render() {
+    var _this2 = this;
+
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
-        background = _props.background,
-        focusIndicator = _props.focusIndicator,
-        onBlur = _props.onBlur,
-        onClose = _props.onClose,
-        onFocus = _props.onFocus,
-        open = _props.open,
+        children = _props.children,
+        _onClose = _props.onClose,
+        propsOpen = _props.open,
+        placeholder = _props.placeholder,
         plain = _props.plain,
-        tabIndex = _props.tabIndex,
-        value = _props.value;
+        value = _props.value,
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'onClose', 'open', 'placeholder', 'plain', 'value']);
+
+    var stateOpen = this.state.open;
+
 
     return React.createElement(
-      DropButton,
-      {
-        open: open || this.closeDrop ? false : undefined,
-        tabIndex: tabIndex,
-        a11yTitle: '' + a11yTitle + (typeof value === 'string' ? ', ' + value : ''),
-        background: background,
-        plain: plain,
-        focusIndicator: focusIndicator,
-        control: this.selectControl(),
-        onClose: onClose,
-        onFocus: onFocus,
-        onBlur: onBlur
-      },
-      React.createElement(SelectContainer, this.props)
+      Keyboard,
+      { onDown: this.onOpen, onUp: this.onOpen },
+      React.createElement(
+        DropButton,
+        _extends({
+          dropAlign: { top: 'bottom', left: 'left' }
+        }, rest, {
+          open: stateOpen || propsOpen,
+          onClose: function onClose() {
+            _this2.setState({ open: undefined });
+            if (_onClose) {
+              _onClose();
+            }
+          },
+          a11yTitle: '' + a11yTitle + (typeof value === 'string' ? ', ' + value : ''),
+          dropContent: React.createElement(SelectContainer, this.props)
+        }),
+        React.createElement(
+          Box,
+          {
+            'aria-hidden': true,
+            align: 'center',
+            border: !plain ? 'all' : undefined,
+            direction: 'row',
+            justify: 'between'
+          },
+          React.isValidElement(value) ? value : React.createElement(TextInput, _extends({
+            style: { cursor: 'pointer' },
+            ref: function ref(_ref) {
+              _this2.inputRef = _ref;
+            }
+          }, rest, {
+            tabIndex: '-1',
+            type: 'text',
+            placeholder: placeholder,
+            plain: true,
+            readOnly: true,
+            value: value
+          })),
+          React.createElement(
+            Box,
+            {
+              margin: { horizontal: 'small' },
+              flex: false,
+              style: { minWidth: 'auto' }
+            },
+            React.createElement(FormDown, null)
+          )
+        )
+      )
     );
   };
 

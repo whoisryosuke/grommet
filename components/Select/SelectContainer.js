@@ -110,8 +110,8 @@ var SelectContainer = function (_Component) {
 
     var _props = this.props,
         activeOptionIndex = _props.activeOptionIndex,
-        background = _props.background,
         children = _props.children,
+        dropBackground = _props.dropBackground,
         dropSize = _props.dropSize,
         id = _props.id,
         name = _props.name,
@@ -134,7 +134,10 @@ var SelectContainer = function (_Component) {
       },
       _react2.default.createElement(
         _Box.Box,
-        { id: id ? 'select-drop__' + id : undefined, background: background },
+        {
+          id: id ? id + '__select-drop' : undefined,
+          background: dropBackground
+        },
         onSearch ? _react2.default.createElement(
           _Box.Box,
           { pad: 'xsmall' },

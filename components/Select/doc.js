@@ -12,8 +12,17 @@ exports.default = function (Select) {
   DocumentedSelect.propTypes = {
     a11yTitle: _utils.a11yTitlePropType,
     activeOptionIndex: _reactDesc.PropTypes.number.description('Highlight a given option at the provided index.'),
-    background: _utils.backgroundPropType,
     children: _reactDesc.PropTypes.func.description('Function that will be called when each option is rendered.'),
+    dropAlign: _reactDesc.PropTypes.shape({
+      top: _reactDesc.PropTypes.oneOf(['top', 'bottom']),
+      bottom: _reactDesc.PropTypes.oneOf(['top', 'bottom']),
+      right: _reactDesc.PropTypes.oneOf(['left', 'right']),
+      left: _reactDesc.PropTypes.oneOf(['left', 'right'])
+    }).description('How to align the drop.').defaultValue({
+      top: 'top',
+      left: 'left'
+    }),
+    dropBackground: _utils.backgroundPropType,
     dropSize: _reactDesc.PropTypes.string.description('Size of the options container inside the Select drop.'),
     focusIndicator: _reactDesc.PropTypes.bool.description('Whether when \'plain\' it should receive a focus outline.'),
     onChange: _reactDesc.PropTypes.func.description('Function that will be called when the user selects an option.'),

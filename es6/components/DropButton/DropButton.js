@@ -26,29 +26,37 @@ var DropButton = function (_Component) {
     var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
     _this.onDropClose = function () {
-      var onClose = _this.props.onClose;
+      var _this$props = _this.props,
+          onClose = _this$props.onClose,
+          open = _this$props.open;
 
-      _this.setState({
-        showDrop: false
-      }, function () {
+      _this.setState({ show: open || false }, function () {
         if (onClose) {
           onClose();
         }
       });
     };
 
-    _this.state = {
-      showDrop: props.open
-    };
+    _this.state = { show: props.open };
+    _this.checkRef = props.open;
     return _this;
   }
 
+  DropButton.prototype.componentDidMount = function componentDidMount() {
+    // In case the caller starts with the drop open, before we have the
+    // buttonRef, see if we have it now and re-render.
+    if (this.checkRef && this.buttonRef) {
+      this.checkRef = false;
+      this.forceUpdate();
+    }
+  };
+
   DropButton.prototype.componentWillReceiveProps = function componentWillReceiveProps(_ref) {
     var open = _ref.open;
-    var showDrop = this.state.showDrop;
+    var show = this.state.show;
 
-    if (open !== undefined && open !== showDrop) {
-      this.setState({ showDrop: open });
+    if (open !== show) {
+      this.setState({ show: open });
     }
   };
 
@@ -56,19 +64,18 @@ var DropButton = function (_Component) {
     var _this2 = this;
 
     var _props = this.props,
-        a11yTitle = _props.a11yTitle,
-        align = _props.align,
-        children = _props.children,
-        control = _props.control,
+        dropAlign = _props.dropAlign,
+        dropContent = _props.dropContent,
         id = _props.id,
+        open = _props.open,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'align', 'children', 'control', 'id', 'theme']);
+        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropContent', 'id', 'open', 'theme']);
 
-    var showDrop = this.state.showDrop;
+    var show = this.state.show;
 
 
     var drop = void 0;
-    if (showDrop) {
+    if (show && this.buttonRef) {
       drop = React.createElement(
         Drop,
         {
@@ -76,36 +83,37 @@ var DropButton = function (_Component) {
           ref: function ref(_ref2) {
             _this2.dropRef = _ref2;
           },
-          id: id ? 'drop-button__' + id : undefined,
+          id: id ? id + '__drop' : undefined,
           restrictFocus: true,
-          align: align,
-          control: this.componentRef,
+          align: dropAlign,
+          control: this.buttonRef,
           onClickOutside: this.onDropClose,
           onEsc: this.onDropClose
         },
-        children
+        dropContent
       );
     }
 
-    return [React.createElement(
-      Button,
-      _extends({
-        key: 'button',
-        id: id,
-        ref: function ref(_ref3) {
-          _this2.componentRef = _ref3;
-        },
-        a11yTitle: a11yTitle || 'Open Drop',
-        onClick: function onClick() {
-          return _this2.setState({ showDrop: !_this2.state.showDrop });
-        }
-      }, rest),
-      control
-    ), drop];
+    return [React.createElement(Button, _extends({
+      key: 'button',
+      id: id,
+      ref: function ref(_ref3) {
+        _this2.buttonRef = _ref3;
+      },
+      onClick: open !== false ? function () {
+        return _this2.setState({ show: !show });
+      } : undefined
+    }, rest)), drop];
   };
 
   return DropButton;
 }(Component);
+
+DropButton.defaultProps = {
+  a11yTitle: 'Open Drop',
+  dropAlign: { top: 'top', left: 'left' }
+};
+
 
 if (process.env.NODE_ENV !== 'production') {
   doc(DropButton);
