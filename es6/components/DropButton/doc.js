@@ -18,7 +18,8 @@ export default (function (DropButton) {
     }),
     dropContent: PropTypes.element.description('Content to put inside the Drop.').isRequired,
     onClose: PropTypes.func.description('Callback for when the drop is closed'),
-    open: PropTypes.bool.description('Whether the drop should be open or not. Setting it to \'false\' will\n      disable the button.')
+    onOpen: PropTypes.func.description('Callback for when the drop is opened'),
+    open: PropTypes.bool.description('Whether the drop should be open or not. Setting this property does not\n      influence user interaction after it has been rendered.')
   };
 
   return DocumentedDropButton;

@@ -22,7 +22,8 @@ exports.default = function (DropButton) {
     }),
     dropContent: _reactDesc.PropTypes.element.description('Content to put inside the Drop.').isRequired,
     onClose: _reactDesc.PropTypes.func.description('Callback for when the drop is closed'),
-    open: _reactDesc.PropTypes.bool.description('Whether the drop should be open or not. Setting it to \'false\' will\n      disable the button.')
+    onOpen: _reactDesc.PropTypes.func.description('Callback for when the drop is opened'),
+    open: _reactDesc.PropTypes.bool.description('Whether the drop should be open or not. Setting this property does not\n      influence user interaction after it has been rendered.')
   };
 
   return DocumentedDropButton;

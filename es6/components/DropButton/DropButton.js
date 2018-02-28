@@ -37,6 +37,15 @@ var DropButton = function (_Component) {
       });
     };
 
+    _this.onToggle = function () {
+      var _this$props2 = _this.props,
+          onClose = _this$props2.onClose,
+          onOpen = _this$props2.onOpen;
+      var show = _this.state.show;
+
+      _this.setState({ show: !show }, show ? onClose && onClose() : onOpen && onOpen());
+    };
+
     _this.state = { show: props.open };
     _this.checkRef = props.open;
     return _this;
@@ -55,7 +64,7 @@ var DropButton = function (_Component) {
     var open = _ref.open;
     var show = this.state.show;
 
-    if (open !== show) {
+    if (open !== undefined && open !== show) {
       this.setState({ show: open });
     }
   };
@@ -100,9 +109,7 @@ var DropButton = function (_Component) {
       ref: function ref(_ref3) {
         _this2.buttonRef = _ref3;
       },
-      onClick: open !== false ? function () {
-        return _this2.setState({ show: !show });
-      } : undefined
+      onClick: this.onToggle
     }, rest)), drop];
   };
 

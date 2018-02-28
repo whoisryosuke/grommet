@@ -111,6 +111,7 @@ var SelectContainer = function (_Component) {
         selectedOptionIndex = _state.selectedOptionIndex,
         search = _state.search;
 
+
     return React.createElement(
       Keyboard,
       {
@@ -146,9 +147,14 @@ var SelectContainer = function (_Component) {
           { basis: dropSize, overflow: 'auto' },
           React.createElement(
             Box,
-            { flex: false, role: 'menubar', tabIndex: '-1', ref: function ref(_ref3) {
+            {
+              flex: false,
+              role: 'menubar',
+              tabIndex: '-1',
+              ref: function ref(_ref3) {
                 _this3.selectRef = _ref3;
-              } },
+              }
+            },
             options.map(function (option, index) {
               return React.createElement(
                 Button,
@@ -157,7 +163,7 @@ var SelectContainer = function (_Component) {
                   ref: function ref(_ref2) {
                     _this3.optionsRef[index] = _ref2;
                   },
-                  active: activeOptionIndex === index || selectedOptionIndex === index || option === value,
+                  active: activeOptionIndex === index || selectedOptionIndex === index || option && option === value,
                   key: 'option_' + (name || '') + '_' + index,
                   onClick: function onClick() {
                     return _this3.selectOption(option);
@@ -170,7 +176,7 @@ var SelectContainer = function (_Component) {
                   React.createElement(
                     Text,
                     { margin: 'none' },
-                    option.toString()
+                    option ? option.toString() : undefined
                   )
                 )
               );

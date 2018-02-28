@@ -48,10 +48,10 @@ var Menu = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { activeItemIndex: -1 }, _this.buttonRefs = {}, _this.onDropClose = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { activeItemIndex: -1, open: false }, _this.buttonRefs = {}, _this.onDropClose = function () {
       _this.setState({
         activeItemIndex: -1,
-        open: undefined
+        open: false
       });
     }, _this.onSelectMenuItem = function (event) {
       var activeItemIndex = _this.state.activeItemIndex;
@@ -164,8 +164,11 @@ var Menu = function (_Component) {
             a11yTitle: messages.openMenu || 'Open Menu',
             dropAlign: dropAlign,
             open: open,
+            onOpen: function onOpen() {
+              return _this2.setState({ open: true });
+            },
             onClose: function onClose() {
-              return _this2.setState({ open: undefined });
+              return _this2.setState({ open: false });
             },
             dropContent: _react2.default.createElement(
               _Box.Box,

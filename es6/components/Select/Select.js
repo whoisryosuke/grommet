@@ -33,8 +33,15 @@ var Select = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { open: undefined }, _this.onOpen = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { open: false }, _this.onOpen = function () {
       _this.setState({ open: true });
+    }, _this.onClose = function () {
+      var onClose = _this.props.onClose;
+
+      _this.setState({ open: false });
+      if (onClose) {
+        onClose();
+      }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -44,7 +51,7 @@ var Select = function (_Component) {
     var open = this.state.open;
 
     if (value !== this.props.value) {
-      this.setState({ open: undefined });
+      this.setState({ open: false });
       if (onClose && open) {
         onClose();
       }
@@ -57,7 +64,7 @@ var Select = function (_Component) {
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
         children = _props.children,
-        _onClose = _props.onClose,
+        onClose = _props.onClose,
         propsOpen = _props.open,
         placeholder = _props.placeholder,
         plain = _props.plain,
@@ -75,13 +82,9 @@ var Select = function (_Component) {
         _extends({
           dropAlign: { top: 'bottom', left: 'left' }
         }, rest, {
-          open: stateOpen || propsOpen,
-          onClose: function onClose() {
-            _this2.setState({ open: undefined });
-            if (_onClose) {
-              _onClose();
-            }
-          },
+          open: stateOpen !== undefined ? stateOpen : propsOpen,
+          onOpen: this.onOpen,
+          onClose: this.onClose,
           a11yTitle: '' + a11yTitle + (typeof value === 'string' ? ', ' + value : ''),
           dropContent: React.createElement(SelectContainer, this.props)
         }),
