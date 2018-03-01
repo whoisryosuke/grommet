@@ -25,7 +25,7 @@ var StyledLayer = /*#__PURE__*/_styledComponents2.default.div.withConfig({
 
 var StyledOverlay = /*#__PURE__*/exports.StyledOverlay = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer__StyledOverlay'
-})(['position:absolute;top:0px;left:0px;right:0px;bottom:0px;background-color:', ';pointer-events:all;'], function (props) {
+})(['', ' top:0px;left:0px;right:0px;bottom:0px;background-color:', ';pointer-events:all;'], (0, _utils.lapAndUp)('position: absolute;'), function (props) {
   return props.theme.layer.overlayBackgroundColor;
 });
 

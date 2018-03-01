@@ -87,7 +87,6 @@ var LayerContainer = function (_Component) {
         StyledLayer,
         {
           id: id,
-          onClick: onClickOutside,
           plain: plain,
           position: position,
           theme: theme,
@@ -96,7 +95,7 @@ var LayerContainer = function (_Component) {
             _this2.layerRef = _ref3;
           }
         },
-        React.createElement(StyledOverlay, { theme: theme }),
+        React.createElement(StyledOverlay, { onClick: onClickOutside, theme: theme }),
         content
       );
     }

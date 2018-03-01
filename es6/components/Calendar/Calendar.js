@@ -346,7 +346,8 @@ var Calendar = function (_Component) {
 
 Calendar.defaultProps = {
   firstDayOfWeek: 0,
-  size: 'medium'
+  size: 'medium',
+  locale: 'en-US'
 };
 
 

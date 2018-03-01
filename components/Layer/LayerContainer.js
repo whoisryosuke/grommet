@@ -102,7 +102,6 @@ var LayerContainer = function (_Component) {
         _StyledLayer2.default,
         {
           id: id,
-          onClick: onClickOutside,
           plain: plain,
           position: position,
           theme: theme,
@@ -111,7 +110,7 @@ var LayerContainer = function (_Component) {
             _this2.layerRef = _ref3;
           }
         },
-        _react2.default.createElement(_StyledLayer.StyledOverlay, { theme: theme }),
+        _react2.default.createElement(_StyledLayer.StyledOverlay, { onClick: onClickOutside, theme: theme }),
         content
       );
     }
