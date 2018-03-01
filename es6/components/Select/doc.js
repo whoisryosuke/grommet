@@ -24,7 +24,6 @@ export default (function (Select) {
     onChange: PropTypes.func.description('Function that will be called when the user selects an option.'),
     onClose: PropTypes.func.description('Function that will be called when the Select drop closes.'),
     onSearch: PropTypes.func.description('Function that will be called when the user types in the search input.\nIf this property is not provided, no search field will be rendered.'),
-    open: PropTypes.bool.description('Whether the Select drop should be open or not.'),
     options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.object])).description('Options can be either a string or an object. If an object is used, use children callback\nin order to render anything based on the current item.').isRequired,
     placeholder: PropTypes.string.description('Placeholder text to use when no value is provided.'),
     plain: PropTypes.bool.description('Whether this is a plain Select input with no border or padding.'),

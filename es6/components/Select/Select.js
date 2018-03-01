@@ -65,13 +65,12 @@ var Select = function (_Component) {
         a11yTitle = _props.a11yTitle,
         children = _props.children,
         onClose = _props.onClose,
-        propsOpen = _props.open,
         placeholder = _props.placeholder,
         plain = _props.plain,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'onClose', 'open', 'placeholder', 'plain', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'onClose', 'placeholder', 'plain', 'value']);
 
-    var stateOpen = this.state.open;
+    var open = this.state.open;
 
 
     return React.createElement(
@@ -82,7 +81,7 @@ var Select = function (_Component) {
         _extends({
           dropAlign: { top: 'bottom', left: 'left' }
         }, rest, {
-          open: stateOpen !== undefined ? stateOpen : propsOpen,
+          open: open,
           onOpen: this.onOpen,
           onClose: this.onClose,
           a11yTitle: '' + a11yTitle + (typeof value === 'string' ? ', ' + value : ''),
