@@ -100,7 +100,7 @@ var FocusedContainer = function (_Component) {
       'div',
       _extends({ ref: function ref(_ref2) {
           _this2.ref = _ref2;
-        }, onBlur: this.removeTrap }, rest),
+        } }, rest),
       children
     );
   };
