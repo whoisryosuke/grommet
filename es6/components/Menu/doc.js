@@ -19,6 +19,7 @@ export default (function (Menu) {
       color: PropTypes.string,
       opacity: PropTypes.oneOfType([PropTypes.oneOf(['weak', 'medium', 'strong']), PropTypes.bool])
     })]).description('Background color when drop is active'),
+    dropTarget: PropTypes.object.description('Target where the drop will be aligned to. This should be\n      a React reference. Typically, this is not required as the drop will be\n      aligned to the Menu itself by default.'),
     icon: PropTypes.node.description('Indicates the icon shown as a control to open it.'),
     items: PropTypes.arrayOf(PropTypes.object).description('Menu items to be placed inside the drop down.\nThe object values can be any Button prop, for example: label and onClick.').isRequired,
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).description('Indicates the label shown as a control to open it.'),

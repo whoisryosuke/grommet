@@ -92,12 +92,13 @@ var Menu = function (_Component) {
 
     var _props = this.props,
         dropAlign = _props.dropAlign,
+        dropTarget = _props.dropTarget,
         icon = _props.icon,
         items = _props.items,
         label = _props.label,
         messages = _props.messages,
         onKeyDown = _props.onKeyDown,
-        rest = _objectWithoutProperties(_props, ['dropAlign', 'icon', 'items', 'label', 'messages', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropTarget', 'icon', 'items', 'label', 'messages', 'onKeyDown']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
@@ -148,6 +149,7 @@ var Menu = function (_Component) {
           _extends({}, rest, {
             a11yTitle: messages.openMenu || 'Open Menu',
             dropAlign: dropAlign,
+            dropTarget: dropTarget,
             open: open,
             onOpen: function onOpen() {
               return _this2.setState({ open: true });

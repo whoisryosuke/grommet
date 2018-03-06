@@ -38,6 +38,13 @@ var COMMANDS = {
   }
 };
 
+var findTarget = function findTarget(target) {
+  if (typeof target === 'string') {
+    return document.getElementById(target);
+  }
+  return findDOMNode(target);
+};
+
 var Diagram = function (_Component) {
   _inherits(Diagram, _Component);
 
@@ -93,42 +100,48 @@ var Diagram = function (_Component) {
     var paths = void 0;
     if (this.containerRef) {
       paths = connections.map(function (_ref, index) {
-        var fromId = _ref.fromId,
-            toId = _ref.toId,
+        var fromTarget = _ref.fromTarget,
+            toTarget = _ref.toTarget,
             color = _ref.color,
             offset = _ref.offset,
             round = _ref.round,
             thickness = _ref.thickness,
-            type = _ref.type;
+            type = _ref.type,
+            connectionRest = _objectWithoutProperties(_ref, ['fromTarget', 'toTarget', 'color', 'offset', 'round', 'thickness', 'type']);
 
         var containerRect = findDOMNode(_this2.containerRef).getBoundingClientRect();
-        var fromElement = document.getElementById(fromId);
-        var toElement = document.getElementById(toId);
+        var fromElement = findTarget(fromTarget);
+        var toElement = findTarget(toTarget);
         if (!fromElement) {
-          console.warn('Diagram cannot find ' + fromId);
+          console.warn('Diagram cannot find ' + fromTarget);
         }
         if (!toElement) {
-          console.warn('Diagram cannot find ' + toId);
+          console.warn('Diagram cannot find ' + toTarget);
         }
+
         var path = void 0;
         if (fromElement && toElement) {
           var fromRect = fromElement.getBoundingClientRect();
           var toRect = toElement.getBoundingClientRect();
           var fromPoint = [fromRect.x - containerRect.x + fromRect.width / 2, fromRect.y - containerRect.y + fromRect.height / 2];
           var toPoint = [toRect.x - containerRect.x + toRect.width / 2, toRect.y - containerRect.y + toRect.height / 2];
+
           var offsetWidth = offset ? parseMetricToNum(theme.global.edgeSize[offset]) : 0;
           var d = COMMANDS[type || 'curved'](fromPoint, toPoint, offsetWidth);
           var strokeWidth = thickness ? parseMetricToNum(theme.global.edgeSize[thickness]) : 1;
-          path = React.createElement('path', {
-            key: fromId + '-' + toId + '-' + index,
+
+          path = React.createElement('path', _extends({
+            key: index
+          }, connectionRest, {
             stroke: colorForName(color, theme),
             strokeWidth: strokeWidth,
             strokeLinecap: round ? 'round' : 'butt',
             strokeLinejoin: round ? 'round' : 'miter',
             fill: 'none',
             d: d
-          });
+          }));
         }
+
         return path;
       });
     }

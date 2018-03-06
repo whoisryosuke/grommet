@@ -3,7 +3,7 @@ import { describe, PropTypes } from 'react-desc';
 import { getAvailableAtBadge } from '../../utils';
 
 export default (function (DropButton) {
-  var DocumentedDropButton = describe(DropButton).availableAt(getAvailableAtBadge('DropButton')).description('A Button that when clicked will a Drop with the specified \'dropContent\'.\n      When opened, the drop will control the focus so that the contents behind\n      it are not focusable. All properties of Button can be passed through.\n      ').usage('import { DropButton } from \'grommet\';\n<DropButton control={element}>{dropContents...}</DropButton>');
+  var DocumentedDropButton = describe(DropButton).availableAt(getAvailableAtBadge('DropButton')).description('A Button that when clicked will a Drop with the specified \'dropContent\'.\n      When opened, the drop will control the focus so that the contents behind\n      it are not focusable. All properties of Button can be passed through.\n      ').usage('import { DropButton } from \'grommet\';\n<DropButton dropContent={...} />');
 
   DocumentedDropButton.propTypes = {
     a11yTitle: PropTypes.string.description('Custom title to be used by screen readers.'),
@@ -17,6 +17,7 @@ export default (function (DropButton) {
       left: 'left'
     }),
     dropContent: PropTypes.element.description('Content to put inside the Drop.').isRequired,
+    dropTarget: PropTypes.object.description('Target where the drop will be aligned to. This should be\n      a React reference. Typically, this is not required as the drop will be\n      aligned to the DropButton itself by default.'),
     onClose: PropTypes.func.description('Callback for when the drop is closed'),
     onOpen: PropTypes.func.description('Callback for when the drop is opened'),
     open: PropTypes.bool.description('Whether the drop should be open or not. Setting this property does not\n      influence user interaction after it has been rendered.')

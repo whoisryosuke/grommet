@@ -7,7 +7,7 @@ var _reactDesc = require('react-desc');
 var _utils = require('../../utils');
 
 exports.default = function (Drop) {
-  var DocumentedDrop = (0, _reactDesc.describe)(Drop).availableAt((0, _utils.getAvailableAtBadge)('Drop')).description('A drop container that opens next to a target.').usage('import { Drop } from \'grommet\';\n<Drop control={element}>...</Drop>');
+  var DocumentedDrop = (0, _reactDesc.describe)(Drop).availableAt((0, _utils.getAvailableAtBadge)('Drop')).description('A drop container that opens next to a target.').usage('import { Drop } from \'grommet\';\n<Drop target={reference}>...</Drop>');
 
   DocumentedDrop.propTypes = {
     align: _reactDesc.PropTypes.shape({
@@ -19,11 +19,11 @@ exports.default = function (Drop) {
       top: 'top',
       left: 'left'
     }),
-    control: _reactDesc.PropTypes.object.description('Target container where the drop will be aligned.').isRequired,
-    restrictFocus: _reactDesc.PropTypes.bool.description('Whether the drop should control focus.'),
     onClickOutside: _reactDesc.PropTypes.func.description('Function that will be invoked when the user clicks outside the drop.'),
     onEsc: _reactDesc.PropTypes.func.description('Function that will be called when the user presses the escape key inside the drop.'),
     responsive: _reactDesc.PropTypes.bool.description('Whether to dynamically re-place when resized.').defaultValue(true),
+    restrictFocus: _reactDesc.PropTypes.bool.description('Whether the drop should control focus.'),
+    target: _reactDesc.PropTypes.object.description('Target where the drop will be aligned to. This should be a React reference.').isRequired,
     theme: _reactDesc.PropTypes.object.description('Custom styles for Drop component.')
   };
 

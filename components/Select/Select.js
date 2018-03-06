@@ -81,11 +81,13 @@ var Select = function (_Component) {
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
         children = _props.children,
+        dropAlign = _props.dropAlign,
+        dropTarget = _props.dropTarget,
         onClose = _props.onClose,
         placeholder = _props.placeholder,
         plain = _props.plain,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'onClose', 'placeholder', 'plain', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'onClose', 'placeholder', 'plain', 'value']);
 
     var open = this.state.open;
 
@@ -96,7 +98,8 @@ var Select = function (_Component) {
       _react2.default.createElement(
         _DropButton.DropButton,
         _extends({
-          dropAlign: { top: 'bottom', left: 'left' }
+          dropAlign: dropAlign,
+          dropTarget: dropTarget
         }, rest, {
           open: open,
           onOpen: this.onOpen,
@@ -142,6 +145,11 @@ var Select = function (_Component) {
 
   return Select;
 }(_react.Component);
+
+Select.defaultProps = {
+  dropAlign: { top: 'bottom', left: 'left' }
+};
+
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Select);

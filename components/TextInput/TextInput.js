@@ -238,13 +238,15 @@ var TextInput = function (_Component) {
 
     var _props2 = this.props,
         defaultValue = _props2.defaultValue,
+        dropAlign = _props2.dropAlign,
+        dropTarget = _props2.dropTarget,
         id = _props2.id,
         plain = _props2.plain,
         value = _props2.value,
         _onFocus = _props2.onFocus,
         _onInput = _props2.onInput,
         onKeyDown = _props2.onKeyDown,
-        rest = _objectWithoutProperties(_props2, ['defaultValue', 'id', 'plain', 'value', 'onFocus', 'onInput', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props2, ['defaultValue', 'dropAlign', 'dropTarget', 'id', 'plain', 'value', 'onFocus', 'onInput', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
     var showDrop = this.state.showDrop;
@@ -258,9 +260,9 @@ var TextInput = function (_Component) {
         _Drop.Drop,
         {
           id: id ? 'text-input-drop__' + id : undefined,
-          align: { top: 'bottom', left: 'left' },
+          align: dropAlign,
           responsive: false,
-          control: this.componentRef,
+          target: dropTarget || this.componentRef,
           onClickOutside: function onClickOutside() {
             return _this2.setState({ showDrop: false });
           },
@@ -320,6 +322,7 @@ TextInput.contextTypes = {
   theme: _propTypes2.default.object
 };
 TextInput.defaultProps = {
+  dropAlign: { top: 'bottom', left: 'left' },
   messages: {
     enterSelect: '(Press Enter to Select)',
     suggestionsCount: 'suggestions available',

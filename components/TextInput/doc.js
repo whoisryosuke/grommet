@@ -11,6 +11,16 @@ exports.default = function (TextInput) {
 
   DocumentedTextInput.propTypes = {
     defaultValue: _reactDesc.PropTypes.string.description('What text to start with in the input.'),
+    dropAlign: _reactDesc.PropTypes.shape({
+      top: _reactDesc.PropTypes.oneOf(['top', 'bottom']),
+      bottom: _reactDesc.PropTypes.oneOf(['top', 'bottom']),
+      right: _reactDesc.PropTypes.oneOf(['left', 'right']),
+      left: _reactDesc.PropTypes.oneOf(['left', 'right'])
+    }).description('How to align the drop.').defaultValue({
+      top: 'top',
+      left: 'left'
+    }),
+    dropTarget: _reactDesc.PropTypes.object.description('Target where any suggestions drop will be aligned to. This should be\n      a React reference. Typically, this is not required as the drop will be\n      aligned to the TextInput itself by default.'),
     id: _reactDesc.PropTypes.string.description('The id attribute of the input.'),
     focusIndicator: _reactDesc.PropTypes.bool.description('Whether the plain text input should receive a focus outline.'),
     messages: _reactDesc.PropTypes.shape({
