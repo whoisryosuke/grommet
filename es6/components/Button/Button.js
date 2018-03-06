@@ -9,6 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Children, Component } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { withFocus, withTheme } from '../hocs';
@@ -50,6 +51,9 @@ var Button = function (_Component) {
         type = _props.type,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
 
+    var grommet = this.context.grommet;
+
+
     var Tag = href ? AnchorStyledButton : StyledButton;
 
     var buttonIcon = void 0;
@@ -87,6 +91,7 @@ var Button = function (_Component) {
         onClick: onClick,
         plain: Children.count(children) > 0 || icon && !label,
         theme: theme,
+        grommet: grommet,
         type: !href ? type : undefined
       }),
       first || second ? [first, second] : children
@@ -96,6 +101,9 @@ var Button = function (_Component) {
   return Button;
 }(Component);
 
+Button.contextTypes = {
+  grommet: PropTypes.object
+};
 Button.defaultProps = {
   type: 'button',
   focusIndicator: true

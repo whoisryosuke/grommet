@@ -20,7 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
 var basicStyle = function basicStyle(props) {
-  return (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? (0, _utils.colorForName)(props.color, props.theme) : props.theme.button.border.color, props.theme.button.border.radius, props.theme.button.colors.text);
+  return (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? (0, _utils.colorForName)(props.color, props.theme) : props.theme.button.border.color, props.theme.button.border.radius, props.grommet && props.grommet.dark ? props.theme.global.colors.darkBackground.text : props.theme.button.colors.text);
 };
 
 var primaryStyle = function primaryStyle(props) {

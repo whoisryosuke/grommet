@@ -10,7 +10,7 @@ import { rgba } from 'polished';
 import { activeStyle, backgroundStyle, colorForName, focusStyle, fontSize, lapAndUp } from '../../utils';
 
 var basicStyle = function basicStyle(props) {
-  return css(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? colorForName(props.color, props.theme) : props.theme.button.border.color, props.theme.button.border.radius, props.theme.button.colors.text);
+  return css(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? colorForName(props.color, props.theme) : props.theme.button.border.color, props.theme.button.border.radius, props.grommet && props.grommet.dark ? props.theme.global.colors.darkBackground.text : props.theme.button.colors.text);
 };
 
 var primaryStyle = function primaryStyle(props) {
