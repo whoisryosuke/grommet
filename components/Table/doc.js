@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.docTableCell = undefined;
+exports.docTableFooter = exports.docTableBody = exports.docTableHeader = exports.docTableRow = exports.docTableCell = undefined;
 
 var _reactDesc = require('react-desc');
 
@@ -17,6 +17,30 @@ var docTableCell = exports.docTableCell = function docTableCell(TableCell) {
   };
 
   return DocumentedTableCell;
+};
+
+var docTableRow = exports.docTableRow = function docTableRow(TableRow) {
+  var DocumentedTableRow = (0, _reactDesc.describe)(TableRow).description('A row of cells in a table.').usage('import { TableRow } from \'grommet\';\n<TableRow />');
+
+  return DocumentedTableRow;
+};
+
+var docTableHeader = exports.docTableHeader = function docTableHeader(TableHeader) {
+  var DocumentedTableHeader = (0, _reactDesc.describe)(TableHeader).description('The header of a table.').usage('import { TableHeader } from \'grommet\';\n<TableHeader />');
+
+  return DocumentedTableHeader;
+};
+
+var docTableBody = exports.docTableBody = function docTableBody(TableBody) {
+  var DocumentedTableBody = (0, _reactDesc.describe)(TableBody).description('The body of a table.').usage('import { TableBody } from \'grommet\';\n<TableBody />');
+
+  return DocumentedTableBody;
+};
+
+var docTableFooter = exports.docTableFooter = function docTableFooter(TableFooter) {
+  var DocumentedTableFooter = (0, _reactDesc.describe)(TableFooter).description('The footer of a table.').usage('import { TableFooter } from \'grommet\';\n<TableFooter />');
+
+  return DocumentedTableFooter;
 };
 
 exports.default = function (Table) {

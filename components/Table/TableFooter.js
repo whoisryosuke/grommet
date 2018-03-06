@@ -14,6 +14,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _StyledTable = require('./StyledTable');
 
+var _doc = require('./doc');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47,4 +49,10 @@ var TableFooter = function (_Component) {
 TableFooter.childContextTypes = {
   grommet: _propTypes2.default.object
 };
+
+
+if (process.env.NODE_ENV !== 'production') {
+  (0, _doc.docTableFooter)(TableFooter);
+}
+
 exports.default = TableFooter;

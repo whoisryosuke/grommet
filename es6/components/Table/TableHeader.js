@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { StyledTableHeader } from './StyledTable';
+import { docTableHeader } from './doc';
 
 var TableHeader = function (_Component) {
   _inherits(TableHeader, _Component);
@@ -36,4 +37,10 @@ var TableHeader = function (_Component) {
 TableHeader.childContextTypes = {
   grommet: PropTypes.object
 };
+
+
+if (process.env.NODE_ENV !== 'production') {
+  docTableHeader(TableHeader);
+}
+
 export default TableHeader;

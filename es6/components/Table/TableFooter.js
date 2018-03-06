@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { StyledTableFooter } from './StyledTable';
+import { docTableFooter } from './doc';
 
 var TableFooter = function (_Component) {
   _inherits(TableFooter, _Component);
@@ -36,4 +37,10 @@ var TableFooter = function (_Component) {
 TableFooter.childContextTypes = {
   grommet: PropTypes.object
 };
+
+
+if (process.env.NODE_ENV !== 'production') {
+  docTableFooter(TableFooter);
+}
+
 export default TableFooter;
