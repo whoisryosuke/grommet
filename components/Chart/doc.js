@@ -19,7 +19,7 @@ exports.default = function (Chart) {
       height: _reactDesc.PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full']),
       width: _reactDesc.PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full'])
     })]).description('The size of the Chart.').defaultValue({ width: 'medium', height: 'small' }),
-    thickness: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The width of the stroke.').defaultValue('medium'),
+    thickness: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'none']).description('The width of the stroke.').defaultValue('medium'),
     type: _reactDesc.PropTypes.oneOf(['bar', 'line', 'area']).description('The visual type of meter.').defaultValue('bar'),
     values: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.shape({
       label: _reactDesc.PropTypes.string, // for accessibility of bars

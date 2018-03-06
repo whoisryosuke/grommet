@@ -15,7 +15,7 @@ export default (function (Chart) {
       height: PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full']),
       width: PropTypes.oneOf(['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'full'])
     })]).description('The size of the Chart.').defaultValue({ width: 'medium', height: 'small' }),
-    thickness: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The width of the stroke.').defaultValue('medium'),
+    thickness: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'none']).description('The width of the stroke.').defaultValue('medium'),
     type: PropTypes.oneOf(['bar', 'line', 'area']).description('The visual type of meter.').defaultValue('bar'),
     values: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string, // for accessibility of bars
