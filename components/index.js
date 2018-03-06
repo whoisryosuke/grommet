@@ -50,18 +50,6 @@ Object.keys(_Calendar).forEach(function (key) {
   });
 });
 
-var _Carousel = require('./Carousel');
-
-Object.keys(_Carousel).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _Carousel[key];
-    }
-  });
-});
-
 var _Chart = require('./Chart');
 
 Object.keys(_Chart).forEach(function (key) {
