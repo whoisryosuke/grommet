@@ -14,6 +14,30 @@ export var docTableCell = function docTableCell(TableCell) {
   return DocumentedTableCell;
 };
 
+export var docTableRow = function docTableRow(TableRow) {
+  var DocumentedTableRow = describe(TableRow).description('A row of cells in a table.').usage('import { TableRow } from \'grommet\';\n<TableRow />');
+
+  return DocumentedTableRow;
+};
+
+export var docTableHeader = function docTableHeader(TableHeader) {
+  var DocumentedTableHeader = describe(TableHeader).description('The header of a table.').usage('import { TableHeader } from \'grommet\';\n<TableHeader />');
+
+  return DocumentedTableHeader;
+};
+
+export var docTableBody = function docTableBody(TableBody) {
+  var DocumentedTableBody = describe(TableBody).description('The body of a table.').usage('import { TableBody } from \'grommet\';\n<TableBody />');
+
+  return DocumentedTableBody;
+};
+
+export var docTableFooter = function docTableFooter(TableFooter) {
+  var DocumentedTableFooter = describe(TableFooter).description('The footer of a table.').usage('import { TableFooter } from \'grommet\';\n<TableFooter />');
+
+  return DocumentedTableFooter;
+};
+
 export default (function (Table) {
   var DocumentedTable = describe(Table).availableAt(getAvailableAtBadge('Table')).description('A table of data organized in cells.').usage('import { Table, TableHeader, TableFooter, TableBody, TableRow } from \'grommet\';\n<Table />');
 

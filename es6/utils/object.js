@@ -40,4 +40,14 @@ export function deepMerge(target) {
   return deepMerge.apply(undefined, [output].concat(sources));
 }
 
-export default { deepFreeze: deepFreeze, deepMerge: deepMerge, isObject: isObject };
+export function removeUndefined(obj) {
+  var result = {};
+  Object.keys(obj).forEach(function (key) {
+    if (obj[key] !== undefined) {
+      result[key] = obj[key];
+    }
+  });
+  return result;
+}
+
+export default { deepFreeze: deepFreeze, deepMerge: deepMerge, isObject: isObject, removeUndefined: removeUndefined };

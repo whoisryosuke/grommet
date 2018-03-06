@@ -15,9 +15,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
+var disabledStyle = '\n  opacity: 0.5;\n  cursor: default;\n';
+
 var StyledRadioButtonContainer = /*#__PURE__*/exports.StyledRadioButtonContainer = _styledComponents2.default.label.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonContainer'
-})(['display:flex;flex-direction:row;align-items:center;cursor:pointer;user-select:none;> div:first-child{', '}:hover input:not([disabled]) + div{border-color:', ';}'], function (props) {
+})(['display:flex;flex-direction:row;align-items:center;cursor:pointer;user-select:none;', ' > div:first-child{', '}:hover input:not([disabled]) + div{border-color:', ';}'], function (props) {
+  return props.disabled && disabledStyle;
+}, function (props) {
   return 'margin-right: ' + props.theme.global.edgeSize.small + ';';
 }, function (props) {
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.global.colors.black;

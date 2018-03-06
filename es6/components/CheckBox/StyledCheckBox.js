@@ -6,10 +6,14 @@ import styled from 'styled-components';
 
 import { focusStyle } from '../../utils';
 
+var disabledStyle = '\n  opacity: 0.5;\n  cursor: default;\n';
+
 export var StyledCheckBoxContainer = /*#__PURE__*/styled.label.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxContainer'
-})(['display:flex;flex-direction:', ';align-items:center;cursor:pointer;user-select:none;> div:first-child{', '}:hover input:not([disabled]) + div,:hover input:not([disabled]) + span{border-color:', ';}'], function (props) {
+})(['display:flex;flex-direction:', ';align-items:center;cursor:pointer;user-select:none;', ' > div:first-child{', '}:hover input:not([disabled]) + div,:hover input:not([disabled]) + span{border-color:', ';}'], function (props) {
   return props.reverse ? 'row-reverse' : 'row';
+}, function (props) {
+  return props.disabled && disabledStyle;
 }, function (props) {
   return props.reverse ? 'margin-left: ' + props.theme.global.edgeSize.small + ';' : 'margin-right: ' + props.theme.global.edgeSize.small + ';';
 }, function (props) {

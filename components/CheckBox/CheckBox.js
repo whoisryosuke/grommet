@@ -16,6 +16,8 @@ var _recompose = require('recompose');
 
 var _hocs = require('../hocs');
 
+var _object = require('../../utils/object');
+
 var _StyledCheckBox = require('./StyledCheckBox');
 
 var _StyledCheckBox2 = _interopRequireDefault(_StyledCheckBox);
@@ -86,22 +88,16 @@ var CheckBox = function (_Component) {
 
     return _react2.default.createElement(
       _StyledCheckBox.StyledCheckBoxContainer,
-      {
-        htmlFor: id,
-        reverse: reverse,
+      _extends({}, (0, _object.removeUndefined)({ htmlFor: id, disabled: disabled, reverse: reverse }), {
         theme: theme,
         grommet: grommet
-      },
+      }),
       _react2.default.createElement(
         _StyledCheckBox2.default,
         { theme: theme },
         _react2.default.createElement(_StyledCheckBox.StyledCheckBoxInput, _extends({}, rest, {
-          id: id,
-          name: name,
-          type: 'checkbox',
-          disabled: disabled,
-          checked: checked,
-          onChange: onChange,
+          type: 'checkbox'
+        }, (0, _object.removeUndefined)({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
           theme: theme,
           grommet: grommet
         })),

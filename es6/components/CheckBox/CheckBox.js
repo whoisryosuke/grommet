@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { withTheme } from '../hocs';
+import { removeUndefined } from '../../utils/object';
 
 import StyledCheckBox, { StyledCheckBoxContainer, StyledCheckBoxInput, StyledCheckBoxBox, StyledCheckBoxToggle, StyledCheckBoxKnob } from './StyledCheckBox';
 import doc from './doc';
@@ -69,22 +70,16 @@ var CheckBox = function (_Component) {
 
     return React.createElement(
       StyledCheckBoxContainer,
-      {
-        htmlFor: id,
-        reverse: reverse,
+      _extends({}, removeUndefined({ htmlFor: id, disabled: disabled, reverse: reverse }), {
         theme: theme,
         grommet: grommet
-      },
+      }),
       React.createElement(
         StyledCheckBox,
         { theme: theme },
         React.createElement(StyledCheckBoxInput, _extends({}, rest, {
-          id: id,
-          name: name,
-          type: 'checkbox',
-          disabled: disabled,
-          checked: checked,
-          onChange: onChange,
+          type: 'checkbox'
+        }, removeUndefined({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
           theme: theme,
           grommet: grommet
         })),

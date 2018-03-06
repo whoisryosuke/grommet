@@ -15,10 +15,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
+var disabledStyle = '\n  opacity: 0.5;\n  cursor: default;\n';
+
 var StyledCheckBoxContainer = /*#__PURE__*/exports.StyledCheckBoxContainer = _styledComponents2.default.label.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxContainer'
-})(['display:flex;flex-direction:', ';align-items:center;cursor:pointer;user-select:none;> div:first-child{', '}:hover input:not([disabled]) + div,:hover input:not([disabled]) + span{border-color:', ';}'], function (props) {
+})(['display:flex;flex-direction:', ';align-items:center;cursor:pointer;user-select:none;', ' > div:first-child{', '}:hover input:not([disabled]) + div,:hover input:not([disabled]) + span{border-color:', ';}'], function (props) {
   return props.reverse ? 'row-reverse' : 'row';
+}, function (props) {
+  return props.disabled && disabledStyle;
 }, function (props) {
   return props.reverse ? 'margin-left: ' + props.theme.global.edgeSize.small + ';' : 'margin-right: ' + props.theme.global.edgeSize.small + ';';
 }, function (props) {

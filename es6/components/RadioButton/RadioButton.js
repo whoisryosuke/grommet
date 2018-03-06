@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { withTheme } from '../hocs';
+import { removeUndefined } from '../../utils/object';
 
 import StyledRadioButton, { StyledRadioButtonContainer, StyledRadioButtonInput, StyledRadioButtonButton } from './StyledRadioButton';
 import doc from './doc';
@@ -48,21 +49,16 @@ var RadioButton = function (_Component) {
 
     return React.createElement(
       StyledRadioButtonContainer,
-      {
-        htmlFor: id,
+      _extends({}, removeUndefined({ htmlFor: id, disabled: disabled }), {
         theme: theme,
         grommet: grommet
-      },
+      }),
       React.createElement(
         StyledRadioButton,
         { theme: theme },
         React.createElement(StyledRadioButtonInput, _extends({}, rest, {
-          id: id,
-          name: name,
-          type: 'radio',
-          disabled: disabled,
-          checked: checked,
-          onChange: onChange,
+          type: 'radio'
+        }, removeUndefined({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
           theme: theme,
           grommet: grommet
         })),

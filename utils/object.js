@@ -9,6 +9,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 exports.isObject = isObject;
 exports.deepFreeze = deepFreeze;
 exports.deepMerge = deepMerge;
+exports.removeUndefined = removeUndefined;
 function isObject(item) {
   return item && (typeof item === 'undefined' ? 'undefined' : _typeof(item)) === 'object' && !Array.isArray(item);
 }
@@ -47,4 +48,14 @@ function deepMerge(target) {
   return deepMerge.apply(undefined, [output].concat(sources));
 }
 
-exports.default = { deepFreeze: deepFreeze, deepMerge: deepMerge, isObject: isObject };
+function removeUndefined(obj) {
+  var result = {};
+  Object.keys(obj).forEach(function (key) {
+    if (obj[key] !== undefined) {
+      result[key] = obj[key];
+    }
+  });
+  return result;
+}
+
+exports.default = { deepFreeze: deepFreeze, deepMerge: deepMerge, isObject: isObject, removeUndefined: removeUndefined };

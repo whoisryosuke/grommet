@@ -16,6 +16,8 @@ var _recompose = require('recompose');
 
 var _hocs = require('../hocs');
 
+var _object = require('../../utils/object');
+
 var _StyledRadioButton = require('./StyledRadioButton');
 
 var _StyledRadioButton2 = _interopRequireDefault(_StyledRadioButton);
@@ -65,21 +67,16 @@ var RadioButton = function (_Component) {
 
     return _react2.default.createElement(
       _StyledRadioButton.StyledRadioButtonContainer,
-      {
-        htmlFor: id,
+      _extends({}, (0, _object.removeUndefined)({ htmlFor: id, disabled: disabled }), {
         theme: theme,
         grommet: grommet
-      },
+      }),
       _react2.default.createElement(
         _StyledRadioButton2.default,
         { theme: theme },
         _react2.default.createElement(_StyledRadioButton.StyledRadioButtonInput, _extends({}, rest, {
-          id: id,
-          name: name,
-          type: 'radio',
-          disabled: disabled,
-          checked: checked,
-          onChange: onChange,
+          type: 'radio'
+        }, (0, _object.removeUndefined)({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
           theme: theme,
           grommet: grommet
         })),
