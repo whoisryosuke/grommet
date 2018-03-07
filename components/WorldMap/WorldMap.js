@@ -248,6 +248,7 @@ var WorldMap = function (_Component) {
     _this.onMouseMove = function (event) {
       var width = _this.state.width;
       // determine the map coordinates for where the mouse is
+      // containerRef uses the group so we can handle aspect ratio scaling
 
       var rect = (0, _reactDom.findDOMNode)(_this.containerRef).getBoundingClientRect();
       var scale = rect.width / width; // since the SVG viewBox might be scaled
@@ -269,9 +270,9 @@ var WorldMap = function (_Component) {
     var _props = this.props,
         color = _props.color,
         onSelectPlace = _props.onSelectPlace,
-        selectColor = _props.selectColor,
+        hoverColor = _props.hoverColor,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['color', 'onSelectPlace', 'selectColor', 'theme']);
+        rest = _objectWithoutProperties(_props, ['color', 'onSelectPlace', 'hoverColor', 'theme']);
 
     delete rest.places;
     delete rest.continents;
@@ -350,7 +351,6 @@ var WorldMap = function (_Component) {
     });
 
     // If the caller is interested in onSelectPlace changes, track where the
-    // user goes.
     var interactiveProps = {};
     if (onSelectPlace) {
       interactiveProps = {
@@ -376,7 +376,7 @@ var WorldMap = function (_Component) {
         _react2.default.createElement('path', {
           strokeLinecap: 'round',
           strokeWidth: (0, _utils.parseMetricToNum)(theme.worldMap.place.active),
-          stroke: (0, _utils.colorForName)(selectColor || color || 'light-4', theme),
+          stroke: (0, _utils.colorForName)(hoverColor || color || 'light-4', theme),
           d: d
         })
       );
@@ -385,9 +385,6 @@ var WorldMap = function (_Component) {
     return _react2.default.createElement(
       _StyledWorldMap2.default,
       _extends({
-        ref: function ref(_ref5) {
-          _this2.containerRef = _ref5;
-        },
         viewBox: x + ' ' + y + ' ' + width + ' ' + height,
         preserveAspectRatio: 'xMinYMin meet',
         width: width,
@@ -395,7 +392,14 @@ var WorldMap = function (_Component) {
       }, interactiveProps, rest),
       _react2.default.createElement(
         'g',
-        { stroke: 'none', fill: 'none', fillRule: 'evenodd' },
+        {
+          ref: function ref(_ref5) {
+            _this2.containerRef = _ref5;
+          },
+          stroke: 'none',
+          fill: 'none',
+          fillRule: 'evenodd'
+        },
         continents
       ),
       places,

@@ -30,8 +30,9 @@ var Stack = function (_Component) {
     var _props = this.props,
         anchor = _props.anchor,
         children = _props.children,
+        fill = _props.fill,
         guidingChild = _props.guidingChild,
-        rest = _objectWithoutProperties(_props, ['anchor', 'children', 'guidingChild']);
+        rest = _objectWithoutProperties(_props, ['anchor', 'children', 'fill', 'guidingChild']);
 
     // make all children but the first absolutely positioned
 
@@ -49,6 +50,9 @@ var Stack = function (_Component) {
           var _style = _extends({}, (child.props || {}).style, {
             position: 'relative'
           });
+          if (fill) {
+            _style.flex = '1 1';
+          }
           return cloneElement(child, { style: _style });
         }
 
@@ -64,7 +68,7 @@ var Stack = function (_Component) {
 
     return React.createElement(
       StyledStack,
-      rest,
+      _extends({ fillContainer: fill }, rest),
       styledChildren
     );
   };

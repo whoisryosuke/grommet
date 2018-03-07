@@ -12,9 +12,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
+var fillStyle = '\n  width: 100%;\n  height: 100%;\n  max-width: none;\n  flex-grow: 1;\n  display: flex;\n';
+
 var StyledStack = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   displayName: 'StyledStack'
-})(['position:relative;']);
+})(['position:relative;', ''], function (props) {
+  return props.fillContainer && fillStyle;
+});
 
 exports.default = StyledStack.extend(_templateObject, function (props) {
   return props.theme.stack && props.theme.stack.extend;

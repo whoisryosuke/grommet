@@ -25,7 +25,7 @@ exports.default = function (WorldMap) {
       onClick: _reactDesc.PropTypes.func,
       onHover: _reactDesc.PropTypes.func
     })).description('Place details.'),
-    selectColor: _reactDesc.PropTypes.string.description('Color when selecting.')
+    hoverColor: _reactDesc.PropTypes.string.description('Color when hovering over places while selecting.')
   };
 
   return DocumentedWorldMap;
