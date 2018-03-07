@@ -23,13 +23,13 @@ function fontSize(size, lineHeight) {
 }
 
 function lapAndUp(content) {
-  return (0, _styledComponents.css)(['@media only screen and (min-width:', '){', ';}'], function (props) {
+  return (0, _styledComponents.css)(['@media only screen and (min-width:', '){', '}'], function (props) {
     return props.theme.global.breakpoints.narrow + 1 + 'px';
   }, content);
 }
 
 function palm(content) {
-  return (0, _styledComponents.css)(['@media only screen and (max-width:', '){', ';}'], function (props) {
+  return (0, _styledComponents.css)(['@media only screen and (max-width:', '){', '}'], function (props) {
     return props.theme.global.breakpoints.narrow + 'px';
   }, content);
 }

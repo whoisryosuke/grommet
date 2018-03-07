@@ -4,26 +4,33 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-import { colorForName } from '../../utils';
+import { colorForName, palm } from '../../utils';
 
 var marginStyle = function marginStyle(props) {
   if (typeof props.margin === 'string') {
     var margin = props.theme.global.edgeSize[props.margin];
-    return '\n      margin-top: ' + margin + ';\n      margin-bottom: ' + margin + ';\n    ';
+    var narrowMargin = props.theme.global.edgeSize.narrow[props.margin];
+    return css(['margin-top:', ';margin-bottom:', ';', ''], margin, margin, props.responsive ? palm('\n        margin-top: ' + narrowMargin + ';\n        margin-bottom: ' + narrowMargin + ';\n      ') : '');
   }
-  var result = '';
+  var result = [];
   if (props.margin.top) {
     if (props.margin.top === 'none') {
-      result += 'margin-top: 0;';
+      result.push(css(['margin-top:0;']));
     } else {
-      result += 'margin-top: ' + props.theme.global.edgeSize[props.margin.top] + ';';
+      result.push(css(['margin-top:', ';'], props.theme.global.edgeSize[props.margin.top]));
+      if (props.responsive) {
+        result.push(palm('margin-top: ' + props.theme.global.edgeSize.narrow[props.margin.top] + ';'));
+      }
     }
   }
   if (props.margin.bottom) {
     if (props.margin.bottom === 'none') {
-      result += 'margin-bottom: 0;';
+      result.push(css(['margin-bottom:0;']));
     } else {
-      result += 'margin-bottom: ' + props.theme.global.edgeSize[props.margin.bottom] + ';';
+      result.push(css(['margin-bottom:', ';'], props.theme.global.edgeSize[props.margin.bottom]));
+      if (props.responsive) {
+        result.push(palm('margin-bottom: ' + props.theme.global.edgeSize.narrow[props.margin.bottom] + ';'));
+      }
     }
   }
   return result;
@@ -33,7 +40,8 @@ var sizeStyle = function sizeStyle(props) {
   // size is a combination of the level and size properties
   var size = props.size || 'medium';
   var data = props.theme.heading.level[props.level][size];
-  return css(['font-size:', ';line-height:', ';max-width:', ';font-weight:', ';'], data.size, data.height, data.maxWidth, props.theme.heading.weight);
+  var narrowData = props.theme.heading.level[Math.min(props.level + 1, 4)][size];
+  return css(['font-size:', ';line-height:', ';max-width:', ';font-weight:', ';', ''], data.size, data.height, data.maxWidth, props.theme.heading.weight, props.responsive ? palm('\n      font-size: ' + narrowData.size + ';\n      line-height: ' + narrowData.height + ';\n      max-width: ' + narrowData.maxWidth + ';\n      font-weight: ' + props.theme.heading.weight + ';\n    ') : '');
 };
 
 var TEXT_ALIGN_MAP = {

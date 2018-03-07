@@ -86,7 +86,7 @@ var POSITIONS = {
       return '\n      top: ' + MARGINS.top(margin, theme) + ';\n      bottom: ' + MARGINS.bottom(margin, theme) + ';\n      left: ' + MARGINS.left(margin, theme) + ';\n      right: ' + MARGINS.right(margin, theme) + ';\n      animation: ' + KEYFRAMES.center.true + ' 0.2s ease-in-out forwards;\n    ';
     },
     false: function _false(margin, theme) {
-      return '\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n      animation: ' + KEYFRAMES.center.false + ' 0.2s ease-in-out forwards;\n      ' + edgeStyle('margin', margin, theme) + '\n    ';
+      return css(['top:50%;left:50%;transform:translate(-50%,-50%);animation:', ' 0.2s ease-in-out forwards;', ''], KEYFRAMES.center.false, edgeStyle('margin', margin, false, theme));
     }
   },
 
@@ -159,9 +159,13 @@ export var StyledContainer = /*#__PURE__*/styled.div.withConfig({
   return props.theme.global.size.xxsmall;
 }, function (props) {
   return props.plain ? 'transparent' : props.theme.layer.backgroundColor;
-}, palm('\n    min-height: 100%;\n    min-width: 100%;\n  '), function (props) {
-  return lapAndUp('\n    position: ' + (props.modal ? 'absolute' : 'fixed') + ';\n    max-height: 100%;\n    max-width: 100%;\n    overflow: auto;\n    border-radius: ' + (props.plain ? 'none' : props.theme.layer.border.radius) + ';\n    ' + (props.position !== 'hidden' && POSITIONS[props.position][props.full](props.margin, props.theme) || '') + '\n  ');
-});
+}, palm('\n    min-height: 100%;\n    min-width: 100%;\n  '), lapAndUp(css(['position:', ';max-height:100%;max-width:100%;overflow:auto;border-radius:', ';', ''], function (props) {
+  return props.modal ? 'absolute' : 'fixed';
+}, function (props) {
+  return props.plain ? 'none' : props.theme.layer.border.radius;
+}, function (props) {
+  return props.position !== 'hidden' && POSITIONS[props.position][props.full](props.margin, props.theme) || '';
+})));
 
 // ${props => props.full && fullStyle(props.full, props.margin, props.theme)}
 // ${props => props.margin && edgeStyle('margin', props.margin, props.theme)}

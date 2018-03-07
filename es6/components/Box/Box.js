@@ -41,8 +41,8 @@ var Box = function (_Component) {
         background = _props.background,
         theme = _props.theme;
 
-    var dark = false;
     if (background) {
+      var dark = false;
       if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
         dark = background.dark;
       } else {
@@ -64,9 +64,10 @@ var Box = function (_Component) {
         children = _props2.children,
         direction = _props2.direction,
         gap = _props2.gap,
+        responsive = _props2.responsive,
         tag = _props2.tag,
         theme = _props2.theme,
-        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'gap', 'tag', 'theme']);
+        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'gap', 'responsive', 'tag', 'theme']);
 
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
@@ -87,6 +88,7 @@ var Box = function (_Component) {
               key: index,
               gap: gap,
               direction: direction,
+              responsive: responsive,
               theme: theme
             }));
           }
@@ -100,6 +102,7 @@ var Box = function (_Component) {
       _extends({
         'aria-label': a11yTitle,
         direction: direction,
+        responsive: responsive,
         theme: theme
       }, rest),
       contents
@@ -119,6 +122,7 @@ Box.defaultProps = {
   direction: 'column',
   margin: 'none',
   pad: 'none',
+  responsive: true,
   tag: 'div'
 };
 

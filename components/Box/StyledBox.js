@@ -73,12 +73,14 @@ var basisStyle = /*#__PURE__*/(0, _styledComponents.css)(['flex-basis:', ';'], f
 // https://stackoverflow.com/questions/36247140/why-doesnt-flex-item-shrink-past-content-size
 // we assume we are in the context of a Box going the other direction
 // TODO: revisit this
-var directionStyle = /*#__PURE__*/(0, _styledComponents.css)(['', ' ', ' flex-direction:', ';'], function (props) {
+var directionStyle = /*#__PURE__*/(0, _styledComponents.css)(['', ' ', ' flex-direction:', ';', '}'], function (props) {
   return props.direction === 'row' && 'min-height: 0;';
 }, function (props) {
   return props.direction === 'column' && 'min-width: 0;';
 }, function (props) {
   return props.direction;
+}, function (props) {
+  return props.direction === 'row-responsive' ? (0, _utils.palm)('\n    flex-direction: column;\n    flex-basis: auto;\n    justify-content: flex-start;\n    align-items: stretch;\n  ') : '';
 });
 
 var elevationStyle = /*#__PURE__*/(0, _styledComponents.css)(['box-shadow:', ';'], function (props) {
@@ -121,34 +123,45 @@ var justifyStyle = /*#__PURE__*/(0, _styledComponents.css)(['justify-content:', 
 
 var wrapStyle = 'flex-wrap: wrap;';
 
-var borderStyle = function borderStyle(data, theme) {
-  var style = '';
+var borderStyle = function borderStyle(data, responsive, theme) {
+  var styles = [];
   var color = (0, _utils.colorForName)(data.color || 'border', theme);
   var borderSize = data.size || 'xsmall';
   var side = typeof data === 'string' ? data : data.side || 'all';
   var value = 'solid ' + theme.global.borderSize[borderSize] + ' ' + color;
+  var narrowValue = 'solid ' + theme.global.borderSize.narrow[borderSize] + ' ' + color;
   if (side === 'top' || side === 'bottom' || side === 'left' || side === 'right') {
-    style = 'border-' + side + ': ' + value + ';';
+    styles.push((0, _styledComponents.css)(['border-', ':', ';'], side, value));
+    if (responsive) {
+      styles.push((0, _utils.palm)('border-' + side + ': ' + narrowValue + ';'));
+    }
   } else if (side === 'vertical') {
-    style = '\n      border-left: ' + value + ';\n      border-right: ' + value + ';\n    ';
+    styles.push((0, _styledComponents.css)(['border-left:', ';border-right:', ';'], value, value));
+    if (responsive) {
+      styles.push((0, _utils.palm)('\n        border-left: ' + narrowValue + ';\n        border-right: ' + narrowValue + ';\n      '));
+    }
   } else if (side === 'horizontal') {
-    style = '\n      border-top: ' + value + ';\n      border-bottom: ' + value + ';\n    ';
+    styles.push((0, _styledComponents.css)(['border-top:', ';border-bottom:', ';'], value, value));
+    if (responsive) {
+      styles.push((0, _utils.palm)('\n        border-top: ' + narrowValue + ';\n        border-bottom: ' + narrowValue + ';\n      '));
+    }
   } else {
-    style = 'border: ' + value + ';';
+    styles.push((0, _styledComponents.css)(['border:', ';'], value));
+    if (responsive) {
+      styles.push((0, _utils.palm)('border: ' + narrowValue + ';'));
+    }
   }
-  return style;
+  return styles;
 };
 
 var ROUND_MAP = {
   'full': '100%'
 };
 
-var roundStyle = /*#__PURE__*/(0, _styledComponents.css)(['border-radius:', ';'], function (props) {
+var roundStyle = /*#__PURE__*/(0, _styledComponents.css)(['border-radius:', ';', ''], function (props) {
   return ROUND_MAP[props.round] || props.theme.global.edgeSize[props.round];
-});
-
-var responsiveStyle = /*#__PURE__*/(0, _styledComponents.css)(['', '}'], function (props) {
-  return (0, _utils.palm)('\n    flex-direction: column;\n    flex-basis: auto;\n\n    ' + (props.justify === 'center' && 'align-items: stretch;') + '\n  ');
+}, function (props) {
+  return props.responsive ? (0, _utils.palm)('\n    border-radius: ' + (ROUND_MAP[props.round] || props.theme.global.edgeSize.narrow[props.round]) + ';\n  ') : '';
 });
 
 var SLIDE_SIZES = {
@@ -296,7 +309,7 @@ var animationStyle = /*#__PURE__*/(0, _styledComponents.css)(['', ''], function 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
   displayName: 'StyledBox'
-})(['display:flex;box-sizing:border-box;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;box-sizing:border-box;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.basis && 'max-width: 100%;';
 }, function (props) {
   return props.align && alignStyle;
@@ -307,7 +320,7 @@ var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
 }, function (props) {
   return props.background && (0, _utils.backgroundStyle)(props.background, props.theme);
 }, function (props) {
-  return props.border && borderStyle(props.border, props.theme);
+  return props.border && borderStyle(props.border, props.responsive, props.theme);
 }, function (props) {
   return props.direction && directionStyle;
 }, function (props) {
@@ -321,15 +334,13 @@ var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
 }, function (props) {
   return props.justify && justifyStyle;
 }, function (props) {
-  return props.margin && (0, _utils.edgeStyle)('margin', props.margin, props.theme);
+  return props.margin && (0, _utils.edgeStyle)('margin', props.margin, props.responsive, props.theme);
 }, function (props) {
-  return props.pad && (0, _utils.edgeStyle)('padding', props.pad, props.theme);
+  return props.pad && (0, _utils.edgeStyle)('padding', props.pad, props.responsive, props.theme);
 }, function (props) {
   return props.round && roundStyle;
 }, function (props) {
   return props.wrap && wrapStyle;
-}, function (props) {
-  return props.responsive && responsiveStyle;
 }, function (props) {
   return props.overflow && 'overflow: ' + props.overflow + ';';
 }, function (props) {
@@ -343,15 +354,16 @@ exports.default = StyledBox.extend(_templateObject, function (props) {
 });
 
 
-var gapStyle = function gapStyle(gap, direction, theme) {
-  if (direction === 'column') {
-    return 'height: ' + theme.global.edgeSize[gap] + ';';
-  }
-  return 'width: ' + theme.global.edgeSize[gap] + ';';
-};
+var gapStyle = /*#__PURE__*/(0, _styledComponents.css)(['', ''], function (_ref) {
+  var direction = _ref.direction,
+      gap = _ref.gap,
+      responsive = _ref.responsive,
+      edgeSize = _ref.theme.global.edgeSize;
+  return direction === 'column' ? '\n      height: ' + edgeSize[gap] + ';\n      ' + (responsive ? (0, _utils.palm)('\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ' : '\n      width: ' + edgeSize[gap] + ';\n      ' + (responsive && direction === 'row-responsive' ? (0, _utils.palm)('\n        width: auto;\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ';
+});
 
 var StyledBoxGap = /*#__PURE__*/exports.StyledBoxGap = _styledComponents2.default.div.withConfig({
   displayName: 'StyledBox__StyledBoxGap'
 })(['', ';'], function (props) {
-  return props.gap && gapStyle(props.gap, props.direction, props.theme);
+  return props.gap && gapStyle;
 });

@@ -21,28 +21,28 @@ exports.default = function (Box) {
   DocumentedBox.propTypes = {
     a11yTitle: _utils.a11yTitlePropType,
     align: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'baseline', 'stretch']).description('How to align the contents along the cross axis.'),
-    alignContent: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in the cross axis.').defaultValue('stretch'),
-    alignSelf: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the cross axis when contained in a Box or along\nthe column axis when contained in a Grid.'),
-    animation: _reactDesc.PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE]))]).description('Animation effect(s) to use.\n      \'duration\' and \'delay\' should be in milliseconds.\n      \'jiggle\' and \'pulse\' types are intended for small elements, like icons.'),
+    alignContent: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents when there is extra space in\n        the cross axis.').defaultValue('stretch'),
+    alignSelf: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the cross axis when contained in\n        a Box or along the column axis when contained in a Grid.'),
+    animation: _reactDesc.PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([ANIMATION_TYPE, ANIMATION_SHAPE]))]).description('Animation effect(s) to use. \'duration\' and \'delay\' should\n        be in milliseconds. \'jiggle\' and \'pulse\' types are intended for\n        small elements, like icons.'),
     background: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.shape({
       color: _reactDesc.PropTypes.string,
       dark: _reactDesc.PropTypes.bool,
       image: _reactDesc.PropTypes.string,
       position: _reactDesc.PropTypes.string,
       opacity: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['weak', 'medium', 'strong']), _reactDesc.PropTypes.bool])
-    })]).description('Either a color identifier to use for the background color. For example:\n\'neutral-1\'. Or, a \'url()\' for an image. Dark is not needed if color is provided.'),
-    basis: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4']).description('A fixed or relative size along its container\'s main axis.'),
+    })]).description('Either a color identifier to use for the background\n        color. For example: \'neutral-1\'. Or, a \'url()\' for an image. Dark\n        is not needed if color is provided.'),
+    basis: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4', 'auto']).description('A fixed or relative size along its container\'s main axis.'),
     border: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']), _reactDesc.PropTypes.shape({
       color: _reactDesc.PropTypes.string,
       side: _reactDesc.PropTypes.oneOf(['top', 'left', 'bottom', 'right', 'horizontal', 'vertical', 'all']),
       size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large'])
     })]).description('Include a border.'),
-    direction: _reactDesc.PropTypes.oneOf(['row', 'column']).description('The orientation to layout the child components in.').defaultValue('column'),
-    elevation: _reactDesc.PropTypes.oneOf(['none', 'xsmall', 'small', 'medium', 'large', 'xlarge']).description('Elevated height above the underlying context, indicated via a drop shadow.').defaultValue('none'),
+    direction: _reactDesc.PropTypes.oneOf(['row', 'column', 'row-responsive']).description('The orientation to layout the child components in.').defaultValue('column'),
+    elevation: _reactDesc.PropTypes.oneOf(['none', 'xsmall', 'small', 'medium', 'large', 'xlarge']).description('Elevated height above the underlying context, indicated\n        via a drop shadow.').defaultValue('none'),
     flex: _reactDesc.PropTypes.oneOf(['grow', 'shrink', true, false]).description('Whether flex-grow and/or flex-shrink is true.'),
     fill: _reactDesc.PropTypes.oneOf(['horizontal', 'vertical', true, false]).description('Whether the width and/or height should fill the container.'),
     gap: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The amount of spacing between child elements.'),
-    gridArea: _reactDesc.PropTypes.string.description('The name of the area to place this Box in inside a parent Grid.'),
+    gridArea: _reactDesc.PropTypes.string.description('The name of the area to place\n      this Box in inside a parent Grid.'),
     justify: _reactDesc.PropTypes.oneOf(['start', 'center', 'between', 'end']).description('How to align the contents along the main axis.'),
     justifySelf: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the row axis when contained in a Grid.'),
     margin: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none'].concat(PAD_SIZES)), _reactDesc.PropTypes.shape({
@@ -52,7 +52,7 @@ exports.default = function (Box) {
       right: _reactDesc.PropTypes.oneOf(PAD_SIZES),
       top: _reactDesc.PropTypes.oneOf(PAD_SIZES),
       vertical: _reactDesc.PropTypes.oneOf(PAD_SIZES)
-    })]).description('The amount of margin around the box. An object can be specified to\ndistinguish horizontal margin, vertical margin, and margin on a\nparticular side of the box'),
+    })]).description('The amount of margin around the box. An object can\n        be specified to distinguish horizontal margin, vertical margin, and\n        margin on a particular side of the box'),
     overflow: _reactDesc.PropTypes.oneOf(['auto', 'hidden', 'scroll']).description('box overflow.'),
     pad: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none'].concat(PAD_SIZES)), _reactDesc.PropTypes.shape({
       bottom: _reactDesc.PropTypes.oneOf(PAD_SIZES),
@@ -61,11 +61,11 @@ exports.default = function (Box) {
       right: _reactDesc.PropTypes.oneOf(PAD_SIZES),
       top: _reactDesc.PropTypes.oneOf(PAD_SIZES),
       vertical: _reactDesc.PropTypes.oneOf(PAD_SIZES)
-    })]).description('The amount of padding around the box contents. An object can be specified to\ndistinguish horizontal padding, vertical padding, and padding on a\nparticular side of the box'),
-    responsive: _reactDesc.PropTypes.bool.description('Whether children laid out in a row direction should be switched to a\ncolumn layout when the display area narrows.'),
+    })]).description('The amount of padding around the box contents. An\n        object can be specified to distinguish horizontal padding, vertical\n        padding, and padding on a particular side of the box'),
+    responsive: _reactDesc.PropTypes.bool.description('Whether margin, pad, and border\n      sizes should be scaled for mobile environments.').defaultValue(true),
     round: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']).description('How much to round the corners.'),
     tag: _reactDesc.PropTypes.string.description('The DOM tag to use for the element.').defaultValue('div'),
-    wrap: _reactDesc.PropTypes.bool.description('Whether children can wrap if they can\'t all fit.')
+    wrap: _reactDesc.PropTypes.bool.description('Whether children can wrap if they\n      can\'t all fit.')
   };
   return DocumentedBox;
 };

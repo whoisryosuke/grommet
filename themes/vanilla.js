@@ -44,7 +44,14 @@ exports.default = (0, _utils.deepFreeze)({
       small: '2px',
       medium: baseSpacing / 6 + 'px',
       large: baseSpacing / 2 + 'px',
-      xlarge: baseSpacing + 'px'
+      xlarge: baseSpacing + 'px',
+      narrow: {
+        xsmall: '1px',
+        small: '2px',
+        medium: baseSpacing / 6 + 'px',
+        large: baseSpacing / 4 + 'px',
+        xlarge: baseSpacing / 2 + 'px'
+      }
     },
     breakpoints: {
       narrow: 699
@@ -90,7 +97,15 @@ exports.default = (0, _utils.deepFreeze)({
       small: baseSpacing / 2 + 'px',
       medium: baseSpacing + 'px',
       large: baseSpacing * 2 + 'px',
-      xlarge: baseSpacing * 4 + 'px'
+      xlarge: baseSpacing * 4 + 'px',
+      narrow: {
+        none: '0',
+        xsmall: baseSpacing / 8 + 'px',
+        small: baseSpacing / 6 + 'px',
+        medium: baseSpacing / 4 + 'px',
+        large: baseSpacing / 2 + 'px',
+        xlarge: baseSpacing + 'px'
+      }
     },
     elevation: {
       none: 'none',
@@ -142,7 +157,16 @@ exports.default = (0, _utils.deepFreeze)({
       medium: baseSpacing * 16 + 'px', // 384
       large: baseSpacing * 32 + 'px', // 768
       xlarge: baseSpacing * 48 + 'px', // 1152
-      full: '100%'
+      full: '100%',
+      narrow: {
+        xxsmall: baseSpacing + 'px', // 24
+        xsmall: baseSpacing * 2 + 'px', // 48
+        small: baseSpacing * 4 + 'px', // 96
+        medium: baseSpacing * 8 + 'px', // 192
+        large: baseSpacing * 16 + 'px', // 384
+        xlarge: baseSpacing * 32 + 'px', // 768
+        full: '100%'
+      }
     }
   },
   anchor: {

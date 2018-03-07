@@ -14,7 +14,7 @@ exports.default = function (Video) {
     controls: _reactDesc.PropTypes.oneOf([false, 'over', 'below']).description('Whether to show playback controls and where to place them.').defaultValue('over'),
     fit: _reactDesc.PropTypes.oneOf(['cover', 'contain']).description('How the image fills its container.'),
     loop: _reactDesc.PropTypes.bool.description('Enables continuous video looping.'),
-    mute: _reactDesc.PropTypes.bool.description('Enables video muting. This option is best used with the autoPlay flag')
+    mute: _reactDesc.PropTypes.bool.description('Enables video muting. This option is best used with the autoPlay flag.')
   };
 
   return DocumentedVideo;

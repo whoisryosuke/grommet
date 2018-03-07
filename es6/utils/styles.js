@@ -2,7 +2,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 import { css } from 'styled-components';
 
-import { parseMetricToNum } from './mixins';
+import { palm, parseMetricToNum } from './mixins';
 import { colorForName, colorIsDark, getRGBA } from './colors';
 
 export var activeStyle = /*#__PURE__*/css(['background-color:', ';color:', ';'], function (props) {
@@ -60,28 +60,28 @@ export var baseStyle = /*#__PURE__*/css(['font-family:', ';font-size:', ';line-h
   return props.theme.global.colors.background && 'background-color: ' + props.theme.global.colors.background + ';';
 });
 
-export var edgeStyle = function edgeStyle(kind, data, theme) {
+export var edgeStyle = function edgeStyle(kind, data, responsive, theme) {
   if (typeof data === 'string') {
-    return kind + ': ' + theme.global.edgeSize[data] + ';';
+    return css(['', ':', ';', ''], kind, theme.global.edgeSize[data], responsive ? palm('\n        ' + kind + ': ' + theme.global.edgeSize.narrow[data] + ';\n      ') : '');
   }
-  var result = '';
+  var result = [];
   if (data.horizontal) {
-    result += '\n      ' + kind + '-left: ' + theme.global.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.global.edgeSize[data.horizontal] + ';\n    ';
+    result.push(css(['', '-left:', ';', '-right:', ';', ''], kind, theme.global.edgeSize[data.horizontal], kind, theme.global.edgeSize[data.horizontal], responsive ? palm('\n        ' + kind + '-left: ' + theme.global.edgeSize.narrow[data.horizontal] + ';\n        ' + kind + '-right: ' + theme.global.edgeSize.narrow[data.horizontal] + ';\n      ') : ''));
   }
   if (data.vertical) {
-    result += '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
+    result.push(css(['', '-top:', ';', '-bottom:', ';', ''], kind, theme.global.edgeSize[data.vertical], kind, theme.global.edgeSize[data.vertical], responsive ? palm('\n        ' + kind + '-top: ' + theme.global.edgeSize.narrow[data.vertical] + ';\n        ' + kind + '-bottom: ' + theme.global.edgeSize.narrow[data.vertical] + ';\n      ') : ''));
   }
   if (data.top) {
-    result += kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
+    result.push(css(['', '-top:', ';', ''], kind, theme.global.edgeSize[data.top], responsive ? palm('\n        ' + kind + '-top: ' + theme.global.edgeSize.narrow[data.top] + ';\n      ') : ''));
   }
   if (data.bottom) {
-    result += kind + '-bottom: ' + theme.global.edgeSize[data.bottom] + ';';
+    result.push(css(['', '-bottom:', ';', ''], kind, theme.global.edgeSize[data.bottom], responsive ? palm('\n        ' + kind + '-bottom: ' + theme.global.edgeSize.narrow[data.bottom] + ';\n      ') : ''));
   }
   if (data.left) {
-    result += kind + '-left: ' + theme.global.edgeSize[data.left] + ';';
+    result.push(css(['', '-left:', ';', ''], kind, theme.global.edgeSize[data.left], responsive ? palm('\n        ' + kind + '-left: ' + theme.global.edgeSize.narrow[data.left] + ';\n      ') : ''));
   }
   if (data.right) {
-    result += kind + '-right: ' + theme.global.edgeSize[data.right] + ';';
+    result.push(css(['', '-right:', ';', ''], kind, theme.global.edgeSize[data.right], responsive ? palm('\n        ' + kind + '-right: ' + theme.global.edgeSize.narrow[data.left] + ';\n      ') : ''));
   }
   return result;
 };

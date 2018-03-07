@@ -63,7 +63,8 @@ var Heading = function (_Component) {
 }(_react.Component);
 
 Heading.defaultProps = {
-  level: 1
+  level: 1,
+  responsive: true
 };
 
 

@@ -13,13 +13,13 @@ export function fontSize(size, lineHeight) {
 }
 
 export function lapAndUp(content) {
-  return css(['@media only screen and (min-width:', '){', ';}'], function (props) {
+  return css(['@media only screen and (min-width:', '){', '}'], function (props) {
     return props.theme.global.breakpoints.narrow + 1 + 'px';
   }, content);
 }
 
 export function palm(content) {
-  return css(['@media only screen and (max-width:', '){', ';}'], function (props) {
+  return css(['@media only screen and (max-width:', '){', '}'], function (props) {
     return props.theme.global.breakpoints.narrow + 'px';
   }, content);
 }

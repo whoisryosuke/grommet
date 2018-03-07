@@ -66,28 +66,28 @@ var baseStyle = /*#__PURE__*/exports.baseStyle = (0, _styledComponents.css)(['fo
   return props.theme.global.colors.background && 'background-color: ' + props.theme.global.colors.background + ';';
 });
 
-var edgeStyle = exports.edgeStyle = function edgeStyle(kind, data, theme) {
+var edgeStyle = exports.edgeStyle = function edgeStyle(kind, data, responsive, theme) {
   if (typeof data === 'string') {
-    return kind + ': ' + theme.global.edgeSize[data] + ';';
+    return (0, _styledComponents.css)(['', ':', ';', ''], kind, theme.global.edgeSize[data], responsive ? (0, _mixins.palm)('\n        ' + kind + ': ' + theme.global.edgeSize.narrow[data] + ';\n      ') : '');
   }
-  var result = '';
+  var result = [];
   if (data.horizontal) {
-    result += '\n      ' + kind + '-left: ' + theme.global.edgeSize[data.horizontal] + ';\n      ' + kind + '-right: ' + theme.global.edgeSize[data.horizontal] + ';\n    ';
+    result.push((0, _styledComponents.css)(['', '-left:', ';', '-right:', ';', ''], kind, theme.global.edgeSize[data.horizontal], kind, theme.global.edgeSize[data.horizontal], responsive ? (0, _mixins.palm)('\n        ' + kind + '-left: ' + theme.global.edgeSize.narrow[data.horizontal] + ';\n        ' + kind + '-right: ' + theme.global.edgeSize.narrow[data.horizontal] + ';\n      ') : ''));
   }
   if (data.vertical) {
-    result += '\n      ' + kind + '-top: ' + theme.global.edgeSize[data.vertical] + ';\n      ' + kind + '-bottom: ' + theme.global.edgeSize[data.vertical] + ';\n    ';
+    result.push((0, _styledComponents.css)(['', '-top:', ';', '-bottom:', ';', ''], kind, theme.global.edgeSize[data.vertical], kind, theme.global.edgeSize[data.vertical], responsive ? (0, _mixins.palm)('\n        ' + kind + '-top: ' + theme.global.edgeSize.narrow[data.vertical] + ';\n        ' + kind + '-bottom: ' + theme.global.edgeSize.narrow[data.vertical] + ';\n      ') : ''));
   }
   if (data.top) {
-    result += kind + '-top: ' + theme.global.edgeSize[data.top] + ';';
+    result.push((0, _styledComponents.css)(['', '-top:', ';', ''], kind, theme.global.edgeSize[data.top], responsive ? (0, _mixins.palm)('\n        ' + kind + '-top: ' + theme.global.edgeSize.narrow[data.top] + ';\n      ') : ''));
   }
   if (data.bottom) {
-    result += kind + '-bottom: ' + theme.global.edgeSize[data.bottom] + ';';
+    result.push((0, _styledComponents.css)(['', '-bottom:', ';', ''], kind, theme.global.edgeSize[data.bottom], responsive ? (0, _mixins.palm)('\n        ' + kind + '-bottom: ' + theme.global.edgeSize.narrow[data.bottom] + ';\n      ') : ''));
   }
   if (data.left) {
-    result += kind + '-left: ' + theme.global.edgeSize[data.left] + ';';
+    result.push((0, _styledComponents.css)(['', '-left:', ';', ''], kind, theme.global.edgeSize[data.left], responsive ? (0, _mixins.palm)('\n        ' + kind + '-left: ' + theme.global.edgeSize.narrow[data.left] + ';\n      ') : ''));
   }
   if (data.right) {
-    result += kind + '-right: ' + theme.global.edgeSize[data.right] + ';';
+    result.push((0, _styledComponents.css)(['', '-right:', ';', ''], kind, theme.global.edgeSize[data.right], responsive ? (0, _mixins.palm)('\n        ' + kind + '-right: ' + theme.global.edgeSize.narrow[data.left] + ';\n      ') : ''));
   }
   return result;
 };
