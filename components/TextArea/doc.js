@@ -10,7 +10,6 @@ exports.default = function (TextArea) {
   var DocumentedTextArea = (0, _reactDesc.describe)(TextArea).availableAt((0, _utils.getAvailableAtBadge)('TextArea')).description('A textarea.').usage('import { TextArea } from \'grommet\';\n<TextArea id=\'item\' name=\'item\' />');
 
   DocumentedTextArea.propTypes = {
-    defaultValue: _reactDesc.PropTypes.string.description('What text to start with.'),
     id: _reactDesc.PropTypes.string.description('The id attribute of the textarea.'),
     focusIndicator: _reactDesc.PropTypes.bool.description('Whether the plain textarea should receive a focus outline.'),
     name: _reactDesc.PropTypes.string.description('The name attribute of the textarea.'),

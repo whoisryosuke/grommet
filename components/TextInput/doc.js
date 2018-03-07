@@ -10,7 +10,6 @@ exports.default = function (TextInput) {
   var DocumentedTextInput = (0, _reactDesc.describe)(TextInput).availableAt((0, _utils.getAvailableAtBadge)('TextInput')).description('A text input field with optional suggestions.').usage('import { TextInput } from \'grommet\';\n<TextInput id=\'item\' name=\'item\' />');
 
   DocumentedTextInput.propTypes = {
-    defaultValue: _reactDesc.PropTypes.string.description('What text to start with in the input.'),
     dropAlign: _reactDesc.PropTypes.shape({
       top: _reactDesc.PropTypes.oneOf(['top', 'bottom']),
       bottom: _reactDesc.PropTypes.oneOf(['top', 'bottom']),

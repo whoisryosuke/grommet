@@ -11,7 +11,6 @@ exports.default = function (RadioButton) {
 
   DocumentedRadioButton.propTypes = {
     checked: _reactDesc.PropTypes.bool.description('Same as React <input checked={} />'),
-    defaultChecked: _reactDesc.PropTypes.bool.description('Same as React <input defaultChecked={} />'),
     disabled: _reactDesc.PropTypes.bool.description('Same as React <input disabled={} />. Also adds a hidden input element\nwith the same name so form submissions work.'),
     id: _reactDesc.PropTypes.string.description('The DOM id attribute value to use for the underlying <input/> element.'),
     label: _reactDesc.PropTypes.node.description('Label text to place next to the control.'),

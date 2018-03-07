@@ -6,7 +6,6 @@ export default (function (TextArea) {
   var DocumentedTextArea = describe(TextArea).availableAt(getAvailableAtBadge('TextArea')).description('A textarea.').usage('import { TextArea } from \'grommet\';\n<TextArea id=\'item\' name=\'item\' />');
 
   DocumentedTextArea.propTypes = {
-    defaultValue: PropTypes.string.description('What text to start with.'),
     id: PropTypes.string.description('The id attribute of the textarea.'),
     focusIndicator: PropTypes.bool.description('Whether the plain textarea should receive a focus outline.'),
     name: PropTypes.string.description('The name attribute of the textarea.'),
