@@ -97,7 +97,7 @@ var StyledButton = /*#__PURE__*/styled.button.withConfig({
 }, lapAndUp('\n    transition: 0.1s ease-in-out;\n  '), function (props) {
   return props.plain && plainStyle;
 }, function (props) {
-  return props.fill && fillStyle;
+  return props.fillContainer && fillStyle;
 }, function (props) {
   return props.icon && !props.label && '\n    padding: ' + props.theme.global.edgeSize.small + ';\n  ';
 });

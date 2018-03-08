@@ -59,6 +59,7 @@ var Button = function (_Component) {
         a11yTitle = _props.a11yTitle,
         children = _props.children,
         icon = _props.icon,
+        fill = _props.fill,
         focus = _props.focus,
         href = _props.href,
         label = _props.label,
@@ -66,7 +67,7 @@ var Button = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         type = _props.type,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'icon', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
 
     var grommet = this.context.grommet;
 
@@ -102,6 +103,7 @@ var Button = function (_Component) {
         'aria-label': a11yTitle,
         disabled: disabled,
         icon: icon,
+        fillContainer: fill,
         focus: focus,
         href: href,
         label: label,

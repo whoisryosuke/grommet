@@ -141,7 +141,9 @@ var Calendar = function (_Component) {
         var onSelect = _this.props.onSelect;
 
         _this.setState({ active: new Date(dateString) });
-        onSelect(dateString);
+        if (onSelect) {
+          onSelect(dateString);
+        }
       };
     };
 

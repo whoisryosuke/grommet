@@ -63,11 +63,13 @@ var Box = function (_Component) {
         a11yTitle = _props2.a11yTitle,
         children = _props2.children,
         direction = _props2.direction,
+        fill = _props2.fill,
         gap = _props2.gap,
         responsive = _props2.responsive,
         tag = _props2.tag,
         theme = _props2.theme,
-        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'gap', 'responsive', 'tag', 'theme']);
+        wrap = _props2.wrap,
+        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'fill', 'gap', 'responsive', 'tag', 'theme', 'wrap']);
 
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
@@ -102,6 +104,8 @@ var Box = function (_Component) {
       _extends({
         'aria-label': a11yTitle,
         direction: direction,
+        fillContainer: fill,
+        wrapContents: wrap,
         responsive: responsive,
         theme: theme
       }, rest),

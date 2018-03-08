@@ -328,7 +328,7 @@ var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
 }, function (props) {
   return props.basis && basisStyle;
 }, function (props) {
-  return props.fill && fillStyle(props.fill);
+  return props.fillContainer && fillStyle(props.fillContainer);
 }, function (props) {
   return props.gridArea && gridAreaStyle;
 }, function (props) {
@@ -340,7 +340,7 @@ var StyledBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
 }, function (props) {
   return props.round && roundStyle;
 }, function (props) {
-  return props.wrap && wrapStyle;
+  return props.wrapContents && wrapStyle;
 }, function (props) {
   return props.overflow && 'overflow: ' + props.overflow + ';';
 }, function (props) {
