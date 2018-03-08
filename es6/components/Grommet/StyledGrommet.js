@@ -6,9 +6,9 @@ import styled, { css } from 'styled-components';
 
 import { baseStyle } from '../../utils';
 
-var fullStyle = /*#__PURE__*/css(['width:100vw;height:100vh;']);
+var fullStyle = css(['width:100vw;height:100vh;']);
 
-var StyledGrommet = /*#__PURE__*/styled.div.withConfig({
+var StyledGrommet = styled.div.withConfig({
   displayName: 'StyledGrommet'
 })(['', ' ', ' ', ''], baseStyle, function (props) {
   return props.full && fullStyle;

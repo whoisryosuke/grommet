@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var placeholderColor = /*#__PURE__*/(0, _styledComponents.css)(['color:', ';'], function (props) {
+var placeholderColor = (0, _styledComponents.css)(['color:', ';'], function (props) {
   return props.theme.global.colors.placeholder;
 });
 
@@ -24,9 +24,9 @@ var sizeStyle = function sizeStyle(props) {
   return (0, _styledComponents.css)(['font-size:', ';line-height:', ';'], data.size, data.height);
 };
 
-var plainStyle = /*#__PURE__*/(0, _styledComponents.css)(['border:none;width:100%;-webkit-appearance:none;']);
+var plainStyle = (0, _styledComponents.css)(['border:none;width:100%;-webkit-appearance:none;']);
 
-var StyledTextInput = /*#__PURE__*/_styledComponents2.default.input.withConfig({
+var StyledTextInput = _styledComponents2.default.input.withConfig({
   displayName: 'StyledTextInput'
 })(['', ' width:100%;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, function (props) {
   return props.size && sizeStyle(props);
@@ -36,11 +36,11 @@ var StyledTextInput = /*#__PURE__*/_styledComponents2.default.input.withConfig({
   return (!props.plain || props.focusIndicator) && _utils.focusStyle;
 });
 
-var StyledTextInputContainer = /*#__PURE__*/exports.StyledTextInputContainer = _styledComponents2.default.div.withConfig({
+var StyledTextInputContainer = exports.StyledTextInputContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledTextInput__StyledTextInputContainer'
 })(['width:100%;']);
 
-var StyledSuggestions = /*#__PURE__*/exports.StyledSuggestions = _styledComponents2.default.ol.withConfig({
+var StyledSuggestions = exports.StyledSuggestions = _styledComponents2.default.ol.withConfig({
   displayName: 'StyledTextInput__StyledSuggestions'
 })(['border-top-left-radius:0;border-top-right-radius:0;margin:0;padding:0;list-style-type:none;']);
 

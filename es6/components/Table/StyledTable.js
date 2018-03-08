@@ -12,13 +12,13 @@ var SIZE_MAP = {
   '2/3': '66.66%'
 };
 
-var sizeStyle = /*#__PURE__*/css(['width:', ';max-width:', ';overflow:hidden;'], function (props) {
+var sizeStyle = css(['width:', ';max-width:', ';overflow:hidden;'], function (props) {
   return SIZE_MAP[props.size] || props.theme.global.size[props.size];
 }, function (props) {
   return SIZE_MAP[props.size] || props.theme.global.size[props.size];
 });
 
-export var StyledTableCell = /*#__PURE__*/styled.td.withConfig({
+export var StyledTableCell = styled.td.withConfig({
   displayName: 'StyledTable__StyledTableCell'
 })(['margin:0;padding:0;font-weight:inherit;text-align:inherit;', ' ', ' ', ''], function (props) {
   return props.size && sizeStyle;
@@ -28,27 +28,27 @@ export var StyledTableCell = /*#__PURE__*/styled.td.withConfig({
   return props.tableContext === 'footer' && 'vertical-align: top;';
 });
 
-export var StyledTableDataCaption = /*#__PURE__*/styled.caption.withConfig({
+export var StyledTableDataCaption = styled.caption.withConfig({
   displayName: 'StyledTable__StyledTableDataCaption'
 })(['display:none;']);
 
-export var StyledTableRow = /*#__PURE__*/styled.tr.withConfig({
+export var StyledTableRow = styled.tr.withConfig({
   displayName: 'StyledTable__StyledTableRow'
 })(['']);
 
-export var StyledTableBody = /*#__PURE__*/styled.tbody.withConfig({
+export var StyledTableBody = styled.tbody.withConfig({
   displayName: 'StyledTable__StyledTableBody'
 })(['']);
 
-export var StyledTableHeader = /*#__PURE__*/styled.thead.withConfig({
+export var StyledTableHeader = styled.thead.withConfig({
   displayName: 'StyledTable__StyledTableHeader'
 })(['']);
 
-export var StyledTableFooter = /*#__PURE__*/styled.tfoot.withConfig({
+export var StyledTableFooter = styled.tfoot.withConfig({
   displayName: 'StyledTable__StyledTableFooter'
 })(['']);
 
-var StyledTable = /*#__PURE__*/styled.table.withConfig({
+var StyledTable = styled.table.withConfig({
   displayName: 'StyledTable'
 })(['border-spacing:0;border-collapse:collapse;']);
 

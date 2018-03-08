@@ -17,7 +17,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var disabledStyle = '\n  opacity: 0.5;\n  cursor: default;\n';
 
-var StyledRadioButtonContainer = /*#__PURE__*/exports.StyledRadioButtonContainer = _styledComponents2.default.label.withConfig({
+var StyledRadioButtonContainer = exports.StyledRadioButtonContainer = _styledComponents2.default.label.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonContainer'
 })(['display:flex;flex-direction:row;align-items:center;cursor:pointer;user-select:none;', ' > div:first-child{', '}:hover input:not([disabled]) + div{border-color:', ';}'], function (props) {
   return props.disabled && disabledStyle;
@@ -27,7 +27,7 @@ var StyledRadioButtonContainer = /*#__PURE__*/exports.StyledRadioButtonContainer
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.global.colors.black;
 });
 
-var StyledRadioButtonInput = /*#__PURE__*/exports.StyledRadioButtonInput = _styledComponents2.default.input.withConfig({
+var StyledRadioButtonInput = exports.StyledRadioButtonInput = _styledComponents2.default.input.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonInput'
 })(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], _utils.focusStyle, function (props) {
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.radioButton.check.color;
@@ -37,7 +37,7 @@ var StyledRadioButtonInput = /*#__PURE__*/exports.StyledRadioButtonInput = _styl
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.radioButton.check.color;
 });
 
-var StyledRadioButtonButton = /*#__PURE__*/exports.StyledRadioButtonButton = _styledComponents2.default.div.withConfig({
+var StyledRadioButtonButton = exports.StyledRadioButtonButton = _styledComponents2.default.div.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonButton'
 })(['box-sizing:border-box;position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background-color:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{box-sizing:border-box;position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';fill:', ';}'], function (props) {
   return props.theme.radioButton.size;
@@ -57,7 +57,7 @@ var StyledRadioButtonButton = /*#__PURE__*/exports.StyledRadioButtonButton = _st
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.radioButton.check.color;
 });
 
-var StyledRadioButton = /*#__PURE__*/_styledComponents2.default.div.withConfig({
+var StyledRadioButton = _styledComponents2.default.div.withConfig({
   displayName: 'StyledRadioButton'
 })(['position:relative;']);
 

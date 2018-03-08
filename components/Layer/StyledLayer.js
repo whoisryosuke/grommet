@@ -15,15 +15,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var hiddenPositionStyle = /*#__PURE__*/(0, _styledComponents.css)(['left:-100%;right:100%;z-index:-1;position:fixed;']);
+var hiddenPositionStyle = (0, _styledComponents.css)(['left:-100%;right:100%;z-index:-1;position:fixed;']);
 
-var StyledLayer = /*#__PURE__*/_styledComponents2.default.div.withConfig({
+var StyledLayer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer'
 })(['', ' position:relative;z-index:10;overflow:auto;pointer-events:none;', ' ', ''], _utils.baseStyle, (0, _utils.palm)('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n  '), function (props) {
   return props.position === 'hidden' ? hiddenPositionStyle : (0, _utils.lapAndUp)('\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n    width: 100vw;\n    height: 100vh;\n  ');
 });
 
-var StyledOverlay = /*#__PURE__*/exports.StyledOverlay = _styledComponents2.default.div.withConfig({
+var StyledOverlay = exports.StyledOverlay = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer__StyledOverlay'
 })(['', ' top:0px;left:0px;right:0px;bottom:0px;background-color:', ';pointer-events:all;'], (0, _utils.lapAndUp)('position: absolute;'), function (props) {
   return props.theme.layer.overlayBackgroundColor;
@@ -160,7 +160,7 @@ var POSITIONS = {
   }
 };
 
-var StyledContainer = /*#__PURE__*/exports.StyledContainer = _styledComponents2.default.div.withConfig({
+var StyledContainer = exports.StyledContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
 })(['', ' display:flex;flex-direction:column;min-height:', ';background-color:', ';outline:none;pointer-events:all;z-index:15;', ' ', ''], function (props) {
   return !props.modal ? _utils.baseStyle : '';

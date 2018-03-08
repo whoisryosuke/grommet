@@ -11,7 +11,7 @@ var ALIGN_MAP = {
   stretch: 'stretch'
 };
 
-var alignStyle = /*#__PURE__*/css(['align-items:', ';'], function (props) {
+var alignStyle = css(['align-items:', ';'], function (props) {
   return ALIGN_MAP[props.align];
 });
 
@@ -24,7 +24,7 @@ var ALIGN_CONTENT_MAP = {
   stretch: 'stretch'
 };
 
-var alignContentStyle = /*#__PURE__*/css(['align-content:', ';'], function (props) {
+var alignContentStyle = css(['align-content:', ';'], function (props) {
   return ALIGN_CONTENT_MAP[props.alignContent];
 });
 
@@ -35,7 +35,7 @@ var JUSTIFY_MAP = {
   stretch: 'stretch'
 };
 
-var justifyStyle = /*#__PURE__*/css(['justify-content:', ';'], function (props) {
+var justifyStyle = css(['justify-content:', ';'], function (props) {
   return JUSTIFY_MAP[props.justify];
 });
 
@@ -48,7 +48,7 @@ var JUSTIFY_CONTENT_MAP = {
   stretch: 'stretch'
 };
 
-var justifyContentStyle = /*#__PURE__*/css(['justify-content:', ';'], function (props) {
+var justifyContentStyle = css(['justify-content:', ';'], function (props) {
   return JUSTIFY_CONTENT_MAP[props.justifyContent];
 });
 
@@ -79,13 +79,13 @@ var SIZE_MAP = {
   '2/3': '66.66%'
 };
 
-var columnsStyle = /*#__PURE__*/css(['grid-template-columns:', ';'], function (props) {
+var columnsStyle = css(['grid-template-columns:', ';'], function (props) {
   return props.columns.map(function (s) {
     return SIZE_MAP[s] || props.theme.global.size[s];
   }).join(' ');
 });
 
-var rowsStyle = /*#__PURE__*/css(['grid-template-rows:', ';'], function (props) {
+var rowsStyle = css(['grid-template-rows:', ';'], function (props) {
   return props.rows.map(function (s) {
     return SIZE_MAP[s] || props.theme.global.size[s];
   }).join(' ');
@@ -110,7 +110,7 @@ var areasStyle = function areasStyle(props) {
   }).join(' ') + ';';
 };
 
-var StyledGrid = /*#__PURE__*/styled.div.withConfig({
+var StyledGrid = styled.div.withConfig({
   displayName: 'StyledGrid'
 })(['display:grid;box-sizing:border-box;height:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.align && alignStyle;

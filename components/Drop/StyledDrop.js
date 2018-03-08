@@ -26,9 +26,9 @@ function getTransformOriginStyle(align) {
   return vertical + ' ' + horizontal;
 }
 
-var dropKeyFrames = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{opacity:0.5;transform:scale(0.8);}100%{opacity:1;transform:scale(1);}']);
+var dropKeyFrames = (0, _styledComponents.keyframes)(['0%{opacity:0.5;transform:scale(0.8);}100%{opacity:1;transform:scale(1);}']);
 
-var StyledDrop = /*#__PURE__*/_styledComponents2.default.div.withConfig({
+var StyledDrop = _styledComponents2.default.div.withConfig({
   displayName: 'StyledDrop'
 })(['', ' border-radius:', ';box-shadow:', ';position:fixed;z-index:20;overflow:auto;outline:none;', ' opacity:0;transform-origin:', ';animation:', ' 0.1s forwards;animation-delay:0.01s;'], _utils.baseStyle, function (props) {
   return props.theme.global.drop.border.radius;

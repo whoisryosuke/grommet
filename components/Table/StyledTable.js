@@ -21,13 +21,13 @@ var SIZE_MAP = {
   '2/3': '66.66%'
 };
 
-var sizeStyle = /*#__PURE__*/(0, _styledComponents.css)(['width:', ';max-width:', ';overflow:hidden;'], function (props) {
+var sizeStyle = (0, _styledComponents.css)(['width:', ';max-width:', ';overflow:hidden;'], function (props) {
   return SIZE_MAP[props.size] || props.theme.global.size[props.size];
 }, function (props) {
   return SIZE_MAP[props.size] || props.theme.global.size[props.size];
 });
 
-var StyledTableCell = /*#__PURE__*/exports.StyledTableCell = _styledComponents2.default.td.withConfig({
+var StyledTableCell = exports.StyledTableCell = _styledComponents2.default.td.withConfig({
   displayName: 'StyledTable__StyledTableCell'
 })(['margin:0;padding:0;font-weight:inherit;text-align:inherit;', ' ', ' ', ''], function (props) {
   return props.size && sizeStyle;
@@ -37,27 +37,27 @@ var StyledTableCell = /*#__PURE__*/exports.StyledTableCell = _styledComponents2.
   return props.tableContext === 'footer' && 'vertical-align: top;';
 });
 
-var StyledTableDataCaption = /*#__PURE__*/exports.StyledTableDataCaption = _styledComponents2.default.caption.withConfig({
+var StyledTableDataCaption = exports.StyledTableDataCaption = _styledComponents2.default.caption.withConfig({
   displayName: 'StyledTable__StyledTableDataCaption'
 })(['display:none;']);
 
-var StyledTableRow = /*#__PURE__*/exports.StyledTableRow = _styledComponents2.default.tr.withConfig({
+var StyledTableRow = exports.StyledTableRow = _styledComponents2.default.tr.withConfig({
   displayName: 'StyledTable__StyledTableRow'
 })(['']);
 
-var StyledTableBody = /*#__PURE__*/exports.StyledTableBody = _styledComponents2.default.tbody.withConfig({
+var StyledTableBody = exports.StyledTableBody = _styledComponents2.default.tbody.withConfig({
   displayName: 'StyledTable__StyledTableBody'
 })(['']);
 
-var StyledTableHeader = /*#__PURE__*/exports.StyledTableHeader = _styledComponents2.default.thead.withConfig({
+var StyledTableHeader = exports.StyledTableHeader = _styledComponents2.default.thead.withConfig({
   displayName: 'StyledTable__StyledTableHeader'
 })(['']);
 
-var StyledTableFooter = /*#__PURE__*/exports.StyledTableFooter = _styledComponents2.default.tfoot.withConfig({
+var StyledTableFooter = exports.StyledTableFooter = _styledComponents2.default.tfoot.withConfig({
   displayName: 'StyledTable__StyledTableFooter'
 })(['']);
 
-var StyledTable = /*#__PURE__*/_styledComponents2.default.table.withConfig({
+var StyledTable = _styledComponents2.default.table.withConfig({
   displayName: 'StyledTable'
 })(['border-spacing:0;border-collapse:collapse;']);
 

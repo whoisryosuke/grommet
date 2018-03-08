@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var StyledHour = /*#__PURE__*/exports.StyledHour = _styledComponents2.default.line.withConfig({
+var StyledHour = exports.StyledHour = _styledComponents2.default.line.withConfig({
   displayName: 'StyledClock__StyledHour'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
   return props.theme.clock.analog.hour.width;
@@ -21,7 +21,7 @@ var StyledHour = /*#__PURE__*/exports.StyledHour = _styledComponents2.default.li
   return props.theme.clock.analog.hour.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
-var StyledMinute = /*#__PURE__*/exports.StyledMinute = _styledComponents2.default.line.withConfig({
+var StyledMinute = exports.StyledMinute = _styledComponents2.default.line.withConfig({
   displayName: 'StyledClock__StyledMinute'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
   return props.theme.clock.analog.minute.width;
@@ -29,7 +29,7 @@ var StyledMinute = /*#__PURE__*/exports.StyledMinute = _styledComponents2.defaul
   return props.theme.clock.analog.minute.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
-var StyledSecond = /*#__PURE__*/exports.StyledSecond = _styledComponents2.default.line.withConfig({
+var StyledSecond = exports.StyledSecond = _styledComponents2.default.line.withConfig({
   displayName: 'StyledClock__StyledSecond'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
   return props.theme.clock.analog.second.width;
@@ -54,27 +54,27 @@ var sizeStyle = function sizeStyle(props) {
   return (0, _styledComponents.css)(['font-size:', ';line-height:', ';'], data.size, data.height);
 };
 
-var StyledDigitalDigit = /*#__PURE__*/exports.StyledDigitalDigit = _styledComponents2.default.div.withConfig({
+var StyledDigitalDigit = exports.StyledDigitalDigit = _styledComponents2.default.div.withConfig({
   displayName: 'StyledClock__StyledDigitalDigit'
 })(['position:relative;width:0.8em;text-align:center;overflow:hidden;', ''], function (props) {
   return sizeStyle(props);
 });
 
-var previousUp = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{transform:translateY(0);}100%{transform:translateY(-100%);}']);
+var previousUp = (0, _styledComponents.keyframes)(['0%{transform:translateY(0);}100%{transform:translateY(-100%);}']);
 
-var previousDown = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{transform:translateY(0);}100%{transform:translateY(100%);}']);
+var previousDown = (0, _styledComponents.keyframes)(['0%{transform:translateY(0);}100%{transform:translateY(100%);}']);
 
-var StyledDigitalPrevious = /*#__PURE__*/exports.StyledDigitalPrevious = _styledComponents2.default.div.withConfig({
+var StyledDigitalPrevious = exports.StyledDigitalPrevious = _styledComponents2.default.div.withConfig({
   displayName: 'StyledClock__StyledDigitalPrevious'
 })(['position:absolute;top:0;left:0;width:0.8em;text-align:center;animation:', ' 0.5s forwards;'], function (props) {
   return props.direction === 'down' ? previousDown : previousUp;
 });
 
-var nextUp = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{transform:translateY(100%);}100%{transform:translateY(0);}']);
+var nextUp = (0, _styledComponents.keyframes)(['0%{transform:translateY(100%);}100%{transform:translateY(0);}']);
 
-var nextDown = /*#__PURE__*/(0, _styledComponents.keyframes)(['0%{transform:translateY(-100%);}100%{transform:translateY(0);}']);
+var nextDown = (0, _styledComponents.keyframes)(['0%{transform:translateY(-100%);}100%{transform:translateY(0);}']);
 
-var StyledDigitalNext = /*#__PURE__*/exports.StyledDigitalNext = _styledComponents2.default.div.withConfig({
+var StyledDigitalNext = exports.StyledDigitalNext = _styledComponents2.default.div.withConfig({
   displayName: 'StyledClock__StyledDigitalNext'
 })(['position:absolute;top:0;left:0;width:0.8em;text-align:center;animation:', ' 0.5s forwards;'], function (props) {
   return props.direction === 'down' ? nextDown : nextUp;

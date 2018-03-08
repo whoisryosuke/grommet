@@ -10,13 +10,13 @@ var sizeStyle = function sizeStyle(props) {
   return css(['font-size:', ';line-height:', ';width:', ';'], data.fontSize, data.lineHeight, props.theme.global.size[props.size]);
 };
 
-var StyledCalendar = /*#__PURE__*/styled.div.withConfig({
+var StyledCalendar = styled.div.withConfig({
   displayName: 'StyledCalendar'
 })(['', ''], function (props) {
   return sizeStyle(props);
 });
 
-export var StyledWeeksContainer = /*#__PURE__*/styled.div.withConfig({
+export var StyledWeeksContainer = styled.div.withConfig({
   displayName: 'StyledCalendar__StyledWeeksContainer'
 })(['overflow:hidden;', ''], function (props) {
   return 'height: ' + parseMetricToNum(props.theme.calendar[props.size].daySize) * 6 + 'px;';
@@ -36,17 +36,17 @@ var slideStyle = function slideStyle(props) {
   return css(['animation ', ' ', ' forwards;'], keyframes(['from{transform:translateY(', ')}to{transform:translateY(', ')}'], direction === 'down' ? '-' + amount + 'px' : '0', direction === 'up' ? '-' + amount + 'px' : '0'), slideDuration);
 };
 
-export var StyledWeeks = /*#__PURE__*/styled.div.withConfig({
+export var StyledWeeks = styled.div.withConfig({
   displayName: 'StyledCalendar__StyledWeeks'
 })(['position:relative;', ''], function (props) {
   return props.slide && slideStyle(props);
 });
 
-export var StyledWeek = /*#__PURE__*/styled.div.withConfig({
+export var StyledWeek = styled.div.withConfig({
   displayName: 'StyledCalendar__StyledWeek'
 })(['display:flex;flex-direction:row;flex-justify:between;']);
 
-export var StyledDayContainer = /*#__PURE__*/styled.div.withConfig({
+export var StyledDayContainer = styled.div.withConfig({
   displayName: 'StyledCalendar__StyledDayContainer'
 })(['flex:0 0;']);
 
@@ -55,7 +55,7 @@ var daySizeStyle = function daySizeStyle(props) {
   return css(['width:', ';height:', ';'], data.daySize, data.daySize);
 };
 
-export var StyledDay = /*#__PURE__*/styled.div.withConfig({
+export var StyledDay = styled.div.withConfig({
   displayName: 'StyledCalendar__StyledDay'
 })(['display:flex;justify-content:center;align-items:center;', ' ', ' ', ''], function (props) {
   return daySizeStyle(props);

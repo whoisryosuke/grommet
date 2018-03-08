@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css, keyframes } from 'styled-components';
 
-export var StyledHour = /*#__PURE__*/styled.line.withConfig({
+export var StyledHour = styled.line.withConfig({
   displayName: 'StyledClock__StyledHour'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
   return props.theme.clock.analog.hour.width;
@@ -12,7 +12,7 @@ export var StyledHour = /*#__PURE__*/styled.line.withConfig({
   return props.theme.clock.analog.hour.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
-export var StyledMinute = /*#__PURE__*/styled.line.withConfig({
+export var StyledMinute = styled.line.withConfig({
   displayName: 'StyledClock__StyledMinute'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
   return props.theme.clock.analog.minute.width;
@@ -20,7 +20,7 @@ export var StyledMinute = /*#__PURE__*/styled.line.withConfig({
   return props.theme.clock.analog.minute.color[props.grommet.dark ? 'dark' : 'light'];
 });
 
-export var StyledSecond = /*#__PURE__*/styled.line.withConfig({
+export var StyledSecond = styled.line.withConfig({
   displayName: 'StyledClock__StyledSecond'
 })(['stroke-width:', ';stroke:', ';transition:stroke 1s ease-out;'], function (props) {
   return props.theme.clock.analog.second.width;
@@ -45,27 +45,27 @@ var sizeStyle = function sizeStyle(props) {
   return css(['font-size:', ';line-height:', ';'], data.size, data.height);
 };
 
-export var StyledDigitalDigit = /*#__PURE__*/styled.div.withConfig({
+export var StyledDigitalDigit = styled.div.withConfig({
   displayName: 'StyledClock__StyledDigitalDigit'
 })(['position:relative;width:0.8em;text-align:center;overflow:hidden;', ''], function (props) {
   return sizeStyle(props);
 });
 
-var previousUp = /*#__PURE__*/keyframes(['0%{transform:translateY(0);}100%{transform:translateY(-100%);}']);
+var previousUp = keyframes(['0%{transform:translateY(0);}100%{transform:translateY(-100%);}']);
 
-var previousDown = /*#__PURE__*/keyframes(['0%{transform:translateY(0);}100%{transform:translateY(100%);}']);
+var previousDown = keyframes(['0%{transform:translateY(0);}100%{transform:translateY(100%);}']);
 
-export var StyledDigitalPrevious = /*#__PURE__*/styled.div.withConfig({
+export var StyledDigitalPrevious = styled.div.withConfig({
   displayName: 'StyledClock__StyledDigitalPrevious'
 })(['position:absolute;top:0;left:0;width:0.8em;text-align:center;animation:', ' 0.5s forwards;'], function (props) {
   return props.direction === 'down' ? previousDown : previousUp;
 });
 
-var nextUp = /*#__PURE__*/keyframes(['0%{transform:translateY(100%);}100%{transform:translateY(0);}']);
+var nextUp = keyframes(['0%{transform:translateY(100%);}100%{transform:translateY(0);}']);
 
-var nextDown = /*#__PURE__*/keyframes(['0%{transform:translateY(-100%);}100%{transform:translateY(0);}']);
+var nextDown = keyframes(['0%{transform:translateY(-100%);}100%{transform:translateY(0);}']);
 
-export var StyledDigitalNext = /*#__PURE__*/styled.div.withConfig({
+export var StyledDigitalNext = styled.div.withConfig({
   displayName: 'StyledClock__StyledDigitalNext'
 })(['position:absolute;top:0;left:0;width:0.8em;text-align:center;animation:', ' 0.5s forwards;'], function (props) {
   return props.direction === 'down' ? nextDown : nextUp;

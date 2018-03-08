@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 
 import { focusStyle, inputStyle } from '../../utils';
 
-var placeholderColor = /*#__PURE__*/css(['color:', ';'], function (props) {
+var placeholderColor = css(['color:', ';'], function (props) {
   return props.theme.global.colors.placeholder;
 });
 
@@ -15,9 +15,9 @@ var sizeStyle = function sizeStyle(props) {
   return css(['font-size:', ';line-height:', ';'], data.size, data.height);
 };
 
-var plainStyle = /*#__PURE__*/css(['border:none;width:100%;-webkit-appearance:none;']);
+var plainStyle = css(['border:none;width:100%;-webkit-appearance:none;']);
 
-var StyledTextInput = /*#__PURE__*/styled.input.withConfig({
+var StyledTextInput = styled.input.withConfig({
   displayName: 'StyledTextInput'
 })(['', ' width:100%;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
   return props.size && sizeStyle(props);
@@ -27,11 +27,11 @@ var StyledTextInput = /*#__PURE__*/styled.input.withConfig({
   return (!props.plain || props.focusIndicator) && focusStyle;
 });
 
-export var StyledTextInputContainer = /*#__PURE__*/styled.div.withConfig({
+export var StyledTextInputContainer = styled.div.withConfig({
   displayName: 'StyledTextInput__StyledTextInputContainer'
 })(['width:100%;']);
 
-export var StyledSuggestions = /*#__PURE__*/styled.ol.withConfig({
+export var StyledSuggestions = styled.ol.withConfig({
   displayName: 'StyledTextInput__StyledSuggestions'
 })(['border-top-left-radius:0;border-top-right-radius:0;margin:0;padding:0;list-style-type:none;']);
 

@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var StyledWorldMap = /*#__PURE__*/_styledComponents2.default.svg.withConfig({
+var StyledWorldMap = _styledComponents2.default.svg.withConfig({
   displayName: 'StyledWorldMap'
 })(['width:100%;@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){padding-bottom:49%;height:1px;}']);
 

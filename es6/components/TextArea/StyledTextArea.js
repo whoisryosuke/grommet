@@ -6,13 +6,13 @@ import styled, { css } from 'styled-components';
 
 import { focusStyle, inputStyle } from '../../utils';
 
-var placeholderColor = /*#__PURE__*/css(['color:', ';'], function (props) {
+var placeholderColor = css(['color:', ';'], function (props) {
   return props.theme.global.colors.placeholder;
 });
 
-var plainStyle = /*#__PURE__*/css(['border:none;width:100%;-webkit-appearance:none;']);
+var plainStyle = css(['border:none;width:100%;-webkit-appearance:none;']);
 
-var StyledTextArea = /*#__PURE__*/styled.textarea.withConfig({
+var StyledTextArea = styled.textarea.withConfig({
   displayName: 'StyledTextArea'
 })(['', ' width:100%;', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
   return props.plain && plainStyle;

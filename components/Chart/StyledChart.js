@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var StyledChart = /*#__PURE__*/_styledComponents2.default.svg.withConfig({
+var StyledChart = _styledComponents2.default.svg.withConfig({
   displayName: 'StyledChart'
 })(['max-width:100%;']);
 

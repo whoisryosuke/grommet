@@ -17,7 +17,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var disabledStyle = '\n  opacity: 0.5;\n  cursor: default;\n';
 
-var StyledCheckBoxContainer = /*#__PURE__*/exports.StyledCheckBoxContainer = _styledComponents2.default.label.withConfig({
+var StyledCheckBoxContainer = exports.StyledCheckBoxContainer = _styledComponents2.default.label.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxContainer'
 })(['display:flex;flex-direction:', ';align-items:center;cursor:pointer;user-select:none;', ' > div:first-child{', '}:hover input:not([disabled]) + div,:hover input:not([disabled]) + span{border-color:', ';}'], function (props) {
   return props.reverse ? 'row-reverse' : 'row';
@@ -29,7 +29,7 @@ var StyledCheckBoxContainer = /*#__PURE__*/exports.StyledCheckBoxContainer = _st
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.global.colors.black;
 });
 
-var StyledCheckBoxInput = /*#__PURE__*/exports.StyledCheckBoxInput = _styledComponents2.default.input.withConfig({
+var StyledCheckBoxInput = exports.StyledCheckBoxInput = _styledComponents2.default.input.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxInput'
 })(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], _utils.focusStyle, function (props) {
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
@@ -39,7 +39,7 @@ var StyledCheckBoxInput = /*#__PURE__*/exports.StyledCheckBoxInput = _styledComp
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 });
 
-var StyledCheckBoxBox = /*#__PURE__*/exports.StyledCheckBoxBox = _styledComponents2.default.div.withConfig({
+var StyledCheckBoxBox = exports.StyledCheckBoxBox = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxBox'
 })(['box-sizing:border-box;position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background-color:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{box-sizing:border-box;position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';stroke-width:', ';stroke:', ';}'], function (props) {
   return props.theme.checkBox.size;
@@ -61,7 +61,7 @@ var StyledCheckBoxBox = /*#__PURE__*/exports.StyledCheckBoxBox = _styledComponen
   return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 });
 
-var StyledCheckBoxToggle = /*#__PURE__*/exports.StyledCheckBoxToggle = _styledComponents2.default.span.withConfig({
+var StyledCheckBoxToggle = exports.StyledCheckBoxToggle = _styledComponents2.default.span.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxToggle'
 })(['box-sizing:border-box;position:relative;vertical-align:middle;display:inline-block;width:', ';height:', ';border:', ' solid;border-color:', ';border-radius:', ';'], function (props) {
   return props.theme.checkBox.toggle.size;
@@ -75,7 +75,7 @@ var StyledCheckBoxToggle = /*#__PURE__*/exports.StyledCheckBoxToggle = _styledCo
   return props.theme.checkBox.toggle.radius;
 });
 
-var StyledCheckBoxKnob = /*#__PURE__*/exports.StyledCheckBoxKnob = _styledComponents2.default.span.withConfig({
+var StyledCheckBoxKnob = exports.StyledCheckBoxKnob = _styledComponents2.default.span.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxKnob'
 })(['box-sizing:border-box;position:absolute;top:-', ';left:-', ';transition:all 0.3s;width:', ';height:', ';background-color:', ';border-radius:', ';'], function (props) {
   return props.theme.checkBox.border.width;
@@ -91,7 +91,7 @@ var StyledCheckBoxKnob = /*#__PURE__*/exports.StyledCheckBoxKnob = _styledCompon
   return props.theme.checkBox.toggle.radius;
 });
 
-var StyledCheckBox = /*#__PURE__*/_styledComponents2.default.div.withConfig({
+var StyledCheckBox = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCheckBox'
 })(['position:relative;']);
 

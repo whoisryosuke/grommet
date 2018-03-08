@@ -18,7 +18,7 @@ var ALIGN_MAP = {
   stretch: 'stretch'
 };
 
-var alignStyle = /*#__PURE__*/css(['align-items:', ';'], function (props) {
+var alignStyle = css(['align-items:', ';'], function (props) {
   return ALIGN_MAP[props.align];
 });
 
@@ -31,7 +31,7 @@ var ALIGN_CONTENT_MAP = {
   stretch: 'stretch'
 };
 
-var alignContentStyle = /*#__PURE__*/css(['align-content:', ';'], function (props) {
+var alignContentStyle = css(['align-content:', ';'], function (props) {
   return ALIGN_CONTENT_MAP[props.alignContent];
 });
 
@@ -42,7 +42,7 @@ var ALIGN_SELF_MAP = {
   stretch: 'stretch'
 };
 
-var alignSelfStyle = /*#__PURE__*/css(['align-self:', ';'], function (props) {
+var alignSelfStyle = css(['align-self:', ';'], function (props) {
   return ALIGN_SELF_MAP[props.alignSelf];
 });
 
@@ -56,7 +56,7 @@ var BASIS_MAP = {
   '2/3': '66.66%'
 };
 
-var basisStyle = /*#__PURE__*/css(['flex-basis:', ';'], function (props) {
+var basisStyle = css(['flex-basis:', ';'], function (props) {
   return BASIS_MAP[props.basis] || props.theme.global.size[props.basis];
 });
 
@@ -64,7 +64,7 @@ var basisStyle = /*#__PURE__*/css(['flex-basis:', ';'], function (props) {
 // https://stackoverflow.com/questions/36247140/why-doesnt-flex-item-shrink-past-content-size
 // we assume we are in the context of a Box going the other direction
 // TODO: revisit this
-var directionStyle = /*#__PURE__*/css(['', ' ', ' flex-direction:', ';', '}'], function (props) {
+var directionStyle = css(['', ' ', ' flex-direction:', ';', '}'], function (props) {
   return props.direction === 'row' && 'min-height: 0;';
 }, function (props) {
   return props.direction === 'column' && 'min-width: 0;';
@@ -74,13 +74,13 @@ var directionStyle = /*#__PURE__*/css(['', ' ', ' flex-direction:', ';', '}'], f
   return props.direction === 'row-responsive' ? palm('\n    flex-direction: column;\n    flex-basis: auto;\n    justify-content: flex-start;\n    align-items: stretch;\n  ') : '';
 });
 
-var elevationStyle = /*#__PURE__*/css(['box-shadow:', ';'], function (props) {
+var elevationStyle = css(['box-shadow:', ';'], function (props) {
   return props.theme.global.elevation[props.elevation];
 });
 
 var FLEX_MAP = (_FLEX_MAP = {}, _FLEX_MAP[true] = '1 1', _FLEX_MAP[false] = '0 0', _FLEX_MAP.grow = '1 0', _FLEX_MAP.shrink = '0 1', _FLEX_MAP);
 
-var flexStyle = /*#__PURE__*/css(['flex:', ';'], function (props) {
+var flexStyle = css(['flex:', ';'], function (props) {
   return FLEX_MAP[props.flex];
 });
 
@@ -97,7 +97,7 @@ var fillStyle = function fillStyle(fill) {
   return undefined;
 };
 
-var gridAreaStyle = /*#__PURE__*/css(['grid-area:', ';'], function (props) {
+var gridAreaStyle = css(['grid-area:', ';'], function (props) {
   return props.gridArea;
 });
 
@@ -108,7 +108,7 @@ var JUSTIFY_MAP = {
   start: 'flex-start'
 };
 
-var justifyStyle = /*#__PURE__*/css(['justify-content:', ';'], function (props) {
+var justifyStyle = css(['justify-content:', ';'], function (props) {
   return JUSTIFY_MAP[props.justify];
 });
 
@@ -149,7 +149,7 @@ var ROUND_MAP = {
   'full': '100%'
 };
 
-var roundStyle = /*#__PURE__*/css(['border-radius:', ';', ''], function (props) {
+var roundStyle = css(['border-radius:', ';', ''], function (props) {
   return ROUND_MAP[props.round] || props.theme.global.edgeSize[props.round];
 }, function (props) {
   return props.responsive ? palm('\n    border-radius: ' + (ROUND_MAP[props.round] || props.theme.global.edgeSize.narrow[props.round]) + ';\n  ') : '';
@@ -293,12 +293,12 @@ var animationInitialStyle = function animationInitialStyle(item) {
   return '';
 };
 
-var animationStyle = /*#__PURE__*/css(['', ''], function (props) {
+var animationStyle = css(['', ''], function (props) {
   return '\n    ' + animationInitialStyle(props.animation) + '\n    animation: ' + animationItemStyle(props.animation, props.theme) + ';\n  ';
 });
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
-var StyledBox = /*#__PURE__*/styled.div.withConfig({
+var StyledBox = styled.div.withConfig({
   displayName: 'StyledBox'
 })(['display:flex;box-sizing:border-box;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.basis && 'max-width: 100%;';
@@ -344,7 +344,7 @@ export default StyledBox.extend(_templateObject, function (props) {
   return props.theme.box && props.theme.box.extend;
 });
 
-var gapStyle = /*#__PURE__*/css(['', ''], function (_ref) {
+var gapStyle = css(['', ''], function (_ref) {
   var direction = _ref.direction,
       gap = _ref.gap,
       responsive = _ref.responsive,
@@ -352,7 +352,7 @@ var gapStyle = /*#__PURE__*/css(['', ''], function (_ref) {
   return direction === 'column' ? '\n      height: ' + edgeSize[gap] + ';\n      ' + (responsive ? palm('\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ' : '\n      width: ' + edgeSize[gap] + ';\n      ' + (responsive && direction === 'row-responsive' ? palm('\n        width: auto;\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ';
 });
 
-export var StyledBoxGap = /*#__PURE__*/styled.div.withConfig({
+export var StyledBoxGap = styled.div.withConfig({
   displayName: 'StyledBox__StyledBoxGap'
 })(['', ';'], function (props) {
   return props.gap && gapStyle;

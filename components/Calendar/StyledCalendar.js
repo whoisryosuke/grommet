@@ -20,13 +20,13 @@ var sizeStyle = function sizeStyle(props) {
   return (0, _styledComponents.css)(['font-size:', ';line-height:', ';width:', ';'], data.fontSize, data.lineHeight, props.theme.global.size[props.size]);
 };
 
-var StyledCalendar = /*#__PURE__*/_styledComponents2.default.div.withConfig({
+var StyledCalendar = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCalendar'
 })(['', ''], function (props) {
   return sizeStyle(props);
 });
 
-var StyledWeeksContainer = /*#__PURE__*/exports.StyledWeeksContainer = _styledComponents2.default.div.withConfig({
+var StyledWeeksContainer = exports.StyledWeeksContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCalendar__StyledWeeksContainer'
 })(['overflow:hidden;', ''], function (props) {
   return 'height: ' + (0, _utils.parseMetricToNum)(props.theme.calendar[props.size].daySize) * 6 + 'px;';
@@ -46,17 +46,17 @@ var slideStyle = function slideStyle(props) {
   return (0, _styledComponents.css)(['animation ', ' ', ' forwards;'], (0, _styledComponents.keyframes)(['from{transform:translateY(', ')}to{transform:translateY(', ')}'], direction === 'down' ? '-' + amount + 'px' : '0', direction === 'up' ? '-' + amount + 'px' : '0'), slideDuration);
 };
 
-var StyledWeeks = /*#__PURE__*/exports.StyledWeeks = _styledComponents2.default.div.withConfig({
+var StyledWeeks = exports.StyledWeeks = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCalendar__StyledWeeks'
 })(['position:relative;', ''], function (props) {
   return props.slide && slideStyle(props);
 });
 
-var StyledWeek = /*#__PURE__*/exports.StyledWeek = _styledComponents2.default.div.withConfig({
+var StyledWeek = exports.StyledWeek = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCalendar__StyledWeek'
 })(['display:flex;flex-direction:row;flex-justify:between;']);
 
-var StyledDayContainer = /*#__PURE__*/exports.StyledDayContainer = _styledComponents2.default.div.withConfig({
+var StyledDayContainer = exports.StyledDayContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCalendar__StyledDayContainer'
 })(['flex:0 0;']);
 
@@ -65,7 +65,7 @@ var daySizeStyle = function daySizeStyle(props) {
   return (0, _styledComponents.css)(['width:', ';height:', ';'], data.daySize, data.daySize);
 };
 
-var StyledDay = /*#__PURE__*/exports.StyledDay = _styledComponents2.default.div.withConfig({
+var StyledDay = exports.StyledDay = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCalendar__StyledDay'
 })(['display:flex;justify-content:center;align-items:center;', ' ', ' ', ''], function (props) {
   return daySizeStyle(props);

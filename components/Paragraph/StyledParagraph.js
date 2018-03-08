@@ -38,11 +38,11 @@ var TEXT_ALIGN_MAP = {
   start: 'left'
 };
 
-var textAlignStyle = /*#__PURE__*/(0, _styledComponents.css)(['text-align:', ';'], function (props) {
+var textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (props) {
   return TEXT_ALIGN_MAP[props.textAlign];
 });
 
-var StyledParagraph = /*#__PURE__*/_styledComponents2.default.p.withConfig({
+var StyledParagraph = _styledComponents2.default.p.withConfig({
   displayName: 'StyledParagraph'
 })(['', ' ', ' ', ''], function (props) {
   return sizeStyle(props);

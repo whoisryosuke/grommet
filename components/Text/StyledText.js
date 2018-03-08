@@ -53,17 +53,17 @@ var TEXT_ALIGN_MAP = {
   start: 'left'
 };
 
-var textAlignStyle = /*#__PURE__*/(0, _styledComponents.css)(['text-align:', ';'], function (props) {
+var textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (props) {
   return TEXT_ALIGN_MAP[props.textAlign];
 });
 
 var truncateStyle = '\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n';
 
-var colorStyle = /*#__PURE__*/(0, _styledComponents.css)(['color:', ''], function (props) {
+var colorStyle = (0, _styledComponents.css)(['color:', ''], function (props) {
   return (0, _utils.colorForName)(props.color, props.theme);
 });
 
-var StyledText = /*#__PURE__*/_styledComponents2.default.span.withConfig({
+var StyledText = _styledComponents2.default.span.withConfig({
   displayName: 'StyledText'
 })(['', ' ', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
