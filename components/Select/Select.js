@@ -62,19 +62,6 @@ var Select = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Select.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    var onClose = nextProps.onClose,
-        value = nextProps.value;
-    var open = this.state.open;
-
-    if (value !== this.props.value) {
-      this.setState({ open: false });
-      if (onClose && open) {
-        onClose();
-      }
-    }
-  };
-
   Select.prototype.render = function render() {
     var _this2 = this;
 
@@ -83,14 +70,26 @@ var Select = function (_Component) {
         children = _props.children,
         dropAlign = _props.dropAlign,
         dropTarget = _props.dropTarget,
+        onChange = _props.onChange,
         onClose = _props.onClose,
         placeholder = _props.placeholder,
         plain = _props.plain,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'onClose', 'placeholder', 'plain', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'onChange', 'onClose', 'placeholder', 'plain', 'value']);
 
     var open = this.state.open;
 
+
+    var onSelectChange = function onSelectChange(event) {
+      for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
+
+      _this2.onClose();
+      if (onChange) {
+        onChange.apply(undefined, [event].concat(args));
+      }
+    };
 
     return _react2.default.createElement(
       _Keyboard.Keyboard,
@@ -105,7 +104,7 @@ var Select = function (_Component) {
           onOpen: this.onOpen,
           onClose: this.onClose,
           a11yTitle: '' + a11yTitle + (typeof value === 'string' ? ', ' + value : ''),
-          dropContent: _react2.default.createElement(_SelectContainer2.default, this.props)
+          dropContent: _react2.default.createElement(_SelectContainer2.default, _extends({}, this.props, { onChange: onSelectChange }))
         }),
         _react2.default.createElement(
           _Box.Box,
