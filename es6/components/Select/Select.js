@@ -9,14 +9,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-
-import FormDown from 'grommet-icons/icons/FormDown';
-
+import { compose } from 'recompose';
 
 import { Box } from '../Box';
 import { DropButton } from '../DropButton';
 import { Keyboard } from '../Keyboard';
 import { TextInput } from '../TextInput';
+
+import { withTheme } from '../hocs';
 
 import SelectContainer from './SelectContainer';
 import doc from './doc';
@@ -57,8 +57,9 @@ var Select = function (_Component) {
         onClose = _props.onClose,
         placeholder = _props.placeholder,
         plain = _props.plain,
+        theme = _props.theme,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'onChange', 'onClose', 'placeholder', 'plain', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'onChange', 'onClose', 'placeholder', 'plain', 'theme', 'value']);
 
     var open = this.state.open;
 
@@ -73,6 +74,8 @@ var Select = function (_Component) {
         onChange.apply(undefined, [event].concat(args));
       }
     };
+
+    var SelectIcon = theme.select.icons.down;
 
     return React.createElement(
       Keyboard,
@@ -118,7 +121,7 @@ var Select = function (_Component) {
               flex: false,
               style: { minWidth: 'auto' }
             },
-            React.createElement(FormDown, null)
+            React.createElement(SelectIcon, null)
           )
         )
       )
@@ -137,4 +140,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Select);
 }
 
-export default Select;
+export default compose(withTheme)(Select);

@@ -12,12 +12,6 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
 
-import FormPrevious from 'grommet-icons/icons/FormPrevious';
-import FormNext from 'grommet-icons/icons/FormNext';
-import Previous from 'grommet-icons/icons/Previous';
-import Next from 'grommet-icons/icons/Next';
-
-
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
@@ -274,6 +268,10 @@ var Calendar = function (_Component) {
       days
     ));
 
+    var PreviousIcon = size === 'small' ? theme.calendar.icons.small.previous : theme.calendar.icons.previous;
+
+    var NextIcon = size === 'small' ? theme.calendar.icons.small.next : theme.calendar.icons.next;
+
     return React.createElement(
       StyledCalendar,
       _extends({ size: size, theme: theme }, rest),
@@ -315,14 +313,14 @@ var Calendar = function (_Component) {
               { direction: 'row', align: 'center' },
               React.createElement(Button, {
                 a11yTitle: previousMonth.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
-                icon: size === 'small' ? React.createElement(FormPrevious, null) : React.createElement(Previous, { size: size }),
+                icon: React.createElement(PreviousIcon, { size: size !== 'small' ? size : undefined }),
                 onClick: onSelect && betweenDates(previousMonth, bounds) ? function () {
                   return _this2.setReference(previousMonth);
                 } : undefined
               }),
               React.createElement(Button, {
                 a11yTitle: nextMonth.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
-                icon: size === 'small' ? React.createElement(FormNext, null) : React.createElement(Next, { size: size }),
+                icon: React.createElement(NextIcon, { size: size !== 'small' ? size : undefined }),
                 onClick: onSelect && betweenDates(nextMonth, bounds) ? function () {
                   return _this2.setReference(nextMonth);
                 } : undefined

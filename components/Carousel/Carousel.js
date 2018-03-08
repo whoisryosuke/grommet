@@ -8,18 +8,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
-var _Previous = require('grommet-icons/icons/Previous');
-
-var _Previous2 = _interopRequireDefault(_Previous);
-
-var _Next = require('grommet-icons/icons/Next');
-
-var _Next2 = _interopRequireDefault(_Next);
-
-var _Subtract = require('grommet-icons/icons/Subtract');
-
-var _Subtract2 = _interopRequireDefault(_Subtract);
-
 var _Box = require('../Box');
 
 var _Button = require('../Button');
@@ -108,7 +96,9 @@ var Carousel = function (_Component) {
   Carousel.prototype.render = function render() {
     var _this2 = this;
 
-    var children = this.props.children;
+    var _props = this.props,
+        children = _props.children,
+        theme = _props.theme;
     var _state = this.state,
         activeIndex = _state.activeIndex,
         priorActiveIndex = _state.priorActiveIndex;
@@ -118,11 +108,13 @@ var Carousel = function (_Component) {
     var onLeft = activeIndex > 0 ? this.onLeft : undefined;
     var onRight = activeIndex < lastIndex ? this.onRight : undefined;
 
+    var CurrentIcon = theme.carousel.icons.current;
+
     var selectors = [];
     var wrappedChildren = _react.Children.map(children, function (child, index) {
       selectors.push(_react2.default.createElement(_Button.Button, {
         key: index,
-        icon: _react2.default.createElement(_Subtract2.default, { color: activeIndex === index ? 'brand' : undefined }),
+        icon: _react2.default.createElement(CurrentIcon, { color: activeIndex === index ? 'brand' : undefined }),
         onClick: _this2.onSelect(index)
       }));
 
@@ -151,12 +143,15 @@ var Carousel = function (_Component) {
       );
     });
 
+    var NextIcon = theme.carousel.icons.next;
+    var PreviousIcon = theme.carousel.icons.previous;
+
     return _react2.default.createElement(
       _Keyboard.Keyboard,
       { onLeft: onLeft, onRight: onRight },
       _react2.default.createElement(
         _Stack.Stack,
-        { guidingChild: activeIndex, tabIndex: '0' },
+        { guidingChild: activeIndex },
         wrappedChildren,
         _react2.default.createElement(
           _Box.Box,
@@ -170,7 +165,7 @@ var Carousel = function (_Component) {
               _react2.default.createElement(
                 _Box.Box,
                 { justify: 'center' },
-                _react2.default.createElement(_Previous2.default, null)
+                _react2.default.createElement(PreviousIcon, null)
               )
             )
           ),
@@ -192,7 +187,7 @@ var Carousel = function (_Component) {
               _react2.default.createElement(
                 _Box.Box,
                 { justify: 'center' },
-                _react2.default.createElement(_Next2.default, null)
+                _react2.default.createElement(NextIcon, null)
               )
             )
           )

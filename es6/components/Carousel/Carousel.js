@@ -7,11 +7,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Children, Component } from 'react';
 import { compose } from 'recompose';
 
-import Previous from 'grommet-icons/icons/Previous';
-import Next from 'grommet-icons/icons/Next';
-import Subtract from 'grommet-icons/icons/Subtract';
-
-
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
@@ -87,7 +82,9 @@ var Carousel = function (_Component) {
   Carousel.prototype.render = function render() {
     var _this2 = this;
 
-    var children = this.props.children;
+    var _props = this.props,
+        children = _props.children,
+        theme = _props.theme;
     var _state = this.state,
         activeIndex = _state.activeIndex,
         priorActiveIndex = _state.priorActiveIndex;
@@ -97,11 +94,13 @@ var Carousel = function (_Component) {
     var onLeft = activeIndex > 0 ? this.onLeft : undefined;
     var onRight = activeIndex < lastIndex ? this.onRight : undefined;
 
+    var CurrentIcon = theme.carousel.icons.current;
+
     var selectors = [];
     var wrappedChildren = Children.map(children, function (child, index) {
       selectors.push(React.createElement(Button, {
         key: index,
-        icon: React.createElement(Subtract, { color: activeIndex === index ? 'brand' : undefined }),
+        icon: React.createElement(CurrentIcon, { color: activeIndex === index ? 'brand' : undefined }),
         onClick: _this2.onSelect(index)
       }));
 
@@ -130,12 +129,15 @@ var Carousel = function (_Component) {
       );
     });
 
+    var NextIcon = theme.carousel.icons.next;
+    var PreviousIcon = theme.carousel.icons.previous;
+
     return React.createElement(
       Keyboard,
       { onLeft: onLeft, onRight: onRight },
       React.createElement(
         Stack,
-        { guidingChild: activeIndex, tabIndex: '0' },
+        { guidingChild: activeIndex },
         wrappedChildren,
         React.createElement(
           Box,
@@ -149,7 +151,7 @@ var Carousel = function (_Component) {
               React.createElement(
                 Box,
                 { justify: 'center' },
-                React.createElement(Previous, null)
+                React.createElement(PreviousIcon, null)
               )
             )
           ),
@@ -171,7 +173,7 @@ var Carousel = function (_Component) {
               React.createElement(
                 Box,
                 { justify: 'center' },
-                React.createElement(Next, null)
+                React.createElement(NextIcon, null)
               )
             )
           )

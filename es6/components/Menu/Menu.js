@@ -10,14 +10,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-
-import FormDown from 'grommet-icons/icons/FormDown';
-
+import { compose } from 'recompose';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { DropButton } from '../DropButton';
+
+import { withTheme } from '../hocs';
 
 import doc from './doc';
 
@@ -92,20 +92,21 @@ var Menu = function (_Component) {
 
     var _props = this.props,
         dropAlign = _props.dropAlign,
+        dropBackground = _props.dropBackground,
         dropTarget = _props.dropTarget,
-        icon = _props.icon,
         items = _props.items,
         label = _props.label,
         messages = _props.messages,
         onKeyDown = _props.onKeyDown,
-        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropTarget', 'icon', 'items', 'label', 'messages', 'onKeyDown']);
+        theme = _props.theme,
+        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropBackground', 'dropTarget', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
         open = _state.open;
 
 
-    var menuIcon = icon || React.createElement(FormDown, null);
+    var MenuIcon = theme.menu.icons.down;
 
     var content = React.createElement(
       Box,
@@ -117,7 +118,7 @@ var Menu = function (_Component) {
         gap: 'small'
       },
       label,
-      menuIcon
+      React.createElement(MenuIcon, null)
     );
 
     var controlMirror = React.createElement(
@@ -147,6 +148,7 @@ var Menu = function (_Component) {
         React.createElement(
           DropButton,
           _extends({}, rest, {
+            theme: theme,
             a11yTitle: messages.openMenu || 'Open Menu',
             dropAlign: dropAlign,
             dropTarget: dropTarget,
@@ -159,7 +161,7 @@ var Menu = function (_Component) {
             },
             dropContent: React.createElement(
               Box,
-              null,
+              { background: dropBackground },
               dropAlign.top === 'top' ? controlMirror : undefined,
               React.createElement(
                 Box,
@@ -213,4 +215,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Menu);
 }
 
-export default Menu;
+export default compose(withTheme)(Menu);

@@ -6,7 +6,65 @@ var _polished = require('polished');
 
 var _styledComponents = require('styled-components');
 
+var _Actions = require('grommet-icons/icons/Actions');
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
+var _ClosedCaption = require('grommet-icons/icons/ClosedCaption');
+
+var _ClosedCaption2 = _interopRequireDefault(_ClosedCaption);
+
+var _Expand = require('grommet-icons/icons/Expand');
+
+var _Expand2 = _interopRequireDefault(_Expand);
+
+var _FormDown = require('grommet-icons/icons/FormDown');
+
+var _FormDown2 = _interopRequireDefault(_FormDown);
+
+var _FormNext = require('grommet-icons/icons/FormNext');
+
+var _FormNext2 = _interopRequireDefault(_FormNext);
+
+var _FormPrevious = require('grommet-icons/icons/FormPrevious');
+
+var _FormPrevious2 = _interopRequireDefault(_FormPrevious);
+
+var _LinkNext = require('grommet-icons/icons/LinkNext');
+
+var _LinkNext2 = _interopRequireDefault(_LinkNext);
+
+var _Next = require('grommet-icons/icons/Next');
+
+var _Next2 = _interopRequireDefault(_Next);
+
+var _Pause = require('grommet-icons/icons/Pause');
+
+var _Pause2 = _interopRequireDefault(_Pause);
+
+var _Play = require('grommet-icons/icons/Play');
+
+var _Play2 = _interopRequireDefault(_Play);
+
+var _Previous = require('grommet-icons/icons/Previous');
+
+var _Previous2 = _interopRequireDefault(_Previous);
+
+var _Subtract = require('grommet-icons/icons/Subtract');
+
+var _Subtract2 = _interopRequireDefault(_Subtract);
+
+var _Volume = require('grommet-icons/icons/Volume');
+
+var _Volume2 = _interopRequireDefault(_Volume);
+
+var _VolumeLow = require('grommet-icons/icons/VolumeLow');
+
+var _VolumeLow2 = _interopRequireDefault(_VolumeLow);
+
 var _utils = require('../utils');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var brandColor = '#865CD6';
 var accentColors = ['#00CCEB', '#FF7D28', '#915591'];
@@ -174,7 +232,10 @@ exports.default = (0, _utils.deepFreeze)({
     fontWeight: 600,
     color: (0, _styledComponents.css)(['', ''], function (props) {
       return props.theme.global.colors.brand;
-    })
+    }),
+    icons: {
+      primary: _LinkNext2.default
+    }
   },
   button: {
     border: {
@@ -223,6 +284,21 @@ exports.default = (0, _utils.deepFreeze)({
       lineHeight: 1.11,
       daySize: baseSpacing * 32 / 7 + 'px',
       slideDuration: '0.8s'
+    },
+    icons: {
+      previous: _Previous2.default,
+      next: _Next2.default,
+      small: {
+        previous: _FormPrevious2.default,
+        next: _FormNext2.default
+      }
+    }
+  },
+  carousel: {
+    icons: {
+      current: _Subtract2.default,
+      next: _Next2.default,
+      previous: _Previous2.default
     }
   },
   checkBox: {
@@ -349,6 +425,11 @@ exports.default = (0, _utils.deepFreeze)({
     },
     overlayBackgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
+  menu: {
+    icons: {
+      down: _FormDown2.default
+    }
+  },
   paragraph: {
     // maxWidth chosen to be ~50 characters wide
     // see: https://ux.stackexchange.com/a/34125
@@ -380,6 +461,11 @@ exports.default = (0, _utils.deepFreeze)({
       })
     }
   },
+  select: {
+    icons: {
+      down: _FormDown2.default
+    }
+  },
   text: {
     medium: { size: '16px', height: 1.375 },
     xsmall: { size: '12px', height: 1.5 },
@@ -391,6 +477,15 @@ exports.default = (0, _utils.deepFreeze)({
   video: {
     captions: {
       background: (0, _polished.rgba)(0, 0, 0, 0.7)
+    },
+    icons: {
+      closedCaption: _ClosedCaption2.default,
+      configure: _Actions2.default,
+      fullScreen: _Expand2.default,
+      pause: _Pause2.default,
+      play: _Play2.default,
+      reduceVolume: _VolumeLow2.default,
+      volume: _Volume2.default
     }
   },
   worldMap: {

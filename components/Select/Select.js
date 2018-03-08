@@ -8,9 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _FormDown = require('grommet-icons/icons/FormDown');
-
-var _FormDown2 = _interopRequireDefault(_FormDown);
+var _recompose = require('recompose');
 
 var _Box = require('../Box');
 
@@ -19,6 +17,8 @@ var _DropButton = require('../DropButton');
 var _Keyboard = require('../Keyboard');
 
 var _TextInput = require('../TextInput');
+
+var _hocs = require('../hocs');
 
 var _SelectContainer = require('./SelectContainer');
 
@@ -74,8 +74,9 @@ var Select = function (_Component) {
         onClose = _props.onClose,
         placeholder = _props.placeholder,
         plain = _props.plain,
+        theme = _props.theme,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'onChange', 'onClose', 'placeholder', 'plain', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'onChange', 'onClose', 'placeholder', 'plain', 'theme', 'value']);
 
     var open = this.state.open;
 
@@ -90,6 +91,8 @@ var Select = function (_Component) {
         onChange.apply(undefined, [event].concat(args));
       }
     };
+
+    var SelectIcon = theme.select.icons.down;
 
     return _react2.default.createElement(
       _Keyboard.Keyboard,
@@ -135,7 +138,7 @@ var Select = function (_Component) {
               flex: false,
               style: { minWidth: 'auto' }
             },
-            _react2.default.createElement(_FormDown2.default, null)
+            _react2.default.createElement(SelectIcon, null)
           )
         )
       )
@@ -154,4 +157,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Select);
 }
 
-exports.default = Select;
+exports.default = (0, _recompose.compose)(_hocs.withTheme)(Select);

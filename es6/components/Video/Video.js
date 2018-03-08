@@ -13,14 +13,6 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
-import Actions from 'grommet-icons/icons/Actions';
-import ClosedCaption from 'grommet-icons/icons/ClosedCaption';
-import Expand from 'grommet-icons/icons/Expand';
-import Play from 'grommet-icons/icons/Play';
-import Pause from 'grommet-icons/icons/Pause';
-import Volume from 'grommet-icons/icons/Volume';
-import VolumeLow from 'grommet-icons/icons/VolumeLow';
-
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Menu } from '../Menu';
@@ -212,7 +204,9 @@ var Video = function (_Component) {
   Video.prototype.renderControls = function renderControls() {
     var _this2 = this;
 
-    var controls = this.props.controls;
+    var _props = this.props,
+        controls = _props.controls,
+        theme = _props.theme;
     var _state = this.state,
         currentTime = _state.currentTime,
         duration = _state.duration,
@@ -228,6 +222,16 @@ var Video = function (_Component) {
 
     var formattedTime = formatTime(scrubTime || currentTime || duration);
 
+    var Icons = {
+      ClosedCaption: theme.video.icons.closedCaption,
+      Configure: theme.video.icons.configure,
+      FullScreen: theme.video.icons.fullScreen,
+      Pause: theme.video.icons.pause,
+      Play: theme.video.icons.play,
+      ReduceVolume: theme.video.icons.reduceVolume,
+      Volume: theme.video.icons.volume
+    };
+
     var captionControls = [];
     if (this.videoRef) {
       var textTracks = findDOMNode(this.videoRef).textTracks;
@@ -235,7 +239,7 @@ var Video = function (_Component) {
         if (textTracks.length === 1) {
           var active = textTracks[0].mode === 'showing';
           captionControls.push({
-            icon: React.createElement(ClosedCaption, { color: iconColor }),
+            icon: React.createElement(Icons.ClosedCaption, { color: iconColor }),
             active: active,
             onClick: function onClick() {
               return _this2.showCaptions(active ? -1 : 0);
@@ -276,7 +280,7 @@ var Video = function (_Component) {
           background: background
         },
         React.createElement(Button, {
-          icon: playing ? React.createElement(Pause, { color: iconColor }) : React.createElement(Play, { color: iconColor }),
+          icon: playing ? React.createElement(Icons.Pause, { color: iconColor }) : React.createElement(Icons.Play, { color: iconColor }),
           hoverIndicator: 'background',
           onClick: playing ? this.pause : this.play
         }),
@@ -323,19 +327,19 @@ var Video = function (_Component) {
           )
         ),
         React.createElement(Menu, {
-          icon: React.createElement(Actions, { color: iconColor }),
+          icon: React.createElement(Icons.Configure, { color: iconColor }),
           dropAlign: { bottom: 'top', right: 'right' },
-          background: background || { color: 'light-2', opacity: 'weak' },
+          dropBackground: background,
           items: [{
-            icon: React.createElement(Volume, { color: iconColor }),
+            icon: React.createElement(Icons.Volume, { color: iconColor }),
             onClick: volume <= 1 - VOLUME_STEP ? this.louder : undefined,
             close: false
           }, {
-            icon: React.createElement(VolumeLow, { color: iconColor }),
+            icon: React.createElement(Icons.ReduceVolume, { color: iconColor }),
             onClick: volume >= VOLUME_STEP ? this.quieter : undefined,
             close: false
           }].concat(captionControls, [{
-            icon: React.createElement(Expand, { color: iconColor }),
+            icon: React.createElement(Icons.FullScreen, { color: iconColor }),
             onClick: this.fullscreen
           }])
         })
@@ -346,12 +350,12 @@ var Video = function (_Component) {
   Video.prototype.render = function render() {
     var _this3 = this;
 
-    var _props = this.props,
-        autoPlay = _props.autoPlay,
-        children = _props.children,
-        controls = _props.controls,
-        loop = _props.loop,
-        rest = _objectWithoutProperties(_props, ['autoPlay', 'children', 'controls', 'loop']);
+    var _props2 = this.props,
+        autoPlay = _props2.autoPlay,
+        children = _props2.children,
+        controls = _props2.controls,
+        loop = _props2.loop,
+        rest = _objectWithoutProperties(_props2, ['autoPlay', 'children', 'controls', 'loop']);
 
     var controlsElement = controls ? this.renderControls() : undefined;
 

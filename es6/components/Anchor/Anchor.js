@@ -12,9 +12,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
-import LinkNext from 'grommet-icons/icons/LinkNext';
-
-
 import { withFocus, withTheme } from '../hocs';
 
 import StyledAnchor, { StyledIcon } from './StyledAnchor';
@@ -60,7 +57,8 @@ var Anchor = function (_Component) {
     if (icon) {
       anchorIcon = icon;
     } else if (primary) {
-      anchorIcon = React.createElement(LinkNext, { color: primary ? 'brand' : undefined });
+      var Icon = theme.anchor.icons.primary;
+      anchorIcon = React.createElement(Icon, { color: primary ? 'brand' : undefined });
     }
 
     if (anchorIcon) {

@@ -10,9 +10,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
-var _FormDown = require('grommet-icons/icons/FormDown');
-
-var _FormDown2 = _interopRequireDefault(_FormDown);
+var _recompose = require('recompose');
 
 var _Box = require('../Box');
 
@@ -21,6 +19,8 @@ var _Button = require('../Button');
 var _Keyboard = require('../Keyboard');
 
 var _DropButton = require('../DropButton');
+
+var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 
@@ -107,20 +107,21 @@ var Menu = function (_Component) {
 
     var _props = this.props,
         dropAlign = _props.dropAlign,
+        dropBackground = _props.dropBackground,
         dropTarget = _props.dropTarget,
-        icon = _props.icon,
         items = _props.items,
         label = _props.label,
         messages = _props.messages,
         onKeyDown = _props.onKeyDown,
-        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropTarget', 'icon', 'items', 'label', 'messages', 'onKeyDown']);
+        theme = _props.theme,
+        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropBackground', 'dropTarget', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
         open = _state.open;
 
 
-    var menuIcon = icon || _react2.default.createElement(_FormDown2.default, null);
+    var MenuIcon = theme.menu.icons.down;
 
     var content = _react2.default.createElement(
       _Box.Box,
@@ -132,7 +133,7 @@ var Menu = function (_Component) {
         gap: 'small'
       },
       label,
-      menuIcon
+      _react2.default.createElement(MenuIcon, null)
     );
 
     var controlMirror = _react2.default.createElement(
@@ -162,6 +163,7 @@ var Menu = function (_Component) {
         _react2.default.createElement(
           _DropButton.DropButton,
           _extends({}, rest, {
+            theme: theme,
             a11yTitle: messages.openMenu || 'Open Menu',
             dropAlign: dropAlign,
             dropTarget: dropTarget,
@@ -174,7 +176,7 @@ var Menu = function (_Component) {
             },
             dropContent: _react2.default.createElement(
               _Box.Box,
-              null,
+              { background: dropBackground },
               dropAlign.top === 'top' ? controlMirror : undefined,
               _react2.default.createElement(
                 _Box.Box,
@@ -228,4 +230,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Menu);
 }
 
-exports.default = Menu;
+exports.default = (0, _recompose.compose)(_hocs.withTheme)(Menu);

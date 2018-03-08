@@ -1,6 +1,22 @@
 import { rgba } from 'polished';
 import { css } from 'styled-components';
 
+import Actions from 'grommet-icons/icons/Actions';
+import ClosedCaption from 'grommet-icons/icons/ClosedCaption';
+import Expand from 'grommet-icons/icons/Expand';
+import FormDown from 'grommet-icons/icons/FormDown';
+import FormNext from 'grommet-icons/icons/FormNext';
+import FormPrevious from 'grommet-icons/icons/FormPrevious';
+import LinkNext from 'grommet-icons/icons/LinkNext';
+import Next from 'grommet-icons/icons/Next';
+import Pause from 'grommet-icons/icons/Pause';
+import Play from 'grommet-icons/icons/Play';
+import Previous from 'grommet-icons/icons/Previous';
+import Subtract from 'grommet-icons/icons/Subtract';
+import Volume from 'grommet-icons/icons/Volume';
+import VolumeLow from 'grommet-icons/icons/VolumeLow';
+
+
 import { colorForName, deepFreeze } from '../utils';
 
 var brandColor = '#865CD6';
@@ -169,7 +185,10 @@ export default deepFreeze({
     fontWeight: 600,
     color: css(['', ''], function (props) {
       return props.theme.global.colors.brand;
-    })
+    }),
+    icons: {
+      primary: LinkNext
+    }
   },
   button: {
     border: {
@@ -218,6 +237,21 @@ export default deepFreeze({
       lineHeight: 1.11,
       daySize: baseSpacing * 32 / 7 + 'px',
       slideDuration: '0.8s'
+    },
+    icons: {
+      previous: Previous,
+      next: Next,
+      small: {
+        previous: FormPrevious,
+        next: FormNext
+      }
+    }
+  },
+  carousel: {
+    icons: {
+      current: Subtract,
+      next: Next,
+      previous: Previous
     }
   },
   checkBox: {
@@ -344,6 +378,11 @@ export default deepFreeze({
     },
     overlayBackgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
+  menu: {
+    icons: {
+      down: FormDown
+    }
+  },
   paragraph: {
     // maxWidth chosen to be ~50 characters wide
     // see: https://ux.stackexchange.com/a/34125
@@ -375,6 +414,11 @@ export default deepFreeze({
       })
     }
   },
+  select: {
+    icons: {
+      down: FormDown
+    }
+  },
   text: {
     medium: { size: '16px', height: 1.375 },
     xsmall: { size: '12px', height: 1.5 },
@@ -386,6 +430,15 @@ export default deepFreeze({
   video: {
     captions: {
       background: rgba(0, 0, 0, 0.7)
+    },
+    icons: {
+      closedCaption: ClosedCaption,
+      configure: Actions,
+      fullScreen: Expand,
+      pause: Pause,
+      play: Play,
+      reduceVolume: VolumeLow,
+      volume: Volume
     }
   },
   worldMap: {
