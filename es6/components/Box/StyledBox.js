@@ -8,7 +8,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css, keyframes } from 'styled-components';
 
-import { backgroundStyle, colorForName, edgeStyle, palm } from '../../utils';
+import { backgroundStyle, colorForName, edgeStyle, palm, focusStyle } from '../../utils';
 
 var ALIGN_MAP = {
   baseline: 'baseline',
@@ -300,7 +300,7 @@ var animationStyle = css(['', ''], function (props) {
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 var StyledBox = styled.div.withConfig({
   displayName: 'StyledBox'
-})(['display:flex;box-sizing:border-box;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:flex;box-sizing:border-box;outline:none;', ';', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return !props.basis && 'max-width: 100%;';
 }, function (props) {
   return props.align && alignStyle;
@@ -338,6 +338,8 @@ var StyledBox = styled.div.withConfig({
   return props.elevation && elevationStyle;
 }, function (props) {
   return props.animation && animationStyle;
+}, function (props) {
+  return props.focus && focusStyle;
 });
 
 export default StyledBox.extend(_templateObject, function (props) {

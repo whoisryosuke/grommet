@@ -103,8 +103,9 @@ var Carousel = function (_Component) {
     var _props = this.props,
         children = _props.children,
         fill = _props.fill,
+        focus = _props.focus,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'fill', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'fill', 'focus', 'theme']);
 
     var _state = this.state,
         activeIndex = _state.activeIndex,
@@ -162,7 +163,7 @@ var Carousel = function (_Component) {
         wrappedChildren,
         _react2.default.createElement(
           _Box.Box,
-          { fill: true, direction: 'row', justify: 'between' },
+          { tabIndex: '0', focus: focus, fill: true, direction: 'row', justify: 'between' },
           _react2.default.createElement(
             _Box.Box,
             { fill: 'vertical' },
@@ -210,4 +211,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Carousel);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme)(Carousel);
+exports.default = (0, _recompose.compose)(_hocs.withTheme, _hocs.withFocus)(Carousel);

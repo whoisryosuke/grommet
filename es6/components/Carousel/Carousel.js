@@ -16,7 +16,7 @@ import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { Stack } from '../Stack';
 
-import { withTheme } from '../hocs';
+import { withFocus, withTheme } from '../hocs';
 
 import doc from './doc';
 
@@ -89,8 +89,9 @@ var Carousel = function (_Component) {
     var _props = this.props,
         children = _props.children,
         fill = _props.fill,
+        focus = _props.focus,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'fill', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'fill', 'focus', 'theme']);
 
     var _state = this.state,
         activeIndex = _state.activeIndex,
@@ -148,7 +149,7 @@ var Carousel = function (_Component) {
         wrappedChildren,
         React.createElement(
           Box,
-          { fill: true, direction: 'row', justify: 'between' },
+          { tabIndex: '0', focus: focus, fill: true, direction: 'row', justify: 'between' },
           React.createElement(
             Box,
             { fill: 'vertical' },
@@ -196,4 +197,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Carousel);
 }
 
-export default compose(withTheme)(Carousel);
+export default compose(withTheme, withFocus)(Carousel);
