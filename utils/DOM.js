@@ -1,11 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.filterByFocusable = filterByFocusable;
-exports.findScrollParents = findScrollParents;
-exports.getBodyChildElements = getBodyChildElements;
-exports.getNewContainer = getNewContainer;
-function filterByFocusable(elements) {
+var filterByFocusable = exports.filterByFocusable = function filterByFocusable(elements) {
   return Array.prototype.filter.call(elements || [], function (element) {
     var currentTag = element.tagName.toLowerCase();
     var validTags = /(svg|a|area|input|select|textarea|button|iframe|div)$/;
@@ -17,9 +13,9 @@ function filterByFocusable(elements) {
     }
     return isValidTag;
   });
-}
+};
 
-function findScrollParents(element, horizontal) {
+var findScrollParents = exports.findScrollParents = function findScrollParents(element, horizontal) {
   var result = [];
   if (element) {
     var parent = element.parentNode;
@@ -42,9 +38,21 @@ function findScrollParents(element, horizontal) {
     }
   }
   return result;
-}
+};
 
-function getBodyChildElements() {
+var getFirstFocusableDescendant = exports.getFirstFocusableDescendant = function getFirstFocusableDescendant(element) {
+  var children = element.getElementsByTagName('*');
+  for (var i = 0; i < children.length; i += 1) {
+    var child = children[i];
+    var tagName = child.tagName.toLowerCase();
+    if (tagName === 'input' || tagName === 'select') {
+      return child;
+    }
+  }
+  return undefined;
+};
+
+var getBodyChildElements = exports.getBodyChildElements = function getBodyChildElements() {
   var excludeMatch = /^(script|link)$/i;
   var children = [];
   [].forEach.call(document.body.children, function (node) {
@@ -53,14 +61,14 @@ function getBodyChildElements() {
     }
   });
   return children;
-}
+};
 
-function getNewContainer() {
+var getNewContainer = exports.getNewContainer = function getNewContainer() {
   // setup DOM
   var container = document.createElement('div');
   document.body.insertBefore(container, document.body.firstChild);
   return container;
-}
+};
 
 var setTabIndex = exports.setTabIndex = function setTabIndex(tabIndex) {
   return function (element) {
@@ -130,10 +138,11 @@ exports.default = {
   filterByFocusable: filterByFocusable,
   findScrollParents: findScrollParents,
   findVisibleParent: findVisibleParent,
+  getBodyChildElements: getBodyChildElements,
+  getFirstFocusableDescendant: getFirstFocusableDescendant,
+  getNewContainer: getNewContainer,
   makeNodeFocusable: makeNodeFocusable,
   makeNodeUnfocusable: makeNodeUnfocusable,
-  getBodyChildElements: getBodyChildElements,
-  getNewContainer: getNewContainer,
   setTabIndex: setTabIndex,
   unsetTabIndex: unsetTabIndex
 };
