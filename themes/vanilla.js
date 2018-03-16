@@ -30,10 +30,6 @@ var _FormPrevious = require('grommet-icons/icons/FormPrevious');
 
 var _FormPrevious2 = _interopRequireDefault(_FormPrevious);
 
-var _LinkNext = require('grommet-icons/icons/LinkNext');
-
-var _LinkNext2 = _interopRequireDefault(_LinkNext);
-
 var _Next = require('grommet-icons/icons/Next');
 
 var _Next2 = _interopRequireDefault(_Next);
@@ -233,10 +229,7 @@ exports.default = (0, _utils.deepFreeze)({
     fontWeight: 600,
     color: (0, _styledComponents.css)(['', ''], function (props) {
       return props.theme.global.colors.brand;
-    }),
-    icons: {
-      primary: _LinkNext2.default
-    }
+    })
   },
   button: {
     border: {

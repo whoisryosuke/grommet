@@ -7,7 +7,6 @@ import Expand from 'grommet-icons/icons/Expand';
 import FormDown from 'grommet-icons/icons/FormDown';
 import FormNext from 'grommet-icons/icons/FormNext';
 import FormPrevious from 'grommet-icons/icons/FormPrevious';
-import LinkNext from 'grommet-icons/icons/LinkNext';
 import Next from 'grommet-icons/icons/Next';
 import Pause from 'grommet-icons/icons/Pause';
 import Play from 'grommet-icons/icons/Play';
@@ -186,10 +185,7 @@ export default deepFreeze({
     fontWeight: 600,
     color: css(['', ''], function (props) {
       return props.theme.global.colors.brand;
-    }),
-    icons: {
-      primary: LinkNext
-    }
+    })
   },
   button: {
     border: {

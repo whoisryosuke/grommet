@@ -73,9 +73,6 @@ var Anchor = function (_Component) {
     var anchorIcon = void 0;
     if (icon) {
       anchorIcon = icon;
-    } else if (primary) {
-      var Icon = theme.anchor.icons.primary;
-      anchorIcon = _react2.default.createElement(Icon, { color: primary ? 'brand' : undefined });
     }
 
     if (anchorIcon) {
