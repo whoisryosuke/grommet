@@ -302,6 +302,18 @@ Object.keys(_RangeInput).forEach(function (key) {
   });
 });
 
+var _RangeSelector = require('./RangeSelector');
+
+Object.keys(_RangeSelector).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _RangeSelector[key];
+    }
+  });
+});
+
 var _Responsive = require('./Responsive');
 
 Object.keys(_Responsive).forEach(function (key) {
