@@ -132,11 +132,7 @@ var FormField = function (_Component) {
         label ? React.createElement(
           Text,
           null,
-          React.createElement(
-            'strong',
-            null,
-            label
-          )
+          label
         ) : undefined,
         help ? React.createElement(
           Text,

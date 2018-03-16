@@ -138,7 +138,7 @@ var Select = function (_Component) {
               flex: false,
               style: { minWidth: 'auto' }
             },
-            _react2.default.createElement(SelectIcon, null)
+            _react2.default.createElement(SelectIcon, { color: 'brand' })
           )
         )
       )

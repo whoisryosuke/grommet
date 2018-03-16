@@ -30,7 +30,8 @@ exports.default = function (Menu) {
     messages: _reactDesc.PropTypes.shape({
       closeMenu: _reactDesc.PropTypes.string,
       openMenu: _reactDesc.PropTypes.string
-    }).description('Custom messages. Used for accessibility by screen readers.')
+    }).description('Custom messages. Used for accessibility by screen readers.'),
+    size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large']).description('The size of the menu.')
   };
 
   return DocumentedMenu;

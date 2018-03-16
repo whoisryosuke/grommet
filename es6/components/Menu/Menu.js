@@ -16,6 +16,7 @@ import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { DropButton } from '../DropButton';
+import { Text } from '../Text';
 
 import { withTheme } from '../hocs';
 
@@ -98,8 +99,9 @@ var Menu = function (_Component) {
         label = _props.label,
         messages = _props.messages,
         onKeyDown = _props.onKeyDown,
+        size = _props.size,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropBackground', 'dropTarget', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
+        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropBackground', 'dropTarget', 'items', 'label', 'messages', 'onKeyDown', 'size', 'theme']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
@@ -117,8 +119,12 @@ var Menu = function (_Component) {
         pad: 'small',
         gap: 'small'
       },
-      label,
-      React.createElement(MenuIcon, null)
+      React.createElement(
+        Text,
+        { size: size },
+        label
+      ),
+      React.createElement(MenuIcon, { color: 'brand', size: size })
     );
 
     var controlMirror = React.createElement(

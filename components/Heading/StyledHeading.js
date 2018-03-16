@@ -70,7 +70,9 @@ var colorStyle = (0, _styledComponents.css)(['color:', ''], function (props) {
 
 var StyledHeading = _styledComponents2.default.h1.withConfig({
   displayName: 'StyledHeading'
-})(['', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+  return props.theme.heading.font && (0, _styledComponents.css)(['font-family:', ';'], props.theme.heading.font.family);
+}, function (props) {
   return sizeStyle(props);
 }, function (props) {
   return props.margin && marginStyle(props);

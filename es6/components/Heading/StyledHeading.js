@@ -62,7 +62,9 @@ var colorStyle = css(['color:', ''], function (props) {
 
 var StyledHeading = styled.h1.withConfig({
   displayName: 'StyledHeading'
-})(['', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+  return props.theme.heading.font && css(['font-family:', ';'], props.theme.heading.font.family);
+}, function (props) {
   return sizeStyle(props);
 }, function (props) {
   return props.margin && marginStyle(props);

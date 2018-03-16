@@ -20,6 +20,8 @@ var _Keyboard = require('../Keyboard');
 
 var _DropButton = require('../DropButton');
 
+var _Text = require('../Text');
+
 var _hocs = require('../hocs');
 
 var _doc = require('./doc');
@@ -113,8 +115,9 @@ var Menu = function (_Component) {
         label = _props.label,
         messages = _props.messages,
         onKeyDown = _props.onKeyDown,
+        size = _props.size,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropBackground', 'dropTarget', 'items', 'label', 'messages', 'onKeyDown', 'theme']);
+        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropBackground', 'dropTarget', 'items', 'label', 'messages', 'onKeyDown', 'size', 'theme']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
@@ -132,8 +135,12 @@ var Menu = function (_Component) {
         pad: 'small',
         gap: 'small'
       },
-      label,
-      _react2.default.createElement(MenuIcon, null)
+      _react2.default.createElement(
+        _Text.Text,
+        { size: size },
+        label
+      ),
+      _react2.default.createElement(MenuIcon, { color: 'brand', size: size })
     );
 
     var controlMirror = _react2.default.createElement(

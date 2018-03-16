@@ -67,23 +67,23 @@ var _utils = require('../utils');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var brandColor = '#865CD6';
-var accentColors = ['#00CCEB', '#FF7D28', '#915591'];
-var neutralColors = ['#0A64A0', '#DC2878', '#501EB4', '#49516F'];
+var accentColors = ['#FD6FFF', '#60EB9F', '#60EBE1', '#FFCA58'];
+var neutralColors = ['#EB6060', '#01C781', '#6095EB', '#FFB200'];
 var statusColors = {
-  critical: '#FF324D',
-  error: '#FF324D',
-  warning: '#FFD602',
-  ok: '#8CC800',
+  critical: '#E1746A',
+  error: '#E1746A',
+  warning: '#F7E464',
+  ok: '#7DD892',
   unknown: '#a8a8a8',
   disabled: '#a8a8a8'
 };
 var darkColors = ['#333333', '#444444', '#555555', '#666666', '#777777', '#999999'];
 var lightColors = ['#F6F6F6', '#EEEEEE', '#DDDDDD', '#CCCCCC', '#BBBBBB', '#AAAAAA'];
 var backgroundColor = '#FFFFFF';
-var textColor = '#333333';
-var borderColor = 'rgba(0, 0, 0, 0.15)';
+var textColor = '#444444';
+var borderColor = 'rgba(0, 0, 0, 0.33)';
 var activeColor = (0, _polished.rgba)('#DDDDDD', 0.5);
-var fontPath = 'https://fonts.gstatic.com/s/worksans/v2';
+var workSansPath = 'https://fonts.gstatic.com/s/worksans/v2';
 
 var baseSpacing = 24;
 
@@ -183,7 +183,7 @@ exports.default = (0, _utils.deepFreeze)({
     },
     font: {
       family: "'Work Sans', Arial, sans-serif",
-      face: '\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 300;\n          src:\n            local(\'Work Sans Light\'),\n            local(\'WorkSans-Light\'),\n            url("' + fontPath + '/FD_Udbezj8EHXbdsqLUplxampu5_7CjHW5spxoeN3Vs.woff2") format(\'woff2\');\n        }\n\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 400;\n          src:\n            local(\'Work Sans\'),\n            local(\'WorkSans-Regular\'),\n            url("' + fontPath + '/ElUAY9q6T0Ayx4zWzW63VJBw1xU1rKptJj_0jans920.woff2") format(\'woff2\');\n        }\n\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 500;\n          src:\n            local(\'Work Sans Medium\'),\n            local(\'WorkSans-Medium\'),\n            url("' + fontPath + '/Nbre-U_bp6Xktt8cpgwaJBampu5_7CjHW5spxoeN3Vs.woff2") format(\'woff2\');\n        }\n\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 600;\n          src:\n            local(\'Work Sans SemiBold\'),\n            local(\'WorkSans-SemiBold\'),\n            url("' + fontPath + '/z9rX03Xuz9ZNHTMg1_ghGRampu5_7CjHW5spxoeN3Vs.woff2") format(\'woff2\');\n        }\n\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 700;\n          src:\n            local(\'Work Sans Bold\'),\n            local(\'WorkSans-Bold\'),\n            url("' + fontPath + '/4udXuXg54JlPEP5iKO5AmRampu5_7CjHW5spxoeN3Vs.woff2") format(\'woff2\');\n        }\n      ',
+      face: '\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 300;\n          src:\n            local(\'Work Sans Light\'),\n            local(\'WorkSans-Light\'),\n            url("' + workSansPath + '/FD_Udbezj8EHXbdsqLUplxampu5_7CjHW5spxoeN3Vs.woff2") format(\'woff2\');\n        }\n\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 400;\n          src:\n            local(\'Work Sans\'),\n            local(\'WorkSans-Regular\'),\n            url("' + workSansPath + '/ElUAY9q6T0Ayx4zWzW63VJBw1xU1rKptJj_0jans920.woff2") format(\'woff2\');\n        }\n\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 500;\n          src:\n            local(\'Work Sans Medium\'),\n            local(\'WorkSans-Medium\'),\n            url("' + workSansPath + '/Nbre-U_bp6Xktt8cpgwaJBampu5_7CjHW5spxoeN3Vs.woff2") format(\'woff2\');\n        }\n\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 600;\n          src:\n            local(\'Work Sans SemiBold\'),\n            local(\'WorkSans-SemiBold\'),\n            url("' + workSansPath + '/z9rX03Xuz9ZNHTMg1_ghGRampu5_7CjHW5spxoeN3Vs.woff2") format(\'woff2\');\n        }\n\n        @font-face {\n          font-family: \'Work Sans\';\n          font-style: normal;\n          font-weight: 700;\n          src:\n            local(\'Work Sans Bold\'),\n            local(\'WorkSans-Bold\'),\n            url("' + workSansPath + '/4udXuXg54JlPEP5iKO5AmRampu5_7CjHW5spxoeN3Vs.woff2") format(\'woff2\');\n        }\n      ',
       size: '16px'
     },
     hover: {
@@ -199,13 +199,14 @@ exports.default = (0, _utils.deepFreeze)({
         color: (0, _styledComponents.css)(['', ''], function (props) {
           return props.theme.global.colors.border;
         })
-      }
+      },
+      weight: 700
     },
     lineHeight: '24px',
     opacity: {
-      weak: '0.8',
+      strong: '0.8',
       medium: '0.4',
-      strong: '0.1'
+      weak: '0.1'
     },
     spacing: baseSpacing + 'px',
     size: {
@@ -243,7 +244,7 @@ exports.default = (0, _utils.deepFreeze)({
         return props.theme.global.colors.brand;
       }),
       width: borderWidth + 'px',
-      radius: '5px'
+      radius: baseSpacing + 'px'
     },
     colors: {
       accent: (0, _styledComponents.css)(['', ''], function (props) {
@@ -263,7 +264,7 @@ exports.default = (0, _utils.deepFreeze)({
     maxWidth: baseSpacing * 16 + 'px',
     padding: {
       vertical: baseSpacing / 2 - borderWidth + 'px',
-      horizontal: baseSpacing / 2 - borderWidth + 'px'
+      horizontal: baseSpacing * 2 - borderWidth + 'px'
     }
   },
   calendar: {
@@ -385,6 +386,10 @@ exports.default = (0, _utils.deepFreeze)({
   },
   grommet: {},
   heading: {
+    font: {
+      family: "'Zilla Slab', 'Work Sans', Arial, sans-serif",
+      face: '\n        @font-face {\n          font-family: \'Zilla Slab\';\n          font-style: normal;\n          font-weight: 400;\n          src:\n            local(\'Zilla Slab Regular\'),\n            local(\'ZillaSlab-Regular\'),\n            url("https://s3.amazonaws.com/grommetfonts/ZillaSlab-Regular.ttf") format(\'ttf\');\n        }\n\n        @font-face {\n          font-family: \'Zilla Slab\';\n          font-style: normal;\n          font-weight: 600;\n          src:\n            local(\'Zilla Slab SemiBold\'),\n            local(\'ZillaSlab-SemiBold\'),\n            url("https://s3.amazonaws.com/grommetfonts/ZillaSlab-SemiBold.ttf") format(\'ttf\');\n        }\n      '
+    },
     // maxWidth chosen to be ~50 characters wide
     // see: https://ux.stackexchange.com/a/34125
     level: {
@@ -409,7 +414,7 @@ exports.default = (0, _utils.deepFreeze)({
         large: { size: '24px', height: 1.333, maxWidth: baseSpacing * 24 + 'px' }
       }
     },
-    weight: 300
+    weight: 600
   },
   icon: {
     extend: (0, _styledComponents.css)(['', ' ', ''], function (props) {

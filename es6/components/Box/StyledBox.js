@@ -69,7 +69,7 @@ var directionStyle = css(['', ' ', ' flex-direction:', ';', '}'], function (prop
 }, function (props) {
   return props.direction === 'column' && 'min-width: 0;';
 }, function (props) {
-  return props.direction;
+  return props.direction === 'row-responsive' ? 'row' : props.direction;
 }, function (props) {
   return props.direction === 'row-responsive' ? palm('\n    flex-direction: column;\n    flex-basis: auto;\n    justify-content: flex-start;\n    align-items: stretch;\n  ') : '';
 });
@@ -351,7 +351,7 @@ var gapStyle = css(['', ''], function (_ref) {
       gap = _ref.gap,
       responsive = _ref.responsive,
       edgeSize = _ref.theme.global.edgeSize;
-  return direction === 'column' ? '\n      height: ' + edgeSize[gap] + ';\n      ' + (responsive ? palm('\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ' : '\n      width: ' + edgeSize[gap] + ';\n      ' + (responsive && direction === 'row-responsive' ? palm('\n        width: auto;\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ';
+  return direction === 'column' ? '\n      height: ' + edgeSize[gap] + ';\n      ' + (responsive ? palm('\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ' : '\n      width: ' + edgeSize[gap] + ';\n      ' + (direction === 'row-responsive' ? palm('\n        width: auto;\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ';
 });
 
 export var StyledBoxGap = styled.div.withConfig({
