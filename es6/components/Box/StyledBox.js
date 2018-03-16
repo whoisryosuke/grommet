@@ -57,7 +57,7 @@ var BASIS_MAP = {
 };
 
 var basisStyle = css(['flex-basis:', ';'], function (props) {
-  return BASIS_MAP[props.basis] || props.theme.global.size[props.basis] || props.basis;
+  return BASIS_MAP[props.basis] || props.theme.global.size[props.basis];
 });
 
 // min-width and min-height needed because of this
