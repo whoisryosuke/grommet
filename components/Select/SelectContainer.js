@@ -41,41 +41,70 @@ var SelectContainer = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-      selectedOptionIndex: -1,
+      activeIndex: -1, // for tracking keyboard interaction
       search: ''
     }, _this.optionsRef = {}, _this.onInput = function (event) {
-      _this.setState({ search: event.target.value, selectedOptionIndex: -1 }, function () {
+      _this.setState({ search: event.target.value, selected: undefined }, function () {
         return _this.onSearch(_this.state.search);
       });
     }, _this.onSearch = (0, _utils.debounce)(function (search) {
       return _this.props.onSearch(search);
-    }, 150), _this.selectOption = function (option) {
-      var onChange = _this.props.onChange;
+    }, 150), _this.selectOption = function (option, index) {
+      var _this$props = _this.props,
+          multiple = _this$props.multiple,
+          onChange = _this$props.onChange,
+          options = _this$props.options,
+          selected = _this$props.selected;
 
 
       if (onChange) {
-        onChange({ target: (0, _reactDom.findDOMNode)(_this.inputRef), option: option });
+        var nextValue = option;
+        var nextSelected = index;
+        if (multiple) {
+          nextValue = [];
+          nextSelected = [];
+          var removed = false;
+          (selected || []).forEach(function (selectedIndex) {
+            if (selectedIndex === index) {
+              removed = true;
+            } else {
+              nextValue.push(options[selectedIndex]);
+              nextSelected.push(selectedIndex);
+            }
+          });
+          if (!removed) {
+            nextValue.push(option);
+            nextSelected.push(index);
+          }
+        }
+
+        onChange({
+          target: (0, _reactDom.findDOMNode)(_this.inputRef),
+          option: option,
+          value: nextValue,
+          selected: nextSelected
+        });
       }
     }, _this.onNextOption = function (event) {
       var options = _this.props.options;
-      var selectedOptionIndex = _this.state.selectedOptionIndex;
+      var activeIndex = _this.state.activeIndex;
 
       event.preventDefault();
-      var index = Math.min(selectedOptionIndex + 1, options.length - 1);
-      _this.setState({ selectedOptionIndex: index });
+      var index = Math.min(activeIndex + 1, options.length - 1);
+      _this.setState({ activeIndex: index });
     }, _this.onPreviousOption = function (event) {
-      var selectedOptionIndex = _this.state.selectedOptionIndex;
+      var activeIndex = _this.state.activeIndex;
 
       event.preventDefault();
-      var index = Math.max(selectedOptionIndex - 1, 0);
-      _this.setState({ selectedOptionIndex: index });
+      var index = Math.max(activeIndex - 1, 0);
+      _this.setState({ activeIndex: index });
     }, _this.onSelectOption = function (event) {
       var options = _this.props.options;
-      var selectedOptionIndex = _this.state.selectedOptionIndex;
+      var activeIndex = _this.state.activeIndex;
 
-      if (selectedOptionIndex >= 0) {
+      if (activeIndex >= 0) {
         event.preventDefault(); // prevent submitting forms
-        _this.selectOption(options[selectedOptionIndex]);
+        _this.selectOption(options[activeIndex], activeIndex);
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -97,10 +126,10 @@ var SelectContainer = function (_Component) {
   };
 
   SelectContainer.prototype.componentDidUpdate = function componentDidUpdate() {
-    var selectedOptionIndex = this.state.selectedOptionIndex;
+    var activeIndex = this.state.activeIndex;
 
-    var buttonNode = (0, _reactDom.findDOMNode)(this.optionsRef[selectedOptionIndex]);
-    if (selectedOptionIndex >= 0 && buttonNode && buttonNode.scrollIntoView) {
+    var buttonNode = (0, _reactDom.findDOMNode)(this.optionsRef[activeIndex]);
+    if (activeIndex >= 0 && buttonNode && buttonNode.scrollIntoView) {
       buttonNode.scrollIntoView();
     }
   };
@@ -109,7 +138,6 @@ var SelectContainer = function (_Component) {
     var _this3 = this;
 
     var _props = this.props,
-        activeOptionIndex = _props.activeOptionIndex,
         children = _props.children,
         dropBackground = _props.dropBackground,
         dropSize = _props.dropSize,
@@ -119,9 +147,10 @@ var SelectContainer = function (_Component) {
         onSearch = _props.onSearch,
         options = _props.options,
         searchPlaceholder = _props.searchPlaceholder,
+        selected = _props.selected,
         value = _props.value;
     var _state = this.state,
-        selectedOptionIndex = _state.selectedOptionIndex,
+        activeIndex = _state.activeIndex,
         search = _state.search;
 
 
@@ -176,10 +205,10 @@ var SelectContainer = function (_Component) {
                   ref: function ref(_ref2) {
                     _this3.optionsRef[index] = _ref2;
                   },
-                  active: activeOptionIndex === index || selectedOptionIndex === index || option && option === value,
+                  active: selected === index || Array.isArray(selected) && selected.indexOf(index) !== -1 || activeIndex === index || option && option === value || option && Array.isArray(value) && value.indexOf(option) !== -1,
                   key: 'option_' + (name || '') + '_' + index,
                   onClick: function onClick() {
-                    return _this3.selectOption(option);
+                    return _this3.selectOption(option, index);
                   },
                   hoverIndicator: 'background'
                 },

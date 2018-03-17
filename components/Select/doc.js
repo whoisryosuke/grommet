@@ -11,7 +11,6 @@ exports.default = function (Select) {
 
   DocumentedSelect.propTypes = {
     a11yTitle: _utils.a11yTitlePropType,
-    activeOptionIndex: _reactDesc.PropTypes.number.description('Highlight a given option at the provided index.'),
     children: _reactDesc.PropTypes.func.description('Function that will be called when each option is rendered.'),
     dropAlign: _reactDesc.PropTypes.shape({
       top: _reactDesc.PropTypes.oneOf(['top', 'bottom']),
@@ -26,14 +25,19 @@ exports.default = function (Select) {
     dropSize: _reactDesc.PropTypes.string.description('Size of the options container inside the Select drop.'),
     dropTarget: _reactDesc.PropTypes.object.description('Target where the options drop will be aligned to. This should be\n      a React reference. Typically, this is not required as the drop will be\n      aligned to the Select itself by default.'),
     focusIndicator: _reactDesc.PropTypes.bool.description('Whether when \'plain\' it should receive a focus outline.'),
+    messages: _reactDesc.PropTypes.shape({
+      multiple: _reactDesc.PropTypes.string
+    }).description('Custom messages.'),
+    multiple: _reactDesc.PropTypes.bool.description('Whether to allow multiple options to be selected.'),
     onChange: _reactDesc.PropTypes.func.description('Function that will be called when the user selects an option.'),
     onClose: _reactDesc.PropTypes.func.description('Function that will be called when the Select drop closes.'),
-    onSearch: _reactDesc.PropTypes.func.description('Function that will be called when the user types in the search input.\nIf this property is not provided, no search field will be rendered.'),
-    options: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.element, _reactDesc.PropTypes.object])).description('Options can be either a string or an object. If an object is used, use children callback\nin order to render anything based on the current item.').isRequired,
+    onSearch: _reactDesc.PropTypes.func.description('Function that will be called when the user types in the search input.\n      If this property is not provided, no search field will be rendered.'),
+    options: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.element, _reactDesc.PropTypes.object])).description('Options can be either a string or an object. If an object is used, use\n      children callback in order to render anything based on the current item.').isRequired,
     placeholder: _reactDesc.PropTypes.string.description('Placeholder text to use when no value is provided.'),
     plain: _reactDesc.PropTypes.bool.description('Whether this is a plain Select input with no border or padding.'),
     searchPlaceholder: _reactDesc.PropTypes.string.description('Placeholder text to use in the search box when the search input is empty.'),
-    value: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.element, _reactDesc.PropTypes.object]).description('Currently selected value.')
+    selected: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.number, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.number)]).description('Index of the currently selected option. When multiple, the set of\n      options selected. This property is required when multiple.'),
+    value: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.element, _reactDesc.PropTypes.object, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.element, _reactDesc.PropTypes.object]))]).description('Currently selected value. This will be an array\n      when multiple.')
   };
 
   return DocumentedSelect;

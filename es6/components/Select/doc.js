@@ -7,7 +7,6 @@ export default (function (Select) {
 
   DocumentedSelect.propTypes = {
     a11yTitle: a11yTitlePropType,
-    activeOptionIndex: PropTypes.number.description('Highlight a given option at the provided index.'),
     children: PropTypes.func.description('Function that will be called when each option is rendered.'),
     dropAlign: PropTypes.shape({
       top: PropTypes.oneOf(['top', 'bottom']),
@@ -22,14 +21,19 @@ export default (function (Select) {
     dropSize: PropTypes.string.description('Size of the options container inside the Select drop.'),
     dropTarget: PropTypes.object.description('Target where the options drop will be aligned to. This should be\n      a React reference. Typically, this is not required as the drop will be\n      aligned to the Select itself by default.'),
     focusIndicator: PropTypes.bool.description('Whether when \'plain\' it should receive a focus outline.'),
+    messages: PropTypes.shape({
+      multiple: PropTypes.string
+    }).description('Custom messages.'),
+    multiple: PropTypes.bool.description('Whether to allow multiple options to be selected.'),
     onChange: PropTypes.func.description('Function that will be called when the user selects an option.'),
     onClose: PropTypes.func.description('Function that will be called when the Select drop closes.'),
-    onSearch: PropTypes.func.description('Function that will be called when the user types in the search input.\nIf this property is not provided, no search field will be rendered.'),
-    options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.object])).description('Options can be either a string or an object. If an object is used, use children callback\nin order to render anything based on the current item.').isRequired,
+    onSearch: PropTypes.func.description('Function that will be called when the user types in the search input.\n      If this property is not provided, no search field will be rendered.'),
+    options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.object])).description('Options can be either a string or an object. If an object is used, use\n      children callback in order to render anything based on the current item.').isRequired,
     placeholder: PropTypes.string.description('Placeholder text to use when no value is provided.'),
     plain: PropTypes.bool.description('Whether this is a plain Select input with no border or padding.'),
     searchPlaceholder: PropTypes.string.description('Placeholder text to use in the search box when the search input is empty.'),
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.object]).description('Currently selected value.')
+    selected: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]).description('Index of the currently selected option. When multiple, the set of\n      options selected. This property is required when multiple.'),
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.object, PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.object]))]).description('Currently selected value. This will be an array\n      when multiple.')
   };
 
   return DocumentedSelect;

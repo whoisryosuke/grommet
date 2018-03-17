@@ -70,13 +70,14 @@ var Select = function (_Component) {
         children = _props.children,
         dropAlign = _props.dropAlign,
         dropTarget = _props.dropTarget,
+        messages = _props.messages,
         onChange = _props.onChange,
         onClose = _props.onClose,
         placeholder = _props.placeholder,
         plain = _props.plain,
         theme = _props.theme,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'onChange', 'onClose', 'placeholder', 'plain', 'theme', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'messages', 'onChange', 'onClose', 'placeholder', 'plain', 'theme', 'value']);
 
     var open = this.state.open;
 
@@ -93,6 +94,27 @@ var Select = function (_Component) {
     };
 
     var SelectIcon = theme.select.icons.down;
+    var selectValue = void 0;
+    var textValue = void 0;
+    if (!_react2.default.isValidElement(value)) {
+      if (Array.isArray(value)) {
+        if (value.length > 1) {
+          textValue = messages.multiple;
+        } else if (value.length === 1) {
+          if (_react2.default.isValidElement(value[0])) {
+            selectValue = value[0];
+          } else {
+            textValue = value[0];
+          }
+        } else {
+          textValue = '';
+        }
+      } else {
+        textValue = value;
+      }
+    } else {
+      selectValue = value;
+    }
 
     return _react2.default.createElement(
       _Keyboard.Keyboard,
@@ -118,7 +140,7 @@ var Select = function (_Component) {
             direction: 'row',
             justify: 'between'
           },
-          _react2.default.isValidElement(value) ? value : _react2.default.createElement(_TextInput.TextInput, _extends({
+          selectValue || _react2.default.createElement(_TextInput.TextInput, _extends({
             style: { cursor: 'pointer' },
             ref: function ref(_ref) {
               _this2.inputRef = _ref;
@@ -129,7 +151,7 @@ var Select = function (_Component) {
             placeholder: placeholder,
             plain: true,
             readOnly: true,
-            value: value
+            value: textValue
           })),
           _react2.default.createElement(
             _Box.Box,
@@ -149,7 +171,8 @@ var Select = function (_Component) {
 }(_react.Component);
 
 Select.defaultProps = {
-  dropAlign: { top: 'bottom', left: 'left' }
+  dropAlign: { top: 'bottom', left: 'left' },
+  messages: { multiple: 'multiple' }
 };
 
 
