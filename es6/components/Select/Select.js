@@ -51,6 +51,7 @@ var Select = function (_Component) {
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
         children = _props.children,
+        disabled = _props.disabled,
         dropAlign = _props.dropAlign,
         dropTarget = _props.dropTarget,
         messages = _props.messages,
@@ -60,7 +61,7 @@ var Select = function (_Component) {
         plain = _props.plain,
         theme = _props.theme,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'dropAlign', 'dropTarget', 'messages', 'onChange', 'onClose', 'placeholder', 'plain', 'theme', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'dropAlign', 'dropTarget', 'messages', 'onChange', 'onClose', 'placeholder', 'plain', 'theme', 'value']);
 
     var open = this.state.open;
 
@@ -105,6 +106,7 @@ var Select = function (_Component) {
       React.createElement(
         DropButton,
         _extends({
+          disabled: disabled,
           dropAlign: dropAlign,
           dropTarget: dropTarget
         }, rest, {

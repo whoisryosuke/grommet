@@ -27,7 +27,9 @@ var primaryStyle = function primaryStyle(props) {
   return (0, _styledComponents.css)(['', ' border:none;border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], (0, _utils.backgroundStyle)(props.color || 'brand', props.theme), props.theme.button.border.radius, props.theme.global.colors.white, props.theme.global.colors.white);
 };
 
-var disabledStyle = '\n  opacity: 0.3;\n  cursor: default;\n';
+var disabledStyle = (0, _styledComponents.css)(['opacity:', ';cursor:default;'], function (props) {
+  return props.theme.button.disabled.opacity;
+});
 
 function getHoverColor(props) {
   if (props.color) {

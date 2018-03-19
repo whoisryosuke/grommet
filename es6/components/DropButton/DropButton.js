@@ -73,13 +73,14 @@ var DropButton = function (_Component) {
     var _this2 = this;
 
     var _props = this.props,
+        disabled = _props.disabled,
         dropAlign = _props.dropAlign,
         dropContent = _props.dropContent,
         dropTarget = _props.dropTarget,
         id = _props.id,
         open = _props.open,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropContent', 'dropTarget', 'id', 'open', 'theme']);
+        rest = _objectWithoutProperties(_props, ['disabled', 'dropAlign', 'dropContent', 'dropTarget', 'id', 'open', 'theme']);
 
     var show = this.state.show;
 
@@ -110,7 +111,7 @@ var DropButton = function (_Component) {
       ref: function ref(_ref3) {
         _this2.buttonRef = _ref3;
       },
-      onClick: this.onToggle
+      onClick: disabled ? undefined : this.onToggle
     }, rest)), drop];
   };
 

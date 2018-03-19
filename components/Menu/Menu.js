@@ -108,6 +108,7 @@ var Menu = function (_Component) {
     var _this2 = this;
 
     var _props = this.props,
+        disabled = _props.disabled,
         dropAlign = _props.dropAlign,
         dropBackground = _props.dropBackground,
         dropTarget = _props.dropTarget,
@@ -117,7 +118,7 @@ var Menu = function (_Component) {
         onKeyDown = _props.onKeyDown,
         size = _props.size,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['dropAlign', 'dropBackground', 'dropTarget', 'items', 'label', 'messages', 'onKeyDown', 'size', 'theme']);
+        rest = _objectWithoutProperties(_props, ['disabled', 'dropAlign', 'dropBackground', 'dropTarget', 'items', 'label', 'messages', 'onKeyDown', 'size', 'theme']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
@@ -172,6 +173,7 @@ var Menu = function (_Component) {
           _extends({}, rest, {
             theme: theme,
             a11yTitle: messages.openMenu || 'Open Menu',
+            disabled: disabled,
             dropAlign: dropAlign,
             dropTarget: dropTarget,
             open: open,

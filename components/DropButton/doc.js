@@ -11,6 +11,7 @@ exports.default = function (DropButton) {
 
   DocumentedDropButton.propTypes = {
     a11yTitle: _reactDesc.PropTypes.string.description('Custom title to be used by screen readers.'),
+    disabled: _reactDesc.PropTypes.bool.description('Whether the button should be disabled.'),
     dropAlign: _reactDesc.PropTypes.shape({
       top: _reactDesc.PropTypes.oneOf(['top', 'bottom']),
       bottom: _reactDesc.PropTypes.oneOf(['top', 'bottom']),

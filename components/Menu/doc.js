@@ -13,6 +13,7 @@ exports.default = function (Menu) {
   var DocumentedMenu = (0, _reactDesc.describe)(Menu).availableAt((0, _utils.getAvailableAtBadge)('Menu')).description('Presents a list of choices within a drop down via a control that\n      opens it.').usage('import { Menu } from \'grommet\';\n<Menu />');
 
   DocumentedMenu.propTypes = {
+    disabled: _reactDesc.PropTypes.bool.description('Whether the menu should be disabled.'),
     dropAlign: _reactDesc.PropTypes.shape({
       top: _reactDesc.PropTypes.oneOf(VERTICAL_ALIGN_OPTIONS),
       bottom: _reactDesc.PropTypes.oneOf(VERTICAL_ALIGN_OPTIONS),

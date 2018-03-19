@@ -9,6 +9,7 @@ export default (function (Menu) {
   var DocumentedMenu = describe(Menu).availableAt(getAvailableAtBadge('Menu')).description('Presents a list of choices within a drop down via a control that\n      opens it.').usage('import { Menu } from \'grommet\';\n<Menu />');
 
   DocumentedMenu.propTypes = {
+    disabled: PropTypes.bool.description('Whether the menu should be disabled.'),
     dropAlign: PropTypes.shape({
       top: PropTypes.oneOf(VERTICAL_ALIGN_OPTIONS),
       bottom: PropTypes.oneOf(VERTICAL_ALIGN_OPTIONS),

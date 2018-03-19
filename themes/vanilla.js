@@ -253,6 +253,9 @@ exports.default = (0, _utils.deepFreeze)({
         return props.theme.global.colors.text;
       })
     },
+    disabled: {
+      opacity: 0.3
+    },
     minWidth: baseSpacing * 4 + 'px',
     maxWidth: baseSpacing * 16 + 'px',
     padding: {
