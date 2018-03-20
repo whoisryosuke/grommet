@@ -69,6 +69,7 @@ var Diagram = function (_Component) {
 
     _this.onResize = function () {
       var _this$state = _this.state,
+          connectionPoints = _this$state.connectionPoints,
           width = _this$state.width,
           height = _this$state.height;
 
@@ -76,7 +77,13 @@ var Diagram = function (_Component) {
       if (parent) {
         var rect = parent.getBoundingClientRect();
         if (rect.width !== width || rect.height !== height) {
-          _this.setState({ width: rect.width, height: rect.height });
+          _this.setState({
+            width: rect.width,
+            height: rect.height,
+            connectionPoints: undefined
+          });
+        } else if (!connectionPoints) {
+          _this.placeConnections();
         }
       }
     };
@@ -90,12 +97,47 @@ var Diagram = function (_Component) {
     this.onResize();
   };
 
+  Diagram.prototype.componentWillReceiveProps = function componentWillReceiveProps() {
+    this.setState({ connectionPoints: undefined });
+  };
+
   Diagram.prototype.componentDidUpdate = function componentDidUpdate() {
     this.onResize();
   };
 
   Diagram.prototype.componentWillUnmount = function componentWillUnmount() {
     window.removeEventListener('resize', this.onResize);
+  };
+
+  Diagram.prototype.placeConnections = function placeConnections() {
+    var connections = this.props.connections;
+
+    var containerRect = (0, _reactDom.findDOMNode)(this.containerRef).getBoundingClientRect();
+    var connectionPoints = connections.map(function (_ref) {
+      var fromTarget = _ref.fromTarget,
+          toTarget = _ref.toTarget;
+
+      var points = void 0;
+      var fromElement = findTarget(fromTarget);
+      var toElement = findTarget(toTarget);
+      if (!fromElement) {
+        console.warn('Diagram cannot find ' + fromTarget);
+      }
+      if (!toElement) {
+        console.warn('Diagram cannot find ' + toTarget);
+      }
+
+      if (fromElement && toElement) {
+        var fromRect = fromElement.getBoundingClientRect();
+        var toRect = toElement.getBoundingClientRect();
+        var fromPoint = [fromRect.x - containerRect.x + fromRect.width / 2, fromRect.y - containerRect.y + fromRect.height / 2];
+        var toPoint = [toRect.x - containerRect.x + toRect.width / 2, toRect.y - containerRect.y + toRect.height / 2];
+        points = [fromPoint, toPoint];
+      }
+
+      return points;
+    });
+    this.setState({ connectionPoints: connectionPoints });
   };
 
   Diagram.prototype.render = function render() {
@@ -107,46 +149,34 @@ var Diagram = function (_Component) {
         rest = _objectWithoutProperties(_props, ['connections', 'theme']);
 
     var _state = this.state,
+        connectionPoints = _state.connectionPoints,
         height = _state.height,
         width = _state.width;
 
 
     var paths = void 0;
-    if (this.containerRef) {
-      paths = connections.map(function (_ref, index) {
-        var fromTarget = _ref.fromTarget,
-            toTarget = _ref.toTarget,
-            color = _ref.color,
-            offset = _ref.offset,
-            round = _ref.round,
-            thickness = _ref.thickness,
-            type = _ref.type,
-            connectionRest = _objectWithoutProperties(_ref, ['fromTarget', 'toTarget', 'color', 'offset', 'round', 'thickness', 'type']);
-
-        var containerRect = (0, _reactDom.findDOMNode)(_this2.containerRef).getBoundingClientRect();
-        var fromElement = findTarget(fromTarget);
-        var toElement = findTarget(toTarget);
-        if (!fromElement) {
-          console.warn('Diagram cannot find ' + fromTarget);
-        }
-        if (!toElement) {
-          console.warn('Diagram cannot find ' + toTarget);
-        }
+    if (connectionPoints) {
+      paths = connections.map(function (_ref2, index) {
+        var color = _ref2.color,
+            offset = _ref2.offset,
+            round = _ref2.round,
+            thickness = _ref2.thickness,
+            type = _ref2.type,
+            connectionRest = _objectWithoutProperties(_ref2, ['color', 'offset', 'round', 'thickness', 'type']);
 
         var path = void 0;
-        if (fromElement && toElement) {
-          var fromRect = fromElement.getBoundingClientRect();
-          var toRect = toElement.getBoundingClientRect();
-          var fromPoint = [fromRect.x - containerRect.x + fromRect.width / 2, fromRect.y - containerRect.y + fromRect.height / 2];
-          var toPoint = [toRect.x - containerRect.x + toRect.width / 2, toRect.y - containerRect.y + toRect.height / 2];
-
+        var cleanedRest = _extends({}, connectionRest);
+        delete cleanedRest.fromTarget;
+        delete cleanedRest.toTarget;
+        var points = connectionPoints[index];
+        if (points) {
           var offsetWidth = offset ? (0, _utils.parseMetricToNum)(theme.global.edgeSize[offset]) : 0;
-          var d = COMMANDS[type || 'curved'](fromPoint, toPoint, offsetWidth);
+          var d = COMMANDS[type || 'curved'](points[0], points[1], offsetWidth);
           var strokeWidth = thickness ? (0, _utils.parseMetricToNum)(theme.global.edgeSize[thickness]) : 1;
 
           path = _react2.default.createElement('path', _extends({
             key: index
-          }, connectionRest, {
+          }, cleanedRest, {
             stroke: (0, _utils.colorForName)(color, theme),
             strokeWidth: strokeWidth,
             strokeLinecap: round ? 'round' : 'butt',
@@ -163,8 +193,8 @@ var Diagram = function (_Component) {
     return _react2.default.createElement(
       _StyledDiagram2.default,
       _extends({
-        ref: function ref(_ref2) {
-          _this2.containerRef = _ref2;
+        ref: function ref(_ref3) {
+          _this2.containerRef = _ref3;
         },
         viewBox: '0 0 ' + width + ' ' + height,
         preserveAspectRatio: 'xMinYMin meet',
