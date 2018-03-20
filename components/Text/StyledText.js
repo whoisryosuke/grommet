@@ -63,9 +63,13 @@ var colorStyle = (0, _styledComponents.css)(['color:', ''], function (props) {
   return (0, _utils.colorForName)(props.color, props.theme);
 });
 
+var weightStyle = (0, _styledComponents.css)(['font-weight:', ''], function (props) {
+  return props.weight;
+});
+
 var StyledText = _styledComponents2.default.span.withConfig({
   displayName: 'StyledText'
-})(['', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
 }, function (props) {
   return props.margin && marginStyle(props);
@@ -75,6 +79,8 @@ var StyledText = _styledComponents2.default.span.withConfig({
   return props.truncate && truncateStyle;
 }, function (props) {
   return props.color && colorStyle;
+}, function (props) {
+  return props.weight && weightStyle;
 });
 
 exports.default = StyledText.extend(_templateObject, function (props) {

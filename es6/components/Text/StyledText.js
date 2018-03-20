@@ -55,9 +55,13 @@ var colorStyle = css(['color:', ''], function (props) {
   return colorForName(props.color, props.theme);
 });
 
+var weightStyle = css(['font-weight:', ''], function (props) {
+  return props.weight;
+});
+
 var StyledText = styled.span.withConfig({
   displayName: 'StyledText'
-})(['', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
 }, function (props) {
   return props.margin && marginStyle(props);
@@ -67,6 +71,8 @@ var StyledText = styled.span.withConfig({
   return props.truncate && truncateStyle;
 }, function (props) {
   return props.color && colorStyle;
+}, function (props) {
+  return props.weight && weightStyle;
 });
 
 export default StyledText.extend(_templateObject, function (props) {

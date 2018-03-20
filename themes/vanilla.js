@@ -380,6 +380,19 @@ exports.default = (0, _utils.deepFreeze)({
       }
     }
   },
+  formField: {
+    border: {
+      color: 'border',
+      position: 'inner',
+      side: 'bottom',
+      error: {
+        color: 'status-critical'
+      }
+    },
+    error: { color: 'status-critical' },
+    help: { color: 'dark-5' },
+    label: {}
+  },
   grommet: {},
   heading: {
     font: {

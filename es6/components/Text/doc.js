@@ -14,7 +14,8 @@ export default (function (Text) {
     size: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge']).description('The font size is primarily driven by the chosen tag. But, it can\nbe adjusted via this size property. The tag should be set for semantic\ncorrectness and accessibility. This size property allows for stylistic\nadjustments.'),
     tag: PropTypes.string.description('The DOM tag to use for the element.').defaultValue('span'),
     textAlign: PropTypes.oneOf(['start', 'center', 'end']).description('How to align the text inside the component.'),
-    truncate: PropTypes.bool.description('Restrict the text to a single line and truncate with ellipsis if it\nis too long to all fit.')
+    truncate: PropTypes.bool.description('Restrict the text to a single line and truncate with ellipsis if it\nis too long to all fit.'),
+    weight: PropTypes.oneOfType([PropTypes.oneOf(['normal', 'bold']), PropTypes.number]).description('Font weight')
   };
 
   return DocumentedText;

@@ -53,15 +53,17 @@ var FormField = function (_Component) {
     var _this2 = this;
 
     var _props = this.props,
-        border = _props.border,
         children = _props.children,
         error = _props.error,
         help = _props.help,
+        htmlFor = _props.htmlFor,
         label = _props.label,
         style = _props.style,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['border', 'children', 'error', 'help', 'label', 'style', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'error', 'help', 'htmlFor', 'label', 'style', 'theme']);
 
+    var formField = theme.formField;
+    var border = formField.border;
     var focus = this.state.focus;
 
 
@@ -78,9 +80,9 @@ var FormField = function (_Component) {
     };
     var borderColor = void 0;
     if (focus) {
-      borderColor = 'accent-1';
+      borderColor = theme.global.focus.border.color;
     } else if (error) {
-      borderColor = 'status-critical';
+      borderColor = formField.border.error.color || 'status-critical';
     } else {
       borderColor = border ? border.color || 'border' : 'border';
     }
@@ -144,25 +146,22 @@ var FormField = function (_Component) {
         },
         label ? _react2.default.createElement(
           _Text.Text,
-          null,
+          _extends({ tag: 'label', htmlFor: htmlFor }, formField.label),
           label
         ) : undefined,
         help ? _react2.default.createElement(
           _Text.Text,
-          { color: 'dark-5' },
+          formField.help,
           help
         ) : undefined
       ) : undefined,
       contents,
       error ? _react2.default.createElement(
         _Box.Box,
-        {
-          justify: 'between',
-          margin: { vertical: 'xsmall', horizontal: 'small' }
-        },
+        { margin: { vertical: 'xsmall', horizontal: 'small' } },
         _react2.default.createElement(
           _Text.Text,
-          { color: 'status-critical' },
+          formField.error,
           error
         )
       ) : undefined
@@ -171,11 +170,6 @@ var FormField = function (_Component) {
 
   return FormField;
 }(_react.Component);
-
-FormField.defaultProps = {
-  border: { color: 'border', position: 'inner', side: 'bottom' }
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(FormField);
