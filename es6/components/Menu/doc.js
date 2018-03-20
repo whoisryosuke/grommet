@@ -28,7 +28,7 @@ export default (function (Menu) {
       closeMenu: PropTypes.string,
       openMenu: PropTypes.string
     }).description('Custom messages. Used for accessibility by screen readers.'),
-    size: PropTypes.oneOf(['small', 'medium', 'large']).description('The size of the menu.')
+    size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']).description('The size of the menu.')
   };
 
   return DocumentedMenu;

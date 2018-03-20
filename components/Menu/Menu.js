@@ -231,6 +231,7 @@ var Menu = function (_Component) {
 
 Menu.defaultProps = {
   dropAlign: { top: 'top', left: 'left' },
+  items: [],
   messages: { openMenu: 'Open Menu', closeMenu: 'Close Menu' }
 };
 

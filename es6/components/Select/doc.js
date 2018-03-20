@@ -34,6 +34,7 @@ export default (function (Select) {
     plain: PropTypes.bool.description('Whether this is a plain Select input with no border or padding.'),
     searchPlaceholder: PropTypes.string.description('Placeholder text to use in the search box when the search input is empty.'),
     selected: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]).description('Index of the currently selected option. When multiple, the set of\n      options selected. This property is required when multiple.'),
+    size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']).description('The size of the select.'),
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.object, PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.object]))]).description('Currently selected value. This will be an array\n      when multiple.')
   };
 

@@ -59,9 +59,10 @@ var Select = function (_Component) {
         onClose = _props.onClose,
         placeholder = _props.placeholder,
         plain = _props.plain,
+        size = _props.size,
         theme = _props.theme,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'dropAlign', 'dropTarget', 'messages', 'onChange', 'onClose', 'placeholder', 'plain', 'theme', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'dropAlign', 'dropTarget', 'messages', 'onChange', 'onClose', 'placeholder', 'plain', 'size', 'theme', 'value']);
 
     var open = this.state.open;
 
@@ -135,6 +136,7 @@ var Select = function (_Component) {
             type: 'text',
             placeholder: placeholder,
             plain: true,
+            size: size,
             readOnly: true,
             value: textValue
           })),
@@ -145,7 +147,7 @@ var Select = function (_Component) {
               flex: false,
               style: { minWidth: 'auto' }
             },
-            React.createElement(SelectIcon, { color: 'brand' })
+            React.createElement(SelectIcon, { color: 'brand', size: size })
           )
         )
       )
