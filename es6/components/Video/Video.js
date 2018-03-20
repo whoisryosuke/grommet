@@ -217,7 +217,7 @@ var Video = function (_Component) {
         volume = _state.volume;
 
     var over = controls === 'over';
-    var background = over ? { color: 'dark-2', opacity: 'weak' } : undefined;
+    var background = over ? { color: 'dark-2', opacity: 'strong' } : undefined;
     var iconColor = over ? 'light-1' : undefined;
 
     var formattedTime = formatTime(scrubTime || currentTime || duration);

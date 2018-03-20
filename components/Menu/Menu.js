@@ -108,17 +108,19 @@ var Menu = function (_Component) {
     var _this2 = this;
 
     var _props = this.props,
+        children = _props.children,
         disabled = _props.disabled,
         dropAlign = _props.dropAlign,
         dropBackground = _props.dropBackground,
         dropTarget = _props.dropTarget,
+        icon = _props.icon,
         items = _props.items,
         label = _props.label,
         messages = _props.messages,
         onKeyDown = _props.onKeyDown,
         size = _props.size,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['disabled', 'dropAlign', 'dropBackground', 'dropTarget', 'items', 'label', 'messages', 'onKeyDown', 'size', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'disabled', 'dropAlign', 'dropBackground', 'dropTarget', 'icon', 'items', 'label', 'messages', 'onKeyDown', 'size', 'theme']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
@@ -127,21 +129,21 @@ var Menu = function (_Component) {
 
     var MenuIcon = theme.menu.icons.down;
 
-    var content = _react2.default.createElement(
+    var content = children || _react2.default.createElement(
       _Box.Box,
       {
         direction: 'row',
         justify: 'start',
         align: 'center',
         pad: 'small',
-        gap: 'small'
+        gap: label && icon !== false ? 'small' : undefined
       },
       _react2.default.createElement(
         _Text.Text,
         { size: size },
         label
       ),
-      _react2.default.createElement(MenuIcon, { color: 'brand', size: size })
+      icon !== false ? icon !== true && icon || _react2.default.createElement(MenuIcon, { color: 'brand', size: size }) : null
     );
 
     var controlMirror = _react2.default.createElement(
