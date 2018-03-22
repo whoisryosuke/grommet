@@ -119,7 +119,7 @@ var SelectContainer = function (_Component) {
     setTimeout(function () {
       if (onSearch) {
         (0, _reactDom.findDOMNode)(_this2.searchRef).querySelector('input').focus();
-      } else {
+      } else if (_this2.selectRef) {
         (0, _reactDom.findDOMNode)(_this2.selectRef).focus();
       }
     }, 0);

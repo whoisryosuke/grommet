@@ -346,16 +346,26 @@ export default StyledBox.extend(_templateObject, function (props) {
   return props.theme.box && props.theme.box.extend;
 });
 
-var gapStyle = css(['', ''], function (_ref) {
-  var direction = _ref.direction,
-      gap = _ref.gap,
-      responsive = _ref.responsive,
-      edgeSize = _ref.theme.global.edgeSize;
-  return direction === 'column' ? '\n      height: ' + edgeSize[gap] + ';\n      ' + (responsive ? palm('\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ' : '\n      width: ' + edgeSize[gap] + ';\n      ' + (direction === 'row-responsive' ? palm('\n        width: auto;\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ';
-});
+var gapStyle = function gapStyle(direction, gap, responsive, _ref) {
+  var edgeSize = _ref.global.edgeSize;
+
+  var styles = [];
+  if (direction === 'column') {
+    styles.push(css(['height:', ';'], edgeSize[gap]));
+    if (responsive) {
+      styles.push(palm('height: ' + edgeSize.narrow[gap] + ';'));
+    }
+  } else {
+    styles.push('width: ' + edgeSize[gap] + ';');
+    if (responsive && direction === 'row-responsive') {
+      styles.push(palm('\n        width: auto;\n        height: ' + edgeSize.narrow[gap] + ';\n      '));
+    }
+  }
+  return styles;
+};
 
 export var StyledBoxGap = styled.div.withConfig({
   displayName: 'StyledBox__StyledBoxGap'
 })(['', ';'], function (props) {
-  return props.gap && gapStyle;
+  return props.gap && gapStyle(props.direction, props.gap, props.responsive, props.theme);
 });

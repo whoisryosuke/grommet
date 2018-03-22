@@ -106,7 +106,7 @@ var SelectContainer = function (_Component) {
     setTimeout(function () {
       if (onSearch) {
         findDOMNode(_this2.searchRef).querySelector('input').focus();
-      } else {
+      } else if (_this2.selectRef) {
         findDOMNode(_this2.selectRef).focus();
       }
     }, 0);

@@ -356,16 +356,26 @@ exports.default = StyledBox.extend(_templateObject, function (props) {
 });
 
 
-var gapStyle = (0, _styledComponents.css)(['', ''], function (_ref) {
-  var direction = _ref.direction,
-      gap = _ref.gap,
-      responsive = _ref.responsive,
-      edgeSize = _ref.theme.global.edgeSize;
-  return direction === 'column' ? '\n      height: ' + edgeSize[gap] + ';\n      ' + (responsive ? (0, _utils.palm)('\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ' : '\n      width: ' + edgeSize[gap] + ';\n      ' + (direction === 'row-responsive' ? (0, _utils.palm)('\n        width: auto;\n        height: ' + edgeSize.narrow[gap] + ';\n      ') : '') + '\n    ';
-});
+var gapStyle = function gapStyle(direction, gap, responsive, _ref) {
+  var edgeSize = _ref.global.edgeSize;
+
+  var styles = [];
+  if (direction === 'column') {
+    styles.push((0, _styledComponents.css)(['height:', ';'], edgeSize[gap]));
+    if (responsive) {
+      styles.push((0, _utils.palm)('height: ' + edgeSize.narrow[gap] + ';'));
+    }
+  } else {
+    styles.push('width: ' + edgeSize[gap] + ';');
+    if (responsive && direction === 'row-responsive') {
+      styles.push((0, _utils.palm)('\n        width: auto;\n        height: ' + edgeSize.narrow[gap] + ';\n      '));
+    }
+  }
+  return styles;
+};
 
 var StyledBoxGap = exports.StyledBoxGap = _styledComponents2.default.div.withConfig({
   displayName: 'StyledBox__StyledBoxGap'
 })(['', ';'], function (props) {
-  return props.gap && gapStyle;
+  return props.gap && gapStyle(props.direction, props.gap, props.responsive, props.theme);
 });
