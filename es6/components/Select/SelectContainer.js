@@ -11,6 +11,7 @@ import { debounce } from '../../utils';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
+import { InfiniteScroll } from '../InfiniteScroll';
 import { Keyboard } from '../Keyboard';
 import { Text } from '../Text';
 import { TextInput } from '../TextInput';
@@ -127,7 +128,6 @@ var SelectContainer = function (_Component) {
     var _props = this.props,
         children = _props.children,
         dropBackground = _props.dropBackground,
-        dropSize = _props.dropSize,
         id = _props.id,
         name = _props.name,
         onKeyDown = _props.onKeyDown,
@@ -160,7 +160,6 @@ var SelectContainer = function (_Component) {
           { pad: 'xsmall' },
           React.createElement(TextInput, {
             focusIndicator: true,
-            plain: true,
             size: 'small',
             ref: function ref(_ref) {
               _this3.searchRef = _ref;
@@ -173,18 +172,18 @@ var SelectContainer = function (_Component) {
         ) : undefined,
         React.createElement(
           Box,
-          { basis: dropSize, overflow: 'auto' },
+          {
+            flex: false,
+            role: 'menubar',
+            tabIndex: '-1',
+            ref: function ref(_ref3) {
+              _this3.selectRef = _ref3;
+            }
+          },
           React.createElement(
-            Box,
-            {
-              flex: false,
-              role: 'menubar',
-              tabIndex: '-1',
-              ref: function ref(_ref3) {
-                _this3.selectRef = _ref3;
-              }
-            },
-            options.map(function (option, index) {
+            InfiniteScroll,
+            { items: options, step: 20 },
+            function (option, index) {
               return React.createElement(
                 Button,
                 {
@@ -205,11 +204,11 @@ var SelectContainer = function (_Component) {
                   React.createElement(
                     Text,
                     { margin: 'none' },
-                    option ? option.toString() : undefined
+                    option !== null && option !== undefined ? option.toString() : undefined
                   )
                 )
               );
-            })
+            }
           )
         )
       )

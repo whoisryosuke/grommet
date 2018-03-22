@@ -23,7 +23,6 @@ exports.default = function (Select) {
       left: 'left'
     }),
     dropBackground: _utils.backgroundPropType,
-    dropSize: _reactDesc.PropTypes.string.description('Size of the options container inside the Select drop.'),
     dropTarget: _reactDesc.PropTypes.object.description('Target where the options drop will be aligned to. This should be\n      a React reference. Typically, this is not required as the drop will be\n      aligned to the Select itself by default.'),
     focusIndicator: _reactDesc.PropTypes.bool.description('Whether when \'plain\' it should receive a focus outline.'),
     messages: _reactDesc.PropTypes.shape({

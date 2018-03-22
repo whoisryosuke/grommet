@@ -14,6 +14,8 @@ var _Box = require('../Box');
 
 var _Button = require('../Button');
 
+var _InfiniteScroll = require('../InfiniteScroll');
+
 var _Keyboard = require('../Keyboard');
 
 var _Text = require('../Text');
@@ -140,7 +142,6 @@ var SelectContainer = function (_Component) {
     var _props = this.props,
         children = _props.children,
         dropBackground = _props.dropBackground,
-        dropSize = _props.dropSize,
         id = _props.id,
         name = _props.name,
         onKeyDown = _props.onKeyDown,
@@ -173,7 +174,6 @@ var SelectContainer = function (_Component) {
           { pad: 'xsmall' },
           _react2.default.createElement(_TextInput.TextInput, {
             focusIndicator: true,
-            plain: true,
             size: 'small',
             ref: function ref(_ref) {
               _this3.searchRef = _ref;
@@ -186,18 +186,18 @@ var SelectContainer = function (_Component) {
         ) : undefined,
         _react2.default.createElement(
           _Box.Box,
-          { basis: dropSize, overflow: 'auto' },
+          {
+            flex: false,
+            role: 'menubar',
+            tabIndex: '-1',
+            ref: function ref(_ref3) {
+              _this3.selectRef = _ref3;
+            }
+          },
           _react2.default.createElement(
-            _Box.Box,
-            {
-              flex: false,
-              role: 'menubar',
-              tabIndex: '-1',
-              ref: function ref(_ref3) {
-                _this3.selectRef = _ref3;
-              }
-            },
-            options.map(function (option, index) {
+            _InfiniteScroll.InfiniteScroll,
+            { items: options, step: 20 },
+            function (option, index) {
               return _react2.default.createElement(
                 _Button.Button,
                 {
@@ -218,11 +218,11 @@ var SelectContainer = function (_Component) {
                   _react2.default.createElement(
                     _Text.Text,
                     { margin: 'none' },
-                    option ? option.toString() : undefined
+                    option !== null && option !== undefined ? option.toString() : undefined
                   )
                 )
               );
-            })
+            }
           )
         )
       )
