@@ -90,7 +90,7 @@ var elevationStyle = (0, _styledComponents.css)(['box-shadow:', ';'], function (
 var FLEX_MAP = (_FLEX_MAP = {}, _FLEX_MAP[true] = '1 1', _FLEX_MAP[false] = '0 0', _FLEX_MAP.grow = '1 0', _FLEX_MAP.shrink = '0 1', _FLEX_MAP);
 
 var flexStyle = (0, _styledComponents.css)(['flex:', ';'], function (props) {
-  return FLEX_MAP[props.flex];
+  return '' + FLEX_MAP[props.flex] + (props.flex !== true && !props.basis ? ' auto' : '');
 });
 
 var fillStyle = function fillStyle(fill) {

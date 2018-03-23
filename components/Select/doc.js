@@ -38,7 +38,7 @@ exports.default = function (Select) {
     searchPlaceholder: _reactDesc.PropTypes.string.description('Placeholder text to use in the search box when the search input is empty.'),
     selected: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.number, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.number)]).description('Index of the currently selected option. When multiple, the set of\n      options selected. This property is required when multiple.'),
     size: _reactDesc.PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']).description('The size of the select.'),
-    value: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.element, _reactDesc.PropTypes.object, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.element, _reactDesc.PropTypes.object]))]).description('Currently selected value. This will be an array\n      when multiple.')
+    value: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.element, _reactDesc.PropTypes.object, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.object]))]).description('Currently selected value. This can be an array\n      when multiple. Passing an element allows the caller to control how\n      the value is rendered.')
   };
 
   return DocumentedSelect;
