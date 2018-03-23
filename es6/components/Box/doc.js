@@ -37,7 +37,7 @@ export default (function (Box) {
     elevation: PropTypes.oneOf(['none', 'xsmall', 'small', 'medium', 'large', 'xlarge']).description('Elevated height above the underlying context, indicated\n        via a drop shadow.').defaultValue('none'),
     flex: PropTypes.oneOf(['grow', 'shrink', true, false]).description('Whether flex-grow and/or flex-shrink is true.'),
     fill: PropTypes.oneOf(['horizontal', 'vertical', true, false]).description('Whether the width and/or height should fill the container.'),
-    gap: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The amount of spacing between child elements.'),
+    gap: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The amount of spacing between child elements. This\n        should not be used in conjunction with \'wrap\' as the gap elements\n        will not wrap gracefully.'),
     gridArea: PropTypes.string.description('The name of the area to place\n      this Box in inside a parent Grid.'),
     justify: PropTypes.oneOf(['start', 'center', 'between', 'end']).description('How to align the contents along the main axis.'),
     justifySelf: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the row axis when contained in a Grid.'),
