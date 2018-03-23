@@ -78,6 +78,7 @@ var Video = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      captions: [],
       mouseActive: false
     }, _this.hasPlayed = false, _this.injectUpdateVideoEvents = function () {
       var videoEvents = ['onAbort', 'onCanPlay', 'onCanPlayThrough', 'onDurationChange', 'onEmptied', 'onEncrypted', 'onEnded', 'onError', 'onLoadedData', 'onLoadedMetadata', 'onLoadStart', 'onPause', 'onPlay', 'onPlaying', 'onProgress', 'onRateChange', 'onSeeked', 'onSeeking', 'onStalled', 'onSuspend', 'onTimeUpdate', 'onVolumeChange', 'onWaiting'];
@@ -173,6 +174,56 @@ var Video = function (_Component) {
       if (!focus && !_this.unmounted) {
         _this.setState({ interacting: false });
       }
+    }, _this.restate = function () {
+      var _this$state = _this.state,
+          captions = _this$state.captions,
+          height = _this$state.height,
+          width = _this$state.width;
+
+      var video = (0, _reactDom.findDOMNode)(_this.videoRef);
+
+      if (video.videoHeight) {
+        // set the size based on the video aspect ratio
+        var rect = video.getBoundingClientRect();
+        var ratio = rect.width / rect.height;
+        var videoRatio = video.videoWidth / video.videoHeight;
+        if (videoRatio > ratio) {
+          var nextHeight = rect.width / videoRatio;
+          if (nextHeight !== height) {
+            _this.setState({ height: nextHeight, width: undefined });
+          }
+        } else {
+          var nextWidth = rect.height * videoRatio;
+          if (nextWidth !== width) {
+            _this.setState({ height: undefined, width: nextWidth });
+          }
+        }
+      }
+
+      // remember the state of the text tracks for subsequent rendering
+      var textTracks = video.textTracks;
+      if (textTracks.length > 0) {
+        if (textTracks.length === 1) {
+          var active = textTracks[0].mode === 'showing';
+          if (!captions || !captions[0] || captions[0].active !== active) {
+            _this.setState({ captions: [{ active: active }] });
+          }
+        } else {
+          var nextCaptions = [];
+          var set = false;
+          for (var i = 0; i < textTracks.length; i += 1) {
+            var track = textTracks[i];
+            var _active = track.mode === 'showing';
+            nextCaptions.push({ label: track.label, active: _active });
+            if (!captions || !captions[i] || captions[i].active !== _active) {
+              set = true;
+            }
+          }
+          if (set) {
+            _this.setState({ captions: nextCaptions });
+          }
+        }
+      }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -195,6 +246,8 @@ var Video = function (_Component) {
     for (var i = 0; i < textTracks.length; i += 1) {
       textTracks[i].mode = 'hidden';
     }
+
+    this.restate();
   };
 
   Video.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
@@ -210,6 +263,10 @@ var Video = function (_Component) {
     //   #the-source-element
     // Using forceUpdate to force redraw of video when receiving new <source>
     this.forceUpdate();
+  };
+
+  Video.prototype.componentDidUpdate = function componentDidUpdate() {
+    this.restate();
   };
 
   Video.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -232,6 +289,7 @@ var Video = function (_Component) {
         controls = _props.controls,
         theme = _props.theme;
     var _state = this.state,
+        captions = _state.captions,
         currentTime = _state.currentTime,
         duration = _state.duration,
         interacting = _state.interacting,
@@ -256,38 +314,16 @@ var Video = function (_Component) {
       Volume: theme.video.icons.volume
     };
 
-    var captionControls = [];
-    if (this.videoRef) {
-      var textTracks = (0, _reactDom.findDOMNode)(this.videoRef).textTracks;
-      if (textTracks.length > 0) {
-        if (textTracks.length === 1) {
-          var active = textTracks[0].mode === 'showing';
-          captionControls.push({
-            icon: _react2.default.createElement(Icons.ClosedCaption, { color: iconColor }),
-            active: active,
-            onClick: function onClick() {
-              return _this2.showCaptions(active ? -1 : 0);
-            }
-          });
-        } else {
-          var _loop = function _loop(i) {
-            var track = textTracks[i];
-            var active = track.mode === 'showing';
-            captionControls.push({
-              label: track.label,
-              active: active,
-              onClick: function onClick() {
-                return _this2.showCaptions(active ? -1 : i);
-              }
-            });
-          };
-
-          for (var i = 0; i < textTracks.length; i += 1) {
-            _loop(i);
-          }
+    var captionControls = captions.map(function (caption) {
+      return {
+        icon: caption.label ? undefined : _react2.default.createElement(Icons.ClosedCaption, { color: iconColor }),
+        label: caption.label,
+        active: caption.active,
+        onClick: function onClick() {
+          return _this2.showCaptions(caption.active ? -1 : 0);
         }
-      }
-    }
+      };
+    });
 
     return _react2.default.createElement(
       _StyledVideo.StyledVideoControls,
@@ -310,7 +346,7 @@ var Video = function (_Component) {
         }),
         _react2.default.createElement(
           _Box.Box,
-          { direction: 'row', align: 'center', flex: 'grow' },
+          { direction: 'row', align: 'center', flex: true },
           _react2.default.createElement(
             _Box.Box,
             { flex: true },
@@ -381,6 +417,11 @@ var Video = function (_Component) {
         loop = _props2.loop,
         rest = _objectWithoutProperties(_props2, ['autoPlay', 'children', 'controls', 'loop']);
 
+    var _state2 = this.state,
+        height = _state2.height,
+        width = _state2.width;
+
+
     var controlsElement = controls ? this.renderControls() : undefined;
 
     var mouseEventListeners = void 0;
@@ -393,19 +434,12 @@ var Video = function (_Component) {
     }
 
     var style = void 0;
-    if (rest.fit === 'contain' && controls === 'over' && this.videoRef) {
+    if (rest.fit === 'contain' && controls === 'over') {
       // constrain the size to fit the aspect ratio so the controls overlap correctly
-      var video = (0, _reactDom.findDOMNode)(this.videoRef);
-      if (video.videoHeight) {
-        var rect = video.getBoundingClientRect();
-        var ratio = rect.width / rect.height;
-        var videoRatio = video.videoWidth / video.videoHeight;
-        style = {};
-        if (videoRatio > ratio) {
-          style.height = rect.width / videoRatio;
-        } else {
-          style.width = rect.height * videoRatio;
-        }
+      if (width) {
+        style = { width: width };
+      } else if (height) {
+        style = { height: height };
       }
     }
 
