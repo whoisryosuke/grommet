@@ -78,6 +78,7 @@ var lightColors = ['#F6F6F6', '#EEEEEE', '#DDDDDD', '#CCCCCC', '#BBBBBB', '#AAAA
 var backgroundColor = '#FFFFFF';
 var textColor = '#444444';
 var borderColor = 'rgba(0, 0, 0, 0.33)';
+var focusColor = accentColors[0];
 var activeColor = (0, _polished.rgba)('#DDDDDD', 0.5);
 var workSansPath = 'https://fonts.gstatic.com/s/worksans/v2';
 
@@ -121,6 +122,7 @@ exports.default = (0, _utils.deepFreeze)({
       darkBackground: {
         text: '#FFFFFF'
       },
+      focus: focusColor,
       light: lightColors,
       neutral: neutralColors,
       placeholder: '#AAAAAA',
@@ -172,7 +174,7 @@ exports.default = (0, _utils.deepFreeze)({
     focus: {
       border: {
         color: (0, _styledComponents.css)(['', ''], function (props) {
-          return (0, _utils.colorForName)('accent-1', props.theme);
+          return (0, _utils.colorForName)('focus', props.theme);
         }),
         width: '2px'
       }

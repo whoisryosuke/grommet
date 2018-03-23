@@ -80,7 +80,7 @@ var FormField = function (_Component) {
     };
     var borderColor = void 0;
     if (focus) {
-      borderColor = theme.global.focus.border.color;
+      borderColor = 'focus';
     } else if (error) {
       borderColor = formField.border.error.color || 'status-critical';
     } else {
