@@ -22,7 +22,7 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
     if (background.image) {
       var color = void 0;
       if (background.dark === false) {
-        color = theme.global.colors.text;
+        color = theme.global.colors.lightBackground.text;
       } else if (background.dark) {
         color = theme.global.colors.darkBackground.text;
       } else {
@@ -33,10 +33,10 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
       var _color = (0, _colors.colorForName)(background.color, theme);
       var rgba = (0, _colors.getRGBA)(_color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
       if (rgba) {
-        return (0, _styledComponents.css)(['background-color:', ';color:', ';'], rgba, (0, _colors.colorIsDark)(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
+        return (0, _styledComponents.css)(['background-color:', ';color:', ';'], rgba, (0, _colors.colorIsDark)(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
       }
     } else if (background.dark === false) {
-      return (0, _styledComponents.css)(['color:', ';'], theme.global.colors.text);
+      return (0, _styledComponents.css)(['color:', ';'], theme.global.colors.lightBackground.text);
     } else if (background.dark) {
       return (0, _styledComponents.css)(['color:', ';'], theme.global.colors.darkBackground.text);
     }
@@ -48,7 +48,7 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
     }
     var _color2 = (0, _colors.colorForName)(background, theme);
     if (_color2) {
-      return (0, _styledComponents.css)(['background-color:', ';color:', ';'], _color2, (0, _colors.colorIsDark)(_color2) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
+      return (0, _styledComponents.css)(['background-color:', ';color:', ';'], _color2, (0, _colors.colorIsDark)(_color2) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
     }
   }
   return undefined;

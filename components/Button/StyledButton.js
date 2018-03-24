@@ -24,7 +24,7 @@ var basicStyle = function basicStyle(props) {
 };
 
 var primaryStyle = function primaryStyle(props) {
-  return (0, _styledComponents.css)(['', ' border:none;border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], (0, _utils.backgroundStyle)(props.color || 'brand', props.theme), props.theme.button.border.radius, props.theme.global.colors.white, props.theme.global.colors.white);
+  return (0, _styledComponents.css)(['', ' border:none;border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], (0, _utils.backgroundStyle)(props.color || 'brand', props.theme), props.theme.button.border.radius, (0, _utils.colorIsDark)((0, _utils.colorForName)('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text, (0, _utils.colorIsDark)((0, _utils.colorForName)('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text);
 };
 
 var disabledStyle = (0, _styledComponents.css)(['opacity:', ';cursor:default;'], function (props) {

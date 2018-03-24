@@ -124,6 +124,9 @@ exports.default = (0, _utils.deepFreeze)({
       },
       focus: focusColor,
       light: lightColors,
+      lightBackground: {
+        text: textColor
+      },
       neutral: neutralColors,
       placeholder: '#AAAAAA',
       status: statusColors,

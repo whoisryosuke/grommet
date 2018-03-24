@@ -16,7 +16,7 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
     if (background.image) {
       var color = void 0;
       if (background.dark === false) {
-        color = theme.global.colors.text;
+        color = theme.global.colors.lightBackground.text;
       } else if (background.dark) {
         color = theme.global.colors.darkBackground.text;
       } else {
@@ -27,10 +27,10 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
       var _color = colorForName(background.color, theme);
       var rgba = getRGBA(_color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
       if (rgba) {
-        return css(['background-color:', ';color:', ';'], rgba, colorIsDark(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
+        return css(['background-color:', ';color:', ';'], rgba, colorIsDark(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
       }
     } else if (background.dark === false) {
-      return css(['color:', ';'], theme.global.colors.text);
+      return css(['color:', ';'], theme.global.colors.lightBackground.text);
     } else if (background.dark) {
       return css(['color:', ';'], theme.global.colors.darkBackground.text);
     }
@@ -42,7 +42,7 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
     }
     var _color2 = colorForName(background, theme);
     if (_color2) {
-      return css(['background-color:', ';color:', ';'], _color2, colorIsDark(_color2) ? theme.global.colors.darkBackground.text : theme.global.colors.text);
+      return css(['background-color:', ';color:', ';'], _color2, colorIsDark(_color2) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
     }
   }
   return undefined;

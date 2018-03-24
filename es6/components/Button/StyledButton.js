@@ -7,14 +7,14 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 
-import { activeStyle, backgroundStyle, colorForName, focusStyle, fontSize, lapAndUp } from '../../utils';
+import { activeStyle, backgroundStyle, colorForName, colorIsDark, focusStyle, fontSize, lapAndUp } from '../../utils';
 
 var basicStyle = function basicStyle(props) {
   return css(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? colorForName(props.color, props.theme) : props.theme.button.border.color, props.theme.button.border.radius, props.grommet && props.grommet.dark ? props.theme.global.colors.darkBackground.text : props.theme.button.colors.text);
 };
 
 var primaryStyle = function primaryStyle(props) {
-  return css(['', ' border:none;border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], backgroundStyle(props.color || 'brand', props.theme), props.theme.button.border.radius, props.theme.global.colors.white, props.theme.global.colors.white);
+  return css(['', ' border:none;border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], backgroundStyle(props.color || 'brand', props.theme), props.theme.button.border.radius, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text);
 };
 
 var disabledStyle = css(['opacity:', ';cursor:default;'], function (props) {

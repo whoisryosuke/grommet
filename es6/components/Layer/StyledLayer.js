@@ -10,7 +10,7 @@ var hiddenPositionStyle = css(['left:-100%;right:100%;z-index:-1;position:fixed;
 
 var StyledLayer = styled.div.withConfig({
   displayName: 'StyledLayer'
-})(['', ' position:relative;z-index:10;overflow:auto;pointer-events:none;', ' ', ''], baseStyle, palm('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n  '), function (props) {
+})(['', ' background-color:unset;position:relative;z-index:10;overflow:auto;pointer-events:none;', ' ', ''], baseStyle, palm('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n  '), function (props) {
   return props.position === 'hidden' ? hiddenPositionStyle : lapAndUp('\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n    width: 100vw;\n    height: 100vh;\n  ');
 });
 
