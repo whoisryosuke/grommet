@@ -40,5 +40,8 @@ export default deepFreeze({
         light: '#01a982'
       }
     }
+  },
+  heading: {
+    font: false
   }
 });

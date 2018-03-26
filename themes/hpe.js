@@ -44,5 +44,8 @@ exports.default = (0, _utils.deepFreeze)({
         light: '#01a982'
       }
     }
+  },
+  heading: {
+    font: false
   }
 });
