@@ -84,7 +84,7 @@ var directionStyle = (0, _styledComponents.css)(['', ' ', ' flex-direction:', ';
 });
 
 var elevationStyle = (0, _styledComponents.css)(['box-shadow:', ';'], function (props) {
-  return props.theme.global.elevation[props.elevation];
+  return props.theme.global.elevation[props.grommet.dark ? 'dark' : 'light'][props.elevation];
 });
 
 var FLEX_MAP = (_FLEX_MAP = {}, _FLEX_MAP[true] = '1 1', _FLEX_MAP[false] = '0 0', _FLEX_MAP.grow = '1 0', _FLEX_MAP.shrink = '0 1', _FLEX_MAP);

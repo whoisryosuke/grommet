@@ -9,6 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 
 import FocusedContainer from '../FocusedContainer';
@@ -194,6 +195,9 @@ var DropContainer = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'onClickOutside', 'onEsc', 'onKeyDown', 'theme']);
 
+    var grommet = this.context.grommet;
+
+
     return React.createElement(
       FocusedContainer,
       null,
@@ -207,7 +211,8 @@ var DropContainer = function (_Component) {
             ref: function ref(_ref) {
               _this2.dropRef = _ref;
             },
-            theme: theme
+            theme: theme,
+            grommet: grommet
           }, rest),
           children
         )
@@ -220,6 +225,9 @@ var DropContainer = function (_Component) {
 
 DropContainer.defaultProps = {
   centered: true
+};
+DropContainer.contextTypes = {
+  grommet: PropTypes.object
 };
 
 

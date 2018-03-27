@@ -71,6 +71,9 @@ var Box = function (_Component) {
         wrap = _props2.wrap,
         rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'fill', 'gap', 'responsive', 'tag', 'theme', 'wrap']);
 
+    var grommet = this.context.grommet;
+
+
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
       StyledComponent = StyledBox.withComponent(tag);
@@ -107,7 +110,8 @@ var Box = function (_Component) {
         fillContainer: fill,
         wrapContents: wrap,
         responsive: responsive,
-        theme: theme
+        theme: theme,
+        grommet: grommet
       }, rest),
       contents
     );
