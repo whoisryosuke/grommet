@@ -1,7 +1,5 @@
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -105,25 +103,32 @@ export var withFocus = function withFocus(WrappedComponent) {
   return FocusableComponent;
 };
 
-var withTheme = function withTheme(WrappedComponent) {
+export var withTheme = function withTheme(WrappedComponent) {
   var ThemedComponent = function (_Component2) {
     _inherits(ThemedComponent, _Component2);
 
-    function ThemedComponent() {
+    function ThemedComponent(props, context) {
       _classCallCheck(this, ThemedComponent);
 
-      return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
+      var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
+
+      _initialiseProps.call(_this3);
+
+      _this3.buildTheme(props, context);
+      return _this3;
     }
 
+    ThemedComponent.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+      // only merge on existence changes
+      if (nextProps.theme && !this.props.theme || !nextProps.theme && this.props.theme) {
+        this.buildTheme(nextProps, this.context);
+      }
+    };
+
     ThemedComponent.prototype.render = function render() {
-      var _props = this.props,
-          theme = _props.theme,
-          rest = _objectWithoutProperties(_props, ['theme']);
+      var theme = this.state.theme;
 
-      var contextTheme = this.context.theme;
-
-      var localTheme = deepMerge(baseTheme, contextTheme, theme);
-      return React.createElement(WrappedComponent, _extends({ theme: localTheme }, rest));
+      return React.createElement(WrappedComponent, _extends({}, this.props, { theme: theme }));
     };
 
     return ThemedComponent;
@@ -133,11 +138,21 @@ var withTheme = function withTheme(WrappedComponent) {
     theme: PropTypes.object
   };
 
+  var _initialiseProps = function _initialiseProps() {
+    var _this4 = this;
+
+    this.buildTheme = function (props, context) {
+      var theme = props.theme;
+      var contextTheme = context.theme;
+
+      var localTheme = deepMerge(baseTheme, contextTheme, theme);
+      _this4.state = { theme: localTheme };
+    };
+  };
 
   ThemedComponent.displayName = getDisplayName(WrappedComponent);
 
   return ThemedComponent;
 };
 
-export { withTheme };
 export default { withFocus: withFocus, withTheme: withTheme };

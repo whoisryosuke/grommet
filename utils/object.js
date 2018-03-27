@@ -31,21 +31,22 @@ function deepMerge(target) {
   }
   // making sure to not change target (immutable)
   var output = _extends({}, target);
-  var source = sources.shift();
-  if (isObject(output) && isObject(source)) {
-    Object.keys(source).forEach(function (key) {
-      if (isObject(source[key])) {
-        if (!output[key]) {
-          output[key] = _extends({}, source[key]);
+  sources.forEach(function (source) {
+    if (isObject(source)) {
+      Object.keys(source).forEach(function (key) {
+        if (isObject(source[key])) {
+          if (!output[key]) {
+            output[key] = _extends({}, source[key]);
+          } else {
+            output[key] = deepMerge(output[key], source[key]);
+          }
         } else {
-          output[key] = deepMerge({}, output[key], source[key]);
+          output[key] = source[key];
         }
-      } else {
-        output[key] = source[key];
-      }
-    });
-  }
-  return deepMerge.apply(undefined, [output].concat(sources));
+      });
+    }
+  });
+  return output;
 }
 
 function removeUndefined(obj) {
