@@ -80,11 +80,16 @@ var Grommet = function (_Component) {
     var theme = this.props.theme;
 
 
+    var mergedTheme = (0, _utils.deepMerge)(_vanilla2.default, theme);
+    var color = mergedTheme.global.colors.background;
+    var dark = color ? (0, _utils.colorIsDark)(color) : false;
+
     return {
       grommet: {
-        announce: this.announce
+        announce: this.announce,
+        dark: dark
       },
-      theme: (0, _utils.deepMerge)(_vanilla2.default, theme)
+      theme: mergedTheme
     };
   };
 

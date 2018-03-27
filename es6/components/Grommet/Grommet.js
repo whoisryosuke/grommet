@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import baseTheme from '../../themes/vanilla';
-import { deepMerge } from '../../utils';
+import { colorIsDark, deepMerge } from '../../utils';
 
 import StyledGrommet from './StyledGrommet';
 import doc from './doc';
@@ -61,11 +61,16 @@ var Grommet = function (_Component) {
     var theme = this.props.theme;
 
 
+    var mergedTheme = deepMerge(baseTheme, theme);
+    var color = mergedTheme.global.colors.background;
+    var dark = color ? colorIsDark(color) : false;
+
     return {
       grommet: {
-        announce: this.announce
+        announce: this.announce,
+        dark: dark
       },
-      theme: deepMerge(baseTheme, theme)
+      theme: mergedTheme
     };
   };
 
