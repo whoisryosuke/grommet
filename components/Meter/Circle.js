@@ -38,18 +38,18 @@ var Circle = function (_Component) {
   Circle.prototype.render = function render() {
     var _props = this.props,
         background = _props.background,
+        max = _props.max,
         round = _props.round,
         size = _props.size,
         theme = _props.theme,
         thickness = _props.thickness,
         values = _props.values,
-        rest = _objectWithoutProperties(_props, ['background', 'round', 'size', 'theme', 'thickness', 'values']);
+        rest = _objectWithoutProperties(_props, ['background', 'max', 'round', 'size', 'theme', 'thickness', 'values']);
 
     var width = size === 'full' ? 288 : (0, _utils.parseMetricToNum)(theme.global.size[size]);
     var height = (0, _utils.parseMetricToNum)(theme.global.edgeSize[thickness]);
     var mid = width / 2;
     var radius = width / 2 - height / 2;
-    var max = 100;
     var anglePer = 360 / max;
     var someHighlight = (values || []).some(function (v) {
       return v.highlight;

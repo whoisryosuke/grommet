@@ -1,3 +1,5 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19,21 +21,47 @@ var Meter = function (_Component) {
   _inherits(Meter, _Component);
 
   function Meter() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Meter);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.deriveMax = function (props) {
+      var max = 100;
+      if (props.values && props.values.length > 1) {
+        max = 0;
+        props.values.forEach(function (v) {
+          max += v.value;
+        });
+      }
+      _this.setState({ max: max });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
+
+  Meter.prototype.componentWillMount = function componentWillMount() {
+    this.deriveMax(this.props);
+  };
+
+  Meter.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    this.deriveMax(nextProps);
+  };
 
   Meter.prototype.render = function render() {
     var _props = this.props,
         type = _props.type,
         rest = _objectWithoutProperties(_props, ['type']);
 
+    var max = this.state.max;
+
+
     var content = void 0;
     if (type === 'bar') {
-      content = React.createElement(Bar, rest);
+      content = React.createElement(Bar, _extends({ max: max }, rest));
     } else if (type === 'circle') {
-      content = React.createElement(Circle, rest);
+      content = React.createElement(Circle, _extends({ max: max }, rest));
     }
 
     return content;
