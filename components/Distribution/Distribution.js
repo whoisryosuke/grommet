@@ -75,7 +75,7 @@ var Distribution = function (_Component) {
       var subIndex = void 0;
       values.some(function (v, index) {
         subTotal += v.value;
-        if (subTotal > total * 0.4) {
+        if (subTotal >= total * 0.4) {
           subIndex = index + 1;
           return true;
         }
@@ -96,7 +96,7 @@ var Distribution = function (_Component) {
         childBasis = ['3/4', '1/4'];
       } else if (subTotal > total * 0.6) {
         childBasis = ['2/3', '1/3'];
-      } else if (subTotal > total * 0.4) {
+      } else {
         childBasis = ['1/2', '1/2'];
       }
 
