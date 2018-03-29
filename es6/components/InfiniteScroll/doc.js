@@ -9,6 +9,7 @@ export default (function (InfiniteScroll) {
     children: PropTypes.func.description('Function that will be called when each item is rendered.'),
     items: PropTypes.arrayOf(PropTypes.any).description('The children callback will be called to render each item.'),
     onMore: PropTypes.func.description('Use this to indicate that \'items\' doesn\'t contain all that it could.\n      It will be called when the entire list of items has been rendered.\n      This might be used when the total number of items that could be retrieved\n      is more than you\'d want to load into the browser. \'onMore\' allows you\n      to lazily fetch more from the server only when needed.'),
+    renderMarker: PropTypes.func.description('Function that will be called to render the marker element that\n      is inserted into the DOM to track when scrolling nears the end of the\n      rendered items. It will be called with a single element that should\n      be wrapped appropriately. This is needed when the default\n      element, a <span>, isn\'t sufficient, such as a row of a table body.'),
     step: PropTypes.number.description('How many items to render at a time.').defaultValue(50)
   };
 

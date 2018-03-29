@@ -49,22 +49,28 @@ var InfiniteScroll = function (_Component) {
   }
 
   InfiniteScroll.prototype.render = function render() {
-    var _this2 = this;
-
     var _props = this.props,
         children = _props.children,
         items = _props.items,
+        renderMarker = _props.renderMarker,
         step = _props.step;
     var count = this.state.count;
 
     var displayCount = step * count;
     var waypointAt = displayCount - step / 2;
+
+    var marker = _react2.default.createElement(_reactWaypoint2.default, {
+      key: 'marker',
+      onEnter: this.increaseOffset,
+      bottomOffsetX: '-96px'
+    });
+    if (renderMarker) {
+      // need to give it a key
+      marker = _react2.default.cloneElement(renderMarker(marker), { key: 'marker' });
+    }
+
     return items.slice(0, displayCount).map(function (item, index) {
-      return [children(item, index), index === waypointAt && _react2.default.createElement(_reactWaypoint2.default, {
-        key: 'waypoint-trigger',
-        onEnter: _this2.increaseOffset,
-        bottomOffsetX: '-96px'
-      })];
+      return [children(item, index), index === waypointAt && marker];
     });
   };
 
