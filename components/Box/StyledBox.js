@@ -376,6 +376,6 @@ var gapStyle = function gapStyle(direction, gap, responsive, _ref) {
 
 var StyledBoxGap = exports.StyledBoxGap = _styledComponents2.default.div.withConfig({
   displayName: 'StyledBox__StyledBoxGap'
-})(['', ';'], function (props) {
+})(['flex:0 0 auto;', ';'], function (props) {
   return props.gap && gapStyle(props.direction, props.gap, props.responsive, props.theme);
 });
