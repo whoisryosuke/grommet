@@ -64,7 +64,7 @@ var textAlignStyle = (0, _styledComponents.css)(['text-align:', ';'], function (
 
 var truncateStyle = '\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n';
 
-var colorStyle = (0, _styledComponents.css)(['color:', ''], function (props) {
+var colorStyle = (0, _styledComponents.css)(['color:', ';'], function (props) {
   return (0, _utils.colorForName)(props.color, props.theme);
 });
 
