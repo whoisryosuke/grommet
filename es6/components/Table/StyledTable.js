@@ -20,12 +20,14 @@ var sizeStyle = css(['width:', ';max-width:', ';overflow:hidden;'], function (pr
 
 export var StyledTableCell = styled.td.withConfig({
   displayName: 'StyledTable__StyledTableCell'
-})(['margin:0;padding:0;font-weight:inherit;text-align:inherit;', ' ', ' ', ''], function (props) {
+})(['margin:0;padding:0;font-weight:inherit;text-align:inherit;', ' ', ' ', ' ', ''], function (props) {
   return props.size && sizeStyle;
 }, function (props) {
-  return props.tableContext === 'header' && 'vertical-align: bottom;';
+  return props.verticalAlign && 'vertical-align: ' + props.verticalAlign + ';';
 }, function (props) {
-  return props.tableContext === 'footer' && 'vertical-align: top;';
+  return !props.verticalAlign && props.tableContext === 'header' && 'vertical-align: bottom;';
+}, function (props) {
+  return !props.verticalAlign && props.tableContext === 'footer' && 'vertical-align: top;';
 });
 
 export var StyledTableDataCaption = styled.caption.withConfig({

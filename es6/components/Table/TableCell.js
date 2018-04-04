@@ -17,7 +17,8 @@ var TableCell = function TableCell(_ref, _ref2) {
       plain = _ref.plain,
       scope = _ref.scope,
       size = _ref.size,
-      rest = _objectWithoutProperties(_ref, ['children', 'plain', 'scope', 'size']);
+      verticalAlign = _ref.verticalAlign,
+      rest = _objectWithoutProperties(_ref, ['children', 'plain', 'scope', 'size', 'verticalAlign']);
 
   var Cell = scope ? StyledTableCell.withComponent('th') : StyledTableCell;
   return React.createElement(
@@ -26,7 +27,8 @@ var TableCell = function TableCell(_ref, _ref2) {
       scope: scope,
       size: size,
       tableContext: (grommet || {}).tableContext,
-      theme: rest.theme
+      theme: rest.theme,
+      verticalAlign: verticalAlign
     },
     plain ? children : React.createElement(
       Box,
