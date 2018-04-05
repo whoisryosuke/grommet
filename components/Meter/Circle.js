@@ -103,13 +103,14 @@ var Circle = function (_Component) {
         }, hoverProps, pathRest)));
 
         // To handle situations where the last values are small, redraw
-        // a dot at the end.
-        var d2 = (0, _utils.arcCommands)(width / 2, width / 2, radius, endAngle, endAngle);
+        // a dot at the end. Give just a bit of angle to avoid anti-aliasing
+        // leakage around the edge.
+        var d2 = (0, _utils.arcCommands)(width / 2, width / 2, radius, endAngle - 0.5, endAngle);
         var pathCap = _react2.default.createElement('path', _extends({
           key: key + '-',
           d: d2,
-          fill: 'none',
-          stroke: stroke,
+          fill: 'none'
+        }, stroke, {
           strokeWidth: height,
           strokeLinecap: 'round'
         }, hoverProps, pathRest));
