@@ -38,7 +38,7 @@ var FocusedContainer = function (_Component) {
       var child = findDOMNode(_this.ref);
       getBodyChildElements().filter(isNotAncestorOf(child)).forEach(makeNodeFocusable);
       if (restrictScroll) {
-        document.body.style.overflow = 'scroll';
+        document.body.style.overflow = _this.bodyOverflowStyle;
       }
     }, _this.trapFocus = function () {
       var restrictScroll = _this.props.restrictScroll;
@@ -47,6 +47,7 @@ var FocusedContainer = function (_Component) {
       getBodyChildElements().filter(isNotAncestorOf(child)).forEach(makeNodeUnfocusable);
 
       if (restrictScroll) {
+        _this.bodyOverflowStyle = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
