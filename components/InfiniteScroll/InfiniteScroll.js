@@ -53,6 +53,7 @@ var InfiniteScroll = function (_Component) {
         children = _props.children,
         items = _props.items,
         renderMarker = _props.renderMarker,
+        scrollableAncestor = _props.scrollableAncestor,
         step = _props.step;
     var count = this.state.count;
 
@@ -62,7 +63,8 @@ var InfiniteScroll = function (_Component) {
     var marker = _react2.default.createElement(_reactWaypoint2.default, {
       key: 'marker',
       onEnter: this.increaseOffset,
-      bottomOffsetX: '-96px'
+      bottomOffsetX: '-96px',
+      scrollableAncestor: scrollableAncestor
     });
     if (renderMarker) {
       // need to give it a key
