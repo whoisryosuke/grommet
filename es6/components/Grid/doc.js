@@ -2,6 +2,7 @@ import { describe, PropTypes } from 'react-desc';
 
 import { getAvailableAtBadge } from '../../utils';
 
+var fixedSizes = ['xsmall', 'small', 'medium', 'large', 'xlarge'];
 var sizes = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4', 'flex'];
 var edgeSizes = ['small', 'medium', 'large', 'none'];
 
@@ -16,14 +17,18 @@ export default (function (Grid) {
       start: PropTypes.arrayOf(PropTypes.number),
       end: PropTypes.arrayOf(PropTypes.number)
     })).description('Area names and column,row coordinates.'),
-    columns: PropTypes.arrayOf(PropTypes.oneOf(sizes)).description('Column sizes.'),
+    columns: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.oneOf(sizes), PropTypes.arrayOf(PropTypes.oneOf(sizes))])), PropTypes.oneOf(fixedSizes), PropTypes.shape({
+      count: PropTypes.oneOf(['fit', 'fill']),
+      size: PropTypes.oneOfType([PropTypes.oneOf(fixedSizes), PropTypes.arrayOf(PropTypes.oneOf(sizes))])
+    })]).description('Column sizes.\n      If an array value is an array, the inner array indicates the\n      minimum and maximum sizes for the column.\n      Specifying a single string will repeat multiple columns\n      of that size, as long as there is room for more.\n      Specifying an object allows indicating how the columns\n      stretch to fit the available space.'),
+    fill: PropTypes.oneOf(['horizontal', 'vertical', true, false]).description('Whether the width and/or height should fill the container.'),
     gap: PropTypes.oneOfType([PropTypes.oneOf(edgeSizes), PropTypes.shape({
-      horizontal: PropTypes.oneOf(edgeSizes),
-      vertical: PropTypes.oneOf(edgeSizes)
+      row: PropTypes.oneOf(edgeSizes),
+      column: PropTypes.oneOf(edgeSizes)
     })]).description('Gap sizes between rows and/or columns.'),
     justify: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align the individual items inside the grid when there is extra\nspace in the row axis.').defaultValue('stretch'),
     justifyContent: PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents along the row axis.'),
-    rows: PropTypes.arrayOf(PropTypes.oneOf(sizes)).description('Row sizes.'),
+    rows: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.oneOf(sizes), PropTypes.arrayOf(PropTypes.oneOf(sizes))])), PropTypes.oneOf(fixedSizes)]).description('Row sizes.\n      If an array value is an array, the inner array indicates the\n      minimum and maximum sizes for the row.\n      Specifying a single string will cause automatically added rows to be\n      the specified size.'),
     tag: PropTypes.string.description('The DOM tag to use for the element.').defaultValue('div')
   };
 

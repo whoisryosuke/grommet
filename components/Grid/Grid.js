@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -43,8 +45,10 @@ var Grid = function (_Component) {
 
   Grid.prototype.render = function render() {
     var _props = this.props,
+        fill = _props.fill,
+        rows = _props.rows,
         tag = _props.tag,
-        rest = _objectWithoutProperties(_props, ['tag']);
+        rest = _objectWithoutProperties(_props, ['fill', 'rows', 'tag']);
 
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
@@ -52,7 +56,10 @@ var Grid = function (_Component) {
       styledComponents[tag] = StyledComponent;
     }
 
-    return _react2.default.createElement(StyledComponent, rest);
+    return _react2.default.createElement(StyledComponent, _extends({
+      fillContainer: fill,
+      rowsProp: rows
+    }, rest));
   };
 
   return Grid;

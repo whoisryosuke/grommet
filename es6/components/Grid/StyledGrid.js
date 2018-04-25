@@ -1,8 +1,23 @@
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']);
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
 import styled, { css } from 'styled-components';
+
+var fillStyle = function fillStyle(fill) {
+  if (fill === 'horizontal') {
+    return 'width: 100%;';
+  }
+  if (fill === 'vertical') {
+    return 'height: 100%;';
+  }
+  if (fill) {
+    return '\n      width: 100%;\n      height: 100%;\n    ';
+  }
+  return undefined;
+};
 
 var ALIGN_MAP = {
   center: 'center',
@@ -57,6 +72,16 @@ var gapStyle = function gapStyle(props) {
     var gapSize = props.theme.global.edgeSize[props.gap];
     return 'grid-gap: ' + gapSize + ' ' + gapSize + ';';
   }
+  if (props.gap.row && props.gap.column) {
+    return '\n      grid-row-gap: ' + props.theme.global.edgeSize[props.gap.row] + ';\n      grid-column-gap: ' + props.theme.global.edgeSize[props.gap.column] + ';\n    ';
+  }
+  if (props.gap.row) {
+    return '\n      grid-row-gap: ' + props.theme.global.edgeSize[props.gap.row] + ';\n    ';
+  }
+  if (props.gap.column) {
+    return '\n      grid-column-gap: ' + props.theme.global.edgeSize[props.gap.column] + ';\n    ';
+  }
+  // horizontal and vertical are deprecated, remove before 2.0.0
   if (props.gap.horizontal && props.gap.vertical) {
     return '\n      grid-row-gap: ' + props.theme.global.edgeSize[props.gap.horizontal] + ';\n      grid-column-gap: ' + props.theme.global.edgeSize[props.gap.vertical] + ';\n    ';
   }
@@ -79,21 +104,40 @@ var SIZE_MAP = {
   '2/3': '66.66%'
 };
 
-var columnsStyle = css(['grid-template-columns:', ';'], function (props) {
-  return props.columns.map(function (s) {
-    return SIZE_MAP[s] || props.theme.global.size[s];
-  }).join(' ');
-});
+var sizeFor = function sizeFor(size, props) {
+  return SIZE_MAP[size] || props.theme.global.size[size];
+};
 
-var rowsStyle = css(['grid-template-rows:', ';'], function (props) {
-  return props.rows.map(function (s) {
-    return SIZE_MAP[s] || props.theme.global.size[s];
-  }).join(' ');
-});
+var columnsStyle = function columnsStyle(props) {
+  if (Array.isArray(props.columns)) {
+    return css(['grid-template-columns:', ';'], props.columns.map(function (s) {
+      if (Array.isArray(s)) {
+        return 'minmax(' + sizeFor(s[0], props) + ', ' + sizeFor(s[1], props) + ')';
+      }
+      return sizeFor(s, props);
+    }).join(' '));
+  }
+  if (_typeof(props.columns) === 'object') {
+    return css(['grid-template-columns:repeat(auto-', ',minmax(', ',1fr));'], props.columns.count, props.theme.global.size[props.columns.size]);
+  }
+  return css(['grid-template-columns:repeat(auto-fill,minmax(', ',1fr));'], props.theme.global.size[props.columns]);
+};
+
+var rowsStyle = function rowsStyle(props) {
+  if (Array.isArray(props.rowsProp)) {
+    return css(['grid-template-rows:', ';'], props.rowsProp.map(function (s) {
+      if (Array.isArray(s)) {
+        return 'minmax(' + sizeFor(s[0], props) + ', ' + sizeFor(s[1], props) + ')';
+      }
+      return sizeFor(s, props);
+    }).join(' '));
+  }
+  return css(['grid-auto-rows:', ';'], props.theme.global.size[props.rowsProp]);
+};
 
 var areasStyle = function areasStyle(props) {
   // translate areas objects into grid-template-areas syntax
-  var cells = props.rows.map(function () {
+  var cells = props.rowsProp.map(function () {
     return props.columns.map(function () {
       return '.';
     });
@@ -112,14 +156,16 @@ var areasStyle = function areasStyle(props) {
 
 var StyledGrid = styled.div.withConfig({
   displayName: 'StyledGrid'
-})(['display:grid;box-sizing:border-box;height:100%;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:grid;box-sizing:border-box;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+  return props.fillContainer && fillStyle(props.fillContainer);
+}, function (props) {
   return props.align && alignStyle;
 }, function (props) {
   return props.alignContent && alignContentStyle;
 }, function (props) {
   return props.areas && areasStyle(props);
 }, function (props) {
-  return props.columns && columnsStyle;
+  return props.columns && columnsStyle(props);
 }, function (props) {
   return props.gap && gapStyle(props);
 }, function (props) {
@@ -127,7 +173,7 @@ var StyledGrid = styled.div.withConfig({
 }, function (props) {
   return props.justifyContent && justifyContentStyle;
 }, function (props) {
-  return props.rows && rowsStyle;
+  return props.rowsProp && rowsStyle(props);
 });
 
 export default StyledGrid.extend(_templateObject, function (props) {

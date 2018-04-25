@@ -6,6 +6,7 @@ var _reactDesc = require('react-desc');
 
 var _utils = require('../../utils');
 
+var fixedSizes = ['xsmall', 'small', 'medium', 'large', 'xlarge'];
 var sizes = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'full', '1/2', '1/3', '2/3', '1/4', '3/4', 'flex'];
 var edgeSizes = ['small', 'medium', 'large', 'none'];
 
@@ -20,14 +21,18 @@ exports.default = function (Grid) {
       start: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.number),
       end: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.number)
     })).description('Area names and column,row coordinates.'),
-    columns: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOf(sizes)).description('Column sizes.'),
+    columns: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(sizes), _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOf(sizes))])), _reactDesc.PropTypes.oneOf(fixedSizes), _reactDesc.PropTypes.shape({
+      count: _reactDesc.PropTypes.oneOf(['fit', 'fill']),
+      size: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(fixedSizes), _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOf(sizes))])
+    })]).description('Column sizes.\n      If an array value is an array, the inner array indicates the\n      minimum and maximum sizes for the column.\n      Specifying a single string will repeat multiple columns\n      of that size, as long as there is room for more.\n      Specifying an object allows indicating how the columns\n      stretch to fit the available space.'),
+    fill: _reactDesc.PropTypes.oneOf(['horizontal', 'vertical', true, false]).description('Whether the width and/or height should fill the container.'),
     gap: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(edgeSizes), _reactDesc.PropTypes.shape({
-      horizontal: _reactDesc.PropTypes.oneOf(edgeSizes),
-      vertical: _reactDesc.PropTypes.oneOf(edgeSizes)
+      row: _reactDesc.PropTypes.oneOf(edgeSizes),
+      column: _reactDesc.PropTypes.oneOf(edgeSizes)
     })]).description('Gap sizes between rows and/or columns.'),
     justify: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align the individual items inside the grid when there is extra\nspace in the row axis.').defaultValue('stretch'),
     justifyContent: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'between', 'around', 'stretch']).description('How to align the contents along the row axis.'),
-    rows: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOf(sizes)).description('Row sizes.'),
+    rows: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(sizes), _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOf(sizes))])), _reactDesc.PropTypes.oneOf(fixedSizes)]).description('Row sizes.\n      If an array value is an array, the inner array indicates the\n      minimum and maximum sizes for the row.\n      Specifying a single string will cause automatically added rows to be\n      the specified size.'),
     tag: _reactDesc.PropTypes.string.description('The DOM tag to use for the element.').defaultValue('div')
   };
 
