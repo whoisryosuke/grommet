@@ -20,6 +20,8 @@ var _Keyboard = require('../Keyboard');
 
 var _Heading = require('../Heading');
 
+var _Text = require('../Text');
+
 var _hocs = require('../hocs');
 
 var _StyledCalendar = require('./StyledCalendar');
@@ -240,8 +242,8 @@ var Calendar = function (_Component) {
       if (selected) {
         background = 'brand';
         content = _react2.default.createElement(
-          'strong',
-          null,
+          _Text.Text,
+          { weight: 'bold' },
           content
         );
       } else if (inRange) {
@@ -321,11 +323,7 @@ var Calendar = function (_Component) {
             _react2.default.createElement(
               _Heading.Heading,
               { level: 3, size: size, margin: 'none' },
-              _react2.default.createElement(
-                'strong',
-                null,
-                reference.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
-              )
+              reference.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
             ),
             _react2.default.createElement(
               _Box.Box,

@@ -16,6 +16,7 @@ import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { Heading } from '../Heading';
+import { Text } from '../Text';
 
 import { withTheme } from '../hocs';
 
@@ -221,8 +222,8 @@ var Calendar = function (_Component) {
       if (selected) {
         background = 'brand';
         content = React.createElement(
-          'strong',
-          null,
+          Text,
+          { weight: 'bold' },
           content
         );
       } else if (inRange) {
@@ -302,11 +303,7 @@ var Calendar = function (_Component) {
             React.createElement(
               Heading,
               { level: 3, size: size, margin: 'none' },
-              React.createElement(
-                'strong',
-                null,
-                reference.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
-              )
+              reference.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
             ),
             React.createElement(
               Box,

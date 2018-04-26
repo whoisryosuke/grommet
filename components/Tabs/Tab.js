@@ -82,12 +82,8 @@ var Tab = function (_Component) {
 
     var activeTitle = typeof title === 'string' ? _react2.default.createElement(
       _Text.Text,
-      null,
-      _react2.default.createElement(
-        'strong',
-        null,
-        title
-      )
+      { weight: 'bold' },
+      title
     ) : title;
 
     var inactiveTitle = typeof title === 'string' ? _react2.default.createElement(
