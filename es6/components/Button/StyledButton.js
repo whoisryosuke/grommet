@@ -78,12 +78,14 @@ var plainStyle = css(['color:inherit;border:none;padding:0;text-align:inherit;',
 
 var StyledButton = styled.button.withConfig({
   displayName: 'StyledButton'
-})(['box-sizing:border-box;cursor:pointer;outline:none;font:inherit;text-decoration:none;font:inherit;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['box-sizing:border-box;cursor:pointer;outline:none;font:inherit;text-decoration:none;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+  return props.plain && plainStyle;
+}, function (props) {
   return !props.plain && css(['text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
 }, function (props) {
   return !props.plain && !props.primary && basicStyle(props);
 }, function (props) {
-  return !props.plain && props.primary && primaryStyle(props);
+  return props.primary && primaryStyle(props);
 }, function (props) {
   return !props.disabled && !props.focus && hoverStyle;
 }, function (props) {
@@ -97,8 +99,6 @@ var StyledButton = styled.button.withConfig({
 }, function (props) {
   return props.focus && (!props.plain || props.focusIndicator) && focusStyle;
 }, lapAndUp('\n    transition: 0.1s ease-in-out;\n  '), function (props) {
-  return props.plain && plainStyle;
-}, function (props) {
   return props.fillContainer && fillStyle;
 }, function (props) {
   return props.icon && !props.label && '\n    padding: ' + props.theme.global.edgeSize.small + ';\n  ';
