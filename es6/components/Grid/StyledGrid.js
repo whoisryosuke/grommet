@@ -50,7 +50,7 @@ var JUSTIFY_MAP = {
   stretch: 'stretch'
 };
 
-var justifyStyle = css(['justify-content:', ';'], function (props) {
+var justifyStyle = css(['justify-items:', ';'], function (props) {
   return JUSTIFY_MAP[props.justify];
 });
 

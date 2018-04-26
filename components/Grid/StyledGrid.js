@@ -58,7 +58,7 @@ var JUSTIFY_MAP = {
   stretch: 'stretch'
 };
 
-var justifyStyle = (0, _styledComponents.css)(['justify-content:', ';'], function (props) {
+var justifyStyle = (0, _styledComponents.css)(['justify-items:', ';'], function (props) {
   return JUSTIFY_MAP[props.justify];
 });
 
