@@ -16,4 +16,6 @@ var _Grid2 = _interopRequireDefault(_Grid);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+_Grid2.default.available = typeof window !== 'undefined' && window.CSS && window.CSS.supports && window.CSS.supports('display', 'grid');
+
 exports.default = _Grid2.default;

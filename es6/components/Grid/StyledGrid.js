@@ -81,16 +81,6 @@ var gapStyle = function gapStyle(props) {
   if (props.gap.column) {
     return '\n      grid-column-gap: ' + props.theme.global.edgeSize[props.gap.column] + ';\n    ';
   }
-  // horizontal and vertical are deprecated, remove before 2.0.0
-  if (props.gap.horizontal && props.gap.vertical) {
-    return '\n      grid-row-gap: ' + props.theme.global.edgeSize[props.gap.horizontal] + ';\n      grid-column-gap: ' + props.theme.global.edgeSize[props.gap.vertical] + ';\n    ';
-  }
-  if (props.gap.horizontal) {
-    return '\n      grid-row-gap: ' + props.theme.global.edgeSize[props.gap.horizontal] + ';\n    ';
-  }
-  if (props.gap.vertical) {
-    return '\n      grid-column-gap: ' + props.theme.global.edgeSize[props.gap.vertical] + ';\n    ';
-  }
   return '';
 };
 
