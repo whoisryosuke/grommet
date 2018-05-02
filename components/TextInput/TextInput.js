@@ -51,6 +51,16 @@ function renderLabel(suggestion) {
   return suggestion;
 }
 
+function stringLabel(suggestion) {
+  if (suggestion && (typeof suggestion === 'undefined' ? 'undefined' : _typeof(suggestion)) === 'object') {
+    if (suggestion.label && typeof suggestion.label === 'string') {
+      return suggestion.label;
+    }
+    return suggestion.value;
+  }
+  return suggestion;
+}
+
 var TextInput = function (_Component) {
   _inherits(TextInput, _Component);
 
@@ -193,7 +203,7 @@ var TextInput = function (_Component) {
         items = suggestions.map(function (suggestion, index) {
           return _react2.default.createElement(
             'li',
-            { key: renderLabel(suggestion) },
+            { key: stringLabel(suggestion) + '-' + index },
             _react2.default.createElement(
               _Button.Button,
               {
@@ -228,7 +238,7 @@ var TextInput = function (_Component) {
         enterSelect = _props.messages.enterSelect;
 
     if (suggestions && suggestions.length > 0) {
-      var labelMessage = renderLabel(suggestions[index]);
+      var labelMessage = stringLabel(suggestions[index]);
       this.announce(labelMessage + ' ' + enterSelect);
     }
   };
