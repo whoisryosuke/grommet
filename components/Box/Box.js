@@ -110,7 +110,7 @@ var Box = function (_Component) {
             contents.push(_react2.default.createElement(_StyledBox.StyledBoxGap, {
               key: index,
               gap: gap,
-              direction: direction,
+              directionProp: direction,
               responsive: responsive,
               theme: theme
             }));

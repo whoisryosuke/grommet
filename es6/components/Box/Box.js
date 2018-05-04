@@ -94,7 +94,7 @@ var Box = function (_Component) {
             contents.push(React.createElement(StyledBoxGap, {
               key: index,
               gap: gap,
-              direction: direction,
+              directionProp: direction,
               responsive: responsive,
               theme: theme
             }));
