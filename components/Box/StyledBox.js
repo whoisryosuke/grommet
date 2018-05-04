@@ -74,17 +74,17 @@ var basisStyle = (0, _styledComponents.css)(['flex-basis:', ';'], function (prop
 // we assume we are in the context of a Box going the other direction
 // TODO: revisit this
 var directionStyle = (0, _styledComponents.css)(['', ' ', ' flex-direction:', ';', '}'], function (props) {
-  return props.direction === 'row' && 'min-height: 0;';
+  return props.directionProp === 'row' && 'min-height: 0;';
 }, function (props) {
-  return props.direction === 'column' && 'min-width: 0;';
+  return props.directionProp === 'column' && 'min-width: 0;';
 }, function (props) {
-  return props.direction === 'row-responsive' ? 'row' : props.direction;
+  return props.directionProp === 'row-responsive' ? 'row' : props.directionProp;
 }, function (props) {
-  return props.direction === 'row-responsive' ? (0, _utils.palm)('\n    flex-direction: column;\n    flex-basis: auto;\n    justify-content: flex-start;\n    align-items: stretch;\n  ') : '';
+  return props.directionProp === 'row-responsive' ? (0, _utils.palm)('\n    flex-direction: column;\n    flex-basis: auto;\n    justify-content: flex-start;\n    align-items: stretch;\n  ') : '';
 });
 
 var elevationStyle = (0, _styledComponents.css)(['box-shadow:', ';'], function (props) {
-  return props.theme.global.elevation[props.grommet.dark ? 'dark' : 'light'][props.elevation];
+  return props.theme.global.elevation[props.grommet.dark ? 'dark' : 'light'][props.elevationProp];
 });
 
 var FLEX_MAP = (_FLEX_MAP = {}, _FLEX_MAP[true] = '1 1', _FLEX_MAP[false] = '0 0', _FLEX_MAP.grow = '1 0', _FLEX_MAP.shrink = '0 1', _FLEX_MAP);
@@ -93,14 +93,14 @@ var flexStyle = (0, _styledComponents.css)(['flex:', ';'], function (props) {
   return '' + FLEX_MAP[props.flex] + (props.flex !== true && !props.basis ? ' auto' : '');
 });
 
-var fillStyle = function fillStyle(fill) {
-  if (fill === 'horizontal') {
+var fillStyle = function fillStyle(fillProp) {
+  if (fillProp === 'horizontal') {
     return 'width: 100%;';
   }
-  if (fill === 'vertical') {
+  if (fillProp === 'vertical') {
     return 'height: 100%;';
   }
-  if (fill) {
+  if (fillProp) {
     return '\n      width: 100%;\n      height: 100%;\n    ';
   }
   return undefined;
@@ -322,13 +322,13 @@ var StyledBox = _styledComponents2.default.div.withConfig({
 }, function (props) {
   return props.border && borderStyle(props.border, props.responsive, props.theme);
 }, function (props) {
-  return props.direction && directionStyle;
+  return props.directionProp && directionStyle;
 }, function (props) {
   return props.flex !== undefined && flexStyle;
 }, function (props) {
   return props.basis && basisStyle;
 }, function (props) {
-  return props.fillContainer && fillStyle(props.fillContainer);
+  return props.fillProp && fillStyle(props.fillProp);
 }, function (props) {
   return props.gridArea && gridAreaStyle;
 }, function (props) {
@@ -340,11 +340,11 @@ var StyledBox = _styledComponents2.default.div.withConfig({
 }, function (props) {
   return props.round && roundStyle;
 }, function (props) {
-  return props.wrapContents && wrapStyle;
+  return props.wrapProp && wrapStyle;
 }, function (props) {
-  return props.overflow && 'overflow: ' + props.overflow + ';';
+  return props.overflowProp && 'overflow: ' + props.overflowProp + ';';
 }, function (props) {
-  return props.elevation && elevationStyle;
+  return props.elevationProp && elevationStyle;
 }, function (props) {
   return props.animation && animationStyle;
 }, function (props) {
@@ -356,18 +356,18 @@ exports.default = StyledBox.extend(_templateObject, function (props) {
 });
 
 
-var gapStyle = function gapStyle(direction, gap, responsive, _ref) {
+var gapStyle = function gapStyle(directionProp, gap, responsive, _ref) {
   var edgeSize = _ref.global.edgeSize;
 
   var styles = [];
-  if (direction === 'column') {
+  if (directionProp === 'column') {
     styles.push((0, _styledComponents.css)(['height:', ';'], edgeSize[gap]));
     if (responsive) {
       styles.push((0, _utils.palm)('height: ' + edgeSize.narrow[gap] + ';'));
     }
   } else {
     styles.push('width: ' + edgeSize[gap] + ';');
-    if (responsive && direction === 'row-responsive') {
+    if (responsive && directionProp === 'row-responsive') {
       styles.push((0, _utils.palm)('\n        width: auto;\n        height: ' + edgeSize.narrow[gap] + ';\n      '));
     }
   }
@@ -377,5 +377,5 @@ var gapStyle = function gapStyle(direction, gap, responsive, _ref) {
 var StyledBoxGap = exports.StyledBoxGap = _styledComponents2.default.div.withConfig({
   displayName: 'StyledBox__StyledBoxGap'
 })(['flex:0 0 auto;', ';'], function (props) {
-  return props.gap && gapStyle(props.direction, props.gap, props.responsive, props.theme);
+  return props.gap && gapStyle(props.directionProp, props.gap, props.responsive, props.theme);
 });

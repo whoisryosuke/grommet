@@ -79,13 +79,15 @@ var Box = function (_Component) {
         a11yTitle = _props2.a11yTitle,
         children = _props2.children,
         direction = _props2.direction,
+        elevation = _props2.elevation,
         fill = _props2.fill,
         gap = _props2.gap,
+        overflow = _props2.overflow,
         responsive = _props2.responsive,
         tag = _props2.tag,
         theme = _props2.theme,
         wrap = _props2.wrap,
-        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'fill', 'gap', 'responsive', 'tag', 'theme', 'wrap']);
+        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'elevation', 'fill', 'gap', 'overflow', 'responsive', 'tag', 'theme', 'wrap']);
 
     var grommet = this.context.grommet;
 
@@ -122,9 +124,11 @@ var Box = function (_Component) {
       StyledComponent,
       _extends({
         'aria-label': a11yTitle,
-        direction: direction,
-        fillContainer: fill,
-        wrapContents: wrap,
+        directionProp: direction,
+        elevationProp: elevation,
+        fillProp: fill,
+        overflowProp: overflow,
+        wrapProp: wrap,
         responsive: responsive,
         theme: theme,
         grommet: grommet
