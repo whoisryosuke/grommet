@@ -75,7 +75,6 @@ var TextInput = function (_Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
       activeSuggestionIndex: -1,
-      announceChange: false,
       showDrop: false
     }, _this.announce = function (message, mode) {
       var suggestions = _this.props.suggestions;
@@ -106,7 +105,6 @@ var TextInput = function (_Component) {
       if (suggestions && suggestions.length) {
         _this.setState({
           activeSuggestionIndex: -1,
-          announceChange: true,
           showDrop: true,
           selectedSuggestionIndex: -1
         }, _this.announceSuggestionsCount);
@@ -165,7 +163,7 @@ var TextInput = function (_Component) {
     }, _this.onClickSuggestion = function (suggestion) {
       var onSelect = _this.props.onSelect;
 
-      _this.setState({ value: suggestion, showDrop: false });
+      _this.setState({ showDrop: false });
       if (onSelect) {
         onSelect({
           target: _this.componentRef, suggestion: suggestion
@@ -181,7 +179,6 @@ var TextInput = function (_Component) {
       if (activeSuggestionIndex >= 0) {
         event.preventDefault(); // prevent submitting forms
         var suggestion = suggestions[activeSuggestionIndex];
-        _this.setState({ value: suggestion });
         if (onSelect) {
           onSelect({
             target: _this.componentRef, suggestion: suggestion

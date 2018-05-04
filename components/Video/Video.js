@@ -77,10 +77,7 @@ var Video = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-      captions: [],
-      mouseActive: false
-    }, _this.hasPlayed = false, _this.injectUpdateVideoEvents = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { captions: [] }, _this.hasPlayed = false, _this.injectUpdateVideoEvents = function () {
       var videoEvents = ['onAbort', 'onCanPlay', 'onCanPlayThrough', 'onDurationChange', 'onEmptied', 'onEncrypted', 'onEnded', 'onError', 'onLoadedData', 'onLoadedMetadata', 'onLoadStart', 'onPause', 'onPlay', 'onPlaying', 'onProgress', 'onRateChange', 'onSeeked', 'onSeeking', 'onStalled', 'onSuspend', 'onTimeUpdate', 'onVolumeChange', 'onWaiting'];
 
       return videoEvents.reduce(function (previousValue, currentValue) {
@@ -109,19 +106,21 @@ var Video = function (_Component) {
       _this.setState({
         duration: video.duration,
         currentTime: video.currentTime,
-        buffered: video.buffered,
-        paused: video.paused,
-        muted: video.muted,
+        // buffered: video.buffered,
+        // paused: video.paused,
+        // muted: video.muted,
         volume: video.volume,
-        ended: video.ended,
-        readyState: video.readyState,
+        // ended: video.ended,
+        // readyState: video.readyState,
         interacting: interacting,
         // computed values
-        hasPlayed: _this.hasPlayed,
+        // hasPlayed: this.hasPlayed,
         playing: !video.paused && !video.loading,
-        percentageBuffered: video.buffered.length && video.buffered.end(video.buffered.length - 1) / video.duration * 100,
-        percentagePlayed: video.currentTime / video.duration * 100,
-        loading: video.readyState < video.HAVE_ENOUGH_DATA
+        // percentageBuffered: video.buffered.length &&
+        //   (video.buffered.end(video.buffered.length - 1) /
+        //   video.duration) * 100,
+        percentagePlayed: video.currentTime / video.duration * 100
+        // loading: video.readyState < video.HAVE_ENOUGH_DATA,
       });
     }, _this.play = function () {
       (0, _reactDom.findDOMNode)(_this.videoRef).play();

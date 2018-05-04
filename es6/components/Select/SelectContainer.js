@@ -32,7 +32,7 @@ var SelectContainer = function (_Component) {
       activeIndex: -1, // for tracking keyboard interaction
       search: ''
     }, _this.optionsRef = {}, _this.onInput = function (event) {
-      _this.setState({ search: event.target.value, selected: undefined }, function () {
+      _this.setState({ search: event.target.value }, function () {
         return _this.onSearch(_this.state.search);
       });
     }, _this.onSearch = debounce(function (search) {
