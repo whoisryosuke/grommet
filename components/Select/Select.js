@@ -10,6 +10,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
 var _Box = require('../Box');
 
 var _DropButton = require('../DropButton');
@@ -37,6 +41,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SelectTextInput = (0, _styledComponents2.default)(_TextInput.TextInput).withConfig({
+  displayName: 'Select__SelectTextInput'
+})(['cursor:pointer;']);
 
 var Select = function (_Component) {
   _inherits(Select, _Component);
@@ -101,7 +109,11 @@ var Select = function (_Component) {
     if (!_react2.default.isValidElement(value)) {
       if (Array.isArray(value)) {
         if (value.length > 1) {
-          textValue = messages.multiple;
+          if (_react2.default.isValidElement(value[0])) {
+            selectValue = value;
+          } else {
+            textValue = messages.multiple;
+          }
         } else if (value.length === 1) {
           if (_react2.default.isValidElement(value[0])) {
             selectValue = value[0];
@@ -137,26 +149,28 @@ var Select = function (_Component) {
         _react2.default.createElement(
           _Box.Box,
           {
-            'aria-hidden': true,
             align: 'center',
             border: !plain ? 'all' : undefined,
             direction: 'row',
             justify: 'between'
           },
-          selectValue || _react2.default.createElement(_TextInput.TextInput, _extends({
-            style: { cursor: 'pointer' },
-            ref: function ref(_ref) {
-              _this2.inputRef = _ref;
-            }
-          }, rest, {
-            tabIndex: '-1',
-            type: 'text',
-            placeholder: placeholder,
-            plain: true,
-            size: size,
-            readOnly: true,
-            value: textValue
-          })),
+          _react2.default.createElement(
+            _Box.Box,
+            { direction: 'row', flex: true },
+            selectValue || _react2.default.createElement(SelectTextInput, _extends({
+              ref: function ref(_ref) {
+                _this2.inputRef = _ref;
+              }
+            }, rest, {
+              tabIndex: '-1',
+              type: 'text',
+              placeholder: placeholder,
+              plain: true,
+              readOnly: true,
+              value: textValue,
+              size: size
+            }))
+          ),
           _react2.default.createElement(
             _Box.Box,
             {

@@ -66,23 +66,18 @@ var FocusedContainer = function (_Component) {
   }
 
   FocusedContainer.prototype.componentDidMount = function componentDidMount() {
+    var _this2 = this;
+
     var hidden = this.props.hidden;
+    // making sure trap focus always execute
+    // after removeTrap for the case where two drops
+    // are open at the same time
 
-    if (!hidden) {
-      this.trapFocus();
-    }
-  };
-
-  FocusedContainer.prototype.componentWillReceiveProps = function componentWillReceiveProps(_ref) {
-    var hidden = _ref.hidden;
-
-    if (hidden !== this.props.hidden) {
+    setTimeout(function () {
       if (!hidden) {
-        this.trapFocus();
-      } else {
-        this.removeTrap();
+        _this2.trapFocus();
       }
-    }
+    }, 0);
   };
 
   FocusedContainer.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -90,7 +85,7 @@ var FocusedContainer = function (_Component) {
   };
 
   FocusedContainer.prototype.render = function render() {
-    var _this2 = this;
+    var _this3 = this;
 
     var _props = this.props,
         children = _props.children,
@@ -99,8 +94,8 @@ var FocusedContainer = function (_Component) {
     delete rest.restrictScroll;
     return _react2.default.createElement(
       'div',
-      _extends({ ref: function ref(_ref2) {
-          _this2.ref = _ref2;
+      _extends({ ref: function ref(_ref) {
+          _this3.ref = _ref;
         } }, rest),
       children
     );

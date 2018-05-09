@@ -7,6 +7,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import getDisplayName from 'recompose/getDisplayName';
 
@@ -18,26 +19,58 @@ export var withFocus = function withFocus(WrappedComponent) {
     _inherits(FocusableComponent, _Component);
 
     function FocusableComponent() {
-      var _temp, _this, _ret;
-
       _classCallCheck(this, FocusableComponent);
 
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
+      var _this = _possibleConstructorReturn(this, _Component.call(this));
 
-      return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      _this.handleActiveMouse = _this.handleActiveMouse.bind(_this);
+      _this.setFocus = _this.setFocus.bind(_this);
+      _this.state = {
         mouseActive: false,
         focus: false
-      }, _temp), _possibleConstructorReturn(_this, _ret);
+      };
+      return _this;
     }
 
-    FocusableComponent.prototype.setMouseActive = function setMouseActive() {
-      this.setState({ mouseActive: true });
+    FocusableComponent.prototype.componentDidMount = function componentDidMount() {
+      window.addEventListener('mousedown', this.handleActiveMouse);
+
+      // we could be using onFocus in the wrapper node itself
+      // but react does not invoke it if you programically
+      // call wrapperNode.focus() inside componentWillUnmount
+      // see Drop "this.originalFocusedElement.focus();" for reference
+      var wrapperNode = findDOMNode(this.wrapperRef);
+      if (wrapperNode && wrapperNode.addEventListener) {
+        wrapperNode.addEventListener('focus', this.setFocus);
+      }
     };
 
-    FocusableComponent.prototype.resetMouseActive = function resetMouseActive() {
-      this.setState({ mouseActive: false });
+    FocusableComponent.prototype.componentWillUnmount = function componentWillUnmount() {
+      if (this.mouseTimer) {
+        clearTimeout(this.mouseTimer);
+      }
+      window.removeEventListener('mousedown', this.handleActiveMouse);
+      var wrapperNode = findDOMNode(this.wrapperRef);
+      if (wrapperNode && wrapperNode.addEventListener) {
+        wrapperNode.removeEventListener('focus', this.setFocus);
+      }
+    };
+
+    FocusableComponent.prototype.handleActiveMouse = function handleActiveMouse() {
+      var _this2 = this;
+
+      this.setState({ mouseActive: true }, function () {
+        // this avoids showing focus when clicking around
+        if (_this2.mouseTimer) {
+          clearTimeout(_this2.mouseTimer);
+        }
+
+        // empirical number to reset mouseActive after
+        // some time has passed without mousedown
+        _this2.mouseTimer = setTimeout(function () {
+          _this2.setState({ mouseActive: false });
+        }, 300);
+      });
     };
 
     FocusableComponent.prototype.setFocus = function setFocus() {
@@ -53,40 +86,27 @@ export var withFocus = function withFocus(WrappedComponent) {
     };
 
     FocusableComponent.prototype.render = function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var focus = this.state.focus;
 
       return React.createElement(WrappedComponent, _extends({
+        ref: function ref(_ref) {
+          _this3.wrapperRef = _ref;
+        },
         focus: focus
       }, this.props, {
-        onMouseDown: function onMouseDown(event) {
-          _this2.setMouseActive();
-          var onMouseDown = _this2.props.onMouseDown;
-
-          if (onMouseDown) {
-            onMouseDown(event);
-          }
-        },
-        onMouseUp: function onMouseUp(event) {
-          _this2.resetMouseActive();
-          var onMouseUp = _this2.props.onMouseUp;
-
-          if (onMouseUp) {
-            onMouseUp(event);
-          }
-        },
         onFocus: function onFocus(event) {
-          _this2.setFocus();
-          var onFocus = _this2.props.onFocus;
+          _this3.setFocus();
+          var onFocus = _this3.props.onFocus;
 
           if (onFocus) {
             onFocus(event);
           }
         },
         onBlur: function onBlur(event) {
-          _this2.resetFocus();
-          var onBlur = _this2.props.onBlur;
+          _this3.resetFocus();
+          var onBlur = _this3.props.onBlur;
 
           if (onBlur) {
             onBlur(event);
@@ -110,12 +130,12 @@ export var withTheme = function withTheme(WrappedComponent) {
     function ThemedComponent(props, context) {
       _classCallCheck(this, ThemedComponent);
 
-      var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
+      var _this4 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
 
-      _initialiseProps.call(_this3);
+      _initialiseProps.call(_this4);
 
-      _this3.buildTheme(props, context);
-      return _this3;
+      _this4.buildTheme(props, context);
+      return _this4;
     }
 
     ThemedComponent.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
@@ -139,14 +159,14 @@ export var withTheme = function withTheme(WrappedComponent) {
   };
 
   var _initialiseProps = function _initialiseProps() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.buildTheme = function (props, context) {
       var theme = props.theme;
       var contextTheme = context.theme;
 
       var localTheme = deepMerge(baseTheme, contextTheme, theme);
-      _this4.state = { theme: localTheme };
+      _this5.state = { theme: localTheme };
     };
   };
 

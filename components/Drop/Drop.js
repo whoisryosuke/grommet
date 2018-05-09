@@ -43,17 +43,11 @@ var Drop = function (_Component) {
   };
 
   Drop.prototype.componentWillUnmount = function componentWillUnmount() {
-    var _this2 = this;
-
     var restrictFocus = this.props.restrictFocus;
 
     if (restrictFocus && this.originalFocusedElement) {
       if (this.originalFocusedElement.focus) {
-        // wait for the fixed positioning to come back to normal
-        // see layer styling for reference
-        setTimeout(function () {
-          _this2.originalFocusedElement.focus();
-        }, 0);
+        this.originalFocusedElement.focus();
       } else if (this.originalFocusedElement.parentNode && this.originalFocusedElement.parentNode.focus) {
         // required for IE11 and Edge
         this.originalFocusedElement.parentNode.focus();

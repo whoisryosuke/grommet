@@ -33,7 +33,7 @@ exports.default = function (Select) {
     onClose: _reactDesc.PropTypes.func.description('Function that will be called when the Select drop closes.'),
     onSearch: _reactDesc.PropTypes.func.description('Function that will be called when the user types in the search input.\n      If this property is not provided, no search field will be rendered.'),
     options: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.element, _reactDesc.PropTypes.object])).description('Options can be either a string or an object. If an object is used, use\n      children callback in order to render anything based on the current item.').isRequired,
-    placeholder: _reactDesc.PropTypes.string.description('Placeholder text to use when no value is provided.'),
+    placeholder: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.node]).description('Placeholder text to use when no value is provided.'),
     plain: _reactDesc.PropTypes.bool.description('Whether this is a plain Select input with no border or padding.'),
     searchPlaceholder: _reactDesc.PropTypes.string.description('Placeholder text to use in the search box when the search input is empty.'),
     selected: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.number, _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.number)]).description('Index of the currently selected option. When multiple, the set of\n      options selected. This property is required when multiple.'),

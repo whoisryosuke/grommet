@@ -74,17 +74,7 @@ var hoverStyle = (0, _styledComponents.css)(['&:hover{', ' ', ' ', '}'], functio
 
 var fillStyle = '\n  width: 100%;\n  height: 100%;\n  max-width: none;\n  flex-grow: 1;\n';
 
-var plainFocusStyle = (0, _styledComponents.css)(['box-shadow:0 0 ', ' ', ' ', ';'], function (props) {
-  return props.theme.global.focus.border.width;
-}, function (props) {
-  return props.theme.global.focus.border.width;
-}, function (props) {
-  return props.theme.global.focus.border.color;
-});
-
-var plainStyle = (0, _styledComponents.css)(['color:inherit;border:none;padding:0;text-align:inherit;', ''], function (props) {
-  return props.focus && props.focusIndicator && plainFocusStyle;
-});
+var plainStyle = (0, _styledComponents.css)(['color:inherit;border:none;padding:0;text-align:inherit;']);
 
 var StyledButton = _styledComponents2.default.button.withConfig({
   displayName: 'StyledButton'

@@ -64,17 +64,7 @@ var hoverStyle = css(['&:hover{', ' ', ' ', '}'], function (props) {
 
 var fillStyle = '\n  width: 100%;\n  height: 100%;\n  max-width: none;\n  flex-grow: 1;\n';
 
-var plainFocusStyle = css(['box-shadow:0 0 ', ' ', ' ', ';'], function (props) {
-  return props.theme.global.focus.border.width;
-}, function (props) {
-  return props.theme.global.focus.border.width;
-}, function (props) {
-  return props.theme.global.focus.border.color;
-});
-
-var plainStyle = css(['color:inherit;border:none;padding:0;text-align:inherit;', ''], function (props) {
-  return props.focus && props.focusIndicator && plainFocusStyle;
-});
+var plainStyle = css(['color:inherit;border:none;padding:0;text-align:inherit;']);
 
 var StyledButton = styled.button.withConfig({
   displayName: 'StyledButton'

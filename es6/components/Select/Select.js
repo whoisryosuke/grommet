@@ -10,6 +10,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
+import styled from 'styled-components';
 
 import { Box } from '../Box';
 import { DropButton } from '../DropButton';
@@ -20,6 +21,10 @@ import { withTheme } from '../hocs';
 
 import SelectContainer from './SelectContainer';
 import doc from './doc';
+
+var SelectTextInput = styled(TextInput).withConfig({
+  displayName: 'Select__SelectTextInput'
+})(['cursor:pointer;']);
 
 var Select = function (_Component) {
   _inherits(Select, _Component);
@@ -84,7 +89,11 @@ var Select = function (_Component) {
     if (!React.isValidElement(value)) {
       if (Array.isArray(value)) {
         if (value.length > 1) {
-          textValue = messages.multiple;
+          if (React.isValidElement(value[0])) {
+            selectValue = value;
+          } else {
+            textValue = messages.multiple;
+          }
         } else if (value.length === 1) {
           if (React.isValidElement(value[0])) {
             selectValue = value[0];
@@ -120,26 +129,28 @@ var Select = function (_Component) {
         React.createElement(
           Box,
           {
-            'aria-hidden': true,
             align: 'center',
             border: !plain ? 'all' : undefined,
             direction: 'row',
             justify: 'between'
           },
-          selectValue || React.createElement(TextInput, _extends({
-            style: { cursor: 'pointer' },
-            ref: function ref(_ref) {
-              _this2.inputRef = _ref;
-            }
-          }, rest, {
-            tabIndex: '-1',
-            type: 'text',
-            placeholder: placeholder,
-            plain: true,
-            size: size,
-            readOnly: true,
-            value: textValue
-          })),
+          React.createElement(
+            Box,
+            { direction: 'row', flex: true },
+            selectValue || React.createElement(SelectTextInput, _extends({
+              ref: function ref(_ref) {
+                _this2.inputRef = _ref;
+              }
+            }, rest, {
+              tabIndex: '-1',
+              type: 'text',
+              placeholder: placeholder,
+              plain: true,
+              readOnly: true,
+              value: textValue,
+              size: size
+            }))
+          ),
           React.createElement(
             Box,
             {
