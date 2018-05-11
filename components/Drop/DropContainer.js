@@ -51,7 +51,7 @@ var DropContainer = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.addScrollListener = function () {
       var target = _this.props.target;
 
-      _this.scrollParents = (0, _utils.findScrollParents)(target);
+      _this.scrollParents = (0, _utils.findScrollParents)((0, _reactDom.findDOMNode)(target));
       _this.scrollParents.forEach(function (scrollParent) {
         return scrollParent.addEventListener('scroll', _this.place);
       });
