@@ -70,6 +70,13 @@ var getNewContainer = exports.getNewContainer = function getNewContainer() {
   return container;
 };
 
+var setFocusWithoutScroll = exports.setFocusWithoutScroll = function setFocusWithoutScroll(element) {
+  var x = window.scrollX;
+  var y = window.scrollY;
+  element.focus();
+  window.scrollTo(x, y);
+};
+
 var setTabIndex = exports.setTabIndex = function setTabIndex(tabIndex) {
   return function (element) {
     element.setAttribute('tabindex', tabIndex);
@@ -143,6 +150,7 @@ exports.default = {
   getNewContainer: getNewContainer,
   makeNodeFocusable: makeNodeFocusable,
   makeNodeUnfocusable: makeNodeUnfocusable,
+  setFocusWithoutScroll: setFocusWithoutScroll,
   setTabIndex: setTabIndex,
   unsetTabIndex: unsetTabIndex
 };

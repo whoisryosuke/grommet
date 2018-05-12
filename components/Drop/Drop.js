@@ -47,10 +47,10 @@ var Drop = function (_Component) {
 
     if (restrictFocus && this.originalFocusedElement) {
       if (this.originalFocusedElement.focus) {
-        this.originalFocusedElement.focus();
+        (0, _utils.setFocusWithoutScroll)(this.originalFocusedElement);
       } else if (this.originalFocusedElement.parentNode && this.originalFocusedElement.parentNode.focus) {
         // required for IE11 and Edge
-        this.originalFocusedElement.parentNode.focus();
+        (0, _utils.setFocusWithoutScroll)(this.originalFocusedElement.parentNode);
       }
     }
     document.body.removeChild(this.dropContainer);

@@ -7,7 +7,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 
-import { getNewContainer } from '../../utils';
+import { getNewContainer, setFocusWithoutScroll } from '../../utils';
 
 import { withTheme } from '../hocs';
 
@@ -33,10 +33,10 @@ var Drop = function (_Component) {
 
     if (restrictFocus && this.originalFocusedElement) {
       if (this.originalFocusedElement.focus) {
-        this.originalFocusedElement.focus();
+        setFocusWithoutScroll(this.originalFocusedElement);
       } else if (this.originalFocusedElement.parentNode && this.originalFocusedElement.parentNode.focus) {
         // required for IE11 and Edge
-        this.originalFocusedElement.parentNode.focus();
+        setFocusWithoutScroll(this.originalFocusedElement.parentNode);
       }
     }
     document.body.removeChild(this.dropContainer);
