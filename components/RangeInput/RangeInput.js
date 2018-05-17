@@ -26,6 +26,8 @@ var _doc2 = _interopRequireDefault(_doc);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -44,7 +46,16 @@ var RangeInput = function (_Component) {
   RangeInput.prototype.render = function render() {
     var grommet = this.context.grommet;
 
-    return _react2.default.createElement(_StyledRangeInput2.default, _extends({ grommet: grommet }, this.props, { type: 'range' }));
+    var _props = this.props,
+        forwardRef = _props.forwardRef,
+        rest = _objectWithoutProperties(_props, ['forwardRef']);
+
+    return _react2.default.createElement(_StyledRangeInput2.default, _extends({
+      grommet: grommet
+    }, rest, {
+      innerRef: forwardRef,
+      type: 'range'
+    }));
   };
 
   return RangeInput;
@@ -59,4 +70,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(RangeInput);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme)(RangeInput);
+exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme, _hocs.withForwardRef)(RangeInput);

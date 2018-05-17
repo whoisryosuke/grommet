@@ -19,7 +19,7 @@ import { Menu } from '../Menu';
 import { Meter } from '../Meter';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
-import { withTheme } from '../hocs';
+import { withForwardRef, withTheme } from '../hocs';
 import { throttle } from '../../utils';
 
 import StyledVideo, { StyledVideoContainer, StyledVideoControls, StyledVideoScrubber } from './StyledVideo';
@@ -454,4 +454,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Video);
 }
 
-export default compose(withTheme)(Video);
+export default compose(withTheme, withForwardRef)(Video);

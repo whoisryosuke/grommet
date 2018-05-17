@@ -49,6 +49,7 @@ var CheckBox = function (_Component) {
     var _props = this.props,
         checked = _props.checked,
         disabled = _props.disabled,
+        forwardRef = _props.forwardRef,
         id = _props.id,
         label = _props.label,
         name = _props.name,
@@ -56,7 +57,7 @@ var CheckBox = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         toggle = _props.toggle,
-        rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'id', 'label', 'name', 'onChange', 'reverse', 'theme', 'toggle']);
+        rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'forwardRef', 'id', 'label', 'name', 'onChange', 'reverse', 'theme', 'toggle']);
 
     var grommet = this.context.grommet;
 
@@ -96,6 +97,7 @@ var CheckBox = function (_Component) {
         _StyledCheckBox2.default,
         { theme: theme },
         _react2.default.createElement(_StyledCheckBox.StyledCheckBoxInput, _extends({}, rest, {
+          innerRef: forwardRef,
           type: 'checkbox'
         }, (0, _object.removeUndefined)({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
           theme: theme,
@@ -120,4 +122,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(CheckBox);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme)(CheckBox);
+exports.default = (0, _recompose.compose)(_hocs.withTheme, _hocs.withForwardRef)(CheckBox);

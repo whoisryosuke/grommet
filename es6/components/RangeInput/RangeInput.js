@@ -1,5 +1,7 @@
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -10,7 +12,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
-import { withFocus, withTheme } from '../hocs';
+import { withFocus, withForwardRef, withTheme } from '../hocs';
 
 import StyledRangeInput from './StyledRangeInput';
 import doc from './doc';
@@ -27,7 +29,16 @@ var RangeInput = function (_Component) {
   RangeInput.prototype.render = function render() {
     var grommet = this.context.grommet;
 
-    return React.createElement(StyledRangeInput, _extends({ grommet: grommet }, this.props, { type: 'range' }));
+    var _props = this.props,
+        forwardRef = _props.forwardRef,
+        rest = _objectWithoutProperties(_props, ['forwardRef']);
+
+    return React.createElement(StyledRangeInput, _extends({
+      grommet: grommet
+    }, rest, {
+      innerRef: forwardRef,
+      type: 'range'
+    }));
   };
 
   return RangeInput;
@@ -42,4 +53,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(RangeInput);
 }
 
-export default compose(withFocus, withTheme)(RangeInput);
+export default compose(withFocus, withTheme, withForwardRef)(RangeInput);

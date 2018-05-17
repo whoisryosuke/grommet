@@ -12,7 +12,7 @@ import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
-import { withFocus, withTheme } from '../hocs';
+import { withFocus, withForwardRef, withTheme } from '../hocs';
 
 import StyledButton, { StyledLabel, StyledIcon } from './StyledButton';
 import doc from './doc';
@@ -40,6 +40,7 @@ var Button = function (_Component) {
   Button.prototype.render = function render() {
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
+        forwardRef = _props.forwardRef,
         children = _props.children,
         icon = _props.icon,
         fill = _props.fill,
@@ -50,7 +51,7 @@ var Button = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         type = _props.type,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'forwardRef', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
 
     var grommet = this.context.grommet;
 
@@ -83,6 +84,7 @@ var Button = function (_Component) {
     return React.createElement(
       Tag,
       _extends({}, rest, {
+        innerRef: forwardRef,
         'aria-label': a11yTitle,
         disabled: disabled,
         icon: icon,
@@ -116,4 +118,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Button);
 }
 
-export default compose(withFocus, withTheme)(Button);
+export default compose(withFocus, withTheme, withForwardRef)(Button);

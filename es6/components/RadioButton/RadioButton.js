@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
-import { withTheme } from '../hocs';
+import { withForwardRef, withTheme } from '../hocs';
 import { removeUndefined } from '../../utils/object';
 
 import StyledRadioButton, { StyledRadioButtonContainer, StyledRadioButtonInput, StyledRadioButtonButton } from './StyledRadioButton';
@@ -31,12 +31,13 @@ var RadioButton = function (_Component) {
     var _props = this.props,
         checked = _props.checked,
         disabled = _props.disabled,
+        forwardRef = _props.forwardRef,
         id = _props.id,
         label = _props.label,
         name = _props.name,
         onChange = _props.onChange,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'id', 'label', 'name', 'onChange', 'theme']);
+        rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'forwardRef', 'id', 'label', 'name', 'onChange', 'theme']);
 
     var grommet = this.context.grommet;
 
@@ -57,6 +58,7 @@ var RadioButton = function (_Component) {
         StyledRadioButton,
         { theme: theme },
         React.createElement(StyledRadioButtonInput, _extends({}, rest, {
+          innerRef: forwardRef,
           type: 'radio'
         }, removeUndefined({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
           theme: theme,
@@ -88,4 +90,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(RadioButton);
 }
 
-export default compose(withTheme)(RadioButton);
+export default compose(withTheme, withForwardRef)(RadioButton);

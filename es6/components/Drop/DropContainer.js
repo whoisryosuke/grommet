@@ -31,9 +31,9 @@ var DropContainer = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.addScrollListener = function () {
-      var target = _this.props.target;
+      var dropTarget = _this.props.dropTarget;
 
-      _this.scrollParents = findScrollParents(findDOMNode(target));
+      _this.scrollParents = findScrollParents(findDOMNode(dropTarget));
       _this.scrollParents.forEach(function (scrollParent) {
         return scrollParent.addEventListener('scroll', _this.place);
       });
@@ -56,12 +56,13 @@ var DropContainer = function (_Component) {
     }, _this.place = function () {
       var _this$props = _this.props,
           align = _this$props.align,
+          dropTarget = _this$props.dropTarget,
           responsive = _this$props.responsive;
 
       var windowWidth = window.innerWidth;
       var windowHeight = window.innerHeight;
 
-      var target = findDOMNode(_this.props.target);
+      var target = findDOMNode(dropTarget);
       var container = findDOMNode(_this.dropRef);
       if (container && target) {
         // clear prior styling

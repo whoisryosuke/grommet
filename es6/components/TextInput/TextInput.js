@@ -18,7 +18,7 @@ import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { Drop } from '../Drop';
-import { withTheme } from '../hocs';
+import { withForwardRef, withTheme } from '../hocs';
 
 import StyledTextInput, { StyledTextInputContainer, StyledSuggestions } from './StyledTextInput';
 import doc from './doc';
@@ -54,6 +54,7 @@ var TextInput = function (_Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
       activeSuggestionIndex: -1,
+      inputRef: React.createRef(),
       showDrop: false
     }, _this.announce = function (message, mode) {
       var suggestions = _this.props.suggestions;
@@ -141,27 +142,26 @@ var TextInput = function (_Component) {
       }
     }, _this.onClickSuggestion = function (suggestion) {
       var onSelect = _this.props.onSelect;
+      var inputRef = _this.state.inputRef;
 
       _this.setState({ showDrop: false });
       if (onSelect) {
-        onSelect({
-          target: _this.componentRef, suggestion: suggestion
-        });
+        onSelect({ target: inputRef.current, suggestion: suggestion });
       }
     }, _this.onSuggestionSelect = function (event) {
       var _this$props3 = _this.props,
           onSelect = _this$props3.onSelect,
           suggestions = _this$props3.suggestions;
-      var activeSuggestionIndex = _this.state.activeSuggestionIndex;
+      var _this$state3 = _this.state,
+          activeSuggestionIndex = _this$state3.activeSuggestionIndex,
+          inputRef = _this$state3.inputRef;
 
       _this.setState({ showDrop: false });
       if (activeSuggestionIndex >= 0) {
         event.preventDefault(); // prevent submitting forms
         var suggestion = suggestions[activeSuggestionIndex];
         if (onSelect) {
-          onSelect({
-            target: _this.componentRef, suggestion: suggestion
-          });
+          onSelect({ target: inputRef.current, suggestion: suggestion });
         }
       }
     }, _this.onDropClose = function () {
@@ -170,9 +170,9 @@ var TextInput = function (_Component) {
       var _this$props4 = _this.props,
           suggestions = _this$props4.suggestions,
           theme = _this$props4.theme;
-      var _this$state3 = _this.state,
-          activeSuggestionIndex = _this$state3.activeSuggestionIndex,
-          selectedSuggestionIndex = _this$state3.selectedSuggestionIndex;
+      var _this$state4 = _this.state,
+          activeSuggestionIndex = _this$state4.activeSuggestionIndex,
+          selectedSuggestionIndex = _this$state4.selectedSuggestionIndex;
 
       var items = void 0;
       if (suggestions && suggestions.length > 0) {
@@ -208,6 +208,17 @@ var TextInput = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
+  TextInput.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var forwardRef = nextProps.forwardRef;
+    var inputRef = prevState.inputRef;
+
+    var nextInputRef = forwardRef || inputRef;
+    if (nextInputRef !== inputRef) {
+      return { inputRef: nextInputRef };
+    }
+    return null;
+  };
+
   TextInput.prototype.announceSuggestion = function announceSuggestion(index) {
     var _props = this.props,
         suggestions = _props.suggestions,
@@ -235,7 +246,9 @@ var TextInput = function (_Component) {
         rest = _objectWithoutProperties(_props2, ['defaultValue', 'dropAlign', 'dropTarget', 'id', 'plain', 'value', 'onFocus', 'onInput', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
-    var showDrop = this.state.showDrop;
+    var _state = this.state,
+        inputRef = _state.inputRef,
+        showDrop = _state.showDrop;
     // needed so that styled components does not invoke
     // onSelect when text input is clicked
 
@@ -248,7 +261,7 @@ var TextInput = function (_Component) {
           id: id ? 'text-input-drop__' + id : undefined,
           align: dropAlign,
           responsive: false,
-          target: dropTarget || this.componentRef,
+          target: dropTarget || inputRef.current,
           onClickOutside: function onClickOutside() {
             return _this2.setState({ showDrop: false });
           },
@@ -274,9 +287,7 @@ var TextInput = function (_Component) {
         },
         React.createElement(StyledTextInput, _extends({
           id: id,
-          ref: function ref(_ref) {
-            _this2.componentRef = _ref;
-          },
+          innerRef: inputRef,
           autoComplete: 'off',
           plain: plain
         }, rest, {
@@ -322,4 +333,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(TextInput);
 }
 
-export default compose(withTheme)(TextInput);
+export default compose(withTheme, withForwardRef)(TextInput);

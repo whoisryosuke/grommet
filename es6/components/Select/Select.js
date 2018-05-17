@@ -17,7 +17,7 @@ import { DropButton } from '../DropButton';
 import { Keyboard } from '../Keyboard';
 import { TextInput } from '../TextInput';
 
-import { withTheme } from '../hocs';
+import { withForwardRef, withTheme } from '../hocs';
 
 import SelectContainer from './SelectContainer';
 import doc from './doc';
@@ -59,6 +59,7 @@ var Select = function (_Component) {
         disabled = _props.disabled,
         dropAlign = _props.dropAlign,
         dropTarget = _props.dropTarget,
+        forwardRef = _props.forwardRef,
         messages = _props.messages,
         onChange = _props.onChange,
         onClose = _props.onClose,
@@ -67,7 +68,7 @@ var Select = function (_Component) {
         size = _props.size,
         theme = _props.theme,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'dropAlign', 'dropTarget', 'messages', 'onChange', 'onClose', 'placeholder', 'plain', 'size', 'theme', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'dropAlign', 'dropTarget', 'forwardRef', 'messages', 'onChange', 'onClose', 'placeholder', 'plain', 'size', 'theme', 'value']);
 
     var open = this.state.open;
 
@@ -116,6 +117,7 @@ var Select = function (_Component) {
       React.createElement(
         DropButton,
         _extends({
+          ref: forwardRef,
           disabled: disabled,
           dropAlign: dropAlign,
           dropTarget: dropTarget
@@ -178,4 +180,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Select);
 }
 
-export default compose(withTheme)(Select);
+export default compose(withTheme, withForwardRef)(Select);

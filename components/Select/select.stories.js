@@ -165,6 +165,50 @@ var SeasonsSelect = function (_Component) {
   return SeasonsSelect;
 }(_react.Component);
 
+var FocusedSelect = function (_Component2) {
+  _inherits(FocusedSelect, _Component2);
+
+  function FocusedSelect() {
+    var _temp2, _this3, _ret2;
+
+    _classCallCheck(this, FocusedSelect);
+
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = { value: '' }, _this3.ref = _react2.default.createRef(), _temp2), _possibleConstructorReturn(_this3, _ret2);
+  }
+
+  FocusedSelect.prototype.componentDidMount = function componentDidMount() {
+    this.ref.current.focus();
+  };
+
+  FocusedSelect.prototype.render = function render() {
+    var _this4 = this;
+
+    var value = this.state.value;
+
+    return _react2.default.createElement(
+      _Grommet2.default,
+      null,
+      _react2.default.createElement(_Select2.default, {
+        ref: this.ref,
+        placeholder: 'Select an option',
+        options: ['Option 1', 'Option 2'],
+        onChange: function onChange(event) {
+          return _this4.setState({ value: event.option });
+        },
+        value: value
+      })
+    );
+  };
+
+  return FocusedSelect;
+}(_react.Component);
+
 (0, _react3.storiesOf)('Select', module).add('Seasons Select', function () {
   return _react2.default.createElement(SeasonsSelect, null);
+}).add('Focused Select', function () {
+  return _react2.default.createElement(FocusedSelect, null);
 });

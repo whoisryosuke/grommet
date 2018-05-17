@@ -16,6 +16,8 @@ var _Drop = require('../Drop');
 
 var _hocs = require('../hocs');
 
+var _utils = require('../../utils');
+
 var _doc = require('./doc');
 
 var _doc2 = _interopRequireDefault(_doc);
@@ -33,12 +35,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DropButton = function (_Component) {
   _inherits(DropButton, _Component);
 
-  function DropButton(props, context) {
+  function DropButton() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, DropButton);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.onDropClose = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      buttonRef: _react2.default.createRef()
+    }, _this.onDropClose = function () {
       var _this$props = _this.props,
           onClose = _this$props.onClose,
           open = _this$props.open;
@@ -48,69 +56,78 @@ var DropButton = function (_Component) {
           onClose();
         }
       });
-    };
-
-    _this.onToggle = function () {
+    }, _this.onToggle = function () {
       var _this$props2 = _this.props,
           onClose = _this$props2.onClose,
           onOpen = _this$props2.onOpen;
       var show = _this.state.show;
 
       _this.setState({ show: !show }, show ? onClose && onClose() : onOpen && onOpen());
-    };
-
-    _this.state = { show: props.open };
-    _this.checkRef = props.open;
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
+  DropButton.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var forwardRef = nextProps.forwardRef,
+        open = nextProps.open;
+    var buttonRef = prevState.buttonRef,
+        show = prevState.show;
+
+    var nextButtonRef = forwardRef || buttonRef;
+    var reRenderOnMount = show === undefined && open;
+    if (open !== undefined && open !== show) {
+      return { show: open, reRenderOnMount: reRenderOnMount, buttonRef: nextButtonRef };
+    }
+    if (nextButtonRef !== buttonRef) {
+      return { buttonRef: nextButtonRef };
+    }
+    return null;
+  };
+
   DropButton.prototype.componentDidMount = function componentDidMount() {
+    var _state = this.state,
+        buttonRef = _state.buttonRef,
+        reRenderOnMount = _state.reRenderOnMount;
     // In case the caller starts with the drop open, before we have the
     // buttonRef, see if we have it now and re-render.
-    if (this.checkRef && this.buttonRef) {
-      this.checkRef = false;
-      this.forceUpdate();
+
+    if (reRenderOnMount && buttonRef.current) {
+      this.setState({ reRenderOnMount: false }); // eslint-disable-line
     }
   };
 
-  DropButton.prototype.componentWillReceiveProps = function componentWillReceiveProps(_ref) {
-    var open = _ref.open;
-    var show = this.state.show;
-
-    if (open !== undefined && open !== show) {
-      this.setState({ show: open });
+  DropButton.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+    if (!this.state.show && prevState.show) {
+      // focus on the button if the drop is closed
+      (0, _utils.setFocusWithoutScroll)(this.state.buttonRef.current);
     }
   };
 
   DropButton.prototype.render = function render() {
-    var _this2 = this;
-
     var _props = this.props,
         disabled = _props.disabled,
         dropAlign = _props.dropAlign,
+        forwardRef = _props.forwardRef,
         dropContent = _props.dropContent,
         dropTarget = _props.dropTarget,
         id = _props.id,
         open = _props.open,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['disabled', 'dropAlign', 'dropContent', 'dropTarget', 'id', 'open', 'theme']);
+        rest = _objectWithoutProperties(_props, ['disabled', 'dropAlign', 'forwardRef', 'dropContent', 'dropTarget', 'id', 'open', 'theme']);
 
-    var show = this.state.show;
+    var _state2 = this.state,
+        buttonRef = _state2.buttonRef,
+        show = _state2.show;
 
 
     var drop = void 0;
-    if (show && this.buttonRef) {
+    if (show && buttonRef.current) {
       drop = _react2.default.createElement(
         _Drop.Drop,
         {
-          key: 'drop',
-          ref: function ref(_ref2) {
-            _this2.dropRef = _ref2;
-          },
           id: id ? id + '__drop' : undefined,
           restrictFocus: true,
           align: dropAlign,
-          target: dropTarget || this.buttonRef,
+          target: dropTarget || buttonRef.current,
           onClickOutside: this.onDropClose,
           onEsc: this.onDropClose
         },
@@ -118,14 +135,16 @@ var DropButton = function (_Component) {
       );
     }
 
-    return [_react2.default.createElement(_Button.Button, _extends({
-      key: 'button',
-      id: id,
-      ref: function ref(_ref3) {
-        _this2.buttonRef = _ref3;
-      },
-      onClick: disabled ? undefined : this.onToggle
-    }, rest)), drop];
+    return _react2.default.createElement(
+      _react2.default.Fragment,
+      null,
+      _react2.default.createElement(_Button.Button, _extends({
+        id: id,
+        ref: buttonRef,
+        onClick: disabled ? undefined : this.onToggle
+      }, rest)),
+      drop
+    );
   };
 
   return DropButton;
@@ -141,4 +160,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(DropButton);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme)(DropButton);
+exports.default = (0, _recompose.compose)(_hocs.withTheme, _hocs.withForwardRef)(DropButton);

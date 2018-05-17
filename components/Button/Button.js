@@ -57,6 +57,7 @@ var Button = function (_Component) {
   Button.prototype.render = function render() {
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
+        forwardRef = _props.forwardRef,
         children = _props.children,
         icon = _props.icon,
         fill = _props.fill,
@@ -67,7 +68,7 @@ var Button = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         type = _props.type,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'forwardRef', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
 
     var grommet = this.context.grommet;
 
@@ -100,6 +101,7 @@ var Button = function (_Component) {
     return _react2.default.createElement(
       Tag,
       _extends({}, rest, {
+        innerRef: forwardRef,
         'aria-label': a11yTitle,
         disabled: disabled,
         icon: icon,
@@ -133,4 +135,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Button);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme)(Button);
+exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme, _hocs.withForwardRef)(Button);

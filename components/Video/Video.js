@@ -478,4 +478,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Video);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme)(Video);
+exports.default = (0, _recompose.compose)(_hocs.withTheme, _hocs.withForwardRef)(Video);

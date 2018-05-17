@@ -16,7 +16,7 @@ import { compose } from 'recompose';
 
 import { colorForName, colorIsDark } from '../../utils';
 
-import { withTheme } from '../hocs';
+import { withForwardRef, withTheme } from '../hocs';
 
 import StyledBox, { StyledBoxGap } from './StyledBox';
 
@@ -65,13 +65,14 @@ var Box = function (_Component) {
         direction = _props2.direction,
         elevation = _props2.elevation,
         fill = _props2.fill,
+        forwardRef = _props2.forwardRef,
         gap = _props2.gap,
         overflow = _props2.overflow,
         responsive = _props2.responsive,
         tag = _props2.tag,
         theme = _props2.theme,
         wrap = _props2.wrap,
-        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'elevation', 'fill', 'gap', 'overflow', 'responsive', 'tag', 'theme', 'wrap']);
+        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'elevation', 'fill', 'forwardRef', 'gap', 'overflow', 'responsive', 'tag', 'theme', 'wrap']);
 
     var grommet = this.context.grommet;
 
@@ -108,6 +109,7 @@ var Box = function (_Component) {
       StyledComponent,
       _extends({
         'aria-label': a11yTitle,
+        innerRef: forwardRef,
         directionProp: direction,
         elevationProp: elevation,
         fillProp: fill,
@@ -143,4 +145,5 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Box);
 }
 
-export default compose(withTheme)(Box);
+export default compose(withTheme, withForwardRef // needed for RangeSelector
+)(Box);

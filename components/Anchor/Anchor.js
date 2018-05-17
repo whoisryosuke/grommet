@@ -57,6 +57,7 @@ var Anchor = function (_Component) {
         a11yTitle = _props.a11yTitle,
         children = _props.children,
         disabled = _props.disabled,
+        forwardRef = _props.forwardRef,
         href = _props.href,
         icon = _props.icon,
         focus = _props.focus,
@@ -65,7 +66,7 @@ var Anchor = function (_Component) {
         onClick = _props.onClick,
         reverse = _props.reverse,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'href', 'icon', 'focus', 'label', 'primary', 'onClick', 'reverse', 'theme']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'forwardRef', 'href', 'icon', 'focus', 'label', 'primary', 'onClick', 'reverse', 'theme']);
 
     var grommet = this.context.grommet;
 
@@ -98,6 +99,7 @@ var Anchor = function (_Component) {
     return _react2.default.createElement(
       _StyledAnchor2.default,
       _extends({}, rest, {
+        innerRef: forwardRef,
         'aria-label': a11yTitle,
         disabled: disabled,
         icon: anchorIcon,
@@ -127,4 +129,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Anchor);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme)(Anchor);
+exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme, _hocs.withForwardRef)(Anchor);

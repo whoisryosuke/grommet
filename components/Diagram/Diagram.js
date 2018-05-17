@@ -62,18 +62,22 @@ var findTarget = function findTarget(target) {
 var Diagram = function (_Component) {
   _inherits(Diagram, _Component);
 
-  function Diagram(props, context) {
+  function Diagram() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Diagram);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.onResize = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { height: 0, width: 0 }, _this.containerRef = _react2.default.createRef(), _this.onResize = function () {
       var _this$state = _this.state,
           connectionPoints = _this$state.connectionPoints,
           width = _this$state.width,
           height = _this$state.height;
 
-      var parent = (0, _reactDom.findDOMNode)(_this.containerRef).parentNode;
+      var parent = (0, _reactDom.findDOMNode)(_this.containerRef.current).parentNode;
       if (parent) {
         var rect = parent.getBoundingClientRect();
         if (rect.width !== width || rect.height !== height) {
@@ -86,19 +90,12 @@ var Diagram = function (_Component) {
           _this.placeConnections();
         }
       }
-    };
-
-    _this.state = { height: 0, width: 0 };
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   Diagram.prototype.componentDidMount = function componentDidMount() {
     window.addEventListener('resize', this.onResize);
     this.onResize();
-  };
-
-  Diagram.prototype.componentWillReceiveProps = function componentWillReceiveProps() {
-    this.setState({ connectionPoints: undefined });
   };
 
   Diagram.prototype.componentDidUpdate = function componentDidUpdate() {
@@ -112,7 +109,7 @@ var Diagram = function (_Component) {
   Diagram.prototype.placeConnections = function placeConnections() {
     var connections = this.props.connections;
 
-    var containerRect = (0, _reactDom.findDOMNode)(this.containerRef).getBoundingClientRect();
+    var containerRect = (0, _reactDom.findDOMNode)(this.containerRef.current).getBoundingClientRect();
     var connectionPoints = connections.map(function (_ref) {
       var fromTarget = _ref.fromTarget,
           toTarget = _ref.toTarget;
@@ -130,8 +127,9 @@ var Diagram = function (_Component) {
       if (fromElement && toElement) {
         var fromRect = fromElement.getBoundingClientRect();
         var toRect = toElement.getBoundingClientRect();
-        var fromPoint = [fromRect.x - containerRect.x + fromRect.width / 2, fromRect.y - containerRect.y + fromRect.height / 2];
-        var toPoint = [toRect.x - containerRect.x + toRect.width / 2, toRect.y - containerRect.y + toRect.height / 2];
+        // There is no x and y when unit testing.
+        var fromPoint = [fromRect.x - containerRect.x + fromRect.width / 2 || 0, fromRect.y - containerRect.y + fromRect.height / 2 || 0];
+        var toPoint = [toRect.x - containerRect.x + toRect.width / 2 || 0, toRect.y - containerRect.y + toRect.height / 2 || 0];
         points = [fromPoint, toPoint];
       }
 
@@ -141,8 +139,6 @@ var Diagram = function (_Component) {
   };
 
   Diagram.prototype.render = function render() {
-    var _this2 = this;
-
     var _props = this.props,
         connections = _props.connections,
         theme = _props.theme,
@@ -177,7 +173,7 @@ var Diagram = function (_Component) {
           path = _react2.default.createElement('path', _extends({
             key: index
           }, cleanedRest, {
-            stroke: (0, _utils.colorForName)(color, theme),
+            stroke: (0, _utils.colorForName)(color || 'accent-1', theme),
             strokeWidth: strokeWidth,
             strokeLinecap: round ? 'round' : 'butt',
             strokeLinejoin: round ? 'round' : 'miter',
@@ -193,9 +189,7 @@ var Diagram = function (_Component) {
     return _react2.default.createElement(
       _StyledDiagram2.default,
       _extends({
-        ref: function ref(_ref3) {
-          _this2.containerRef = _ref3;
-        },
+        ref: this.containerRef,
         viewBox: '0 0 ' + width + ' ' + height,
         preserveAspectRatio: 'xMinYMin meet',
         width: width,

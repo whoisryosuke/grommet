@@ -8,11 +8,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _recompose = require('recompose');
+
 var _Box = require('../Box');
 
 var _Keyboard = require('../Keyboard');
 
 var _utils = require('../../utils');
+
+var _hocs = require('../hocs');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,13 +39,13 @@ var DIRECTION_PROPS = {
   }
 };
 
-var _class = function (_Component) {
-  _inherits(_class, _Component);
+var EdgeControl = function (_Component) {
+  _inherits(EdgeControl, _Component);
 
-  function _class() {
+  function EdgeControl() {
     var _temp, _this, _ret;
 
-    _classCallCheck(this, _class);
+    _classCallCheck(this, EdgeControl);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -50,17 +54,18 @@ var _class = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _class.prototype.render = function render() {
+  EdgeControl.prototype.render = function render() {
     var _this2 = this;
 
     var _props = this.props,
         color = _props.color,
         direction = _props.direction,
         edge = _props.edge,
+        forwardRef = _props.forwardRef,
         onDecrease = _props.onDecrease,
         onIncrease = _props.onIncrease,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['color', 'direction', 'edge', 'onDecrease', 'onIncrease', 'theme']);
+        rest = _objectWithoutProperties(_props, ['color', 'direction', 'edge', 'forwardRef', 'onDecrease', 'onIncrease', 'theme']);
 
     var focused = this.state.focused;
     var _DIRECTION_PROPS$dire = DIRECTION_PROPS[direction],
@@ -85,6 +90,7 @@ var _class = function (_Component) {
         _react2.default.createElement(
           _Box.Box,
           _extends({
+            ref: forwardRef,
             direction: boxDirection,
             justify: 'center',
             align: 'center',
@@ -121,7 +127,7 @@ var _class = function (_Component) {
     );
   };
 
-  return _class;
+  return EdgeControl;
 }(_react.Component);
 
-exports.default = _class;
+exports.default = (0, _recompose.compose)(_hocs.withForwardRef)(EdgeControl);

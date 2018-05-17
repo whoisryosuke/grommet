@@ -18,7 +18,7 @@ import { Keyboard } from '../Keyboard';
 import { DropButton } from '../DropButton';
 import { Text } from '../Text';
 
-import { withTheme } from '../hocs';
+import { withForwardRef, withTheme } from '../hocs';
 
 import doc from './doc';
 
@@ -97,6 +97,7 @@ var Menu = function (_Component) {
         dropAlign = _props.dropAlign,
         dropBackground = _props.dropBackground,
         dropTarget = _props.dropTarget,
+        forwardRef = _props.forwardRef,
         icon = _props.icon,
         items = _props.items,
         label = _props.label,
@@ -104,7 +105,7 @@ var Menu = function (_Component) {
         onKeyDown = _props.onKeyDown,
         size = _props.size,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'disabled', 'dropAlign', 'dropBackground', 'dropTarget', 'icon', 'items', 'label', 'messages', 'onKeyDown', 'size', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'disabled', 'dropAlign', 'dropBackground', 'dropTarget', 'forwardRef', 'icon', 'items', 'label', 'messages', 'onKeyDown', 'size', 'theme']);
 
     var _state = this.state,
         activeItemIndex = _state.activeItemIndex,
@@ -156,7 +157,9 @@ var Menu = function (_Component) {
         null,
         React.createElement(
           DropButton,
-          _extends({}, rest, {
+          _extends({
+            ref: forwardRef
+          }, rest, {
             theme: theme,
             a11yTitle: messages.openMenu || 'Open Menu',
             disabled: disabled,
@@ -226,4 +229,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Menu);
 }
 
-export default compose(withTheme)(Menu);
+export default compose(withTheme, withForwardRef)(Menu);

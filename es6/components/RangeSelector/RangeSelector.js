@@ -13,7 +13,7 @@ import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
 
 import { Box } from '../Box';
-import { withTheme } from '../hocs';
+import { withForwardRef, withTheme } from '../hocs';
 
 import EdgeControl from './EdgeControl';
 import doc from './doc';
@@ -30,14 +30,14 @@ var RangeSelector = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.valueForMouseCoord = function (event) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.containerRef = React.createRef(), _this.valueForMouseCoord = function (event) {
       var _this$props = _this.props,
           direction = _this$props.direction,
           max = _this$props.max,
           min = _this$props.min,
           step = _this$props.step;
 
-      var rect = findDOMNode(_this.containerRef).getBoundingClientRect();
+      var rect = findDOMNode(_this.containerRef.current).getBoundingClientRect();
       if (direction === 'vertical') {
         var y = event.clientY - (rect.y || 0); // unit test resilience
         var scaleY = rect.height / (max - min + step) || 1; // unit test resilience
@@ -115,11 +115,10 @@ var RangeSelector = function (_Component) {
   };
 
   RangeSelector.prototype.render = function render() {
-    var _this2 = this;
-
     var _props = this.props,
         color = _props.color,
         direction = _props.direction,
+        forwardRef = _props.forwardRef,
         invert = _props.invert,
         max = _props.max,
         messages = _props.messages,
@@ -131,7 +130,7 @@ var RangeSelector = function (_Component) {
         step = _props.step,
         theme = _props.theme,
         values = _props.values,
-        rest = _objectWithoutProperties(_props, ['color', 'direction', 'invert', 'max', 'messages', 'min', 'onChange', 'opacity', 'round', 'size', 'step', 'theme', 'values']);
+        rest = _objectWithoutProperties(_props, ['color', 'direction', 'forwardRef', 'invert', 'max', 'messages', 'min', 'onChange', 'opacity', 'round', 'size', 'step', 'theme', 'values']);
 
     var _state = this.state,
         nextLower = _state.nextLower,
@@ -146,9 +145,7 @@ var RangeSelector = function (_Component) {
     return React.createElement(
       Box,
       _extends({
-        ref: function ref(_ref) {
-          _this2.containerRef = _ref;
-        },
+        ref: this.containerRef,
         direction: direction === 'vertical' ? 'column' : 'row',
         fill: fill
       }, rest, {
@@ -163,6 +160,7 @@ var RangeSelector = function (_Component) {
       React.createElement(EdgeControl, {
         a11yTitle: messages.lower,
         tabIndex: 0,
+        ref: forwardRef,
         color: color,
         direction: direction,
         edge: 'lower',
@@ -227,4 +225,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(RangeSelector);
 }
 
-export default compose(withTheme)(RangeSelector);
+export default compose(withTheme, withForwardRef)(RangeSelector);
