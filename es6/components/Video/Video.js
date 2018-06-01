@@ -10,7 +10,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { Box } from '../Box';
@@ -41,21 +40,35 @@ var formatTime = function formatTime(time) {
   return minutes + ':' + seconds;
 };
 
+var videoEvents = ['onAbort', 'onCanPlay', 'onCanPlayThrough', 'onDurationChange', 'onEmptied', 'onEncrypted', 'onEnded', 'onError', 'onLoadedData', 'onLoadedMetadata', 'onLoadStart', 'onPause', 'onPlay', 'onPlaying', 'onProgress', 'onRateChange', 'onSeeked', 'onSeeking', 'onStalled', 'onSuspend', 'onTimeUpdate', 'onVolumeChange', 'onWaiting'];
+
 var Video = function (_Component) {
   _inherits(Video, _Component);
 
-  function Video() {
-    var _temp, _this, _ret;
+  Video.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var forwardRef = nextProps.forwardRef;
+    var videoRef = prevState.videoRef;
 
+    var nextVideoRef = forwardRef || videoRef;
+    if (nextVideoRef !== videoRef) {
+      return { videoRef: nextVideoRef };
+    }
+    return null;
+  };
+
+  function Video(props) {
     _classCallCheck(this, Video);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { captions: [] }, _this.hasPlayed = false, _this.injectUpdateVideoEvents = function () {
-      var videoEvents = ['onAbort', 'onCanPlay', 'onCanPlayThrough', 'onDurationChange', 'onEmptied', 'onEncrypted', 'onEnded', 'onError', 'onLoadedData', 'onLoadedMetadata', 'onLoadStart', 'onPause', 'onPlay', 'onPlaying', 'onProgress', 'onRateChange', 'onSeeked', 'onSeeking', 'onStalled', 'onSuspend', 'onTimeUpdate', 'onVolumeChange', 'onWaiting'];
+    _this.state = {
+      captions: [],
+      scrubberRef: React.createRef(),
+      videoRef: React.createRef()
+    };
+    _this.hasPlayed = false;
 
+    _this.injectUpdateVideoEvents = function () {
       return videoEvents.reduce(function (previousValue, currentValue) {
         var nextValue = _extends({}, previousValue);
         nextValue[currentValue] = function (e) {
@@ -67,8 +80,12 @@ var Video = function (_Component) {
 
         return nextValue;
       }, {});
-    }, _this.update = function () {
-      var video = findDOMNode(_this.videoRef);
+    };
+
+    _this.update = function () {
+      var videoRef = _this.state.videoRef;
+
+      var video = findDOMNode(videoRef.current);
       // Set flag for Video first play
       if (!_this.hasPlayed && !video.paused && !video.loading || video.currentTime) {
         _this.hasPlayed = true;
@@ -98,36 +115,73 @@ var Video = function (_Component) {
         percentagePlayed: video.currentTime / video.duration * 100
         // loading: video.readyState < video.HAVE_ENOUGH_DATA,
       });
-    }, _this.play = function () {
-      findDOMNode(_this.videoRef).play();
-    }, _this.pause = function () {
-      findDOMNode(_this.videoRef).pause();
-    }, _this.scrub = function (event) {
-      var duration = _this.state.duration;
+    };
 
-      if (_this.scrubberRef) {
-        var scrubberRect = findDOMNode(_this.scrubberRef).getBoundingClientRect();
+    _this.play = function () {
+      var videoRef = _this.state.videoRef;
+
+      findDOMNode(videoRef.current).play();
+    };
+
+    _this.pause = function () {
+      var videoRef = _this.state.videoRef;
+
+      findDOMNode(videoRef.current).pause();
+    };
+
+    _this.scrub = function (event) {
+      var _this$state = _this.state,
+          duration = _this$state.duration,
+          scrubberRef = _this$state.scrubberRef;
+
+      if (scrubberRef.current) {
+        var scrubberRect = findDOMNode(scrubberRef.current).getBoundingClientRect();
         var percent = (event.clientX - scrubberRect.left) / scrubberRect.width;
         _this.setState({ scrubTime: duration * percent });
       }
-    }, _this.seek = function (event) {
-      var duration = _this.state.duration;
+    };
 
-      if (_this.scrubberRef) {
-        var scrubberRect = findDOMNode(_this.scrubberRef).getBoundingClientRect();
+    _this.seek = function (event) {
+      var _this$state2 = _this.state,
+          duration = _this$state2.duration,
+          scrubberRef = _this$state2.scrubberRef,
+          videoRef = _this$state2.videoRef;
+
+      if (scrubberRef.current) {
+        var scrubberRect = findDOMNode(scrubberRef.current).getBoundingClientRect();
         var percent = (event.clientX - scrubberRect.left) / scrubberRect.width;
-        findDOMNode(_this.videoRef).currentTime = duration * percent;
+        findDOMNode(videoRef.current).currentTime = duration * percent;
       }
-    }, _this.unmute = function () {
-      findDOMNode(_this.videoRef).muted = false;
-    }, _this.mute = function () {
-      findDOMNode(_this.videoRef).muted = true;
-    }, _this.louder = function () {
-      findDOMNode(_this.videoRef).volume += VOLUME_STEP;
-    }, _this.quieter = function () {
-      findDOMNode(_this.videoRef).volume -= VOLUME_STEP;
-    }, _this.fullscreen = function () {
-      var video = findDOMNode(_this.videoRef);
+    };
+
+    _this.unmute = function () {
+      var videoRef = _this.state.videoRef;
+
+      findDOMNode(videoRef.current).muted = false;
+    };
+
+    _this.mute = function () {
+      var videoRef = _this.state.videoRef;
+
+      findDOMNode(videoRef.current).muted = true;
+    };
+
+    _this.louder = function () {
+      var videoRef = _this.state.videoRef;
+
+      findDOMNode(videoRef.current).volume += VOLUME_STEP;
+    };
+
+    _this.quieter = function () {
+      var videoRef = _this.state.videoRef;
+
+      findDOMNode(videoRef.current).volume -= VOLUME_STEP;
+    };
+
+    _this.fullscreen = function () {
+      var videoRef = _this.state.videoRef;
+
+      var video = findDOMNode(videoRef.current);
       if (video.requestFullscreen) {
         video.requestFullscreen();
       } else if (video.msRequestFullscreen) {
@@ -139,23 +193,30 @@ var Video = function (_Component) {
       } else {
         console.warn('Your browser doesn\'t support fullscreen.');
       }
-    }, _this.interactionStart = function () {
+    };
+
+    _this.interactionStart = function () {
       _this.setState({ interacting: true });
       clearTimeout(_this.interactionTimer);
       _this.interactionTimer = setTimeout(_this.interactionStop, 3000);
-    }, _this.interactionStop = function () {
+    };
+
+    _this.interactionStop = function () {
       var focus = _this.state.focus;
 
       if (!focus && !_this.unmounted) {
         _this.setState({ interacting: false });
       }
-    }, _this.restate = function () {
-      var _this$state = _this.state,
-          captions = _this$state.captions,
-          height = _this$state.height,
-          width = _this$state.width;
+    };
 
-      var video = findDOMNode(_this.videoRef);
+    _this.restate = function () {
+      var _this$state3 = _this.state,
+          captions = _this$state3.captions,
+          height = _this$state3.height,
+          videoRef = _this$state3.videoRef,
+          width = _this$state3.width;
+
+      var video = findDOMNode(videoRef.current);
 
       if (video.videoHeight) {
         // set the size based on the video aspect ratio
@@ -199,18 +260,18 @@ var Video = function (_Component) {
           }
         }
       }
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
+    };
 
-  Video.prototype.componentWillMount = function componentWillMount() {
-    this.update = throttle(this.update, 100, this);
-    this.mediaEventProps = this.injectUpdateVideoEvents();
-  };
+    _this.update = throttle(_this.update, 100, _this);
+    _this.mediaEventProps = _this.injectUpdateVideoEvents();
+    return _this;
+  }
 
   Video.prototype.componentDidMount = function componentDidMount() {
     var mute = this.props.mute;
+    var videoRef = this.state.videoRef;
 
-    var video = findDOMNode(this.videoRef);
+    var video = findDOMNode(videoRef.current);
 
     if (mute) {
       this.mute();
@@ -225,22 +286,11 @@ var Video = function (_Component) {
     this.restate();
   };
 
-  Video.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    if (nextProps.autoPlay && !this.props.autoPlay) {
+  Video.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
+    if (this.props.autoPlay && !prevProps.autoPlay) {
       // Caller wants the video to play now.
       this.play();
     }
-    // Dynamically modifying a source element and its attribute when
-    // the element is already inserted in a video or audio element will
-    // have no effect.
-    // From HTML Specs:
-    // https://html.spec.whatwg.org/multipage/embedded-content.html
-    //   #the-source-element
-    // Using forceUpdate to force redraw of video when receiving new <source>
-    this.forceUpdate();
-  };
-
-  Video.prototype.componentDidUpdate = function componentDidUpdate() {
     this.restate();
   };
 
@@ -249,7 +299,9 @@ var Video = function (_Component) {
   };
 
   Video.prototype.showCaptions = function showCaptions(index) {
-    var textTracks = findDOMNode(this.videoRef).textTracks;
+    var videoRef = this.state.videoRef;
+
+    var textTracks = findDOMNode(videoRef.current).textTracks;
     for (var i = 0; i < textTracks.length; i += 1) {
       textTracks[i].mode = i === index ? 'showing' : 'hidden';
     }
@@ -270,6 +322,7 @@ var Video = function (_Component) {
         interacting = _state.interacting,
         percentagePlayed = _state.percentagePlayed,
         playing = _state.playing,
+        scrubberRef = _state.scrubberRef,
         scrubTime = _state.scrubTime,
         volume = _state.volume;
 
@@ -336,9 +389,7 @@ var Video = function (_Component) {
                 values: [{ value: percentagePlayed || 0 }]
               }),
               React.createElement(StyledVideoScrubber, {
-                ref: function ref(_ref) {
-                  _this2.scrubberRef = _ref;
-                },
+                innerRef: scrubberRef,
                 tabIndex: 0,
                 role: 'button',
                 value: scrubTime ? Math.round(scrubTime / duration * 100) : undefined,
@@ -347,7 +398,7 @@ var Video = function (_Component) {
                   return _this2.setState({ scrubTime: undefined });
                 },
                 onClick: this.seek,
-                theme: this.props.theme
+                theme: theme
               })
             )
           ),
@@ -383,17 +434,17 @@ var Video = function (_Component) {
   };
 
   Video.prototype.render = function render() {
-    var _this3 = this;
-
     var _props2 = this.props,
         autoPlay = _props2.autoPlay,
         children = _props2.children,
         controls = _props2.controls,
         loop = _props2.loop,
-        rest = _objectWithoutProperties(_props2, ['autoPlay', 'children', 'controls', 'loop']);
+        theme = _props2.theme,
+        rest = _objectWithoutProperties(_props2, ['autoPlay', 'children', 'controls', 'loop', 'theme']);
 
     var _state2 = this.state,
         height = _state2.height,
+        videoRef = _state2.videoRef,
         width = _state2.width;
 
 
@@ -420,14 +471,13 @@ var Video = function (_Component) {
 
     return React.createElement(
       StyledVideoContainer,
-      _extends({}, mouseEventListeners, { style: style }),
+      _extends({}, mouseEventListeners, { theme: theme, style: style }),
       React.createElement(
         StyledVideo,
-        _extends({
-          ref: function ref(_ref2) {
-            _this3.videoRef = _ref2;
-          }
-        }, rest, this.mediaEventProps, {
+        _extends({}, rest, {
+          innerRef: videoRef,
+          theme: theme
+        }, this.mediaEventProps, {
           autoPlay: autoPlay || false,
           loop: loop || false
         }),
@@ -440,11 +490,6 @@ var Video = function (_Component) {
   return Video;
 }(Component);
 
-Video.contextTypes = {
-  grommet: PropTypes.object,
-  theme: PropTypes.object,
-  router: PropTypes.any
-};
 Video.defaultProps = {
   controls: 'over'
 };

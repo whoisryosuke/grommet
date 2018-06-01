@@ -39,13 +39,13 @@ var GrommetMarkdown = function (_Component) {
       var result = _extends({}, obj);
       result['h' + level] = {
         component: Heading,
-        props: { level: level, theme: theme }
+        props: { level: level }
       };
       return result;
     }, {});
 
     var overrides = deepMerge({
-      p: { component: Paragraph, props: { theme: theme } }
+      p: { component: Paragraph }
     }, heading, components);
 
     return React.createElement(Markdown, _extends({ options: { overrides: overrides } }, rest));

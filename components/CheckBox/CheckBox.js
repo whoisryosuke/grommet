@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _recompose = require('recompose');
 
 var _hocs = require('../hocs');
@@ -59,9 +55,6 @@ var CheckBox = function (_Component) {
         toggle = _props.toggle,
         rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'forwardRef', 'id', 'label', 'name', 'onChange', 'reverse', 'theme', 'toggle']);
 
-    var grommet = this.context.grommet;
-
-
     var normalizedLabel = typeof label === 'string' ? _react2.default.createElement(
       'div',
       null,
@@ -75,11 +68,11 @@ var CheckBox = function (_Component) {
 
     var control = toggle ? _react2.default.createElement(
       _StyledCheckBox.StyledCheckBoxToggle,
-      { theme: theme, grommet: grommet },
-      _react2.default.createElement(_StyledCheckBox.StyledCheckBoxKnob, { theme: theme, grommet: grommet })
+      { theme: theme },
+      _react2.default.createElement(_StyledCheckBox.StyledCheckBoxKnob, { theme: theme })
     ) : _react2.default.createElement(
       _StyledCheckBox.StyledCheckBoxBox,
-      { theme: theme, grommet: grommet },
+      { theme: theme },
       _react2.default.createElement(
         'svg',
         { viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
@@ -90,8 +83,7 @@ var CheckBox = function (_Component) {
     return _react2.default.createElement(
       _StyledCheckBox.StyledCheckBoxContainer,
       _extends({}, (0, _object.removeUndefined)({ htmlFor: id, disabled: disabled, reverse: reverse }), {
-        theme: theme,
-        grommet: grommet
+        theme: theme
       }),
       _react2.default.createElement(
         _StyledCheckBox2.default,
@@ -100,8 +92,7 @@ var CheckBox = function (_Component) {
           innerRef: forwardRef,
           type: 'checkbox'
         }, (0, _object.removeUndefined)({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
-          theme: theme,
-          grommet: grommet
+          theme: theme
         })),
         control
       ),
@@ -112,11 +103,6 @@ var CheckBox = function (_Component) {
 
   return CheckBox;
 }(_react.Component);
-
-CheckBox.contextTypes = {
-  grommet: _propTypes2.default.object
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(CheckBox);

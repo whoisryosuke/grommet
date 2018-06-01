@@ -11,14 +11,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { Drop } from '../Drop';
-import { withForwardRef, withTheme } from '../hocs';
+import { withAnnounce, withForwardRef, withTheme } from '../hocs';
 
 import StyledTextInput, { StyledTextInputContainer, StyledSuggestions } from './StyledTextInput';
 import doc from './doc';
@@ -57,17 +56,17 @@ var TextInput = function (_Component) {
       inputRef: React.createRef(),
       showDrop: false
     }, _this.announce = function (message, mode) {
-      var suggestions = _this.props.suggestions;
-      var grommet = _this.context.grommet;
+      var _this$props = _this.props,
+          announce = _this$props.announce,
+          suggestions = _this$props.suggestions;
 
-      var announce = grommet && grommet.announce;
-      if (announce && suggestions && suggestions.length > 0) {
+      if (suggestions && suggestions.length > 0) {
         announce(message, mode);
       }
     }, _this.announceSuggestionsCount = function () {
-      var _this$props = _this.props,
-          suggestions = _this$props.suggestions,
-          suggestionsCount = _this$props.messages.suggestionsCount;
+      var _this$props2 = _this.props,
+          suggestions = _this$props2.suggestions,
+          suggestionsCount = _this$props2.messages.suggestionsCount;
 
       _this.announce(suggestions.length + ' ' + suggestionsCount);
     }, _this.announceSuggestionsExist = function () {
@@ -90,9 +89,9 @@ var TextInput = function (_Component) {
         }, _this.announceSuggestionsCount);
       }
     }, _this.getSelectedSuggestionIndex = function () {
-      var _this$props2 = _this.props,
-          suggestions = _this$props2.suggestions,
-          value = _this$props2.value;
+      var _this$props3 = _this.props,
+          suggestions = _this$props3.suggestions,
+          value = _this$props3.value;
 
       var suggestionValues = suggestions.map(function (suggestion) {
         if ((typeof suggestion === 'undefined' ? 'undefined' : _typeof(suggestion)) === 'object') {
@@ -149,9 +148,9 @@ var TextInput = function (_Component) {
         onSelect({ target: inputRef.current, suggestion: suggestion });
       }
     }, _this.onSuggestionSelect = function (event) {
-      var _this$props3 = _this.props,
-          onSelect = _this$props3.onSelect,
-          suggestions = _this$props3.suggestions;
+      var _this$props4 = _this.props,
+          onSelect = _this$props4.onSelect,
+          suggestions = _this$props4.suggestions;
       var _this$state3 = _this.state,
           activeSuggestionIndex = _this$state3.activeSuggestionIndex,
           inputRef = _this$state3.inputRef;
@@ -167,9 +166,9 @@ var TextInput = function (_Component) {
     }, _this.onDropClose = function () {
       _this.setState({ showDrop: false });
     }, _this.renderSuggestions = function () {
-      var _this$props4 = _this.props,
-          suggestions = _this$props4.suggestions,
-          theme = _this$props4.theme;
+      var _this$props5 = _this.props,
+          suggestions = _this$props5.suggestions,
+          theme = _this$props5.theme;
       var _this$state4 = _this.state,
           activeSuggestionIndex = _this$state4.activeSuggestionIndex,
           selectedSuggestionIndex = _this$state4.selectedSuggestionIndex;
@@ -314,10 +313,6 @@ var TextInput = function (_Component) {
   return TextInput;
 }(Component);
 
-TextInput.contextTypes = {
-  grommet: PropTypes.object,
-  theme: PropTypes.object
-};
 TextInput.defaultProps = {
   dropAlign: { top: 'bottom', left: 'left' },
   messages: {
@@ -333,4 +328,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(TextInput);
 }
 
-export default compose(withTheme, withForwardRef)(TextInput);
+export default compose(withTheme, withAnnounce, withForwardRef)(TextInput);

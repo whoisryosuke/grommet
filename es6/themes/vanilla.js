@@ -1,20 +1,7 @@
 import { rgba } from 'polished';
 import { css } from 'styled-components';
 
-import Actions from 'grommet-icons/icons/Actions';
-import ClosedCaption from 'grommet-icons/icons/ClosedCaption';
-import Expand from 'grommet-icons/icons/Expand';
-import FormDown from 'grommet-icons/icons/FormDown';
-import FormNext from 'grommet-icons/icons/FormNext';
-import FormPrevious from 'grommet-icons/icons/FormPrevious';
-import Next from 'grommet-icons/icons/Next';
-import Pause from 'grommet-icons/icons/Pause';
-import Play from 'grommet-icons/icons/Play';
-import Previous from 'grommet-icons/icons/Previous';
-import Subtract from 'grommet-icons/icons/Subtract';
-import Volume from 'grommet-icons/icons/Volume';
-import VolumeLow from 'grommet-icons/icons/VolumeLow';
-
+import { Actions, ClosedCaption, Expand, FormDown, FormNext, FormPrevious, Next, Pause, Play, Previous, Subtract, Volume, VolumeLow } from 'grommet-icons';
 
 import { colorForName, deepFreeze } from '../utils';
 
@@ -36,6 +23,43 @@ var textColor = '#444444';
 var borderColor = 'rgba(0, 0, 0, 0.33)';
 var focusColor = accentColors[0];
 var activeColor = rgba('#DDDDDD', 0.5);
+
+var colors = {
+  active: activeColor,
+  accent: accentColors, // deprecated
+  black: '#000000',
+  border: borderColor,
+  brand: brandColor,
+  dark: darkColors, // deprecated
+  darkBackground: {
+    text: '#FFFFFF'
+  },
+  focus: focusColor,
+  light: lightColors, // deprecated
+  lightBackground: {
+    text: textColor
+  },
+  neutral: neutralColors, // deprecated
+  placeholder: '#AAAAAA',
+  status: statusColors, // deprecated
+  text: textColor,
+  white: '#FFFFFF'
+};
+
+var colorArray = function colorArray(array, prefix) {
+  return array.forEach(function (color, index) {
+    colors[prefix + '-' + (index + 1)] = color;
+  });
+};
+
+colorArray(accentColors, 'accent');
+colorArray(darkColors, 'dark');
+colorArray(lightColors, 'light');
+colorArray(neutralColors, 'neutral');
+Object.keys(statusColors).forEach(function (color) {
+  colors['status-' + color] = statusColors[color];
+});
+
 var workSansPath = 'https://fonts.gstatic.com/s/worksans/v2';
 var zillaSlabPath = 'https://fonts.gstatic.com/s/zillaslab/v3';
 
@@ -68,27 +92,7 @@ export default deepFreeze({
     breakpoints: {
       narrow: 699
     },
-    colors: {
-      active: activeColor,
-      accent: accentColors,
-      black: '#000000',
-      border: borderColor,
-      brand: brandColor,
-      dark: darkColors,
-      darkBackground: {
-        text: '#FFFFFF'
-      },
-      focus: focusColor,
-      light: lightColors,
-      lightBackground: {
-        text: textColor
-      },
-      neutral: neutralColors,
-      placeholder: '#AAAAAA',
-      status: statusColors,
-      text: textColor,
-      white: '#FFFFFF'
-    },
+    colors: colors,
     control: {
       border: {
         width: '2px'
@@ -402,11 +406,7 @@ export default deepFreeze({
     weight: 600
   },
   icon: {
-    extend: css(['', ' ', ''], function (props) {
-      return props.color && props.color !== 'plain' && '\n        fill: ' + colorForName(props.color, props.theme) + ';\n        stroke: ' + colorForName(props.color, props.theme) + ';\n      ';
-    }, function (props) {
-      return props.dark && '\n        fill: ' + props.theme.global.colors.darkBackground.text + ';\n        stroke: ' + props.theme.global.colors.darkBackground.text + ';\n      ';
-    })
+    colors: colors
   },
   layer: {
     backgroundColor: backgroundColor,

@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _utils = require('../../utils');
 
 var _StyledClock = require('./StyledClock');
@@ -41,10 +37,9 @@ var getClockDimensions = function getClockDimensions(theme) {
 };
 
 var getClockState = function getClockState(_ref) {
-  var _ref$elements = _ref.elements,
-      hours = _ref$elements.hours,
-      minutes = _ref$elements.minutes,
-      seconds = _ref$elements.seconds;
+  var hours = _ref.hours,
+      minutes = _ref.minutes,
+      seconds = _ref.seconds;
 
   var hour12 = hours > 12 ? hours - 12 : hours;
   var minuteAngle = minutes * ANGLE_UNIT;
@@ -60,22 +55,31 @@ var getClockState = function getClockState(_ref) {
 var Analog = function (_Component) {
   _inherits(Analog, _Component);
 
-  function Analog(props, context) {
+  function Analog() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Analog);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = getClockState(props);
-    return _this;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Analog.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    this.setState(getClockState(nextProps));
+  Analog.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var elements = nextProps.elements;
+
+    var nextState = getClockState(elements);
+    if (prevState.hourAngle === undefined || Object.keys(nextState).some(function (k) {
+      return prevState[k] !== nextState[k];
+    })) {
+      return nextState;
+    }
+    return null;
   };
 
   Analog.prototype.render = function render() {
-    var grommet = this.context.grommet;
-
     var _props = this.props,
         precision = _props.precision,
         theme = _props.theme,
@@ -97,7 +101,6 @@ var Analog = function (_Component) {
     var secondHand = void 0;
     if (precision === 'seconds') {
       secondHand = _react2.default.createElement(_StyledClock.StyledSecond, {
-        grommet: grommet,
         theme: theme,
         x1: halfSize,
         y1: halfSize,
@@ -115,7 +118,6 @@ var Analog = function (_Component) {
     var minuteHand = void 0;
     if (precision === 'seconds' || precision === 'minutes') {
       minuteHand = _react2.default.createElement(_StyledClock.StyledMinute, {
-        grommet: grommet,
         theme: theme,
         x1: halfSize,
         y1: halfSize,
@@ -143,7 +145,6 @@ var Analog = function (_Component) {
       secondHand,
       minuteHand,
       _react2.default.createElement(_StyledClock.StyledHour, {
-        grommet: grommet,
         theme: theme,
         x1: halfSize,
         y1: halfSize,
@@ -162,9 +163,6 @@ var Analog = function (_Component) {
   return Analog;
 }(_react.Component);
 
-Analog.contextTypes = {
-  grommet: _propTypes2.default.object
-};
 Analog.defaultProps = {
   size: 'medium'
 };

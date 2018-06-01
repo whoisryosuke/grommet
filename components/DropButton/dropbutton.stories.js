@@ -6,9 +6,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _react3 = require('@storybook/react');
 
-var _Close = require('grommet-icons/icons/Close');
-
-var _Close2 = _interopRequireDefault(_Close);
+var _grommetIcons = require('grommet-icons');
 
 var _DropButton = require('../DropButton/DropButton');
 
@@ -55,7 +53,7 @@ var DropContent = function DropContent(_ref) {
         { level: 3, margin: 'small' },
         'Heading'
       ),
-      _react2.default.createElement(_Button2.default, { icon: _react2.default.createElement(_Close2.default, null), onClick: onClose })
+      _react2.default.createElement(_Button2.default, { icon: _react2.default.createElement(_grommetIcons.Close, null), onClick: onClose })
     ),
     _react2.default.createElement(
       _Text2.default,
@@ -107,55 +105,6 @@ var SimpleDropButton = function (_Component) {
   return SimpleDropButton;
 }(_react.Component);
 
-var FocusedDropButton = function (_Component2) {
-  _inherits(FocusedDropButton, _Component2);
-
-  function FocusedDropButton() {
-    var _temp2, _this3, _ret2;
-
-    _classCallCheck(this, FocusedDropButton);
-
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.ref = _react2.default.createRef(), _this3.state = {}, _this3.onClose = function () {
-      _this3.setState({ open: false });
-      setTimeout(function () {
-        return _this3.setState({ open: undefined });
-      }, 1);
-    }, _temp2), _possibleConstructorReturn(_this3, _ret2);
-  }
-
-  FocusedDropButton.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedDropButton.prototype.render = function render() {
-    var _this4 = this;
-
-    var open = this.state.open;
-
-    return _react2.default.createElement(
-      _Grommet2.default,
-      null,
-      _react2.default.createElement(_DropButton2.default, {
-        ref: this.ref,
-        label: 'Open',
-        open: open,
-        onClose: function onClose() {
-          return _this4.setState({ open: undefined });
-        },
-        dropContent: _react2.default.createElement(DropContent, { onClose: this.onClose })
-      })
-    );
-  };
-
-  return FocusedDropButton;
-}(_react.Component);
-
 (0, _react3.storiesOf)('DropButton', module).add('Simple DropButton', function () {
   return _react2.default.createElement(SimpleDropButton, null);
-}).add('Focused DropButton', function () {
-  return _react2.default.createElement(FocusedDropButton, null);
 });

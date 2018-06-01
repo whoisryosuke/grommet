@@ -46,42 +46,6 @@ var SimpleAnchor = function (_Component) {
   return SimpleAnchor;
 }(_react.Component);
 
-var FocusedAnchor = function (_Component2) {
-  _inherits(FocusedAnchor, _Component2);
-
-  function FocusedAnchor() {
-    var _temp, _this2, _ret;
-
-    _classCallCheck(this, FocusedAnchor);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.ref = _react2.default.createRef(), _temp), _possibleConstructorReturn(_this2, _ret);
-  }
-
-  FocusedAnchor.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedAnchor.prototype.render = function render() {
-    return _react2.default.createElement(
-      _Grommet2.default,
-      null,
-      _react2.default.createElement(
-        _Anchor2.default,
-        { ref: this.ref, href: '#' },
-        'Link'
-      )
-    );
-  };
-
-  return FocusedAnchor;
-}(_react.Component);
-
 (0, _react3.storiesOf)('Anchor', module).add('Simple Anchor', function () {
   return _react2.default.createElement(SimpleAnchor, null);
-}).add('Focused Anchor', function () {
-  return _react2.default.createElement(FocusedAnchor, null);
 });

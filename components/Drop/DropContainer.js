@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _reactDom = require('react-dom');
 
 var _FocusedContainer = require('../FocusedContainer');
@@ -214,9 +210,6 @@ var DropContainer = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'onClickOutside', 'onEsc', 'onKeyDown', 'theme']);
 
-    var grommet = this.context.grommet;
-
-
     return _react2.default.createElement(
       _FocusedContainer2.default,
       null,
@@ -230,8 +223,7 @@ var DropContainer = function (_Component) {
             ref: function ref(_ref) {
               _this2.dropRef = _ref;
             },
-            theme: theme,
-            grommet: grommet
+            theme: theme
           }, rest),
           children
         )
@@ -244,8 +236,5 @@ var DropContainer = function (_Component) {
 
 DropContainer.defaultProps = {
   centered: true
-};
-DropContainer.contextTypes = {
-  grommet: _propTypes2.default.object
 };
 exports.default = DropContainer;

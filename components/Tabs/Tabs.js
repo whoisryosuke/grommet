@@ -8,11 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _recompose = require('recompose');
-
 var _Box = require('../Box');
-
-var _hocs = require('../hocs');
 
 var _doc = require('./doc');
 
@@ -31,30 +27,37 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Tabs = function (_Component) {
   _inherits(Tabs, _Component);
 
-  function Tabs(props, context) {
+  function Tabs() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Tabs);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.activateTab = function (index) {
-      if (!_this.props.activeIndex) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.activateTab = function (index) {
+      var _this$props = _this.props,
+          activeIndex = _this$props.activeIndex,
+          onActive = _this$props.onActive;
+
+      if (!activeIndex) {
         _this.setState({ activeIndex: index });
       }
-      if (_this.props.onActive) {
-        _this.props.onActive(index);
+      if (onActive) {
+        onActive(index);
       }
-    };
-
-    _this.state = {
-      activeIndex: props.activeIndex
-    };
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Tabs.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    if (nextProps.activeIndex === (nextProps.activeIndex || 0) && this.state.activeIndex !== nextProps.activeIndex) {
-      this.setState({ activeIndex: nextProps.activeIndex });
+  Tabs.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var activeIndex = nextProps.activeIndex;
+    var stateActiveIndex = prevState.activeIndex;
+
+    if (stateActiveIndex !== activeIndex && activeIndex !== undefined) {
+      return { activeIndex: activeIndex };
     }
+    return null;
   };
 
   Tabs.prototype.render = function render() {
@@ -88,7 +91,7 @@ var Tabs = function (_Component) {
       return (0, _react.cloneElement)(tab, {
         active: isTabActive,
         onActivate: function onActivate() {
-          _this2.activateTab(index);
+          return _this2.activateTab(index);
         }
       });
     }, this);
@@ -103,8 +106,7 @@ var Tabs = function (_Component) {
         _extends({
           border: 'bottom',
           direction: 'row',
-          justify: justify,
-          margin: { vertical: 'small' }
+          justify: justify
         }, rest),
         tabs
       ),
@@ -134,4 +136,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Tabs);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme)(Tabs);
+exports.default = Tabs;

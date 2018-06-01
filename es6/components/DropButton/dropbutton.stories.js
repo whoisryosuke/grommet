@@ -6,8 +6,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
-import Close from 'grommet-icons/icons/Close';
-
+import { Close } from 'grommet-icons';
 
 import DropButton from '../DropButton/DropButton';
 import Grommet from '../Grommet/Grommet';
@@ -81,55 +80,6 @@ var SimpleDropButton = function (_Component) {
   return SimpleDropButton;
 }(Component);
 
-var FocusedDropButton = function (_Component2) {
-  _inherits(FocusedDropButton, _Component2);
-
-  function FocusedDropButton() {
-    var _temp2, _this3, _ret2;
-
-    _classCallCheck(this, FocusedDropButton);
-
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.ref = React.createRef(), _this3.state = {}, _this3.onClose = function () {
-      _this3.setState({ open: false });
-      setTimeout(function () {
-        return _this3.setState({ open: undefined });
-      }, 1);
-    }, _temp2), _possibleConstructorReturn(_this3, _ret2);
-  }
-
-  FocusedDropButton.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedDropButton.prototype.render = function render() {
-    var _this4 = this;
-
-    var open = this.state.open;
-
-    return React.createElement(
-      Grommet,
-      null,
-      React.createElement(DropButton, {
-        ref: this.ref,
-        label: 'Open',
-        open: open,
-        onClose: function onClose() {
-          return _this4.setState({ open: undefined });
-        },
-        dropContent: React.createElement(DropContent, { onClose: this.onClose })
-      })
-    );
-  };
-
-  return FocusedDropButton;
-}(Component);
-
 storiesOf('DropButton', module).add('Simple DropButton', function () {
   return React.createElement(SimpleDropButton, null);
-}).add('Focused DropButton', function () {
-  return React.createElement(FocusedDropButton, null);
 });

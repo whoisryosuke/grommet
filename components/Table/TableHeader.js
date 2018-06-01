@@ -2,15 +2,13 @@
 
 exports.__esModule = true;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _TableContext = require('./TableContext');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _TableContext2 = _interopRequireDefault(_TableContext);
 
 var _StyledTable = require('./StyledTable');
 
@@ -33,23 +31,16 @@ var TableHeader = function (_Component) {
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  TableHeader.prototype.getChildContext = function getChildContext() {
-    var grommet = this.context.grommet;
-
-    return { grommet: _extends({}, grommet, { tableContext: 'header' }) };
-  };
-
   TableHeader.prototype.render = function render() {
-    return _react2.default.createElement(_StyledTable.StyledTableHeader, this.props);
+    return _react2.default.createElement(
+      _TableContext2.default.Provider,
+      { value: 'header' },
+      _react2.default.createElement(_StyledTable.StyledTableHeader, this.props)
+    );
   };
 
   return TableHeader;
 }(_react.Component);
-
-TableHeader.childContextTypes = {
-  grommet: _propTypes2.default.object
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc.docTableHeader)(TableHeader);

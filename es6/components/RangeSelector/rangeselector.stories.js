@@ -8,6 +8,9 @@ import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import RangeSelector from '../RangeSelector/RangeSelector';
+import Stack from '../Stack/Stack';
+import Box from '../Box/Box';
+import Text from '../Text/Text';
 import Grommet from '../Grommet/Grommet';
 
 var SimpleRangeSelector = function (_Component) {
@@ -22,7 +25,7 @@ var SimpleRangeSelector = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { values: [5, 10] }, _this.onChange = function (values) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { values: [2, 8] }, _this.onChange = function (values) {
       return _this.setState({ values: values });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -33,49 +36,41 @@ var SimpleRangeSelector = function (_Component) {
     return React.createElement(
       Grommet,
       null,
-      React.createElement(RangeSelector, { values: values, onChange: this.onChange })
+      React.createElement(
+        Stack,
+        null,
+        React.createElement(
+          Box,
+          { direction: 'row', justify: 'between' },
+          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(function (value) {
+            return React.createElement(
+              Box,
+              { key: value, pad: 'small', border: false },
+              React.createElement(
+                Text,
+                { style: { fontFamily: 'monospace' } },
+                value
+              )
+            );
+          })
+        ),
+        React.createElement(RangeSelector, {
+          direction: 'horizontal',
+          invert: false,
+          min: 0,
+          max: 9,
+          size: 'full',
+          round: 'small',
+          values: values,
+          onChange: this.onChange
+        })
+      )
     );
   };
 
   return SimpleRangeSelector;
 }(Component);
 
-var FocusedRangeSelector = function (_Component2) {
-  _inherits(FocusedRangeSelector, _Component2);
-
-  function FocusedRangeSelector() {
-    var _temp2, _this2, _ret2;
-
-    _classCallCheck(this, FocusedRangeSelector);
-
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.state = { values: [5, 10] }, _this2.ref = React.createRef(), _this2.onChange = function (values) {
-      return _this2.setState({ values: values });
-    }, _temp2), _possibleConstructorReturn(_this2, _ret2);
-  }
-
-  FocusedRangeSelector.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedRangeSelector.prototype.render = function render() {
-    var values = this.state.values;
-
-    return React.createElement(
-      Grommet,
-      null,
-      React.createElement(RangeSelector, { ref: this.ref, values: values, onChange: this.onChange })
-    );
-  };
-
-  return FocusedRangeSelector;
-}(Component);
-
 storiesOf('RangeSelector', module).add('Simple RangeSelector', function () {
   return React.createElement(SimpleRangeSelector, null);
-}).add('Focused RangeSelector', function () {
-  return React.createElement(FocusedRangeSelector, null);
 });

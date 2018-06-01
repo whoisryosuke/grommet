@@ -37,15 +37,23 @@ var Digit = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Digit.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+  Digit.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var number = nextProps.number;
+
+    if (number !== prevState.number) {
+      return { previous: prevState.number, number: number };
+    }
+    return null;
+  };
+
+  Digit.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
     var _this2 = this;
 
-    if (nextProps.number !== this.props.number) {
+    if (prevState.previous === undefined && this.state.previous !== undefined) {
       clearTimeout(this.timer);
       this.timer = setTimeout(function () {
         _this2.setState({ previous: undefined });
       }, 900);
-      this.setState({ previous: this.props.number });
     }
   };
 
@@ -55,11 +63,12 @@ var Digit = function (_Component) {
 
   Digit.prototype.render = function render() {
     var _props = this.props,
-        number = _props.number,
         run = _props.run,
         size = _props.size,
         theme = _props.theme;
-    var previous = this.state.previous;
+    var _state = this.state,
+        number = _state.number,
+        previous = _state.previous;
 
     if (previous !== undefined) {
       var direction = run === 'backward' ? 'down' : 'up';

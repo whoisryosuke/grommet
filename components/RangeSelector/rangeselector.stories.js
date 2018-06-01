@@ -10,6 +10,18 @@ var _RangeSelector = require('../RangeSelector/RangeSelector');
 
 var _RangeSelector2 = _interopRequireDefault(_RangeSelector);
 
+var _Stack = require('../Stack/Stack');
+
+var _Stack2 = _interopRequireDefault(_Stack);
+
+var _Box = require('../Box/Box');
+
+var _Box2 = _interopRequireDefault(_Box);
+
+var _Text = require('../Text/Text');
+
+var _Text2 = _interopRequireDefault(_Text);
+
 var _Grommet = require('../Grommet/Grommet');
 
 var _Grommet2 = _interopRequireDefault(_Grommet);
@@ -34,7 +46,7 @@ var SimpleRangeSelector = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { values: [5, 10] }, _this.onChange = function (values) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { values: [2, 8] }, _this.onChange = function (values) {
       return _this.setState({ values: values });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -45,49 +57,41 @@ var SimpleRangeSelector = function (_Component) {
     return _react2.default.createElement(
       _Grommet2.default,
       null,
-      _react2.default.createElement(_RangeSelector2.default, { values: values, onChange: this.onChange })
+      _react2.default.createElement(
+        _Stack2.default,
+        null,
+        _react2.default.createElement(
+          _Box2.default,
+          { direction: 'row', justify: 'between' },
+          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(function (value) {
+            return _react2.default.createElement(
+              _Box2.default,
+              { key: value, pad: 'small', border: false },
+              _react2.default.createElement(
+                _Text2.default,
+                { style: { fontFamily: 'monospace' } },
+                value
+              )
+            );
+          })
+        ),
+        _react2.default.createElement(_RangeSelector2.default, {
+          direction: 'horizontal',
+          invert: false,
+          min: 0,
+          max: 9,
+          size: 'full',
+          round: 'small',
+          values: values,
+          onChange: this.onChange
+        })
+      )
     );
   };
 
   return SimpleRangeSelector;
 }(_react.Component);
 
-var FocusedRangeSelector = function (_Component2) {
-  _inherits(FocusedRangeSelector, _Component2);
-
-  function FocusedRangeSelector() {
-    var _temp2, _this2, _ret2;
-
-    _classCallCheck(this, FocusedRangeSelector);
-
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.state = { values: [5, 10] }, _this2.ref = _react2.default.createRef(), _this2.onChange = function (values) {
-      return _this2.setState({ values: values });
-    }, _temp2), _possibleConstructorReturn(_this2, _ret2);
-  }
-
-  FocusedRangeSelector.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedRangeSelector.prototype.render = function render() {
-    var values = this.state.values;
-
-    return _react2.default.createElement(
-      _Grommet2.default,
-      null,
-      _react2.default.createElement(_RangeSelector2.default, { ref: this.ref, values: values, onChange: this.onChange })
-    );
-  };
-
-  return FocusedRangeSelector;
-}(_react.Component);
-
 (0, _react3.storiesOf)('RangeSelector', module).add('Simple RangeSelector', function () {
   return _react2.default.createElement(SimpleRangeSelector, null);
-}).add('Focused RangeSelector', function () {
-  return _react2.default.createElement(FocusedRangeSelector, null);
 });

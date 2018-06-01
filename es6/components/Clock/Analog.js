@@ -9,7 +9,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import { parseMetricToNum } from '../../utils';
 
@@ -30,10 +29,9 @@ var getClockDimensions = function getClockDimensions(theme) {
 };
 
 var getClockState = function getClockState(_ref) {
-  var _ref$elements = _ref.elements,
-      hours = _ref$elements.hours,
-      minutes = _ref$elements.minutes,
-      seconds = _ref$elements.seconds;
+  var hours = _ref.hours,
+      minutes = _ref.minutes,
+      seconds = _ref.seconds;
 
   var hour12 = hours > 12 ? hours - 12 : hours;
   var minuteAngle = minutes * ANGLE_UNIT;
@@ -49,22 +47,31 @@ var getClockState = function getClockState(_ref) {
 var Analog = function (_Component) {
   _inherits(Analog, _Component);
 
-  function Analog(props, context) {
+  function Analog() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Analog);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = getClockState(props);
-    return _this;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Analog.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    this.setState(getClockState(nextProps));
+  Analog.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var elements = nextProps.elements;
+
+    var nextState = getClockState(elements);
+    if (prevState.hourAngle === undefined || Object.keys(nextState).some(function (k) {
+      return prevState[k] !== nextState[k];
+    })) {
+      return nextState;
+    }
+    return null;
   };
 
   Analog.prototype.render = function render() {
-    var grommet = this.context.grommet;
-
     var _props = this.props,
         precision = _props.precision,
         theme = _props.theme,
@@ -86,7 +93,6 @@ var Analog = function (_Component) {
     var secondHand = void 0;
     if (precision === 'seconds') {
       secondHand = React.createElement(StyledSecond, {
-        grommet: grommet,
         theme: theme,
         x1: halfSize,
         y1: halfSize,
@@ -104,7 +110,6 @@ var Analog = function (_Component) {
     var minuteHand = void 0;
     if (precision === 'seconds' || precision === 'minutes') {
       minuteHand = React.createElement(StyledMinute, {
-        grommet: grommet,
         theme: theme,
         x1: halfSize,
         y1: halfSize,
@@ -132,7 +137,6 @@ var Analog = function (_Component) {
       secondHand,
       minuteHand,
       React.createElement(StyledHour, {
-        grommet: grommet,
         theme: theme,
         x1: halfSize,
         y1: halfSize,
@@ -151,9 +155,6 @@ var Analog = function (_Component) {
   return Analog;
 }(Component);
 
-Analog.contextTypes = {
-  grommet: PropTypes.object
-};
 Analog.defaultProps = {
   size: 'medium'
 };

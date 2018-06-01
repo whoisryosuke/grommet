@@ -44,10 +44,10 @@ var FocusedContainer = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.removeTrap = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.ref = _react2.default.createRef(), _this.removeTrap = function () {
       var restrictScroll = _this.props.restrictScroll;
 
-      var child = (0, _reactDom.findDOMNode)(_this.ref);
+      var child = (0, _reactDom.findDOMNode)(_this.ref.current);
       (0, _utils.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils.makeNodeFocusable);
       if (restrictScroll) {
         document.body.style.overflow = _this.bodyOverflowStyle;
@@ -55,7 +55,7 @@ var FocusedContainer = function (_Component) {
     }, _this.trapFocus = function () {
       var restrictScroll = _this.props.restrictScroll;
 
-      var child = (0, _reactDom.findDOMNode)(_this.ref);
+      var child = (0, _reactDom.findDOMNode)(_this.ref.current);
       (0, _utils.getBodyChildElements)().filter(isNotAncestorOf(child)).forEach(_utils.makeNodeUnfocusable);
 
       if (restrictScroll) {
@@ -85,8 +85,6 @@ var FocusedContainer = function (_Component) {
   };
 
   FocusedContainer.prototype.render = function render() {
-    var _this3 = this;
-
     var _props = this.props,
         children = _props.children,
         rest = _objectWithoutProperties(_props, ['children']);
@@ -94,9 +92,7 @@ var FocusedContainer = function (_Component) {
     delete rest.restrictScroll;
     return _react2.default.createElement(
       'div',
-      _extends({ ref: function ref(_ref) {
-          _this3.ref = _ref;
-        } }, rest),
+      _extends({ ref: this.ref }, rest),
       children
     );
   };

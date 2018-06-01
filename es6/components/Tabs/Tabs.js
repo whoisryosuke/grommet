@@ -9,41 +9,45 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { cloneElement, Children, Component } from 'react';
-import { compose } from 'recompose';
 
 import { Box } from '../Box';
-
-import { withTheme } from '../hocs';
 
 import doc from './doc';
 
 var Tabs = function (_Component) {
   _inherits(Tabs, _Component);
 
-  function Tabs(props, context) {
+  function Tabs() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Tabs);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.activateTab = function (index) {
-      if (!_this.props.activeIndex) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.activateTab = function (index) {
+      var _this$props = _this.props,
+          activeIndex = _this$props.activeIndex,
+          onActive = _this$props.onActive;
+
+      if (!activeIndex) {
         _this.setState({ activeIndex: index });
       }
-      if (_this.props.onActive) {
-        _this.props.onActive(index);
+      if (onActive) {
+        onActive(index);
       }
-    };
-
-    _this.state = {
-      activeIndex: props.activeIndex
-    };
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Tabs.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    if (nextProps.activeIndex === (nextProps.activeIndex || 0) && this.state.activeIndex !== nextProps.activeIndex) {
-      this.setState({ activeIndex: nextProps.activeIndex });
+  Tabs.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var activeIndex = nextProps.activeIndex;
+    var stateActiveIndex = prevState.activeIndex;
+
+    if (stateActiveIndex !== activeIndex && activeIndex !== undefined) {
+      return { activeIndex: activeIndex };
     }
+    return null;
   };
 
   Tabs.prototype.render = function render() {
@@ -77,7 +81,7 @@ var Tabs = function (_Component) {
       return cloneElement(tab, {
         active: isTabActive,
         onActivate: function onActivate() {
-          _this2.activateTab(index);
+          return _this2.activateTab(index);
         }
       });
     }, this);
@@ -92,8 +96,7 @@ var Tabs = function (_Component) {
         _extends({
           border: 'bottom',
           direction: 'row',
-          justify: justify,
-          margin: { vertical: 'small' }
+          justify: justify
         }, rest),
         tabs
       ),
@@ -123,4 +126,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(Tabs);
 }
 
-export default compose(withTheme)(Tabs);
+export default Tabs;

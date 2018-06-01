@@ -8,15 +8,23 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _grommetIcons = require('grommet-icons');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _ThemeContext = require('../../contexts/ThemeContext');
+
+var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
+
+var _ResponsiveContext = require('../../contexts/ResponsiveContext');
+
+var _ResponsiveContext2 = _interopRequireDefault(_ResponsiveContext);
 
 var _vanilla = require('../../themes/vanilla');
 
 var _vanilla2 = _interopRequireDefault(_vanilla);
 
 var _utils = require('../../utils');
+
+var _hocs = require('../hocs');
 
 var _StyledGrommet = require('./StyledGrommet');
 
@@ -36,18 +44,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var createAnnouncer = function createAnnouncer() {
-  var announcer = document.createElement('div');
-  announcer.style.left = '-100%';
-  announcer.style.right = '100%';
-  announcer.style.position = 'fixed';
-  announcer.style['z-index'] = '-1';
-
-  document.body.insertBefore(announcer, document.body.firstChild);
-
-  return announcer;
-};
-
 var Grommet = function (_Component) {
   _inherits(Grommet, _Component);
 
@@ -60,63 +56,101 @@ var Grommet = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.announce = function (message) {
-      var mode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'polite';
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.onResize = function () {
+      var _this$state = _this.state,
+          theme = _this$state.theme,
+          responsive = _this$state.responsive;
 
-      // we only create a new container if we don't have one already
-      // we create a separate node so that grommet does not set aria-hidden to it
-      var announcer = document.body.querySelector('[aria-live]') || createAnnouncer();
-
-      announcer.setAttribute('aria-live', 'off');
-      announcer.innerHTML = message;
-      announcer.setAttribute('aria-live', mode);
-      setTimeout(function () {
-        announcer.innerHTML = '';
-      }, 500);
+      if (window.innerWidth > theme.global.breakpoints.narrow) {
+        if (responsive !== 'wide') {
+          _this.setState({ responsive: 'wide' });
+        }
+      } else if (responsive !== 'narrow') {
+        _this.setState({ responsive: 'narrow' });
+      }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Grommet.prototype.getChildContext = function getChildContext() {
-    var theme = this.props.theme;
+  Grommet.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var iconTheme = nextProps.iconTheme,
+        theme = nextProps.theme;
+    var stateTheme = prevState.theme,
+        themeProp = prevState.themeProp,
+        iconThemeProp = prevState.iconThemeProp;
 
 
-    var mergedTheme = (0, _utils.deepMerge)(_vanilla2.default, theme);
-    var color = mergedTheme.global.colors.background;
-    var dark = color ? (0, _utils.colorIsDark)(color) : false;
+    var nextTheme = void 0;
+    if (theme && (theme !== themeProp || iconTheme !== iconThemeProp)) {
+      nextTheme = (0, _utils.deepMerge)(_vanilla2.default, theme);
+    } else if (!theme && (themeProp || !stateTheme)) {
+      nextTheme = _vanilla2.default;
+    }
 
-    return {
-      grommet: {
-        announce: this.announce,
-        dark: dark
-      },
-      theme: mergedTheme
-    };
+    if (nextTheme) {
+      var color = nextTheme.global.colors.background;
+      var dark = color ? (0, _utils.colorIsDark)(color) : false;
+      var iconThemes = {
+        dark: (0, _utils.deepMerge)(iconTheme, {
+          color: nextTheme.global.colors.darkBackground.text
+        }),
+        light: (0, _utils.deepMerge)(iconTheme, nextTheme.icon)
+      };
+      return {
+        theme: _extends({}, nextTheme, {
+          dark: dark,
+          icon: dark ? iconThemes.dark : iconThemes.light,
+          iconThemes: iconThemes
+        }),
+        themeProp: theme,
+        iconThemeProp: iconTheme
+      };
+    }
+    return null;
+  };
+
+  Grommet.prototype.componentDidMount = function componentDidMount() {
+    window.addEventListener('resize', this.onResize);
+  };
+
+  Grommet.prototype.componentWillUnmount = function componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
   };
 
   Grommet.prototype.render = function render() {
     var _props = this.props,
         children = _props.children,
-        theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children']);
+
+    delete rest.theme;
+    var _state = this.state,
+        responsive = _state.responsive,
+        theme = _state.theme;
+
 
     return _react2.default.createElement(
-      _StyledGrommet2.default,
-      _extends({}, rest, { theme: (0, _utils.deepMerge)(_vanilla2.default, theme) }),
-      children
+      _ThemeContext2.default.Provider,
+      { value: theme },
+      _react2.default.createElement(
+        _grommetIcons.ThemeContext.Provider,
+        { value: theme.icon },
+        _react2.default.createElement(
+          _ResponsiveContext2.default.Provider,
+          { value: responsive },
+          _react2.default.createElement(
+            _StyledGrommet2.default,
+            _extends({}, rest, { theme: theme }),
+            children
+          )
+        )
+      )
     );
   };
 
   return Grommet;
 }(_react.Component);
 
-Grommet.childContextTypes = {
-  grommet: _propTypes2.default.object,
-  theme: _propTypes2.default.object
-};
-
-
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Grommet);
 }
 
-exports.default = Grommet;
+exports.default = (0, _hocs.withIconTheme)(Grommet);

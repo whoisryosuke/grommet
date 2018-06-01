@@ -30,38 +30,6 @@ var SimpleCheckBox = function (_Component) {
   return SimpleCheckBox;
 }(Component);
 
-var FocusedCheckBox = function (_Component2) {
-  _inherits(FocusedCheckBox, _Component2);
-
-  function FocusedCheckBox() {
-    var _temp, _this2, _ret;
-
-    _classCallCheck(this, FocusedCheckBox);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.ref = React.createRef(), _temp), _possibleConstructorReturn(_this2, _ret);
-  }
-
-  FocusedCheckBox.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedCheckBox.prototype.render = function render() {
-    return React.createElement(
-      Grommet,
-      null,
-      React.createElement(CheckBox, { ref: this.ref, label: 'Choice' })
-    );
-  };
-
-  return FocusedCheckBox;
-}(Component);
-
 storiesOf('CheckBox', module).add('Simple CheckBox', function () {
   return React.createElement(SimpleCheckBox, null);
-}).add('Focused CheckBox', function () {
-  return React.createElement(FocusedCheckBox, null);
 });

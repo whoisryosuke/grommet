@@ -52,42 +52,6 @@ var SimpleTextArea = function (_Component) {
   return SimpleTextArea;
 }(_react.Component);
 
-var FocusedTextArea = function (_Component2) {
-  _inherits(FocusedTextArea, _Component2);
-
-  function FocusedTextArea() {
-    var _temp2, _this2, _ret2;
-
-    _classCallCheck(this, FocusedTextArea);
-
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.state = { value: '' }, _this2.ref = _react2.default.createRef(), _this2.onChange = function (event) {
-      return _this2.setState({ value: event.target.value });
-    }, _temp2), _possibleConstructorReturn(_this2, _ret2);
-  }
-
-  FocusedTextArea.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedTextArea.prototype.render = function render() {
-    var value = this.state.value;
-
-    return _react2.default.createElement(
-      _Grommet2.default,
-      null,
-      _react2.default.createElement(_TextArea2.default, { ref: this.ref, value: value, onChange: this.onChange })
-    );
-  };
-
-  return FocusedTextArea;
-}(_react.Component);
-
 (0, _react3.storiesOf)('TextArea', module).add('Simple TextArea', function () {
   return _react2.default.createElement(SimpleTextArea, null);
-}).add('Focused TextArea', function () {
-  return _react2.default.createElement(FocusedTextArea, null);
 });

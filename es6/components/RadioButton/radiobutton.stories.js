@@ -31,39 +31,6 @@ var SimpleRadioButton = function (_Component) {
   return SimpleRadioButton;
 }(Component);
 
-var FocusedRadioButton = function (_Component2) {
-  _inherits(FocusedRadioButton, _Component2);
-
-  function FocusedRadioButton() {
-    var _temp, _this2, _ret;
-
-    _classCallCheck(this, FocusedRadioButton);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.ref = React.createRef(), _temp), _possibleConstructorReturn(_this2, _ret);
-  }
-
-  FocusedRadioButton.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedRadioButton.prototype.render = function render() {
-    return React.createElement(
-      Grommet,
-      null,
-      React.createElement(RadioButton, { ref: this.ref, label: 'Choice 1', name: 'radio' }),
-      React.createElement(RadioButton, { label: 'Choice 2', name: 'radio' })
-    );
-  };
-
-  return FocusedRadioButton;
-}(Component);
-
 storiesOf('RadioButton', module).add('Simple RadioButton', function () {
   return React.createElement(SimpleRadioButton, null);
-}).add('Focused RadioButton', function () {
-  return React.createElement(FocusedRadioButton, null);
 });

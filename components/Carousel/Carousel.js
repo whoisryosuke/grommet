@@ -85,11 +85,13 @@ var Carousel = function (_Component) {
     }
   };
 
-  Carousel.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    if (this.props.play && !nextProps.play) {
-      clearInterval(this.timer);
-    } else if (nextProps.play && !this.props.play) {
+  Carousel.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
+    var play = this.props.play;
+
+    if (play && (!prevProps.play || play !== prevProps.play)) {
       this.play();
+    } else if (!play && prevProps.play) {
+      clearInterval(this.timer);
     }
   };
 

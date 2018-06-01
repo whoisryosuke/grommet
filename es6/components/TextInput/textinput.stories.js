@@ -40,57 +40,23 @@ var SimpleTextInput = function (_Component) {
   return SimpleTextInput;
 }(Component);
 
-var FocusedTextInput = function (_Component2) {
-  _inherits(FocusedTextInput, _Component2);
+var SuggestionsTextInput = function (_Component2) {
+  _inherits(SuggestionsTextInput, _Component2);
 
-  function FocusedTextInput() {
+  function SuggestionsTextInput() {
     var _temp2, _this2, _ret2;
 
-    _classCallCheck(this, FocusedTextInput);
+    _classCallCheck(this, SuggestionsTextInput);
 
     for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
     }
 
-    return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.state = { value: '' }, _this2.ref = React.createRef(), _this2.onChange = function (event) {
+    return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.state = { value: '' }, _this2.onChange = function (event) {
       return _this2.setState({ value: event.target.value });
+    }, _this2.onSelect = function (event) {
+      return _this2.setState({ value: event.suggestion });
     }, _temp2), _possibleConstructorReturn(_this2, _ret2);
-  }
-
-  FocusedTextInput.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedTextInput.prototype.render = function render() {
-    var value = this.state.value;
-
-    return React.createElement(
-      Grommet,
-      null,
-      React.createElement(TextInput, { ref: this.ref, value: value, onChange: this.onChange })
-    );
-  };
-
-  return FocusedTextInput;
-}(Component);
-
-var SuggestionsTextInput = function (_Component3) {
-  _inherits(SuggestionsTextInput, _Component3);
-
-  function SuggestionsTextInput() {
-    var _temp3, _this3, _ret3;
-
-    _classCallCheck(this, SuggestionsTextInput);
-
-    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-      args[_key3] = arguments[_key3];
-    }
-
-    return _ret3 = (_temp3 = (_this3 = _possibleConstructorReturn(this, _Component3.call.apply(_Component3, [this].concat(args))), _this3), _this3.state = { value: '' }, _this3.onChange = function (event) {
-      return _this3.setState({ value: event.target.value });
-    }, _this3.onSelect = function (event) {
-      return _this3.setState({ value: event.suggestion });
-    }, _temp3), _possibleConstructorReturn(_this3, _ret3);
   }
 
   SuggestionsTextInput.prototype.render = function render() {
@@ -113,8 +79,6 @@ var SuggestionsTextInput = function (_Component3) {
 
 storiesOf('TextInput', module).add('Simple TextInput', function () {
   return React.createElement(SimpleTextInput, null);
-}).add('Focused TextInput', function () {
-  return React.createElement(FocusedTextInput, null);
 }).add('Suggestions TextInput', function () {
   return React.createElement(SuggestionsTextInput, null);
 });

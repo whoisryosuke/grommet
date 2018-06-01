@@ -44,8 +44,8 @@ var LayerContainer = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.makeLayerVisible = function () {
-      var node = (0, _reactDom.findDOMNode)(_this.layerRef || _this.containerRef);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.containerRef = _react2.default.createRef(), _this.layerRef = _react2.default.createRef(), _this.makeLayerVisible = function () {
+      var node = (0, _reactDom.findDOMNode)(_this.layerRef.current || _this.containerRef.current);
       if (node && node.scrollIntoView) {
         node.scrollIntoView();
       }
@@ -60,17 +60,15 @@ var LayerContainer = function (_Component) {
     }
   };
 
-  LayerContainer.prototype.componentWillReceiveProps = function componentWillReceiveProps(_ref) {
-    var position = _ref.position;
+  LayerContainer.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
+    var position = this.props.position;
 
-    if (this.props.position !== position && position !== 'hidden') {
+    if (prevProps.position !== position && position !== 'hidden') {
       this.makeLayerVisible();
     }
   };
 
   LayerContainer.prototype.render = function render() {
-    var _this2 = this;
-
     var _props = this.props,
         children = _props.children,
         id = _props.id,
@@ -90,9 +88,7 @@ var LayerContainer = function (_Component) {
         theme: theme,
         position: position,
         plain: plain,
-        ref: function ref(_ref2) {
-          _this2.containerRef = _ref2;
-        }
+        ref: this.containerRef
       }),
       children
     );
@@ -106,9 +102,7 @@ var LayerContainer = function (_Component) {
           position: position,
           theme: theme,
           tabIndex: '-1',
-          ref: function ref(_ref3) {
-            _this2.layerRef = _ref3;
-          }
+          ref: this.layerRef
         },
         _react2.default.createElement(_StyledLayer.StyledOverlay, { onClick: onClickOutside, theme: theme }),
         content

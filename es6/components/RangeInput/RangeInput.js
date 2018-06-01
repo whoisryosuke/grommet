@@ -9,7 +9,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { withFocus, withForwardRef, withTheme } from '../hocs';
@@ -27,15 +26,11 @@ var RangeInput = function (_Component) {
   }
 
   RangeInput.prototype.render = function render() {
-    var grommet = this.context.grommet;
-
     var _props = this.props,
         forwardRef = _props.forwardRef,
         rest = _objectWithoutProperties(_props, ['forwardRef']);
 
-    return React.createElement(StyledRangeInput, _extends({
-      grommet: grommet
-    }, rest, {
+    return React.createElement(StyledRangeInput, _extends({}, rest, {
       innerRef: forwardRef,
       type: 'range'
     }));
@@ -43,11 +38,6 @@ var RangeInput = function (_Component) {
 
   return RangeInput;
 }(Component);
-
-RangeInput.contextTypes = {
-  grommet: PropTypes.object
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   doc(RangeInput);

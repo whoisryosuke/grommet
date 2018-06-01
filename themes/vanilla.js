@@ -6,61 +6,9 @@ var _polished = require('polished');
 
 var _styledComponents = require('styled-components');
 
-var _Actions = require('grommet-icons/icons/Actions');
-
-var _Actions2 = _interopRequireDefault(_Actions);
-
-var _ClosedCaption = require('grommet-icons/icons/ClosedCaption');
-
-var _ClosedCaption2 = _interopRequireDefault(_ClosedCaption);
-
-var _Expand = require('grommet-icons/icons/Expand');
-
-var _Expand2 = _interopRequireDefault(_Expand);
-
-var _FormDown = require('grommet-icons/icons/FormDown');
-
-var _FormDown2 = _interopRequireDefault(_FormDown);
-
-var _FormNext = require('grommet-icons/icons/FormNext');
-
-var _FormNext2 = _interopRequireDefault(_FormNext);
-
-var _FormPrevious = require('grommet-icons/icons/FormPrevious');
-
-var _FormPrevious2 = _interopRequireDefault(_FormPrevious);
-
-var _Next = require('grommet-icons/icons/Next');
-
-var _Next2 = _interopRequireDefault(_Next);
-
-var _Pause = require('grommet-icons/icons/Pause');
-
-var _Pause2 = _interopRequireDefault(_Pause);
-
-var _Play = require('grommet-icons/icons/Play');
-
-var _Play2 = _interopRequireDefault(_Play);
-
-var _Previous = require('grommet-icons/icons/Previous');
-
-var _Previous2 = _interopRequireDefault(_Previous);
-
-var _Subtract = require('grommet-icons/icons/Subtract');
-
-var _Subtract2 = _interopRequireDefault(_Subtract);
-
-var _Volume = require('grommet-icons/icons/Volume');
-
-var _Volume2 = _interopRequireDefault(_Volume);
-
-var _VolumeLow = require('grommet-icons/icons/VolumeLow');
-
-var _VolumeLow2 = _interopRequireDefault(_VolumeLow);
+var _grommetIcons = require('grommet-icons');
 
 var _utils = require('../utils');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var brandColor = '#865CD6';
 var accentColors = ['#FD6FFF', '#60EB9F', '#60EBE1', '#FFCA58'];
@@ -80,6 +28,43 @@ var textColor = '#444444';
 var borderColor = 'rgba(0, 0, 0, 0.33)';
 var focusColor = accentColors[0];
 var activeColor = (0, _polished.rgba)('#DDDDDD', 0.5);
+
+var colors = {
+  active: activeColor,
+  accent: accentColors, // deprecated
+  black: '#000000',
+  border: borderColor,
+  brand: brandColor,
+  dark: darkColors, // deprecated
+  darkBackground: {
+    text: '#FFFFFF'
+  },
+  focus: focusColor,
+  light: lightColors, // deprecated
+  lightBackground: {
+    text: textColor
+  },
+  neutral: neutralColors, // deprecated
+  placeholder: '#AAAAAA',
+  status: statusColors, // deprecated
+  text: textColor,
+  white: '#FFFFFF'
+};
+
+var colorArray = function colorArray(array, prefix) {
+  return array.forEach(function (color, index) {
+    colors[prefix + '-' + (index + 1)] = color;
+  });
+};
+
+colorArray(accentColors, 'accent');
+colorArray(darkColors, 'dark');
+colorArray(lightColors, 'light');
+colorArray(neutralColors, 'neutral');
+Object.keys(statusColors).forEach(function (color) {
+  colors['status-' + color] = statusColors[color];
+});
+
 var workSansPath = 'https://fonts.gstatic.com/s/worksans/v2';
 var zillaSlabPath = 'https://fonts.gstatic.com/s/zillaslab/v3';
 
@@ -112,27 +97,7 @@ exports.default = (0, _utils.deepFreeze)({
     breakpoints: {
       narrow: 699
     },
-    colors: {
-      active: activeColor,
-      accent: accentColors,
-      black: '#000000',
-      border: borderColor,
-      brand: brandColor,
-      dark: darkColors,
-      darkBackground: {
-        text: '#FFFFFF'
-      },
-      focus: focusColor,
-      light: lightColors,
-      lightBackground: {
-        text: textColor
-      },
-      neutral: neutralColors,
-      placeholder: '#AAAAAA',
-      status: statusColors,
-      text: textColor,
-      white: '#FFFFFF'
-    },
+    colors: colors,
     control: {
       border: {
         width: '2px'
@@ -304,19 +269,19 @@ exports.default = (0, _utils.deepFreeze)({
       slideDuration: '0.8s'
     },
     icons: {
-      previous: _Previous2.default,
-      next: _Next2.default,
+      previous: _grommetIcons.Previous,
+      next: _grommetIcons.Next,
       small: {
-        previous: _FormPrevious2.default,
-        next: _FormNext2.default
+        previous: _grommetIcons.FormPrevious,
+        next: _grommetIcons.FormNext
       }
     }
   },
   carousel: {
     icons: {
-      current: _Subtract2.default,
-      next: _Next2.default,
-      previous: _Previous2.default
+      current: _grommetIcons.Subtract,
+      next: _grommetIcons.Next,
+      previous: _grommetIcons.Previous
     }
   },
   checkBox: {
@@ -446,11 +411,7 @@ exports.default = (0, _utils.deepFreeze)({
     weight: 600
   },
   icon: {
-    extend: (0, _styledComponents.css)(['', ' ', ''], function (props) {
-      return props.color && props.color !== 'plain' && '\n        fill: ' + (0, _utils.colorForName)(props.color, props.theme) + ';\n        stroke: ' + (0, _utils.colorForName)(props.color, props.theme) + ';\n      ';
-    }, function (props) {
-      return props.dark && '\n        fill: ' + props.theme.global.colors.darkBackground.text + ';\n        stroke: ' + props.theme.global.colors.darkBackground.text + ';\n      ';
-    })
+    colors: colors
   },
   layer: {
     backgroundColor: backgroundColor,
@@ -461,7 +422,7 @@ exports.default = (0, _utils.deepFreeze)({
   },
   menu: {
     icons: {
-      down: _FormDown2.default
+      down: _grommetIcons.FormDown
     }
   },
   paragraph: {
@@ -497,7 +458,7 @@ exports.default = (0, _utils.deepFreeze)({
   },
   select: {
     icons: {
-      down: _FormDown2.default
+      down: _grommetIcons.FormDown
     }
   },
   text: {
@@ -513,13 +474,13 @@ exports.default = (0, _utils.deepFreeze)({
       background: (0, _polished.rgba)(0, 0, 0, 0.7)
     },
     icons: {
-      closedCaption: _ClosedCaption2.default,
-      configure: _Actions2.default,
-      fullScreen: _Expand2.default,
-      pause: _Pause2.default,
-      play: _Play2.default,
-      reduceVolume: _VolumeLow2.default,
-      volume: _Volume2.default
+      closedCaption: _grommetIcons.ClosedCaption,
+      configure: _grommetIcons.Actions,
+      fullScreen: _grommetIcons.Expand,
+      pause: _grommetIcons.Pause,
+      play: _grommetIcons.Play,
+      reduceVolume: _grommetIcons.VolumeLow,
+      volume: _grommetIcons.Volume
     }
   },
   worldMap: {

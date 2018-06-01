@@ -9,7 +9,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { withForwardRef, withTheme } from '../hocs';
@@ -41,9 +40,6 @@ var CheckBox = function (_Component) {
         toggle = _props.toggle,
         rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'forwardRef', 'id', 'label', 'name', 'onChange', 'reverse', 'theme', 'toggle']);
 
-    var grommet = this.context.grommet;
-
-
     var normalizedLabel = typeof label === 'string' ? React.createElement(
       'div',
       null,
@@ -57,11 +53,11 @@ var CheckBox = function (_Component) {
 
     var control = toggle ? React.createElement(
       StyledCheckBoxToggle,
-      { theme: theme, grommet: grommet },
-      React.createElement(StyledCheckBoxKnob, { theme: theme, grommet: grommet })
+      { theme: theme },
+      React.createElement(StyledCheckBoxKnob, { theme: theme })
     ) : React.createElement(
       StyledCheckBoxBox,
-      { theme: theme, grommet: grommet },
+      { theme: theme },
       React.createElement(
         'svg',
         { viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
@@ -72,8 +68,7 @@ var CheckBox = function (_Component) {
     return React.createElement(
       StyledCheckBoxContainer,
       _extends({}, removeUndefined({ htmlFor: id, disabled: disabled, reverse: reverse }), {
-        theme: theme,
-        grommet: grommet
+        theme: theme
       }),
       React.createElement(
         StyledCheckBox,
@@ -82,8 +77,7 @@ var CheckBox = function (_Component) {
           innerRef: forwardRef,
           type: 'checkbox'
         }, removeUndefined({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
-          theme: theme,
-          grommet: grommet
+          theme: theme
         })),
         control
       ),
@@ -94,11 +88,6 @@ var CheckBox = function (_Component) {
 
   return CheckBox;
 }(Component);
-
-CheckBox.contextTypes = {
-  grommet: PropTypes.object
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   doc(CheckBox);

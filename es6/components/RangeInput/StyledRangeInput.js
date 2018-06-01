@@ -9,13 +9,13 @@ import { focusStyle, parseMetricToNum } from '../../utils';
 var rangeTrackStyle = css(['box-sizing:border-box;width:100%;height:', ';background-color:', ';'], function (props) {
   return props.theme.global.focus.border.width;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
+  return props.theme.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
 });
 
 var rangeThumbStyle = css(['box-sizing:border-box;position:relative;border:', ' solid ', ';border-radius:', ';height:', ';width:', ';overflow:visible;background-color:', ';-webkit-appearance:none;cursor:pointer;'], function (props) {
   return props.theme.global.control.border.width;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.global.colors.brand;
+  return props.theme.dark ? props.theme.global.colors.white : props.theme.global.colors.brand;
 }, function (props) {
   return props.theme.global.spacing;
 }, function (props) {
@@ -23,7 +23,7 @@ var rangeThumbStyle = css(['box-sizing:border-box;position:relative;border:', ' 
 }, function (props) {
   return props.theme.global.spacing;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.black : props.theme.global.colors.white;
+  return props.theme.dark ? props.theme.global.colors.black : props.theme.global.colors.white;
 });
 
 var firefoxMicrosoftThumbStyle = css(['', ' margin-top:0px;height:', 'px;width:', 'px;'], rangeThumbStyle, function (props) {
@@ -39,13 +39,13 @@ var StyledRangeInput = styled.input.withConfig({
 }, rangeTrackStyle, rangeThumbStyle, function (props) {
   return Math.round(parseMetricToNum(props.theme.global.spacing) * 0.45);
 }, function (props) {
-  return !props.disabled && css(['&:hover{border-color:', ';}'], props.grommet.dark ? props.theme.global.colors.white : props.theme.global.hover.textColor);
+  return !props.disabled && css(['&:hover{border-color:', ';}'], props.theme.dark ? props.theme.global.colors.white : props.theme.global.hover.textColor);
 }, rangeTrackStyle, firefoxMicrosoftThumbStyle, firefoxMicrosoftThumbStyle, function (props) {
-  return !props.disabled && css(['&:hover::-moz-range-thumb{border-color:', ';}&:hover::-ms-thumb{border-color:', ';}'], props.grommet.dark ? props.theme.global.colors.white : props.theme.global.hover.textColor, props.grommet.dark ? props.theme.global.colors.white : props.theme.global.hover.textColor);
+  return !props.disabled && css(['&:hover::-moz-range-thumb{border-color:', ';}&:hover::-ms-thumb{border-color:', ';}'], props.theme.dark ? props.theme.global.colors.white : props.theme.global.hover.textColor, props.theme.dark ? props.theme.global.colors.white : props.theme.global.hover.textColor);
 }, rangeTrackStyle, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
+  return props.theme.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
+  return props.theme.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
 }, function (props) {
   return props.focus && focusStyle;
 });

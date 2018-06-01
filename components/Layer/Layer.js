@@ -22,6 +22,8 @@ var _doc2 = _interopRequireDefault(_doc);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -62,7 +64,11 @@ var Layer = function (_Component) {
   };
 
   Layer.prototype.render = function render() {
-    return (0, _reactDom.createPortal)(_react2.default.createElement(_LayerContainer2.default, this.props), this.layerContainer);
+    var _props = this.props,
+        theme = _props.theme,
+        rest = _objectWithoutProperties(_props, ['theme']);
+
+    return (0, _reactDom.createPortal)(_react2.default.createElement(_LayerContainer2.default, rest), this.layerContainer);
   };
 
   return Layer;

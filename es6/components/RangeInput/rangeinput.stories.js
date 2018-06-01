@@ -40,42 +40,6 @@ var SimpleRangeInput = function (_Component) {
   return SimpleRangeInput;
 }(Component);
 
-var FocusedRangeInput = function (_Component2) {
-  _inherits(FocusedRangeInput, _Component2);
-
-  function FocusedRangeInput() {
-    var _temp2, _this2, _ret2;
-
-    _classCallCheck(this, FocusedRangeInput);
-
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.state = { value: 5 }, _this2.ref = React.createRef(), _this2.onChange = function (event) {
-      return _this2.setState({ value: event.target.value });
-    }, _temp2), _possibleConstructorReturn(_this2, _ret2);
-  }
-
-  FocusedRangeInput.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedRangeInput.prototype.render = function render() {
-    var value = this.state.value;
-
-    return React.createElement(
-      Grommet,
-      null,
-      React.createElement(RangeInput, { ref: this.ref, value: value, onChange: this.onChange })
-    );
-  };
-
-  return FocusedRangeInput;
-}(Component);
-
 storiesOf('RangeInput', module).add('Simple RangeInput', function () {
   return React.createElement(SimpleRangeInput, null);
-}).add('Focused RangeInput', function () {
-  return React.createElement(FocusedRangeInput, null);
 });

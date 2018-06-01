@@ -6,15 +6,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _recompose = require('recompose');
 
 var _Box = require('../Box');
 
 var _hocs = require('../hocs');
+
+var _TableContext = require('./TableContext');
+
+var _TableContext2 = _interopRequireDefault(_TableContext);
 
 var _StyledTable = require('./StyledTable');
 
@@ -24,36 +24,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var TableCell = function TableCell(_ref, _ref2) {
-  var grommet = _ref2.grommet;
-
+var TableCell = function TableCell(_ref) {
   var children = _ref.children,
       plain = _ref.plain,
       scope = _ref.scope,
       size = _ref.size,
+      theme = _ref.theme,
       verticalAlign = _ref.verticalAlign,
-      rest = _objectWithoutProperties(_ref, ['children', 'plain', 'scope', 'size', 'verticalAlign']);
+      rest = _objectWithoutProperties(_ref, ['children', 'plain', 'scope', 'size', 'theme', 'verticalAlign']);
 
   var Cell = scope ? _StyledTable.StyledTableCell.withComponent('th') : _StyledTable.StyledTableCell;
   return _react2.default.createElement(
-    Cell,
-    {
-      scope: scope,
-      size: size,
-      tableContext: (grommet || {}).tableContext,
-      theme: rest.theme,
-      verticalAlign: verticalAlign
-    },
-    plain ? children : _react2.default.createElement(
-      _Box.Box,
-      rest,
-      children
-    )
+    _TableContext2.default.Consumer,
+    null,
+    function (tableContext) {
+      return _react2.default.createElement(
+        Cell,
+        {
+          scope: scope,
+          size: size,
+          tableContext: tableContext,
+          theme: theme,
+          verticalAlign: verticalAlign
+        },
+        plain ? children : _react2.default.createElement(
+          _Box.Box,
+          rest,
+          children
+        )
+      );
+    }
   );
-};
-
-TableCell.contextTypes = {
-  grommet: _propTypes2.default.object
 };
 
 TableCell.defaultProps = {

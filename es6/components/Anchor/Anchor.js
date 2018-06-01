@@ -9,7 +9,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { withFocus, withForwardRef, withTheme } from '../hocs';
@@ -20,10 +19,10 @@ import doc from './doc';
 var Anchor = function (_Component) {
   _inherits(Anchor, _Component);
 
-  function Anchor(props, context) {
+  function Anchor(props) {
     _classCallCheck(this, Anchor);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
     var children = props.children,
         icon = props.icon,
@@ -50,9 +49,6 @@ var Anchor = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'forwardRef', 'href', 'icon', 'focus', 'label', 'primary', 'onClick', 'reverse', 'theme']);
-
-    var grommet = this.context.grommet;
-
 
     var anchorIcon = void 0;
     if (icon) {
@@ -91,7 +87,6 @@ var Anchor = function (_Component) {
         primary: primary,
         reverse: reverse,
         theme: theme,
-        grommet: grommet,
         href: !disabled ? href : undefined,
         onClick: !disabled ? onClick : undefined
       }),
@@ -102,11 +97,6 @@ var Anchor = function (_Component) {
 
   return Anchor;
 }(Component);
-
-Anchor.contextTypes = {
-  grommet: PropTypes.object
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   doc(Anchor);

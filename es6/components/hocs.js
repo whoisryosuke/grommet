@@ -10,10 +10,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import getDisplayName from 'recompose/getDisplayName';
+import { ThemeContext as IconThemeContext } from 'grommet-icons';
 
-import baseTheme from '../themes/vanilla';
+import AnnounceContext from '../contexts/AnnounceContext';
+import ThemeContext from '../contexts/ThemeContext';
 import { deepMerge } from '../utils';
 
 var withFocus = function withFocus(WrappedComponent) {
@@ -30,10 +31,9 @@ var withFocus = function withFocus(WrappedComponent) {
       }
 
       return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-        mouseActive: false,
         focus: false,
         wrappedRef: React.createRef()
-      }, _this.componentDidMount = function () {
+      }, _this.mouseActive = false, _this.componentDidMount = function () {
         var wrappedRef = _this.state.wrappedRef;
 
         window.addEventListener('mousedown', _this.handleActiveMouse);
@@ -49,31 +49,24 @@ var withFocus = function withFocus(WrappedComponent) {
       }, _this.componentWillUnmount = function () {
         var wrappedRef = _this.state.wrappedRef;
 
-        if (_this.mouseTimer) {
-          clearTimeout(_this.mouseTimer);
-        }
         window.removeEventListener('mousedown', _this.handleActiveMouse);
         var wrapperNode = findDOMNode(wrappedRef.current);
         if (wrapperNode && wrapperNode.addEventListener) {
           wrapperNode.removeEventListener('focus', _this.setFocus);
         }
+        clearTimeout(_this.mouseTimer);
       }, _this.handleActiveMouse = function () {
-        _this.setState({ mouseActive: true }, function () {
-          // this avoids showing focus when clicking around
-          if (_this.mouseTimer) {
-            clearTimeout(_this.mouseTimer);
-          }
+        _this.mouseActive = true;
 
-          // empirical number to reset mouseActive after
-          // some time has passed without mousedown
-          _this.mouseTimer = setTimeout(function () {
-            _this.setState({ mouseActive: false });
-          }, 300);
-        });
+        // this avoids showing focus when clicking around
+        clearTimeout(_this.mouseTimer);
+        // empirical number to reset mouseActive after
+        // some time has passed without mousedown
+        _this.mouseTimer = setTimeout(function () {
+          _this.mouseActive = false;
+        }, 300);
       }, _this.setFocus = function () {
-        var mouseActive = _this.state.mouseActive;
-
-        if (mouseActive === false) {
+        if (_this.mouseActive === false) {
           _this.setState({ focus: true });
         }
       }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -88,7 +81,7 @@ var withFocus = function withFocus(WrappedComponent) {
         return { wrappedRef: nextWrappedRef };
       }
       return null;
-    };
+    }; // not in state because it doesn't affect rendering
 
     FocusableComponent.prototype.resetFocus = function resetFocus() {
       this.setState({ focus: false });
@@ -141,57 +134,67 @@ var withTheme = function withTheme(WrappedComponent) {
   var ThemedComponent = function (_Component2) {
     _inherits(ThemedComponent, _Component2);
 
-    function ThemedComponent(props, context) {
+    function ThemedComponent() {
+      var _temp2, _this3, _ret2;
+
       _classCallCheck(this, ThemedComponent);
 
-      var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
 
-      _initialiseProps.call(_this3);
-
-      _this3.buildTheme(props, context);
-      return _this3;
+      return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = {}, _temp2), _possibleConstructorReturn(_this3, _ret2);
     }
 
-    ThemedComponent.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-      // only merge on existence changes
-      if (nextProps.theme && !this.props.theme || !nextProps.theme && this.props.theme) {
-        this.buildTheme(nextProps, this.context);
+    ThemedComponent.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+      var themeContext = nextProps.themeContext,
+          theme = nextProps.theme;
+      var stateTheme = prevState.theme;
+
+      if (theme && !stateTheme) {
+        return { theme: deepMerge(themeContext, theme) };
+      } else if (!theme && stateTheme) {
+        return { theme: undefined };
       }
+      return null;
     };
 
     ThemedComponent.prototype.render = function render() {
       var _props2 = this.props,
           withThemeRef = _props2.withThemeRef,
-          rest = _objectWithoutProperties(_props2, ['withThemeRef']);
+          themeContext = _props2.themeContext,
+          rest = _objectWithoutProperties(_props2, ['withThemeRef', 'themeContext']);
 
       var theme = this.state.theme;
 
-      return React.createElement(WrappedComponent, _extends({ ref: withThemeRef }, rest, { theme: theme }));
+      var content = React.createElement(WrappedComponent, _extends({
+        ref: withThemeRef
+      }, rest, {
+        theme: theme || themeContext
+      }));
+      if (theme) {
+        content = React.createElement(
+          ThemeContext.Consumer,
+          { value: theme },
+          content
+        );
+      }
+      return content;
     };
 
     return ThemedComponent;
   }(Component);
 
-  ThemedComponent.contextTypes = {
-    theme: PropTypes.object
-  };
-
-  var _initialiseProps = function _initialiseProps() {
-    var _this4 = this;
-
-    this.buildTheme = function (props, context) {
-      var theme = props.theme;
-      var contextTheme = context.theme;
-
-      var localTheme = deepMerge(baseTheme, contextTheme, theme);
-      _this4.state = { theme: localTheme };
-    };
-  };
-
   ThemedComponent.displayName = getDisplayName(WrappedComponent);
 
   return React.forwardRef(function (props, ref) {
-    return React.createElement(ThemedComponent, _extends({}, props, { withThemeRef: ref }));
+    return React.createElement(
+      ThemeContext.Consumer,
+      null,
+      function (theme) {
+        return React.createElement(ThemedComponent, _extends({}, props, { themeContext: theme, withThemeRef: ref }));
+      }
+    );
   });
 };
 
@@ -202,4 +205,28 @@ export var withForwardRef = function withForwardRef(WrappedComponent) {
   });
 };
 
-export default { withFocus: withFocus, withForwardRef: withForwardRef, withTheme: withTheme };
+export var withAnnounce = function withAnnounce(WrappedComponent) {
+  return function (props) {
+    return React.createElement(
+      AnnounceContext.Consumer,
+      null,
+      function (announce) {
+        return React.createElement(WrappedComponent, _extends({}, props, { announce: announce }));
+      }
+    );
+  };
+};
+
+export var withIconTheme = function withIconTheme(WrappedComponent) {
+  return function (props) {
+    return React.createElement(
+      IconThemeContext.Consumer,
+      null,
+      function (iconTheme) {
+        return React.createElement(WrappedComponent, _extends({}, props, { iconTheme: iconTheme }));
+      }
+    );
+  };
+};
+
+export default { withAnnounce: withAnnounce, withFocus: withFocus, withForwardRef: withForwardRef, withIconTheme: withIconTheme, withTheme: withTheme };

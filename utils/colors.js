@@ -6,12 +6,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 exports.getRGBA = getRGBA;
 var colorForName = exports.colorForName = function colorForName(name, theme) {
+  var color = theme.global.colors[name];
+  if (color) {
+    return color;
+  }
+
   var _name$split = name.split('-'),
       kind = _name$split[0],
       index = _name$split[1];
 
   var colorSet = theme.global.colors[kind];
-  var color = void 0;
   if (Array.isArray(colorSet)) {
     color = colorSet[index - 1];
   } else if ((typeof colorSet === 'undefined' ? 'undefined' : _typeof(colorSet)) === 'object') {

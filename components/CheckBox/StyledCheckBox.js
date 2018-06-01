@@ -26,17 +26,17 @@ var StyledCheckBoxContainer = exports.StyledCheckBoxContainer = _styledComponent
 }, function (props) {
   return props.reverse ? 'margin-left: ' + props.theme.global.edgeSize.small + ';' : 'margin-right: ' + props.theme.global.edgeSize.small + ';';
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.global.colors.black;
+  return props.theme.dark ? props.theme.global.colors.white : props.theme.global.colors.black;
 });
 
 var StyledCheckBoxInput = exports.StyledCheckBoxInput = _styledComponents2.default.input.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxInput'
 })(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], _utils.focusStyle, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
+  return props.theme.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 }, function (props) {
   return props.theme.checkBox.size;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
+  return props.theme.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 });
 
 var StyledCheckBoxBox = exports.StyledCheckBoxBox = _styledComponents2.default.div.withConfig({
@@ -48,7 +48,7 @@ var StyledCheckBoxBox = exports.StyledCheckBoxBox = _styledComponents2.default.d
 }, function (props) {
   return props.theme.checkBox.border.width;
 }, function (props) {
-  return props.theme.checkBox.border.color[props.grommet.dark ? 'dark' : 'light'];
+  return props.theme.checkBox.border.color[props.theme.dark ? 'dark' : 'light'];
 }, function (props) {
   return props.theme.checkBox.border.radius;
 }, function (props) {
@@ -58,7 +58,7 @@ var StyledCheckBoxBox = exports.StyledCheckBoxBox = _styledComponents2.default.d
 }, function (props) {
   return props.theme.checkBox.check.width;
 }, function (props) {
-  return props.grommet.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
+  return props.theme.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 });
 
 var StyledCheckBoxToggle = exports.StyledCheckBoxToggle = _styledComponents2.default.span.withConfig({
@@ -70,7 +70,7 @@ var StyledCheckBoxToggle = exports.StyledCheckBoxToggle = _styledComponents2.def
 }, function (props) {
   return props.theme.checkBox.border.width;
 }, function (props) {
-  return props.theme.checkBox.border.color[props.grommet.dark ? 'dark' : 'light'];
+  return props.theme.checkBox.border.color[props.theme.dark ? 'dark' : 'light'];
 }, function (props) {
   return props.theme.checkBox.toggle.radius;
 });

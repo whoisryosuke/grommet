@@ -42,7 +42,6 @@ var SimpleMenu = function (_Component) {
       _react2.default.createElement(
         _Box2.default,
         { direction: 'row', gap: 'large' },
-        _react2.default.createElement(_Menu2.default, { label: 'Actions', items: [{ label: 'Launch' }, { label: 'Abort' }] }),
         _react2.default.createElement(_Menu2.default, { label: 'Actions', items: [{ label: 'Launch' }, { label: 'Abort' }] })
       )
     );
@@ -51,42 +50,6 @@ var SimpleMenu = function (_Component) {
   return SimpleMenu;
 }(_react.Component);
 
-var FocusedMenu = function (_Component2) {
-  _inherits(FocusedMenu, _Component2);
-
-  function FocusedMenu() {
-    var _temp, _this2, _ret;
-
-    _classCallCheck(this, FocusedMenu);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.ref = _react2.default.createRef(), _temp), _possibleConstructorReturn(_this2, _ret);
-  }
-
-  FocusedMenu.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedMenu.prototype.render = function render() {
-    return _react2.default.createElement(
-      _Grommet2.default,
-      null,
-      _react2.default.createElement(_Menu2.default, {
-        ref: this.ref,
-        label: 'Actions',
-        items: [{ label: 'Launch' }, { label: 'Abort' }]
-      })
-    );
-  };
-
-  return FocusedMenu;
-}(_react.Component);
-
 (0, _react3.storiesOf)('Menu', module).add('Simple Menu', function () {
   return _react2.default.createElement(SimpleMenu, null);
-}).add('Focused Menu', function () {
-  return _react2.default.createElement(FocusedMenu, null);
 });

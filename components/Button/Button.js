@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _recompose = require('recompose');
 
 var _hocs = require('../hocs');
@@ -39,10 +35,10 @@ var AnchorStyledButton = _StyledButton2.default.withComponent('a');
 var Button = function (_Component) {
   _inherits(Button, _Component);
 
-  function Button(props, context) {
+  function Button(props) {
     _classCallCheck(this, Button);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
     var children = props.children,
         icon = props.icon,
@@ -69,9 +65,6 @@ var Button = function (_Component) {
         theme = _props.theme,
         type = _props.type,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'forwardRef', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
-
-    var grommet = this.context.grommet;
-
 
     var Tag = href ? AnchorStyledButton : _StyledButton2.default;
 
@@ -112,7 +105,6 @@ var Button = function (_Component) {
         onClick: onClick,
         plain: _react.Children.count(children) > 0 || icon && !label,
         theme: theme,
-        grommet: grommet,
         type: !href ? type : undefined
       }),
       first || second ? [first, second] : children
@@ -122,9 +114,6 @@ var Button = function (_Component) {
   return Button;
 }(_react.Component);
 
-Button.contextTypes = {
-  grommet: _propTypes2.default.object
-};
 Button.defaultProps = {
   type: 'button',
   focusIndicator: true

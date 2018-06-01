@@ -74,14 +74,36 @@ var parseTime = function parseTime(time, hourLimit) {
 var Clock = function (_Component) {
   _inherits(Clock, _Component);
 
-  function Clock(props) {
+  function Clock() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Clock);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = { elements: parseTime(props.time, props.hourLimit) };
-    return _this;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _temp), _possibleConstructorReturn(_this, _ret);
   }
+
+  Clock.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var hourLimit = nextProps.hourLimit,
+        time = nextProps.time;
+    var elements = prevState.elements;
+
+    if (!elements || time) {
+      var nextElements = parseTime(time, hourLimit);
+      if (!elements) {
+        return { elements: nextElements };
+      }
+      if (Object.keys(nextElements).some(function (k) {
+        return elements[k] !== nextElements[k];
+      })) {
+        return { elements: nextElements };
+      }
+    }
+    return null;
+  };
 
   Clock.prototype.componentDidMount = function componentDidMount() {
     if (this.props.run) {
@@ -89,9 +111,13 @@ var Clock = function (_Component) {
     }
   };
 
-  Clock.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    if (nextProps.run) {
+  Clock.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
+    var run = this.props.run;
+
+    if (run && !prevProps.run) {
       this.run();
+    } else if (!run && prevProps.run) {
+      clearInterval(this.timer);
     }
   };
 

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.withForwardRef = exports.withTheme = exports.withFocus = undefined;
+exports.withIconTheme = exports.withAnnounce = exports.withForwardRef = exports.withTheme = exports.withFocus = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -11,17 +11,19 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _getDisplayName = require('recompose/getDisplayName');
 
 var _getDisplayName2 = _interopRequireDefault(_getDisplayName);
 
-var _vanilla = require('../themes/vanilla');
+var _grommetIcons = require('grommet-icons');
 
-var _vanilla2 = _interopRequireDefault(_vanilla);
+var _AnnounceContext = require('../contexts/AnnounceContext');
+
+var _AnnounceContext2 = _interopRequireDefault(_AnnounceContext);
+
+var _ThemeContext = require('../contexts/ThemeContext');
+
+var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
 var _utils = require('../utils');
 
@@ -49,10 +51,9 @@ var withFocus = function withFocus(WrappedComponent) {
       }
 
       return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-        mouseActive: false,
         focus: false,
         wrappedRef: _react2.default.createRef()
-      }, _this.componentDidMount = function () {
+      }, _this.mouseActive = false, _this.componentDidMount = function () {
         var wrappedRef = _this.state.wrappedRef;
 
         window.addEventListener('mousedown', _this.handleActiveMouse);
@@ -68,31 +69,24 @@ var withFocus = function withFocus(WrappedComponent) {
       }, _this.componentWillUnmount = function () {
         var wrappedRef = _this.state.wrappedRef;
 
-        if (_this.mouseTimer) {
-          clearTimeout(_this.mouseTimer);
-        }
         window.removeEventListener('mousedown', _this.handleActiveMouse);
         var wrapperNode = (0, _reactDom.findDOMNode)(wrappedRef.current);
         if (wrapperNode && wrapperNode.addEventListener) {
           wrapperNode.removeEventListener('focus', _this.setFocus);
         }
+        clearTimeout(_this.mouseTimer);
       }, _this.handleActiveMouse = function () {
-        _this.setState({ mouseActive: true }, function () {
-          // this avoids showing focus when clicking around
-          if (_this.mouseTimer) {
-            clearTimeout(_this.mouseTimer);
-          }
+        _this.mouseActive = true;
 
-          // empirical number to reset mouseActive after
-          // some time has passed without mousedown
-          _this.mouseTimer = setTimeout(function () {
-            _this.setState({ mouseActive: false });
-          }, 300);
-        });
+        // this avoids showing focus when clicking around
+        clearTimeout(_this.mouseTimer);
+        // empirical number to reset mouseActive after
+        // some time has passed without mousedown
+        _this.mouseTimer = setTimeout(function () {
+          _this.mouseActive = false;
+        }, 300);
       }, _this.setFocus = function () {
-        var mouseActive = _this.state.mouseActive;
-
-        if (mouseActive === false) {
+        if (_this.mouseActive === false) {
           _this.setState({ focus: true });
         }
       }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -107,7 +101,7 @@ var withFocus = function withFocus(WrappedComponent) {
         return { wrappedRef: nextWrappedRef };
       }
       return null;
-    };
+    }; // not in state because it doesn't affect rendering
 
     FocusableComponent.prototype.resetFocus = function resetFocus() {
       this.setState({ focus: false });
@@ -160,57 +154,67 @@ var withTheme = function withTheme(WrappedComponent) {
   var ThemedComponent = function (_Component2) {
     _inherits(ThemedComponent, _Component2);
 
-    function ThemedComponent(props, context) {
+    function ThemedComponent() {
+      var _temp2, _this3, _ret2;
+
       _classCallCheck(this, ThemedComponent);
 
-      var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
 
-      _initialiseProps.call(_this3);
-
-      _this3.buildTheme(props, context);
-      return _this3;
+      return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = {}, _temp2), _possibleConstructorReturn(_this3, _ret2);
     }
 
-    ThemedComponent.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-      // only merge on existence changes
-      if (nextProps.theme && !this.props.theme || !nextProps.theme && this.props.theme) {
-        this.buildTheme(nextProps, this.context);
+    ThemedComponent.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+      var themeContext = nextProps.themeContext,
+          theme = nextProps.theme;
+      var stateTheme = prevState.theme;
+
+      if (theme && !stateTheme) {
+        return { theme: (0, _utils.deepMerge)(themeContext, theme) };
+      } else if (!theme && stateTheme) {
+        return { theme: undefined };
       }
+      return null;
     };
 
     ThemedComponent.prototype.render = function render() {
       var _props2 = this.props,
           withThemeRef = _props2.withThemeRef,
-          rest = _objectWithoutProperties(_props2, ['withThemeRef']);
+          themeContext = _props2.themeContext,
+          rest = _objectWithoutProperties(_props2, ['withThemeRef', 'themeContext']);
 
       var theme = this.state.theme;
 
-      return _react2.default.createElement(WrappedComponent, _extends({ ref: withThemeRef }, rest, { theme: theme }));
+      var content = _react2.default.createElement(WrappedComponent, _extends({
+        ref: withThemeRef
+      }, rest, {
+        theme: theme || themeContext
+      }));
+      if (theme) {
+        content = _react2.default.createElement(
+          _ThemeContext2.default.Consumer,
+          { value: theme },
+          content
+        );
+      }
+      return content;
     };
 
     return ThemedComponent;
   }(_react.Component);
 
-  ThemedComponent.contextTypes = {
-    theme: _propTypes2.default.object
-  };
-
-  var _initialiseProps = function _initialiseProps() {
-    var _this4 = this;
-
-    this.buildTheme = function (props, context) {
-      var theme = props.theme;
-      var contextTheme = context.theme;
-
-      var localTheme = (0, _utils.deepMerge)(_vanilla2.default, contextTheme, theme);
-      _this4.state = { theme: localTheme };
-    };
-  };
-
   ThemedComponent.displayName = (0, _getDisplayName2.default)(WrappedComponent);
 
   return _react2.default.forwardRef(function (props, ref) {
-    return _react2.default.createElement(ThemedComponent, _extends({}, props, { withThemeRef: ref }));
+    return _react2.default.createElement(
+      _ThemeContext2.default.Consumer,
+      null,
+      function (theme) {
+        return _react2.default.createElement(ThemedComponent, _extends({}, props, { themeContext: theme, withThemeRef: ref }));
+      }
+    );
   });
 };
 
@@ -221,4 +225,28 @@ var withForwardRef = exports.withForwardRef = function withForwardRef(WrappedCom
   });
 };
 
-exports.default = { withFocus: withFocus, withForwardRef: withForwardRef, withTheme: withTheme };
+var withAnnounce = exports.withAnnounce = function withAnnounce(WrappedComponent) {
+  return function (props) {
+    return _react2.default.createElement(
+      _AnnounceContext2.default.Consumer,
+      null,
+      function (announce) {
+        return _react2.default.createElement(WrappedComponent, _extends({}, props, { announce: announce }));
+      }
+    );
+  };
+};
+
+var withIconTheme = exports.withIconTheme = function withIconTheme(WrappedComponent) {
+  return function (props) {
+    return _react2.default.createElement(
+      _grommetIcons.ThemeContext.Consumer,
+      null,
+      function (iconTheme) {
+        return _react2.default.createElement(WrappedComponent, _extends({}, props, { iconTheme: iconTheme }));
+      }
+    );
+  };
+};
+
+exports.default = { withAnnounce: withAnnounce, withFocus: withFocus, withForwardRef: withForwardRef, withIconTheme: withIconTheme, withTheme: withTheme };

@@ -42,8 +42,9 @@ var Distribution = function (_Component) {
         children = _props.children,
         direction = _props.direction,
         gap = _props.gap,
+        theme = _props.theme,
         values = _props.values,
-        rest = _objectWithoutProperties(_props, ['basis', 'children', 'direction', 'gap', 'values']);
+        rest = _objectWithoutProperties(_props, ['basis', 'children', 'direction', 'gap', 'theme', 'values']);
 
     if (values.length === 1) {
       var value = values[0];

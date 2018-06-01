@@ -42,38 +42,6 @@ var SimpleButton = function (_Component) {
   return SimpleButton;
 }(_react.Component);
 
-var FocusedButton = function (_Component2) {
-  _inherits(FocusedButton, _Component2);
-
-  function FocusedButton() {
-    var _temp, _this2, _ret;
-
-    _classCallCheck(this, FocusedButton);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.ref = _react2.default.createRef(), _temp), _possibleConstructorReturn(_this2, _ret);
-  }
-
-  FocusedButton.prototype.componentDidMount = function componentDidMount() {
-    this.ref.current.focus();
-  };
-
-  FocusedButton.prototype.render = function render() {
-    return _react2.default.createElement(
-      _Grommet2.default,
-      null,
-      _react2.default.createElement(_Button2.default, { ref: this.ref, label: 'Submit', onClick: function onClick() {} })
-    );
-  };
-
-  return FocusedButton;
-}(_react.Component);
-
 (0, _react3.storiesOf)('Button', module).add('Simple Button', function () {
   return _react2.default.createElement(SimpleButton, null);
-}).add('Focused Button', function () {
-  return _react2.default.createElement(FocusedButton, null);
 });

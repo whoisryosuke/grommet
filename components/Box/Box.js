@@ -10,11 +10,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _recompose = require('recompose');
+
+var _grommetIcons = require('grommet-icons');
+
+var _ThemeContext = require('../../contexts/ThemeContext');
+
+var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
 var _utils = require('../../utils');
 
@@ -46,19 +48,26 @@ var Box = function (_Component) {
   _inherits(Box, _Component);
 
   function Box() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Box);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Box.prototype.getChildContext = function getChildContext() {
-    var grommet = this.context.grommet;
-    var _props = this.props,
-        background = _props.background,
-        theme = _props.theme;
+  Box.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var background = nextProps.background,
+        theme = nextProps.theme;
+    var stateTheme = prevState.theme;
 
+
+    var dark = theme.dark;
     if (background) {
-      var dark = false;
+      dark = false;
       if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
         dark = background.dark;
       } else {
@@ -67,31 +76,40 @@ var Box = function (_Component) {
           dark = (0, _utils.colorIsDark)(color);
         }
       }
-      return {
-        grommet: _extends({}, grommet, { dark: dark })
-      };
     }
-    return {};
+
+    if (dark !== theme.dark && (!stateTheme || dark !== stateTheme.dark)) {
+      return {
+        theme: _extends({}, theme, {
+          dark: dark,
+          icon: dark ? theme.iconThemes.dark : theme.iconThemes.light
+        })
+      };
+    } else if (dark === theme.dark && stateTheme) {
+      return { theme: undefined };
+    }
+    return null;
   };
 
   Box.prototype.render = function render() {
-    var _props2 = this.props,
-        a11yTitle = _props2.a11yTitle,
-        children = _props2.children,
-        direction = _props2.direction,
-        elevation = _props2.elevation,
-        fill = _props2.fill,
-        forwardRef = _props2.forwardRef,
-        gap = _props2.gap,
-        overflow = _props2.overflow,
-        responsive = _props2.responsive,
-        tag = _props2.tag,
-        theme = _props2.theme,
-        wrap = _props2.wrap,
-        rest = _objectWithoutProperties(_props2, ['a11yTitle', 'children', 'direction', 'elevation', 'fill', 'forwardRef', 'gap', 'overflow', 'responsive', 'tag', 'theme', 'wrap']);
+    var _props = this.props,
+        a11yTitle = _props.a11yTitle,
+        children = _props.children,
+        direction = _props.direction,
+        elevation = _props.elevation,
+        fill = _props.fill,
+        forwardRef = _props.forwardRef,
+        gap = _props.gap,
+        overflow = _props.overflow,
+        responsive = _props.responsive,
+        tag = _props.tag,
+        propsTheme = _props.theme,
+        wrap = _props.wrap,
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'direction', 'elevation', 'fill', 'forwardRef', 'gap', 'overflow', 'responsive', 'tag', 'theme', 'wrap']);
 
-    var grommet = this.context.grommet;
+    var stateTheme = this.state.theme;
 
+    var theme = stateTheme || propsTheme;
 
     var StyledComponent = styledComponents[tag];
     if (!StyledComponent) {
@@ -121,7 +139,7 @@ var Box = function (_Component) {
       });
     }
 
-    return _react2.default.createElement(
+    var content = _react2.default.createElement(
       StyledComponent,
       _extends({
         'aria-label': a11yTitle,
@@ -132,22 +150,32 @@ var Box = function (_Component) {
         overflowProp: overflow,
         wrapProp: wrap,
         responsive: responsive,
-        theme: theme,
-        grommet: grommet
+        theme: theme
       }, rest),
       contents
     );
+
+    if (stateTheme) {
+      if (stateTheme.dark !== propsTheme.dark) {
+        content = _react2.default.createElement(
+          _grommetIcons.ThemeContext.Provider,
+          { value: stateTheme.icon },
+          content
+        );
+      }
+      content = _react2.default.createElement(
+        _ThemeContext2.default.Provider,
+        { value: stateTheme },
+        content
+      );
+    }
+
+    return content;
   };
 
   return Box;
 }(_react.Component);
 
-Box.contextTypes = {
-  grommet: _propTypes2.default.object
-};
-Box.childContextTypes = {
-  grommet: _propTypes2.default.object
-};
 Box.defaultProps = {
   direction: 'column',
   margin: 'none',

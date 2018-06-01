@@ -9,7 +9,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 
 import { withForwardRef, withTheme } from '../hocs';
@@ -39,9 +38,6 @@ var RadioButton = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'forwardRef', 'id', 'label', 'name', 'onChange', 'theme']);
 
-    var grommet = this.context.grommet;
-
-
     var normalizedLabel = typeof label === 'string' ? React.createElement(
       'div',
       null,
@@ -51,8 +47,7 @@ var RadioButton = function (_Component) {
     return React.createElement(
       StyledRadioButtonContainer,
       _extends({}, removeUndefined({ htmlFor: id, disabled: disabled }), {
-        theme: theme,
-        grommet: grommet
+        theme: theme
       }),
       React.createElement(
         StyledRadioButton,
@@ -61,12 +56,11 @@ var RadioButton = function (_Component) {
           innerRef: forwardRef,
           type: 'radio'
         }, removeUndefined({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
-          theme: theme,
-          grommet: grommet
+          theme: theme
         })),
         React.createElement(
           StyledRadioButtonButton,
-          { theme: theme, grommet: grommet },
+          { theme: theme },
           React.createElement(
             'svg',
             { viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
@@ -80,11 +74,6 @@ var RadioButton = function (_Component) {
 
   return RadioButton;
 }(Component);
-
-RadioButton.contextTypes = {
-  grommet: PropTypes.object
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   doc(RadioButton);

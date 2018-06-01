@@ -138,47 +138,56 @@ var renderArea = function renderArea(values, bounds, scale, height, _ref3) {
   );
 };
 
-var normalizeBounds = function normalizeBounds(props) {
-  var bounds = props.bounds;
-  if (!bounds) {
-    bounds = [[0, 1], [0, 1]];
-    (props.values || []).forEach(function (value) {
-      bounds[0][0] = Math.min(bounds[0][0], value.value[0]);
-      bounds[0][1] = Math.max(bounds[0][1], value.value[0]);
-      bounds[1][0] = Math.min(bounds[1][0], value.value[1]);
-      bounds[1][1] = Math.max(bounds[1][1], value.value[1]);
+var normalizeBounds = function normalizeBounds(bounds, values) {
+  var result = bounds;
+  if (!result) {
+    result = [[0, 1], [0, 1]];
+    (values || []).forEach(function (value) {
+      result[0][0] = Math.min(result[0][0], value.value[0]);
+      result[0][1] = Math.max(result[0][1], value.value[0]);
+      result[1][0] = Math.min(result[1][0], value.value[1]);
+      result[1][1] = Math.max(result[1][1], value.value[1]);
     });
   }
-  return bounds;
+  return result;
 };
 
 var Chart = function (_Component) {
   _inherits(Chart, _Component);
 
-  function Chart(props, context) {
+  function Chart() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Chart);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.onResize = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { containerWidth: 0, containerHeight: 0 }, _this.onResize = function () {
       var parent = findDOMNode(_this.containerRef).parentNode;
       if (parent) {
         var rect = parent.getBoundingClientRect();
         _this.setState({ containerWidth: rect.width, containerHeight: rect.height });
       }
-    };
-
-    _this.state = { bounds: normalizeBounds(props), containerWidth: 0, containerHeight: 0 };
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
+
+  Chart.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var bounds = nextProps.bounds,
+        values = nextProps.values;
+    var stateBounds = prevState.bounds;
+
+    var nextBounds = normalizeBounds(bounds, values);
+    if (!stateBounds || nextBounds[0][0] !== stateBounds[0][0] || nextBounds[0][1] !== stateBounds[0][1] || nextBounds[1][0] !== stateBounds[1][0] || nextBounds[1][1] !== stateBounds[1][1]) {
+      return { bounds: nextBounds };
+    }
+    return null;
+  };
 
   Chart.prototype.componentDidMount = function componentDidMount() {
     window.addEventListener('resize', this.onResize);
     this.onResize();
-  };
-
-  Chart.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    this.setState({ bounds: normalizeBounds(nextProps) });
   };
 
   Chart.prototype.componentWillUnmount = function componentWillUnmount() {

@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _recompose = require('recompose');
 
 var _Box = require('../Box');
@@ -78,17 +74,17 @@ var TextInput = function (_Component) {
       inputRef: _react2.default.createRef(),
       showDrop: false
     }, _this.announce = function (message, mode) {
-      var suggestions = _this.props.suggestions;
-      var grommet = _this.context.grommet;
+      var _this$props = _this.props,
+          announce = _this$props.announce,
+          suggestions = _this$props.suggestions;
 
-      var announce = grommet && grommet.announce;
-      if (announce && suggestions && suggestions.length > 0) {
+      if (suggestions && suggestions.length > 0) {
         announce(message, mode);
       }
     }, _this.announceSuggestionsCount = function () {
-      var _this$props = _this.props,
-          suggestions = _this$props.suggestions,
-          suggestionsCount = _this$props.messages.suggestionsCount;
+      var _this$props2 = _this.props,
+          suggestions = _this$props2.suggestions,
+          suggestionsCount = _this$props2.messages.suggestionsCount;
 
       _this.announce(suggestions.length + ' ' + suggestionsCount);
     }, _this.announceSuggestionsExist = function () {
@@ -111,9 +107,9 @@ var TextInput = function (_Component) {
         }, _this.announceSuggestionsCount);
       }
     }, _this.getSelectedSuggestionIndex = function () {
-      var _this$props2 = _this.props,
-          suggestions = _this$props2.suggestions,
-          value = _this$props2.value;
+      var _this$props3 = _this.props,
+          suggestions = _this$props3.suggestions,
+          value = _this$props3.value;
 
       var suggestionValues = suggestions.map(function (suggestion) {
         if ((typeof suggestion === 'undefined' ? 'undefined' : _typeof(suggestion)) === 'object') {
@@ -170,9 +166,9 @@ var TextInput = function (_Component) {
         onSelect({ target: inputRef.current, suggestion: suggestion });
       }
     }, _this.onSuggestionSelect = function (event) {
-      var _this$props3 = _this.props,
-          onSelect = _this$props3.onSelect,
-          suggestions = _this$props3.suggestions;
+      var _this$props4 = _this.props,
+          onSelect = _this$props4.onSelect,
+          suggestions = _this$props4.suggestions;
       var _this$state3 = _this.state,
           activeSuggestionIndex = _this$state3.activeSuggestionIndex,
           inputRef = _this$state3.inputRef;
@@ -188,9 +184,9 @@ var TextInput = function (_Component) {
     }, _this.onDropClose = function () {
       _this.setState({ showDrop: false });
     }, _this.renderSuggestions = function () {
-      var _this$props4 = _this.props,
-          suggestions = _this$props4.suggestions,
-          theme = _this$props4.theme;
+      var _this$props5 = _this.props,
+          suggestions = _this$props5.suggestions,
+          theme = _this$props5.theme;
       var _this$state4 = _this.state,
           activeSuggestionIndex = _this$state4.activeSuggestionIndex,
           selectedSuggestionIndex = _this$state4.selectedSuggestionIndex;
@@ -335,10 +331,6 @@ var TextInput = function (_Component) {
   return TextInput;
 }(_react.Component);
 
-TextInput.contextTypes = {
-  grommet: _propTypes2.default.object,
-  theme: _propTypes2.default.object
-};
 TextInput.defaultProps = {
   dropAlign: { top: 'bottom', left: 'left' },
   messages: {
@@ -354,4 +346,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(TextInput);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme, _hocs.withForwardRef)(TextInput);
+exports.default = (0, _recompose.compose)(_hocs.withTheme, _hocs.withAnnounce, _hocs.withForwardRef)(TextInput);

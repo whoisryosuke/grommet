@@ -55,13 +55,13 @@ var GrommetMarkdown = function (_Component) {
       var result = _extends({}, obj);
       result['h' + level] = {
         component: _Heading.Heading,
-        props: { level: level, theme: theme }
+        props: { level: level }
       };
       return result;
     }, {});
 
     var overrides = (0, _utils.deepMerge)({
-      p: { component: _Paragraph.Paragraph, props: { theme: theme } }
+      p: { component: _Paragraph.Paragraph }
     }, heading, components);
 
     return _react2.default.createElement(_markdownToJsx2.default, _extends({ options: { overrides: overrides } }, rest));

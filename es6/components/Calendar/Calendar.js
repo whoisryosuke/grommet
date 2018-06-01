@@ -9,7 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
+// import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
 
 import { Box } from '../Box';
@@ -51,9 +51,6 @@ var buildState = function buildState(props) {
   } else {
     reference = new Date();
   }
-  // if (props.locale) {
-  //   reference.locale(props.locale);
-  // }
   return _extends({}, buildStartEnd(reference, firstDayOfWeek), {
     reference: reference,
     active: new Date(reference)
@@ -63,12 +60,16 @@ var buildState = function buildState(props) {
 var Calendar = function (_Component) {
   _inherits(Calendar, _Component);
 
-  function Calendar(props) {
+  function Calendar() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Calendar);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.setReference = function (reference) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.setReference = function (reference) {
       var _this$props = _this.props,
           bounds = _this$props.bounds,
           firstDayOfWeek = _this$props.firstDayOfWeek;
@@ -105,9 +106,7 @@ var Calendar = function (_Component) {
         }
         _this.setState(nextState);
       }
-    };
-
-    _this.setActive = function (active) {
+    }, _this.setActive = function (active) {
       var bounds = _this.props.bounds;
       var _this$state2 = _this.state,
           start = _this$state2.start,
@@ -129,9 +128,7 @@ var Calendar = function (_Component) {
         _this.setFocus = true;
         _this.setState(nextState);
       }
-    };
-
-    _this.onClickDay = function (dateString) {
+    }, _this.onClickDay = function (dateString) {
       return function () {
         var onSelect = _this.props.onSelect;
 
@@ -140,24 +137,26 @@ var Calendar = function (_Component) {
           onSelect(dateString);
         }
       };
-    };
-
-    _this.state = buildState(props);
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Calendar.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    this.setState(buildState(nextProps));
+  Calendar.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var reference = prevState.reference;
+
+    if (!reference) {
+      return buildState(nextProps);
+    }
+    return null;
   };
 
-  Calendar.prototype.componentDidUpdate = function componentDidUpdate() {
-    if (this.setFocus) {
-      this.setFocus = false;
-      if (this.activeRef) {
-        findDOMNode(this.activeRef).focus();
-      }
-    }
-  };
+  // componentDidUpdate() {
+  //   if (this.setFocus) {
+  //     this.setFocus = false;
+  //     // if (this.activeRef) {
+  //     //   findDOMNode(this.activeRef).focus();
+  //     // }
+  //   }
+  // }
 
   Calendar.prototype.componentWillUnmount = function componentWillUnmount() {
     clearTimeout(this.timer);

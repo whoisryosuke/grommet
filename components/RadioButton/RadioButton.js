@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _recompose = require('recompose');
 
 var _hocs = require('../hocs');
@@ -57,9 +53,6 @@ var RadioButton = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'forwardRef', 'id', 'label', 'name', 'onChange', 'theme']);
 
-    var grommet = this.context.grommet;
-
-
     var normalizedLabel = typeof label === 'string' ? _react2.default.createElement(
       'div',
       null,
@@ -69,8 +62,7 @@ var RadioButton = function (_Component) {
     return _react2.default.createElement(
       _StyledRadioButton.StyledRadioButtonContainer,
       _extends({}, (0, _object.removeUndefined)({ htmlFor: id, disabled: disabled }), {
-        theme: theme,
-        grommet: grommet
+        theme: theme
       }),
       _react2.default.createElement(
         _StyledRadioButton2.default,
@@ -79,12 +71,11 @@ var RadioButton = function (_Component) {
           innerRef: forwardRef,
           type: 'radio'
         }, (0, _object.removeUndefined)({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
-          theme: theme,
-          grommet: grommet
+          theme: theme
         })),
         _react2.default.createElement(
           _StyledRadioButton.StyledRadioButtonButton,
-          { theme: theme, grommet: grommet },
+          { theme: theme },
           _react2.default.createElement(
             'svg',
             { viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
@@ -98,11 +89,6 @@ var RadioButton = function (_Component) {
 
   return RadioButton;
 }(_react.Component);
-
-RadioButton.contextTypes = {
-  grommet: _propTypes2.default.object
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(RadioButton);

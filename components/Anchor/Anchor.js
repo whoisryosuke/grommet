@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _recompose = require('recompose');
 
 var _hocs = require('../hocs');
@@ -37,10 +33,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Anchor = function (_Component) {
   _inherits(Anchor, _Component);
 
-  function Anchor(props, context) {
+  function Anchor(props) {
     _classCallCheck(this, Anchor);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
     var children = props.children,
         icon = props.icon,
@@ -67,9 +63,6 @@ var Anchor = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'forwardRef', 'href', 'icon', 'focus', 'label', 'primary', 'onClick', 'reverse', 'theme']);
-
-    var grommet = this.context.grommet;
-
 
     var anchorIcon = void 0;
     if (icon) {
@@ -108,7 +101,6 @@ var Anchor = function (_Component) {
         primary: primary,
         reverse: reverse,
         theme: theme,
-        grommet: grommet,
         href: !disabled ? href : undefined,
         onClick: !disabled ? onClick : undefined
       }),
@@ -119,11 +111,6 @@ var Anchor = function (_Component) {
 
   return Anchor;
 }(_react.Component);
-
-Anchor.contextTypes = {
-  grommet: _propTypes2.default.object
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Anchor);

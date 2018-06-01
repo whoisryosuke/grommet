@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _recompose = require('recompose');
 
 var _hocs = require('../hocs');
@@ -44,15 +40,11 @@ var RangeInput = function (_Component) {
   }
 
   RangeInput.prototype.render = function render() {
-    var grommet = this.context.grommet;
-
     var _props = this.props,
         forwardRef = _props.forwardRef,
         rest = _objectWithoutProperties(_props, ['forwardRef']);
 
-    return _react2.default.createElement(_StyledRangeInput2.default, _extends({
-      grommet: grommet
-    }, rest, {
+    return _react2.default.createElement(_StyledRangeInput2.default, _extends({}, rest, {
       innerRef: forwardRef,
       type: 'range'
     }));
@@ -60,11 +52,6 @@ var RangeInput = function (_Component) {
 
   return RangeInput;
 }(_react.Component);
-
-RangeInput.contextTypes = {
-  grommet: _propTypes2.default.object
-};
-
 
 if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(RangeInput);

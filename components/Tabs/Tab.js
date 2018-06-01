@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _recompose = require('recompose');
 
 var _Box = require('../Box');
@@ -21,6 +17,8 @@ var _Button = require('../Button');
 var _Text = require('../Text');
 
 var _hocs = require('../hocs');
+
+var _utils = require('../../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,8 +42,20 @@ var Tab = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-      hover: undefined
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.onMouseOver = function (event) {
+      var onMouseOver = _this.props.onMouseOver;
+
+      _this.setState({ over: true });
+      if (onMouseOver) {
+        onMouseOver(event);
+      }
+    }, _this.onMouseOut = function (event) {
+      var onMouseOut = _this.props.onMouseOut;
+
+      _this.setState({ over: undefined });
+      if (onMouseOut) {
+        onMouseOut(event);
+      }
     }, _this.onClickTab = function (event) {
       var onActivate = _this.props.onActivate;
 
@@ -56,83 +66,79 @@ var Tab = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  Tab.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    if (this.props.active !== nextProps.active && nextProps.active) {
-      this.setState({ hover: undefined });
+  Tab.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var active = nextProps.active;
+    var over = prevState.over;
+
+    if (active && over) {
+      return { over: undefined };
     }
+    return null;
   };
 
   Tab.prototype.render = function render() {
-    var _this2 = this;
-
     var _props = this.props,
         active = _props.active,
+        forwardRef = _props.forwardRef,
         title = _props.title,
-        _onMouseOver = _props.onMouseOver,
-        _onMouseOut = _props.onMouseOut,
-        rest = _objectWithoutProperties(_props, ['active', 'title', 'onMouseOver', 'onMouseOut']);
+        onMouseOver = _props.onMouseOver,
+        onMouseOut = _props.onMouseOut,
+        theme = _props.theme,
+        rest = _objectWithoutProperties(_props, ['active', 'forwardRef', 'title', 'onMouseOver', 'onMouseOut', 'theme']);
 
-    var hover = this.state.hover;
-    var grommet = this.context.grommet;
+    var over = this.state.over;
 
 
     delete rest.onActivate;
 
-    var dark = grommet && grommet.dark;
+    var normalizedTitle = void 0;
+    if (typeof title !== 'string') {
+      normalizedTitle = title;
+    } else if (active) {
+      normalizedTitle = _react2.default.createElement(
+        _Text.Text,
+        { weight: 'bold' },
+        title
+      );
+    } else {
+      var color = theme.dark ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text;
+      normalizedTitle = _react2.default.createElement(
+        _Text.Text,
+        { color: color },
+        title
+      );
+    }
 
-    var activeTitle = typeof title === 'string' ? _react2.default.createElement(
-      _Text.Text,
-      { weight: 'bold' },
-      title
-    ) : title;
-
-    var inactiveTitle = typeof title === 'string' ? _react2.default.createElement(
-      _Text.Text,
-      { color: dark ? 'light-2' : 'dark-4' },
-      title
-    ) : title;
+    var borderColor = void 0;
+    if (active) {
+      borderColor = theme.dark ? 'white' : 'black';
+    } else if (over) {
+      borderColor = (0, _utils.colorForName)('border', theme);
+    } else {
+      borderColor = 'transparent';
+    }
 
     return _react2.default.createElement(
       _Button.Button,
       _extends({
+        ref: forwardRef,
         plain: true,
         role: 'tab',
         'aria-selected': active,
-        'aria-expanded': active,
+        'aria-expanded': active
+      }, rest, {
         onClick: this.onClickTab,
-        onMouseOver: function onMouseOver() {
-          for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-            args[_key2] = arguments[_key2];
-          }
-
-          if (!active) {
-            _this2.setState({ hover: dark ? 'light-4' : 'border' });
-          }
-          if (_onMouseOver) {
-            _onMouseOver(args);
-          }
-        },
-        onMouseOut: function onMouseOut() {
-          for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-            args[_key3] = arguments[_key3];
-          }
-
-          if (!active) {
-            _this2.setState({ hover: undefined });
-          }
-          if (_onMouseOut) {
-            _onMouseOut(args);
-          }
-        }
-      }, rest),
+        onMouseOver: this.onMouseOver,
+        onMouseOut: this.onMouseOut
+      }),
       _react2.default.createElement(
         _Box.Box,
         {
           pad: { bottom: 'xsmall' },
           margin: { horizontal: 'small' },
-          border: active || hover ? { side: 'bottom', size: 'medium', color: hover || (dark ? 'white' : 'black') } : { side: 'bottom', size: 'medium', color: 'transparent' }
+          border: { side: 'bottom', size: 'medium', color: borderColor }
         },
-        active ? activeTitle : inactiveTitle
+        normalizedTitle
       )
     );
   };
@@ -140,7 +146,4 @@ var Tab = function (_Component) {
   return Tab;
 }(_react.Component);
 
-Tab.contextTypes = {
-  grommet: _propTypes2.default.object
-};
-exports.default = (0, _recompose.compose)(_hocs.withTheme)(Tab);
+exports.default = (0, _recompose.compose)(_hocs.withTheme, _hocs.withForwardRef)(Tab);

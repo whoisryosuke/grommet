@@ -160,7 +160,6 @@ var Menu = function (_Component) {
           _extends({
             ref: forwardRef
           }, rest, {
-            theme: theme,
             a11yTitle: messages.openMenu || 'Open Menu',
             disabled: disabled,
             dropAlign: dropAlign,
