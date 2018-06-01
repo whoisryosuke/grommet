@@ -19,7 +19,7 @@ var plainStyle = css(['border:none;-webkit-appearance:none;']);
 
 var StyledTextInput = styled.input.withConfig({
   displayName: 'StyledTextInput'
-})(['', ' width:100%;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
+})(['', ' width:100%;-webkit-appearance:textfield;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
   return props.size && sizeStyle(props);
 }, function (props) {
   return props.plain && plainStyle;

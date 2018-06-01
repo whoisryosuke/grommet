@@ -28,7 +28,7 @@ var plainStyle = (0, _styledComponents.css)(['border:none;-webkit-appearance:non
 
 var StyledTextInput = _styledComponents2.default.input.withConfig({
   displayName: 'StyledTextInput'
-})(['', ' width:100%;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, function (props) {
+})(['', ' width:100%;-webkit-appearance:textfield;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], _utils.inputStyle, function (props) {
   return props.size && sizeStyle(props);
 }, function (props) {
   return props.plain && plainStyle;
