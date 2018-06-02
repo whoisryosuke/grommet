@@ -174,7 +174,7 @@ var withTheme = function withTheme(WrappedComponent) {
       }));
       if (theme) {
         content = React.createElement(
-          ThemeContext.Consumer,
+          ThemeContext.Provider,
           { value: theme },
           content
         );

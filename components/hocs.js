@@ -194,7 +194,7 @@ var withTheme = function withTheme(WrappedComponent) {
       }));
       if (theme) {
         content = _react2.default.createElement(
-          _ThemeContext2.default.Consumer,
+          _ThemeContext2.default.Provider,
           { value: theme },
           content
         );

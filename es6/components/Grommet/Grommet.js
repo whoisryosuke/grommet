@@ -65,11 +65,12 @@ var Grommet = function (_Component) {
     if (nextTheme) {
       var color = nextTheme.global.colors.background;
       var dark = color ? colorIsDark(color) : false;
+      var lightIconTheme = deepMerge(iconTheme, nextTheme.icon);
       var iconThemes = {
-        dark: deepMerge(iconTheme, {
+        dark: deepMerge(lightIconTheme, {
           color: nextTheme.global.colors.darkBackground.text
         }),
-        light: deepMerge(iconTheme, nextTheme.icon)
+        light: lightIconTheme
       };
       return {
         theme: _extends({}, nextTheme, {
