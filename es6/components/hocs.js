@@ -122,11 +122,14 @@ var withFocus = function withFocus(WrappedComponent) {
     return FocusableComponent;
   }(Component);
 
-  FocusableComponent.displayName = getDisplayName(WrappedComponent);
-
-  return React.forwardRef(function (props, ref) {
+  var ForwardRef = React.forwardRef(function (props, ref) {
     return React.createElement(FocusableComponent, _extends({}, props, { withFocusRef: ref }));
   });
+
+  ForwardRef.displayName = getDisplayName(WrappedComponent);
+  ForwardRef.name = ForwardRef.displayName;
+
+  return ForwardRef;
 };
 
 export { withFocus };
@@ -185,9 +188,7 @@ var withTheme = function withTheme(WrappedComponent) {
     return ThemedComponent;
   }(Component);
 
-  ThemedComponent.displayName = getDisplayName(WrappedComponent);
-
-  return React.forwardRef(function (props, ref) {
+  var ForwardRef = React.forwardRef(function (props, ref) {
     return React.createElement(
       ThemeContext.Consumer,
       null,
@@ -196,17 +197,27 @@ var withTheme = function withTheme(WrappedComponent) {
       }
     );
   });
+
+  ForwardRef.displayName = getDisplayName(WrappedComponent);
+  ForwardRef.name = ForwardRef.displayName;
+
+  return ForwardRef;
 };
 
 export { withTheme };
 export var withForwardRef = function withForwardRef(WrappedComponent) {
-  return React.forwardRef(function (props, ref) {
+  var ForwardRefComponent = React.forwardRef(function (props, ref) {
     return React.createElement(WrappedComponent, _extends({ forwardRef: ref }, props));
   });
+
+  ForwardRefComponent.displayName = getDisplayName(WrappedComponent);
+  ForwardRefComponent.name = ForwardRefComponent.displayName;
+
+  return ForwardRefComponent;
 };
 
 export var withAnnounce = function withAnnounce(WrappedComponent) {
-  return function (props) {
+  var AnnounceComponent = function AnnounceComponent(props) {
     return React.createElement(
       AnnounceContext.Consumer,
       null,
@@ -215,10 +226,14 @@ export var withAnnounce = function withAnnounce(WrappedComponent) {
       }
     );
   };
+
+  AnnounceComponent.displayName = getDisplayName(WrappedComponent);
+
+  return AnnounceComponent;
 };
 
 export var withIconTheme = function withIconTheme(WrappedComponent) {
-  return function (props) {
+  var IconThemeComponent = function IconThemeComponent(props) {
     return React.createElement(
       IconThemeContext.Consumer,
       null,
@@ -227,6 +242,10 @@ export var withIconTheme = function withIconTheme(WrappedComponent) {
       }
     );
   };
+
+  IconThemeComponent.displayName = getDisplayName(WrappedComponent);
+
+  return IconThemeComponent;
 };
 
 export default { withAnnounce: withAnnounce, withFocus: withFocus, withForwardRef: withForwardRef, withIconTheme: withIconTheme, withTheme: withTheme };

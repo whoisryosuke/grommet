@@ -142,11 +142,14 @@ var withFocus = function withFocus(WrappedComponent) {
     return FocusableComponent;
   }(_react.Component);
 
-  FocusableComponent.displayName = (0, _getDisplayName2.default)(WrappedComponent);
-
-  return _react2.default.forwardRef(function (props, ref) {
+  var ForwardRef = _react2.default.forwardRef(function (props, ref) {
     return _react2.default.createElement(FocusableComponent, _extends({}, props, { withFocusRef: ref }));
   });
+
+  ForwardRef.displayName = (0, _getDisplayName2.default)(WrappedComponent);
+  ForwardRef.name = ForwardRef.displayName;
+
+  return ForwardRef;
 };
 
 exports.withFocus = withFocus;
@@ -205,9 +208,7 @@ var withTheme = function withTheme(WrappedComponent) {
     return ThemedComponent;
   }(_react.Component);
 
-  ThemedComponent.displayName = (0, _getDisplayName2.default)(WrappedComponent);
-
-  return _react2.default.forwardRef(function (props, ref) {
+  var ForwardRef = _react2.default.forwardRef(function (props, ref) {
     return _react2.default.createElement(
       _ThemeContext2.default.Consumer,
       null,
@@ -216,17 +217,27 @@ var withTheme = function withTheme(WrappedComponent) {
       }
     );
   });
+
+  ForwardRef.displayName = (0, _getDisplayName2.default)(WrappedComponent);
+  ForwardRef.name = ForwardRef.displayName;
+
+  return ForwardRef;
 };
 
 exports.withTheme = withTheme;
 var withForwardRef = exports.withForwardRef = function withForwardRef(WrappedComponent) {
-  return _react2.default.forwardRef(function (props, ref) {
+  var ForwardRefComponent = _react2.default.forwardRef(function (props, ref) {
     return _react2.default.createElement(WrappedComponent, _extends({ forwardRef: ref }, props));
   });
+
+  ForwardRefComponent.displayName = (0, _getDisplayName2.default)(WrappedComponent);
+  ForwardRefComponent.name = ForwardRefComponent.displayName;
+
+  return ForwardRefComponent;
 };
 
 var withAnnounce = exports.withAnnounce = function withAnnounce(WrappedComponent) {
-  return function (props) {
+  var AnnounceComponent = function AnnounceComponent(props) {
     return _react2.default.createElement(
       _AnnounceContext2.default.Consumer,
       null,
@@ -235,10 +246,14 @@ var withAnnounce = exports.withAnnounce = function withAnnounce(WrappedComponent
       }
     );
   };
+
+  AnnounceComponent.displayName = (0, _getDisplayName2.default)(WrappedComponent);
+
+  return AnnounceComponent;
 };
 
 var withIconTheme = exports.withIconTheme = function withIconTheme(WrappedComponent) {
-  return function (props) {
+  var IconThemeComponent = function IconThemeComponent(props) {
     return _react2.default.createElement(
       _grommetIcons.ThemeContext.Consumer,
       null,
@@ -247,6 +262,10 @@ var withIconTheme = exports.withIconTheme = function withIconTheme(WrappedCompon
       }
     );
   };
+
+  IconThemeComponent.displayName = (0, _getDisplayName2.default)(WrappedComponent);
+
+  return IconThemeComponent;
 };
 
 exports.default = { withAnnounce: withAnnounce, withFocus: withFocus, withForwardRef: withForwardRef, withIconTheme: withIconTheme, withTheme: withTheme };
