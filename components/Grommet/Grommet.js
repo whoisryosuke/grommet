@@ -111,6 +111,7 @@ var Grommet = function (_Component) {
 
   Grommet.prototype.componentDidMount = function componentDidMount() {
     window.addEventListener('resize', this.onResize);
+    this.onResize();
   };
 
   Grommet.prototype.componentWillUnmount = function componentWillUnmount() {
