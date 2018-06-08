@@ -112,7 +112,6 @@ var Tabs = function (_Component) {
 }(Component);
 
 Tabs.defaultProps = {
-  children: [],
   activeIndex: 0,
   justify: 'center',
   messages: {

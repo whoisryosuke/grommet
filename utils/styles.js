@@ -101,7 +101,7 @@ var focusStyle = exports.focusStyle = (0, _styledComponents.css)(['> circle,> el
   return props.theme.global.focus.border.color;
 });
 
-var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['box-sizing:border-box;padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;font:inherit;', ' margin:0;'], function (props) {
+var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;', ' margin:0;', ''], function (props) {
   return (0, _mixins.parseMetricToNum)(props.theme.global.spacing) / 2 - (0, _mixins.parseMetricToNum)(props.theme.global.input.border.width);
 }, function (props) {
   return props.theme.global.input.border.width;
@@ -111,6 +111,8 @@ var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['box-sizing:bo
   return props.theme.global.input.border.radius;
 }, function (props) {
   return props.theme.global.input.weight && (0, _styledComponents.css)(['font-weight:', ';'], props.theme.global.input.weight);
+}, function (props) {
+  return props.focus && (!props.plain || props.focusIndicator) && focusStyle;
 });
 
 exports.default = {

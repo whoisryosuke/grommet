@@ -1,7 +1,7 @@
 import { rgba } from 'polished';
 import { css } from 'styled-components';
 
-import { Actions, ClosedCaption, Expand, FormDown, FormNext, FormPrevious, Next, Pause, Play, Previous, Subtract, Volume, VolumeLow } from 'grommet-icons';
+import { Actions, ClosedCaption, Expand, FormDown, FormNext, FormPrevious, FormUp, Next, Pause, Play, Previous, Subtract, Volume, VolumeLow } from 'grommet-icons';
 
 import { colorForName, deepFreeze } from '../utils';
 
@@ -205,6 +205,16 @@ export default deepFreeze({
       }
     }
   },
+  accordion: {
+    icons: {
+      collapse: FormUp,
+      expand: FormDown
+    },
+    iconColor: css(['', ''], function (props) {
+      return props.theme.global.colors.brand;
+    })
+
+  },
   anchor: {
     textDecoration: 'none',
     fontWeight: 600,
@@ -361,6 +371,10 @@ export default deepFreeze({
       }
     }
   },
+  collapsible: {
+    minSpeed: 150,
+    baseHeight: 500
+  },
   formField: {
     border: {
       color: 'border',
@@ -408,6 +422,7 @@ export default deepFreeze({
   icon: {
     colors: colors
   },
+  iconThemes: {},
   layer: {
     backgroundColor: backgroundColor,
     border: {

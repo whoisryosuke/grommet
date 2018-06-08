@@ -210,6 +210,16 @@ exports.default = (0, _utils.deepFreeze)({
       }
     }
   },
+  accordion: {
+    icons: {
+      collapse: _grommetIcons.FormUp,
+      expand: _grommetIcons.FormDown
+    },
+    iconColor: (0, _styledComponents.css)(['', ''], function (props) {
+      return props.theme.global.colors.brand;
+    })
+
+  },
   anchor: {
     textDecoration: 'none',
     fontWeight: 600,
@@ -366,6 +376,10 @@ exports.default = (0, _utils.deepFreeze)({
       }
     }
   },
+  collapsible: {
+    minSpeed: 150,
+    baseHeight: 500
+  },
   formField: {
     border: {
       color: 'border',
@@ -413,6 +427,7 @@ exports.default = (0, _utils.deepFreeze)({
   icon: {
     colors: colors
   },
+  iconThemes: {},
   layer: {
     backgroundColor: backgroundColor,
     border: {

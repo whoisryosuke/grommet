@@ -2,6 +2,18 @@
 
 exports.__esModule = true;
 
+var _Accordion = require('./Accordion');
+
+Object.keys(_Accordion).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Accordion[key];
+    }
+  });
+});
+
 var _Anchor = require('./Anchor');
 
 Object.keys(_Anchor).forEach(function (key) {
@@ -94,6 +106,18 @@ Object.keys(_Clock).forEach(function (key) {
     enumerable: true,
     get: function get() {
       return _Clock[key];
+    }
+  });
+});
+
+var _Collapsible = require('./Collapsible');
+
+Object.keys(_Collapsible).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Collapsible[key];
     }
   });
 });

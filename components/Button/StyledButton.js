@@ -72,7 +72,7 @@ var hoverStyle = (0, _styledComponents.css)(['&:hover{', ' ', ' ', '}'], functio
   return !props.plain && !props.primary && (0, _styledComponents.css)(['svg{fill:', ';stroke:', ';transition:none;}'], props.theme.global.hover.textColor, props.theme.global.hover.textColor);
 });
 
-var fillStyle = '\n  width: 100%;\n  height: 100%;\n  max-width: none;\n  flex-grow: 1;\n';
+var fillStyle = '\n  width: 100%;\n  height: 100%;\n  max-width: none;\n  flex: 1 0 auto;\n';
 
 var plainStyle = (0, _styledComponents.css)(['color:inherit;border:none;padding:0;text-align:inherit;']);
 

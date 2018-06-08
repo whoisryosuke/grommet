@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-import { focusStyle, inputStyle } from '../../utils';
+import { inputStyle } from '../../utils';
 
 var placeholderColor = css(['color:', ';'], function (props) {
   return props.theme.global.colors.placeholder;
@@ -19,13 +19,11 @@ var plainStyle = css(['border:none;-webkit-appearance:none;']);
 
 var StyledTextInput = styled.input.withConfig({
   displayName: 'StyledTextInput'
-})(['', ' width:100%;-webkit-appearance:textfield;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}&:focus{', '}'], inputStyle, function (props) {
+})(['', ' width:100%;-webkit-appearance:textfield;', ' ', ' &::-webkit-input-placeholder{', '}&::-moz-placeholder{', '}&:-ms-input-placeholder{', '}&::-moz-focus-inner{border:none;outline:none;}'], inputStyle, function (props) {
   return props.size && sizeStyle(props);
 }, function (props) {
   return props.plain && plainStyle;
-}, placeholderColor, placeholderColor, placeholderColor, function (props) {
-  return (!props.plain || props.focusIndicator) && focusStyle;
-});
+}, placeholderColor, placeholderColor, placeholderColor);
 
 export var StyledTextInputContainer = styled.div.withConfig({
   displayName: 'StyledTextInput__StyledTextInputContainer'
