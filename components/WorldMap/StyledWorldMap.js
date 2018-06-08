@@ -14,7 +14,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var StyledWorldMap = _styledComponents2.default.svg.withConfig({
   displayName: 'StyledWorldMap'
-})(['width:100%;@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){padding-bottom:49%;height:1px;}']);
+})(['width:100%;']);
 
 exports.default = StyledWorldMap.extend(_templateObject, function (props) {
   return props.theme.diagram && props.theme.diagram.extend;
