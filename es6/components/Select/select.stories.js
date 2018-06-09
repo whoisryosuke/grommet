@@ -15,31 +15,80 @@ import Grommet from '../Grommet/Grommet';
 import Select from '../Select/Select';
 import Text from '../Text/Text';
 
-var allSeasons = ['S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10'];
+var DEFAULT_OPTIONS = ['one', 'two', 'three'];
 
-var SeasonsSelect = function (_Component) {
-  _inherits(SeasonsSelect, _Component);
+var SearchSelect = function (_Component) {
+  _inherits(SearchSelect, _Component);
 
-  function SeasonsSelect() {
+  function SearchSelect() {
     var _temp, _this, _ret;
 
-    _classCallCheck(this, SeasonsSelect);
+    _classCallCheck(this, SearchSelect);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { options: DEFAULT_OPTIONS }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  SearchSelect.prototype.render = function render() {
+    var _this2 = this;
+
+    var _state = this.state,
+        options = _state.options,
+        value = _state.value;
+
+    return React.createElement(
+      Grommet,
+      null,
+      React.createElement(Select, {
+        size: 'medium',
+        placeholder: 'Select',
+        value: value,
+        options: options,
+        onChange: function onChange(_ref) {
+          var option = _ref.option;
+          return _this2.setState({ value: option });
+        },
+        onSearch: function onSearch(text) {
+          var exp = new RegExp(text, 'i');
+          _this2.setState({ options: DEFAULT_OPTIONS.filter(function (o) {
+              return exp.test(o);
+            }) });
+        }
+      })
+    );
+  };
+
+  return SearchSelect;
+}(Component);
+
+var allSeasons = ['S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10'];
+
+var SeasonsSelect = function (_Component2) {
+  _inherits(SeasonsSelect, _Component2);
+
+  function SeasonsSelect() {
+    var _temp2, _this3, _ret2;
+
+    _classCallCheck(this, SeasonsSelect);
+
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = {
       selectedSeasons: []
-    }, _this.onRemoveSeason = function (season) {
-      var selectedSeasons = _this.state.selectedSeasons;
+    }, _this3.onRemoveSeason = function (season) {
+      var selectedSeasons = _this3.state.selectedSeasons;
 
       var newSeasons = [].concat(selectedSeasons);
       newSeasons.splice(selectedSeasons.indexOf(season), 1);
-      _this.setState({
+      _this3.setState({
         selectedSeasons: newSeasons
       });
-    }, _this.renderSeason = function (season) {
+    }, _this3.renderSeason = function (season) {
       return React.createElement(
         Button,
         {
@@ -48,7 +97,7 @@ var SeasonsSelect = function (_Component) {
           onClick: function onClick(event) {
             event.preventDefault();
             event.stopPropagation();
-            _this.onRemoveSeason(season);
+            _this3.onRemoveSeason(season);
           },
           onFocus: function onFocus(event) {
             return event.stopPropagation();
@@ -81,20 +130,20 @@ var SeasonsSelect = function (_Component) {
           )
         )
       );
-    }, _this.renderOption = function (option) {
+    }, _this3.renderOption = function (option) {
       return React.createElement(
         Box,
         {
           pad: 'small',
-          background: _this.state.selectedSeasons.indexOf(option) >= 0 ? 'active' : undefined
+          background: _this3.state.selectedSeasons.indexOf(option) >= 0 ? 'active' : undefined
         },
         option
       );
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp2), _possibleConstructorReturn(_this3, _ret2);
   }
 
   SeasonsSelect.prototype.render = function render() {
-    var _this2 = this;
+    var _this4 = this;
 
     var selectedSeasons = this.state.selectedSeasons;
 
@@ -119,17 +168,17 @@ var SeasonsSelect = function (_Component) {
                 selectedSeasons.map(this.renderSeason)
               ) : undefined,
               options: allSeasons,
-              onChange: function onChange(_ref) {
-                var option = _ref.option;
+              onChange: function onChange(_ref2) {
+                var option = _ref2.option;
 
-                var newSelectedSeasons = [].concat(_this2.state.selectedSeasons);
+                var newSelectedSeasons = [].concat(_this4.state.selectedSeasons);
                 var seasonIndex = newSelectedSeasons.indexOf(option);
                 if (seasonIndex >= 0) {
                   newSelectedSeasons.splice(seasonIndex, 1);
                 } else {
                   newSelectedSeasons.push(option);
                 }
-                _this2.setState({ selectedSeasons: newSelectedSeasons.sort() });
+                _this4.setState({ selectedSeasons: newSelectedSeasons.sort() });
               }
             },
             this.renderOption
@@ -142,6 +191,8 @@ var SeasonsSelect = function (_Component) {
   return SeasonsSelect;
 }(Component);
 
-storiesOf('Select', module).add('Seasons Select', function () {
+storiesOf('Select', module).add('Search Select', function () {
+  return React.createElement(SearchSelect, null);
+}).add('Seasons Select', function () {
   return React.createElement(SeasonsSelect, null);
 });
