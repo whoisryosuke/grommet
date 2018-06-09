@@ -237,19 +237,20 @@ var withForwardRef = exports.withForwardRef = function withForwardRef(WrappedCom
 };
 
 var withAnnounce = exports.withAnnounce = function withAnnounce(WrappedComponent) {
-  var AnnounceComponent = function AnnounceComponent(props) {
+  var ForwardRef = _react2.default.forwardRef(function (props, ref) {
     return _react2.default.createElement(
       _AnnounceContext2.default.Consumer,
       null,
       function (announce) {
-        return _react2.default.createElement(WrappedComponent, _extends({}, props, { announce: announce }));
+        return _react2.default.createElement(WrappedComponent, _extends({}, props, { announce: announce, ref: ref }));
       }
     );
-  };
+  });
 
-  AnnounceComponent.displayName = (0, _getDisplayName2.default)(WrappedComponent);
+  ForwardRef.displayName = (0, _getDisplayName2.default)(WrappedComponent);
+  ForwardRef.name = ForwardRef.displayName;
 
-  return AnnounceComponent;
+  return ForwardRef;
 };
 
 var withIconTheme = exports.withIconTheme = function withIconTheme(WrappedComponent) {

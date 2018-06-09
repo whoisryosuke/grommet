@@ -217,19 +217,20 @@ export var withForwardRef = function withForwardRef(WrappedComponent) {
 };
 
 export var withAnnounce = function withAnnounce(WrappedComponent) {
-  var AnnounceComponent = function AnnounceComponent(props) {
+  var ForwardRef = React.forwardRef(function (props, ref) {
     return React.createElement(
       AnnounceContext.Consumer,
       null,
       function (announce) {
-        return React.createElement(WrappedComponent, _extends({}, props, { announce: announce }));
+        return React.createElement(WrappedComponent, _extends({}, props, { announce: announce, ref: ref }));
       }
     );
-  };
+  });
 
-  AnnounceComponent.displayName = getDisplayName(WrappedComponent);
+  ForwardRef.displayName = getDisplayName(WrappedComponent);
+  ForwardRef.name = ForwardRef.displayName;
 
-  return AnnounceComponent;
+  return ForwardRef;
 };
 
 export var withIconTheme = function withIconTheme(WrappedComponent) {

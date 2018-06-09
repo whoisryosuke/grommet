@@ -263,6 +263,7 @@ var TextInput = function (_Component) {
         rest = _objectWithoutProperties(_props2, ['defaultValue', 'dropAlign', 'dropTarget', 'id', 'plain', 'value', 'onFocus', 'onInput', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
+    delete rest.forwardRef;
     var _state = this.state,
         inputRef = _state.inputRef,
         showDrop = _state.showDrop;

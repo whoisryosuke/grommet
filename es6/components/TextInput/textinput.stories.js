@@ -22,7 +22,7 @@ var SimpleTextInput = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { value: '' }, _this.onChange = function (event) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { value: '' }, _this.ref = React.createRef(), _this.onChange = function (event) {
       return _this.setState({ value: event.target.value });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -33,7 +33,7 @@ var SimpleTextInput = function (_Component) {
     return React.createElement(
       Grommet,
       null,
-      React.createElement(TextInput, { value: value, onChange: this.onChange })
+      React.createElement(TextInput, { ref: this.ref, value: value, onChange: this.onChange })
     );
   };
 
