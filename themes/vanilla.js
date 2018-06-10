@@ -123,6 +123,7 @@ exports.default = (0, _utils.deepFreeze)({
     },
     edgeSize: {
       none: '0',
+      hair: '1px', // for Chart
       xsmall: baseSpacing / 4 + 'px',
       small: baseSpacing / 2 + 'px',
       medium: baseSpacing + 'px',
@@ -130,6 +131,7 @@ exports.default = (0, _utils.deepFreeze)({
       xlarge: baseSpacing * 4 + 'px',
       narrow: {
         none: '0',
+        hair: '1px', // for Chart
         xsmall: baseSpacing / 8 + 'px',
         small: baseSpacing / 4 + 'px',
         medium: baseSpacing / 2 + 'px',

@@ -14,7 +14,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var StyledChart = _styledComponents2.default.svg.withConfig({
   displayName: 'StyledChart'
-})(['max-width:100%;']);
+})(['display:block;max-width:100%;overflow:visible;']);
 
 exports.default = StyledChart.extend(_templateObject, function (props) {
   return props.theme.chart && props.theme.chart.extend;

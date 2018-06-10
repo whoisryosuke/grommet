@@ -1,3 +1,5 @@
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17,6 +19,7 @@ import { colorForName, parseMetricToNum } from '../../utils';
 import { withTheme } from '../hocs';
 
 import StyledChart from './StyledChart';
+import { normalizeValues, normalizeBounds } from './utils';
 
 import doc from './doc';
 
@@ -111,9 +114,11 @@ var renderArea = function renderArea(values, bounds, scale, height, _ref3) {
     var value = _ref5.value;
 
     var bottom = value.length === 2 ? bounds[1][0] : value[1];
-    d += ' L ' + value[0] * scale[0] + ',' + ('' + (height - (bottom - bounds[1][0]) * scale[1]));
+    d += ' L ' + (value[0] - bounds[0][0]) * scale[0] + ',' + ('' + (height - (bottom - bounds[1][0]) * scale[1]));
   });
-  d += ' Z';
+  if (d.length > 0) {
+    d += ' Z';
+  }
 
   var hoverProps = void 0;
   if (onHover) {
@@ -133,23 +138,9 @@ var renderArea = function renderArea(values, bounds, scale, height, _ref3) {
 
   return React.createElement(
     'g',
-    { fill: colorForName(color, theme) },
+    { fill: colorForName(color.color || color, theme) },
     React.createElement('path', _extends({ d: d }, hoverProps, clickProps))
   );
-};
-
-var normalizeBounds = function normalizeBounds(bounds, values) {
-  var result = bounds;
-  if (!result) {
-    result = [[0, 1], [0, 1]];
-    (values || []).forEach(function (value) {
-      result[0][0] = Math.min(result[0][0], value.value[0]);
-      result[0][1] = Math.max(result[0][1], value.value[0]);
-      result[1][0] = Math.min(result[1][0], value.value[1]);
-      result[1][1] = Math.max(result[1][1], value.value[1]);
-    });
-  }
-  return result;
 };
 
 var Chart = function (_Component) {
@@ -176,11 +167,13 @@ var Chart = function (_Component) {
   Chart.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
     var bounds = nextProps.bounds,
         values = nextProps.values;
-    var stateBounds = prevState.bounds;
+    var stateBounds = prevState.bounds,
+        stateValues = prevState.values;
 
-    var nextBounds = normalizeBounds(bounds, values);
-    if (!stateBounds || nextBounds[0][0] !== stateBounds[0][0] || nextBounds[0][1] !== stateBounds[0][1] || nextBounds[1][0] !== stateBounds[1][0] || nextBounds[1][1] !== stateBounds[1][1]) {
-      return { bounds: nextBounds };
+    if (!stateValues || values !== stateValues || bounds !== stateBounds) {
+      var nextValues = normalizeValues(values);
+      var nextBounds = normalizeBounds(bounds, nextValues);
+      return { bounds: nextBounds, values: nextValues };
     }
     return null;
   };
@@ -201,18 +194,20 @@ var Chart = function (_Component) {
         color = _props.color,
         onClick = _props.onClick,
         onHover = _props.onHover,
+        overflow = _props.overflow,
         round = _props.round,
         size = _props.size,
         theme = _props.theme,
         thickness = _props.thickness,
         type = _props.type,
-        values = _props.values,
-        rest = _objectWithoutProperties(_props, ['color', 'onClick', 'onHover', 'round', 'size', 'theme', 'thickness', 'type', 'values']);
+        rest = _objectWithoutProperties(_props, ['color', 'onClick', 'onHover', 'overflow', 'round', 'size', 'theme', 'thickness', 'type']);
 
+    delete rest.values;
     var _state = this.state,
         bounds = _state.bounds,
         containerWidth = _state.containerWidth,
-        containerHeight = _state.containerHeight;
+        containerHeight = _state.containerHeight,
+        values = _state.values;
 
 
     var sizeWidth = typeof size === 'string' ? size : size.width || 'medium';
@@ -221,6 +216,9 @@ var Chart = function (_Component) {
     var height = sizeHeight === 'full' ? containerHeight : parseMetricToNum(theme.global.size[sizeHeight]);
     var strokeWidth = parseMetricToNum(theme.global.edgeSize[thickness]);
     var scale = [width / (bounds[0][1] - bounds[0][0]), height / (bounds[1][1] - bounds[1][0])];
+    var viewBox = overflow ? '0 0 ' + width + ' ' + height : '-' + strokeWidth / 2 + ' -' + strokeWidth / 2 + ' ' + (width + strokeWidth) + ' ' + (height + strokeWidth);
+    var colorName = (typeof color === 'undefined' ? 'undefined' : _typeof(color)) === 'object' ? color.color : color;
+    var opacity = color.opacity ? theme.global.opacity[color.opacity] : undefined;
 
     var contents = void 0;
     if (type === 'bar') {
@@ -237,18 +235,19 @@ var Chart = function (_Component) {
         ref: function ref(_ref6) {
           _this2.containerRef = _ref6;
         },
-        viewBox: '-' + strokeWidth / 2 + ' -' + strokeWidth / 2 + '\n          ' + (width + strokeWidth) + ' ' + (height + strokeWidth),
-        preserveAspectRatio: 'xMinYMin meet',
+        viewBox: viewBox,
+        preserveAspectRatio: 'none',
         width: size === 'full' ? '100%' : width,
         height: size === 'full' ? '100%' : height
       }, rest),
       React.createElement(
         'g',
         {
-          stroke: colorForName(color, theme),
+          stroke: colorForName(colorName, theme),
           strokeWidth: strokeWidth,
           strokeLinecap: round ? 'round' : 'butt',
-          strokeLinejoin: round ? 'round' : 'miter'
+          strokeLinejoin: round ? 'round' : 'miter',
+          opacity: opacity
         },
         contents
       )
@@ -260,6 +259,7 @@ var Chart = function (_Component) {
 
 Chart.defaultProps = {
   color: 'accent-1',
+  overflow: false,
   size: { width: 'medium', height: 'small' },
   thickness: 'medium',
   type: 'bar'

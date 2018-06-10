@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 var StyledChart = styled.svg.withConfig({
   displayName: 'StyledChart'
-})(['max-width:100%;']);
+})(['display:block;max-width:100%;overflow:visible;']);
 
 export default StyledChart.extend(_templateObject, function (props) {
   return props.theme.chart && props.theme.chart.extend;

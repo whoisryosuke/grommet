@@ -39,6 +39,7 @@ export default (function (Box) {
     fill: PropTypes.oneOf(['horizontal', 'vertical', true, false]).description('Whether the width and/or height should fill the container.'),
     gap: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The amount of spacing between child elements. This\n        should not be used in conjunction with \'wrap\' as the gap elements\n        will not wrap gracefully.'),
     gridArea: PropTypes.string.description('The name of the area to place\n      this Box in inside a parent Grid.'),
+    height: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('A fixed height.'),
     justify: PropTypes.oneOf(['start', 'center', 'between', 'end']).description('How to align the contents along the main axis.'),
     justifySelf: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the row axis when contained in a Grid.'),
     margin: PropTypes.oneOfType([PropTypes.oneOf(['none'].concat(PAD_SIZES)), PropTypes.shape({
@@ -61,6 +62,7 @@ export default (function (Box) {
     responsive: PropTypes.bool.description('Whether margin, pad, and border\n      sizes should be scaled for mobile environments.').defaultValue(true),
     round: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']).description('How much to round the corners.'),
     tag: PropTypes.string.description('The DOM tag to use for the element.').defaultValue('div'),
+    width: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('A fixed width.'),
     wrap: PropTypes.bool.description('Whether children can wrap if they\n      can\'t all fit.')
   };
   return DocumentedBox;

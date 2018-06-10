@@ -20,10 +20,6 @@ var _doc = require('./doc');
 
 var _doc2 = _interopRequireDefault(_doc);
 
-var _styleMap = require('./styleMap');
-
-var _styleMap2 = _interopRequireDefault(_styleMap);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -54,30 +50,26 @@ var Stack = function (_Component) {
     // make all children but the first absolutely positioned
 
 
-    var lastIndex = _react2.default.Children.count(children) - 1;
     var guidingIndex = guidingChild;
     if (guidingIndex === 'first' || !guidingIndex) {
       guidingIndex = 0;
     } else if (guidingIndex === 'last') {
-      guidingIndex = lastIndex;
+      guidingIndex = _react2.default.Children.count(children) - 1;
     }
     var styledChildren = _react.Children.map(children, function (child, index) {
       if (child) {
         if (index === guidingIndex) {
-          var _style = _extends({}, (child.props || {}).style, {
-            position: 'relative'
-          });
-          if (fill) {
-            _style.flex = '1 1';
-          }
-          return (0, _react.cloneElement)(child, { style: _style });
+          return _react2.default.createElement(
+            _StyledStack.StyledStackLayer,
+            { guiding: true },
+            child
+          );
         }
-
-        var style = _extends({}, (child.props || {}).style, {
-          position: 'absolute',
-          overflow: 'hidden'
-        }, _styleMap2.default[anchor || 'fill']);
-        return (0, _react.cloneElement)(child, { style: style });
+        return _react2.default.createElement(
+          _StyledStack.StyledStackLayer,
+          { anchor: anchor },
+          child
+        );
       }
 
       return child;

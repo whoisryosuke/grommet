@@ -8,14 +8,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import React, { Children, cloneElement, Component } from 'react';
+import React, { Children, Component } from 'react';
 import { compose } from 'recompose';
 
 import { withTheme } from '../hocs';
 
-import StyledStack from './StyledStack';
+import StyledStack, { StyledStackLayer } from './StyledStack';
 import doc from './doc';
-import styleMap from './styleMap';
 
 var Stack = function (_Component) {
   _inherits(Stack, _Component);
@@ -37,30 +36,26 @@ var Stack = function (_Component) {
     // make all children but the first absolutely positioned
 
 
-    var lastIndex = React.Children.count(children) - 1;
     var guidingIndex = guidingChild;
     if (guidingIndex === 'first' || !guidingIndex) {
       guidingIndex = 0;
     } else if (guidingIndex === 'last') {
-      guidingIndex = lastIndex;
+      guidingIndex = React.Children.count(children) - 1;
     }
     var styledChildren = Children.map(children, function (child, index) {
       if (child) {
         if (index === guidingIndex) {
-          var _style = _extends({}, (child.props || {}).style, {
-            position: 'relative'
-          });
-          if (fill) {
-            _style.flex = '1 1';
-          }
-          return cloneElement(child, { style: _style });
+          return React.createElement(
+            StyledStackLayer,
+            { guiding: true },
+            child
+          );
         }
-
-        var style = _extends({}, (child.props || {}).style, {
-          position: 'absolute',
-          overflow: 'hidden'
-        }, styleMap[anchor || 'fill']);
-        return cloneElement(child, { style: style });
+        return React.createElement(
+          StyledStackLayer,
+          { anchor: anchor },
+          child
+        );
       }
 
       return child;

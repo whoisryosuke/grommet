@@ -43,6 +43,7 @@ exports.default = function (Box) {
     fill: _reactDesc.PropTypes.oneOf(['horizontal', 'vertical', true, false]).description('Whether the width and/or height should fill the container.'),
     gap: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The amount of spacing between child elements. This\n        should not be used in conjunction with \'wrap\' as the gap elements\n        will not wrap gracefully.'),
     gridArea: _reactDesc.PropTypes.string.description('The name of the area to place\n      this Box in inside a parent Grid.'),
+    height: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('A fixed height.'),
     justify: _reactDesc.PropTypes.oneOf(['start', 'center', 'between', 'end']).description('How to align the contents along the main axis.'),
     justifySelf: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the row axis when contained in a Grid.'),
     margin: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none'].concat(PAD_SIZES)), _reactDesc.PropTypes.shape({
@@ -65,6 +66,7 @@ exports.default = function (Box) {
     responsive: _reactDesc.PropTypes.bool.description('Whether margin, pad, and border\n      sizes should be scaled for mobile environments.').defaultValue(true),
     round: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'full']).description('How much to round the corners.'),
     tag: _reactDesc.PropTypes.string.description('The DOM tag to use for the element.').defaultValue('div'),
+    width: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('A fixed width.'),
     wrap: _reactDesc.PropTypes.bool.description('Whether children can wrap if they\n      can\'t all fit.')
   };
   return DocumentedBox;
