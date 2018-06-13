@@ -17,10 +17,19 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var hiddenPositionStyle = (0, _styledComponents.css)(['left:-100%;right:100%;z-index:-1;position:fixed;']);
 
+var desktopLayerStyle = '\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  width: 100vw;\n  height: 100vh;\n';
+
 var StyledLayer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer'
-})(['', ' background-color:unset;position:relative;z-index:10;overflow:auto;pointer-events:none;', ' ', ''], _utils.baseStyle, (0, _utils.palm)('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n  '), function (props) {
-  return props.position === 'hidden' ? hiddenPositionStyle : (0, _utils.lapAndUp)('\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n    width: 100vw;\n    height: 100vh;\n  ');
+})(['', ' background-color:unset;position:relative;z-index:10;overflow:auto;pointer-events:none;outline:none;', ' ', ''], _utils.baseStyle, function (props) {
+  return props.responsive && (0, _utils.palm)('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n  ');
+}, function (props) {
+  if (props.position === 'hidden') {
+    return hiddenPositionStyle;
+  } else if (props.responsive) {
+    return (0, _utils.lapAndUp)(desktopLayerStyle);
+  }
+  return desktopLayerStyle;
 });
 
 var StyledOverlay = exports.StyledOverlay = _styledComponents2.default.div.withConfig({
@@ -160,6 +169,14 @@ var POSITIONS = {
   }
 };
 
+var desktopContainerStyle = (0, _styledComponents.css)(['position:', ';max-height:100%;max-width:100%;overflow:auto;border-radius:', ';', ''], function (props) {
+  return props.modal ? 'absolute' : 'fixed';
+}, function (props) {
+  return props.plain ? 'none' : props.theme.layer.border.radius;
+}, function (props) {
+  return props.position !== 'hidden' && POSITIONS[props.position][props.full](props.margin, props.theme) || '';
+});
+
 var StyledContainer = exports.StyledContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
 })(['', ' display:flex;flex-direction:column;min-height:', ';background-color:', ';outline:none;pointer-events:all;z-index:15;', ' ', ''], function (props) {
@@ -168,13 +185,11 @@ var StyledContainer = exports.StyledContainer = _styledComponents2.default.div.w
   return props.theme.global.size.xxsmall;
 }, function (props) {
   return props.plain ? 'transparent' : props.theme.layer.backgroundColor;
-}, (0, _utils.palm)('\n    min-height: 100%;\n    min-width: 100%;\n  '), (0, _utils.lapAndUp)((0, _styledComponents.css)(['position:', ';max-height:100%;max-width:100%;overflow:auto;border-radius:', ';', ''], function (props) {
-  return props.modal ? 'absolute' : 'fixed';
 }, function (props) {
-  return props.plain ? 'none' : props.theme.layer.border.radius;
+  return props.responsive && (0, _utils.palm)('\n    min-height: 100%;\n    min-width: 100%;\n  ');
 }, function (props) {
-  return props.position !== 'hidden' && POSITIONS[props.position][props.full](props.margin, props.theme) || '';
-})));
+  return props.responsive ? (0, _utils.lapAndUp)(desktopContainerStyle) : desktopContainerStyle;
+});
 
 // ${props => props.full && fullStyle(props.full, props.margin, props.theme)}
 // ${props => props.margin && edgeStyle('margin', props.margin, props.theme)}

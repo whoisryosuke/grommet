@@ -95,7 +95,7 @@ export var focusStyle = css(['> circle,> ellipse,> line,> path,> polygon,> polyl
   return props.theme.global.focus.border.color;
 });
 
-export var inputStyle = css(['padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;', ' margin:0;', ''], function (props) {
+export var inputStyle = css(['box-sizing:border-box;font-size:inherit;padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;', ' margin:0;', ''], function (props) {
   return parseMetricToNum(props.theme.global.spacing) / 2 - parseMetricToNum(props.theme.global.input.border.width);
 }, function (props) {
   return props.theme.global.input.border.width;

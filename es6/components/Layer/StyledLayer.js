@@ -8,10 +8,19 @@ import { baseStyle, edgeStyle, lapAndUp, palm } from '../../utils';
 
 var hiddenPositionStyle = css(['left:-100%;right:100%;z-index:-1;position:fixed;']);
 
+var desktopLayerStyle = '\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  width: 100vw;\n  height: 100vh;\n';
+
 var StyledLayer = styled.div.withConfig({
   displayName: 'StyledLayer'
-})(['', ' background-color:unset;position:relative;z-index:10;overflow:auto;pointer-events:none;', ' ', ''], baseStyle, palm('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n  '), function (props) {
-  return props.position === 'hidden' ? hiddenPositionStyle : lapAndUp('\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n    width: 100vw;\n    height: 100vh;\n  ');
+})(['', ' background-color:unset;position:relative;z-index:10;overflow:auto;pointer-events:none;outline:none;', ' ', ''], baseStyle, function (props) {
+  return props.responsive && palm('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n  ');
+}, function (props) {
+  if (props.position === 'hidden') {
+    return hiddenPositionStyle;
+  } else if (props.responsive) {
+    return lapAndUp(desktopLayerStyle);
+  }
+  return desktopLayerStyle;
 });
 
 export var StyledOverlay = styled.div.withConfig({
@@ -151,6 +160,14 @@ var POSITIONS = {
   }
 };
 
+var desktopContainerStyle = css(['position:', ';max-height:100%;max-width:100%;overflow:auto;border-radius:', ';', ''], function (props) {
+  return props.modal ? 'absolute' : 'fixed';
+}, function (props) {
+  return props.plain ? 'none' : props.theme.layer.border.radius;
+}, function (props) {
+  return props.position !== 'hidden' && POSITIONS[props.position][props.full](props.margin, props.theme) || '';
+});
+
 export var StyledContainer = styled.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
 })(['', ' display:flex;flex-direction:column;min-height:', ';background-color:', ';outline:none;pointer-events:all;z-index:15;', ' ', ''], function (props) {
@@ -159,13 +176,11 @@ export var StyledContainer = styled.div.withConfig({
   return props.theme.global.size.xxsmall;
 }, function (props) {
   return props.plain ? 'transparent' : props.theme.layer.backgroundColor;
-}, palm('\n    min-height: 100%;\n    min-width: 100%;\n  '), lapAndUp(css(['position:', ';max-height:100%;max-width:100%;overflow:auto;border-radius:', ';', ''], function (props) {
-  return props.modal ? 'absolute' : 'fixed';
 }, function (props) {
-  return props.plain ? 'none' : props.theme.layer.border.radius;
+  return props.responsive && palm('\n    min-height: 100%;\n    min-width: 100%;\n  ');
 }, function (props) {
-  return props.position !== 'hidden' && POSITIONS[props.position][props.full](props.margin, props.theme) || '';
-})));
+  return props.responsive ? lapAndUp(desktopContainerStyle) : desktopContainerStyle;
+});
 
 // ${props => props.full && fullStyle(props.full, props.margin, props.theme)}
 // ${props => props.margin && edgeStyle('margin', props.margin, props.theme)}

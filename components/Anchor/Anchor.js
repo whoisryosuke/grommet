@@ -10,6 +10,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _Box = require('../Box/Box');
+
+var _Box2 = _interopRequireDefault(_Box);
+
+var _Text = require('../Text/Text');
+
+var _Text2 = _interopRequireDefault(_Text);
+
 var _hocs = require('../hocs');
 
 var _StyledAnchor = require('./StyledAnchor');
@@ -64,30 +72,18 @@ var Anchor = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'forwardRef', 'href', 'icon', 'focus', 'label', 'primary', 'onClick', 'reverse', 'theme']);
 
-    var anchorIcon = void 0;
-    if (icon) {
-      anchorIcon = icon;
-    }
+    var anchorLabel = typeof label === 'string' ? _react2.default.createElement(
+      _Text2.default,
+      null,
+      _react2.default.createElement(
+        'strong',
+        null,
+        label
+      )
+    ) : label;
 
-    if (anchorIcon) {
-      anchorIcon = _react2.default.createElement(
-        _StyledAnchor.StyledIcon,
-        { reverse: reverse, label: label, theme: theme },
-        anchorIcon
-      );
-    }
-
-    var first = void 0;
-    var second = void 0;
-    if (children) {
-      first = children;
-    } else if (reverse) {
-      first = label || null;
-      second = anchorIcon || null;
-    } else {
-      first = anchorIcon || null;
-      second = label || null;
-    }
+    var first = reverse ? anchorLabel : icon;
+    var second = reverse ? icon : anchorLabel;
 
     return _react2.default.createElement(
       _StyledAnchor2.default,
@@ -95,7 +91,7 @@ var Anchor = function (_Component) {
         innerRef: forwardRef,
         'aria-label': a11yTitle,
         disabled: disabled,
-        icon: anchorIcon,
+        icon: icon,
         focus: focus,
         label: label,
         primary: primary,
@@ -104,8 +100,12 @@ var Anchor = function (_Component) {
         href: !disabled ? href : undefined,
         onClick: !disabled ? onClick : undefined
       }),
-      first,
-      second
+      first || second ? _react2.default.createElement(
+        _Box2.default,
+        { tag: 'span', direction: 'row', align: 'center', gap: 'small', style: { display: 'inline-flex' } },
+        first,
+        second
+      ) : children
     );
   };
 

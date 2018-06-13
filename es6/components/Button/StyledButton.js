@@ -7,14 +7,14 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 
-import { activeStyle, backgroundStyle, colorForName, colorIsDark, focusStyle, fontSize, lapAndUp } from '../../utils';
+import { activeStyle, backgroundStyle, colorForName, colorIsDark, focusStyle, lapAndUp } from '../../utils';
 
 var basicStyle = function basicStyle(props) {
   return css(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? colorForName(props.color, props.theme) : props.theme.button.border.color, props.theme.button.border.radius, props.theme.dark ? props.theme.global.colors.darkBackground.text : props.theme.button.colors.text);
 };
 
 var primaryStyle = function primaryStyle(props) {
-  return css(['', ' border:none;border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], backgroundStyle(props.color || 'brand', props.theme), props.theme.button.border.radius, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text);
+  return css(['', ' border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], backgroundStyle(props.color || 'brand', props.theme), props.theme.button.border.radius, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text);
 };
 
 var disabledStyle = css(['opacity:', ';cursor:default;'], function (props) {
@@ -68,12 +68,10 @@ var plainStyle = css(['color:inherit;border:none;padding:0;text-align:inherit;']
 
 var StyledButton = styled.button.withConfig({
   displayName: 'StyledButton'
-})(['box-sizing:border-box;cursor:pointer;outline:none;font:inherit;text-decoration:none;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['box-sizing:border-box;cursor:pointer;outline:none;font:inherit;text-decoration:none;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.plain && plainStyle;
 }, function (props) {
-  return !props.plain && css(['text-align:center;display:inline-block;min-width:', ';max-width:', ';font-weight:', ';'], props.theme.button.minWidth, props.theme.button.maxWidth, props.theme.global.control.font.weight);
-}, function (props) {
-  return !props.plain && !props.primary && basicStyle(props);
+  return !props.plain && basicStyle(props);
 }, function (props) {
   return props.primary && primaryStyle(props);
 }, function (props) {
@@ -83,27 +81,13 @@ var StyledButton = styled.button.withConfig({
 }, function (props) {
   return props.disabled && disabledStyle;
 }, function (props) {
-  return !props.plain && fontSize(props.theme.global.control.font.size, props.theme.global.spacing);
-}, function (props) {
   return !props.plain && 'padding: ' + props.theme.button.padding.vertical + ' ' + props.theme.button.padding.horizontal + ';';
 }, function (props) {
   return props.focus && (!props.plain || props.focusIndicator) && focusStyle;
 }, lapAndUp('\n    transition: 0.1s ease-in-out;\n  '), function (props) {
   return props.fillContainer && fillStyle;
 }, function (props) {
-  return props.icon && !props.label && '\n    padding: ' + props.theme.global.edgeSize.small + ';\n  ';
-});
-
-export var StyledLabel = styled.span.withConfig({
-  displayName: 'StyledButton__StyledLabel'
-})(['&:first-child:not(:last-child){margin-right:', ';}'], function (props) {
-  return props.theme.global.edgeSize.small;
-});
-
-export var StyledIcon = styled.span.withConfig({
-  displayName: 'StyledButton__StyledIcon'
-})(['display:inline-block;&:first-child:not(:last-child){margin-right:', ';}> *{vertical-align:bottom;}'], function (props) {
-  return props.theme.global.edgeSize.small;
+  return props.icon && !props.label && !props.plain && '\n    padding: ' + props.theme.global.edgeSize.small + ';\n  ';
 });
 
 export default StyledButton.extend(_templateObject, function (props) {

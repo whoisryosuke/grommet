@@ -62,8 +62,9 @@ var LayerContainer = function (_Component) {
         onEsc = _props.onEsc,
         plain = _props.plain,
         position = _props.position,
+        responsive = _props.responsive,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'id', 'modal', 'onClickOutside', 'onEsc', 'plain', 'position', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'id', 'modal', 'onClickOutside', 'onEsc', 'plain', 'position', 'responsive', 'theme']);
 
     var content = React.createElement(
       StyledContainer,
@@ -73,6 +74,7 @@ var LayerContainer = function (_Component) {
         theme: theme,
         position: position,
         plain: plain,
+        responsive: responsive,
         ref: this.containerRef
       }),
       children
@@ -86,6 +88,7 @@ var LayerContainer = function (_Component) {
           plain: plain,
           position: position,
           theme: theme,
+          responsive: responsive,
           tabIndex: '-1',
           ref: this.layerRef
         },
@@ -97,7 +100,7 @@ var LayerContainer = function (_Component) {
     if (onEsc) {
       content = React.createElement(
         Keyboard,
-        { onEsc: onEsc },
+        { target: 'document', onEsc: onEsc },
         content
       );
     }

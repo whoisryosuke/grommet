@@ -11,9 +11,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
+import Box from '../Box/Box';
+import Text from '../Text/Text';
+
 import { withFocus, withForwardRef, withTheme } from '../hocs';
 
-import StyledAnchor, { StyledIcon } from './StyledAnchor';
+import StyledAnchor from './StyledAnchor';
 import doc from './doc';
 
 var Anchor = function (_Component) {
@@ -50,30 +53,18 @@ var Anchor = function (_Component) {
         theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'forwardRef', 'href', 'icon', 'focus', 'label', 'primary', 'onClick', 'reverse', 'theme']);
 
-    var anchorIcon = void 0;
-    if (icon) {
-      anchorIcon = icon;
-    }
+    var anchorLabel = typeof label === 'string' ? React.createElement(
+      Text,
+      null,
+      React.createElement(
+        'strong',
+        null,
+        label
+      )
+    ) : label;
 
-    if (anchorIcon) {
-      anchorIcon = React.createElement(
-        StyledIcon,
-        { reverse: reverse, label: label, theme: theme },
-        anchorIcon
-      );
-    }
-
-    var first = void 0;
-    var second = void 0;
-    if (children) {
-      first = children;
-    } else if (reverse) {
-      first = label || null;
-      second = anchorIcon || null;
-    } else {
-      first = anchorIcon || null;
-      second = label || null;
-    }
+    var first = reverse ? anchorLabel : icon;
+    var second = reverse ? icon : anchorLabel;
 
     return React.createElement(
       StyledAnchor,
@@ -81,7 +72,7 @@ var Anchor = function (_Component) {
         innerRef: forwardRef,
         'aria-label': a11yTitle,
         disabled: disabled,
-        icon: anchorIcon,
+        icon: icon,
         focus: focus,
         label: label,
         primary: primary,
@@ -90,8 +81,12 @@ var Anchor = function (_Component) {
         href: !disabled ? href : undefined,
         onClick: !disabled ? onClick : undefined
       }),
-      first,
-      second
+      first || second ? React.createElement(
+        Box,
+        { tag: 'span', direction: 'row', align: 'center', gap: 'small', style: { display: 'inline-flex' } },
+        first,
+        second
+      ) : children
     );
   };
 

@@ -10,6 +10,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _Box = require('../Box/Box');
+
+var _Box2 = _interopRequireDefault(_Box);
+
+var _Text = require('../Text/Text');
+
+var _Text2 = _interopRequireDefault(_Text);
+
 var _hocs = require('../hocs');
 
 var _StyledButton = require('./StyledButton');
@@ -61,33 +69,26 @@ var Button = function (_Component) {
         href = _props.href,
         label = _props.label,
         onClick = _props.onClick,
+        plain = _props.plain,
         reverse = _props.reverse,
         theme = _props.theme,
         type = _props.type,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'forwardRef', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'forwardRef', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
 
     var Tag = href ? AnchorStyledButton : _StyledButton2.default;
 
-    var buttonIcon = void 0;
-    if (icon) {
-      buttonIcon = _react2.default.createElement(
-        _StyledButton.StyledIcon,
-        { 'aria-hidden': true, key: 'styled-icon', theme: theme },
-        icon
-      );
-    }
-
-    var buttonLabel = void 0;
-    if (label) {
-      buttonLabel = _react2.default.createElement(
-        _StyledButton.StyledLabel,
-        { key: 'styled-label', theme: theme },
+    var buttonLabel = typeof label === 'string' ? _react2.default.createElement(
+      _Text2.default,
+      null,
+      _react2.default.createElement(
+        'strong',
+        null,
         label
-      );
-    }
+      )
+    ) : label;
 
-    var first = reverse ? buttonLabel : buttonIcon;
-    var second = reverse ? buttonIcon : buttonLabel;
+    var first = reverse ? buttonLabel : icon;
+    var second = reverse ? icon : buttonLabel;
 
     var disabled = !href && !onClick && ['reset', 'submit'].indexOf(type) === -1;
 
@@ -103,11 +104,16 @@ var Button = function (_Component) {
         href: href,
         label: label,
         onClick: onClick,
-        plain: _react.Children.count(children) > 0 || icon && !label,
+        plain: typeof plain !== 'undefined' ? plain : _react.Children.count(children) > 0 || icon && !label,
         theme: theme,
         type: !href ? type : undefined
       }),
-      first || second ? [first, second] : children
+      first || second ? _react2.default.createElement(
+        _Box2.default,
+        { direction: 'row', align: 'center', gap: 'small' },
+        first,
+        second
+      ) : children
     );
   };
 

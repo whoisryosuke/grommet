@@ -64,7 +64,8 @@ Layer.defaultProps = {
   full: false,
   margin: 'none',
   modal: true,
-  position: 'center'
+  position: 'center',
+  responsive: true
 };
 
 

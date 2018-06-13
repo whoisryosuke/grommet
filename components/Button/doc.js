@@ -32,6 +32,7 @@ exports.default = function (Button) {
     icon: _reactDesc.PropTypes.element.description('Icon element to place in the button.'),
     label: _reactDesc.PropTypes.node.description('Label text to place in the button.'),
     onClick: _reactDesc.PropTypes.func.description('Click handler. Not setting this property and not specifying a href\ncauses the Button to be disabled.'),
+    plain: _reactDesc.PropTypes.bool.description('Whether this is a plain button with no border or padding.'),
     primary: _reactDesc.PropTypes.bool.description('Whether this is a primary button. There should be at most one per page or screen.'),
     reverse: _reactDesc.PropTypes.bool.description('Whether an icon and label should be reversed so that the icon is at the\nend of the anchor.'),
     type: _reactDesc.PropTypes.oneOf(['button', 'reset', 'submit']).description('The type of button. Set the type to submit for the default button on forms.').defaultValue('button')

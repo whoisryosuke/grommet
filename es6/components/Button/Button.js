@@ -11,9 +11,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Children, Component } from 'react';
 import { compose } from 'recompose';
 
+import Box from '../Box/Box';
+import Text from '../Text/Text';
+
 import { withFocus, withForwardRef, withTheme } from '../hocs';
 
-import StyledButton, { StyledLabel, StyledIcon } from './StyledButton';
+import StyledButton from './StyledButton';
 import doc from './doc';
 
 var AnchorStyledButton = StyledButton.withComponent('a');
@@ -47,33 +50,26 @@ var Button = function (_Component) {
         href = _props.href,
         label = _props.label,
         onClick = _props.onClick,
+        plain = _props.plain,
         reverse = _props.reverse,
         theme = _props.theme,
         type = _props.type,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'forwardRef', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'reverse', 'theme', 'type']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'forwardRef', 'children', 'icon', 'fill', 'focus', 'href', 'label', 'onClick', 'plain', 'reverse', 'theme', 'type']);
 
     var Tag = href ? AnchorStyledButton : StyledButton;
 
-    var buttonIcon = void 0;
-    if (icon) {
-      buttonIcon = React.createElement(
-        StyledIcon,
-        { 'aria-hidden': true, key: 'styled-icon', theme: theme },
-        icon
-      );
-    }
-
-    var buttonLabel = void 0;
-    if (label) {
-      buttonLabel = React.createElement(
-        StyledLabel,
-        { key: 'styled-label', theme: theme },
+    var buttonLabel = typeof label === 'string' ? React.createElement(
+      Text,
+      null,
+      React.createElement(
+        'strong',
+        null,
         label
-      );
-    }
+      )
+    ) : label;
 
-    var first = reverse ? buttonLabel : buttonIcon;
-    var second = reverse ? buttonIcon : buttonLabel;
+    var first = reverse ? buttonLabel : icon;
+    var second = reverse ? icon : buttonLabel;
 
     var disabled = !href && !onClick && ['reset', 'submit'].indexOf(type) === -1;
 
@@ -89,11 +85,16 @@ var Button = function (_Component) {
         href: href,
         label: label,
         onClick: onClick,
-        plain: Children.count(children) > 0 || icon && !label,
+        plain: typeof plain !== 'undefined' ? plain : Children.count(children) > 0 || icon && !label,
         theme: theme,
         type: !href ? type : undefined
       }),
-      first || second ? [first, second] : children
+      first || second ? React.createElement(
+        Box,
+        { direction: 'row', align: 'center', gap: 'small' },
+        first,
+        second
+      ) : children
     );
   };
 
