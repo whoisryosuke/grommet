@@ -1,5 +1,7 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -35,13 +37,60 @@ var SimpleButton = function (_Component) {
     return _react2.default.createElement(
       _Grommet2.default,
       null,
-      _react2.default.createElement(_Button2.default, { label: 'Submit', onClick: function onClick() {} })
+      _react2.default.createElement(_Button2.default, _extends({ label: 'Submit', onClick: function onClick() {} }, this.props))
     );
   };
 
   return SimpleButton;
 }(_react.Component);
 
-(0, _react3.storiesOf)('Button', module).add('Simple Button', function () {
+var customTheme = {
+  button: {
+    border: {
+      radius: undefined,
+      color: '#2196f3'
+    },
+    padding: {
+      vertical: '12px',
+      horizontal: '24px'
+    },
+    colors: {
+      primary: '#2196f3'
+    },
+    extend: function extend(props) {
+      var extraStyles = '';
+      if (props.primary) {
+        extraStyles = '\n          text-transform: uppercase;\n        ';
+      }
+      return '\n        color: white;\n\n        span {\n          font-size: 12px;\n        }\n\n        ' + extraStyles + '\n      ';
+    }
+  }
+};
+
+var CustomThemeButton = function (_Component2) {
+  _inherits(CustomThemeButton, _Component2);
+
+  function CustomThemeButton() {
+    _classCallCheck(this, CustomThemeButton);
+
+    return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
+  }
+
+  CustomThemeButton.prototype.render = function render() {
+    return _react2.default.createElement(
+      _Grommet2.default,
+      { theme: customTheme },
+      _react2.default.createElement(_Button2.default, { label: 'Submit', onClick: function onClick() {}, primary: true })
+    );
+  };
+
+  return CustomThemeButton;
+}(_react.Component);
+
+(0, _react3.storiesOf)('Button', module).add('Default', function () {
   return _react2.default.createElement(SimpleButton, null);
+}).add('Primary', function () {
+  return _react2.default.createElement(SimpleButton, { primary: true });
+}).add('Custom theme', function () {
+  return _react2.default.createElement(CustomThemeButton, null);
 });

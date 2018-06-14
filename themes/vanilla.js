@@ -234,15 +234,7 @@ exports.default = (0, _utils.deepFreeze)({
       radius: baseSpacing + 'px'
     },
     colors: {
-      accent: (0, _styledComponents.css)(['', ''], function (props) {
-        return (0, _utils.colorForName)('accent-1', props.theme);
-      }),
-      critical: (0, _styledComponents.css)(['', ''], function (props) {
-        return props.theme.global.colors.status.critical;
-      }),
-      secondary: (0, _styledComponents.css)(['', ''], function (props) {
-        return (0, _utils.colorForName)('neutral-2', props.theme);
-      }),
+      // primary: undefined,
       text: (0, _styledComponents.css)(['', ''], function (props) {
         return props.theme.global.colors.text;
       })

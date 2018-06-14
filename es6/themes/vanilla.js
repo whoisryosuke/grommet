@@ -229,15 +229,7 @@ export default deepFreeze({
       radius: baseSpacing + 'px'
     },
     colors: {
-      accent: css(['', ''], function (props) {
-        return colorForName('accent-1', props.theme);
-      }),
-      critical: css(['', ''], function (props) {
-        return props.theme.global.colors.status.critical;
-      }),
-      secondary: css(['', ''], function (props) {
-        return colorForName('neutral-2', props.theme);
-      }),
+      // primary: undefined,
       text: css(['', ''], function (props) {
         return props.theme.global.colors.text;
       })

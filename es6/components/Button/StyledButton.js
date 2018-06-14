@@ -14,7 +14,7 @@ var basicStyle = function basicStyle(props) {
 };
 
 var primaryStyle = function primaryStyle(props) {
-  return css(['', ' border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], backgroundStyle(props.color || 'brand', props.theme), props.theme.button.border.radius, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text);
+  return css(['', ' border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], backgroundStyle(props.color || props.theme.button.colors.primary || 'brand', props.theme), props.theme.button.border.radius, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text, colorIsDark(colorForName('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text);
 };
 
 var disabledStyle = css(['opacity:', ';cursor:default;'], function (props) {
