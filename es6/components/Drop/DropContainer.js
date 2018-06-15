@@ -178,6 +178,10 @@ var DropContainer = function (_Component) {
     }
   };
 
+  DropContainer.prototype.componentDidUpdate = function componentDidUpdate() {
+    this.place();
+  };
+
   DropContainer.prototype.componentWillUnmount = function componentWillUnmount() {
     this.removeScrollListener();
     window.removeEventListener('resize', this.onResize);
