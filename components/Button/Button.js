@@ -110,7 +110,12 @@ var Button = function (_Component) {
       }),
       first || second ? _react2.default.createElement(
         _Box2.default,
-        { direction: 'row', align: 'center', gap: 'small' },
+        {
+          direction: 'row',
+          align: 'center',
+          gap: 'small',
+          pad: icon && !plain ? 'small' : undefined
+        },
         first,
         second
       ) : children

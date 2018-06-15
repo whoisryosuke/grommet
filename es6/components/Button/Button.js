@@ -91,7 +91,12 @@ var Button = function (_Component) {
       }),
       first || second ? React.createElement(
         Box,
-        { direction: 'row', align: 'center', gap: 'small' },
+        {
+          direction: 'row',
+          align: 'center',
+          gap: 'small',
+          pad: icon && !plain ? 'small' : undefined
+        },
         first,
         second
       ) : children

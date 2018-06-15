@@ -8,6 +8,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _react3 = require('@storybook/react');
 
+var _grommetIcons = require('grommet-icons');
+
 var _Button = require('../Button/Button');
 
 var _Button2 = _interopRequireDefault(_Button);
@@ -16,33 +18,52 @@ var _Grommet = require('../Grommet/Grommet');
 
 var _Grommet2 = _interopRequireDefault(_Grommet);
 
+var _Box = require('../Box/Box');
+
+var _Box2 = _interopRequireDefault(_Box);
+
+var _Text = require('../Text/Text');
+
+var _Text2 = _interopRequireDefault(_Text);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var SimpleButton = function SimpleButton(props) {
+  return _react2.default.createElement(
+    _Grommet2.default,
+    null,
+    _react2.default.createElement(_Button2.default, _extends({ label: 'Submit', onClick: function onClick() {} }, props))
+  );
+};
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var IconButton = function IconButton() {
+  return _react2.default.createElement(
+    _Grommet2.default,
+    null,
+    _react2.default.createElement(_Button2.default, { icon: _react2.default.createElement(_grommetIcons.Add, null), hoverIndicator: true, onClick: function onClick() {} })
+  );
+};
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SimpleButton = function (_Component) {
-  _inherits(SimpleButton, _Component);
-
-  function SimpleButton() {
-    _classCallCheck(this, SimpleButton);
-
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
-  }
-
-  SimpleButton.prototype.render = function render() {
-    return _react2.default.createElement(
-      _Grommet2.default,
-      null,
-      _react2.default.createElement(_Button2.default, _extends({ label: 'Submit', onClick: function onClick() {} }, this.props))
-    );
-  };
-
-  return SimpleButton;
-}(_react.Component);
+var PlainButton = function PlainButton() {
+  return _react2.default.createElement(
+    _Grommet2.default,
+    null,
+    _react2.default.createElement(
+      _Button2.default,
+      { hoverIndicator: true, onClick: function onClick() {} },
+      _react2.default.createElement(
+        _Box2.default,
+        { pad: 'small', direction: 'row', align: 'center', gap: 'small' },
+        _react2.default.createElement(_grommetIcons.Add, null),
+        _react2.default.createElement(
+          _Text2.default,
+          null,
+          'Add'
+        )
+      )
+    )
+  );
+};
 
 var customTheme = {
   button: {
@@ -67,30 +88,22 @@ var customTheme = {
   }
 };
 
-var CustomThemeButton = function (_Component2) {
-  _inherits(CustomThemeButton, _Component2);
-
-  function CustomThemeButton() {
-    _classCallCheck(this, CustomThemeButton);
-
-    return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
-  }
-
-  CustomThemeButton.prototype.render = function render() {
-    return _react2.default.createElement(
-      _Grommet2.default,
-      { theme: customTheme },
-      _react2.default.createElement(_Button2.default, { label: 'Submit', onClick: function onClick() {}, primary: true })
-    );
-  };
-
-  return CustomThemeButton;
-}(_react.Component);
+var CustomThemeButton = function CustomThemeButton() {
+  return _react2.default.createElement(
+    _Grommet2.default,
+    { theme: customTheme },
+    _react2.default.createElement(_Button2.default, { label: 'Submit', onClick: function onClick() {}, primary: true })
+  );
+};
 
 (0, _react3.storiesOf)('Button', module).add('Default', function () {
   return _react2.default.createElement(SimpleButton, null);
 }).add('Primary', function () {
   return _react2.default.createElement(SimpleButton, { primary: true });
+}).add('Icon', function () {
+  return _react2.default.createElement(IconButton, null);
+}).add('Plain', function () {
+  return _react2.default.createElement(PlainButton, null);
 }).add('Custom theme', function () {
   return _react2.default.createElement(CustomThemeButton, null);
 });

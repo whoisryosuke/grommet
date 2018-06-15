@@ -1,36 +1,50 @@
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { Add } from 'grommet-icons';
 
 import Button from '../Button/Button';
 import Grommet from '../Grommet/Grommet';
+import Box from '../Box/Box';
+import Text from '../Text/Text';
 
-var SimpleButton = function (_Component) {
-  _inherits(SimpleButton, _Component);
+var SimpleButton = function SimpleButton(props) {
+  return React.createElement(
+    Grommet,
+    null,
+    React.createElement(Button, _extends({ label: 'Submit', onClick: function onClick() {} }, props))
+  );
+};
 
-  function SimpleButton() {
-    _classCallCheck(this, SimpleButton);
+var IconButton = function IconButton() {
+  return React.createElement(
+    Grommet,
+    null,
+    React.createElement(Button, { icon: React.createElement(Add, null), hoverIndicator: true, onClick: function onClick() {} })
+  );
+};
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
-  }
-
-  SimpleButton.prototype.render = function render() {
-    return React.createElement(
-      Grommet,
-      null,
-      React.createElement(Button, _extends({ label: 'Submit', onClick: function onClick() {} }, this.props))
-    );
-  };
-
-  return SimpleButton;
-}(Component);
+var PlainButton = function PlainButton() {
+  return React.createElement(
+    Grommet,
+    null,
+    React.createElement(
+      Button,
+      { hoverIndicator: true, onClick: function onClick() {} },
+      React.createElement(
+        Box,
+        { pad: 'small', direction: 'row', align: 'center', gap: 'small' },
+        React.createElement(Add, null),
+        React.createElement(
+          Text,
+          null,
+          'Add'
+        )
+      )
+    )
+  );
+};
 
 var customTheme = {
   button: {
@@ -55,30 +69,22 @@ var customTheme = {
   }
 };
 
-var CustomThemeButton = function (_Component2) {
-  _inherits(CustomThemeButton, _Component2);
-
-  function CustomThemeButton() {
-    _classCallCheck(this, CustomThemeButton);
-
-    return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
-  }
-
-  CustomThemeButton.prototype.render = function render() {
-    return React.createElement(
-      Grommet,
-      { theme: customTheme },
-      React.createElement(Button, { label: 'Submit', onClick: function onClick() {}, primary: true })
-    );
-  };
-
-  return CustomThemeButton;
-}(Component);
+var CustomThemeButton = function CustomThemeButton() {
+  return React.createElement(
+    Grommet,
+    { theme: customTheme },
+    React.createElement(Button, { label: 'Submit', onClick: function onClick() {}, primary: true })
+  );
+};
 
 storiesOf('Button', module).add('Default', function () {
   return React.createElement(SimpleButton, null);
 }).add('Primary', function () {
   return React.createElement(SimpleButton, { primary: true });
+}).add('Icon', function () {
+  return React.createElement(IconButton, null);
+}).add('Plain', function () {
+  return React.createElement(PlainButton, null);
 }).add('Custom theme', function () {
   return React.createElement(CustomThemeButton, null);
 });
