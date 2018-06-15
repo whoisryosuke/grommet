@@ -32,7 +32,7 @@ export default (function (TextInput) {
     name: PropTypes.string.description('The name attribute of the input.'),
     onInput: PropTypes.func.description('Function that will be called when the user types in the input.'),
     onSelect: PropTypes.func.description('Function that will be called when the user selects a suggestion.\nThe suggestion contains the object chosen from the supplied suggestions.'),
-    placeholder: PropTypes.string.description('Placeholder text to use when no value is provided.'),
+    placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).description('Placeholder to use when no value is provided.'),
     plain: PropTypes.bool.description('Whether this is a plain input with no border or padding.\nOnly use this when the containing context provides sufficient affordance'),
     size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']).description('The size of the TextInput.'),
     suggestions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.shape({

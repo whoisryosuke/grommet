@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
-import { inputStyle } from '../../utils';
+import { inputStyle, parseMetricToNum } from '../../utils';
 
 var placeholderColor = css(['color:', ';'], function (props) {
   return props.theme.global.colors.placeholder;
@@ -27,7 +27,13 @@ var StyledTextInput = styled.input.withConfig({
 
 export var StyledTextInputContainer = styled.div.withConfig({
   displayName: 'StyledTextInput__StyledTextInputContainer'
-})(['width:100%;']);
+})(['position:relative;width:100%;']);
+
+export var StyledPlaceholder = styled.div.withConfig({
+  displayName: 'StyledTextInput__StyledPlaceholder'
+})(['position:absolute;left:', 'px;top:50%;transform:translateY(-50%);display:flex;justify-content:center;'], function (props) {
+  return parseMetricToNum(props.theme.global.spacing) / 2 - parseMetricToNum(props.theme.global.input.border.width);
+});
 
 export var StyledSuggestions = styled.ol.withConfig({
   displayName: 'StyledTextInput__StyledSuggestions'

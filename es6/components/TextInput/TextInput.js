@@ -19,7 +19,7 @@ import { Keyboard } from '../Keyboard';
 import { Drop } from '../Drop';
 import { withAnnounce, withFocus, withForwardRef, withTheme } from '../hocs';
 
-import StyledTextInput, { StyledTextInputContainer, StyledSuggestions } from './StyledTextInput';
+import StyledTextInput, { StyledTextInputContainer, StyledPlaceholder, StyledSuggestions } from './StyledTextInput';
 import doc from './doc';
 
 function renderLabel(suggestion) {
@@ -237,12 +237,14 @@ var TextInput = function (_Component) {
         dropAlign = _props2.dropAlign,
         dropTarget = _props2.dropTarget,
         id = _props2.id,
+        placeholder = _props2.placeholder,
         plain = _props2.plain,
+        theme = _props2.theme,
         value = _props2.value,
         _onFocus = _props2.onFocus,
         _onInput = _props2.onInput,
         onKeyDown = _props2.onKeyDown,
-        rest = _objectWithoutProperties(_props2, ['defaultValue', 'dropAlign', 'dropTarget', 'id', 'plain', 'value', 'onFocus', 'onInput', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props2, ['defaultValue', 'dropAlign', 'dropTarget', 'id', 'placeholder', 'plain', 'theme', 'value', 'onFocus', 'onInput', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
     delete rest.forwardRef;
@@ -275,6 +277,11 @@ var TextInput = function (_Component) {
     return React.createElement(
       StyledTextInputContainer,
       { plain: plain },
+      placeholder && typeof placeholder !== 'string' && !value ? React.createElement(
+        StyledPlaceholder,
+        { theme: theme },
+        placeholder
+      ) : null,
       React.createElement(
         Keyboard,
         {
@@ -289,7 +296,9 @@ var TextInput = function (_Component) {
           id: id,
           innerRef: inputRef,
           autoComplete: 'off',
-          plain: plain
+          plain: plain,
+          placeholder: typeof placeholder === 'string' ? placeholder : undefined,
+          theme: theme
         }, rest, {
           defaultValue: renderLabel(defaultValue),
           value: renderLabel(value),
