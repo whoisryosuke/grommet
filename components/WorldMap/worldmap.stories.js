@@ -26,16 +26,26 @@ var SimpleWorldMap = function (_Component) {
   _inherits(SimpleWorldMap, _Component);
 
   function SimpleWorldMap() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, SimpleWorldMap);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.onSelectPlace = function (place) {
+      _this.setState({ places: [{ color: 'accent-1', location: place }] });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   SimpleWorldMap.prototype.render = function render() {
+    var places = this.state.places;
+
     return _react2.default.createElement(
       _Grommet2.default,
       null,
-      _react2.default.createElement(_WorldMap2.default, null)
+      _react2.default.createElement(_WorldMap2.default, { onSelectPlace: this.onSelectPlace, places: places })
     );
   };
 

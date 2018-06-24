@@ -221,17 +221,19 @@ var buildInteractiveProps = function buildInteractiveProps(_ref4, activeFunc, ac
 var WorldMap = function (_Component) {
   _inherits(WorldMap, _Component);
 
-  function WorldMap(props, context) {
+  function WorldMap() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, WorldMap);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.onMouseOver = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.onMouseOver = function () {
       // track when we're over the map to avoid dealing with mouse moves
       _this.setState({ over: true });
-    };
-
-    _this.onMouseMove = function (event) {
+    }, _this.onMouseMove = function (event) {
       var width = _this.state.width;
       // determine the map coordinates for where the mouse is
       // containerRef uses the group so we can handle aspect ratio scaling
@@ -240,15 +242,17 @@ var WorldMap = function (_Component) {
       var scale = rect.width / width; // since the SVG viewBox might be scaled
       var coords = [Math.round((event.clientX - rect.left) / scale / FACTOR), Math.round((event.clientY - rect.top) / scale / FACTOR)];
       _this.setState({ activeCoords: coords });
-    };
-
-    _this.onMouseLeave = function () {
+    }, _this.onMouseLeave = function () {
       _this.setState({ over: false, activeCoords: undefined });
-    };
-
-    _this.state = updateState(buildState(), props);
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
+
+  WorldMap.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    if (!prevState.continents) {
+      return updateState(buildState(), nextProps);
+    }
+    return updateState(prevState, nextProps);
+  };
 
   WorldMap.prototype.render = function render() {
     var _this2 = this;
