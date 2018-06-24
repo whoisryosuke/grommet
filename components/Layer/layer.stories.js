@@ -34,11 +34,17 @@ var CenterLayer = function (_Component) {
       return _this.setState({ open: true });
     }, _this.onClose = function () {
       return _this.setState({ open: undefined });
+    }, _this.onOpen2 = function () {
+      return _this.setState({ open2: true });
+    }, _this.onClose2 = function () {
+      return _this.setState({ open2: undefined });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   CenterLayer.prototype.render = function render() {
-    var open = this.state.open;
+    var _state = this.state,
+        open = _state.open,
+        open2 = _state.open2;
 
     return _react2.default.createElement(
       _.Grommet,
@@ -89,8 +95,8 @@ var CenterLayer = function (_Component) {
               pad: { top: 'medium', bottom: 'small' }
             },
             _react2.default.createElement(_.Button, {
-              label: 'Cancel',
-              onClick: this.onClose,
+              label: 'Open 2',
+              onClick: this.onOpen2,
               color: 'dark-6'
             }),
             _react2.default.createElement(_.Button, {
@@ -106,6 +112,40 @@ var CenterLayer = function (_Component) {
               onClick: this.onClose,
               primary: true,
               color: 'status-critical'
+            })
+          )
+        )
+      ),
+      open2 && _react2.default.createElement(
+        _.Layer,
+        {
+          position: 'top',
+          modal: true,
+          onClickOutside: this.onClose2,
+          onEsc: this.onClose2
+        },
+        _react2.default.createElement(
+          _.Box,
+          { pad: 'medium', gap: 'small', width: 'medium' },
+          _react2.default.createElement(
+            _.Heading,
+            { level: 3, margin: 'none' },
+            'Confirm 2'
+          ),
+          _react2.default.createElement(
+            _.Box,
+            {
+              tag: 'footer',
+              gap: 'small',
+              direction: 'row',
+              align: 'center',
+              justify: 'end',
+              pad: { top: 'medium', bottom: 'small' }
+            },
+            _react2.default.createElement(_.Button, {
+              label: 'Close',
+              onClick: this.onClose2,
+              color: 'dark-6'
             })
           )
         )

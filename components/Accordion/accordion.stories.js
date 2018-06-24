@@ -406,7 +406,7 @@ var CustomHeaderAccordion = function (_Component4) {
     }
 
     return _ret3 = (_temp3 = (_this6 = _possibleConstructorReturn(this, _Component4.call.apply(_Component4, [this].concat(args))), _this6), _this6.state = {
-      activeIndex: 0
+      activeIndex: [0]
     }, _temp3), _possibleConstructorReturn(_this6, _ret3);
   }
 
@@ -429,7 +429,7 @@ var CustomHeaderAccordion = function (_Component4) {
         _react2.default.createElement(
           _.AccordionPanel,
           {
-            header: renderPanelHeader('Panel 1', activeIndex === 0)
+            header: renderPanelHeader('Panel 1', activeIndex.includes(0))
           },
           _react2.default.createElement(
             _.Box,
@@ -445,7 +445,7 @@ var CustomHeaderAccordion = function (_Component4) {
         _react2.default.createElement(
           _.AccordionPanel,
           {
-            header: renderPanelHeader('Panel 2', activeIndex === 1)
+            header: renderPanelHeader('Panel 2', activeIndex.includes(1))
           },
           _react2.default.createElement(
             _.Box,
@@ -460,7 +460,7 @@ var CustomHeaderAccordion = function (_Component4) {
         _react2.default.createElement(
           _.AccordionPanel,
           {
-            header: renderPanelHeader('Panel 3', activeIndex === 2)
+            header: renderPanelHeader('Panel 3', activeIndex.includes(2))
           },
           _react2.default.createElement(
             _.Box,

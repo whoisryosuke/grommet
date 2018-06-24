@@ -285,12 +285,6 @@ exports.default = (0, _utils.deepFreeze)({
     }
   },
   checkBox: {
-    check: {
-      color: (0, _styledComponents.css)(['', ''], function (props) {
-        return props.theme.global.colors.brand;
-      }),
-      width: '4px'
-    },
     border: {
       color: {
         dark: 'rgba(255, 255, 255, 0.5)',
@@ -298,6 +292,27 @@ exports.default = (0, _utils.deepFreeze)({
       },
       radius: '4px',
       width: '2px'
+    },
+    check: {
+      color: (0, _styledComponents.css)(['', ''], function (props) {
+        return props.theme.global.colors.brand;
+      }),
+      width: '4px'
+    },
+    icons: {
+      // checked: undefined,
+    },
+    hover: {
+      border: {
+        color: {
+          dark: (0, _styledComponents.css)(['', ''], function (props) {
+            return (0, _utils.colorForName)('white', props.theme);
+          }),
+          light: (0, _styledComponents.css)(['', ''], function (props) {
+            return (0, _utils.colorForName)('black', props.theme);
+          })
+        }
+      }
     },
     size: baseSpacing + 'px',
     toggle: {
@@ -464,7 +479,12 @@ exports.default = (0, _utils.deepFreeze)({
   select: {
     icons: {
       down: _grommetIcons.FormDown
-    }
+    },
+    // searchInput: undefined,
+    drop: {
+      maxHeight: '384px'
+    },
+    step: 20
   },
   text: {
     medium: { size: '16px', height: 1.375 },
@@ -474,6 +494,9 @@ exports.default = (0, _utils.deepFreeze)({
     xlarge: { size: '32px', height: 1.1875 },
     xxlarge: { size: '48px', height: 1.125 }
   },
+  // textInput: {
+  //   extend: undefined,
+  // },
   video: {
     captions: {
       background: (0, _polished.rgba)(0, 0, 0, 0.7)

@@ -59,14 +59,21 @@ var Select = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { open: false }, _this.onOpen = function () {
-      _this.setState({ open: true });
+      var onOpen = _this.props.onOpen;
+
+      _this.setState({ open: true }, function () {
+        if (onOpen) {
+          onOpen();
+        }
+      });
     }, _this.onClose = function () {
       var onClose = _this.props.onClose;
 
-      _this.setState({ open: false });
-      if (onClose) {
-        onClose();
-      }
+      _this.setState({ open: false }, function () {
+        if (onClose) {
+          onClose();
+        }
+      });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -76,6 +83,7 @@ var Select = function (_Component) {
     var _props = this.props,
         a11yTitle = _props.a11yTitle,
         children = _props.children,
+        closeOnChange = _props.closeOnChange,
         disabled = _props.disabled,
         dropAlign = _props.dropAlign,
         dropTarget = _props.dropTarget,
@@ -88,7 +96,7 @@ var Select = function (_Component) {
         size = _props.size,
         theme = _props.theme,
         value = _props.value,
-        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'disabled', 'dropAlign', 'dropTarget', 'forwardRef', 'messages', 'onChange', 'onClose', 'placeholder', 'plain', 'size', 'theme', 'value']);
+        rest = _objectWithoutProperties(_props, ['a11yTitle', 'children', 'closeOnChange', 'disabled', 'dropAlign', 'dropTarget', 'forwardRef', 'messages', 'onChange', 'onClose', 'placeholder', 'plain', 'size', 'theme', 'value']);
 
     var open = this.state.open;
 
@@ -98,7 +106,9 @@ var Select = function (_Component) {
         args[_key2 - 1] = arguments[_key2];
       }
 
-      _this2.onClose();
+      if (closeOnChange) {
+        _this2.onClose();
+      }
       if (onChange) {
         onChange.apply(undefined, [event].concat(args));
       }
@@ -191,6 +201,7 @@ var Select = function (_Component) {
 }(_react.Component);
 
 Select.defaultProps = {
+  closeOnChange: true,
   dropAlign: { top: 'bottom', left: 'left' },
   messages: { multiple: 'multiple' }
 };

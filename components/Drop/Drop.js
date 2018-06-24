@@ -36,15 +36,16 @@ var Drop = function (_Component) {
   _inherits(Drop, _Component);
 
   function Drop() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Drop);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
-  }
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-  Drop.prototype.componentWillMount = function componentWillMount() {
-    this.originalFocusedElement = document.activeElement;
-    this.dropContainer = (0, _utils.getNewContainer)();
-  };
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.originalFocusedElement = document.activeElement, _this.dropContainer = (0, _utils.getNewContainer)(), _temp), _possibleConstructorReturn(_this, _ret);
+  }
 
   Drop.prototype.componentWillUnmount = function componentWillUnmount() {
     var restrictFocus = this.props.restrictFocus;

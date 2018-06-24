@@ -11,7 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
-import { withForwardRef, withTheme } from '../hocs';
+import { withFocus, withForwardRef, withTheme } from '../hocs';
 import { removeUndefined } from '../../utils/object';
 
 import StyledCheckBox, { StyledCheckBoxContainer, StyledCheckBoxInput, StyledCheckBoxBox, StyledCheckBoxToggle, StyledCheckBoxKnob } from './StyledCheckBox';
@@ -30,6 +30,7 @@ var CheckBox = function (_Component) {
     var _props = this.props,
         checked = _props.checked,
         disabled = _props.disabled,
+        focus = _props.focus,
         forwardRef = _props.forwardRef,
         id = _props.id,
         label = _props.label,
@@ -38,7 +39,7 @@ var CheckBox = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         toggle = _props.toggle,
-        rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'forwardRef', 'id', 'label', 'name', 'onChange', 'reverse', 'theme', 'toggle']);
+        rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'focus', 'forwardRef', 'id', 'label', 'name', 'onChange', 'reverse', 'theme', 'toggle']);
 
     var normalizedLabel = typeof label === 'string' ? React.createElement(
       'div',
@@ -51,14 +52,16 @@ var CheckBox = function (_Component) {
       hidden = React.createElement('input', { name: name, type: 'hidden', value: 'true' });
     }
 
+    var Icon = theme.checkBox.icons.checked;
+
     var control = toggle ? React.createElement(
       StyledCheckBoxToggle,
-      { theme: theme },
+      { focus: focus, theme: theme },
       React.createElement(StyledCheckBoxKnob, { theme: theme })
     ) : React.createElement(
       StyledCheckBoxBox,
-      { theme: theme },
-      React.createElement(
+      { focus: focus, theme: theme },
+      Icon ? React.createElement(Icon, null) : React.createElement(
         'svg',
         { viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
         React.createElement('path', { fill: 'none', d: 'M6,11.3 L10.3,16 L18,6.2' })
@@ -93,4 +96,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(CheckBox);
 }
 
-export default compose(withTheme, withForwardRef)(CheckBox);
+export default compose(withFocus, withTheme, withForwardRef)(CheckBox);

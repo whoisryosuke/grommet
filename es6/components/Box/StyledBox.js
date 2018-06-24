@@ -64,11 +64,7 @@ var basisStyle = css(['flex-basis:', ';'], function (props) {
 // https://stackoverflow.com/questions/36247140/why-doesnt-flex-item-shrink-past-content-size
 // we assume we are in the context of a Box going the other direction
 // TODO: revisit this
-var directionStyle = css(['', ' ', ' flex-direction:', ';', '}'], function (props) {
-  return props.directionProp === 'row' && 'min-height: 0;';
-}, function (props) {
-  return props.directionProp === 'column' && 'min-width: 0;';
-}, function (props) {
+var directionStyle = css(['min-width:0;min-height:0;flex-direction:', ';', '}'], function (props) {
   return props.directionProp === 'row-responsive' ? 'row' : props.directionProp;
 }, function (props) {
   return props.directionProp === 'row-responsive' ? palm('\n    flex-direction: column;\n    flex-basis: auto;\n    justify-content: flex-start;\n    align-items: stretch;\n  ') : '';

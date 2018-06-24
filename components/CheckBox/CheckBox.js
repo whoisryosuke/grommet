@@ -45,6 +45,7 @@ var CheckBox = function (_Component) {
     var _props = this.props,
         checked = _props.checked,
         disabled = _props.disabled,
+        focus = _props.focus,
         forwardRef = _props.forwardRef,
         id = _props.id,
         label = _props.label,
@@ -53,7 +54,7 @@ var CheckBox = function (_Component) {
         reverse = _props.reverse,
         theme = _props.theme,
         toggle = _props.toggle,
-        rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'forwardRef', 'id', 'label', 'name', 'onChange', 'reverse', 'theme', 'toggle']);
+        rest = _objectWithoutProperties(_props, ['checked', 'disabled', 'focus', 'forwardRef', 'id', 'label', 'name', 'onChange', 'reverse', 'theme', 'toggle']);
 
     var normalizedLabel = typeof label === 'string' ? _react2.default.createElement(
       'div',
@@ -66,14 +67,16 @@ var CheckBox = function (_Component) {
       hidden = _react2.default.createElement('input', { name: name, type: 'hidden', value: 'true' });
     }
 
+    var Icon = theme.checkBox.icons.checked;
+
     var control = toggle ? _react2.default.createElement(
       _StyledCheckBox.StyledCheckBoxToggle,
-      { theme: theme },
+      { focus: focus, theme: theme },
       _react2.default.createElement(_StyledCheckBox.StyledCheckBoxKnob, { theme: theme })
     ) : _react2.default.createElement(
       _StyledCheckBox.StyledCheckBoxBox,
-      { theme: theme },
-      _react2.default.createElement(
+      { focus: focus, theme: theme },
+      Icon ? _react2.default.createElement(Icon, null) : _react2.default.createElement(
         'svg',
         { viewBox: '0 0 24 24', preserveAspectRatio: 'xMidYMid meet' },
         _react2.default.createElement('path', { fill: 'none', d: 'M6,11.3 L10.3,16 L18,6.2' })
@@ -108,4 +111,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(CheckBox);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme, _hocs.withForwardRef)(CheckBox);
+exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme, _hocs.withForwardRef)(CheckBox);

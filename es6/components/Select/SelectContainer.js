@@ -4,10 +4,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import React, { Component } from 'react';
+import React, { createRef, Component } from 'react';
 import { findDOMNode } from 'react-dom';
+import styled from 'styled-components';
 
-import { debounce } from '../../utils';
+import { debounce, isNodeAfterScroll, isNodeBeforeScroll, setFocusWithoutScroll } from '../../utils';
+
+import { withTheme } from '../hocs';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
@@ -15,6 +18,12 @@ import { InfiniteScroll } from '../InfiniteScroll';
 import { Keyboard } from '../Keyboard';
 import { Text } from '../Text';
 import { TextInput } from '../TextInput';
+
+var SelectContainerBox = styled(Box).withConfig({
+  displayName: 'SelectContainer__SelectContainerBox'
+})(['max-height:', ';scroll-behavior:\'smooth\';'], function (props) {
+  return props.theme.select.drop.maxHeight;
+});
 
 var SelectContainer = function (_Component) {
   _inherits(SelectContainer, _Component);
@@ -31,13 +40,13 @@ var SelectContainer = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
       activeIndex: -1, // for tracking keyboard interaction
       search: ''
-    }, _this.optionsRef = {}, _this.onInput = function (event) {
+    }, _this.optionsRef = {}, _this.searchRef = createRef(), _this.selectRef = createRef(), _this.onInput = function (event) {
       _this.setState({ search: event.target.value }, function () {
         return _this.onSearch(_this.state.search);
       });
     }, _this.onSearch = debounce(function (search) {
       return _this.props.onSearch(search);
-    }, 150), _this.selectOption = function (option, index) {
+    }, 300), _this.selectOption = function (option, index) {
       var _this$props = _this.props,
           multiple = _this$props.multiple,
           onChange = _this$props.onChange,
@@ -67,7 +76,7 @@ var SelectContainer = function (_Component) {
         }
 
         onChange({
-          target: findDOMNode(_this.inputRef),
+          target: findDOMNode(_this.searchRef.current),
           option: option,
           value: nextValue,
           selected: nextSelected
@@ -79,13 +88,27 @@ var SelectContainer = function (_Component) {
 
       event.preventDefault();
       var index = Math.min(activeIndex + 1, options.length - 1);
-      _this.setState({ activeIndex: index });
+      _this.setState({ activeIndex: index }, function () {
+        var buttonNode = findDOMNode(_this.optionsRef[index]);
+        var selectNode = findDOMNode(_this.selectRef.current);
+
+        if (isNodeAfterScroll(buttonNode, selectNode) && selectNode.scrollBy) {
+          selectNode.scrollBy(0, buttonNode.getBoundingClientRect().height);
+        }
+      });
     }, _this.onPreviousOption = function (event) {
       var activeIndex = _this.state.activeIndex;
 
       event.preventDefault();
       var index = Math.max(activeIndex - 1, 0);
-      _this.setState({ activeIndex: index });
+      _this.setState({ activeIndex: index }, function () {
+        var buttonNode = findDOMNode(_this.optionsRef[index]);
+        var selectNode = findDOMNode(_this.selectRef.current);
+
+        if (isNodeBeforeScroll(buttonNode, selectNode) && selectNode.scrollBy) {
+          selectNode.scrollBy(0, -buttonNode.getBoundingClientRect().height);
+        }
+      });
     }, _this.onSelectOption = function (event) {
       var options = _this.props.options;
       var activeIndex = _this.state.activeIndex;
@@ -106,28 +129,25 @@ var SelectContainer = function (_Component) {
 
     setTimeout(function () {
       if (onSearch) {
-        findDOMNode(_this2.searchRef).querySelector('input').focus();
+        var input = findDOMNode(_this2.searchRef.current);
+        if (input && input.focus) {
+          setFocusWithoutScroll(input);
+        }
       } else if (_this2.selectRef) {
-        findDOMNode(_this2.selectRef).focus();
+        setFocusWithoutScroll(findDOMNode(_this2.selectRef.current));
       }
     }, 0);
   };
 
-  SelectContainer.prototype.componentDidUpdate = function componentDidUpdate() {
-    var activeIndex = this.state.activeIndex;
+  // wait 300ms of idle time before notifying that the search changed
+  // 300ms seems like the right amount to wait for after the used stopped typing
 
-    var buttonNode = findDOMNode(this.optionsRef[activeIndex]);
-    if (activeIndex >= 0 && buttonNode && buttonNode.scrollIntoView) {
-      buttonNode.scrollIntoView();
-    }
-  };
 
   SelectContainer.prototype.render = function render() {
     var _this3 = this;
 
     var _props = this.props,
         children = _props.children,
-        dropBackground = _props.dropBackground,
         id = _props.id,
         name = _props.name,
         onKeyDown = _props.onKeyDown,
@@ -135,11 +155,15 @@ var SelectContainer = function (_Component) {
         options = _props.options,
         searchPlaceholder = _props.searchPlaceholder,
         selected = _props.selected,
+        theme = _props.theme,
         value = _props.value;
     var _state = this.state,
         activeIndex = _state.activeIndex,
         search = _state.search;
 
+
+    var customSearchInput = theme.select.searchInput;
+    var SelectTextInput = customSearchInput || TextInput;
 
     return React.createElement(
       Keyboard,
@@ -152,44 +176,42 @@ var SelectContainer = function (_Component) {
       React.createElement(
         Box,
         {
-          id: id ? id + '__select-drop' : undefined,
-          background: dropBackground
+          id: id ? id + '__select-drop' : undefined
         },
-        onSearch ? React.createElement(
+        onSearch && React.createElement(
           Box,
-          { pad: 'xsmall' },
-          React.createElement(TextInput, {
-            focusIndicator: true,
+          { pad: !customSearchInput ? 'xsmall' : undefined, flex: false },
+          React.createElement(SelectTextInput, {
+            focusIndicator: !customSearchInput,
             size: 'small',
-            ref: function ref(_ref) {
-              _this3.searchRef = _ref;
-            },
+            ref: this.searchRef,
             type: 'search',
             value: search,
             placeholder: searchPlaceholder,
             onInput: this.onInput
           })
-        ) : undefined,
+        ),
         React.createElement(
-          Box,
+          SelectContainerBox,
           {
-            flex: false,
+            flex: true,
             role: 'menubar',
             tabIndex: '-1',
-            ref: function ref(_ref3) {
-              _this3.selectRef = _ref3;
-            }
+            ref: this.selectRef,
+            overflow: 'auto',
+            theme: theme
           },
           React.createElement(
             InfiniteScroll,
-            { items: options, step: 20 },
+            { items: options, step: theme.select.step },
             function (option, index) {
               return React.createElement(
                 Button,
                 {
+                  fill: true,
                   role: 'menuitem',
-                  ref: function ref(_ref2) {
-                    _this3.optionsRef[index] = _ref2;
+                  ref: function ref(_ref) {
+                    _this3.optionsRef[index] = _ref;
                   },
                   active: selected === index || Array.isArray(selected) && selected.indexOf(index) !== -1 || activeIndex === index || option && option === value || option && Array.isArray(value) && value.indexOf(option) !== -1,
                   key: 'option_' + (name || '') + '_' + index,
@@ -223,4 +245,4 @@ SelectContainer.defaultProps = {
 };
 
 
-export default SelectContainer;
+export default withTheme(SelectContainer);

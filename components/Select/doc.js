@@ -12,6 +12,7 @@ exports.default = function (Select) {
   DocumentedSelect.propTypes = {
     a11yTitle: _utils.a11yTitlePropType,
     children: _reactDesc.PropTypes.func.description('Function that will be called when each option is rendered.'),
+    closeOnChange: _reactDesc.PropTypes.bool.description('Wether to close the drop when a selection is made.').defaultValue(true),
     disabled: _reactDesc.PropTypes.bool.description('Whether the select should be disabled.'),
     dropAlign: _reactDesc.PropTypes.shape({
       top: _reactDesc.PropTypes.oneOf(['top', 'bottom']),

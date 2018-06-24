@@ -66,7 +66,7 @@ var getBodyChildElements = exports.getBodyChildElements = function getBodyChildE
 var getNewContainer = exports.getNewContainer = function getNewContainer() {
   // setup DOM
   var container = document.createElement('div');
-  document.body.insertBefore(container, document.body.firstChild);
+  document.body.appendChild(container);
   return container;
 };
 
@@ -140,11 +140,37 @@ var findVisibleParent = exports.findVisibleParent = function findVisibleParent(e
   return undefined;
 };
 
+var isNodeAfterScroll = exports.isNodeAfterScroll = function isNodeAfterScroll(node) {
+  var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window;
+
+  var _node$getBoundingClie = node.getBoundingClientRect(),
+      bottom = _node$getBoundingClie.bottom;
+
+  var _target$getBoundingCl = target.getBoundingClientRect(),
+      height = _target$getBoundingCl.height;
+
+  return bottom >= height;
+};
+
+var isNodeBeforeScroll = exports.isNodeBeforeScroll = function isNodeBeforeScroll(node) {
+  var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window;
+
+  var _node$getBoundingClie2 = node.getBoundingClientRect(),
+      top = _node$getBoundingClie2.top;
+
+  var _target$getBoundingCl2 = target.getBoundingClientRect(),
+      targetTop = _target$getBoundingCl2.top;
+
+  return top <= targetTop;
+};
+
 exports.default = {
   copyAttribute: copyAttribute,
   filterByFocusable: filterByFocusable,
   findScrollParents: findScrollParents,
   findVisibleParent: findVisibleParent,
+  isNodeAfterScroll: isNodeAfterScroll,
+  isNodeBeforeScroll: isNodeBeforeScroll,
   getBodyChildElements: getBodyChildElements,
   getFirstFocusableDescendant: getFirstFocusableDescendant,
   getNewContainer: getNewContainer,
