@@ -38,7 +38,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var SelectContainerBox = (0, _styledComponents2.default)(_Box.Box).withConfig({
   displayName: 'SelectContainer__SelectContainerBox'
-})(['max-height:', ';scroll-behavior:\'smooth\';'], function (props) {
+})(['max-height:', ';scroll-behavior:smooth;'], function (props) {
   return props.theme.select.drop.maxHeight;
 });
 

@@ -21,7 +21,7 @@ import { TextInput } from '../TextInput';
 
 var SelectContainerBox = styled(Box).withConfig({
   displayName: 'SelectContainer__SelectContainerBox'
-})(['max-height:', ';scroll-behavior:\'smooth\';'], function (props) {
+})(['max-height:', ';scroll-behavior:smooth;'], function (props) {
   return props.theme.select.drop.maxHeight;
 });
 
