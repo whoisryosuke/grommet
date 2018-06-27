@@ -57,6 +57,7 @@ var connection = function connection(fromTarget, toTarget) {
   return _extends({
     fromTarget: fromTarget,
     toTarget: toTarget,
+    anchor: 'vertical',
     color: color || 'accent-1',
     thickness: 'xsmall',
     round: true,
@@ -86,20 +87,20 @@ var SimpleDiagram = function (_Component) {
           _react2.default.createElement(
             _Box2.default,
             { direction: 'row' },
-            [1, 2].map(function (id) {
+            [1, 2, 3].map(function (id) {
               return _react2.default.createElement(Node, { key: id, id: id });
             })
           ),
           _react2.default.createElement(
             _Box2.default,
             { direction: 'row' },
-            [3, 4].map(function (id) {
+            [4, 5].map(function (id) {
               return _react2.default.createElement(Node, { key: id, id: id, background: 'neutral-2' });
             })
           )
         ),
         _react2.default.createElement(_Diagram2.default, {
-          connections: [connection('1', '4', { color: 'accent-2' })]
+          connections: [connection('1', '5', { color: 'accent-2' }), connection('3', '5', { color: 'accent-2', anchor: 'horizontal' })]
         })
       )
     );

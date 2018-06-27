@@ -14,7 +14,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 var StyledDiagram = _styledComponents2.default.svg.withConfig({
   displayName: 'StyledDiagram'
-})(['max-width:100%;']);
+})(['max-width:100%;width:100%;height:100%;']);
 
 exports.default = StyledDiagram.extend(_templateObject, function (props) {
   return props.theme.diagram && props.theme.diagram.extend;

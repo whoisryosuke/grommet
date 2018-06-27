@@ -11,11 +11,12 @@ exports.default = function (Diagram) {
 
   DocumentedDiagram.propTypes = {
     connections: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.shape({
+      anchor: _reactDesc.PropTypes.oneOf(['center', 'vertical', 'horizontal']),
       color: _reactDesc.PropTypes.string,
       fromTarget: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.object]).isRequired,
       label: _reactDesc.PropTypes.string, // for accessibility
       offset: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large']),
-      thickness: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large']),
+      thickness: _reactDesc.PropTypes.oneOf(['hair', 'xxsmall', 'xsmall', 'small', 'medium', 'large']),
       toTarget: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.string, _reactDesc.PropTypes.object]).isRequired,
       type: _reactDesc.PropTypes.oneOf(['direct', 'curved', 'rectilinear'])
     })).description('Array of objects describing the connections.\n      The \'fromTarget\' and \'toTarget\' may be either DOM element ids or\n      React references.\n      \'offset\' can be used to shift a bit to reduce the amount of overlap\n      with other connection lines to make the lines easier to distinguish.').isRequired
