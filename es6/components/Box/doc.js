@@ -41,7 +41,6 @@ export default (function (Box) {
     gridArea: PropTypes.string.description('The name of the area to place\n      this Box in inside a parent Grid.'),
     height: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('A fixed height.'),
     justify: PropTypes.oneOf(['start', 'center', 'between', 'end']).description('How to align the contents along the main axis.'),
-    justifySelf: PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the row axis when contained in a Grid.'),
     margin: PropTypes.oneOfType([PropTypes.oneOf(['none'].concat(PAD_SIZES)), PropTypes.shape({
       bottom: PropTypes.oneOf(PAD_SIZES),
       horizontal: PropTypes.oneOf(PAD_SIZES),

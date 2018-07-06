@@ -113,6 +113,7 @@ var Button = function (_Component) {
         {
           direction: 'row',
           align: 'center',
+          justify: 'center',
           gap: 'small',
           pad: icon && !plain ? 'small' : undefined
         },

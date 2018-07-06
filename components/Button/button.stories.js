@@ -32,7 +32,7 @@ var SimpleButton = function SimpleButton(props) {
   return _react2.default.createElement(
     _Grommet2.default,
     null,
-    _react2.default.createElement(_Button2.default, _extends({ label: 'Submit', onClick: function onClick() {} }, props))
+    _react2.default.createElement(_Button2.default, _extends({ fill: true, label: 'Submit', onClick: function onClick() {} }, props))
   );
 };
 

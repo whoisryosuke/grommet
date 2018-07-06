@@ -13,7 +13,7 @@ var SimpleButton = function SimpleButton(props) {
   return React.createElement(
     Grommet,
     null,
-    React.createElement(Button, _extends({ label: 'Submit', onClick: function onClick() {} }, props))
+    React.createElement(Button, _extends({ fill: true, label: 'Submit', onClick: function onClick() {} }, props))
   );
 };
 

@@ -45,7 +45,6 @@ exports.default = function (Box) {
     gridArea: _reactDesc.PropTypes.string.description('The name of the area to place\n      this Box in inside a parent Grid.'),
     height: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('A fixed height.'),
     justify: _reactDesc.PropTypes.oneOf(['start', 'center', 'between', 'end']).description('How to align the contents along the main axis.'),
-    justifySelf: _reactDesc.PropTypes.oneOf(['start', 'center', 'end', 'stretch']).description('How to align along the row axis when contained in a Grid.'),
     margin: _reactDesc.PropTypes.oneOfType([_reactDesc.PropTypes.oneOf(['none'].concat(PAD_SIZES)), _reactDesc.PropTypes.shape({
       bottom: _reactDesc.PropTypes.oneOf(PAD_SIZES),
       horizontal: _reactDesc.PropTypes.oneOf(PAD_SIZES),
