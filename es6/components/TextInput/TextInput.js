@@ -304,6 +304,7 @@ var TextInput = function (_Component) {
           value: renderLabel(value),
           onFocus: function onFocus(event) {
             _this2.announceSuggestionsExist();
+            _this2.resetSuggestions();
             if (_onFocus) {
               _onFocus(event);
             }

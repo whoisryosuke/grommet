@@ -41,22 +41,24 @@ var DropContainer = function (_Component) {
         return scrollParent.removeEventListener('scroll', _this.place);
       });
     }, _this.onClickDocument = function (event) {
-      var onClickOutside = _this.props.onClickOutside;
+      var _this$props = _this.props,
+          dropTarget = _this$props.dropTarget,
+          onClickOutside = _this$props.onClickOutside;
 
-      if (!findDOMNode(_this.dropRef).contains(event.target)) {
-        if (onClickOutside) {
-          onClickOutside();
-        }
+      var dropTargetNode = findDOMNode(dropTarget);
+      var dropNode = findDOMNode(_this.dropRef);
+      if (onClickOutside && !dropTargetNode.contains(event.target) && !dropNode.contains(event.target)) {
+        onClickOutside();
       }
     }, _this.onResize = function () {
       _this.removeScrollListener();
       _this.addScrollListener();
       _this.place();
     }, _this.place = function () {
-      var _this$props = _this.props,
-          align = _this$props.align,
-          dropTarget = _this$props.dropTarget,
-          responsive = _this$props.responsive;
+      var _this$props2 = _this.props,
+          align = _this$props2.align,
+          dropTarget = _this$props2.dropTarget,
+          responsive = _this$props2.responsive;
 
       var windowWidth = window.innerWidth;
       var windowHeight = window.innerHeight;

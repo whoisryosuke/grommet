@@ -10,10 +10,12 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function (props) {
+var ArrowDown = function ArrowDown(props) {
   return _react2.default.createElement(
     'svg',
     _extends({ width: '10', height: '20', fill: 'rgba(0, 0, 0, 0.54)' }, props),
     _react2.default.createElement('path', { d: 'm0,7.5l5,5l5,-5l-10,0z' })
   );
 };
+
+exports.default = ArrowDown;
