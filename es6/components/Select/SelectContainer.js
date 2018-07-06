@@ -208,7 +208,6 @@ var SelectContainer = function (_Component) {
               return React.createElement(
                 Button,
                 {
-                  fill: true,
                   role: 'menuitem',
                   ref: function ref(_ref) {
                     _this3.optionsRef[index] = _ref;

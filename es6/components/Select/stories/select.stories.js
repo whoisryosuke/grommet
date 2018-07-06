@@ -15,7 +15,7 @@ import { Box, Button, CheckBox, Grommet, Select, Text } from '../../';
 import customSearchTheme from './theme';
 import SearchInputContext from './components/SearchInputContext';
 
-var DEFAULT_OPTIONS = ['one', 'two', 'three'];
+var DEFAULT_OPTIONS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 
 var SearchSelect = function (_Component) {
   _inherits(SearchSelect, _Component);
