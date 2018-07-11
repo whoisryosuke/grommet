@@ -85,7 +85,7 @@ var Header = function Header(_ref) {
             { property: property, onResize: onResize, theme: theme },
             _react2.default.createElement(
               _Box.Box,
-              { flex: true },
+              { flex: true, fill: 'vertical' },
               _react2.default.createElement(
                 _Box.Box,
                 _extends({
