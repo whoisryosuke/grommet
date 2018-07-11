@@ -93,7 +93,8 @@ exports.default = (0, _utils.deepFreeze)({
     }
   },
   icon: {
-    color: textColor
+    color: textColor,
+    colors: colors
   },
   layer: {
     backgroundColor: backgroundColor,

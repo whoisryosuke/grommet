@@ -88,7 +88,8 @@ export default deepFreeze({
     }
   },
   icon: {
-    color: textColor
+    color: textColor,
+    colors: colors
   },
   layer: {
     backgroundColor: backgroundColor,

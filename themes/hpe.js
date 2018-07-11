@@ -66,5 +66,8 @@ exports.default = (0, _utils.deepFreeze)({
   },
   heading: {
     font: false
+  },
+  icon: {
+    colors: colors
   }
 });
