@@ -74,4 +74,8 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(Grid);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme)(Grid);
+var WrappedGrid = (0, _recompose.compose)(_hocs.withTheme)(Grid);
+
+WrappedGrid.available = typeof window !== 'undefined' && window.CSS && window.CSS.supports && window.CSS.supports('display', 'grid');
+
+exports.default = WrappedGrid;
