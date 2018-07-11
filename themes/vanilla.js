@@ -387,6 +387,34 @@ exports.default = (0, _utils.deepFreeze)({
     minSpeed: 150,
     baseHeight: 500
   },
+  dataTable: {
+    body: {
+      pad: { horizontal: 'small', vertical: 'xsmall' }
+    },
+    footer: {
+      border: { side: 'top', size: 'small' },
+      pad: { horizontal: 'small', vertical: 'xsmall' }
+    },
+    groupHeader: {
+      border: { side: 'bottom', size: 'xsmall' },
+      pad: { horizontal: 'small', vertical: 'xsmall' },
+      background: 'light-2'
+    },
+    header: {
+      border: { side: 'bottom', size: 'small' },
+      pad: { horizontal: 'small', vertical: 'xsmall' },
+      background: 'light-1'
+    },
+    icons: {
+      ascending: _grommetIcons.FormDown,
+      contract: _grommetIcons.FormUp,
+      descending: _grommetIcons.FormUp,
+      expand: _grommetIcons.FormDown
+    },
+    resize: {
+      border: { side: 'right', color: 'border' }
+    }
+  },
   formField: {
     border: {
       color: 'border',

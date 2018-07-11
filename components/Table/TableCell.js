@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -40,13 +42,13 @@ var TableCell = function TableCell(_ref) {
     function (tableContext) {
       return _react2.default.createElement(
         Cell,
-        {
+        _extends({
           scope: scope,
           size: size,
           tableContext: tableContext,
           theme: theme,
           verticalAlign: verticalAlign
-        },
+        }, plain ? rest : {}),
         plain ? children : _react2.default.createElement(
           _Box.Box,
           rest,

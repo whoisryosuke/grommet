@@ -122,6 +122,18 @@ Object.keys(_Collapsible).forEach(function (key) {
   });
 });
 
+var _DataTable = require('./DataTable');
+
+Object.keys(_DataTable).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _DataTable[key];
+    }
+  });
+});
+
 var _Diagram = require('./Diagram');
 
 Object.keys(_Diagram).forEach(function (key) {

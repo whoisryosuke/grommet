@@ -29,7 +29,7 @@ var sizeStyle = (0, _styledComponents.css)(['width:', ';max-width:', ';overflow:
 
 var StyledTableCell = exports.StyledTableCell = _styledComponents2.default.td.withConfig({
   displayName: 'StyledTable__StyledTableCell'
-})(['margin:0;padding:0;font-weight:inherit;text-align:inherit;', ' ', ' ', ' ', ''], function (props) {
+})(['margin:0;padding:0;font-weight:inherit;text-align:inherit;height:inherit;', ' ', ' ', ' ', ''], function (props) {
   return props.size && sizeStyle;
 }, function (props) {
   return props.verticalAlign && 'vertical-align: ' + props.verticalAlign + ';';
