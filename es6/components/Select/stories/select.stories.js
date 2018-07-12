@@ -29,7 +29,10 @@ var SearchSelect = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { options: DEFAULT_OPTIONS }, _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      options: DEFAULT_OPTIONS,
+      value: ''
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   SearchSelect.prototype.render = function render() {
@@ -50,6 +53,9 @@ var SearchSelect = function (_Component) {
         onChange: function onChange(_ref) {
           var option = _ref.option;
           return _this2.setState({ value: option });
+        },
+        onClose: function onClose() {
+          return _this2.setState({ options: DEFAULT_OPTIONS });
         },
         onSearch: function onSearch(text) {
           var exp = new RegExp(text, 'i');

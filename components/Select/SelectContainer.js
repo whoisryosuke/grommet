@@ -58,11 +58,14 @@ var SelectContainer = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-      activeIndex: -1, // for tracking keyboard interaction
-      search: ''
-    }, _this.optionsRef = {}, _this.searchRef = (0, _react.createRef)(), _this.selectRef = (0, _react.createRef)(), _this.onInput = function (event) {
-      _this.setState({ search: event.target.value }, function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.optionsRef = {}, _this.searchRef = (0, _react.createRef)(), _this.selectRef = (0, _react.createRef)(), _this.state = {
+      search: '',
+      activeIndex: -1
+    }, _this.onInput = function (event) {
+      _this.setState({
+        search: event.target.value,
+        activeIndex: -1
+      }, function () {
         return _this.onSearch(_this.state.search);
       });
     }, _this.onSearch = (0, _utils.debounce)(function (search) {
@@ -141,14 +144,36 @@ var SelectContainer = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
+  SelectContainer.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var options = nextProps.options,
+        value = nextProps.value;
+
+
+    if (prevState.activeIndex === -1 && prevState.search === '' && options && value) {
+      var optionValue = Array.isArray(value) && value.length ? value[0] : value;
+      var activeIndex = options.indexOf(optionValue);
+      return {
+        activeIndex: activeIndex
+      };
+    } else if (prevState.activeIndex === -1 && prevState.search !== '') {
+      return {
+        activeIndex: 0
+      };
+    }
+
+    return null;
+  };
+
   SelectContainer.prototype.componentDidMount = function componentDidMount() {
     var _this2 = this;
 
     var onSearch = this.props.onSearch;
+    var activeIndex = this.state.activeIndex;
     // timeout need to send the operation through event loop and allow time to the portal
     // to be available
 
     setTimeout(function () {
+      var selectNode = (0, _reactDom.findDOMNode)(_this2.selectRef.current);
       if (onSearch) {
         var input = (0, _reactDom.findDOMNode)(_this2.searchRef.current);
         if (input && input.focus) {
@@ -156,6 +181,21 @@ var SelectContainer = function (_Component) {
         }
       } else if (_this2.selectRef) {
         (0, _utils.setFocusWithoutScroll)((0, _reactDom.findDOMNode)(_this2.selectRef.current));
+      }
+
+      // scroll to active option if it is below the fold
+      if (activeIndex >= 0) {
+        var optionNode = (0, _reactDom.findDOMNode)(_this2.optionsRef[activeIndex]);
+
+        var _selectNode$getBoundi = selectNode.getBoundingClientRect(),
+            containerBottom = _selectNode$getBoundi.bottom;
+
+        var _optionNode$getBoundi = optionNode.getBoundingClientRect(),
+            optionTop = _optionNode$getBoundi.bottom;
+
+        if (containerBottom < optionTop) {
+          optionNode.scrollIntoView();
+        }
       }
     }, 0);
   };
