@@ -156,13 +156,13 @@ var CenterLayer = function (_Component) {
   return CenterLayer;
 }(_react.Component);
 
-var NotificationLayer = function (_Component2) {
-  _inherits(NotificationLayer, _Component2);
+var FormLayer = function (_Component2) {
+  _inherits(FormLayer, _Component2);
 
-  function NotificationLayer() {
+  function FormLayer() {
     var _temp2, _this2, _ret2;
 
-    _classCallCheck(this, NotificationLayer);
+    _classCallCheck(this, FormLayer);
 
     for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
@@ -173,6 +173,107 @@ var NotificationLayer = function (_Component2) {
     }, _this2.onClose = function () {
       return _this2.setState({ open: undefined });
     }, _temp2), _possibleConstructorReturn(_this2, _ret2);
+  }
+
+  FormLayer.prototype.render = function render() {
+    var open = this.state.open;
+
+    return _react2.default.createElement(
+      _.Grommet,
+      null,
+      _react2.default.createElement(_.Button, {
+        icon: _react2.default.createElement(_grommetIcons.Add, null),
+        label: 'Add',
+        onClick: this.onOpen
+      }),
+      open && _react2.default.createElement(
+        _.Layer,
+        {
+          position: 'right',
+          full: 'vertical',
+          modal: true,
+          onClickOutside: this.onClose,
+          onEsc: this.onClose
+        },
+        _react2.default.createElement(
+          _.Box,
+          {
+            tag: 'form',
+            fill: 'vertical',
+            overflow: 'auto',
+            width: 'medium',
+            pad: 'medium',
+            onSubmit: this.onClose
+          },
+          _react2.default.createElement(
+            _.Box,
+            { flex: false, direction: 'row', justify: 'between' },
+            _react2.default.createElement(
+              _.Heading,
+              { level: 2, margin: 'none' },
+              'Add'
+            ),
+            _react2.default.createElement(_.Button, { icon: _react2.default.createElement(_grommetIcons.Close, null), onClick: this.onClose })
+          ),
+          _react2.default.createElement(
+            _.Box,
+            { flex: 'grow', overflow: true, pad: { vertical: 'medium' } },
+            _react2.default.createElement(
+              _.FormField,
+              { label: 'First' },
+              _react2.default.createElement(_.TextInput, null)
+            ),
+            _react2.default.createElement(
+              _.FormField,
+              { label: 'Second' },
+              _react2.default.createElement(_.TextInput, null)
+            ),
+            _react2.default.createElement(
+              _.FormField,
+              { label: 'Third' },
+              _react2.default.createElement(_.TextInput, null)
+            ),
+            _react2.default.createElement(
+              _.FormField,
+              { label: 'Fourth' },
+              _react2.default.createElement(_.TextInput, null)
+            )
+          ),
+          _react2.default.createElement(
+            _.Box,
+            { flex: false, tag: 'footer', align: 'start' },
+            _react2.default.createElement(_.Button, {
+              type: 'submit',
+              label: 'Submit',
+              onClick: this.onClose,
+              primary: true
+            })
+          )
+        )
+      )
+    );
+  };
+
+  return FormLayer;
+}(_react.Component);
+
+var NotificationLayer = function (_Component3) {
+  _inherits(NotificationLayer, _Component3);
+
+  function NotificationLayer() {
+    var _temp3, _this3, _ret3;
+
+    _classCallCheck(this, NotificationLayer);
+
+    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      args[_key3] = arguments[_key3];
+    }
+
+    return _ret3 = (_temp3 = (_this3 = _possibleConstructorReturn(this, _Component3.call.apply(_Component3, [this].concat(args))), _this3), _this3.state = {}, _this3.onOpen = function () {
+      return _this3.setState({ open: true });
+    }, _this3.onClose = function () {
+      return _this3.setState({ open: undefined });
+    }, _temp3), _possibleConstructorReturn(_this3, _ret3);
   }
 
   NotificationLayer.prototype.render = function render() {
@@ -239,6 +340,8 @@ var NotificationLayer = function (_Component2) {
 
 (0, _react3.storiesOf)('Layer', module).add('Center', function () {
   return _react2.default.createElement(CenterLayer, null);
+}).add('Form', function () {
+  return _react2.default.createElement(FormLayer, null);
 }).add('Notification', function () {
   return _react2.default.createElement(NotificationLayer, null);
 });

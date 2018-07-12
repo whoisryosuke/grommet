@@ -7,9 +7,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { Add, FormClose, StatusGood, Trash } from 'grommet-icons';
+import { Add, Close, FormClose, StatusGood, Trash } from 'grommet-icons';
 
-import { Box, Button, Grommet, Heading, Layer, Text } from '../';
+import { Box, Button, FormField, Grommet, Heading, Layer, Text, TextInput } from '../';
 
 var CenterLayer = function (_Component) {
   _inherits(CenterLayer, _Component);
@@ -149,13 +149,13 @@ var CenterLayer = function (_Component) {
   return CenterLayer;
 }(Component);
 
-var NotificationLayer = function (_Component2) {
-  _inherits(NotificationLayer, _Component2);
+var FormLayer = function (_Component2) {
+  _inherits(FormLayer, _Component2);
 
-  function NotificationLayer() {
+  function FormLayer() {
     var _temp2, _this2, _ret2;
 
-    _classCallCheck(this, NotificationLayer);
+    _classCallCheck(this, FormLayer);
 
     for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
@@ -166,6 +166,107 @@ var NotificationLayer = function (_Component2) {
     }, _this2.onClose = function () {
       return _this2.setState({ open: undefined });
     }, _temp2), _possibleConstructorReturn(_this2, _ret2);
+  }
+
+  FormLayer.prototype.render = function render() {
+    var open = this.state.open;
+
+    return React.createElement(
+      Grommet,
+      null,
+      React.createElement(Button, {
+        icon: React.createElement(Add, null),
+        label: 'Add',
+        onClick: this.onOpen
+      }),
+      open && React.createElement(
+        Layer,
+        {
+          position: 'right',
+          full: 'vertical',
+          modal: true,
+          onClickOutside: this.onClose,
+          onEsc: this.onClose
+        },
+        React.createElement(
+          Box,
+          {
+            tag: 'form',
+            fill: 'vertical',
+            overflow: 'auto',
+            width: 'medium',
+            pad: 'medium',
+            onSubmit: this.onClose
+          },
+          React.createElement(
+            Box,
+            { flex: false, direction: 'row', justify: 'between' },
+            React.createElement(
+              Heading,
+              { level: 2, margin: 'none' },
+              'Add'
+            ),
+            React.createElement(Button, { icon: React.createElement(Close, null), onClick: this.onClose })
+          ),
+          React.createElement(
+            Box,
+            { flex: 'grow', overflow: true, pad: { vertical: 'medium' } },
+            React.createElement(
+              FormField,
+              { label: 'First' },
+              React.createElement(TextInput, null)
+            ),
+            React.createElement(
+              FormField,
+              { label: 'Second' },
+              React.createElement(TextInput, null)
+            ),
+            React.createElement(
+              FormField,
+              { label: 'Third' },
+              React.createElement(TextInput, null)
+            ),
+            React.createElement(
+              FormField,
+              { label: 'Fourth' },
+              React.createElement(TextInput, null)
+            )
+          ),
+          React.createElement(
+            Box,
+            { flex: false, tag: 'footer', align: 'start' },
+            React.createElement(Button, {
+              type: 'submit',
+              label: 'Submit',
+              onClick: this.onClose,
+              primary: true
+            })
+          )
+        )
+      )
+    );
+  };
+
+  return FormLayer;
+}(Component);
+
+var NotificationLayer = function (_Component3) {
+  _inherits(NotificationLayer, _Component3);
+
+  function NotificationLayer() {
+    var _temp3, _this3, _ret3;
+
+    _classCallCheck(this, NotificationLayer);
+
+    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      args[_key3] = arguments[_key3];
+    }
+
+    return _ret3 = (_temp3 = (_this3 = _possibleConstructorReturn(this, _Component3.call.apply(_Component3, [this].concat(args))), _this3), _this3.state = {}, _this3.onOpen = function () {
+      return _this3.setState({ open: true });
+    }, _this3.onClose = function () {
+      return _this3.setState({ open: undefined });
+    }, _temp3), _possibleConstructorReturn(_this3, _ret3);
   }
 
   NotificationLayer.prototype.render = function render() {
@@ -232,6 +333,8 @@ var NotificationLayer = function (_Component2) {
 
 storiesOf('Layer', module).add('Center', function () {
   return React.createElement(CenterLayer, null);
+}).add('Form', function () {
+  return React.createElement(FormLayer, null);
 }).add('Notification', function () {
   return React.createElement(NotificationLayer, null);
 });

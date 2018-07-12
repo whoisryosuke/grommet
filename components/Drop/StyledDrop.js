@@ -30,7 +30,7 @@ var dropKeyFrames = (0, _styledComponents.keyframes)(['0%{opacity:0.5;transform:
 
 var StyledDrop = _styledComponents2.default.div.withConfig({
   displayName: 'StyledDrop'
-})(['', ' border-radius:', ';box-shadow:', ';position:fixed;z-index:20;overflow:auto;outline:none;', ' opacity:0;transform-origin:', ';animation:', ' 0.1s forwards;animation-delay:0.01s;'], _utils.baseStyle, function (props) {
+})(['', ' border-radius:', ';box-shadow:', ';position:fixed;z-index:20;outline:none;', ' opacity:0;transform-origin:', ';animation:', ' 0.1s forwards;animation-delay:0.01s;'], _utils.baseStyle, function (props) {
   return props.theme.global.drop.border.radius;
 }, function (props) {
   return props.theme.global.drop.shadow[props.theme.dark ? 'dark' : 'light'];

@@ -36,11 +36,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SelectContainerBox = (0, _styledComponents2.default)(_Box.Box).withConfig({
-  displayName: 'SelectContainer__SelectContainerBox'
-})(['max-height:', ';scroll-behavior:smooth;'], function (props) {
+var ContainerBox = (0, _styledComponents2.default)(_Box.Box).withConfig({
+  displayName: 'SelectContainer__ContainerBox'
+})(['height:', ';max-height:inherit;'], function (props) {
   return props.theme.select.drop.maxHeight;
 });
+
+var OptionsBox = (0, _styledComponents2.default)(_Box.Box).withConfig({
+  displayName: 'SelectContainer__OptionsBox'
+})(['scroll-behavior:smooth;']);
 
 var SelectContainer = function (_Component) {
   _inherits(SelectContainer, _Component);
@@ -191,9 +195,10 @@ var SelectContainer = function (_Component) {
         onKeyDown: onKeyDown
       },
       _react2.default.createElement(
-        _Box.Box,
+        ContainerBox,
         {
-          id: id ? id + '__select-drop' : undefined
+          id: id ? id + '__select-drop' : undefined,
+          theme: theme
         },
         onSearch && _react2.default.createElement(
           _Box.Box,
@@ -209,7 +214,7 @@ var SelectContainer = function (_Component) {
           })
         ),
         _react2.default.createElement(
-          SelectContainerBox,
+          OptionsBox,
           {
             flex: true,
             role: 'menubar',
@@ -223,26 +228,29 @@ var SelectContainer = function (_Component) {
             { items: options, step: theme.select.step },
             function (option, index) {
               return _react2.default.createElement(
-                _Button.Button,
-                {
-                  role: 'menuitem',
-                  ref: function ref(_ref) {
-                    _this3.optionsRef[index] = _ref;
+                _Box.Box,
+                { key: 'option_' + (name || '') + '_' + index, flex: false },
+                _react2.default.createElement(
+                  _Button.Button,
+                  {
+                    role: 'menuitem',
+                    ref: function ref(_ref) {
+                      _this3.optionsRef[index] = _ref;
+                    },
+                    active: selected === index || Array.isArray(selected) && selected.indexOf(index) !== -1 || activeIndex === index || option && option === value || option && Array.isArray(value) && value.indexOf(option) !== -1,
+                    onClick: function onClick() {
+                      return _this3.selectOption(option, index);
+                    },
+                    hoverIndicator: 'background'
                   },
-                  active: selected === index || Array.isArray(selected) && selected.indexOf(index) !== -1 || activeIndex === index || option && option === value || option && Array.isArray(value) && value.indexOf(option) !== -1,
-                  key: 'option_' + (name || '') + '_' + index,
-                  onClick: function onClick() {
-                    return _this3.selectOption(option, index);
-                  },
-                  hoverIndicator: 'background'
-                },
-                children ? children(option, index, options) : _react2.default.createElement(
-                  _Box.Box,
-                  { align: 'start', pad: 'small' },
-                  _react2.default.createElement(
-                    _Text.Text,
-                    { margin: 'none' },
-                    option !== null && option !== undefined ? option.toString() : undefined
+                  children ? children(option, index, options) : _react2.default.createElement(
+                    _Box.Box,
+                    { align: 'start', pad: 'small' },
+                    _react2.default.createElement(
+                      _Text.Text,
+                      { margin: 'none' },
+                      option !== null && option !== undefined ? option.toString() : undefined
+                    )
                   )
                 )
               );

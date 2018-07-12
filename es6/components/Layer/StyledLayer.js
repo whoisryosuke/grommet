@@ -12,8 +12,8 @@ var desktopLayerStyle = '\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  righ
 
 var StyledLayer = styled.div.withConfig({
   displayName: 'StyledLayer'
-})(['', ' background-color:unset;position:relative;z-index:10;overflow:auto;pointer-events:none;outline:none;', ' ', ''], baseStyle, function (props) {
-  return props.responsive && palm('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n  ');
+})(['', ' background-color:unset;position:relative;z-index:10;pointer-events:none;outline:none;', ' ', ''], baseStyle, function (props) {
+  return props.responsive && palm('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    ');
 }, function (props) {
   if (props.position === 'hidden') {
     return hiddenPositionStyle;
@@ -160,7 +160,7 @@ var POSITIONS = {
   }
 };
 
-var desktopContainerStyle = css(['position:', ';max-height:100%;max-width:100%;overflow:auto;border-radius:', ';', ''], function (props) {
+var desktopContainerStyle = css(['position:', ';max-height:100%;max-width:100%;border-radius:', ';', ''], function (props) {
   return props.modal ? 'absolute' : 'fixed';
 }, function (props) {
   return props.plain ? 'none' : props.theme.layer.border.radius;

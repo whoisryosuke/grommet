@@ -19,11 +19,15 @@ import { Keyboard } from '../Keyboard';
 import { Text } from '../Text';
 import { TextInput } from '../TextInput';
 
-var SelectContainerBox = styled(Box).withConfig({
-  displayName: 'SelectContainer__SelectContainerBox'
-})(['max-height:', ';scroll-behavior:smooth;'], function (props) {
+var ContainerBox = styled(Box).withConfig({
+  displayName: 'SelectContainer__ContainerBox'
+})(['height:', ';max-height:inherit;'], function (props) {
   return props.theme.select.drop.maxHeight;
 });
+
+var OptionsBox = styled(Box).withConfig({
+  displayName: 'SelectContainer__OptionsBox'
+})(['scroll-behavior:smooth;']);
 
 var SelectContainer = function (_Component) {
   _inherits(SelectContainer, _Component);
@@ -174,9 +178,10 @@ var SelectContainer = function (_Component) {
         onKeyDown: onKeyDown
       },
       React.createElement(
-        Box,
+        ContainerBox,
         {
-          id: id ? id + '__select-drop' : undefined
+          id: id ? id + '__select-drop' : undefined,
+          theme: theme
         },
         onSearch && React.createElement(
           Box,
@@ -192,7 +197,7 @@ var SelectContainer = function (_Component) {
           })
         ),
         React.createElement(
-          SelectContainerBox,
+          OptionsBox,
           {
             flex: true,
             role: 'menubar',
@@ -206,26 +211,29 @@ var SelectContainer = function (_Component) {
             { items: options, step: theme.select.step },
             function (option, index) {
               return React.createElement(
-                Button,
-                {
-                  role: 'menuitem',
-                  ref: function ref(_ref) {
-                    _this3.optionsRef[index] = _ref;
+                Box,
+                { key: 'option_' + (name || '') + '_' + index, flex: false },
+                React.createElement(
+                  Button,
+                  {
+                    role: 'menuitem',
+                    ref: function ref(_ref) {
+                      _this3.optionsRef[index] = _ref;
+                    },
+                    active: selected === index || Array.isArray(selected) && selected.indexOf(index) !== -1 || activeIndex === index || option && option === value || option && Array.isArray(value) && value.indexOf(option) !== -1,
+                    onClick: function onClick() {
+                      return _this3.selectOption(option, index);
+                    },
+                    hoverIndicator: 'background'
                   },
-                  active: selected === index || Array.isArray(selected) && selected.indexOf(index) !== -1 || activeIndex === index || option && option === value || option && Array.isArray(value) && value.indexOf(option) !== -1,
-                  key: 'option_' + (name || '') + '_' + index,
-                  onClick: function onClick() {
-                    return _this3.selectOption(option, index);
-                  },
-                  hoverIndicator: 'background'
-                },
-                children ? children(option, index, options) : React.createElement(
-                  Box,
-                  { align: 'start', pad: 'small' },
-                  React.createElement(
-                    Text,
-                    { margin: 'none' },
-                    option !== null && option !== undefined ? option.toString() : undefined
+                  children ? children(option, index, options) : React.createElement(
+                    Box,
+                    { align: 'start', pad: 'small' },
+                    React.createElement(
+                      Text,
+                      { margin: 'none' },
+                      option !== null && option !== undefined ? option.toString() : undefined
+                    )
                   )
                 )
               );
