@@ -38,7 +38,11 @@ var SimpleBox = function (_Component) {
         },
         React.createElement(
           Box,
-          { pad: 'xlarge', align: 'center', background: 'white-2' },
+          {
+            pad: 'xlarge',
+            align: 'center',
+            background: { color: 'white-2', opacity: 'strong' }
+          },
           React.createElement(Attraction, { size: 'xlarge' }),
           React.createElement(
             Text,
@@ -50,7 +54,11 @@ var SimpleBox = function (_Component) {
         ),
         React.createElement(
           Box,
-          { pad: 'xlarge', align: 'center', background: 'accent-2' },
+          {
+            pad: 'xlarge',
+            align: 'center',
+            background: { color: 'accent-2', opacity: 'weak' }
+          },
           React.createElement(TreeOption, { size: 'xlarge' }),
           React.createElement(
             Text,

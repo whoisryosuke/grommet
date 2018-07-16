@@ -20,8 +20,6 @@ var _Keyboard = require('../Keyboard');
 
 var _Heading = require('../Heading');
 
-var _Text = require('../Text');
-
 var _hocs = require('../hocs');
 
 var _StyledCalendar = require('./StyledCalendar');
@@ -225,11 +223,9 @@ var Calendar = function (_Component) {
       }
 
       var dateString = day.toISOString();
-      var content = day.getDate();
       var isActive = active && (0, _utils.sameDay)(day, active);
       var selected = false;
       var inRange = false;
-      var background = void 0;
 
       var selectedState = (0, _utils.withinDates)(day, date || dates);
       if (selectedState === 2) {
@@ -238,16 +234,6 @@ var Calendar = function (_Component) {
         inRange = true;
       }
       var dayDisabled = (0, _utils.withinDates)(day, disabled);
-      if (selected) {
-        background = 'brand';
-        content = _react2.default.createElement(
-          _Text.Text,
-          { weight: 'bold' },
-          content
-        );
-      } else if (inRange) {
-        background = { color: 'brand', opacity: 'weak' };
-      }
 
       days.push(_react2.default.createElement(
         _StyledCalendar.StyledDayContainer,
@@ -267,12 +253,13 @@ var Calendar = function (_Component) {
           _react2.default.createElement(
             _StyledCalendar.StyledDay,
             {
-              background: background,
+              inRange: inRange,
               otherMonth: day.getMonth() !== reference.getMonth(),
+              isSelected: selected,
               size: size,
               theme: theme
             },
-            content
+            day.getDate()
           )
         )
       ));

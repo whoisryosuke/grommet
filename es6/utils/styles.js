@@ -27,7 +27,7 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
       var _color = colorForName(background.color, theme);
       var rgba = getRGBA(_color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
       if (rgba) {
-        return css(['background-color:', ';color:', ';'], rgba, colorIsDark(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
+        return css(['background-color:', ';', ''], rgba, (!background.opacity || background.opacity !== 'weak') && 'color: ' + (colorIsDark(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text) + ';');
       }
     } else if (background.dark === false) {
       return css(['color:', ';'], theme.global.colors.lightBackground.text);

@@ -16,7 +16,6 @@ import { Box } from '../Box';
 import { Button } from '../Button';
 import { Keyboard } from '../Keyboard';
 import { Heading } from '../Heading';
-import { Text } from '../Text';
 
 import { withTheme } from '../hocs';
 
@@ -205,11 +204,9 @@ var Calendar = function (_Component) {
       }
 
       var dateString = day.toISOString();
-      var content = day.getDate();
       var isActive = active && sameDay(day, active);
       var selected = false;
       var inRange = false;
-      var background = void 0;
 
       var selectedState = withinDates(day, date || dates);
       if (selectedState === 2) {
@@ -218,16 +215,6 @@ var Calendar = function (_Component) {
         inRange = true;
       }
       var dayDisabled = withinDates(day, disabled);
-      if (selected) {
-        background = 'brand';
-        content = React.createElement(
-          Text,
-          { weight: 'bold' },
-          content
-        );
-      } else if (inRange) {
-        background = { color: 'brand', opacity: 'weak' };
-      }
 
       days.push(React.createElement(
         StyledDayContainer,
@@ -247,12 +234,13 @@ var Calendar = function (_Component) {
           React.createElement(
             StyledDay,
             {
-              background: background,
+              inRange: inRange,
               otherMonth: day.getMonth() !== reference.getMonth(),
+              isSelected: selected,
               size: size,
               theme: theme
             },
-            content
+            day.getDate()
           )
         )
       ));

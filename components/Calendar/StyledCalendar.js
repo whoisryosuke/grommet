@@ -58,7 +58,7 @@ var StyledWeek = exports.StyledWeek = _styledComponents2.default.div.withConfig(
 
 var StyledDayContainer = exports.StyledDayContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCalendar__StyledDayContainer'
-})(['flex:0 0;']);
+})(['flex:0 0 auto;']);
 
 var daySizeStyle = function daySizeStyle(props) {
   var data = props.theme.calendar[props.size];
@@ -67,12 +67,14 @@ var daySizeStyle = function daySizeStyle(props) {
 
 var StyledDay = exports.StyledDay = _styledComponents2.default.div.withConfig({
   displayName: 'StyledCalendar__StyledDay'
-})(['display:flex;justify-content:center;align-items:center;', ' ', ' ', ''], function (props) {
+})(['display:flex;justify-content:center;align-items:center;', ' ', ' ', ' ', ''], function (props) {
   return daySizeStyle(props);
 }, function (props) {
-  return props.background && (0, _utils.backgroundStyle)(props.background, props.theme);
+  return props.isSelected && (0, _utils.backgroundStyle)('brand', props.theme) || props.inRange && (0, _utils.backgroundStyle)({ color: 'brand', opacity: 'weak' }, props.theme);
 }, function (props) {
   return props.otherMonth && 'opacity: 0.5;';
+}, function (props) {
+  return props.isSelected && 'font-weight: bold;';
 });
 
 exports.default = StyledCalendar.extend(_templateObject, function (props) {

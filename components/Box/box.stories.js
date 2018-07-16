@@ -60,7 +60,11 @@ var SimpleBox = function (_Component) {
         },
         _react2.default.createElement(
           _Box2.default,
-          { pad: 'xlarge', align: 'center', background: 'white-2' },
+          {
+            pad: 'xlarge',
+            align: 'center',
+            background: { color: 'white-2', opacity: 'strong' }
+          },
           _react2.default.createElement(_grommetIcons.Attraction, { size: 'xlarge' }),
           _react2.default.createElement(
             _Text2.default,
@@ -72,7 +76,11 @@ var SimpleBox = function (_Component) {
         ),
         _react2.default.createElement(
           _Box2.default,
-          { pad: 'xlarge', align: 'center', background: 'accent-2' },
+          {
+            pad: 'xlarge',
+            align: 'center',
+            background: { color: 'accent-2', opacity: 'weak' }
+          },
           _react2.default.createElement(_grommetIcons.TreeOption, { size: 'xlarge' }),
           _react2.default.createElement(
             _Text2.default,

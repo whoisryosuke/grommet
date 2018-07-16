@@ -49,13 +49,21 @@ var Box = function (_Component) {
 
     var dark = theme.dark;
     if (background) {
-      dark = false;
       if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
-        dark = background.dark;
+        if (background.dark !== undefined) {
+          dark = background.dark;
+        } else if (background.color && (
+        // weak opacity means we keep the existing darkness
+        !background.opacity || background.opacity !== 'weak')) {
+          var color = colorForName(background.color, theme);
+          if (color) {
+            dark = colorIsDark(color);
+          }
+        }
       } else {
-        var color = colorForName(background, theme);
-        if (color) {
-          dark = colorIsDark(color);
+        var _color = colorForName(background, theme);
+        if (_color) {
+          dark = colorIsDark(_color);
         }
       }
     }
