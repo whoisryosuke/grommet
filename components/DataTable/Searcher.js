@@ -67,7 +67,7 @@ var Searcher = function (_Component) {
           } },
         _react2.default.createElement(
           _Box.Box,
-          { flex: false, pad: { horizontal: 'small' } },
+          { flex: true, pad: { horizontal: 'small' } },
           _react2.default.createElement(_TextInput.TextInput, {
             ref: this.inputRef,
             value: filters[property],

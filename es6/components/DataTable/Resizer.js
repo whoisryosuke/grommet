@@ -62,7 +62,7 @@ var Resizer = function (_Component) {
     if (onResize) {
       return React.createElement(
         Box,
-        { ref: this.ref, direction: 'row', flex: true, fill: 'vertical' },
+        { ref: this.ref, direction: 'row', fill: true },
         children,
         React.createElement(ResizerBox, _extends({
           flex: false

@@ -47,7 +47,7 @@ var columns = [{
   header: _react2.default.createElement(
     _Text2.default,
     null,
-    'Name'
+    'Name with extra'
   ),
   primary: true,
   footer: 'Total'
@@ -93,7 +93,7 @@ for (var i = 0; i < 40; i += 1) {
     paid: (i + 1) * 17 % 1000
   });
 }
-var DATA = [{ name: 'Alan', location: 'Los Gatos', date: '2018-06-11', percent: 20, paid: 2345 }, { name: 'Bryan', location: 'Fort Collins', date: '2018-06-10', percent: 30, paid: 1234 }, { name: 'Chris', location: 'Palo Alto', date: '2018-06-9', percent: 40, paid: 2345 }, { name: 'Eric', location: 'Palo Alto', date: '2018-06-11', percent: 80, paid: 3456 }, { name: 'Doug', location: 'Fort Collins', date: '2018-06-10', percent: 60, paid: 1234 }, { name: 'Jet', location: 'Palo Alto', date: '2018-06-09', percent: 40, paid: 3456 }, { name: 'Michael', location: 'Boise', date: '2018-06-11', percent: 50, paid: 1234 }, { name: 'Tracy', location: 'San Francisco', date: '2018-06-10', percent: 10, paid: 2345 }];
+var DATA = [{ name: 'Alan', location: 'Los Gatos', date: '2018-06-11', percent: 20, paid: 2345 }, { name: 'Bryan', location: 'Fort Collins', date: '2018-06-10', percent: 30, paid: 1234 }, { name: 'Chris', location: 'Palo Alto', date: '2018-06-09', percent: 40, paid: 2345 }, { name: 'Eric', location: 'Palo Alto', date: '2018-06-11', percent: 80, paid: 3456 }, { name: 'Doug', location: 'Fort Collins', date: '2018-06-10', percent: 60, paid: 1234 }, { name: 'Jet', location: 'Palo Alto', date: '2018-06-09', percent: 40, paid: 3456 }, { name: 'Michael', location: 'Boise', date: '2018-06-11', percent: 50, paid: 1234 }, { name: 'Tracy', location: 'San Francisco', date: '2018-06-10', percent: 10, paid: 2345 }];
 
 var SimpleDataTable = function (_Component) {
   _inherits(SimpleDataTable, _Component);
@@ -108,10 +108,7 @@ var SimpleDataTable = function (_Component) {
     return _react2.default.createElement(
       _Grommet2.default,
       null,
-      _react2.default.createElement(_DataTable2.default, {
-        columns: columns,
-        data: DATA
-      })
+      _react2.default.createElement(_DataTable2.default, { columns: columns, data: DATA })
     );
   };
 
@@ -131,11 +128,7 @@ var SizedDataTable = function (_Component2) {
     return _react2.default.createElement(
       _Grommet2.default,
       null,
-      _react2.default.createElement(_DataTable2.default, {
-        columns: columns,
-        data: data,
-        size: 'medium'
-      })
+      _react2.default.createElement(_DataTable2.default, { columns: columns, data: data, size: 'medium' })
     );
   };
 

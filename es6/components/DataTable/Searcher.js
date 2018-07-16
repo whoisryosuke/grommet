@@ -54,7 +54,7 @@ var Searcher = function (_Component) {
           } },
         React.createElement(
           Box,
-          { flex: false, pad: { horizontal: 'small' } },
+          { flex: true, pad: { horizontal: 'small' } },
           React.createElement(TextInput, {
             ref: this.inputRef,
             value: filters[property],

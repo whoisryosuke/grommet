@@ -52,6 +52,20 @@ var Header = function Header(_ref) {
       widths = _ref.widths,
       rest = _objectWithoutProperties(_ref, ['columns', 'filtering', 'filters', 'groups', 'groupState', 'onFilter', 'onFiltering', 'onResize', 'onSort', 'onToggle', 'sort', 'theme', 'widths']);
 
+  // The tricky part here is that we need to manage the theme styling
+  // to make sure that the background, border, and padding are applied
+  // at the right places depending on the mix of controls in each header cell.
+  var outerThemeProps = function (_ref2) {
+    var border = _ref2.border,
+        background = _ref2.background;
+    return { border: border, background: background };
+  }(theme.dataTable.header);
+
+  var _theme$dataTable$head = theme.dataTable.header,
+      border = _theme$dataTable$head.border,
+      background = _theme$dataTable$head.background,
+      innerThemeProps = _objectWithoutProperties(_theme$dataTable$head, ['border', 'background']);
+
   return _react2.default.createElement(
     _StyledDataTable.StyledDataTableHeader,
     rest,
@@ -66,11 +80,79 @@ var Header = function Header(_ref) {
         theme: theme,
         onToggle: onToggle
       }),
-      columns.map(function (_ref2) {
-        var property = _ref2.property,
-            header = _ref2.header,
-            align = _ref2.align,
-            search = _ref2.search;
+      columns.map(function (_ref3) {
+        var property = _ref3.property,
+            header = _ref3.header,
+            align = _ref3.align,
+            search = _ref3.search;
+
+        var content = typeof header === 'string' ? _react2.default.createElement(
+          _Text.Text,
+          null,
+          header
+        ) : header;
+
+        if (onSort) {
+          content = _react2.default.createElement(
+            _Sorter2.default,
+            {
+              align: align,
+              fill: !search,
+              property: property,
+              onSort: onSort,
+              sort: sort,
+              theme: theme,
+              themeProps: search ? innerThemeProps : theme.dataTable.header
+            },
+            content
+          );
+        }
+
+        if (search && filters) {
+          if (!onSort) {
+            content = _react2.default.createElement(
+              _Box.Box,
+              _extends({ justify: 'center', align: align }, innerThemeProps),
+              content
+            );
+          }
+          content = _react2.default.createElement(
+            _Box.Box,
+            _extends({
+              fill: true,
+              direction: 'row',
+              justify: 'between',
+              align: 'center'
+            }, outerThemeProps),
+            content,
+            _react2.default.createElement(_Searcher2.default, {
+              filtering: filtering,
+              filters: filters,
+              property: property,
+              onFilter: onFilter,
+              onFiltering: onFiltering
+            })
+          );
+        } else if (!onSort) {
+          content = _react2.default.createElement(
+            _Box.Box,
+            _extends({
+              fill: true,
+              justify: 'center',
+              align: align
+            }, theme.dataTable.header),
+            content
+          );
+        }
+
+        if (onResize) {
+          content = _react2.default.createElement(
+            _Resizer2.default,
+            { property: property, onResize: onResize, theme: theme },
+            content
+          );
+        }
+
         return _react2.default.createElement(
           _Table.TableCell,
           {
@@ -80,47 +162,7 @@ var Header = function Header(_ref) {
             verticalAlign: 'bottom',
             style: widths && widths[property] ? { width: widths[property] } : undefined
           },
-          _react2.default.createElement(
-            _Resizer2.default,
-            { property: property, onResize: onResize, theme: theme },
-            _react2.default.createElement(
-              _Box.Box,
-              { flex: true, fill: 'vertical' },
-              _react2.default.createElement(
-                _Box.Box,
-                _extends({
-                  flex: true,
-                  direction: 'row',
-                  justify: 'between',
-                  align: 'center'
-                }, theme.dataTable.header, {
-                  pad: undefined
-                }),
-                _react2.default.createElement(
-                  _Sorter2.default,
-                  {
-                    align: align,
-                    property: property,
-                    onSort: onSort,
-                    sort: sort,
-                    theme: theme
-                  },
-                  typeof header === 'string' ? _react2.default.createElement(
-                    _Text.Text,
-                    null,
-                    header
-                  ) : header
-                ),
-                filters && search && _react2.default.createElement(_Searcher2.default, {
-                  filtering: filtering,
-                  filters: filters,
-                  property: property,
-                  onFilter: onFilter,
-                  onFiltering: onFiltering
-                })
-              )
-            )
-          )
+          content
         );
       })
     )

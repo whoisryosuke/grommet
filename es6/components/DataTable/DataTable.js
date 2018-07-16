@@ -9,8 +9,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
-import { Table } from '../Table';
-
 import { withTheme } from '../hocs';
 
 import Header from './Header';
@@ -19,6 +17,7 @@ import Body from './Body';
 import GroupedBody from './GroupedBody';
 import buildState from './buildState';
 import doc from './doc';
+import { StyledDataTable } from './StyledDataTable';
 
 var DataTable = function (_Component) {
   _inherits(DataTable, _Component);
@@ -102,7 +101,7 @@ var DataTable = function (_Component) {
     }
 
     return React.createElement(
-      Table,
+      StyledDataTable,
       null,
       React.createElement(Header, {
         columns: columns,

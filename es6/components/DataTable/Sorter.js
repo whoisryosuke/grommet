@@ -8,15 +8,17 @@ import { Box } from '../Box';
 
 var SorterButton = styled(Button).withConfig({
   displayName: 'Sorter__SorterButton'
-})(['flex-shrink:1;']);
+})(['flex-shrink:1;height:100%;']);
 
 var Sorter = function Sorter(_ref) {
   var align = _ref.align,
       children = _ref.children,
+      fill = _ref.fill,
       onSort = _ref.onSort,
       property = _ref.property,
       sort = _ref.sort,
-      theme = _ref.theme;
+      theme = _ref.theme,
+      themeProps = _ref.themeProps;
 
   var icon = void 0;
   if (sort && sort.property === property) {
@@ -26,16 +28,13 @@ var Sorter = function Sorter(_ref) {
   var content = React.createElement(
     Box,
     _extends({
-      flex: true,
+      flex: 'shrink',
       direction: 'row',
       justify: align,
       align: 'center',
       gap: 'xsmall',
-      fill: 'vertical'
-    }, theme.dataTable.header, {
-      border: undefined,
-      background: undefined
-    }),
+      fill: fill
+    }, themeProps),
     children,
     icon
   );
@@ -43,10 +42,9 @@ var Sorter = function Sorter(_ref) {
     content = React.createElement(
       SorterButton,
       {
-        fill: true,
+        fill: fill,
         hoverIndicator: true,
-        onClick: onSort(property),
-        style: { flexShrink: 1 }
+        onClick: onSort(property)
       },
       content
     );

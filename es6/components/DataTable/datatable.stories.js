@@ -26,7 +26,7 @@ var columns = [{
   header: React.createElement(
     Text,
     null,
-    'Name'
+    'Name with extra'
   ),
   primary: true,
   footer: 'Total'
@@ -72,7 +72,7 @@ for (var i = 0; i < 40; i += 1) {
     paid: (i + 1) * 17 % 1000
   });
 }
-var DATA = [{ name: 'Alan', location: 'Los Gatos', date: '2018-06-11', percent: 20, paid: 2345 }, { name: 'Bryan', location: 'Fort Collins', date: '2018-06-10', percent: 30, paid: 1234 }, { name: 'Chris', location: 'Palo Alto', date: '2018-06-9', percent: 40, paid: 2345 }, { name: 'Eric', location: 'Palo Alto', date: '2018-06-11', percent: 80, paid: 3456 }, { name: 'Doug', location: 'Fort Collins', date: '2018-06-10', percent: 60, paid: 1234 }, { name: 'Jet', location: 'Palo Alto', date: '2018-06-09', percent: 40, paid: 3456 }, { name: 'Michael', location: 'Boise', date: '2018-06-11', percent: 50, paid: 1234 }, { name: 'Tracy', location: 'San Francisco', date: '2018-06-10', percent: 10, paid: 2345 }];
+var DATA = [{ name: 'Alan', location: 'Los Gatos', date: '2018-06-11', percent: 20, paid: 2345 }, { name: 'Bryan', location: 'Fort Collins', date: '2018-06-10', percent: 30, paid: 1234 }, { name: 'Chris', location: 'Palo Alto', date: '2018-06-09', percent: 40, paid: 2345 }, { name: 'Eric', location: 'Palo Alto', date: '2018-06-11', percent: 80, paid: 3456 }, { name: 'Doug', location: 'Fort Collins', date: '2018-06-10', percent: 60, paid: 1234 }, { name: 'Jet', location: 'Palo Alto', date: '2018-06-09', percent: 40, paid: 3456 }, { name: 'Michael', location: 'Boise', date: '2018-06-11', percent: 50, paid: 1234 }, { name: 'Tracy', location: 'San Francisco', date: '2018-06-10', percent: 10, paid: 2345 }];
 
 var SimpleDataTable = function (_Component) {
   _inherits(SimpleDataTable, _Component);
@@ -87,10 +87,7 @@ var SimpleDataTable = function (_Component) {
     return React.createElement(
       Grommet,
       null,
-      React.createElement(DataTable, {
-        columns: columns,
-        data: DATA
-      })
+      React.createElement(DataTable, { columns: columns, data: DATA })
     );
   };
 
@@ -110,11 +107,7 @@ var SizedDataTable = function (_Component2) {
     return React.createElement(
       Grommet,
       null,
-      React.createElement(DataTable, {
-        columns: columns,
-        data: data,
-        size: 'medium'
-      })
+      React.createElement(DataTable, { columns: columns, data: data, size: 'medium' })
     );
   };
 

@@ -10,8 +10,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
-var _Table = require('../Table');
-
 var _hocs = require('../hocs');
 
 var _Header = require('./Header');
@@ -37,6 +35,8 @@ var _buildState2 = _interopRequireDefault(_buildState);
 var _doc = require('./doc');
 
 var _doc2 = _interopRequireDefault(_doc);
+
+var _StyledDataTable = require('./StyledDataTable');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -128,7 +128,7 @@ var DataTable = function (_Component) {
     }
 
     return _react2.default.createElement(
-      _Table.Table,
+      _StyledDataTable.StyledDataTable,
       null,
       _react2.default.createElement(_Header2.default, {
         columns: columns,

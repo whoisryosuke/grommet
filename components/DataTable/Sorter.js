@@ -20,15 +20,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SorterButton = (0, _styledComponents2.default)(_Button.Button).withConfig({
   displayName: 'Sorter__SorterButton'
-})(['flex-shrink:1;']);
+})(['flex-shrink:1;height:100%;']);
 
 var Sorter = function Sorter(_ref) {
   var align = _ref.align,
       children = _ref.children,
+      fill = _ref.fill,
       onSort = _ref.onSort,
       property = _ref.property,
       sort = _ref.sort,
-      theme = _ref.theme;
+      theme = _ref.theme,
+      themeProps = _ref.themeProps;
 
   var icon = void 0;
   if (sort && sort.property === property) {
@@ -38,16 +40,13 @@ var Sorter = function Sorter(_ref) {
   var content = _react2.default.createElement(
     _Box.Box,
     _extends({
-      flex: true,
+      flex: 'shrink',
       direction: 'row',
       justify: align,
       align: 'center',
       gap: 'xsmall',
-      fill: 'vertical'
-    }, theme.dataTable.header, {
-      border: undefined,
-      background: undefined
-    }),
+      fill: fill
+    }, themeProps),
     children,
     icon
   );
@@ -55,10 +54,9 @@ var Sorter = function Sorter(_ref) {
     content = _react2.default.createElement(
       SorterButton,
       {
-        fill: true,
+        fill: fill,
         hoverIndicator: true,
-        onClick: onSort(property),
-        style: { flexShrink: 1 }
+        onClick: onSort(property)
       },
       content
     );
