@@ -71,8 +71,10 @@ var SimpleSelect = function (_Component) {
   return SimpleSelect;
 }(_react.Component);
 
-var DEFAULT_OPTIONS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-
+var DEFAULT_OPTIONS = [];
+for (var i = 1; i <= 200; i += 1) {
+  DEFAULT_OPTIONS.push('option ' + i);
+}
 var SearchSelect = function (_Component2) {
   _inherits(SearchSelect, _Component2);
 
