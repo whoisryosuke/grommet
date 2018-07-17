@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
 import FocusedContainer from '../FocusedContainer';
-import { findScrollParents, findVisibleParent } from '../../utils';
+import { findScrollParents, findVisibleParent, parseMetricToNum } from '../../utils';
 import { Keyboard } from '../Keyboard';
 
 import StyledDrop from './StyledDrop';
@@ -58,7 +58,8 @@ var DropContainer = function (_Component) {
       var _this$props2 = _this.props,
           align = _this$props2.align,
           dropTarget = _this$props2.dropTarget,
-          responsive = _this$props2.responsive;
+          responsive = _this$props2.responsive,
+          theme = _this$props2.theme;
 
       var windowWidth = window.innerWidth;
       var windowHeight = window.innerHeight;
@@ -161,7 +162,11 @@ var DropContainer = function (_Component) {
         // the (position:absolute + scrollTop)
         // is presenting issues with desktop scroll flickering
         container.style.top = top + 'px';
-        container.style.maxHeight = windowHeight - (top || 0) + 'px';
+        maxHeight = windowHeight - (top || 0);
+        if (theme.drop && theme.drop.maxHeight) {
+          maxHeight = Math.min(maxHeight, parseMetricToNum(theme.drop.maxHeight));
+        }
+        container.style.maxHeight = maxHeight + 'px';
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }

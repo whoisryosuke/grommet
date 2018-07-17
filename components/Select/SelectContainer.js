@@ -38,9 +38,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var ContainerBox = (0, _styledComponents2.default)(_Box.Box).withConfig({
   displayName: 'SelectContainer__ContainerBox'
-})(['height:', ';max-height:inherit;'], function (props) {
-  return props.theme.select.drop.maxHeight;
-});
+})(['max-height:inherit;@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){width:100%;}']);
 
 var OptionsBox = (0, _styledComponents2.default)(_Box.Box).withConfig({
   displayName: 'SelectContainer__OptionsBox'
@@ -256,7 +254,7 @@ var SelectContainer = function (_Component) {
         _react2.default.createElement(
           OptionsBox,
           {
-            flex: true,
+            flex: 'shrink',
             role: 'menubar',
             tabIndex: '-1',
             ref: this.selectRef,

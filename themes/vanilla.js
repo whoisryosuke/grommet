@@ -416,6 +416,9 @@ exports.default = (0, _utils.deepFreeze)({
       border: { side: 'right', color: 'border' }
     }
   },
+  // drop: {
+  //   maxHeight: undefined,
+  // },
   formField: {
     border: {
       color: 'border',
@@ -512,9 +515,6 @@ exports.default = (0, _utils.deepFreeze)({
       down: _grommetIcons.FormDown
     },
     // searchInput: undefined,
-    drop: {
-      maxHeight: '384px'
-    },
     step: 20
   },
   text: {

@@ -21,9 +21,7 @@ import { TextInput } from '../TextInput';
 
 var ContainerBox = styled(Box).withConfig({
   displayName: 'SelectContainer__ContainerBox'
-})(['height:', ';max-height:inherit;'], function (props) {
-  return props.theme.select.drop.maxHeight;
-});
+})(['max-height:inherit;@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){width:100%;}']);
 
 var OptionsBox = styled(Box).withConfig({
   displayName: 'SelectContainer__OptionsBox'
@@ -239,7 +237,7 @@ var SelectContainer = function (_Component) {
         React.createElement(
           OptionsBox,
           {
-            flex: true,
+            flex: 'shrink',
             role: 'menubar',
             tabIndex: '-1',
             ref: this.selectRef,

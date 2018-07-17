@@ -53,6 +53,9 @@ export default {
       return '\n      input:checked + div {\n        border-color: ' + colorForName('brand', props.theme) + ';\n        background-color: ' + colorForName('brand', props.theme) + ';\n\n        > svg {\n          stroke: ' + colorForName('white', props.theme) + ';\n        }\n      }\n    ';
     }
   },
+  drop: {
+    maxHeight: '384px'
+  },
   select: {
     icons: {
       down: ArrowDown

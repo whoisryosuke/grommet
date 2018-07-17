@@ -15,27 +15,25 @@ import { Box, Button, CheckBox, Grommet, Select, Text } from '../../';
 import customSearchTheme from './theme';
 import SearchInputContext from './components/SearchInputContext';
 
-var DEFAULT_OPTIONS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+var SimpleSelect = function (_Component) {
+  _inherits(SimpleSelect, _Component);
 
-var SearchSelect = function (_Component) {
-  _inherits(SearchSelect, _Component);
-
-  function SearchSelect() {
+  function SimpleSelect() {
     var _temp, _this, _ret;
 
-    _classCallCheck(this, SearchSelect);
+    _classCallCheck(this, SimpleSelect);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-      options: DEFAULT_OPTIONS,
+      options: ['one', 'two'],
       value: ''
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  SearchSelect.prototype.render = function render() {
+  SimpleSelect.prototype.render = function render() {
     var _this2 = this;
 
     var _state = this.state,
@@ -46,20 +44,65 @@ var SearchSelect = function (_Component) {
       Grommet,
       null,
       React.createElement(Select, {
-        size: 'medium',
         placeholder: 'Select',
         value: value,
         options: options,
         onChange: function onChange(_ref) {
           var option = _ref.option;
           return _this2.setState({ value: option });
+        }
+      })
+    );
+  };
+
+  return SimpleSelect;
+}(Component);
+
+var DEFAULT_OPTIONS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+
+var SearchSelect = function (_Component2) {
+  _inherits(SearchSelect, _Component2);
+
+  function SearchSelect() {
+    var _temp2, _this3, _ret2;
+
+    _classCallCheck(this, SearchSelect);
+
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = {
+      options: DEFAULT_OPTIONS,
+      value: ''
+    }, _temp2), _possibleConstructorReturn(_this3, _ret2);
+  }
+
+  SearchSelect.prototype.render = function render() {
+    var _this4 = this;
+
+    var _state2 = this.state,
+        options = _state2.options,
+        value = _state2.value;
+
+    return React.createElement(
+      Grommet,
+      null,
+      React.createElement(Select, {
+        size: 'medium',
+        placeholder: 'Select',
+        value: value,
+        options: options,
+        onChange: function onChange(_ref2) {
+          var option = _ref2.option;
+          return _this4.setState({ value: option });
         },
         onClose: function onClose() {
-          return _this2.setState({ options: DEFAULT_OPTIONS });
+          return _this4.setState({ options: DEFAULT_OPTIONS });
         },
         onSearch: function onSearch(text) {
           var exp = new RegExp(text, 'i');
-          _this2.setState({ options: DEFAULT_OPTIONS.filter(function (o) {
+          _this4.setState({ options: DEFAULT_OPTIONS.filter(function (o) {
               return exp.test(o);
             }) });
         }
@@ -72,29 +115,29 @@ var SearchSelect = function (_Component) {
 
 var allSeasons = ['S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10'];
 
-var SeasonsSelect = function (_Component2) {
-  _inherits(SeasonsSelect, _Component2);
+var SeasonsSelect = function (_Component3) {
+  _inherits(SeasonsSelect, _Component3);
 
   function SeasonsSelect() {
-    var _temp2, _this3, _ret2;
+    var _temp3, _this5, _ret3;
 
     _classCallCheck(this, SeasonsSelect);
 
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
+    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      args[_key3] = arguments[_key3];
     }
 
-    return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = {
+    return _ret3 = (_temp3 = (_this5 = _possibleConstructorReturn(this, _Component3.call.apply(_Component3, [this].concat(args))), _this5), _this5.state = {
       selectedSeasons: []
-    }, _this3.onRemoveSeason = function (season) {
-      var selectedSeasons = _this3.state.selectedSeasons;
+    }, _this5.onRemoveSeason = function (season) {
+      var selectedSeasons = _this5.state.selectedSeasons;
 
       var newSeasons = [].concat(selectedSeasons);
       newSeasons.splice(selectedSeasons.indexOf(season), 1);
-      _this3.setState({
+      _this5.setState({
         selectedSeasons: newSeasons
       });
-    }, _this3.renderSeason = function (season) {
+    }, _this5.renderSeason = function (season) {
       return React.createElement(
         Button,
         {
@@ -103,7 +146,7 @@ var SeasonsSelect = function (_Component2) {
           onClick: function onClick(event) {
             event.preventDefault();
             event.stopPropagation();
-            _this3.onRemoveSeason(season);
+            _this5.onRemoveSeason(season);
           },
           onFocus: function onFocus(event) {
             return event.stopPropagation();
@@ -136,20 +179,20 @@ var SeasonsSelect = function (_Component2) {
           )
         )
       );
-    }, _this3.renderOption = function (option) {
+    }, _this5.renderOption = function (option) {
       return React.createElement(
         Box,
         {
           pad: 'small',
-          background: _this3.state.selectedSeasons.indexOf(option) >= 0 ? 'active' : undefined
+          background: _this5.state.selectedSeasons.indexOf(option) >= 0 ? 'active' : undefined
         },
         option
       );
-    }, _temp2), _possibleConstructorReturn(_this3, _ret2);
+    }, _temp3), _possibleConstructorReturn(_this5, _ret3);
   }
 
   SeasonsSelect.prototype.render = function render() {
-    var _this4 = this;
+    var _this6 = this;
 
     var selectedSeasons = this.state.selectedSeasons;
 
@@ -174,17 +217,17 @@ var SeasonsSelect = function (_Component2) {
                 selectedSeasons.map(this.renderSeason)
               ) : undefined,
               options: allSeasons,
-              onChange: function onChange(_ref2) {
-                var option = _ref2.option;
+              onChange: function onChange(_ref3) {
+                var option = _ref3.option;
 
-                var newSelectedSeasons = [].concat(_this4.state.selectedSeasons);
+                var newSelectedSeasons = [].concat(_this6.state.selectedSeasons);
                 var seasonIndex = newSelectedSeasons.indexOf(option);
                 if (seasonIndex >= 0) {
                   newSelectedSeasons.splice(seasonIndex, 1);
                 } else {
                   newSelectedSeasons.push(option);
                 }
-                _this4.setState({ selectedSeasons: newSelectedSeasons.sort() });
+                _this6.setState({ selectedSeasons: newSelectedSeasons.sort() });
               }
             },
             this.renderOption
@@ -235,27 +278,27 @@ var allContentPartners = [{
   id: '32131244'
 }];
 
-var CustomSearchSelect = function (_Component3) {
-  _inherits(CustomSearchSelect, _Component3);
+var CustomSearchSelect = function (_Component4) {
+  _inherits(CustomSearchSelect, _Component4);
 
   function CustomSearchSelect() {
-    var _temp3, _this5, _ret3;
+    var _temp4, _this7, _ret4;
 
     _classCallCheck(this, CustomSearchSelect);
 
-    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-      args[_key3] = arguments[_key3];
+    for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+      args[_key4] = arguments[_key4];
     }
 
-    return _ret3 = (_temp3 = (_this5 = _possibleConstructorReturn(this, _Component3.call.apply(_Component3, [this].concat(args))), _this5), _this5.state = {
+    return _ret4 = (_temp4 = (_this7 = _possibleConstructorReturn(this, _Component4.call.apply(_Component4, [this].concat(args))), _this7), _this7.state = {
       contentPartners: allContentPartners,
       selectedContentPartners: [],
       searching: false
-    }, _this5.selectRef = createRef(), _this5.clearContentPartners = function () {
-      return _this5.setState({ selectedContentPartners: [] });
-    }, _this5.renderOption = function (_ref3) {
-      var name = _ref3.name;
-      var selectedContentPartners = _this5.state.selectedContentPartners;
+    }, _this7.selectRef = createRef(), _this7.clearContentPartners = function () {
+      return _this7.setState({ selectedContentPartners: [] });
+    }, _this7.renderOption = function (_ref4) {
+      var name = _ref4.name;
+      var selectedContentPartners = _this7.state.selectedContentPartners;
 
       return React.createElement(
         Box,
@@ -274,8 +317,8 @@ var CustomSearchSelect = function (_Component3) {
           name
         )
       );
-    }, _this5.renderContentPartners = function () {
-      var selectedContentPartners = _this5.state.selectedContentPartners;
+    }, _this7.renderContentPartners = function () {
+      var selectedContentPartners = _this7.state.selectedContentPartners;
 
       return React.createElement(
         Box,
@@ -308,8 +351,8 @@ var CustomSearchSelect = function (_Component3) {
           React.createElement(
             Text,
             { size: 'small', truncate: true },
-            selectedContentPartners.map(function (_ref4) {
-              var name = _ref4.name;
+            selectedContentPartners.map(function (_ref5) {
+              var name = _ref5.name;
               return name;
             }).join(', ')
           )
@@ -324,8 +367,8 @@ var CustomSearchSelect = function (_Component3) {
             onClick: function onClick(event) {
               event.preventDefault();
               event.stopPropagation();
-              _this5.clearContentPartners();
-              findDOMNode(_this5.selectRef.current).focus();
+              _this7.clearContentPartners();
+              findDOMNode(_this7.selectRef.current).focus();
             }
           },
           React.createElement(
@@ -335,20 +378,20 @@ var CustomSearchSelect = function (_Component3) {
           )
         )
       );
-    }, _temp3), _possibleConstructorReturn(_this5, _ret3);
+    }, _temp4), _possibleConstructorReturn(_this7, _ret4);
   }
 
   CustomSearchSelect.prototype.render = function render() {
-    var _this6 = this;
+    var _this8 = this;
 
-    var _state2 = this.state,
-        contentPartners = _state2.contentPartners,
-        searching = _state2.searching,
-        selectedContentPartners = _state2.selectedContentPartners;
+    var _state3 = this.state,
+        contentPartners = _state3.contentPartners,
+        searching = _state3.searching,
+        selectedContentPartners = _state3.selectedContentPartners;
 
 
-    var selectedPartnerNames = selectedContentPartners.map(function (_ref5) {
-      var name = _ref5.name;
+    var selectedPartnerNames = selectedContentPartners.map(function (_ref6) {
+      var name = _ref6.name;
       return name;
     });
 
@@ -372,12 +415,12 @@ var CustomSearchSelect = function (_Component3) {
               multiple: true,
               value: selectedContentPartners.length ? this.renderContentPartners() : undefined,
               options: contentPartners,
-              onChange: function onChange(_ref6) {
-                var option = _ref6.option;
+              onChange: function onChange(_ref7) {
+                var option = _ref7.option;
 
-                var newSelectedPartners = [].concat(_this6.state.selectedContentPartners);
-                var seasonIndex = newSelectedPartners.map(function (_ref7) {
-                  var name = _ref7.name;
+                var newSelectedPartners = [].concat(_this8.state.selectedContentPartners);
+                var seasonIndex = newSelectedPartners.map(function (_ref8) {
+                  var name = _ref8.name;
                   return name;
                 }).indexOf(option.name);
                 if (seasonIndex >= 0) {
@@ -385,10 +428,10 @@ var CustomSearchSelect = function (_Component3) {
                 } else {
                   newSelectedPartners.push(option);
                 }
-                _this6.setState({ selectedContentPartners: newSelectedPartners });
+                _this8.setState({ selectedContentPartners: newSelectedPartners });
               },
               onClose: function onClose() {
-                return _this6.setState({
+                return _this8.setState({
                   contentPartners: allContentPartners.sort(function (p1, p2) {
                     var p1Exists = selectedPartnerNames.includes(p1.name);
                     var p2Exists = selectedPartnerNames.includes(p2.name);
@@ -405,9 +448,9 @@ var CustomSearchSelect = function (_Component3) {
                 });
               },
               onSearch: function onSearch(query) {
-                _this6.setState({ searching: true }, function () {
+                _this8.setState({ searching: true }, function () {
                   setTimeout(function () {
-                    _this6.setState({
+                    _this8.setState({
                       searching: false,
                       contentPartners: allContentPartners.filter(function (s) {
                         return s.name.toLowerCase().indexOf(query.toLowerCase()) >= 0;
@@ -427,7 +470,9 @@ var CustomSearchSelect = function (_Component3) {
   return CustomSearchSelect;
 }(Component);
 
-storiesOf('Select', module).add('Search Select', function () {
+storiesOf('Select', module).add('Simple Select', function () {
+  return React.createElement(SimpleSelect, null);
+}).add('Search Select', function () {
   return React.createElement(SearchSelect, null);
 }).add('Seasons Select', function () {
   return React.createElement(SeasonsSelect, null);

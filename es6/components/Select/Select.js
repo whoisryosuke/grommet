@@ -148,7 +148,7 @@ var Select = function (_Component) {
           },
           React.createElement(
             Box,
-            { direction: 'row', flex: true },
+            { direction: 'row', flex: true, basis: 'auto' },
             selectValue || React.createElement(SelectTextInput, _extends({
               ref: function ref(_ref) {
                 _this2.inputRef = _ref;
