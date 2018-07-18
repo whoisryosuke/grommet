@@ -56,7 +56,8 @@ var SelectContainer = function (_Component) {
           multiple = _this$props.multiple,
           onChange = _this$props.onChange,
           options = _this$props.options,
-          selected = _this$props.selected;
+          selected = _this$props.selected,
+          value = _this$props.value;
 
 
       if (onChange) {
@@ -66,7 +67,17 @@ var SelectContainer = function (_Component) {
           nextValue = [];
           nextSelected = [];
           var removed = false;
-          (selected || []).forEach(function (selectedIndex) {
+          var selectedIndexes = [];
+
+          if (Array.isArray(selected)) {
+            selectedIndexes = selected;
+          } else if (Array.isArray(value)) {
+            selectedIndexes = value.map(function (v) {
+              return options.indexOf(v);
+            });
+          }
+
+          selectedIndexes.forEach(function (selectedIndex) {
             if (selectedIndex === index) {
               removed = true;
             } else {
