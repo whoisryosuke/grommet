@@ -40,6 +40,10 @@ var SimpleTextInput = function (_Component) {
   return SimpleTextInput;
 }(Component);
 
+var suggestions = Array(10).fill().map(function (_, i) {
+  return 'suggestion ' + (i + 1);
+});
+
 var SuggestionsTextInput = function (_Component2) {
   _inherits(SuggestionsTextInput, _Component2);
 
@@ -69,7 +73,7 @@ var SuggestionsTextInput = function (_Component2) {
         value: value,
         onChange: this.onChange,
         onSelect: this.onSelect,
-        suggestions: ['First', 'Second', 'Third']
+        suggestions: suggestions
       })
     );
   };
