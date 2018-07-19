@@ -12,9 +12,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _recompose = require('recompose');
 
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
 var _Box = require('../Box');
 
 var _Button = require('../Button');
+
+var _InfiniteScroll = require('../InfiniteScroll');
 
 var _Keyboard = require('../Keyboard');
 
@@ -56,6 +62,10 @@ function stringLabel(suggestion) {
   }
   return suggestion;
 }
+
+var ContainerBox = (0, _styledComponents2.default)(_Box.Box).withConfig({
+  displayName: 'TextInput__ContainerBox'
+})(['max-height:inherit;@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){width:100%;}']);
 
 var TextInput = function (_Component) {
   _inherits(TextInput, _Component);
@@ -191,36 +201,36 @@ var TextInput = function (_Component) {
           activeSuggestionIndex = _this$state4.activeSuggestionIndex,
           selectedSuggestionIndex = _this$state4.selectedSuggestionIndex;
 
-      var items = void 0;
-      if (suggestions && suggestions.length > 0) {
-        items = suggestions.map(function (suggestion, index) {
-          return _react2.default.createElement(
-            'li',
-            { key: stringLabel(suggestion) + '-' + index },
-            _react2.default.createElement(
-              _Button.Button,
-              {
-                active: activeSuggestionIndex === index || selectedSuggestionIndex === index,
-                fill: true,
-                hoverIndicator: 'background',
-                onClick: function onClick() {
-                  return _this.onClickSuggestion(suggestion);
-                }
-              },
-              _react2.default.createElement(
-                _Box.Box,
-                { align: 'start', pad: 'small' },
-                renderLabel(suggestion)
-              )
-            )
-          );
-        });
-      }
 
       return _react2.default.createElement(
         _StyledTextInput.StyledSuggestions,
         { theme: theme },
-        items
+        _react2.default.createElement(
+          _InfiniteScroll.InfiniteScroll,
+          { items: suggestions, step: theme.select.step },
+          function (suggestion, index) {
+            return _react2.default.createElement(
+              'li',
+              { key: stringLabel(suggestion) + '-' + index },
+              _react2.default.createElement(
+                _Button.Button,
+                {
+                  active: activeSuggestionIndex === index || selectedSuggestionIndex === index,
+                  fill: true,
+                  hoverIndicator: 'background',
+                  onClick: function onClick() {
+                    return _this.onClickSuggestion(suggestion);
+                  }
+                },
+                _react2.default.createElement(
+                  _Box.Box,
+                  { align: 'start', pad: 'small' },
+                  renderLabel(suggestion)
+                )
+              )
+            );
+          }
+        )
       );
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -289,7 +299,11 @@ var TextInput = function (_Component) {
             return _this2.setState({ showDrop: false });
           }
         },
-        this.renderSuggestions()
+        _react2.default.createElement(
+          ContainerBox,
+          { overflow: 'auto' },
+          this.renderSuggestions()
+        )
       );
     }
     return _react2.default.createElement(
