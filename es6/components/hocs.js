@@ -56,18 +56,22 @@ var withFocus = function withFocus(WrappedComponent) {
         }
         clearTimeout(_this.mouseTimer);
       }, _this.handleActiveMouse = function () {
-        window.mouseActive = true;
+        _this.mouseActive = true;
 
         // this avoids showing focus when clicking around
         clearTimeout(_this.mouseTimer);
         // empirical number to reset mouseActive after
         // some time has passed without mousedown
         _this.mouseTimer = setTimeout(function () {
-          window.mouseActive = false;
+          _this.mouseActive = false;
         }, 300);
       }, _this.setFocus = function () {
-        if (window.mouseActive === false) {
+        if (_this.mouseActive === false) {
           _this.setState({ focus: true });
+        }
+      }, _this.resetFocus = function () {
+        if (_this.state.focus) {
+          _this.setState({ focus: false });
         }
       }, _temp), _possibleConstructorReturn(_this, _ret);
     }
@@ -82,10 +86,6 @@ var withFocus = function withFocus(WrappedComponent) {
       }
       return null;
     }; // not in state because it doesn't affect rendering
-
-    FocusableComponent.prototype.resetFocus = function resetFocus() {
-      this.setState({ focus: false });
-    };
 
     FocusableComponent.prototype.render = function render() {
       var _this2 = this;
