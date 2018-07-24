@@ -79,6 +79,23 @@ var FormFieldSelect = function FormFieldSelect(props) {
   );
 };
 
+var FormFieldHelpError = function FormFieldHelpError(props) {
+  return React.createElement(
+    Grommet,
+    null,
+    React.createElement(
+      FormField,
+      _extends({
+        label: 'Label'
+      }, props, {
+        help: 'Text to help the user know what is possible',
+        error: 'Text to call attention to an issue with this field'
+      }),
+      React.createElement(TextInput, { placeholder: 'placeholder', value: 'Value' })
+    )
+  );
+};
+
 storiesOf('FormField', module).add('TextInput', function () {
   return React.createElement(FormFieldTextInput, null);
 }).add('TextArea', function () {
@@ -89,4 +106,6 @@ storiesOf('FormField', module).add('TextInput', function () {
   return React.createElement(FormFieldCheckBox, null);
 }).add('Toggle', function () {
   return React.createElement(FormFieldToggle, null);
+}).add('Help and error', function () {
+  return React.createElement(FormFieldHelpError, null);
 });
