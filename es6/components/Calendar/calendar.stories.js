@@ -33,7 +33,7 @@ var SimpleCalendar = function (_Component) {
     return React.createElement(
       Grommet,
       null,
-      React.createElement(Calendar, { date: date, onSelect: this.onSelect })
+      React.createElement(Calendar, { date: date, onSelect: this.onSelect, size: 'small' })
     );
   };
 

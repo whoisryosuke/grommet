@@ -288,9 +288,13 @@ var Calendar = function (_Component) {
             Box,
             { direction: 'row', justify: 'between', align: 'center' },
             React.createElement(
-              Heading,
-              { level: 3, size: size, margin: 'none' },
-              reference.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
+              Box,
+              { pad: { horizontal: 'small' } },
+              React.createElement(
+                Heading,
+                { level: 3, size: size, margin: 'none' },
+                reference.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
+              )
             ),
             React.createElement(
               Box,

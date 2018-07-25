@@ -32,6 +32,10 @@ var _Text = require('../Text/Text');
 
 var _Text2 = _interopRequireDefault(_Text);
 
+var _Calendar = require('../Calendar/Calendar');
+
+var _Calendar2 = _interopRequireDefault(_Calendar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -105,6 +109,69 @@ var SimpleDropButton = function (_Component) {
   return SimpleDropButton;
 }(_react.Component);
 
-(0, _react3.storiesOf)('DropButton', module).add('Simple DropButton', function () {
+var CalendarDropButton = function (_Component2) {
+  _inherits(CalendarDropButton, _Component2);
+
+  function CalendarDropButton() {
+    var _temp2, _this3, _ret2;
+
+    _classCallCheck(this, CalendarDropButton);
+
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = { date: undefined }, _this3.onClose = function () {
+      _this3.setState({ open: false });
+      setTimeout(function () {
+        return _this3.setState({ open: undefined });
+      }, 1);
+    }, _this3.onSelect = function (date) {
+      return _this3.setState({ date: date, open: false });
+    }, _temp2), _possibleConstructorReturn(_this3, _ret2);
+  }
+
+  CalendarDropButton.prototype.render = function render() {
+    var _this4 = this;
+
+    var _state = this.state,
+        date = _state.date,
+        open = _state.open;
+
+    return _react2.default.createElement(
+      _Grommet2.default,
+      null,
+      _react2.default.createElement(
+        _DropButton2.default,
+        {
+          open: open,
+          onClose: function onClose() {
+            return _this4.setState({ open: false });
+          },
+          onOpen: function onOpen() {
+            return _this4.setState({ open: true });
+          },
+          dropContent: _react2.default.createElement(_Calendar2.default, { date: date, onSelect: this.onSelect })
+        },
+        _react2.default.createElement(
+          _Box2.default,
+          { direction: 'row', gap: 'medium', align: 'center', pad: 'small' },
+          _react2.default.createElement(
+            _Text2.default,
+            null,
+            date ? new Date(date).toLocaleDateString() : 'Select date'
+          ),
+          _react2.default.createElement(_grommetIcons.FormDown, { color: 'brand' })
+        )
+      )
+    );
+  };
+
+  return CalendarDropButton;
+}(_react.Component);
+
+(0, _react3.storiesOf)('DropButton', module).add('Simple', function () {
   return _react2.default.createElement(SimpleDropButton, null);
+}).add('Calendar', function () {
+  return _react2.default.createElement(CalendarDropButton, null);
 });

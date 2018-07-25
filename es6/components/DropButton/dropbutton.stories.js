@@ -6,7 +6,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
-import { Close } from 'grommet-icons';
+import { Close, FormDown } from 'grommet-icons';
 
 import DropButton from '../DropButton/DropButton';
 import Grommet from '../Grommet/Grommet';
@@ -14,6 +14,7 @@ import Box from '../Box/Box';
 import Heading from '../Heading/Heading';
 import Button from '../Button/Button';
 import Text from '../Text/Text';
+import Calendar from '../Calendar/Calendar';
 
 var DropContent = function DropContent(_ref) {
   var onClose = _ref.onClose;
@@ -80,6 +81,69 @@ var SimpleDropButton = function (_Component) {
   return SimpleDropButton;
 }(Component);
 
-storiesOf('DropButton', module).add('Simple DropButton', function () {
+var CalendarDropButton = function (_Component2) {
+  _inherits(CalendarDropButton, _Component2);
+
+  function CalendarDropButton() {
+    var _temp2, _this3, _ret2;
+
+    _classCallCheck(this, CalendarDropButton);
+
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = { date: undefined }, _this3.onClose = function () {
+      _this3.setState({ open: false });
+      setTimeout(function () {
+        return _this3.setState({ open: undefined });
+      }, 1);
+    }, _this3.onSelect = function (date) {
+      return _this3.setState({ date: date, open: false });
+    }, _temp2), _possibleConstructorReturn(_this3, _ret2);
+  }
+
+  CalendarDropButton.prototype.render = function render() {
+    var _this4 = this;
+
+    var _state = this.state,
+        date = _state.date,
+        open = _state.open;
+
+    return React.createElement(
+      Grommet,
+      null,
+      React.createElement(
+        DropButton,
+        {
+          open: open,
+          onClose: function onClose() {
+            return _this4.setState({ open: false });
+          },
+          onOpen: function onOpen() {
+            return _this4.setState({ open: true });
+          },
+          dropContent: React.createElement(Calendar, { date: date, onSelect: this.onSelect })
+        },
+        React.createElement(
+          Box,
+          { direction: 'row', gap: 'medium', align: 'center', pad: 'small' },
+          React.createElement(
+            Text,
+            null,
+            date ? new Date(date).toLocaleDateString() : 'Select date'
+          ),
+          React.createElement(FormDown, { color: 'brand' })
+        )
+      )
+    );
+  };
+
+  return CalendarDropButton;
+}(Component);
+
+storiesOf('DropButton', module).add('Simple', function () {
   return React.createElement(SimpleDropButton, null);
+}).add('Calendar', function () {
+  return React.createElement(CalendarDropButton, null);
 });

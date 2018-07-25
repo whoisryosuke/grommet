@@ -307,9 +307,13 @@ var Calendar = function (_Component) {
             _Box.Box,
             { direction: 'row', justify: 'between', align: 'center' },
             _react2.default.createElement(
-              _Heading.Heading,
-              { level: 3, size: size, margin: 'none' },
-              reference.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
+              _Box.Box,
+              { pad: { horizontal: 'small' } },
+              _react2.default.createElement(
+                _Heading.Heading,
+                { level: 3, size: size, margin: 'none' },
+                reference.toLocaleDateString(locale, { month: 'long', year: 'numeric' })
+              )
             ),
             _react2.default.createElement(
               _Box.Box,
