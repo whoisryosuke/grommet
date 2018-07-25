@@ -16,7 +16,7 @@ import Box from '../../../Box/Box';
 import { ThemeContext } from '../../../../contexts';
 import { colorForName } from '../../../../utils';
 
-var searchingStyle = css(['position:relative;outline:none;box-shadow:none;&:before{content:\'\';position:absolute;bottom:0;left:0;width:100%;height:2px;background:', ';}&:after{content:\'\';position:absolute;bottom:0;left:0;width:80%;height:2px;will-change:left,right;background:', ';animation:progress 1s ease-out infinite;}@keyframes progress{0%{left:-100%;right:100%;}100%{left:100%;right:-50%;}}'], function (props) {
+var searchingStyle = css(['position:relative;outline:none;box-shadow:none;&:before{content:\'\';position:absolute;bottom:0;left:0;width:100%;height:2px;background:', ';}&:after{content:\'\';position:absolute;bottom:0;left:0;width:100%;height:2px;will-change:left,right;background:', ';animation:progress 1.5s cubic-bezier(0.4,0,0.2,1) infinite;transform:translateX(-50%) scaleX(0);}@keyframes progress{0%{transform:translateX(-50%) scaleX(0);}50%{transform:translateX(12.5%) scaleX(.75);}100%{transform:translateX(50%) scaleX(0);}}'], function (props) {
   return colorForName('light-2', props.theme);
 }, function (props) {
   return colorForName('brand', props.theme);
