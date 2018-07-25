@@ -18,45 +18,28 @@ var RoutedButton = function (_Component) {
   _inherits(RoutedButton, _Component);
 
   function RoutedButton() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, RoutedButton);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _initialiseProps.call(_this), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   RoutedButton.prototype.render = function render() {
-    var _this2 = this;
-
     var _props = this.props,
+        href = _props.href,
         path = _props.path,
         method = _props.method,
-        rest = _objectWithoutProperties(_props, ['path', 'method']);
+        onClick = _props.onClick,
+        rest = _objectWithoutProperties(_props, ['href', 'path', 'method', 'onClick']);
 
     return React.createElement(Button, _extends({}, rest, {
-      href: path,
-      onClick: function onClick(event) {
-        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-
-        var onClick = _this2.props.onClick;
-        var router = _this2.context.router;
-
-        if (event) {
-          var modifierKey = event.ctrlKey || event.metaKey;
-
-          // if the user right-clicked in the button we should let it go
-          if (modifierKey) {
-            return;
-          }
-        }
-        if (router) {
-          event.preventDefault();
-          (router.history || router)[method](path);
-        }
-        if (onClick) {
-          onClick.apply(undefined, [event].concat(args));
-        }
-      }
+      href: path || href,
+      onClick: path || onClick ? this.onClick : undefined
     }));
   };
 
@@ -70,6 +53,37 @@ RoutedButton.defaultProps = {
   method: 'push'
 };
 
+var _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this.onClick = function (event) {
+    for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      args[_key2 - 1] = arguments[_key2];
+    }
+
+    var _props2 = _this2.props,
+        method = _props2.method,
+        onClick = _props2.onClick,
+        path = _props2.path;
+    var router = _this2.context.router;
+
+    if (event) {
+      var modifierKey = event.ctrlKey || event.metaKey;
+
+      // if the user right-clicked in the button we should let it go
+      if (modifierKey) {
+        return;
+      }
+    }
+    if (router) {
+      event.preventDefault();
+      (router.history || router)[method](path);
+    }
+    if (onClick) {
+      onClick.apply(undefined, [event].concat(args));
+    }
+  };
+};
 
 if (process.env.NODE_ENV !== 'production') {
   routedButton(RoutedButton);

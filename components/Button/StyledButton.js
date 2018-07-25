@@ -77,7 +77,7 @@ var plainStyle = (0, _styledComponents.css)(['color:inherit;border:none;padding:
 
 var StyledButton = _styledComponents2.default.button.withConfig({
   displayName: 'StyledButton'
-})(['box-sizing:border-box;cursor:pointer;outline:none;font:inherit;text-decoration:none;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
+})(['display:inline-block;box-sizing:border-box;cursor:pointer;outline:none;font:inherit;text-decoration:none;margin:0;background-color:transparent;overflow:visible;text-transform:none;', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ''], function (props) {
   return props.plain && plainStyle;
 }, function (props) {
   return !props.plain && basicStyle(props);

@@ -5,6 +5,7 @@ import { storiesOf } from '@storybook/react';
 import { Add } from 'grommet-icons';
 
 import Button from '../Button/Button';
+import RoutedButton from '../Button/RoutedButton';
 import Grommet from '../Grommet/Grommet';
 import Box from '../Box/Box';
 import Text from '../Text/Text';
@@ -43,6 +44,22 @@ var PlainButton = function PlainButton() {
         )
       )
     )
+  );
+};
+
+var AnchorButton = function AnchorButton() {
+  return React.createElement(
+    Grommet,
+    null,
+    React.createElement(Button, { label: 'Go', href: '#' })
+  );
+};
+
+var RouteButton = function RouteButton() {
+  return React.createElement(
+    Grommet,
+    null,
+    React.createElement(RoutedButton, { label: 'Go', path: '/' })
   );
 };
 
@@ -85,6 +102,10 @@ storiesOf('Button', module).add('Default', function () {
   return React.createElement(IconButton, null);
 }).add('Plain', function () {
   return React.createElement(PlainButton, null);
+}).add('Anchor', function () {
+  return React.createElement(AnchorButton, null);
+}).add('RoutedButton', function () {
+  return React.createElement(RouteButton, null);
 }).add('Custom theme', function () {
   return React.createElement(CustomThemeButton, null);
 });

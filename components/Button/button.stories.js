@@ -14,6 +14,10 @@ var _Button = require('../Button/Button');
 
 var _Button2 = _interopRequireDefault(_Button);
 
+var _RoutedButton = require('../Button/RoutedButton');
+
+var _RoutedButton2 = _interopRequireDefault(_RoutedButton);
+
 var _Grommet = require('../Grommet/Grommet');
 
 var _Grommet2 = _interopRequireDefault(_Grommet);
@@ -65,6 +69,22 @@ var PlainButton = function PlainButton() {
   );
 };
 
+var AnchorButton = function AnchorButton() {
+  return _react2.default.createElement(
+    _Grommet2.default,
+    null,
+    _react2.default.createElement(_Button2.default, { label: 'Go', href: '#' })
+  );
+};
+
+var RouteButton = function RouteButton() {
+  return _react2.default.createElement(
+    _Grommet2.default,
+    null,
+    _react2.default.createElement(_RoutedButton2.default, { label: 'Go', path: '/' })
+  );
+};
+
 var customTheme = {
   button: {
     border: {
@@ -104,6 +124,10 @@ var CustomThemeButton = function CustomThemeButton() {
   return _react2.default.createElement(IconButton, null);
 }).add('Plain', function () {
   return _react2.default.createElement(PlainButton, null);
+}).add('Anchor', function () {
+  return _react2.default.createElement(AnchorButton, null);
+}).add('RoutedButton', function () {
+  return _react2.default.createElement(RouteButton, null);
 }).add('Custom theme', function () {
   return _react2.default.createElement(CustomThemeButton, null);
 });
