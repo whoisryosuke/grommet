@@ -6,6 +6,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
 var _reactWaypoint = require('react-waypoint');
 
 var _reactWaypoint2 = _interopRequireDefault(_reactWaypoint);
@@ -25,12 +27,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var InfiniteScroll = function (_Component) {
   _inherits(InfiniteScroll, _Component);
 
-  function InfiniteScroll(props, context) {
+  function InfiniteScroll() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, InfiniteScroll);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.increaseOffset = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.showRef = _react2.default.createRef(), _this.initialScroll = false, _this.increaseOffset = function () {
       var _this$props = _this.props,
           items = _this$props.items,
           onMore = _this$props.onMore,
@@ -42,18 +48,51 @@ var InfiniteScroll = function (_Component) {
       function () {
         return onMore && (count + 1) * step >= items.length && onMore();
       });
-    };
-
-    _this.state = { count: 1 };
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
+  InfiniteScroll.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var show = nextProps.show,
+        step = nextProps.step;
+
+    if (!prevState.count || show && show < step * prevState.count) {
+      var count = prevState.count || 1;
+      if (show && show > step * count) {
+        count = (show + step) / step;
+      }
+      return { count: count };
+    }
+    return null;
+  };
+
+  InfiniteScroll.prototype.componentDidMount = function componentDidMount() {
+    this.scrollShow();
+  };
+
+  InfiniteScroll.prototype.componentDidUpdate = function componentDidUpdate() {
+    this.scrollShow();
+  };
+
+  InfiniteScroll.prototype.scrollShow = function scrollShow() {
+    var show = this.props.show;
+
+    if (show && !this.initialScroll && this.showRef.current) {
+      this.initialScroll = true;
+      // on initial render, scroll to any 'show'
+      var element = (0, _reactDom.findDOMNode)(this.showRef.current);
+      element.scrollIntoView();
+    }
+  };
+
   InfiniteScroll.prototype.render = function render() {
+    var _this2 = this;
+
     var _props = this.props,
         children = _props.children,
         items = _props.items,
         renderMarker = _props.renderMarker,
         scrollableAncestor = _props.scrollableAncestor,
+        show = _props.show,
         step = _props.step;
     var count = this.state.count;
 
@@ -72,7 +111,14 @@ var InfiniteScroll = function (_Component) {
     }
 
     return items.slice(0, displayCount).map(function (item, index) {
-      return [children(item, index), index === waypointAt && marker];
+      var child = children(item, index);
+      if (show && show === index) {
+        child = _react2.default.cloneElement(child, { key: 'show', ref: _this2.showRef });
+      }
+      if (index === waypointAt) {
+        return [child, marker];
+      }
+      return child;
     });
   };
 
