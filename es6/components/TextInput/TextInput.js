@@ -169,6 +169,21 @@ var TextInput = function (_Component) {
           onSelect({ target: inputRef.current, suggestion: suggestion });
         }
       }
+    }, _this.onFocus = function (event) {
+      var onFocus = _this.props.onFocus;
+
+      _this.announceSuggestionsExist();
+      _this.resetSuggestions();
+      if (onFocus) {
+        onFocus(event);
+      }
+    }, _this.onInput = function (event) {
+      var onInput = _this.props.onInput;
+
+      _this.resetSuggestions();
+      if (onInput) {
+        onInput(event);
+      }
     }, _this.onDropClose = function () {
       _this.setState({ showDrop: false });
     }, _this.renderSuggestions = function () {
@@ -247,10 +262,8 @@ var TextInput = function (_Component) {
         plain = _props2.plain,
         theme = _props2.theme,
         value = _props2.value,
-        _onFocus = _props2.onFocus,
-        _onInput = _props2.onInput,
         onKeyDown = _props2.onKeyDown,
-        rest = _objectWithoutProperties(_props2, ['defaultValue', 'dropAlign', 'dropTarget', 'id', 'placeholder', 'plain', 'theme', 'value', 'onFocus', 'onInput', 'onKeyDown']);
+        rest = _objectWithoutProperties(_props2, ['defaultValue', 'dropAlign', 'dropTarget', 'id', 'placeholder', 'plain', 'theme', 'value', 'onKeyDown']);
 
     delete rest.onInput; // se we can manage in onInputChange()
     delete rest.forwardRef;
@@ -312,19 +325,8 @@ var TextInput = function (_Component) {
         }, rest, {
           defaultValue: renderLabel(defaultValue),
           value: renderLabel(value),
-          onFocus: function onFocus(event) {
-            _this2.announceSuggestionsExist();
-            _this2.resetSuggestions();
-            if (_onFocus) {
-              _onFocus(event);
-            }
-          },
-          onInput: function onInput(event) {
-            _this2.resetSuggestions();
-            if (_onInput) {
-              _onInput(event);
-            }
-          }
+          onFocus: this.onFocus,
+          onInput: this.onInput
         }))
       ),
       drop

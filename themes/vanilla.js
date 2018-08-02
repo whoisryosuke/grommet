@@ -104,10 +104,7 @@ exports.default = (0, _utils.deepFreeze)({
       }
     },
     drop: {
-      backgroundColor: {
-        light: '#f8f8f8',
-        dark: '#222222'
-      },
+      background: '#f8f8f8',
       border: {
         width: '0px',
         radius: '0px'
@@ -218,7 +215,6 @@ exports.default = (0, _utils.deepFreeze)({
     iconColor: (0, _styledComponents.css)(['', ''], function (props) {
       return props.theme.global.colors.brand;
     })
-
   },
   anchor: {
     textDecoration: 'none',
@@ -511,7 +507,12 @@ exports.default = (0, _utils.deepFreeze)({
     }
   },
   select: {
+    background: '#ffffff',
     icons: {
+      color: {
+        // light: undefined,
+        // dark: undefined,
+      },
       down: _grommetIcons.FormDown
     },
     // searchInput: undefined,

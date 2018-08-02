@@ -1,3 +1,5 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -472,6 +474,53 @@ var CustomSearchSelect = function (_Component4) {
   return CustomSearchSelect;
 }(Component);
 
+var DarkSelect = function (_Component5) {
+  _inherits(DarkSelect, _Component5);
+
+  function DarkSelect() {
+    var _temp5, _this9, _ret5;
+
+    _classCallCheck(this, DarkSelect);
+
+    for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+      args[_key5] = arguments[_key5];
+    }
+
+    return _ret5 = (_temp5 = (_this9 = _possibleConstructorReturn(this, _Component5.call.apply(_Component5, [this].concat(args))), _this9), _this9.state = {
+      options: ['one', 'two'],
+      value: ''
+    }, _temp5), _possibleConstructorReturn(_this9, _ret5);
+  }
+
+  DarkSelect.prototype.render = function render() {
+    var _this10 = this;
+
+    var _state4 = this.state,
+        options = _state4.options,
+        value = _state4.value;
+
+    return React.createElement(
+      Grommet,
+      _extends({ full: true }, this.props),
+      React.createElement(
+        Box,
+        { fill: true, background: 'dark-1', align: 'center', justify: 'center' },
+        React.createElement(Select, {
+          placeholder: 'Select',
+          value: value,
+          options: options,
+          onChange: function onChange(_ref9) {
+            var option = _ref9.option;
+            return _this10.setState({ value: option });
+          }
+        })
+      )
+    );
+  };
+
+  return DarkSelect;
+}(Component);
+
 storiesOf('Select', module).add('Simple Select', function () {
   return React.createElement(SimpleSelect, null);
 }).add('Search Select', function () {
@@ -480,4 +529,8 @@ storiesOf('Select', module).add('Simple Select', function () {
   return React.createElement(SeasonsSelect, null);
 }).add('Custom Search', function () {
   return React.createElement(CustomSearchSelect, null);
+}).add('Dark', function () {
+  return React.createElement(DarkSelect, null);
+}).add('Custom Colors', function () {
+  return React.createElement(DarkSelect, { theme: { select: { background: '#000000', iconColor: '#d3d3d3' } } });
 });

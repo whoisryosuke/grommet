@@ -1,5 +1,7 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -485,6 +487,53 @@ var CustomSearchSelect = function (_Component4) {
   return CustomSearchSelect;
 }(_react.Component);
 
+var DarkSelect = function (_Component5) {
+  _inherits(DarkSelect, _Component5);
+
+  function DarkSelect() {
+    var _temp5, _this9, _ret5;
+
+    _classCallCheck(this, DarkSelect);
+
+    for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+      args[_key5] = arguments[_key5];
+    }
+
+    return _ret5 = (_temp5 = (_this9 = _possibleConstructorReturn(this, _Component5.call.apply(_Component5, [this].concat(args))), _this9), _this9.state = {
+      options: ['one', 'two'],
+      value: ''
+    }, _temp5), _possibleConstructorReturn(_this9, _ret5);
+  }
+
+  DarkSelect.prototype.render = function render() {
+    var _this10 = this;
+
+    var _state4 = this.state,
+        options = _state4.options,
+        value = _state4.value;
+
+    return _react2.default.createElement(
+      _.Grommet,
+      _extends({ full: true }, this.props),
+      _react2.default.createElement(
+        _.Box,
+        { fill: true, background: 'dark-1', align: 'center', justify: 'center' },
+        _react2.default.createElement(_.Select, {
+          placeholder: 'Select',
+          value: value,
+          options: options,
+          onChange: function onChange(_ref9) {
+            var option = _ref9.option;
+            return _this10.setState({ value: option });
+          }
+        })
+      )
+    );
+  };
+
+  return DarkSelect;
+}(_react.Component);
+
 (0, _react3.storiesOf)('Select', module).add('Simple Select', function () {
   return _react2.default.createElement(SimpleSelect, null);
 }).add('Search Select', function () {
@@ -493,4 +542,8 @@ var CustomSearchSelect = function (_Component4) {
   return _react2.default.createElement(SeasonsSelect, null);
 }).add('Custom Search', function () {
   return _react2.default.createElement(CustomSearchSelect, null);
+}).add('Dark', function () {
+  return _react2.default.createElement(DarkSelect, null);
+}).add('Custom Colors', function () {
+  return _react2.default.createElement(DarkSelect, { theme: { select: { background: '#000000', iconColor: '#d3d3d3' } } });
 });

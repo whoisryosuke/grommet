@@ -27,7 +27,7 @@ var StyledDrop = styled.div.withConfig({
 }, function (props) {
   return props.theme.global.drop.shadow[props.theme.dark ? 'dark' : 'light'];
 }, function (props) {
-  return backgroundStyle(props.theme.global.drop.backgroundColor[props.theme.dark ? 'dark' : 'light'], props.theme);
+  return backgroundStyle(props.theme.global.drop.background, props.theme);
 }, function (props) {
   return getTransformOriginStyle(props.align);
 }, dropKeyFrames);

@@ -38,17 +38,65 @@ var _Box2 = _interopRequireDefault(_Box);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var FormFieldTextInput = function FormFieldTextInput(props) {
-  return _react2.default.createElement(
-    _Grommet2.default,
-    null,
-    _react2.default.createElement(
-      _FormField2.default,
-      _extends({ label: 'Label' }, props),
-      _react2.default.createElement(_TextInput2.default, { placeholder: 'placeholder' })
-    )
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var allSuggestions = Array(100).fill().map(function (_, i) {
+  return 'suggestion ' + (i + 1);
+});
+
+var FormFieldTextInput = function (_Component) {
+  _inherits(FormFieldTextInput, _Component);
+
+  function FormFieldTextInput() {
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, FormFieldTextInput);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { value: '', suggestions: allSuggestions }, _this.onChange = function (event) {
+      var value = event.target.value;
+      var exp = new RegExp(value, 'i');
+      var suggestions = allSuggestions.filter(function (s) {
+        return exp.test(s);
+      });
+      _this.setState({ value: value, suggestions: suggestions });
+    }, _this.onSelect = function (event) {
+      return _this.setState({ value: event.suggestion });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  FormFieldTextInput.prototype.render = function render() {
+    var _state = this.state,
+        value = _state.value,
+        suggestions = _state.suggestions;
+
+    return _react2.default.createElement(
+      _Grommet2.default,
+      null,
+      _react2.default.createElement(
+        _FormField2.default,
+        _extends({ label: 'Label', htmlFor: 'text-input' }, this.props),
+        _react2.default.createElement(_TextInput2.default, {
+          id: 'text-input',
+          placeholder: 'placeholder',
+          value: value,
+          onChange: this.onChange,
+          onSelect: this.onSelect,
+          suggestions: suggestions
+        })
+      )
+    );
+  };
+
+  return FormFieldTextInput;
+}(_react.Component);
 
 var FormFieldTextArea = function FormFieldTextArea(props) {
   return _react2.default.createElement(
@@ -56,8 +104,8 @@ var FormFieldTextArea = function FormFieldTextArea(props) {
     null,
     _react2.default.createElement(
       _FormField2.default,
-      _extends({ label: 'Label' }, props),
-      _react2.default.createElement(_TextArea2.default, { placeholder: 'placeholder' })
+      _extends({ label: 'Label', htmlFor: 'text-area' }, props),
+      _react2.default.createElement(_TextArea2.default, { id: 'text-area', placeholder: 'placeholder' })
     )
   );
 };
@@ -68,11 +116,11 @@ var FormFieldCheckBox = function FormFieldCheckBox(props) {
     null,
     _react2.default.createElement(
       _FormField2.default,
-      _extends({ label: 'Label' }, props),
+      _extends({ label: 'Label', htmlFor: 'check-box' }, props),
       _react2.default.createElement(
         _Box2.default,
         { pad: { horizontal: 'small', vertical: 'xsmall' } },
-        _react2.default.createElement(_CheckBox2.default, { label: 'CheckBox' })
+        _react2.default.createElement(_CheckBox2.default, { id: 'check-box', label: 'CheckBox' })
       )
     )
   );
@@ -84,11 +132,11 @@ var FormFieldToggle = function FormFieldToggle(props) {
     null,
     _react2.default.createElement(
       _FormField2.default,
-      _extends({ label: 'Label' }, props),
+      _extends({ label: 'Label', htmlFor: 'check-box' }, props),
       _react2.default.createElement(
         _Box2.default,
         { pad: { horizontal: 'small', vertical: 'xsmall' } },
-        _react2.default.createElement(_CheckBox2.default, { label: 'CheckBox', toggle: true })
+        _react2.default.createElement(_CheckBox2.default, { id: 'check-box', label: 'CheckBox', toggle: true })
       )
     )
   );
@@ -100,8 +148,8 @@ var FormFieldSelect = function FormFieldSelect(props) {
     null,
     _react2.default.createElement(
       _FormField2.default,
-      _extends({ label: 'Label' }, props),
-      _react2.default.createElement(_Select2.default, { placeholder: 'placeholder', options: ['one', 'two'] })
+      _extends({ label: 'Label', htmlFor: 'select' }, props),
+      _react2.default.createElement(_Select2.default, { id: 'select', placeholder: 'placeholder', options: ['one', 'two'] })
     )
   );
 };
@@ -113,12 +161,13 @@ var FormFieldHelpError = function FormFieldHelpError(props) {
     _react2.default.createElement(
       _FormField2.default,
       _extends({
-        label: 'Label'
+        label: 'Label',
+        htmlFor: 'text-input'
       }, props, {
         help: 'Text to help the user know what is possible',
         error: 'Text to call attention to an issue with this field'
       }),
-      _react2.default.createElement(_TextInput2.default, { placeholder: 'placeholder', value: 'Value' })
+      _react2.default.createElement(_TextInput2.default, { id: 'text-input', placeholder: 'placeholder', value: 'Value' })
     )
   );
 };

@@ -26,9 +26,7 @@ exports.default = {
       gray: 'rgba(0, 0, 0, 0.54)'
     },
     drop: {
-      backgroundColor: {
-        light: '#ffffff'
-      }
+      background: '#ffffff'
     },
     elevation: {
       light: {

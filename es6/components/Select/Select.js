@@ -19,6 +19,7 @@ import { TextInput } from '../TextInput';
 
 import { withForwardRef, withTheme } from '../hocs';
 
+import { colorIsDark, colorForName } from '../../utils';
 import SelectContainer from './SelectContainer';
 import doc from './doc';
 
@@ -121,6 +122,8 @@ var Select = function (_Component) {
       selectValue = value;
     }
 
+    var iconColor = colorIsDark(theme.select.background) ? theme.select.icons.color.dark || colorForName('light-4', theme) : theme.select.icons.color.light || colorForName('brand', theme);
+
     return React.createElement(
       Keyboard,
       { onDown: this.onOpen, onUp: this.onOpen },
@@ -144,7 +147,8 @@ var Select = function (_Component) {
             align: 'center',
             border: !plain ? 'all' : undefined,
             direction: 'row',
-            justify: 'between'
+            justify: 'between',
+            background: theme.select.background
           },
           React.createElement(
             Box,
@@ -170,7 +174,7 @@ var Select = function (_Component) {
               flex: false,
               style: { minWidth: 'auto' }
             },
-            React.createElement(SelectIcon, { color: 'brand', size: size })
+            React.createElement(SelectIcon, { color: iconColor, size: size })
           )
         )
       )

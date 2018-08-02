@@ -24,6 +24,8 @@ var _TextInput = require('../TextInput');
 
 var _hocs = require('../hocs');
 
+var _utils = require('../../utils');
+
 var _SelectContainer = require('./SelectContainer');
 
 var _SelectContainer2 = _interopRequireDefault(_SelectContainer);
@@ -141,6 +143,8 @@ var Select = function (_Component) {
       selectValue = value;
     }
 
+    var iconColor = (0, _utils.colorIsDark)(theme.select.background) ? theme.select.icons.color.dark || (0, _utils.colorForName)('light-4', theme) : theme.select.icons.color.light || (0, _utils.colorForName)('brand', theme);
+
     return _react2.default.createElement(
       _Keyboard.Keyboard,
       { onDown: this.onOpen, onUp: this.onOpen },
@@ -164,7 +168,8 @@ var Select = function (_Component) {
             align: 'center',
             border: !plain ? 'all' : undefined,
             direction: 'row',
-            justify: 'between'
+            justify: 'between',
+            background: theme.select.background
           },
           _react2.default.createElement(
             _Box.Box,
@@ -190,7 +195,7 @@ var Select = function (_Component) {
               flex: false,
               style: { minWidth: 'auto' }
             },
-            _react2.default.createElement(SelectIcon, { color: 'brand', size: size })
+            _react2.default.createElement(SelectIcon, { color: iconColor, size: size })
           )
         )
       )

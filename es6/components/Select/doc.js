@@ -1,6 +1,6 @@
 import { describe, PropTypes } from 'react-desc';
 
-import { a11yTitlePropType, backgroundPropType, getAvailableAtBadge } from '../../utils';
+import { a11yTitlePropType, getAvailableAtBadge } from '../../utils';
 
 export default (function (Select) {
   var DocumentedSelect = describe(Select).availableAt(getAvailableAtBadge('Select')).description('An select-like field with optional search capability.').usage('import { Select } from \'grommet\';\n<Select />');
@@ -19,7 +19,6 @@ export default (function (Select) {
       top: 'top',
       left: 'left'
     }),
-    dropBackground: backgroundPropType,
     dropTarget: PropTypes.object.description('Target where the options drop will be aligned to. This should be\n      a React reference. Typically, this is not required as the drop will be\n      aligned to the Select itself by default.'),
     focusIndicator: PropTypes.bool.description('Whether when \'plain\' it should receive a focus outline.'),
     messages: PropTypes.shape({

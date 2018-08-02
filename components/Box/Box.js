@@ -164,7 +164,7 @@ var Box = function (_Component) {
     );
 
     if (stateTheme) {
-      if (stateTheme.dark !== propsTheme.dark) {
+      if (stateTheme.dark !== propsTheme.dark && stateTheme.icon) {
         content = _react2.default.createElement(
           _grommetIcons.ThemeContext.Provider,
           { value: stateTheme.icon },

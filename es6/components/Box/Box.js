@@ -146,7 +146,7 @@ var Box = function (_Component) {
     );
 
     if (stateTheme) {
-      if (stateTheme.dark !== propsTheme.dark) {
+      if (stateTheme.dark !== propsTheme.dark && stateTheme.icon) {
         content = React.createElement(
           IconThemeContext.Provider,
           { value: stateTheme.icon },

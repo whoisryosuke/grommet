@@ -8,8 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
 var _recompose = require('recompose');
 
 var _utils = require('../../utils');
@@ -38,15 +36,9 @@ var FormField = function (_Component) {
   _inherits(FormField, _Component);
 
   function FormField() {
-    var _temp, _this, _ret;
-
     _classCallCheck(this, FormField);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _temp), _possibleConstructorReturn(_this, _ret);
+    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
   FormField.prototype.render = function render() {
@@ -55,29 +47,20 @@ var FormField = function (_Component) {
     var _props = this.props,
         children = _props.children,
         error = _props.error,
+        focus = _props.focus,
         help = _props.help,
         htmlFor = _props.htmlFor,
         label = _props.label,
         style = _props.style,
         theme = _props.theme,
-        rest = _objectWithoutProperties(_props, ['children', 'error', 'help', 'htmlFor', 'label', 'style', 'theme']);
+        rest = _objectWithoutProperties(_props, ['children', 'error', 'focus', 'help', 'htmlFor', 'label', 'style', 'theme']);
 
     var formField = theme.formField;
     var border = formField.border;
-    var focus = this.state.focus;
 
 
     var contents = children;
-    var focusHandlers = {
-      onClick: function onClick() {
-        // set focus on focusable descendant
-        var container = (0, _reactDom.findDOMNode)(_this2.childContainerRef);
-        var element = (0, _utils.getFirstFocusableDescendant)(container);
-        if (element) {
-          element.focus();
-        }
-      }
-    };
+
     var borderColor = void 0;
     if (focus) {
       borderColor = 'focus';
@@ -108,13 +91,6 @@ var FormField = function (_Component) {
         normalizedChildren
       );
 
-      focusHandlers.onFocus = function () {
-        return _this2.setState({ focus: true });
-      };
-      focusHandlers.onBlur = function () {
-        return _this2.setState({ focus: false });
-      };
-
       abut = border.position === 'outer' && (border.side === 'all' || border.side === 'horizontal' || !border.side);
       if (abut) {
         // marginBottom is set to overlap adjacent fields
@@ -134,8 +110,7 @@ var FormField = function (_Component) {
       _Box.Box,
       _extends({
         border: border && border.position === 'outer' ? _extends({}, border, { color: borderColor }) : undefined,
-        margin: abut ? undefined : { bottom: 'small' }
-      }, focusHandlers, {
+        margin: abut ? undefined : { bottom: 'small' },
         style: outerStyle
       }, rest),
       label || help ? _react2.default.createElement(
@@ -175,4 +150,4 @@ if (process.env.NODE_ENV !== 'production') {
   (0, _doc2.default)(FormField);
 }
 
-exports.default = (0, _recompose.compose)(_hocs.withTheme)(FormField);
+exports.default = (0, _recompose.compose)(_hocs.withFocus, _hocs.withTheme)(FormField);
