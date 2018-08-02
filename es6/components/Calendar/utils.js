@@ -16,7 +16,8 @@ export var addMonths = function addMonths(date, months) {
   var result = new Date(date);
   var years = Math.floor((date.getMonth() + months) / 12);
   result.setFullYear(date.getFullYear() + years);
-  result.setMonth((date.getMonth() + months) % 12);
+  var targetMonth = (date.getMonth() + months) % 12;
+  result.setMonth(targetMonth < 0 ? 12 + targetMonth : targetMonth);
   return result;
 };
 
