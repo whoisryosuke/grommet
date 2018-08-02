@@ -48,7 +48,7 @@ export default {
     },
     size: '18px',
     extend: function extend(props) {
-      return '\n      input:checked + div {\n        border-color: ' + colorForName('brand', props.theme) + ';\n        background-color: ' + colorForName('brand', props.theme) + ';\n\n        > svg {\n          stroke: ' + colorForName('white', props.theme) + ';\n        }\n      }\n    ';
+      return '\n      input:checked + div {\n        border-color: ' + colorForName('brand', props.theme) + ';\n        background: ' + colorForName('brand', props.theme) + ';\n\n        > svg {\n          stroke: ' + colorForName('white', props.theme) + ';\n        }\n      }\n    ';
     }
   },
   drop: {

@@ -6,13 +6,13 @@ import styled, { css } from 'styled-components';
 
 import { focusStyle, parseMetricToNum } from '../../utils';
 
-var rangeTrackStyle = css(['box-sizing:border-box;width:100%;height:', ';background-color:', ';'], function (props) {
+var rangeTrackStyle = css(['box-sizing:border-box;width:100%;height:', ';background:', ';'], function (props) {
   return props.theme.global.focus.border.width;
 }, function (props) {
   return props.theme.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
 });
 
-var rangeThumbStyle = css(['box-sizing:border-box;position:relative;border:', ' solid ', ';border-radius:', ';height:', ';width:', ';overflow:visible;background-color:', ';-webkit-appearance:none;cursor:pointer;'], function (props) {
+var rangeThumbStyle = css(['box-sizing:border-box;position:relative;border:', ' solid ', ';border-radius:', ';height:', ';width:', ';overflow:visible;background:', ';-webkit-appearance:none;cursor:pointer;'], function (props) {
   return props.theme.global.control.border.width;
 }, function (props) {
   return props.theme.dark ? props.theme.global.colors.white : props.theme.global.colors.brand;

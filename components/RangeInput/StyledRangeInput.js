@@ -14,13 +14,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var rangeTrackStyle = (0, _styledComponents.css)(['box-sizing:border-box;width:100%;height:', ';background-color:', ';'], function (props) {
+var rangeTrackStyle = (0, _styledComponents.css)(['box-sizing:border-box;width:100%;height:', ';background:', ';'], function (props) {
   return props.theme.global.focus.border.width;
 }, function (props) {
   return props.theme.dark ? props.theme.global.colors.white : props.theme.rangeInput.track.color;
 });
 
-var rangeThumbStyle = (0, _styledComponents.css)(['box-sizing:border-box;position:relative;border:', ' solid ', ';border-radius:', ';height:', ';width:', ';overflow:visible;background-color:', ';-webkit-appearance:none;cursor:pointer;'], function (props) {
+var rangeThumbStyle = (0, _styledComponents.css)(['box-sizing:border-box;position:relative;border:', ' solid ', ';border-radius:', ';height:', ';width:', ';overflow:visible;background:', ';-webkit-appearance:none;cursor:pointer;'], function (props) {
   return props.theme.global.control.border.width;
 }, function (props) {
   return props.theme.dark ? props.theme.global.colors.white : props.theme.global.colors.brand;

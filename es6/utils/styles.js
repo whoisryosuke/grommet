@@ -5,7 +5,7 @@ import { css } from 'styled-components';
 import { palm, parseMetricToNum } from './mixins';
 import { colorForName, colorIsDark, getRGBA } from './colors';
 
-export var activeStyle = css(['background-color:', ';color:', ';'], function (props) {
+export var activeStyle = css(['background:', ';color:', ';'], function (props) {
   return props.theme.global.hover.backgroundColor;
 }, function (props) {
   return props.theme.global.hover.textColor;
@@ -24,11 +24,8 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
       }
       return css(['background:', ' no-repeat;background-position:', ';background-size:cover;color:', ';'], background.image, background.position || 'center center', color);
     } else if (background.color) {
-      var _color = colorForName(background.color, theme);
-      var rgba = getRGBA(_color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
-      if (rgba) {
-        return css(['background-color:', ';', ''], rgba, (!background.opacity || background.opacity !== 'weak') && 'color: ' + (colorIsDark(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text) + ';');
-      }
+      var backgroundColor = getRGBA(background.color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]) || colorForName(background.color, theme);
+      return css(['background:', ';', ''], backgroundColor, (!background.opacity || background.opacity !== 'weak') && 'color: ' + (background.dark || colorIsDark(backgroundColor) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text) + ';');
     } else if (background.dark === false) {
       return css(['color:', ';'], theme.global.colors.lightBackground.text);
     } else if (background.dark) {
@@ -40,9 +37,9 @@ export var backgroundStyle = function backgroundStyle(background, theme) {
     if (background.lastIndexOf('url', 0) === 0) {
       return css(['background:', ' no-repeat center center;background-size:cover;'], background);
     }
-    var _color2 = colorForName(background, theme);
-    if (_color2) {
-      return css(['background-color:', ';color:', ';'], _color2, colorIsDark(_color2) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
+    var _color = colorForName(background, theme);
+    if (_color) {
+      return css(['background:', ';color:', ';'], _color, colorIsDark(_color) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
     }
   }
   return undefined;
@@ -57,7 +54,7 @@ export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';',
 }, function (props) {
   return props.theme.global.colors.text && 'color: ' + props.theme.global.colors.text + ';';
 }, function (props) {
-  return props.theme.global.colors.background && 'background-color: ' + props.theme.global.colors.background + ';';
+  return props.theme.global.colors.background && 'background: ' + props.theme.global.colors.background + ';';
 });
 
 export var edgeStyle = function edgeStyle(kind, data, responsive, theme) {
@@ -95,7 +92,7 @@ export var focusStyle = css(['> circle,> ellipse,> line,> path,> polygon,> polyl
   return props.theme.global.focus.border.color;
 });
 
-export var inputStyle = css(['box-sizing:border-box;font-size:inherit;padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;', ' margin:0;', ''], function (props) {
+export var inputStyle = css(['box-sizing:border-box;font-size:inherit;padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background:transparent;color:inherit;', ' margin:0;', ''], function (props) {
   return parseMetricToNum(props.theme.global.spacing) / 2 - parseMetricToNum(props.theme.global.input.border.width);
 }, function (props) {
   return props.theme.global.input.border.width;

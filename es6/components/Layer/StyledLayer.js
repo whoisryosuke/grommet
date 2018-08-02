@@ -12,7 +12,7 @@ var desktopLayerStyle = '\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  righ
 
 var StyledLayer = styled.div.withConfig({
   displayName: 'StyledLayer'
-})(['', ' background-color:unset;position:relative;z-index:10;pointer-events:none;outline:none;', ' ', ''], baseStyle, function (props) {
+})(['', ' background:unset;position:relative;z-index:10;pointer-events:none;outline:none;', ' ', ''], baseStyle, function (props) {
   return props.responsive && palm('\n    position: absolute;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    ');
 }, function (props) {
   if (props.position === 'hidden') {
@@ -25,7 +25,7 @@ var StyledLayer = styled.div.withConfig({
 
 export var StyledOverlay = styled.div.withConfig({
   displayName: 'StyledLayer__StyledOverlay'
-})(['', ' top:0px;left:0px;right:0px;bottom:0px;background-color:', ';pointer-events:all;'], lapAndUp('position: absolute;'), function (props) {
+})(['', ' top:0px;left:0px;right:0px;bottom:0px;background:', ';pointer-events:all;'], lapAndUp('position: absolute;'), function (props) {
   return props.theme.layer.overlayBackgroundColor;
 });
 

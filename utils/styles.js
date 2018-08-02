@@ -11,7 +11,7 @@ var _mixins = require('./mixins');
 
 var _colors = require('./colors');
 
-var activeStyle = exports.activeStyle = (0, _styledComponents.css)(['background-color:', ';color:', ';'], function (props) {
+var activeStyle = exports.activeStyle = (0, _styledComponents.css)(['background:', ';color:', ';'], function (props) {
   return props.theme.global.hover.backgroundColor;
 }, function (props) {
   return props.theme.global.hover.textColor;
@@ -30,11 +30,8 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
       }
       return (0, _styledComponents.css)(['background:', ' no-repeat;background-position:', ';background-size:cover;color:', ';'], background.image, background.position || 'center center', color);
     } else if (background.color) {
-      var _color = (0, _colors.colorForName)(background.color, theme);
-      var rgba = (0, _colors.getRGBA)(_color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]);
-      if (rgba) {
-        return (0, _styledComponents.css)(['background-color:', ';', ''], rgba, (!background.opacity || background.opacity !== 'weak') && 'color: ' + ((0, _colors.colorIsDark)(rgba) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text) + ';');
-      }
+      var backgroundColor = (0, _colors.getRGBA)(background.color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]) || (0, _colors.colorForName)(background.color, theme);
+      return (0, _styledComponents.css)(['background:', ';', ''], backgroundColor, (!background.opacity || background.opacity !== 'weak') && 'color: ' + (background.dark || (0, _colors.colorIsDark)(backgroundColor) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text) + ';');
     } else if (background.dark === false) {
       return (0, _styledComponents.css)(['color:', ';'], theme.global.colors.lightBackground.text);
     } else if (background.dark) {
@@ -46,9 +43,9 @@ var backgroundStyle = exports.backgroundStyle = function backgroundStyle(backgro
     if (background.lastIndexOf('url', 0) === 0) {
       return (0, _styledComponents.css)(['background:', ' no-repeat center center;background-size:cover;'], background);
     }
-    var _color2 = (0, _colors.colorForName)(background, theme);
-    if (_color2) {
-      return (0, _styledComponents.css)(['background-color:', ';color:', ';'], _color2, (0, _colors.colorIsDark)(_color2) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
+    var _color = (0, _colors.colorForName)(background, theme);
+    if (_color) {
+      return (0, _styledComponents.css)(['background:', ';color:', ';'], _color, (0, _colors.colorIsDark)(_color) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
     }
   }
   return undefined;
@@ -63,7 +60,7 @@ var baseStyle = exports.baseStyle = (0, _styledComponents.css)(['font-family:', 
 }, function (props) {
   return props.theme.global.colors.text && 'color: ' + props.theme.global.colors.text + ';';
 }, function (props) {
-  return props.theme.global.colors.background && 'background-color: ' + props.theme.global.colors.background + ';';
+  return props.theme.global.colors.background && 'background: ' + props.theme.global.colors.background + ';';
 });
 
 var edgeStyle = exports.edgeStyle = function edgeStyle(kind, data, responsive, theme) {
@@ -101,7 +98,7 @@ var focusStyle = exports.focusStyle = (0, _styledComponents.css)(['> circle,> el
   return props.theme.global.focus.border.color;
 });
 
-var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['box-sizing:border-box;font-size:inherit;padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background-color:transparent;color:inherit;', ' margin:0;', ''], function (props) {
+var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['box-sizing:border-box;font-size:inherit;padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background:transparent;color:inherit;', ' margin:0;', ''], function (props) {
   return (0, _mixins.parseMetricToNum)(props.theme.global.spacing) / 2 - (0, _mixins.parseMetricToNum)(props.theme.global.input.border.width);
 }, function (props) {
   return props.theme.global.input.border.width;

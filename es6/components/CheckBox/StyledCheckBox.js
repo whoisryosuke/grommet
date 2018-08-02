@@ -26,7 +26,7 @@ export var StyledCheckBoxContainer = styled.label.withConfig({
 
 export var StyledCheckBoxInput = styled.input.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxInput'
-})(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;cursor:pointer;:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], function (props) {
+})(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;cursor:pointer;:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background:', ';}'], function (props) {
   return props.theme.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
 }, function (props) {
   return props.theme.checkBox.size;
@@ -36,7 +36,7 @@ export var StyledCheckBoxInput = styled.input.withConfig({
 
 export var StyledCheckBoxBox = styled.div.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxBox'
-})(['box-sizing:border-box;position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background-color:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{box-sizing:border-box;position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';stroke-width:', ';stroke:', ';}', ';'], function (props) {
+})(['box-sizing:border-box;position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{box-sizing:border-box;position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';stroke-width:', ';stroke:', ';}', ';'], function (props) {
   return props.theme.checkBox.size;
 }, function (props) {
   return props.theme.checkBox.size;
@@ -76,7 +76,7 @@ export var StyledCheckBoxToggle = styled.span.withConfig({
 
 export var StyledCheckBoxKnob = styled.span.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxKnob'
-})(['box-sizing:border-box;position:absolute;top:-', ';left:-', ';transition:all 0.3s;width:', ';height:', ';background-color:', ';border-radius:', ';'], function (props) {
+})(['box-sizing:border-box;position:absolute;top:-', ';left:-', ';transition:all 0.3s;width:', ';height:', ';background:', ';border-radius:', ';'], function (props) {
   return props.theme.checkBox.border.width;
 }, function (props) {
   return props.theme.checkBox.border.width;

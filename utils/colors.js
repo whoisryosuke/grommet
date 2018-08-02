@@ -34,6 +34,11 @@ function parseHexToRGB(color) {
   });
 }
 
+var canExtractRGBArray = function canExtractRGBArray(color) {
+  return (/^#/.test(color) || /^rgb/.test(color)
+  );
+};
+
 function getRGBArray(color) {
   if (/^#/.test(color)) {
     return parseHexToRGB(color);
@@ -57,7 +62,7 @@ var colorIsDark = exports.colorIsDark = function colorIsDark(color) {
 };
 
 var getRGBA = exports.getRGBA = function getRGBA(color, opacity) {
-  if (color) {
+  if (color && canExtractRGBArray(color)) {
     var _getRGBArray2 = getRGBArray(color),
         red = _getRGBArray2[0],
         green = _getRGBArray2[1],

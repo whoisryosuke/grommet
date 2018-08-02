@@ -34,7 +34,7 @@ var searchingStyle = (0, _styledComponents.css)(['position:relative;outline:none
   return (0, _utils.colorForName)('brand', props.theme);
 });
 
-var defaultStyle = (0, _styledComponents.css)(['position:relative;outline:none;&:after{content:\'\';position:absolute;bottom:0;left:50%;width:0;height:2px;background:transparent;transition:width .2s ease,background-color .2s ease,left .2s ease;}', ''], function (props) {
+var defaultStyle = (0, _styledComponents.css)(['position:relative;outline:none;&:after{content:\'\';position:absolute;bottom:0;left:50%;width:0;height:2px;background:transparent;transition:width .2s ease,background .2s ease,left .2s ease;}', ''], function (props) {
   return props.focus && '\n    box-shadow: none;\n    &:after {\n      left: 0;\n      width: 100%;\n      background: ' + (0, _utils.colorForName)('brand', props.theme) + ';\n    }\n  ';
 });
 

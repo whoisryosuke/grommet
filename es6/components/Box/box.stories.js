@@ -87,6 +87,50 @@ var SimpleBox = function (_Component) {
   return SimpleBox;
 }(Component);
 
+var customColorBox = {
+  global: {
+    colors: {
+      'brand-gradient': 'linear-gradient(102.77deg, #865ED6 -9.18%, #18BAB9 209.09%)'
+    }
+  }
+};
+
+var CustomColorBox = function (_Component2) {
+  _inherits(CustomColorBox, _Component2);
+
+  function CustomColorBox() {
+    _classCallCheck(this, CustomColorBox);
+
+    return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
+  }
+
+  CustomColorBox.prototype.render = function render() {
+    return React.createElement(
+      Grommet,
+      { theme: customColorBox },
+      React.createElement(
+        Box,
+        {
+          justify: 'center',
+          align: 'center',
+          pad: 'xlarge',
+          background: { color: 'brand-gradient', dark: true },
+          round: 'large'
+        },
+        React.createElement(
+          Text,
+          null,
+          'I have a linear gradient background'
+        )
+      )
+    );
+  };
+
+  return CustomColorBox;
+}(Component);
+
 storiesOf('Box', module).add('Simple Box', function () {
   return React.createElement(SimpleBox, null);
+}).add('Custom color', function () {
+  return React.createElement(CustomColorBox, null);
 });

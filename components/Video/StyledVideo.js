@@ -46,7 +46,7 @@ var StyledVideoControls = exports.StyledVideoControls = _styledComponents2.defau
   return props.active ? 'opacity: 1;' : 'pointer-events: none';
 });
 
-var headStyle = (0, _styledComponents.css)(['::after{content:\'\';height:100%;width:', ';background-color:', ';position:absolute;left:', ';}'], function (props) {
+var headStyle = (0, _styledComponents.css)(['::after{content:\'\';height:100%;width:', ';background:', ';position:absolute;left:', ';}'], function (props) {
   return props.theme.global.edgeSize.xsmall;
 }, function (props) {
   return (0, _utils.colorForName)('light-5', props.theme);

@@ -20,7 +20,7 @@ export var StyledRadioButtonContainer = styled.label.withConfig({
 
 export var StyledRadioButtonInput = styled.input.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonInput'
-})(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background-color:', ';}'], focusStyle, function (props) {
+})(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background:', ';}'], focusStyle, function (props) {
   return props.theme.dark ? props.theme.global.colors.white : props.theme.radioButton.check.color;
 }, function (props) {
   return props.theme.radioButton.size;
@@ -30,7 +30,7 @@ export var StyledRadioButtonInput = styled.input.withConfig({
 
 export var StyledRadioButtonButton = styled.div.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonButton'
-})(['box-sizing:border-box;position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background-color:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{box-sizing:border-box;position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';fill:', ';}'], function (props) {
+})(['box-sizing:border-box;position:relative;top:-1px;display:inline-block;width:', ';height:', ';vertical-align:middle;background:inherit;border:', ' solid;border-color:', ';border-radius:', ';> svg{box-sizing:border-box;position:absolute;top:-2px;left:-2px;display:none;width:', ';height:', ';fill:', ';}'], function (props) {
   return props.theme.radioButton.size;
 }, function (props) {
   return props.theme.radioButton.size;

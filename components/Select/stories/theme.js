@@ -59,7 +59,7 @@ exports.default = {
     },
     size: '18px',
     extend: function extend(props) {
-      return '\n      input:checked + div {\n        border-color: ' + (0, _utils.colorForName)('brand', props.theme) + ';\n        background-color: ' + (0, _utils.colorForName)('brand', props.theme) + ';\n\n        > svg {\n          stroke: ' + (0, _utils.colorForName)('white', props.theme) + ';\n        }\n      }\n    ';
+      return '\n      input:checked + div {\n        border-color: ' + (0, _utils.colorForName)('brand', props.theme) + ';\n        background: ' + (0, _utils.colorForName)('brand', props.theme) + ';\n\n        > svg {\n          stroke: ' + (0, _utils.colorForName)('white', props.theme) + ';\n        }\n      }\n    ';
     }
   },
   drop: {
