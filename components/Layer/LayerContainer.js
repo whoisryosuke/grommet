@@ -10,6 +10,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
+var _grommetIcons = require('grommet-icons');
+
 var _FocusedContainer = require('../FocusedContainer');
 
 var _FocusedContainer2 = _interopRequireDefault(_FocusedContainer);
@@ -17,6 +19,8 @@ var _FocusedContainer2 = _interopRequireDefault(_FocusedContainer);
 var _Keyboard = require('../Keyboard');
 
 var _hocs = require('../hocs');
+
+var _utils = require('../../utils');
 
 var _StyledLayer = require('./StyledLayer');
 
@@ -44,13 +48,37 @@ var LayerContainer = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.containerRef = _react2.default.createRef(), _this.layerRef = _react2.default.createRef(), _this.makeLayerVisible = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.containerRef = _react2.default.createRef(), _this.layerRef = _react2.default.createRef(), _this.makeLayerVisible = function () {
       var node = (0, _reactDom.findDOMNode)(_this.layerRef.current || _this.containerRef.current);
       if (node && node.scrollIntoView) {
         node.scrollIntoView();
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
+
+  LayerContainer.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    var theme = nextProps.theme;
+    var stateTheme = prevState.theme;
+    // set dark context based on layer background, not Layer's container.
+
+    var dark = theme.dark;
+    if (theme.layer.background) {
+      dark = (0, _utils.backgroundIsDark)(theme.layer.background, theme);
+    }
+    if (!dark !== !theme.dark) {
+      if (!stateTheme || dark !== stateTheme.dark) {
+        return {
+          theme: _extends({}, theme, {
+            dark: dark,
+            icon: dark ? theme.iconThemes.dark : theme.iconThemes.light
+          })
+        };
+      }
+    } else if (stateTheme) {
+      return { theme: undefined };
+    }
+    return null;
+  };
 
   LayerContainer.prototype.componentDidMount = function componentDidMount() {
     var position = this.props.position;
@@ -78,8 +106,12 @@ var LayerContainer = function (_Component) {
         plain = _props.plain,
         position = _props.position,
         responsive = _props.responsive,
-        theme = _props.theme,
+        propsTheme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'id', 'modal', 'onClickOutside', 'onEsc', 'plain', 'position', 'responsive', 'theme']);
+
+    var stateTheme = this.state.theme;
+
+    var theme = stateTheme || propsTheme;
 
     var content = _react2.default.createElement(
       _StyledLayer.StyledContainer,
@@ -124,7 +156,11 @@ var LayerContainer = function (_Component) {
       content = _react2.default.createElement(
         _FocusedContainer2.default,
         { hidden: position === 'hidden', restrictScroll: true },
-        content
+        _react2.default.createElement(
+          _grommetIcons.ThemeContext.Provider,
+          { value: theme.icon },
+          content
+        )
       );
     }
 

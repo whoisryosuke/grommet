@@ -4,7 +4,6 @@ exports.__esModule = true;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-exports.getRGBA = getRGBA;
 var colorForName = exports.colorForName = function colorForName(name, theme) {
   var color = theme.global.colors[name];
   if (color) {
@@ -57,7 +56,7 @@ var colorIsDark = exports.colorIsDark = function colorIsDark(color) {
   return brightness < 125;
 };
 
-function getRGBA(color, opacity) {
+var getRGBA = exports.getRGBA = function getRGBA(color, opacity) {
   if (color) {
     var _getRGBArray2 = getRGBArray(color),
         red = _getRGBArray2[0],
@@ -67,6 +66,30 @@ function getRGBA(color, opacity) {
     return 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + (opacity || 1) + ')';
   }
   return undefined;
-}
+};
 
-exports.default = { colorForName: colorForName, colorIsDark: colorIsDark, getRGBA: getRGBA };
+var backgroundIsDark = exports.backgroundIsDark = function backgroundIsDark(background, theme) {
+  var dark = void 0;
+  if (background) {
+    if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
+      if (background.dark !== undefined) {
+        dark = background.dark;
+      } else if (background.color && (
+      // weak opacity means we keep the existing darkness
+      !background.opacity || background.opacity !== 'weak')) {
+        var color = colorForName(background.color, theme);
+        if (color) {
+          dark = colorIsDark(color);
+        }
+      }
+    } else {
+      var _color = colorForName(background, theme);
+      if (_color) {
+        dark = colorIsDark(_color);
+      }
+    }
+  }
+  return dark;
+};
+
+exports.default = { backgroundIsDark: backgroundIsDark, colorForName: colorForName, colorIsDark: colorIsDark, getRGBA: getRGBA };

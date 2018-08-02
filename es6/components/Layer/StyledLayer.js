@@ -4,7 +4,7 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css, keyframes } from 'styled-components';
 
-import { baseStyle, edgeStyle, lapAndUp, palm } from '../../utils';
+import { backgroundStyle, baseStyle, edgeStyle, lapAndUp, palm } from '../../utils';
 
 var hiddenPositionStyle = css(['left:-100%;right:100%;z-index:-1;position:fixed;']);
 
@@ -170,12 +170,12 @@ var desktopContainerStyle = css(['position:', ';max-height:100%;max-width:100%;b
 
 export var StyledContainer = styled.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
-})(['', ' display:flex;flex-direction:column;min-height:', ';background-color:', ';outline:none;pointer-events:all;z-index:15;', ' ', ''], function (props) {
+})(['', ' display:flex;flex-direction:column;min-height:', ';', ' outline:none;pointer-events:all;z-index:15;', ' ', ''], function (props) {
   return !props.modal ? baseStyle : '';
 }, function (props) {
   return props.theme.global.size.xxsmall;
 }, function (props) {
-  return props.plain ? 'transparent' : props.theme.layer.backgroundColor;
+  return props.theme.layer.background && backgroundStyle(props.theme.layer.background, props.theme);
 }, function (props) {
   return props.responsive && palm('\n    min-height: 100%;\n    min-width: 100%;\n  ');
 }, function (props) {

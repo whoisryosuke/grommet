@@ -23,7 +23,6 @@ var statusColors = {
 };
 var darkColors = ['#333333', '#444444', '#555555', '#666666', '#777777', '#999999'];
 var lightColors = ['#F6F6F6', '#EEEEEE', '#DDDDDD', '#CCCCCC', '#BBBBBB', '#AAAAAA'];
-var backgroundColor = '#FFFFFF';
 var textColor = '#444444';
 var borderColor = 'rgba(0, 0, 0, 0.33)';
 var focusColor = accentColors[0];
@@ -464,7 +463,7 @@ exports.default = (0, _utils.deepFreeze)({
   },
   iconThemes: {},
   layer: {
-    backgroundColor: backgroundColor,
+    background: 'white',
     border: {
       radius: '4px'
     },

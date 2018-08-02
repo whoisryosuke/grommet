@@ -181,73 +181,77 @@ var FormLayer = function (_Component2) {
     return _react2.default.createElement(
       _.Grommet,
       null,
-      _react2.default.createElement(_.Button, {
-        icon: _react2.default.createElement(_grommetIcons.Add, null),
-        label: 'Add',
-        onClick: this.onOpen
-      }),
-      open && _react2.default.createElement(
-        _.Layer,
-        {
-          position: 'right',
-          full: 'vertical',
-          modal: true,
-          onClickOutside: this.onClose,
-          onEsc: this.onClose
-        },
-        _react2.default.createElement(
-          _.Box,
+      _react2.default.createElement(
+        _.Box,
+        { align: 'start' },
+        _react2.default.createElement(_.Button, {
+          icon: _react2.default.createElement(_grommetIcons.Add, null),
+          label: 'Add',
+          onClick: this.onOpen
+        }),
+        open && _react2.default.createElement(
+          _.Layer,
           {
-            tag: 'form',
-            fill: 'vertical',
-            overflow: 'auto',
-            width: 'medium',
-            pad: 'medium',
-            onSubmit: this.onClose
+            position: 'right',
+            full: 'vertical',
+            modal: true,
+            onClickOutside: this.onClose,
+            onEsc: this.onClose
           },
           _react2.default.createElement(
             _.Box,
-            { flex: false, direction: 'row', justify: 'between' },
+            {
+              tag: 'form',
+              fill: 'vertical',
+              overflow: 'auto',
+              width: 'medium',
+              pad: 'medium',
+              onSubmit: this.onClose
+            },
             _react2.default.createElement(
-              _.Heading,
-              { level: 2, margin: 'none' },
-              'Add'
-            ),
-            _react2.default.createElement(_.Button, { icon: _react2.default.createElement(_grommetIcons.Close, null), onClick: this.onClose })
-          ),
-          _react2.default.createElement(
-            _.Box,
-            { flex: 'grow', overflow: true, pad: { vertical: 'medium' } },
-            _react2.default.createElement(
-              _.FormField,
-              { label: 'First' },
-              _react2.default.createElement(_.TextInput, null)
-            ),
-            _react2.default.createElement(
-              _.FormField,
-              { label: 'Second' },
-              _react2.default.createElement(_.TextInput, null)
+              _.Box,
+              { flex: false, direction: 'row', justify: 'between' },
+              _react2.default.createElement(
+                _.Heading,
+                { level: 2, margin: 'none' },
+                'Add'
+              ),
+              _react2.default.createElement(_.Button, { icon: _react2.default.createElement(_grommetIcons.Close, null), onClick: this.onClose })
             ),
             _react2.default.createElement(
-              _.FormField,
-              { label: 'Third' },
-              _react2.default.createElement(_.TextInput, null)
+              _.Box,
+              { flex: 'grow', overflow: true, pad: { vertical: 'medium' } },
+              _react2.default.createElement(
+                _.FormField,
+                { label: 'First' },
+                _react2.default.createElement(_.TextInput, null)
+              ),
+              _react2.default.createElement(
+                _.FormField,
+                { label: 'Second' },
+                _react2.default.createElement(_.TextInput, null)
+              ),
+              _react2.default.createElement(
+                _.FormField,
+                { label: 'Third' },
+                _react2.default.createElement(_.TextInput, null)
+              ),
+              _react2.default.createElement(
+                _.FormField,
+                { label: 'Fourth' },
+                _react2.default.createElement(_.TextInput, null)
+              )
             ),
             _react2.default.createElement(
-              _.FormField,
-              { label: 'Fourth' },
-              _react2.default.createElement(_.TextInput, null)
+              _.Box,
+              { flex: false, tag: 'footer', align: 'start' },
+              _react2.default.createElement(_.Button, {
+                type: 'submit',
+                label: 'Submit',
+                onClick: this.onClose,
+                primary: true
+              })
             )
-          ),
-          _react2.default.createElement(
-            _.Box,
-            { flex: false, tag: 'footer', align: 'start' },
-            _react2.default.createElement(_.Button, {
-              type: 'submit',
-              label: 'Submit',
-              onClick: this.onClose,
-              primary: true
-            })
           )
         )
       )

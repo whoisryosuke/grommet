@@ -174,73 +174,77 @@ var FormLayer = function (_Component2) {
     return React.createElement(
       Grommet,
       null,
-      React.createElement(Button, {
-        icon: React.createElement(Add, null),
-        label: 'Add',
-        onClick: this.onOpen
-      }),
-      open && React.createElement(
-        Layer,
-        {
-          position: 'right',
-          full: 'vertical',
-          modal: true,
-          onClickOutside: this.onClose,
-          onEsc: this.onClose
-        },
-        React.createElement(
-          Box,
+      React.createElement(
+        Box,
+        { align: 'start' },
+        React.createElement(Button, {
+          icon: React.createElement(Add, null),
+          label: 'Add',
+          onClick: this.onOpen
+        }),
+        open && React.createElement(
+          Layer,
           {
-            tag: 'form',
-            fill: 'vertical',
-            overflow: 'auto',
-            width: 'medium',
-            pad: 'medium',
-            onSubmit: this.onClose
+            position: 'right',
+            full: 'vertical',
+            modal: true,
+            onClickOutside: this.onClose,
+            onEsc: this.onClose
           },
           React.createElement(
             Box,
-            { flex: false, direction: 'row', justify: 'between' },
+            {
+              tag: 'form',
+              fill: 'vertical',
+              overflow: 'auto',
+              width: 'medium',
+              pad: 'medium',
+              onSubmit: this.onClose
+            },
             React.createElement(
-              Heading,
-              { level: 2, margin: 'none' },
-              'Add'
-            ),
-            React.createElement(Button, { icon: React.createElement(Close, null), onClick: this.onClose })
-          ),
-          React.createElement(
-            Box,
-            { flex: 'grow', overflow: true, pad: { vertical: 'medium' } },
-            React.createElement(
-              FormField,
-              { label: 'First' },
-              React.createElement(TextInput, null)
-            ),
-            React.createElement(
-              FormField,
-              { label: 'Second' },
-              React.createElement(TextInput, null)
+              Box,
+              { flex: false, direction: 'row', justify: 'between' },
+              React.createElement(
+                Heading,
+                { level: 2, margin: 'none' },
+                'Add'
+              ),
+              React.createElement(Button, { icon: React.createElement(Close, null), onClick: this.onClose })
             ),
             React.createElement(
-              FormField,
-              { label: 'Third' },
-              React.createElement(TextInput, null)
+              Box,
+              { flex: 'grow', overflow: true, pad: { vertical: 'medium' } },
+              React.createElement(
+                FormField,
+                { label: 'First' },
+                React.createElement(TextInput, null)
+              ),
+              React.createElement(
+                FormField,
+                { label: 'Second' },
+                React.createElement(TextInput, null)
+              ),
+              React.createElement(
+                FormField,
+                { label: 'Third' },
+                React.createElement(TextInput, null)
+              ),
+              React.createElement(
+                FormField,
+                { label: 'Fourth' },
+                React.createElement(TextInput, null)
+              )
             ),
             React.createElement(
-              FormField,
-              { label: 'Fourth' },
-              React.createElement(TextInput, null)
+              Box,
+              { flex: false, tag: 'footer', align: 'start' },
+              React.createElement(Button, {
+                type: 'submit',
+                label: 'Submit',
+                onClick: this.onClose,
+                primary: true
+              })
             )
-          ),
-          React.createElement(
-            Box,
-            { flex: false, tag: 'footer', align: 'start' },
-            React.createElement(Button, {
-              type: 'submit',
-              label: 'Submit',
-              onClick: this.onClose,
-              primary: true
-            })
           )
         )
       )

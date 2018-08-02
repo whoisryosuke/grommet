@@ -52,7 +52,7 @@ export var colorIsDark = function colorIsDark(color) {
   return brightness < 125;
 };
 
-export function getRGBA(color, opacity) {
+export var getRGBA = function getRGBA(color, opacity) {
   if (color) {
     var _getRGBArray2 = getRGBArray(color),
         red = _getRGBArray2[0],
@@ -62,6 +62,30 @@ export function getRGBA(color, opacity) {
     return 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + (opacity || 1) + ')';
   }
   return undefined;
-}
+};
 
-export default { colorForName: colorForName, colorIsDark: colorIsDark, getRGBA: getRGBA };
+export var backgroundIsDark = function backgroundIsDark(background, theme) {
+  var dark = void 0;
+  if (background) {
+    if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
+      if (background.dark !== undefined) {
+        dark = background.dark;
+      } else if (background.color && (
+      // weak opacity means we keep the existing darkness
+      !background.opacity || background.opacity !== 'weak')) {
+        var color = colorForName(background.color, theme);
+        if (color) {
+          dark = colorIsDark(color);
+        }
+      }
+    } else {
+      var _color = colorForName(background, theme);
+      if (_color) {
+        dark = colorIsDark(_color);
+      }
+    }
+  }
+  return dark;
+};
+
+export default { backgroundIsDark: backgroundIsDark, colorForName: colorForName, colorIsDark: colorIsDark, getRGBA: getRGBA };

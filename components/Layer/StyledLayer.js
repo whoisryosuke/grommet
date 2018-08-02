@@ -179,12 +179,12 @@ var desktopContainerStyle = (0, _styledComponents.css)(['position:', ';max-heigh
 
 var StyledContainer = exports.StyledContainer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledLayer__StyledContainer'
-})(['', ' display:flex;flex-direction:column;min-height:', ';background-color:', ';outline:none;pointer-events:all;z-index:15;', ' ', ''], function (props) {
+})(['', ' display:flex;flex-direction:column;min-height:', ';', ' outline:none;pointer-events:all;z-index:15;', ' ', ''], function (props) {
   return !props.modal ? _utils.baseStyle : '';
 }, function (props) {
   return props.theme.global.size.xxsmall;
 }, function (props) {
-  return props.plain ? 'transparent' : props.theme.layer.backgroundColor;
+  return props.theme.layer.background && (0, _utils.backgroundStyle)(props.theme.layer.background, props.theme);
 }, function (props) {
   return props.responsive && (0, _utils.palm)('\n    min-height: 100%;\n    min-width: 100%;\n  ');
 }, function (props) {

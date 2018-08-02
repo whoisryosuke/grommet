@@ -4,8 +4,6 @@ exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -67,23 +65,7 @@ var Box = function (_Component) {
 
     var dark = theme.dark;
     if (background) {
-      if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
-        if (background.dark !== undefined) {
-          dark = background.dark;
-        } else if (background.color && (
-        // weak opacity means we keep the existing darkness
-        !background.opacity || background.opacity !== 'weak')) {
-          var color = (0, _utils.colorForName)(background.color, theme);
-          if (color) {
-            dark = (0, _utils.colorIsDark)(color);
-          }
-        }
-      } else {
-        var _color = (0, _utils.colorForName)(background, theme);
-        if (_color) {
-          dark = (0, _utils.colorIsDark)(_color);
-        }
-      }
+      dark = (0, _utils.backgroundIsDark)(background, theme);
     }
 
     if (dark !== theme.dark && (!stateTheme || dark !== stateTheme.dark)) {
