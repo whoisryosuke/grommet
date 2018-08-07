@@ -103,7 +103,7 @@ var SIZE_MAP = {
 };
 
 var sizeFor = function sizeFor(size, props) {
-  return SIZE_MAP[size] || props.theme.global.size[size];
+  return SIZE_MAP[size] || props.theme.global.size[size] || size;
 };
 
 var columnsStyle = function columnsStyle(props) {

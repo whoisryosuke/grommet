@@ -142,17 +142,54 @@ var FormFieldToggle = function FormFieldToggle(props) {
   );
 };
 
-var FormFieldSelect = function FormFieldSelect(props) {
-  return _react2.default.createElement(
-    _Grommet2.default,
-    null,
-    _react2.default.createElement(
-      _FormField2.default,
-      _extends({ label: 'Label', htmlFor: 'select' }, props),
-      _react2.default.createElement(_Select2.default, { id: 'select', placeholder: 'placeholder', options: ['one', 'two'] })
-    )
-  );
-};
+var allOptions = Array(100).fill().map(function (_, i) {
+  return 'option ' + (i + 1);
+});
+
+var FormFieldSelect = function (_Component2) {
+  _inherits(FormFieldSelect, _Component2);
+
+  function FormFieldSelect() {
+    var _temp2, _this2, _ret2;
+
+    _classCallCheck(this, FormFieldSelect);
+
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this2), _this2.state = { value: '', options: allOptions }, _temp2), _possibleConstructorReturn(_this2, _ret2);
+  }
+
+  FormFieldSelect.prototype.render = function render() {
+    var _this3 = this;
+
+    var _state2 = this.state,
+        value = _state2.value,
+        options = _state2.options;
+
+    return _react2.default.createElement(
+      _Grommet2.default,
+      null,
+      _react2.default.createElement(
+        _FormField2.default,
+        _extends({ label: 'Label', htmlFor: 'select' }, this.props),
+        _react2.default.createElement(_Select2.default, {
+          id: 'select',
+          placeholder: 'placeholder',
+          options: options,
+          value: value,
+          onChange: function onChange(_ref) {
+            var option = _ref.option;
+            return _this3.setState({ value: option });
+          }
+        })
+      )
+    );
+  };
+
+  return FormFieldSelect;
+}(_react.Component);
 
 var FormFieldHelpError = function FormFieldHelpError(props) {
   return _react2.default.createElement(
