@@ -29,7 +29,7 @@ var DropContainer = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.addScrollListener = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.dropRef = React.createRef(), _this.addScrollListener = function () {
       var dropTarget = _this.props.dropTarget;
 
       _this.scrollParents = findScrollParents(findDOMNode(dropTarget));
@@ -46,8 +46,9 @@ var DropContainer = function (_Component) {
           onClickOutside = _this$props.onClickOutside;
 
       var dropTargetNode = findDOMNode(dropTarget);
-      var dropNode = findDOMNode(_this.dropRef);
-      if (onClickOutside && !dropTargetNode.contains(event.target) && !dropNode.contains(event.target)) {
+      var dropNode = findDOMNode(_this.dropRef.current);
+      if (onClickOutside && dropNode && // need this for ie11
+      !dropTargetNode.contains(event.target) && !dropNode.contains(event.target)) {
         onClickOutside();
       }
     }, _this.onResize = function () {
@@ -65,7 +66,7 @@ var DropContainer = function (_Component) {
       var windowHeight = window.innerHeight;
 
       var target = findDOMNode(dropTarget);
-      var container = findDOMNode(_this.dropRef);
+      var container = findDOMNode(_this.dropRef.current);
       if (container && target) {
         // clear prior styling
         container.style.left = '';
@@ -181,7 +182,7 @@ var DropContainer = function (_Component) {
     this.place();
 
     if (restrictFocus) {
-      findDOMNode(this.dropRef).focus();
+      findDOMNode(this.dropRef.current).focus();
     }
   };
 
@@ -196,8 +197,6 @@ var DropContainer = function (_Component) {
   };
 
   DropContainer.prototype.render = function render() {
-    var _this2 = this;
-
     var _props = this.props,
         children = _props.children,
         onClickOutside = _props.onClickOutside,
@@ -216,9 +215,7 @@ var DropContainer = function (_Component) {
           StyledDrop,
           _extends({
             tabIndex: '-1',
-            ref: function ref(_ref) {
-              _this2.dropRef = _ref;
-            },
+            ref: this.dropRef,
             theme: theme
           }, rest),
           children
