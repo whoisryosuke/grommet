@@ -30,10 +30,10 @@ var withFocus = function withFocus(WrappedComponent) {
         args[_key] = arguments[_key];
       }
 
-      return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.mouseActive = false, _this.state = {
         focus: false,
         wrappedRef: React.createRef()
-      }, _this.mouseActive = false, _this.componentDidMount = function () {
+      }, _this.componentDidMount = function () {
         var wrappedRef = _this.state.wrappedRef;
 
         window.addEventListener('mousedown', _this.handleActiveMouse);
@@ -54,25 +54,35 @@ var withFocus = function withFocus(WrappedComponent) {
         if (wrapperNode && wrapperNode.addEventListener) {
           wrapperNode.removeEventListener('focus', _this.setFocus);
         }
+        clearTimeout(_this.focusTimer);
         clearTimeout(_this.mouseTimer);
       }, _this.handleActiveMouse = function () {
+        // from https://marcysutton.com/button-focus-hell/
         _this.mouseActive = true;
-
         // this avoids showing focus when clicking around
         clearTimeout(_this.mouseTimer);
         // empirical number to reset mouseActive after
         // some time has passed without mousedown
         _this.mouseTimer = setTimeout(function () {
           _this.mouseActive = false;
-        }, 300);
+        }, 150);
       }, _this.setFocus = function () {
-        if (_this.mouseActive === false) {
-          _this.setState({ focus: true });
-        }
+        // delay setting focus to avoid interupting events,
+        // 1ms was chosen empirically based on ie11 using Select and TextInput
+        // with and without a FormField.
+        clearTimeout(_this.focusTimer);
+        _this.focusTimer = setTimeout(function () {
+          if (!_this.state.focus && !_this.mouseActive) {
+            _this.setState({ focus: true });
+          }
+        }, 1);
       }, _this.resetFocus = function () {
-        if (_this.state.focus) {
-          _this.setState({ focus: false });
-        }
+        clearTimeout(_this.focusTimer);
+        _this.focusTimer = setTimeout(function () {
+          if (_this.state.focus) {
+            _this.setState({ focus: false });
+          }
+        }, 1);
       }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 

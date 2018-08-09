@@ -19,7 +19,7 @@ import { Button } from '../Button';
 import { InfiniteScroll } from '../InfiniteScroll';
 import { Keyboard } from '../Keyboard';
 import { Drop } from '../Drop';
-import { withAnnounce, withFocus, withForwardRef, withTheme } from '../hocs';
+import { withAnnounce, withForwardRef, withTheme } from '../hocs';
 
 import StyledTextInput, { StyledTextInputContainer, StyledPlaceholder, StyledSuggestions } from './StyledTextInput';
 import doc from './doc';
@@ -84,16 +84,22 @@ var TextInput = function (_Component) {
 
       _this.announce(suggestionIsOpen);
     }, _this.resetSuggestions = function () {
-      var suggestions = _this.props.suggestions;
+      // delay this to avoid re-render interupting event delivery
+      // https://github.com/grommet/grommet/issues/2154
+      // 10ms was chosen empirically based on ie11 using TextInput
+      // with and without a FormField.
+      clearTimeout(_this.resetTimer);
+      _this.resetTimer = setTimeout(function () {
+        var suggestions = _this.props.suggestions;
 
-
-      if (suggestions && suggestions.length) {
-        _this.setState({
-          activeSuggestionIndex: -1,
-          showDrop: true,
-          selectedSuggestionIndex: -1
-        }, _this.announceSuggestionsCount);
-      }
+        if (suggestions && suggestions.length) {
+          _this.setState({
+            activeSuggestionIndex: -1,
+            showDrop: true,
+            selectedSuggestionIndex: -1
+          }, _this.announceSuggestionsCount);
+        }
+      }, 10);
     }, _this.getSelectedSuggestionIndex = function () {
       var _this$props3 = _this.props,
           suggestions = _this$props3.suggestions,
@@ -170,12 +176,23 @@ var TextInput = function (_Component) {
         }
       }
     }, _this.onFocus = function (event) {
-      var onFocus = _this.props.onFocus;
+      var _this$props5 = _this.props,
+          onFocus = _this$props5.onFocus,
+          suggestions = _this$props5.suggestions;
 
-      _this.announceSuggestionsExist();
+      if (suggestions && suggestions.length > 0) {
+        _this.announceSuggestionsExist();
+      }
       _this.resetSuggestions();
       if (onFocus) {
         onFocus(event);
+      }
+    }, _this.onBlur = function (event) {
+      var onBlur = _this.props.onBlur;
+
+      clearTimeout(_this.resetTimer);
+      if (onBlur) {
+        onBlur(event);
       }
     }, _this.onInput = function (event) {
       var onInput = _this.props.onInput;
@@ -187,9 +204,9 @@ var TextInput = function (_Component) {
     }, _this.onDropClose = function () {
       _this.setState({ showDrop: false });
     }, _this.renderSuggestions = function () {
-      var _this$props5 = _this.props,
-          suggestions = _this$props5.suggestions,
-          theme = _this$props5.theme;
+      var _this$props6 = _this.props,
+          suggestions = _this$props6.suggestions,
+          theme = _this$props6.theme;
       var _this$state4 = _this.state,
           activeSuggestionIndex = _this$state4.activeSuggestionIndex,
           selectedSuggestionIndex = _this$state4.selectedSuggestionIndex;
@@ -237,6 +254,10 @@ var TextInput = function (_Component) {
       return { inputRef: nextInputRef };
     }
     return null;
+  };
+
+  TextInput.prototype.componentWillUnmount = function componentWillUnmount() {
+    clearTimeout(this.resetTimer);
   };
 
   TextInput.prototype.announceSuggestion = function announceSuggestion(index) {
@@ -326,6 +347,7 @@ var TextInput = function (_Component) {
           defaultValue: renderLabel(defaultValue),
           value: renderLabel(value),
           onFocus: this.onFocus,
+          onBlur: this.onBlur,
           onInput: this.onInput
         }))
       ),
@@ -351,4 +373,4 @@ if (process.env.NODE_ENV !== 'production') {
   doc(TextInput);
 }
 
-export default compose(withFocus, withTheme, withAnnounce, withForwardRef)(TextInput);
+export default compose(withTheme, withAnnounce, withForwardRef)(TextInput);

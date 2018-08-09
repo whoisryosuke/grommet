@@ -40,7 +40,7 @@ var SimpleTextInput = function (_Component) {
   return SimpleTextInput;
 }(Component);
 
-var suggestions = Array(10).fill().map(function (_, i) {
+var suggestions = Array(100).fill().map(function (_, i) {
   return 'suggestion ' + (i + 1);
 });
 
