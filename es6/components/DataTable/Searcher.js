@@ -60,6 +60,9 @@ var Searcher = function (_Component) {
             value: filters[property],
             onChange: function onChange(event) {
               return onFilter(property, event.target.value);
+            },
+            onBlur: function onBlur() {
+              return onFiltering(undefined);
             }
           })
         )

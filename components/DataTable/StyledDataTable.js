@@ -21,19 +21,19 @@ var StyledDataTableRow = exports.StyledDataTableRow = _styledComponents2.default
 
 var StyledDataTableBody = exports.StyledDataTableBody = _styledComponents2.default.tbody.withConfig({
   displayName: 'StyledDataTable__StyledDataTableBody'
-})(['height:100%;', ''], function (props) {
+})(['', ''], function (props) {
   return props.size && '\n    display: block;\n    width: 100%;\n    max-height: ' + props.theme.global.size[props.size] + ';\n    overflow: auto;\n  ';
 });
 
 var StyledDataTableHeader = exports.StyledDataTableHeader = _styledComponents2.default.thead.withConfig({
   displayName: 'StyledDataTable__StyledDataTableHeader'
-})(['height:100%;', ''], function (props) {
+})(['', ''], function (props) {
   return props.size && '\n    display: table;\n    width: 100%;\n    table-layout: fixed;\n  ';
 });
 
 var StyledDataTableFooter = exports.StyledDataTableFooter = _styledComponents2.default.tfoot.withConfig({
   displayName: 'StyledDataTable__StyledDataTableFooter'
-})(['height:100%;', ''], function (props) {
+})(['', ''], function (props) {
   return props.size && '\n    display: table;\n    width: 100%;\n    table-layout: fixed;\n  ';
 });
 
