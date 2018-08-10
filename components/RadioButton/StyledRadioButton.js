@@ -30,11 +30,11 @@ var StyledRadioButtonContainer = exports.StyledRadioButtonContainer = _styledCom
 var StyledRadioButtonInput = exports.StyledRadioButtonInput = _styledComponents2.default.input.withConfig({
   displayName: 'StyledRadioButton__StyledRadioButtonInput'
 })(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;:focus + div,:focus + span{', '}:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background:', ';}'], _utils.focusStyle, function (props) {
-  return props.theme.dark ? props.theme.global.colors.white : props.theme.radioButton.check.color;
+  return (props.theme.radioButton.check.color || props.theme.global.control.color)[props.theme.dark ? 'dark' : 'light'];
 }, function (props) {
   return props.theme.radioButton.size;
 }, function (props) {
-  return props.theme.dark ? props.theme.global.colors.white : props.theme.radioButton.check.color;
+  return (props.theme.radioButton.check.color || props.theme.global.control.color)[props.theme.dark ? 'dark' : 'light'];
 });
 
 var StyledRadioButtonButton = exports.StyledRadioButtonButton = _styledComponents2.default.div.withConfig({
@@ -54,7 +54,7 @@ var StyledRadioButtonButton = exports.StyledRadioButtonButton = _styledComponent
 }, function (props) {
   return props.theme.radioButton.size;
 }, function (props) {
-  return props.theme.dark ? props.theme.global.colors.white : props.theme.radioButton.check.color;
+  return (props.theme.radioButton.check.color || props.theme.global.control.color)[props.theme.dark ? 'dark' : 'light'];
 });
 
 var StyledRadioButton = _styledComponents2.default.div.withConfig({

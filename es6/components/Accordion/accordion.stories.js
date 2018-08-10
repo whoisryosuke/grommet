@@ -12,6 +12,7 @@ import { storiesOf } from '@storybook/react';
 import { Bookmark, CircleInformation, FormSubtract, FormAdd, User } from 'grommet-icons';
 
 import { Accordion, AccordionPanel, Box, CollapsibleContext, Grommet, Heading, Text, TextInput, ThemeContext } from '../../';
+import { grommet } from '../../themes';
 
 var richAccordionTheme = {
   accordion: {
@@ -39,7 +40,7 @@ var SimpleAccordion = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Box,
         rest,
@@ -187,7 +188,7 @@ var RichAccordion = function (_Component3) {
 
     return React.createElement(
       Grommet,
-      { full: true },
+      { full: true, theme: grommet },
       React.createElement(
         Box,
         { fill: true, direction: 'row' },
@@ -410,7 +411,7 @@ var CustomHeaderAccordion = function (_Component4) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Accordion,
         {

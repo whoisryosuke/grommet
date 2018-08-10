@@ -15,7 +15,6 @@ import { ThemeContext as IconThemeContext } from 'grommet-icons';
 
 import AnnounceContext from '../contexts/AnnounceContext';
 import ThemeContext from '../contexts/ThemeContext';
-import { deepMerge } from '../utils';
 
 var withFocus = function withFocus(WrappedComponent) {
   var FocusableComponent = function (_Component) {
@@ -148,51 +147,22 @@ var withTheme = function withTheme(WrappedComponent) {
     _inherits(ThemedComponent, _Component2);
 
     function ThemedComponent() {
-      var _temp2, _this3, _ret2;
-
       _classCallCheck(this, ThemedComponent);
 
-      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-
-      return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = {}, _temp2), _possibleConstructorReturn(_this3, _ret2);
+      return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
     }
-
-    ThemedComponent.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
-      var themeContext = nextProps.themeContext,
-          theme = nextProps.theme;
-      var stateTheme = prevState.theme;
-
-      if (theme && !stateTheme) {
-        return { theme: deepMerge(themeContext, theme) };
-      } else if (!theme && stateTheme) {
-        return { theme: undefined };
-      }
-      return null;
-    };
 
     ThemedComponent.prototype.render = function render() {
       var _props2 = this.props,
           withThemeRef = _props2.withThemeRef,
-          themeContext = _props2.themeContext,
-          rest = _objectWithoutProperties(_props2, ['withThemeRef', 'themeContext']);
+          theme = _props2.theme,
+          rest = _objectWithoutProperties(_props2, ['withThemeRef', 'theme']);
 
-      var theme = this.state.theme;
-
-      var content = React.createElement(WrappedComponent, _extends({
+      return React.createElement(WrappedComponent, _extends({
         ref: withThemeRef
       }, rest, {
-        theme: theme || themeContext
+        theme: theme
       }));
-      if (theme) {
-        content = React.createElement(
-          ThemeContext.Provider,
-          { value: theme },
-          content
-        );
-      }
-      return content;
     };
 
     return ThemedComponent;
@@ -203,7 +173,7 @@ var withTheme = function withTheme(WrappedComponent) {
       ThemeContext.Consumer,
       null,
       function (theme) {
-        return React.createElement(ThemedComponent, _extends({}, props, { themeContext: theme, withThemeRef: ref }));
+        return React.createElement(ThemedComponent, _extends({}, props, { theme: theme, withThemeRef: ref }));
       }
     );
   });

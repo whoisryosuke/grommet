@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import Markdown from '../Markdown/Markdown';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var CONTENT = '\n  # Out of Breath\n\n  You know, sometimes in life it seems like there\'s no way out. Like\n  a sheep trapped in a maze designed by wolves.\n\n  [reference](#)\n';
 
@@ -24,7 +25,7 @@ var SimpleMarkdown = function (_Component) {
   SimpleMarkdown.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Markdown,
         null,

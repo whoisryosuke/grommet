@@ -16,6 +16,7 @@ import TextArea from '../TextArea/TextArea';
 import Select from '../Select/Select';
 import CheckBox from '../CheckBox/CheckBox';
 import Box from '../Box/Box';
+import { grommet } from '../../themes';
 
 var allSuggestions = Array(100).fill().map(function (_, i) {
   return 'suggestion ' + (i + 1);
@@ -52,7 +53,7 @@ var FormFieldTextInput = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         FormField,
         _extends({ label: 'Label', htmlFor: 'text-input' }, this.props),
@@ -74,7 +75,7 @@ var FormFieldTextInput = function (_Component) {
 var FormFieldTextArea = function FormFieldTextArea(props) {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(
       FormField,
       _extends({ label: 'Label', htmlFor: 'text-area' }, props),
@@ -86,7 +87,7 @@ var FormFieldTextArea = function FormFieldTextArea(props) {
 var FormFieldCheckBox = function FormFieldCheckBox(props) {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(
       FormField,
       _extends({ label: 'Label', htmlFor: 'check-box' }, props),
@@ -102,7 +103,7 @@ var FormFieldCheckBox = function FormFieldCheckBox(props) {
 var FormFieldToggle = function FormFieldToggle(props) {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(
       FormField,
       _extends({ label: 'Label', htmlFor: 'check-box' }, props),
@@ -167,7 +168,7 @@ var FormFieldSelect = function (_Component2) {
 var FormFieldHelpError = function FormFieldHelpError(props) {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(
       FormField,
       _extends({
@@ -177,7 +178,12 @@ var FormFieldHelpError = function FormFieldHelpError(props) {
         help: 'Text to help the user know what is possible',
         error: 'Text to call attention to an issue with this field'
       }),
-      React.createElement(TextInput, { id: 'text-input', placeholder: 'placeholder', value: 'Value' })
+      React.createElement(TextInput, {
+        id: 'text-input',
+        placeholder: 'placeholder',
+        value: 'Value',
+        onChange: function onChange() {}
+      })
     )
   );
 };

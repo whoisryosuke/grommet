@@ -19,6 +19,7 @@ import { DropButton } from '../DropButton';
 import { Text } from '../Text';
 
 import { withForwardRef, withTheme } from '../hocs';
+import { evalStyle } from '../../utils';
 
 import doc from './doc';
 
@@ -113,6 +114,7 @@ var Menu = function (_Component) {
 
 
     var MenuIcon = theme.menu.icons.down;
+    var iconColor = evalStyle(theme.global.control.color[theme.dark ? 'dark' : 'light'], theme) || 'brand';
 
     var content = children || React.createElement(
       Box,
@@ -128,7 +130,7 @@ var Menu = function (_Component) {
         { size: size },
         label
       ),
-      icon !== false ? icon !== true && icon || React.createElement(MenuIcon, { color: 'brand', size: size }) : null
+      icon !== false ? icon !== true && icon || React.createElement(MenuIcon, { color: iconColor, size: size }) : null
     );
 
     var controlMirror = React.createElement(

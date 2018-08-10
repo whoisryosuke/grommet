@@ -118,7 +118,7 @@ var EdgeControl = function (_Component) {
                 cx: halfSize,
                 cy: halfSize,
                 r: halfSize,
-                fill: (0, _utils.colorForName)(color || 'brand', theme)
+                fill: color ? (0, _utils.colorForName)(color, theme) : (0, _utils.evalStyle)((0, _utils.normalizeColor)(theme.global.control.color, theme), theme)
               })
             )
           )

@@ -6,7 +6,7 @@ export var StyledDataTable = styled.table.withConfig({
 
 export var StyledDataTableRow = styled.tr.withConfig({
   displayName: 'StyledDataTable__StyledDataTableRow'
-})(['height:100%;', ''], function (props) {
+})(['', ''], function (props) {
   return props.size && '\n    display: table;\n    width: 100%;\n    table-layout: fixed;\n  ';
 });
 

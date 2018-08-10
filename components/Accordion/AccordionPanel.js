@@ -20,6 +20,8 @@ var _Heading = require('../Heading');
 
 var _hocs = require('../hocs');
 
+var _utils = require('../../utils');
+
 var _doc = require('./doc');
 
 var _AccordionContext = require('./AccordionContext');
@@ -67,6 +69,7 @@ var AccordionPanel = function (_Component) {
 
 
     var dark = theme.dark;
+    var iconColor = (0, _utils.evalStyle)((0, _utils.normalizeColor)(theme.accordion.icons.color || theme.global.control.color, theme), theme);
 
     return _react2.default.createElement(
       _AccordionContext.AccordionContext,
@@ -84,7 +87,6 @@ var AccordionPanel = function (_Component) {
           _react2.default.createElement(
             _Button.Button,
             {
-              fill: true,
               role: 'tab',
               'aria-selected': active,
               'aria-expanded': active,
@@ -133,7 +135,7 @@ var AccordionPanel = function (_Component) {
               AccordionIcon && _react2.default.createElement(
                 _Box.Box,
                 { pad: { horizontal: 'small' } },
-                _react2.default.createElement(AccordionIcon, { color: dark ? 'light-3' : 'brand' })
+                _react2.default.createElement(AccordionIcon, { color: iconColor })
               )
             )
           ),
@@ -141,7 +143,7 @@ var AccordionPanel = function (_Component) {
             _Box.Box,
             {
               flex: false,
-              border: { side: 'bottom', color: dark ? 'light-5' : 'border' }
+              border: { side: 'bottom', color: dark ? 'border-dark' : 'border-light' }
             },
             animate ? _react2.default.createElement(
               _Collapsible.Collapsible,

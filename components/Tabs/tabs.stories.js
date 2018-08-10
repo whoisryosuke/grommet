@@ -24,6 +24,8 @@ var _Grommet = require('../Grommet/Grommet');
 
 var _Grommet2 = _interopRequireDefault(_Grommet);
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92,7 +94,7 @@ var ControlledTabs = function (_Component) {
 
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(
         _Tabs2.default,
         { activeIndex: index, onActive: this.onActive },
@@ -101,7 +103,7 @@ var ControlledTabs = function (_Component) {
           { title: 'Tab 1' },
           _react2.default.createElement(
             _Box2.default,
-            { pad: 'large', align: 'center', background: 'accent-1' },
+            { margin: 'small', pad: 'large', align: 'center', background: 'accent-1' },
             _react2.default.createElement(_grommetIcons.Attraction, { size: 'xlarge' })
           )
         ),
@@ -110,7 +112,7 @@ var ControlledTabs = function (_Component) {
           { title: 'Tab 2' },
           _react2.default.createElement(
             _Box2.default,
-            { pad: 'large', align: 'center', background: 'accent-2' },
+            { margin: 'small', pad: 'large', align: 'center', background: 'accent-2' },
             _react2.default.createElement(_grommetIcons.TreeOption, { size: 'xlarge' })
           )
         ),
@@ -119,7 +121,7 @@ var ControlledTabs = function (_Component) {
           { title: 'Tab 3' },
           _react2.default.createElement(
             _Box2.default,
-            { pad: 'large', align: 'center', background: 'accent-3' },
+            { margin: 'small', pad: 'large', align: 'center', background: 'accent-3' },
             _react2.default.createElement(_grommetIcons.Car, { size: 'xlarge' })
           )
         )

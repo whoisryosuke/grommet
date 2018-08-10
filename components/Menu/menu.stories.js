@@ -18,6 +18,8 @@ var _Box = require('../Box/Box');
 
 var _Box2 = _interopRequireDefault(_Box);
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38,11 +40,14 @@ var SimpleMenu = function (_Component) {
   SimpleMenu.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(
         _Box2.default,
         { direction: 'row', gap: 'large' },
-        _react2.default.createElement(_Menu2.default, { label: 'Actions', items: [{ label: 'Launch' }, { label: 'Abort' }] })
+        _react2.default.createElement(_Menu2.default, {
+          label: 'Actions',
+          items: [{ label: 'Launch', onClick: function onClick() {} }, { label: 'Abort', onClick: function onClick() {} }]
+        })
       )
     );
   };

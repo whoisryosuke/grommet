@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import Meter from '../Meter/Meter';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var BarMeter = function (_Component) {
   _inherits(BarMeter, _Component);
@@ -22,7 +23,7 @@ var BarMeter = function (_Component) {
   BarMeter.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Meter, {
         type: 'bar',
         background: 'light-2',
@@ -46,7 +47,7 @@ var CircleMeter = function (_Component2) {
   CircleMeter.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Meter, {
         type: 'circle',
         background: 'light-2',

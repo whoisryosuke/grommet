@@ -13,6 +13,7 @@ import { storiesOf } from '@storybook/react';
 import { FormClose } from 'grommet-icons';
 
 import { Box, Button, CheckBox, Grommet, Select, Text } from '../../';
+import { grommet } from '../../../themes';
 
 import customSearchTheme from './theme';
 import SearchInputContext from './components/SearchInputContext';
@@ -44,7 +45,7 @@ var SimpleSelect = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Select, {
         placeholder: 'Select',
         value: value,
@@ -91,7 +92,7 @@ var SearchSelect = function (_Component2) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Select, {
         size: 'medium',
         placeholder: 'Select',
@@ -202,7 +203,7 @@ var SeasonsSelect = function (_Component3) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Box,
         { direction: 'row' },
@@ -501,7 +502,7 @@ var DarkSelect = function (_Component5) {
 
     return React.createElement(
       Grommet,
-      _extends({ full: true }, this.props),
+      _extends({ full: true, theme: grommet }, this.props),
       React.createElement(
         Box,
         { fill: true, background: 'dark-1', align: 'center', justify: 'center' },
@@ -532,5 +533,5 @@ storiesOf('Select', module).add('Simple Select', function () {
 }).add('Dark', function () {
   return React.createElement(DarkSelect, null);
 }).add('Custom Colors', function () {
-  return React.createElement(DarkSelect, { theme: { select: { background: '#000000', iconColor: '#d3d3d3' } } });
+  return React.createElement(DarkSelect, { theme: { global: { font: { family: 'Arial' } }, select: { background: '#000000', iconColor: '#d3d3d3' } } });
 });

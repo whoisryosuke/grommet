@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import Calendar from '../Calendar/Calendar';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleCalendar = function (_Component) {
   _inherits(SimpleCalendar, _Component);
@@ -32,7 +33,7 @@ var SimpleCalendar = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Calendar, { date: date, onSelect: this.onSelect, size: 'small' })
     );
   };
@@ -101,7 +102,7 @@ var RichCalendar = function (_Component2) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Calendar, { date: date, dates: dates, onSelect: this.onSelect })
     );
   };

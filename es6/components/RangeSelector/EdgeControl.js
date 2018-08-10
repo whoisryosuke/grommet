@@ -13,7 +13,7 @@ import { compose } from 'recompose';
 
 import { Box } from '../Box';
 import { Keyboard } from '../Keyboard';
-import { colorForName, parseMetricToNum } from '../../utils';
+import { colorForName, evalStyle, normalizeColor, parseMetricToNum } from '../../utils';
 import { withForwardRef } from '../hocs';
 
 var DIRECTION_PROPS = {
@@ -106,7 +106,7 @@ var EdgeControl = function (_Component) {
                 cx: halfSize,
                 cy: halfSize,
                 r: halfSize,
-                fill: colorForName(color || 'brand', theme)
+                fill: color ? colorForName(color, theme) : evalStyle(normalizeColor(theme.global.control.color, theme), theme)
               })
             )
           )

@@ -14,6 +14,8 @@ var _grommetIcons = require('grommet-icons');
 
 var _ = require('../../');
 
+var _themes = require('../../../themes');
+
 var _theme = require('./theme');
 
 var _theme2 = _interopRequireDefault(_theme);
@@ -57,7 +59,7 @@ var SimpleSelect = function (_Component) {
 
     return _react2.default.createElement(
       _.Grommet,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_.Select, {
         placeholder: 'Select',
         value: value,
@@ -104,7 +106,7 @@ var SearchSelect = function (_Component2) {
 
     return _react2.default.createElement(
       _.Grommet,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_.Select, {
         size: 'medium',
         placeholder: 'Select',
@@ -215,7 +217,7 @@ var SeasonsSelect = function (_Component3) {
 
     return _react2.default.createElement(
       _.Grommet,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(
         _.Box,
         { direction: 'row' },
@@ -514,7 +516,7 @@ var DarkSelect = function (_Component5) {
 
     return _react2.default.createElement(
       _.Grommet,
-      _extends({ full: true }, this.props),
+      _extends({ full: true, theme: _themes.grommet }, this.props),
       _react2.default.createElement(
         _.Box,
         { fill: true, background: 'dark-1', align: 'center', justify: 'center' },
@@ -545,5 +547,5 @@ var DarkSelect = function (_Component5) {
 }).add('Dark', function () {
   return _react2.default.createElement(DarkSelect, null);
 }).add('Custom Colors', function () {
-  return _react2.default.createElement(DarkSelect, { theme: { select: { background: '#000000', iconColor: '#d3d3d3' } } });
+  return _react2.default.createElement(DarkSelect, { theme: { global: { font: { family: 'Arial' } }, select: { background: '#000000', iconColor: '#d3d3d3' } } });
 });

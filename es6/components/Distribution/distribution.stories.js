@@ -11,6 +11,7 @@ import Distribution from '../Distribution/Distribution';
 import Box from '../Box/Box';
 import Text from '../Text/Text';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleDistribution = function (_Component) {
   _inherits(SimpleDistribution, _Component);
@@ -24,7 +25,7 @@ var SimpleDistribution = function (_Component) {
   SimpleDistribution.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Distribution,
         {

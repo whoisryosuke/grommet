@@ -59,24 +59,27 @@ var Box = function (_Component) {
 
   Box.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
     var background = nextProps.background,
-        theme = nextProps.theme;
-    var stateTheme = prevState.theme;
+        propsTheme = nextProps.theme;
+    var stateTheme = prevState.theme,
+        priorTheme = prevState.priorTheme;
 
 
-    var dark = theme.dark;
+    var dark = propsTheme.dark;
     if (background) {
-      dark = (0, _utils.backgroundIsDark)(background, theme);
+      dark = (0, _utils.backgroundIsDark)(background, propsTheme);
     }
 
-    if (dark !== theme.dark && (!stateTheme || dark !== stateTheme.dark)) {
+    if (dark === propsTheme.dark && stateTheme) {
+      return { theme: undefined, priorTheme: undefined };
+    }
+    if (dark !== propsTheme.dark && (!stateTheme || dark !== stateTheme.dark || propsTheme !== priorTheme)) {
       return {
-        theme: _extends({}, theme, {
+        theme: _extends({}, propsTheme, {
           dark: dark,
-          icon: dark ? theme.iconThemes.dark : theme.iconThemes.light
-        })
+          icon: dark ? propsTheme.iconThemes.dark : propsTheme.iconThemes.light
+        }),
+        priorTheme: propsTheme
       };
-    } else if (dark === theme.dark && stateTheme) {
-      return { theme: undefined };
     }
     return null;
   };

@@ -12,6 +12,7 @@ import Stack from '../Stack/Stack';
 import Box from '../Box/Box';
 import Text from '../Text/Text';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleRangeSelector = function (_Component) {
   _inherits(SimpleRangeSelector, _Component);
@@ -35,7 +36,7 @@ var SimpleRangeSelector = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Stack,
         null,

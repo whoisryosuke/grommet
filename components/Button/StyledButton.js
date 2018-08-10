@@ -2,15 +2,11 @@
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _templateObject = _taggedTemplateLiteralLoose(['\n  ', '\n'], ['\n  ', '\n']);
 
 var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
-
-var _polished = require('polished');
 
 var _utils = require('../../utils');
 
@@ -19,11 +15,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
 var basicStyle = function basicStyle(props) {
-  return (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? (0, _utils.colorForName)(props.color, props.theme) : props.theme.button.border.color, props.theme.button.border.radius, props.theme.dark ? props.theme.global.colors.darkBackground.text : props.theme.button.colors.text);
+  return (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? (0, _utils.colorForName)(props.color, props.theme) : (0, _utils.normalizeColor)(props.theme.button.border.color || props.theme.global.control.color, props.theme), props.theme.button.border.radius, (props.theme.button.color || props.theme.global.text.color)[props.theme.dark ? 'dark' : 'light']);
 };
 
 var primaryStyle = function primaryStyle(props) {
-  return (0, _styledComponents.css)(['', ' border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], (0, _utils.backgroundStyle)(props.color || props.theme.button.colors.primary || 'brand', props.theme), props.theme.button.border.radius, (0, _utils.colorIsDark)((0, _utils.colorForName)('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text, (0, _utils.colorIsDark)((0, _utils.colorForName)('brand', props.theme)) ? props.theme.global.colors.darkBackground.text : props.theme.global.colors.lightBackground.text);
+  return (0, _styledComponents.css)(['', ' border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], (0, _utils.backgroundStyle)((0, _utils.normalizeColor)(props.color || props.theme.button.primary.color || 'brand', props.theme), props.theme), props.theme.button.border.radius, props.theme.global.text.color[(0, _utils.colorIsDark)((0, _utils.colorForName)('brand', props.theme)) ? 'dark' : 'light'], props.theme.global.text.color[(0, _utils.colorIsDark)((0, _utils.colorForName)('brand', props.theme)) ? 'dark' : 'light']);
 };
 
 var disabledStyle = (0, _styledComponents.css)(['opacity:', ';cursor:default;'], function (props) {
@@ -34,33 +30,17 @@ function getHoverColor(props) {
   if (props.color) {
     return (0, _utils.colorForName)(props.color, props.theme);
   }
-  return props.theme.button.border.color;
+  return (0, _utils.normalizeColor)(props.theme.button.border.color || props.theme.global.control.color, props.theme);
 }
 
 function getHoverIndicatorStyle(hoverIndicator, theme) {
-  var backgroundColor = theme.global.hover.backgroundColor;
-  if ((typeof hoverIndicator === 'undefined' ? 'undefined' : _typeof(hoverIndicator)) === 'object') {
-    if (typeof hoverIndicator.background === 'string') {
-      var colorGroup = hoverIndicator.background.split('-');
-      var colorType = colorGroup[0];
-      if (!theme.global.colors[colorType]) {
-        console.warn('Invalid color ' + hoverIndicator.background + ', using ' + backgroundColor + ' instead');
-      } else if (colorGroup.length > 1) {
-        // subtract one to use the array
-        var colorIndex = colorGroup[1] - 1;
-        if (theme.global.colors[colorType].length < colorGroup[1]) {
-          console.warn('Invalid color ' + hoverIndicator.background + ', using ' + backgroundColor + ' instead');
-        } else {
-          backgroundColor = (0, _polished.rgba)(theme.global.colors[colorType][colorIndex], 0.3) + ';';
-        }
-      } else if (typeof theme.global.colors[colorType] !== 'string') {
-        console.warn('Invalid color ' + hoverIndicator.background + ', using ' + backgroundColor + ' instead');
-      } else {
-        backgroundColor = (0, _polished.rgba)(theme.global.colors[colorType], 0.3) + ';';
-      }
-    }
+  var background = void 0;
+  if (hoverIndicator === true || hoverIndicator === 'background') {
+    background = theme.global.hover.background;
+  } else {
+    background = hoverIndicator;
   }
-  return (0, _styledComponents.css)(['background:', ';color:', ';'], backgroundColor, theme.global.hover.textColor);
+  return (0, _styledComponents.css)(['', ' color:', ';'], (0, _utils.backgroundStyle)(background, theme), theme.global.hover.color);
 }
 
 var hoverStyle = (0, _styledComponents.css)(['&:hover{', ' ', ' ', '}'], function (props) {

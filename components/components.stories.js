@@ -12,6 +12,14 @@ var _Grommet = require('./Grommet/Grommet');
 
 var _Grommet2 = _interopRequireDefault(_Grommet);
 
+var _Accordion = require('./Accordion/Accordion');
+
+var _Accordion2 = _interopRequireDefault(_Accordion);
+
+var _AccordionPanel = require('./Accordion/AccordionPanel');
+
+var _AccordionPanel2 = _interopRequireDefault(_AccordionPanel);
+
 var _Anchor = require('./Anchor/Anchor');
 
 var _Anchor2 = _interopRequireDefault(_Anchor);
@@ -39,6 +47,10 @@ var _CheckBox2 = _interopRequireDefault(_CheckBox);
 var _Clock = require('./Clock/Clock');
 
 var _Clock2 = _interopRequireDefault(_Clock);
+
+var _DataTable = require('./DataTable/DataTable');
+
+var _DataTable2 = _interopRequireDefault(_DataTable);
 
 var _Diagram = require('./Diagram/Diagram');
 
@@ -80,6 +92,10 @@ var _RangeInput = require('./RangeInput/RangeInput');
 
 var _RangeInput2 = _interopRequireDefault(_RangeInput);
 
+var _RangeSelector = require('./RangeSelector/RangeSelector');
+
+var _RangeSelector2 = _interopRequireDefault(_RangeSelector);
+
 var _Select = require('./Select/Select');
 
 var _Select2 = _interopRequireDefault(_Select);
@@ -87,6 +103,14 @@ var _Select2 = _interopRequireDefault(_Select);
 var _Stack = require('./Stack/Stack');
 
 var _Stack2 = _interopRequireDefault(_Stack);
+
+var _Tab = require('./Tabs/Tab');
+
+var _Tab2 = _interopRequireDefault(_Tab);
+
+var _Tabs = require('./Tabs/Tabs');
+
+var _Tabs2 = _interopRequireDefault(_Tabs);
 
 var _Text = require('./Text/Text');
 
@@ -99,6 +123,16 @@ var _TextArea2 = _interopRequireDefault(_TextArea);
 var _TextInput = require('./TextInput/TextInput');
 
 var _TextInput2 = _interopRequireDefault(_TextInput);
+
+var _Video = require('./Video/Video');
+
+var _Video2 = _interopRequireDefault(_Video);
+
+var _themes = require('../themes');
+
+var _base = require('../themes/base');
+
+var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -144,137 +178,332 @@ var Components = function (_Component) {
   _inherits(Components, _Component);
 
   function Components() {
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Components);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { baseSize: 24, checkBox: true, radioButton: true, rangeSelector: [1, 2] }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   Components.prototype.render = function render() {
-    return _react2.default.createElement(
-      _Grommet2.default,
-      null,
+    var _this2 = this;
+
+    var _state = this.state,
+        baseSize = _state.baseSize,
+        checkBox = _state.checkBox,
+        radioButton = _state.radioButton,
+        rangeSelector = _state.rangeSelector,
+        tabIndex = _state.tabIndex;
+
+    var theme = (0, _utils.deepMerge)((0, _base.generate)(baseSize), _themes.grommet);
+
+    var content = [_react2.default.createElement(
+      _Box2.default,
+      { key: 'type', align: 'start' },
       _react2.default.createElement(
-        _Box2.default,
-        { pad: 'medium', background: 'light-2' },
+        _Heading2.default,
+        { margin: { top: 'none' } },
+        'Heading'
+      ),
+      _react2.default.createElement(
+        _Paragraph2.default,
+        null,
+        'Paragraph'
+      ),
+      _react2.default.createElement(
+        _Text2.default,
+        null,
+        'Text'
+      ),
+      _react2.default.createElement(
+        _Anchor2.default,
+        { href: '' },
+        'Anchor'
+      ),
+      _react2.default.createElement(_Menu2.default, {
+        label: 'Menu',
+        items: [{ label: 'One', onClick: function onClick() {} }, { label: 'Two' }]
+      }),
+      _react2.default.createElement(_Button2.default, { label: 'Button', onClick: function onClick() {} })
+    ), _react2.default.createElement(
+      _Box2.default,
+      { key: 'input', gap: 'small' },
+      _react2.default.createElement(_Select2.default, { placeholder: 'Select', options: ['One', 'Two'], onChange: function onChange() {} }),
+      _react2.default.createElement(_CheckBox2.default, {
+        checked: checkBox,
+        label: 'CheckBox',
+        onChange: function onChange(event) {
+          return _this2.setState({ checkBox: event.target.checked });
+        }
+      }),
+      _react2.default.createElement(_CheckBox2.default, {
+        toggle: true,
+        checked: checkBox,
+        label: 'CheckBox toggle',
+        onChange: function onChange(event) {
+          return _this2.setState({ checkBox: event.target.checked });
+        }
+      }),
+      _react2.default.createElement(_RadioButton2.default, {
+        checked: radioButton,
+        label: 'RadioButton',
+        onChange: function onChange(event) {
+          return _this2.setState({ radioButton: event.target.checked });
+        }
+      }),
+      _react2.default.createElement(_TextInput2.default, { placeholder: 'TextInput' }),
+      _react2.default.createElement(_TextArea2.default, { placeholder: 'TextArea' }),
+      _react2.default.createElement(_RangeInput2.default, { value: 24, onChange: function onChange() {} }),
+      _react2.default.createElement(
+        _Stack2.default,
+        null,
         _react2.default.createElement(
-          _Grid2.default,
-          {
-            fill: true,
-            rows: 'medium',
-            columns: 'small',
-            gap: 'small'
-          },
-          _react2.default.createElement(
+          _Box2.default,
+          { direction: 'row', justify: 'between' },
+          [0, 1, 2, 3].map(function (value) {
+            return _react2.default.createElement(
+              _Box2.default,
+              { key: value, pad: 'small', border: false },
+              _react2.default.createElement(
+                _Text2.default,
+                { style: { fontFamily: 'monospace' } },
+                value
+              )
+            );
+          })
+        ),
+        _react2.default.createElement(_RangeSelector2.default, {
+          direction: 'horizontal',
+          invert: false,
+          min: 0,
+          max: 3,
+          size: 'full',
+          round: 'small',
+          values: rangeSelector,
+          onChange: function onChange(values) {
+            return _this2.setState({ rangeSelector: values });
+          }
+        })
+      ),
+      _react2.default.createElement(
+        _FormField2.default,
+        { label: 'FormField' },
+        _react2.default.createElement(_TextInput2.default, { placeholder: 'TextInput' })
+      )
+    ), _react2.default.createElement(
+      _Box2.default,
+      { key: 'time', gap: 'medium' },
+      _react2.default.createElement(_Calendar2.default, { size: 'small' }),
+      _react2.default.createElement(_Clock2.default, { type: 'digital' }),
+      _react2.default.createElement(_Clock2.default, null)
+    ), _react2.default.createElement(
+      _Box2.default,
+      { key: 'measure', gap: 'medium' },
+      _react2.default.createElement(_Chart2.default, {
+        type: 'bar',
+        round: true,
+        size: 'small',
+        values: [{ value: [10, 20] }, { value: [20, 30] }, { value: [30, 15] }]
+      }),
+      _react2.default.createElement(_Meter2.default, {
+        type: 'bar',
+        round: true,
+        size: 'small',
+        background: 'light-3',
+        values: [{ value: 30 }]
+      })
+    ), _react2.default.createElement(
+      _Box2.default,
+      { key: 'visualize', gap: 'small' },
+      _react2.default.createElement(
+        _Distribution2.default,
+        {
+          basis: 'small',
+          values: [{ value: 50, color: 'light-3' }, { value: 30, color: 'accent-1' }, { value: 20, color: 'light-4' }, { value: 10, color: 'light-3' }, { value: 5, color: 'light-4' }]
+        },
+        function (value) {
+          return _react2.default.createElement(
             _Box2.default,
-            null,
-            _react2.default.createElement(
-              _Heading2.default,
-              { margin: { top: 'none' } },
-              'Heading'
-            ),
-            _react2.default.createElement(
-              _Paragraph2.default,
-              null,
-              'Paragraph'
-            ),
+            { pad: 'xsmall', background: value.color, fill: true },
             _react2.default.createElement(
               _Text2.default,
-              null,
-              'Text'
-            ),
-            _react2.default.createElement(
-              _Anchor2.default,
-              { href: '' },
-              'Anchor'
-            ),
-            _react2.default.createElement(_Menu2.default, { label: 'Menu', items: ['One', 'Two'] }),
-            _react2.default.createElement(_Button2.default, { label: 'Button', onClick: function onClick() {} })
-          ),
-          _react2.default.createElement(
-            _Box2.default,
-            { gap: 'small' },
-            _react2.default.createElement(_Select2.default, { label: 'Select', options: ['One', 'Two'], onChange: function onChange() {} }),
-            _react2.default.createElement(_CheckBox2.default, { checked: true, label: 'CheckBox', onChange: function onChange() {} }),
-            _react2.default.createElement(_RadioButton2.default, { checked: true, label: 'RadioButton', onChange: function onChange() {} }),
-            _react2.default.createElement(_TextInput2.default, { placeholder: 'TextInput' }),
-            _react2.default.createElement(_TextArea2.default, { placeholder: 'TextArea' }),
-            _react2.default.createElement(_RangeInput2.default, null),
-            _react2.default.createElement(
-              _FormField2.default,
-              { label: 'FormField' },
-              _react2.default.createElement(_TextInput2.default, { placeholder: 'TextInput' })
+              { size: 'large' },
+              value.value
             )
-          ),
+          );
+        }
+      ),
+      _react2.default.createElement(
+        _Stack2.default,
+        null,
+        _react2.default.createElement(
+          _Box2.default,
+          null,
           _react2.default.createElement(
             _Box2.default,
-            { gap: 'medium' },
-            _react2.default.createElement(_Calendar2.default, { size: 'small' }),
-            _react2.default.createElement(_Clock2.default, { type: 'digital' }),
-            _react2.default.createElement(_Clock2.default, null)
-          ),
-          _react2.default.createElement(
-            _Box2.default,
-            { gap: 'medium' },
-            _react2.default.createElement(_Chart2.default, {
-              type: 'bar',
-              round: true,
-              size: 'small',
-              values: [{ value: [10, 20] }, { value: [20, 30] }, { value: [30, 15] }]
-            }),
-            _react2.default.createElement(_Meter2.default, {
-              type: 'bar',
-              round: true,
-              size: 'small',
-              background: 'light-3',
-              values: [{ value: 30 }]
+            { direction: 'row' },
+            [1, 2].map(function (id) {
+              return _react2.default.createElement(Node, { key: id, id: id });
             })
           ),
           _react2.default.createElement(
             _Box2.default,
-            { gap: 'small' },
+            { direction: 'row' },
+            [3, 4].map(function (id) {
+              return _react2.default.createElement(Node, { key: id, id: id });
+            })
+          )
+        ),
+        _react2.default.createElement(_Diagram2.default, {
+          connections: [connection('1', '4')]
+        })
+      )
+    ), _react2.default.createElement(
+      _Box2.default,
+      { key: 'dataTable', alignSelf: 'start' },
+      _react2.default.createElement(_DataTable2.default, {
+        columns: [{ property: 'name', header: 'Name' }, { property: 'color', header: 'Color' }],
+        data: [{ name: 'Alan', color: 'blue' }, { name: 'Chris', color: 'purple' }, { name: 'Eric', color: 'orange' }],
+        sortable: true
+      })
+    ), _react2.default.createElement(
+      _Box2.default,
+      { key: 'accordion' },
+      _react2.default.createElement(
+        _Accordion2.default,
+        null,
+        _react2.default.createElement(
+          _AccordionPanel2.default,
+          { label: 'Accordion Panel 1' },
+          _react2.default.createElement(
+            _Box2.default,
+            { pad: 'small' },
             _react2.default.createElement(
-              _Distribution2.default,
-              {
-                basis: 'small',
-                values: [{ value: 50, color: 'light-3' }, { value: 30, color: 'accent-1' }, { value: 20, color: 'light-4' }, { value: 10, color: 'light-3' }, { value: 5, color: 'light-4' }]
-              },
-              function (value) {
-                return _react2.default.createElement(
-                  _Box2.default,
-                  { pad: 'xsmall', background: value.color, fill: true },
-                  _react2.default.createElement(
-                    _Text2.default,
-                    { size: 'large' },
-                    value.value
-                  )
-                );
-              }
-            ),
-            _react2.default.createElement(
-              _Stack2.default,
+              _Text2.default,
               null,
-              _react2.default.createElement(
-                _Box2.default,
-                null,
-                _react2.default.createElement(
-                  _Box2.default,
-                  { direction: 'row' },
-                  [1, 2].map(function (id) {
-                    return _react2.default.createElement(Node, { key: id, id: id });
-                  })
-                ),
-                _react2.default.createElement(
-                  _Box2.default,
-                  { direction: 'row' },
-                  [3, 4].map(function (id) {
-                    return _react2.default.createElement(Node, { key: id, id: id });
-                  })
-                )
-              ),
-              _react2.default.createElement(_Diagram2.default, {
-                connections: [connection('1', '4')]
-              })
+              'Accordion panel 1 content'
             )
+          )
+        ),
+        _react2.default.createElement(
+          _AccordionPanel2.default,
+          { label: 'Accordion Panel 2' },
+          _react2.default.createElement(
+            _Box2.default,
+            { pad: 'small' },
+            _react2.default.createElement(
+              _Text2.default,
+              null,
+              'Accordion panel 2 content'
+            )
+          )
+        )
+      )
+    ), _react2.default.createElement(
+      _Box2.default,
+      { key: 'tabs' },
+      _react2.default.createElement(
+        _Tabs2.default,
+        {
+          activeIndex: tabIndex,
+          onActive: function onActive(index) {
+            return _this2.setState({ tabIndex: index });
+          }
+        },
+        _react2.default.createElement(
+          _Tab2.default,
+          { title: 'Tab 1' },
+          _react2.default.createElement(
+            _Box2.default,
+            { pad: 'small' },
+            _react2.default.createElement(
+              _Text2.default,
+              null,
+              'Tab 1 content'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          _Tab2.default,
+          { title: 'Tab 2' },
+          _react2.default.createElement(
+            _Box2.default,
+            { pad: 'small' },
+            _react2.default.createElement(
+              _Text2.default,
+              null,
+              'Tab 2 content'
+            )
+          )
+        )
+      )
+    ), _react2.default.createElement(
+      _Box2.default,
+      { key: 'video', alignSelf: 'start' },
+      _react2.default.createElement(
+        _Video2.default,
+        null,
+        _react2.default.createElement('source', { src: 'http://techslides.com/demos/sample-videos/small.webm', type: 'video/webm' }),
+        _react2.default.createElement('source', { src: 'http://techslides.com/demos/sample-videos/small.ogv', type: 'video/ogg' }),
+        _react2.default.createElement('source', { src: 'http://techslides.com/demos/sample-videos/small.mp4', type: 'video/mp4' }),
+        _react2.default.createElement('source', { src: 'http://techslides.com/demos/sample-videos/small.3gp', type: 'video/3gp' })
+      )
+    )];
+
+    return _react2.default.createElement(
+      _react2.default.Fragment,
+      null,
+      _react2.default.createElement(
+        _Grommet2.default,
+        { theme: _themes.grommet },
+        _react2.default.createElement(
+          _Box2.default,
+          {
+            direction: 'row-responsive',
+            gap: 'medium',
+            justify: 'end',
+            align: 'center',
+            margin: 'small'
+          },
+          _react2.default.createElement(
+            _Box2.default,
+            { basis: 'small' },
+            _react2.default.createElement(_RangeInput2.default, {
+              min: 16,
+              max: 36,
+              step: 2,
+              value: baseSize,
+              onChange: function onChange(event) {
+                return _this2.setState({ baseSize: parseInt(event.target.value, 10) });
+              }
+            })
+          ),
+          _react2.default.createElement(
+            _Text2.default,
+            null,
+            baseSize,
+            'px base spacing'
+          )
+        )
+      ),
+      _react2.default.createElement(
+        _Grommet2.default,
+        { theme: theme },
+        _react2.default.createElement(
+          _Box2.default,
+          { pad: 'medium', background: 'white' },
+          _Grid2.default.available ? _react2.default.createElement(
+            _Grid2.default,
+            { fill: true, columns: 'small', gap: 'medium' },
+            content
+          ) : _react2.default.createElement(
+            _Box2.default,
+            { direction: 'row', wrap: true, align: 'start', gap: 'large' },
+            content
           )
         )
       )

@@ -9,11 +9,12 @@ import RoutedButton from '../Button/RoutedButton';
 import Grommet from '../Grommet/Grommet';
 import Box from '../Box/Box';
 import Text from '../Text/Text';
+import { grommet } from '../../themes';
 
 var SimpleButton = function SimpleButton(props) {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(Button, _extends({ fill: true, label: 'Submit', onClick: function onClick() {} }, props))
   );
 };
@@ -21,7 +22,7 @@ var SimpleButton = function SimpleButton(props) {
 var IconButton = function IconButton() {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(Button, { icon: React.createElement(Add, null), hoverIndicator: true, onClick: function onClick() {} })
   );
 };
@@ -29,7 +30,7 @@ var IconButton = function IconButton() {
 var PlainButton = function PlainButton() {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(
       Button,
       { hoverIndicator: true, onClick: function onClick() {} },
@@ -50,7 +51,7 @@ var PlainButton = function PlainButton() {
 var AnchorButton = function AnchorButton() {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(Button, { label: 'Go', href: '#' })
   );
 };
@@ -58,12 +59,17 @@ var AnchorButton = function AnchorButton() {
 var RouteButton = function RouteButton() {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(RoutedButton, { label: 'Go', path: '/' })
   );
 };
 
 var customTheme = {
+  global: {
+    font: {
+      family: 'Arial'
+    }
+  },
   button: {
     border: {
       radius: undefined,
@@ -73,8 +79,8 @@ var customTheme = {
       vertical: '12px',
       horizontal: '24px'
     },
-    colors: {
-      primary: '#2196f3'
+    primary: {
+      color: '#2196f3'
     },
     extend: function extend(props) {
       var extraStyles = '';

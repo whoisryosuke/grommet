@@ -14,6 +14,8 @@ var _Grommet = require('../Grommet/Grommet');
 
 var _Grommet2 = _interopRequireDefault(_Grommet);
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22,30 +24,41 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SimpleParagraph = function (_Component) {
-  _inherits(SimpleParagraph, _Component);
+var sizes = ['xlarge', 'large', 'medium', 'small'];
 
-  function SimpleParagraph() {
-    _classCallCheck(this, SimpleParagraph);
+var paragraphFiller = '\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua.\n';
+
+var All = function (_Component) {
+  _inherits(All, _Component);
+
+  function All() {
+    _classCallCheck(this, All);
 
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  SimpleParagraph.prototype.render = function render() {
+  All.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(
-        _Paragraph2.default,
+        'div',
         null,
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        sizes.map(function (size) {
+          return _react2.default.createElement(
+            _Paragraph2.default,
+            { size: size },
+            'Paragraph ' + size,
+            paragraphFiller
+          );
+        })
       )
     );
   };
 
-  return SimpleParagraph;
+  return All;
 }(_react.Component);
 
-(0, _react3.storiesOf)('Paragraph', module).add('Simple Paragraph', function () {
-  return _react2.default.createElement(SimpleParagraph, null);
+(0, _react3.storiesOf)('Paragraph', module).add('All', function () {
+  return _react2.default.createElement(All, null);
 });

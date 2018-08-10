@@ -10,6 +10,7 @@ import { storiesOf } from '@storybook/react';
 import Menu from '../Menu/Menu';
 import Grommet from '../Grommet/Grommet';
 import Box from '../Box/Box';
+import { grommet } from '../../themes';
 
 var SimpleMenu = function (_Component) {
   _inherits(SimpleMenu, _Component);
@@ -23,11 +24,14 @@ var SimpleMenu = function (_Component) {
   SimpleMenu.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Box,
         { direction: 'row', gap: 'large' },
-        React.createElement(Menu, { label: 'Actions', items: [{ label: 'Launch' }, { label: 'Abort' }] })
+        React.createElement(Menu, {
+          label: 'Actions',
+          items: [{ label: 'Launch', onClick: function onClick() {} }, { label: 'Abort', onClick: function onClick() {} }]
+        })
       )
     );
   };

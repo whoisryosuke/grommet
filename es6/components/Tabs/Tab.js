@@ -16,7 +16,7 @@ import { Button } from '../Button';
 import { Text } from '../Text';
 
 import { withForwardRef, withTheme } from '../hocs';
-import { colorForName } from '../../utils';
+import { evalStyle, normalizeColor } from '../../utils';
 
 var Tab = function (_Component) {
   _inherits(Tab, _Component);
@@ -89,7 +89,7 @@ var Tab = function (_Component) {
         title
       );
     } else {
-      var color = theme.dark ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text;
+      var color = normalizeColor(theme.global.text.color, theme);
       normalizedTitle = React.createElement(
         Text,
         { color: color },
@@ -101,9 +101,9 @@ var Tab = function (_Component) {
     if (active) {
       borderColor = theme.dark ? 'white' : 'black';
     } else if (over) {
-      borderColor = colorForName('border', theme);
+      borderColor = theme.dark ? 'white' : 'black';
     } else {
-      borderColor = 'transparent';
+      borderColor = evalStyle(normalizeColor(theme.global.control.border.color, theme), theme);
     }
 
     return React.createElement(
@@ -124,7 +124,7 @@ var Tab = function (_Component) {
         {
           pad: { bottom: 'xsmall' },
           margin: { horizontal: 'small' },
-          border: { side: 'bottom', size: 'medium', color: borderColor }
+          border: { side: 'bottom', size: 'small', color: borderColor }
         },
         normalizedTitle
       )

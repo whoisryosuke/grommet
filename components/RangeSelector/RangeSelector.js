@@ -233,7 +233,8 @@ RangeSelector.defaultProps = {
   min: 0,
   opacity: 'medium',
   size: 'medium',
-  step: 1
+  step: 1,
+  values: []
 };
 
 

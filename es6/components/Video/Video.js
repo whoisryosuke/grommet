@@ -327,8 +327,8 @@ var Video = function (_Component) {
         volume = _state.volume;
 
     var over = controls === 'over';
-    var background = over ? { color: 'dark-2', opacity: 'strong' } : undefined;
-    var iconColor = over ? 'light-1' : undefined;
+    var background = over && (theme.video.controls && theme.video.controls.background || { color: 'dark-2', opacity: 'strong' });
+    var iconColor = over && (theme.video.icons.color || 'light-1');
 
     var formattedTime = formatTime(scrubTime || currentTime || duration);
 
@@ -383,7 +383,7 @@ var Video = function (_Component) {
               null,
               React.createElement(Meter, {
                 'aria-label': 'Video progress',
-                background: over ? 'dark-3' : undefined,
+                background: over && (theme.video.scrubber && theme.video.scrubber.track.color || 'dark-3'),
                 size: 'full',
                 thickness: 'small',
                 values: [{ value: percentagePlayed || 0 }]

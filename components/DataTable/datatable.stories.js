@@ -28,6 +28,8 @@ var _Text = require('../Text/Text');
 
 var _Text2 = _interopRequireDefault(_Text);
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -107,7 +109,7 @@ var SimpleDataTable = function (_Component) {
   SimpleDataTable.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_DataTable2.default, { columns: columns, data: DATA })
     );
   };
@@ -127,7 +129,7 @@ var SizedDataTable = function (_Component2) {
   SizedDataTable.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_DataTable2.default, { columns: columns, data: data, size: 'medium' })
     );
   };
@@ -147,7 +149,7 @@ var TunableDataTable = function (_Component3) {
   TunableDataTable.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_DataTable2.default, {
         columns: columns.map(function (c) {
           return _extends({}, c, { search: c.property === 'name' || c.property === 'location' });
@@ -181,7 +183,7 @@ var GroupedDataTable = function (_Component4) {
   GroupedDataTable.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_DataTable2.default, {
         columns: groupColumns,
         data: DATA,

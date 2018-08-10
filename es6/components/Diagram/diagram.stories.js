@@ -15,6 +15,7 @@ import Diagram from '../Diagram/Diagram';
 import Box from '../Box/Box';
 import Stack from '../Stack/Stack';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var Node = function Node(_ref) {
   var id = _ref.id,
@@ -59,7 +60,7 @@ var SimpleDiagram = function (_Component) {
   SimpleDiagram.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Stack,
         null,

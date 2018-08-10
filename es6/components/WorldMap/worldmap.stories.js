@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import WorldMap from '../WorldMap/WorldMap';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleWorldMap = function (_Component) {
   _inherits(SimpleWorldMap, _Component);
@@ -32,7 +33,7 @@ var SimpleWorldMap = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(WorldMap, { onSelectPlace: this.onSelectPlace, places: places })
     );
   };

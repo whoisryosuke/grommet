@@ -10,6 +10,7 @@ import { storiesOf } from '@storybook/react';
 import { Add, Close, FormClose, StatusGood, Trash } from 'grommet-icons';
 
 import { Box, Button, FormField, Grommet, Heading, Layer, Text, TextInput } from '../';
+import { grommet } from '../../themes';
 
 var CenterLayer = function (_Component) {
   _inherits(CenterLayer, _Component);
@@ -41,7 +42,7 @@ var CenterLayer = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Button, {
         icon: React.createElement(Trash, null),
         label: React.createElement(
@@ -173,7 +174,7 @@ var FormLayer = function (_Component2) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Box,
         { align: 'start' },
@@ -278,7 +279,7 @@ var NotificationLayer = function (_Component3) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Button, {
         icon: React.createElement(Add, { color: 'brand' }),
         label: React.createElement(

@@ -15,6 +15,7 @@ import Heading from '../Heading/Heading';
 import Button from '../Button/Button';
 import Text from '../Text/Text';
 import Calendar from '../Calendar/Calendar';
+import { grommet } from '../../themes';
 
 var DropContent = function DropContent(_ref) {
   var onClose = _ref.onClose;
@@ -66,7 +67,7 @@ var SimpleDropButton = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(DropButton, {
         label: 'Open',
         open: open,
@@ -112,7 +113,7 @@ var CalendarDropButton = function (_Component2) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         DropButton,
         {

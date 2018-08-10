@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import RadioButton from '../RadioButton/RadioButton';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleRadioButton = function (_Component) {
   _inherits(SimpleRadioButton, _Component);
@@ -22,7 +23,7 @@ var SimpleRadioButton = function (_Component) {
   SimpleRadioButton.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(RadioButton, { label: 'Choice 1', name: 'radio' }),
       React.createElement(RadioButton, { label: 'Choice 2', name: 'radio' })
     );

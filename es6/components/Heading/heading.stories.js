@@ -9,31 +9,64 @@ import { storiesOf } from '@storybook/react';
 
 import Heading from '../Heading/Heading';
 import Grommet from '../Grommet/Grommet';
+import Grid from '../Grid/Grid';
+import ThemeContext from '../../contexts/ThemeContext';
+import { grommet } from '../../themes';
 
-var SimpleHeading = function (_Component) {
-  _inherits(SimpleHeading, _Component);
+var H = function H(_ref) {
+  var level = _ref.level,
+      size = _ref.size;
+  return React.createElement(
+    Heading,
+    { level: level, size: size },
+    'Heading ' + level + ' ' + size
+  );
+};
 
-  function SimpleHeading() {
-    _classCallCheck(this, SimpleHeading);
+var Set = function Set(_ref2) {
+  var size = _ref2.size,
+      theme = _ref2.theme;
+  return React.createElement(
+    'div',
+    null,
+    [1, 2, 3, 4].map(function (level) {
+      return React.createElement(H, { level: level, size: size, theme: theme });
+    })
+  );
+};
+
+var All = function (_Component) {
+  _inherits(All, _Component);
+
+  function All() {
+    _classCallCheck(this, All);
 
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  SimpleHeading.prototype.render = function render() {
+  All.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
-        Heading,
+        ThemeContext.Consumer,
         null,
-        'Brief Heading'
+        function (theme) {
+          return React.createElement(
+            Grid,
+            { columns: 'large', gap: 'medium' },
+            React.createElement(Set, { size: 'medium', theme: theme }),
+            React.createElement(Set, { size: 'small', theme: theme }),
+            React.createElement(Set, { size: 'large', theme: theme })
+          );
+        }
       )
     );
   };
 
-  return SimpleHeading;
+  return All;
 }(Component);
 
-storiesOf('Heading', module).add('Simple Heading', function () {
-  return React.createElement(SimpleHeading, null);
+storiesOf('Heading', module).add('All', function () {
+  return React.createElement(All, null);
 });

@@ -51,9 +51,9 @@ var FormField = function (_Component) {
     if (focus) {
       borderColor = 'focus';
     } else if (error) {
-      borderColor = formField.border.error.color || 'status-critical';
+      borderColor = formField.border.error.color[theme.dark ? 'dark' : 'light'] || 'status-critical';
     } else {
-      borderColor = border ? border.color || 'border' : 'border';
+      borderColor = border && border.color[theme.dark ? 'dark' : 'light'] || (theme.dark ? 'border-dark' : 'border-light');
     }
     var abut = void 0;
     var outerStyle = style;
@@ -112,7 +112,9 @@ var FormField = function (_Component) {
         ) : undefined,
         help ? React.createElement(
           Text,
-          formField.help,
+          _extends({}, formField.help, {
+            color: formField.help.color[theme.dark ? 'dark' : 'light']
+          }),
           help
         ) : undefined
       ) : undefined,
@@ -122,7 +124,9 @@ var FormField = function (_Component) {
         { margin: { vertical: 'xsmall', horizontal: 'small' } },
         React.createElement(
           Text,
-          formField.error,
+          _extends({}, formField.error, {
+            color: formField.error.color[theme.dark ? 'dark' : 'light']
+          }),
           error
         )
       ) : undefined

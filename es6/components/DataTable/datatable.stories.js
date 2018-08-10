@@ -14,6 +14,7 @@ import Grommet from '../Grommet/Grommet';
 import Meter from '../Meter/Meter';
 import Box from '../Box/Box';
 import Text from '../Text/Text';
+import { grommet } from '../../themes';
 
 var amountFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -86,7 +87,7 @@ var SimpleDataTable = function (_Component) {
   SimpleDataTable.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(DataTable, { columns: columns, data: DATA })
     );
   };
@@ -106,7 +107,7 @@ var SizedDataTable = function (_Component2) {
   SizedDataTable.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(DataTable, { columns: columns, data: data, size: 'medium' })
     );
   };
@@ -126,7 +127,7 @@ var TunableDataTable = function (_Component3) {
   TunableDataTable.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(DataTable, {
         columns: columns.map(function (c) {
           return _extends({}, c, { search: c.property === 'name' || c.property === 'location' });
@@ -160,7 +161,7 @@ var GroupedDataTable = function (_Component4) {
   GroupedDataTable.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(DataTable, {
         columns: groupColumns,
         data: DATA,

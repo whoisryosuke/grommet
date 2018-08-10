@@ -32,6 +32,8 @@ var _Text = require('../Text/Text');
 
 var _Text2 = _interopRequireDefault(_Text);
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52,7 +54,7 @@ var BarChart = function (_Component) {
   BarChart.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_Chart2.default, {
         type: 'bar',
         values: [[10, 20], [20, 30], [30, 15]]
@@ -75,7 +77,7 @@ var LineChart = function (_Component2) {
   LineChart.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_Chart2.default, {
         type: 'line',
         values: [20, 30, 15]
@@ -98,7 +100,7 @@ var AreaChart = function (_Component3) {
   AreaChart.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_Chart2.default, {
         type: 'area',
         values: [{ value: [10, 20] }, { value: [20, 30] }, { value: [30, 15] }]
@@ -168,7 +170,7 @@ var RichChart = function (_Component4) {
     };
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(
         _Box2.default,
         { align: 'center' },

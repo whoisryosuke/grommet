@@ -25,8 +25,6 @@ var _ThemeContext = require('../contexts/ThemeContext');
 
 var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
-var _utils = require('../utils');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -168,51 +166,22 @@ var withTheme = function withTheme(WrappedComponent) {
     _inherits(ThemedComponent, _Component2);
 
     function ThemedComponent() {
-      var _temp2, _this3, _ret2;
-
       _classCallCheck(this, ThemedComponent);
 
-      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-
-      return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, _Component2.call.apply(_Component2, [this].concat(args))), _this3), _this3.state = {}, _temp2), _possibleConstructorReturn(_this3, _ret2);
+      return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
     }
-
-    ThemedComponent.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
-      var themeContext = nextProps.themeContext,
-          theme = nextProps.theme;
-      var stateTheme = prevState.theme;
-
-      if (theme && !stateTheme) {
-        return { theme: (0, _utils.deepMerge)(themeContext, theme) };
-      } else if (!theme && stateTheme) {
-        return { theme: undefined };
-      }
-      return null;
-    };
 
     ThemedComponent.prototype.render = function render() {
       var _props2 = this.props,
           withThemeRef = _props2.withThemeRef,
-          themeContext = _props2.themeContext,
-          rest = _objectWithoutProperties(_props2, ['withThemeRef', 'themeContext']);
+          theme = _props2.theme,
+          rest = _objectWithoutProperties(_props2, ['withThemeRef', 'theme']);
 
-      var theme = this.state.theme;
-
-      var content = _react2.default.createElement(WrappedComponent, _extends({
+      return _react2.default.createElement(WrappedComponent, _extends({
         ref: withThemeRef
       }, rest, {
-        theme: theme || themeContext
+        theme: theme
       }));
-      if (theme) {
-        content = _react2.default.createElement(
-          _ThemeContext2.default.Provider,
-          { value: theme },
-          content
-        );
-      }
-      return content;
     };
 
     return ThemedComponent;
@@ -223,7 +192,7 @@ var withTheme = function withTheme(WrappedComponent) {
       _ThemeContext2.default.Consumer,
       null,
       function (theme) {
-        return _react2.default.createElement(ThemedComponent, _extends({}, props, { themeContext: theme, withThemeRef: ref }));
+        return _react2.default.createElement(ThemedComponent, _extends({}, props, { theme: theme, withThemeRef: ref }));
       }
     );
   });

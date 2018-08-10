@@ -18,9 +18,9 @@ var _ResponsiveContext = require('../../contexts/ResponsiveContext');
 
 var _ResponsiveContext2 = _interopRequireDefault(_ResponsiveContext);
 
-var _vanilla = require('../../themes/vanilla');
+var _base = require('../../themes/base');
 
-var _vanilla2 = _interopRequireDefault(_vanilla);
+var _base2 = _interopRequireDefault(_base);
 
 var _utils = require('../../utils');
 
@@ -81,9 +81,9 @@ var Grommet = function (_Component) {
 
     var nextTheme = void 0;
     if (theme && (theme !== themeProp || iconTheme !== iconThemeProp)) {
-      nextTheme = (0, _utils.deepMerge)(_vanilla2.default, theme);
+      nextTheme = (0, _utils.deepMerge)(_base2.default, theme);
     } else if (!theme && (themeProp || !stateTheme)) {
-      nextTheme = _vanilla2.default;
+      nextTheme = _base2.default;
     }
 
     if (nextTheme) {
@@ -92,7 +92,7 @@ var Grommet = function (_Component) {
       var lightIconTheme = (0, _utils.deepMerge)(iconTheme, nextTheme.icon);
       var iconThemes = {
         dark: (0, _utils.deepMerge)(lightIconTheme, {
-          color: nextTheme.global.colors.darkBackground.text
+          color: nextTheme.global.text.color.dark
         }),
         light: lightIconTheme
       };

@@ -24,6 +24,8 @@ var _Text = require('../Text');
 
 var _hocs = require('../hocs');
 
+var _utils = require('../../utils');
+
 var _doc = require('./doc');
 
 var _doc2 = _interopRequireDefault(_doc);
@@ -129,6 +131,7 @@ var Menu = function (_Component) {
 
 
     var MenuIcon = theme.menu.icons.down;
+    var iconColor = (0, _utils.evalStyle)(theme.global.control.color[theme.dark ? 'dark' : 'light'], theme) || 'brand';
 
     var content = children || _react2.default.createElement(
       _Box.Box,
@@ -144,7 +147,7 @@ var Menu = function (_Component) {
         { size: size },
         label
       ),
-      icon !== false ? icon !== true && icon || _react2.default.createElement(MenuIcon, { color: 'brand', size: size }) : null
+      icon !== false ? icon !== true && icon || _react2.default.createElement(MenuIcon, { color: iconColor, size: size }) : null
     );
 
     var controlMirror = _react2.default.createElement(

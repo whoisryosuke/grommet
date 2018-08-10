@@ -14,6 +14,8 @@ var _Grommet = require('../Grommet/Grommet');
 
 var _Grommet2 = _interopRequireDefault(_Grommet);
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34,7 +36,7 @@ var SimpleRadioButton = function (_Component) {
   SimpleRadioButton.prototype.render = function render() {
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_RadioButton2.default, { label: 'Choice 1', name: 'radio' }),
       _react2.default.createElement(_RadioButton2.default, { label: 'Choice 2', name: 'radio' })
     );

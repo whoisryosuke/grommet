@@ -13,6 +13,7 @@ import Text from '../Text/Text';
 import Anchor from '../Anchor/Anchor';
 import Button from '../Button/Button';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleBox = function (_Component) {
   _inherits(SimpleBox, _Component);
@@ -26,7 +27,7 @@ var SimpleBox = function (_Component) {
   SimpleBox.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Box,
         {
@@ -41,7 +42,7 @@ var SimpleBox = function (_Component) {
           {
             pad: 'xlarge',
             align: 'center',
-            background: { color: 'white-2', opacity: 'strong' }
+            background: { color: 'light-2', opacity: 'strong' }
           },
           React.createElement(Attraction, { size: 'xlarge' }),
           React.createElement(
@@ -91,6 +92,9 @@ var customColorBox = {
   global: {
     colors: {
       'brand-gradient': 'linear-gradient(102.77deg, #865ED6 -9.18%, #18BAB9 209.09%)'
+    },
+    font: {
+      family: 'Arial'
     }
   }
 };

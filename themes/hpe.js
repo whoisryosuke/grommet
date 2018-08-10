@@ -16,11 +16,8 @@ var statusColors = {
 };
 
 var colors = {
-  accent: accentColors,
   brand: '#01a982',
-  focus: accentColors[0],
-  neutral: neutralColors,
-  status: statusColors
+  focus: accentColors[0]
 };
 
 var colorArray = function colorArray(array, prefix) {
@@ -44,7 +41,7 @@ exports.default = (0, _utils.deepFreeze)({
     }
   },
   anchor: {
-    color: 'inherit'
+    color: '#6194EB'
   },
   button: {
     border: {
@@ -57,10 +54,12 @@ exports.default = (0, _utils.deepFreeze)({
     extend: 'letter-spacing: 0.04167em;'
   },
   clock: {
-    second: {
-      color: {
-        dark: '#01a982',
-        light: '#01a982'
+    analog: {
+      second: {
+        color: {
+          dark: '#01a982',
+          light: '#01a982'
+        }
       }
     }
   },

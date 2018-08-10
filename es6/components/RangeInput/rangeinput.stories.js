@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import RangeInput from '../RangeInput/RangeInput';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleRangeInput = function (_Component) {
   _inherits(SimpleRangeInput, _Component);
@@ -32,7 +33,7 @@ var SimpleRangeInput = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(RangeInput, { value: value, onChange: this.onChange })
     );
   };

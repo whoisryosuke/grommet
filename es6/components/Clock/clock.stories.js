@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import Clock from '../Clock/Clock';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var DigitalClock = function (_Component) {
   _inherits(DigitalClock, _Component);
@@ -22,7 +23,7 @@ var DigitalClock = function (_Component) {
   DigitalClock.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Clock, { type: 'digital' })
     );
   };
@@ -42,7 +43,7 @@ var AnalogClock = function (_Component2) {
   AnalogClock.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Clock, { type: 'analog' })
     );
   };

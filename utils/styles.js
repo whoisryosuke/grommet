@@ -1,15 +1,11 @@
 'use strict';
 
 exports.__esModule = true;
-exports.inputStyle = exports.focusStyle = exports.edgeStyle = exports.baseStyle = exports.backgroundStyle = exports.activeStyle = undefined;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+exports.evalStyle = exports.inputStyle = exports.focusStyle = exports.edgeStyle = exports.baseStyle = exports.activeStyle = undefined;
 
 var _styledComponents = require('styled-components');
 
 var _mixins = require('./mixins');
-
-var _colors = require('./colors');
 
 var activeStyle = exports.activeStyle = (0, _styledComponents.css)(['background:', ';color:', ';'], function (props) {
   return props.theme.global.hover.backgroundColor;
@@ -17,46 +13,12 @@ var activeStyle = exports.activeStyle = (0, _styledComponents.css)(['background:
   return props.theme.global.hover.textColor;
 });
 
-var backgroundStyle = exports.backgroundStyle = function backgroundStyle(background, theme) {
-  if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
-    if (background.image) {
-      var color = void 0;
-      if (background.dark === false) {
-        color = theme.global.colors.lightBackground.text;
-      } else if (background.dark) {
-        color = theme.global.colors.darkBackground.text;
-      } else {
-        color = 'inherit';
-      }
-      return (0, _styledComponents.css)(['background:', ' no-repeat;background-position:', ';background-size:cover;color:', ';'], background.image, background.position || 'center center', color);
-    } else if (background.color) {
-      var backgroundColor = (0, _colors.getRGBA)(background.color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]) || (0, _colors.colorForName)(background.color, theme);
-      return (0, _styledComponents.css)(['background:', ';', ''], backgroundColor, (!background.opacity || background.opacity !== 'weak') && 'color: ' + (background.dark || (0, _colors.colorIsDark)(backgroundColor) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text) + ';');
-    } else if (background.dark === false) {
-      return (0, _styledComponents.css)(['color:', ';'], theme.global.colors.lightBackground.text);
-    } else if (background.dark) {
-      return (0, _styledComponents.css)(['color:', ';'], theme.global.colors.darkBackground.text);
-    }
-    return undefined;
-  }
-  if (background) {
-    if (background.lastIndexOf('url', 0) === 0) {
-      return (0, _styledComponents.css)(['background:', ' no-repeat center center;background-size:cover;'], background);
-    }
-    var _color = (0, _colors.colorForName)(background, theme);
-    if (_color) {
-      return (0, _styledComponents.css)(['background:', ';color:', ';'], _color, (0, _colors.colorIsDark)(_color) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
-    }
-  }
-  return undefined;
-};
-
 var baseStyle = exports.baseStyle = (0, _styledComponents.css)(['font-family:', ';font-size:', ';line-height:', ';', ' ', ' box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;'], function (props) {
   return props.theme.global.font.family;
 }, function (props) {
-  return (0, _mixins.parseMetricToNum)(props.theme.global.font.size) / 16 * 1 + 'em';
+  return props.theme.global.font.size;
 }, function (props) {
-  return (0, _mixins.parseMetricToNum)(props.theme.global.lineHeight) / (0, _mixins.parseMetricToNum)(props.theme.global.font.size);
+  return props.theme.global.font.height;
 }, function (props) {
   return props.theme.global.colors.text && 'color: ' + props.theme.global.colors.text + ';';
 }, function (props) {
@@ -103,7 +65,7 @@ var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['box-sizing:bo
 }, function (props) {
   return props.theme.global.input.border.width;
 }, function (props) {
-  return props.theme.global.input.border.color;
+  return (props.theme.global.input.border.color || props.theme.global.control.border.color)[props.theme.dark ? 'dark' : 'light'];
 }, function (props) {
   return props.theme.global.input.border.radius;
 }, function (props) {
@@ -112,6 +74,18 @@ var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['box-sizing:bo
   return props.focus && (!props.plain || props.focusIndicator) && focusStyle;
 });
 
+var evalStyle = exports.evalStyle = function evalStyle(arg, theme) {
+  if (arg && Array.isArray(arg) && typeof arg[0] === 'function') {
+    return arg[0]({ theme: theme });
+  }
+  return arg;
+};
+
 exports.default = {
-  activeStyle: activeStyle, backgroundStyle: backgroundStyle, baseStyle: baseStyle, edgeStyle: edgeStyle, inputStyle: inputStyle, focusStyle: focusStyle
+  activeStyle: activeStyle,
+  baseStyle: baseStyle,
+  evalStyle: evalStyle,
+  edgeStyle: edgeStyle,
+  focusStyle: focusStyle,
+  inputStyle: inputStyle
 };

@@ -12,6 +12,7 @@ import Tabs from '../Tabs/Tabs';
 import Tab from '../Tabs/Tab';
 import Box from '../Box/Box';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var UncontrolledTabs = function UncontrolledTabs() {
   return React.createElement(
@@ -73,7 +74,7 @@ var ControlledTabs = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Tabs,
         { activeIndex: index, onActive: this.onActive },
@@ -82,7 +83,7 @@ var ControlledTabs = function (_Component) {
           { title: 'Tab 1' },
           React.createElement(
             Box,
-            { pad: 'large', align: 'center', background: 'accent-1' },
+            { margin: 'small', pad: 'large', align: 'center', background: 'accent-1' },
             React.createElement(Attraction, { size: 'xlarge' })
           )
         ),
@@ -91,7 +92,7 @@ var ControlledTabs = function (_Component) {
           { title: 'Tab 2' },
           React.createElement(
             Box,
-            { pad: 'large', align: 'center', background: 'accent-2' },
+            { margin: 'small', pad: 'large', align: 'center', background: 'accent-2' },
             React.createElement(TreeOption, { size: 'xlarge' })
           )
         ),
@@ -100,7 +101,7 @@ var ControlledTabs = function (_Component) {
           { title: 'Tab 3' },
           React.createElement(
             Box,
-            { pad: 'large', align: 'center', background: 'accent-3' },
+            { margin: 'small', pad: 'large', align: 'center', background: 'accent-3' },
             React.createElement(Car, { size: 'xlarge' })
           )
         )

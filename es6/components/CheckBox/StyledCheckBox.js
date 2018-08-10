@@ -27,11 +27,11 @@ export var StyledCheckBoxContainer = styled.label.withConfig({
 export var StyledCheckBoxInput = styled.input.withConfig({
   displayName: 'StyledCheckBox__StyledCheckBoxInput'
 })(['position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;z-index:1;cursor:pointer;:checked + div{border-color:', ';}:checked + div > svg{display:block;}:checked + span > span{left:', ';background:', ';}'], function (props) {
-  return props.theme.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
+  return (props.theme.checkBox.check.color || props.theme.global.control.color)[props.theme.dark ? 'dark' : 'light'];
 }, function (props) {
   return props.theme.checkBox.size;
 }, function (props) {
-  return props.theme.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
+  return (props.theme.checkBox.check.color || props.theme.global.control.color)[props.theme.dark ? 'dark' : 'light'];
 });
 
 export var StyledCheckBoxBox = styled.div.withConfig({
@@ -53,7 +53,7 @@ export var StyledCheckBoxBox = styled.div.withConfig({
 }, function (props) {
   return props.theme.checkBox.check.width;
 }, function (props) {
-  return props.theme.dark ? props.theme.global.colors.white : props.theme.checkBox.check.color;
+  return (props.theme.checkBox.check.color || props.theme.global.control.color)[props.theme.dark ? 'dark' : 'light'];
 }, function (props) {
   return props.focus && focusStyle;
 });
@@ -85,7 +85,7 @@ export var StyledCheckBoxKnob = styled.span.withConfig({
 }, function (props) {
   return props.theme.checkBox.size;
 }, function (props) {
-  return props.theme.checkBox.toggle.color;
+  return props.theme.checkBox.toggle.color[props.theme.dark ? 'dark' : 'light'];
 }, function (props) {
   return props.theme.checkBox.toggle.radius;
 });

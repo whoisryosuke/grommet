@@ -9,31 +9,41 @@ import { storiesOf } from '@storybook/react';
 
 import Text from '../Text/Text';
 import Grommet from '../Grommet/Grommet';
+import Box from '../Box/Box';
+import { grommet } from '../../themes';
 
-var SimpleText = function (_Component) {
-  _inherits(SimpleText, _Component);
+var sizes = ['xxlarge', 'xlarge', 'large', 'medium', 'small', 'xsmall'];
 
-  function SimpleText() {
-    _classCallCheck(this, SimpleText);
+var All = function (_Component) {
+  _inherits(All, _Component);
+
+  function All() {
+    _classCallCheck(this, All);
 
     return _possibleConstructorReturn(this, _Component.apply(this, arguments));
   }
 
-  SimpleText.prototype.render = function render() {
+  All.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
-      React.createElement(
-        Text,
-        null,
-        'Some text'
-      )
+      { theme: grommet },
+      sizes.map(function (size) {
+        return React.createElement(
+          Box,
+          { margin: 'small' },
+          React.createElement(
+            Text,
+            { size: size },
+            'Text ' + size
+          )
+        );
+      })
     );
   };
 
-  return SimpleText;
+  return All;
 }(Component);
 
-storiesOf('Text', module).add('Simple Text', function () {
-  return React.createElement(SimpleText, null);
+storiesOf('Text', module).add('All', function () {
+  return React.createElement(All, null);
 });

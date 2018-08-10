@@ -1,26 +1,6 @@
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 export var colorForName = function colorForName(name, theme) {
-  var color = theme.global.colors[name];
-  if (color) {
-    return color;
-  }
-
-  var _name$split = name.split('-'),
-      kind = _name$split[0],
-      index = _name$split[1];
-
-  var colorSet = theme.global.colors[kind];
-  if (Array.isArray(colorSet)) {
-    color = colorSet[index - 1];
-  } else if ((typeof colorSet === 'undefined' ? 'undefined' : _typeof(colorSet)) === 'object') {
-    color = colorSet[index];
-  } else if (typeof colorSet === 'string') {
-    color = colorSet;
-  } else {
-    color = name;
-  }
-  return color;
+  return theme.global.colors[name] || name;
 };
 
 function parseHexToRGB(color) {
@@ -64,33 +44,22 @@ export var getRGBA = function getRGBA(color, opacity) {
         green = _getRGBArray2[1],
         blue = _getRGBArray2[2];
 
-    return 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + (opacity || 1) + ')';
+    return "rgba(" + red + ", " + green + ", " + blue + ", " + (opacity || 1) + ")";
   }
   return undefined;
 };
 
-export var backgroundIsDark = function backgroundIsDark(background, theme) {
-  var dark = void 0;
-  if (background) {
-    if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
-      if (background.dark !== undefined) {
-        dark = background.dark;
-      } else if (background.color && (
-      // weak opacity means we keep the existing darkness
-      !background.opacity || background.opacity !== 'weak')) {
-        var color = colorForName(background.color, theme);
-        if (color) {
-          dark = colorIsDark(color);
-        }
-      }
-    } else {
-      var _color = colorForName(background, theme);
-      if (_color) {
-        dark = colorIsDark(_color);
-      }
+export var normalizeColor = function normalizeColor(color, theme) {
+  // If the color has a light or dark object, use that
+  var result = color;
+  if (color) {
+    if (theme.dark && color.dark) {
+      result = color.dark;
+    } else if (!theme.dark && color.light) {
+      result = color.light;
     }
   }
-  return dark;
+  return result;
 };
 
-export default { backgroundIsDark: backgroundIsDark, colorForName: colorForName, colorIsDark: colorIsDark, getRGBA: getRGBA };
+export default { colorForName: colorForName, colorIsDark: colorIsDark, getRGBA: getRGBA, normalizeColor: normalizeColor };

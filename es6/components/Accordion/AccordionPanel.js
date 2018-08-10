@@ -15,11 +15,10 @@ import { Box } from '../Box';
 import { Button } from '../Button';
 import { Collapsible } from '../Collapsible';
 import { Heading } from '../Heading';
-
 import { withTheme, withForwardRef } from '../hocs';
+import { evalStyle, normalizeColor } from '../../utils';
 
 import { accordionPanel } from './doc';
-
 import { AccordionContext } from './AccordionContext';
 
 var AccordionPanel = function (_Component) {
@@ -55,6 +54,7 @@ var AccordionPanel = function (_Component) {
 
 
     var dark = theme.dark;
+    var iconColor = evalStyle(normalizeColor(theme.accordion.icons.color || theme.global.control.color, theme), theme);
 
     return React.createElement(
       AccordionContext,
@@ -72,7 +72,6 @@ var AccordionPanel = function (_Component) {
           React.createElement(
             Button,
             {
-              fill: true,
               role: 'tab',
               'aria-selected': active,
               'aria-expanded': active,
@@ -121,7 +120,7 @@ var AccordionPanel = function (_Component) {
               AccordionIcon && React.createElement(
                 Box,
                 { pad: { horizontal: 'small' } },
-                React.createElement(AccordionIcon, { color: dark ? 'light-3' : 'brand' })
+                React.createElement(AccordionIcon, { color: iconColor })
               )
             )
           ),
@@ -129,7 +128,7 @@ var AccordionPanel = function (_Component) {
             Box,
             {
               flex: false,
-              border: { side: 'bottom', color: dark ? 'light-5' : 'border' }
+              border: { side: 'bottom', color: dark ? 'border-dark' : 'border-light' }
             },
             animate ? React.createElement(
               Collapsible,

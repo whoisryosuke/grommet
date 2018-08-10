@@ -30,12 +30,14 @@ var _Text = require('../Text/Text');
 
 var _Text2 = _interopRequireDefault(_Text);
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SimpleButton = function SimpleButton(props) {
   return _react2.default.createElement(
     _Grommet2.default,
-    null,
+    { theme: _themes.grommet },
     _react2.default.createElement(_Button2.default, _extends({ fill: true, label: 'Submit', onClick: function onClick() {} }, props))
   );
 };
@@ -43,7 +45,7 @@ var SimpleButton = function SimpleButton(props) {
 var IconButton = function IconButton() {
   return _react2.default.createElement(
     _Grommet2.default,
-    null,
+    { theme: _themes.grommet },
     _react2.default.createElement(_Button2.default, { icon: _react2.default.createElement(_grommetIcons.Add, null), hoverIndicator: true, onClick: function onClick() {} })
   );
 };
@@ -51,7 +53,7 @@ var IconButton = function IconButton() {
 var PlainButton = function PlainButton() {
   return _react2.default.createElement(
     _Grommet2.default,
-    null,
+    { theme: _themes.grommet },
     _react2.default.createElement(
       _Button2.default,
       { hoverIndicator: true, onClick: function onClick() {} },
@@ -72,7 +74,7 @@ var PlainButton = function PlainButton() {
 var AnchorButton = function AnchorButton() {
   return _react2.default.createElement(
     _Grommet2.default,
-    null,
+    { theme: _themes.grommet },
     _react2.default.createElement(_Button2.default, { label: 'Go', href: '#' })
   );
 };
@@ -80,12 +82,17 @@ var AnchorButton = function AnchorButton() {
 var RouteButton = function RouteButton() {
   return _react2.default.createElement(
     _Grommet2.default,
-    null,
+    { theme: _themes.grommet },
     _react2.default.createElement(_RoutedButton2.default, { label: 'Go', path: '/' })
   );
 };
 
 var customTheme = {
+  global: {
+    font: {
+      family: 'Arial'
+    }
+  },
   button: {
     border: {
       radius: undefined,
@@ -95,8 +102,8 @@ var customTheme = {
       vertical: '12px',
       horizontal: '24px'
     },
-    colors: {
-      primary: '#2196f3'
+    primary: {
+      color: '#2196f3'
     },
     extend: function extend(props) {
       var extraStyles = '';

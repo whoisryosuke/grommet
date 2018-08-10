@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import TextInput from '../TextInput/TextInput';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleTextInput = function (_Component) {
   _inherits(SimpleTextInput, _Component);
@@ -32,7 +33,7 @@ var SimpleTextInput = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(TextInput, { ref: this.ref, value: value, onChange: this.onChange })
     );
   };
@@ -68,7 +69,7 @@ var SuggestionsTextInput = function (_Component2) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(TextInput, {
         value: value,
         onChange: this.onChange,

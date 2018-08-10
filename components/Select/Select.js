@@ -143,7 +143,8 @@ var Select = function (_Component) {
       selectValue = value;
     }
 
-    var iconColor = (0, _utils.colorIsDark)(theme.select.background) ? theme.select.icons.color.dark || (0, _utils.colorForName)('light-4', theme) : theme.select.icons.color.light || (0, _utils.colorForName)('brand', theme);
+    var dark = theme.select.background ? (0, _utils.colorIsDark)(theme.select.background) : theme.dark;
+    var iconColor = (0, _utils.evalStyle)((theme.select.icons.color || theme.global.control.color)[dark ? 'dark' : 'light'], theme);
 
     return _react2.default.createElement(
       _Keyboard.Keyboard,

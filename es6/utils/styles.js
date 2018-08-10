@@ -1,9 +1,6 @@
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 import { css } from 'styled-components';
 
 import { palm, parseMetricToNum } from './mixins';
-import { colorForName, colorIsDark, getRGBA } from './colors';
 
 export var activeStyle = css(['background:', ';color:', ';'], function (props) {
   return props.theme.global.hover.backgroundColor;
@@ -11,46 +8,12 @@ export var activeStyle = css(['background:', ';color:', ';'], function (props) {
   return props.theme.global.hover.textColor;
 });
 
-export var backgroundStyle = function backgroundStyle(background, theme) {
-  if ((typeof background === 'undefined' ? 'undefined' : _typeof(background)) === 'object') {
-    if (background.image) {
-      var color = void 0;
-      if (background.dark === false) {
-        color = theme.global.colors.lightBackground.text;
-      } else if (background.dark) {
-        color = theme.global.colors.darkBackground.text;
-      } else {
-        color = 'inherit';
-      }
-      return css(['background:', ' no-repeat;background-position:', ';background-size:cover;color:', ';'], background.image, background.position || 'center center', color);
-    } else if (background.color) {
-      var backgroundColor = getRGBA(background.color, background.opacity === true ? theme.global.opacity.medium : theme.global.opacity[background.opacity]) || colorForName(background.color, theme);
-      return css(['background:', ';', ''], backgroundColor, (!background.opacity || background.opacity !== 'weak') && 'color: ' + (background.dark || colorIsDark(backgroundColor) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text) + ';');
-    } else if (background.dark === false) {
-      return css(['color:', ';'], theme.global.colors.lightBackground.text);
-    } else if (background.dark) {
-      return css(['color:', ';'], theme.global.colors.darkBackground.text);
-    }
-    return undefined;
-  }
-  if (background) {
-    if (background.lastIndexOf('url', 0) === 0) {
-      return css(['background:', ' no-repeat center center;background-size:cover;'], background);
-    }
-    var _color = colorForName(background, theme);
-    if (_color) {
-      return css(['background:', ';color:', ';'], _color, colorIsDark(_color) ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text);
-    }
-  }
-  return undefined;
-};
-
 export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';', ' ', ' box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;'], function (props) {
   return props.theme.global.font.family;
 }, function (props) {
-  return parseMetricToNum(props.theme.global.font.size) / 16 * 1 + 'em';
+  return props.theme.global.font.size;
 }, function (props) {
-  return parseMetricToNum(props.theme.global.lineHeight) / parseMetricToNum(props.theme.global.font.size);
+  return props.theme.global.font.height;
 }, function (props) {
   return props.theme.global.colors.text && 'color: ' + props.theme.global.colors.text + ';';
 }, function (props) {
@@ -97,7 +60,7 @@ export var inputStyle = css(['box-sizing:border-box;font-size:inherit;padding:',
 }, function (props) {
   return props.theme.global.input.border.width;
 }, function (props) {
-  return props.theme.global.input.border.color;
+  return (props.theme.global.input.border.color || props.theme.global.control.border.color)[props.theme.dark ? 'dark' : 'light'];
 }, function (props) {
   return props.theme.global.input.border.radius;
 }, function (props) {
@@ -106,6 +69,18 @@ export var inputStyle = css(['box-sizing:border-box;font-size:inherit;padding:',
   return props.focus && (!props.plain || props.focusIndicator) && focusStyle;
 });
 
+export var evalStyle = function evalStyle(arg, theme) {
+  if (arg && Array.isArray(arg) && typeof arg[0] === 'function') {
+    return arg[0]({ theme: theme });
+  }
+  return arg;
+};
+
 export default {
-  activeStyle: activeStyle, backgroundStyle: backgroundStyle, baseStyle: baseStyle, edgeStyle: edgeStyle, inputStyle: inputStyle, focusStyle: focusStyle
+  activeStyle: activeStyle,
+  baseStyle: baseStyle,
+  evalStyle: evalStyle,
+  edgeStyle: edgeStyle,
+  focusStyle: focusStyle,
+  inputStyle: inputStyle
 };

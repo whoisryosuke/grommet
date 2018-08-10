@@ -24,6 +24,8 @@ var _Text = require('../Text/Text');
 
 var _Text2 = _interopRequireDefault(_Text);
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var items = Array(200).fill().map(function (_, i) {
@@ -33,7 +35,7 @@ var items = Array(200).fill().map(function (_, i) {
 var SimpleInfiniteScroll = function SimpleInfiniteScroll(props) {
   return _react2.default.createElement(
     _Grommet2.default,
-    null,
+    { theme: _themes.grommet },
     _react2.default.createElement(
       _Box2.default,
       null,

@@ -20,6 +20,8 @@ var _Stack = require('../Stack');
 
 var _hocs = require('../hocs');
 
+var _utils = require('../../utils');
+
 var _doc = require('./doc');
 
 var _doc2 = _interopRequireDefault(_doc);
@@ -119,12 +121,16 @@ var Carousel = function (_Component) {
     var onRight = activeIndex < lastIndex ? this.onRight : undefined;
 
     var CurrentIcon = theme.carousel.icons.current;
+    var dark = theme.dark;
+    var iconColor = (0, _utils.evalStyle)((theme.carousel.icons.color || theme.global.control.color)[dark ? 'dark' : 'light'], theme);
 
     var selectors = [];
     var wrappedChildren = _react.Children.map(children, function (child, index) {
       selectors.push(_react2.default.createElement(_Button.Button, {
         key: index,
-        icon: _react2.default.createElement(CurrentIcon, { color: activeIndex === index ? 'brand' : undefined }),
+        icon: _react2.default.createElement(CurrentIcon, {
+          color: activeIndex === index ? iconColor : undefined
+        }),
         onClick: _this2.onSelect(index)
       }));
 

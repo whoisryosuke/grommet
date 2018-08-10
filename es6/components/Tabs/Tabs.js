@@ -94,7 +94,6 @@ var Tabs = function (_Component) {
       React.createElement(
         Box,
         _extends({
-          border: 'bottom',
           direction: 'row',
           justify: justify
         }, rest),

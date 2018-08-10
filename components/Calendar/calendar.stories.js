@@ -14,6 +14,8 @@ var _Grommet = require('../Grommet/Grommet');
 
 var _Grommet2 = _interopRequireDefault(_Grommet);
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44,7 +46,7 @@ var SimpleCalendar = function (_Component) {
 
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_Calendar2.default, { date: date, onSelect: this.onSelect, size: 'small' })
     );
   };
@@ -113,7 +115,7 @@ var RichCalendar = function (_Component2) {
 
     return _react2.default.createElement(
       _Grommet2.default,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(_Calendar2.default, { date: date, dates: dates, onSelect: this.onSelect })
     );
   };

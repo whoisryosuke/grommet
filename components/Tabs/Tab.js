@@ -101,7 +101,7 @@ var Tab = function (_Component) {
         title
       );
     } else {
-      var color = theme.dark ? theme.global.colors.darkBackground.text : theme.global.colors.lightBackground.text;
+      var color = (0, _utils.normalizeColor)(theme.global.text.color, theme);
       normalizedTitle = _react2.default.createElement(
         _Text.Text,
         { color: color },
@@ -113,9 +113,9 @@ var Tab = function (_Component) {
     if (active) {
       borderColor = theme.dark ? 'white' : 'black';
     } else if (over) {
-      borderColor = (0, _utils.colorForName)('border', theme);
+      borderColor = theme.dark ? 'white' : 'black';
     } else {
-      borderColor = 'transparent';
+      borderColor = (0, _utils.evalStyle)((0, _utils.normalizeColor)(theme.global.control.border.color, theme), theme);
     }
 
     return _react2.default.createElement(
@@ -136,7 +136,7 @@ var Tab = function (_Component) {
         {
           pad: { bottom: 'xsmall' },
           margin: { horizontal: 'small' },
-          border: { side: 'bottom', size: 'medium', color: borderColor }
+          border: { side: 'bottom', size: 'small', color: borderColor }
         },
         normalizedTitle
       )

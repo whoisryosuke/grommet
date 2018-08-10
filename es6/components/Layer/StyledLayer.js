@@ -25,8 +25,8 @@ var StyledLayer = styled.div.withConfig({
 
 export var StyledOverlay = styled.div.withConfig({
   displayName: 'StyledLayer__StyledOverlay'
-})(['', ' top:0px;left:0px;right:0px;bottom:0px;background:', ';pointer-events:all;'], lapAndUp('position: absolute;'), function (props) {
-  return props.theme.layer.overlayBackgroundColor;
+})(['', ' top:0px;left:0px;right:0px;bottom:0px;', ' pointer-events:all;'], lapAndUp('position: absolute;'), function (props) {
+  return props.theme.layer.overlay.background && backgroundStyle(props.theme.layer.overlay.background, props.theme);
 });
 
 var MARGINS = {

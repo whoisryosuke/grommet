@@ -54,7 +54,7 @@ var CheckBox = function (_Component) {
 
     var Icon = theme.checkBox.icons.checked;
 
-    var control = toggle ? React.createElement(
+    var visual = toggle ? React.createElement(
       StyledCheckBoxToggle,
       { focus: focus, theme: theme },
       React.createElement(StyledCheckBoxKnob, { theme: theme })
@@ -82,7 +82,7 @@ var CheckBox = function (_Component) {
         }, removeUndefined({ id: id, name: name, checked: checked, disabled: disabled, onChange: onChange }), {
           theme: theme
         })),
-        control
+        visual
       ),
       normalizedLabel,
       hidden

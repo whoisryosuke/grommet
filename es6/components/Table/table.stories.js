@@ -15,6 +15,7 @@ import TableHeader from '../Table/TableHeader';
 import TableRow from '../Table/TableRow';
 import Text from '../Text/Text';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 // Always should store amount in cents to avoid precision errors
 var DATA = [{
@@ -72,7 +73,7 @@ var SimpleTable = function (_Component) {
   SimpleTable.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Table,
         { caption: 'Simple Table' },

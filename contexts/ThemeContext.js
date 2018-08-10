@@ -6,15 +6,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _vanilla = require('../themes/vanilla');
+var _base = require('../themes/base');
 
-var _vanilla2 = _interopRequireDefault(_vanilla);
+var _base2 = _interopRequireDefault(_base);
 
 var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ThemeContext = _react2.default.createContext(_vanilla2.default);
+var ThemeContext = _react2.default.createContext(_base2.default);
 
 ThemeContext.Extend = function (_ref) {
   var children = _ref.children,

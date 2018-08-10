@@ -19,9 +19,9 @@ var disabledStyle = '\n  opacity: 0.3;\n  cursor: default;\n  text-decoration: n
 var StyledAnchor = _styledComponents2.default.a.withConfig({
   displayName: 'StyledAnchor'
 })(['box-sizing:border-box;font-size:inherit;line-height:inherit;color:', ';text-decoration:', ';cursor:pointer;outline:none;', ' ', ' ', ' ', ' ', ''], function (props) {
-  return props.theme.dark ? props.theme.global.colors.darkBackground.text : props.theme.anchor.color;
+  return (0, _utils.normalizeColor)(props.theme.anchor.color, props.theme);
 }, function (props) {
-  return props.theme.anchor.textDecoration;
+  return props.icon ? 'none' : props.theme.anchor.textDecoration;
 }, function (props) {
   return !props.disabled && '\n    &:hover {\n      text-decoration: underline;\n    }\n  ';
 }, function (props) {

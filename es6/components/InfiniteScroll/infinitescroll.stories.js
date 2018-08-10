@@ -7,6 +7,7 @@ import InfiniteScroll from '../InfiniteScroll/InfiniteScroll';
 import Grommet from '../Grommet/Grommet';
 import Box from '../Box/Box';
 import Text from '../Text/Text';
+import { grommet } from '../../themes';
 
 var items = Array(200).fill().map(function (_, i) {
   return 'item ' + (i + 1);
@@ -15,7 +16,7 @@ var items = Array(200).fill().map(function (_, i) {
 var SimpleInfiniteScroll = function SimpleInfiniteScroll(props) {
   return React.createElement(
     Grommet,
-    null,
+    { theme: grommet },
     React.createElement(
       Box,
       null,

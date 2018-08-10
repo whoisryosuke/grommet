@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import TextArea from '../TextArea/TextArea';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleTextArea = function (_Component) {
   _inherits(SimpleTextArea, _Component);
@@ -32,7 +33,7 @@ var SimpleTextArea = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(TextArea, { value: value, onChange: this.onChange })
     );
   };

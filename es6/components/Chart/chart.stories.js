@@ -15,6 +15,7 @@ import Grommet from '../Grommet/Grommet';
 import Box from '../Box/Box';
 import Stack from '../Stack/Stack';
 import Text from '../Text/Text';
+import { grommet } from '../../themes';
 
 var BarChart = function (_Component) {
   _inherits(BarChart, _Component);
@@ -28,7 +29,7 @@ var BarChart = function (_Component) {
   BarChart.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Chart, {
         type: 'bar',
         values: [[10, 20], [20, 30], [30, 15]]
@@ -51,7 +52,7 @@ var LineChart = function (_Component2) {
   LineChart.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Chart, {
         type: 'line',
         values: [20, 30, 15]
@@ -74,7 +75,7 @@ var AreaChart = function (_Component3) {
   AreaChart.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(Chart, {
         type: 'area',
         values: [{ value: [10, 20] }, { value: [20, 30] }, { value: [30, 15] }]
@@ -144,7 +145,7 @@ var RichChart = function (_Component4) {
     };
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Box,
         { align: 'center' },

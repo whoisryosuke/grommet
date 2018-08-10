@@ -10,6 +10,8 @@ var _grommetIcons = require('grommet-icons');
 
 var _ = require('../../');
 
+var _themes = require('../../themes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -46,7 +48,7 @@ var SimpleAccordion = function (_Component) {
 
     return _react2.default.createElement(
       _.Grommet,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(
         _.Box,
         rest,
@@ -194,7 +196,7 @@ var RichAccordion = function (_Component3) {
 
     return _react2.default.createElement(
       _.Grommet,
-      { full: true },
+      { full: true, theme: _themes.grommet },
       _react2.default.createElement(
         _.Box,
         { fill: true, direction: 'row' },
@@ -417,7 +419,7 @@ var CustomHeaderAccordion = function (_Component4) {
 
     return _react2.default.createElement(
       _.Grommet,
-      null,
+      { theme: _themes.grommet },
       _react2.default.createElement(
         _.Accordion,
         {

@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { Box, Drop, Grommet } from '../';
+import { grommet } from '../../themes';
 
 var SimpleDrop = function (_Component) {
   _inherits(SimpleDrop, _Component);
@@ -27,7 +28,7 @@ var SimpleDrop = function (_Component) {
 
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Box,
         { align: 'start' },

@@ -15,7 +15,7 @@ var StyledDataTable = exports.StyledDataTable = _styledComponents2.default.table
 
 var StyledDataTableRow = exports.StyledDataTableRow = _styledComponents2.default.tr.withConfig({
   displayName: 'StyledDataTable__StyledDataTableRow'
-})(['height:100%;', ''], function (props) {
+})(['', ''], function (props) {
   return props.size && '\n    display: table;\n    width: 100%;\n    table-layout: fixed;\n  ';
 });
 

@@ -37,7 +37,7 @@ var ExpanderCell = function ExpanderCell(_ref) {
         React.createElement(
           Box,
           _extends({}, theme.dataTable[context], rest, { pad: 'xsmall' }),
-          React.createElement(ExpandIcon, { color: 'border' })
+          React.createElement(ExpandIcon, { color: theme.dark ? 'border-dark' : 'border-light' })
         )
       )
     );

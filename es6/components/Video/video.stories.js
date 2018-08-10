@@ -9,6 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import Video from '../Video/Video';
 import Grommet from '../Grommet/Grommet';
+import { grommet } from '../../themes';
 
 var SimpleVideo = function (_Component) {
   _inherits(SimpleVideo, _Component);
@@ -22,7 +23,7 @@ var SimpleVideo = function (_Component) {
   SimpleVideo.prototype.render = function render() {
     return React.createElement(
       Grommet,
-      null,
+      { theme: grommet },
       React.createElement(
         Video,
         null,
