@@ -185,12 +185,19 @@ var ServedDataTable = function (_Component5) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this5 = _possibleConstructorReturn(this, _Component5.call.apply(_Component5, [this].concat(args))), _this5), _this5.state = { data: DATA }, _this5.onSearch = function (property, search) {
+    return _ret = (_temp = (_this5 = _possibleConstructorReturn(this, _Component5.call.apply(_Component5, [this].concat(args))), _this5), _this5.state = { data: DATA }, _this5.onSearch = function (search) {
       var nextData = void 0;
       if (search) {
-        var exp = new RegExp(search, 'i');
+        var expressions = Object.keys(search).map(function (property) {
+          return {
+            property: property,
+            exp: new RegExp(search[property], 'i')
+          };
+        });
         nextData = DATA.filter(function (d) {
-          return exp.test(d[property]);
+          return !expressions.some(function (e) {
+            return !e.exp.test(d[e.property]);
+          });
         });
       } else {
         nextData = DATA;
@@ -200,8 +207,6 @@ var ServedDataTable = function (_Component5) {
   }
 
   ServedDataTable.prototype.render = function render() {
-    var _this6 = this;
-
     var servedData = this.state.data;
 
     return React.createElement(
@@ -210,10 +215,11 @@ var ServedDataTable = function (_Component5) {
       React.createElement(DataTable, {
         columns: columns.map(function (column) {
           return _extends({}, column, {
-            onSearch: (column.property === 'name' || column.property === 'location') && _this6.onSearch
+            search: column.property === 'name' || column.property === 'location'
           });
         }),
-        data: servedData
+        data: servedData,
+        onSearch: this.onSearch
       })
     );
   };

@@ -50,7 +50,8 @@ var findPrimary = function findPrimary(nextProps, prevState, nextState) {
 };
 
 var filter = function filter(nextProps, prevState, nextState) {
-  var columns = nextProps.columns;
+  var columns = nextProps.columns,
+      onSearch = nextProps.onSearch;
   var data = nextState.data,
       filters = nextState.filters;
 
@@ -58,13 +59,14 @@ var filter = function filter(nextProps, prevState, nextState) {
   var nextFilters = void 0;
   var regexps = void 0;
   columns.forEach(function (column) {
-    if (column.search || column.onSearch) {
+    if (column.search) {
       if (!nextFilters) {
         nextFilters = {};
         regexps = {};
       }
       nextFilters[column.property] = filters ? filters[column.property] || '' : '';
-      if (nextFilters[column.property] && column.search) {
+      // don't do filtering if the caller has supplied onSearch
+      if (nextFilters[column.property] && column.search && !onSearch) {
         regexps[column.property] = new RegExp(nextFilters[column.property], 'i');
       }
     }

@@ -34,22 +34,16 @@ var DataTable = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.onFiltering = function (property) {
       _this.setState({ filtering: property });
     }, _this.onFilter = function (property, value) {
-      var columns = _this.props.columns;
+      var onSearch = _this.props.onSearch;
 
       var nextFilters = _extends({}, _this.state.filters);
       nextFilters[property] = value;
       _this.setState({ filters: nextFilters });
 
       // Let caller know about search, if interested
-      columns.some(function (column) {
-        if (column.property === property) {
-          if (column.onSearch) {
-            column.onSearch(property, value);
-          }
-          return true;
-        }
-        return false;
-      });
+      if (onSearch) {
+        onSearch(nextFilters);
+      }
     }, _this.onSort = function (property) {
       return function () {
         var sort = _this.state.sort;

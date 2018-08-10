@@ -62,7 +62,6 @@ var Header = function Header(_ref) {
         var property = _ref3.property,
             header = _ref3.header,
             align = _ref3.align,
-            onSearch = _ref3.onSearch,
             search = _ref3.search;
 
         var content = typeof header === 'string' ? React.createElement(
@@ -76,18 +75,18 @@ var Header = function Header(_ref) {
             Sorter,
             {
               align: align,
-              fill: !search && !onSearch,
+              fill: !search,
               property: property,
               onSort: onSort,
               sort: sort,
               theme: theme,
-              themeProps: search || onSearch ? innerThemeProps : theme.dataTable.header
+              themeProps: search ? innerThemeProps : theme.dataTable.header
             },
             content
           );
         }
 
-        if ((search || onSearch) && filters) {
+        if (search && filters) {
           if (!onSort) {
             content = React.createElement(
               Box,
