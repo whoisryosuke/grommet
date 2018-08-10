@@ -37,7 +37,8 @@ export default deepFreeze({
     }
   },
   anchor: {
-    color: '#6194EB'
+    textDecoration: 'underline',
+    color: '#000000'
   },
   button: {
     border: {
@@ -58,9 +59,6 @@ export default deepFreeze({
         }
       }
     }
-  },
-  heading: {
-    font: false
   },
   icon: {
     colors: colors

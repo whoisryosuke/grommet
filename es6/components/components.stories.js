@@ -41,7 +41,7 @@ import Text from './Text/Text';
 import TextArea from './TextArea/TextArea';
 import TextInput from './TextInput/TextInput';
 import Video from './Video/Video';
-import { grommet } from '../themes';
+import { grommet, dark, hpe } from '../themes';
 import { generate } from '../themes/base';
 import { deepMerge } from '../utils';
 
@@ -75,6 +75,12 @@ var connection = function connection(fromTarget, toTarget) {
   }, rest);
 };
 
+var themes = {
+  dark: dark,
+  grommet: grommet,
+  hpe: hpe
+};
+
 var Components = function (_Component) {
   _inherits(Components, _Component);
 
@@ -87,7 +93,13 @@ var Components = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { baseSize: 24, checkBox: true, radioButton: true, rangeSelector: [1, 2] }, _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      baseSize: 24,
+      checkBox: true,
+      radioButton: true,
+      rangeSelector: [1, 2],
+      themeName: 'grommet'
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   Components.prototype.render = function render() {
@@ -98,9 +110,10 @@ var Components = function (_Component) {
         checkBox = _state.checkBox,
         radioButton = _state.radioButton,
         rangeSelector = _state.rangeSelector,
-        tabIndex = _state.tabIndex;
+        tabIndex = _state.tabIndex,
+        themeName = _state.themeName;
 
-    var theme = deepMerge(generate(baseSize), grommet);
+    var theme = deepMerge(generate(baseSize), themes[themeName]);
 
     var content = [React.createElement(
       Box,
@@ -373,6 +386,19 @@ var Components = function (_Component) {
           React.createElement(
             Box,
             { basis: 'small' },
+            React.createElement(Select, {
+              plain: true,
+              size: 'small',
+              options: ['grommet', 'dark', 'hpe'],
+              value: themeName,
+              onChange: function onChange(event) {
+                return _this2.setState({ themeName: event.option });
+              }
+            })
+          ),
+          React.createElement(
+            Box,
+            { basis: 'small' },
             React.createElement(RangeInput, {
               min: 16,
               max: 36,
@@ -385,7 +411,7 @@ var Components = function (_Component) {
           ),
           React.createElement(
             Text,
-            null,
+            { size: 'small' },
             baseSize,
             'px base spacing'
           )
@@ -396,7 +422,10 @@ var Components = function (_Component) {
         { theme: theme },
         React.createElement(
           Box,
-          { pad: 'medium', background: 'white' },
+          {
+            pad: 'medium',
+            background: theme.global.colors.background || theme.global.colors.white
+          },
           Grid.available ? React.createElement(
             Grid,
             { fill: true, columns: 'small', gap: 'medium' },

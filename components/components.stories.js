@@ -174,6 +174,12 @@ var connection = function connection(fromTarget, toTarget) {
   }, rest);
 };
 
+var themes = {
+  dark: _themes.dark,
+  grommet: _themes.grommet,
+  hpe: _themes.hpe
+};
+
 var Components = function (_Component) {
   _inherits(Components, _Component);
 
@@ -186,7 +192,13 @@ var Components = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { baseSize: 24, checkBox: true, radioButton: true, rangeSelector: [1, 2] }, _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      baseSize: 24,
+      checkBox: true,
+      radioButton: true,
+      rangeSelector: [1, 2],
+      themeName: 'grommet'
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   Components.prototype.render = function render() {
@@ -197,9 +209,10 @@ var Components = function (_Component) {
         checkBox = _state.checkBox,
         radioButton = _state.radioButton,
         rangeSelector = _state.rangeSelector,
-        tabIndex = _state.tabIndex;
+        tabIndex = _state.tabIndex,
+        themeName = _state.themeName;
 
-    var theme = (0, _utils.deepMerge)((0, _base.generate)(baseSize), _themes.grommet);
+    var theme = (0, _utils.deepMerge)((0, _base.generate)(baseSize), themes[themeName]);
 
     var content = [_react2.default.createElement(
       _Box2.default,
@@ -472,6 +485,19 @@ var Components = function (_Component) {
           _react2.default.createElement(
             _Box2.default,
             { basis: 'small' },
+            _react2.default.createElement(_Select2.default, {
+              plain: true,
+              size: 'small',
+              options: ['grommet', 'dark', 'hpe'],
+              value: themeName,
+              onChange: function onChange(event) {
+                return _this2.setState({ themeName: event.option });
+              }
+            })
+          ),
+          _react2.default.createElement(
+            _Box2.default,
+            { basis: 'small' },
             _react2.default.createElement(_RangeInput2.default, {
               min: 16,
               max: 36,
@@ -484,7 +510,7 @@ var Components = function (_Component) {
           ),
           _react2.default.createElement(
             _Text2.default,
-            null,
+            { size: 'small' },
             baseSize,
             'px base spacing'
           )
@@ -495,7 +521,10 @@ var Components = function (_Component) {
         { theme: theme },
         _react2.default.createElement(
           _Box2.default,
-          { pad: 'medium', background: 'white' },
+          {
+            pad: 'medium',
+            background: theme.global.colors.background || theme.global.colors.white
+          },
           _Grid2.default.available ? _react2.default.createElement(
             _Grid2.default,
             { fill: true, columns: 'small', gap: 'medium' },
