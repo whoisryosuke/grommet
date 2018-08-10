@@ -31,7 +31,7 @@ var Tabs = function (_Component) {
           activeIndex = _this$props.activeIndex,
           onActive = _this$props.onActive;
 
-      if (!activeIndex) {
+      if (activeIndex === undefined) {
         _this.setState({ activeIndex: index });
       }
       if (onActive) {
@@ -47,7 +47,7 @@ var Tabs = function (_Component) {
     if (stateActiveIndex !== activeIndex && activeIndex !== undefined) {
       return { activeIndex: activeIndex };
     }
-    return null;
+    return { activeIndex: stateActiveIndex || 0 };
   };
 
   Tabs.prototype.render = function render() {
@@ -112,7 +112,6 @@ var Tabs = function (_Component) {
 }(Component);
 
 Tabs.defaultProps = {
-  activeIndex: 0,
   justify: 'center',
   messages: {
     tabContents: 'Tab Contents'

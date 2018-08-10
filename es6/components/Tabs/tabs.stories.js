@@ -13,13 +13,51 @@ import Tab from '../Tabs/Tab';
 import Box from '../Box/Box';
 import Grommet from '../Grommet/Grommet';
 
-var SimpleTabs = function (_Component) {
-  _inherits(SimpleTabs, _Component);
+var UncontrolledTabs = function UncontrolledTabs() {
+  return React.createElement(
+    Grommet,
+    null,
+    React.createElement(
+      Tabs,
+      null,
+      React.createElement(
+        Tab,
+        { title: 'Tab 1' },
+        React.createElement(
+          Box,
+          { pad: 'large', align: 'center', background: 'accent-1' },
+          React.createElement(Attraction, { size: 'xlarge' })
+        )
+      ),
+      React.createElement(
+        Tab,
+        { title: 'Tab 2' },
+        React.createElement(
+          Box,
+          { pad: 'large', align: 'center', background: 'accent-2' },
+          React.createElement(TreeOption, { size: 'xlarge' })
+        )
+      ),
+      React.createElement(
+        Tab,
+        { title: 'Tab 3' },
+        React.createElement(
+          Box,
+          { pad: 'large', align: 'center', background: 'accent-3' },
+          React.createElement(Car, { size: 'xlarge' })
+        )
+      )
+    )
+  );
+};
 
-  function SimpleTabs() {
+var ControlledTabs = function (_Component) {
+  _inherits(ControlledTabs, _Component);
+
+  function ControlledTabs() {
     var _temp, _this, _ret;
 
-    _classCallCheck(this, SimpleTabs);
+    _classCallCheck(this, ControlledTabs);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -30,7 +68,7 @@ var SimpleTabs = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  SimpleTabs.prototype.render = function render() {
+  ControlledTabs.prototype.render = function render() {
     var index = this.state.index;
 
     return React.createElement(
@@ -70,9 +108,11 @@ var SimpleTabs = function (_Component) {
     );
   };
 
-  return SimpleTabs;
+  return ControlledTabs;
 }(Component);
 
-storiesOf('Tabs', module).add('Simple Tabs', function () {
-  return React.createElement(SimpleTabs, null);
+storiesOf('Tabs', module).add('Uncontrolled Tabs', function () {
+  return React.createElement(UncontrolledTabs, null);
+}).add('Controlled Tabs', function () {
+  return React.createElement(ControlledTabs, null);
 });

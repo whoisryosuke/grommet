@@ -32,13 +32,51 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SimpleTabs = function (_Component) {
-  _inherits(SimpleTabs, _Component);
+var UncontrolledTabs = function UncontrolledTabs() {
+  return _react2.default.createElement(
+    _Grommet2.default,
+    null,
+    _react2.default.createElement(
+      _Tabs2.default,
+      null,
+      _react2.default.createElement(
+        _Tab2.default,
+        { title: 'Tab 1' },
+        _react2.default.createElement(
+          _Box2.default,
+          { pad: 'large', align: 'center', background: 'accent-1' },
+          _react2.default.createElement(_grommetIcons.Attraction, { size: 'xlarge' })
+        )
+      ),
+      _react2.default.createElement(
+        _Tab2.default,
+        { title: 'Tab 2' },
+        _react2.default.createElement(
+          _Box2.default,
+          { pad: 'large', align: 'center', background: 'accent-2' },
+          _react2.default.createElement(_grommetIcons.TreeOption, { size: 'xlarge' })
+        )
+      ),
+      _react2.default.createElement(
+        _Tab2.default,
+        { title: 'Tab 3' },
+        _react2.default.createElement(
+          _Box2.default,
+          { pad: 'large', align: 'center', background: 'accent-3' },
+          _react2.default.createElement(_grommetIcons.Car, { size: 'xlarge' })
+        )
+      )
+    )
+  );
+};
 
-  function SimpleTabs() {
+var ControlledTabs = function (_Component) {
+  _inherits(ControlledTabs, _Component);
+
+  function ControlledTabs() {
     var _temp, _this, _ret;
 
-    _classCallCheck(this, SimpleTabs);
+    _classCallCheck(this, ControlledTabs);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -49,7 +87,7 @@ var SimpleTabs = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  SimpleTabs.prototype.render = function render() {
+  ControlledTabs.prototype.render = function render() {
     var index = this.state.index;
 
     return _react2.default.createElement(
@@ -89,9 +127,11 @@ var SimpleTabs = function (_Component) {
     );
   };
 
-  return SimpleTabs;
+  return ControlledTabs;
 }(_react.Component);
 
-(0, _react3.storiesOf)('Tabs', module).add('Simple Tabs', function () {
-  return _react2.default.createElement(SimpleTabs, null);
+(0, _react3.storiesOf)('Tabs', module).add('Uncontrolled Tabs', function () {
+  return _react2.default.createElement(UncontrolledTabs, null);
+}).add('Controlled Tabs', function () {
+  return _react2.default.createElement(ControlledTabs, null);
 });
