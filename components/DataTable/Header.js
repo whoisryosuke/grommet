@@ -84,6 +84,7 @@ var Header = function Header(_ref) {
         var property = _ref3.property,
             header = _ref3.header,
             align = _ref3.align,
+            onSearch = _ref3.onSearch,
             search = _ref3.search;
 
         var content = typeof header === 'string' ? _react2.default.createElement(
@@ -97,18 +98,18 @@ var Header = function Header(_ref) {
             _Sorter2.default,
             {
               align: align,
-              fill: !search,
+              fill: !search && !onSearch,
               property: property,
               onSort: onSort,
               sort: sort,
               theme: theme,
-              themeProps: search ? innerThemeProps : theme.dataTable.header
+              themeProps: search || onSearch ? innerThemeProps : theme.dataTable.header
             },
             content
           );
         }
 
-        if (search && filters) {
+        if ((search || onSearch) && filters) {
           if (!onSort) {
             content = _react2.default.createElement(
               _Box.Box,

@@ -173,6 +173,54 @@ var GroupedDataTable = function (_Component4) {
   return GroupedDataTable;
 }(Component);
 
+var ServedDataTable = function (_Component5) {
+  _inherits(ServedDataTable, _Component5);
+
+  function ServedDataTable() {
+    var _temp, _this5, _ret;
+
+    _classCallCheck(this, ServedDataTable);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this5 = _possibleConstructorReturn(this, _Component5.call.apply(_Component5, [this].concat(args))), _this5), _this5.state = { data: DATA }, _this5.onSearch = function (property, search) {
+      var nextData = void 0;
+      if (search) {
+        var exp = new RegExp(search, 'i');
+        nextData = DATA.filter(function (d) {
+          return exp.test(d[property]);
+        });
+      } else {
+        nextData = DATA;
+      }
+      _this5.setState({ data: nextData });
+    }, _temp), _possibleConstructorReturn(_this5, _ret);
+  }
+
+  ServedDataTable.prototype.render = function render() {
+    var _this6 = this;
+
+    var servedData = this.state.data;
+
+    return React.createElement(
+      Grommet,
+      null,
+      React.createElement(DataTable, {
+        columns: columns.map(function (column) {
+          return _extends({}, column, {
+            onSearch: (column.property === 'name' || column.property === 'location') && _this6.onSearch
+          });
+        }),
+        data: servedData
+      })
+    );
+  };
+
+  return ServedDataTable;
+}(Component);
+
 storiesOf('DataTable', module).add('Simple DataTable', function () {
   return React.createElement(SimpleDataTable, null);
 }).add('Sized DataTable', function () {
@@ -181,4 +229,6 @@ storiesOf('DataTable', module).add('Simple DataTable', function () {
   return React.createElement(TunableDataTable, null);
 }).add('Grouped DataTable', function () {
   return React.createElement(GroupedDataTable, null);
+}).add('Served DataTable', function () {
+  return React.createElement(ServedDataTable, null);
 });
