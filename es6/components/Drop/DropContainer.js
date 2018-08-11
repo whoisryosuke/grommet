@@ -60,6 +60,7 @@ var DropContainer = function (_Component) {
           align = _this$props2.align,
           dropTarget = _this$props2.dropTarget,
           responsive = _this$props2.responsive,
+          stretch = _this$props2.stretch,
           theme = _this$props2.theme;
 
       var windowWidth = window.innerWidth;
@@ -79,7 +80,7 @@ var DropContainer = function (_Component) {
         var containerRect = container.getBoundingClientRect();
 
         // determine width
-        var width = Math.min(Math.max(targetRect.width, containerRect.width), windowWidth);
+        var width = Math.min(stretch ? Math.max(targetRect.width, containerRect.width) : containerRect.width, windowWidth);
 
         // set left position
         var left = void 0;
@@ -87,7 +88,7 @@ var DropContainer = function (_Component) {
           if (align.left === 'left') {
             left = targetRect.left;
           } else if (align.left === 'right') {
-            left = targetRect.left - width;
+            left = targetRect.left + targetRect.width;
           }
         } else if (align.right) {
           if (align.right === 'left') {
@@ -95,6 +96,8 @@ var DropContainer = function (_Component) {
           } else if (align.right === 'right') {
             left = targetRect.left + targetRect.width - width;
           }
+        } else {
+          left = targetRect.left + targetRect.width / 2 - width / 2;
         }
 
         if (left + width > windowWidth) {
@@ -122,6 +125,8 @@ var DropContainer = function (_Component) {
             top = targetRect.top - containerRect.height;
             maxHeight = Math.max(targetRect.top, 0);
           }
+        } else {
+          top = targetRect.top + targetRect.height / 2 - containerRect.height / 2;
         }
 
         // if we can't fit it all, see if there's more room the other direction
@@ -157,9 +162,11 @@ var DropContainer = function (_Component) {
         }
 
         container.style.left = left + 'px';
-        // offset width by 0.1 to avoid a bug in ie11 that
-        // unnecessarily wraps the text if width is the same
-        container.style.width = width + 0.1 + 'px';
+        if (stretch) {
+          // offset width by 0.1 to avoid a bug in ie11 that
+          // unnecessarily wraps the text if width is the same
+          container.style.width = width + 0.1 + 'px';
+        }
         // the (position:absolute + scrollTop)
         // is presenting issues with desktop scroll flickering
         container.style.top = top + 'px';
@@ -228,7 +235,11 @@ var DropContainer = function (_Component) {
 }(Component);
 
 DropContainer.defaultProps = {
-  centered: true
+  align: {
+    top: 'top',
+    left: 'left'
+  },
+  stretch: 'width'
 };
 
 
