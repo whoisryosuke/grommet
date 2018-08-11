@@ -6,6 +6,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _react3 = require('@storybook/react');
 
+var _themes = require('../../themes');
+
 var _Stack = require('../Stack/Stack');
 
 var _Stack2 = _interopRequireDefault(_Stack);
@@ -51,6 +53,36 @@ var SimpleStack = function (_Component) {
   return SimpleStack;
 }(_react.Component);
 
+var FillStack = function (_Component2) {
+  _inherits(FillStack, _Component2);
+
+  function FillStack() {
+    _classCallCheck(this, FillStack);
+
+    return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
+  }
+
+  FillStack.prototype.render = function render() {
+    return _react2.default.createElement(
+      _Grommet2.default,
+      { theme: _themes.grommet, full: true },
+      _react2.default.createElement(
+        _Stack2.default,
+        { fill: true },
+        _react2.default.createElement(
+          _Box2.default,
+          { background: 'brand', fill: true },
+          'Test'
+        )
+      )
+    );
+  };
+
+  return FillStack;
+}(_react.Component);
+
 (0, _react3.storiesOf)('Stack', module).add('Simple Stack', function () {
   return _react2.default.createElement(SimpleStack, null);
+}).add('Fill Stack', function () {
+  return _react2.default.createElement(FillStack, null);
 });

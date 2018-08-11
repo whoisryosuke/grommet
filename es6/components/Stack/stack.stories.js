@@ -7,6 +7,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 
+import { grommet } from '../../themes';
+
 import Stack from '../Stack/Stack';
 import Grommet from '../Grommet/Grommet';
 import Box from '../Box/Box';
@@ -36,6 +38,36 @@ var SimpleStack = function (_Component) {
   return SimpleStack;
 }(Component);
 
+var FillStack = function (_Component2) {
+  _inherits(FillStack, _Component2);
+
+  function FillStack() {
+    _classCallCheck(this, FillStack);
+
+    return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
+  }
+
+  FillStack.prototype.render = function render() {
+    return React.createElement(
+      Grommet,
+      { theme: grommet, full: true },
+      React.createElement(
+        Stack,
+        { fill: true },
+        React.createElement(
+          Box,
+          { background: 'brand', fill: true },
+          'Test'
+        )
+      )
+    );
+  };
+
+  return FillStack;
+}(Component);
+
 storiesOf('Stack', module).add('Simple Stack', function () {
   return React.createElement(SimpleStack, null);
+}).add('Fill Stack', function () {
+  return React.createElement(FillStack, null);
 });

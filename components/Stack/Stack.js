@@ -56,20 +56,25 @@ var Stack = function (_Component) {
     } else if (guidingIndex === 'last') {
       guidingIndex = _react2.default.Children.count(children) - 1;
     }
-    var styledChildren = _react.Children.map(children, function (child, index) {
+    var childIndex = 0;
+    var styledChildren = _react.Children.map(children, function (child) {
       if (child) {
-        if (index === guidingIndex) {
-          return _react2.default.createElement(
+        var layer = void 0;
+        if (childIndex === guidingIndex) {
+          layer = _react2.default.createElement(
             _StyledStack.StyledStackLayer,
-            { guiding: true },
+            { guiding: true, fill: fill },
+            child
+          );
+        } else {
+          layer = _react2.default.createElement(
+            _StyledStack.StyledStackLayer,
+            { anchor: anchor },
             child
           );
         }
-        return _react2.default.createElement(
-          _StyledStack.StyledStackLayer,
-          { anchor: anchor },
-          child
-        );
+        childIndex += 1;
+        return layer;
       }
 
       return child;

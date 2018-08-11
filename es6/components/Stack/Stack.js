@@ -42,20 +42,25 @@ var Stack = function (_Component) {
     } else if (guidingIndex === 'last') {
       guidingIndex = React.Children.count(children) - 1;
     }
-    var styledChildren = Children.map(children, function (child, index) {
+    var childIndex = 0;
+    var styledChildren = Children.map(children, function (child) {
       if (child) {
-        if (index === guidingIndex) {
-          return React.createElement(
+        var layer = void 0;
+        if (childIndex === guidingIndex) {
+          layer = React.createElement(
             StyledStackLayer,
-            { guiding: true },
+            { guiding: true, fill: fill },
+            child
+          );
+        } else {
+          layer = React.createElement(
+            StyledStackLayer,
+            { anchor: anchor },
             child
           );
         }
-        return React.createElement(
-          StyledStackLayer,
-          { anchor: anchor },
-          child
-        );
+        childIndex += 1;
+        return layer;
       }
 
       return child;

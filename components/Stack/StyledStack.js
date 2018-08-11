@@ -41,10 +41,12 @@ var styleMap = {
 
 var StyledStackLayer = exports.StyledStackLayer = _styledComponents2.default.div.withConfig({
   displayName: 'StyledStack__StyledStackLayer'
-})(['position:', ';', ' ', ''], function (props) {
+})(['position:', ';', ' ', ' ', ''], function (props) {
   return props.guiding ? 'relative' : 'absolute';
 }, function (props) {
   return props.guiding && 'display: block;';
 }, function (props) {
   return !props.guiding && styleMap[props.anchor || 'fill'] + ';';
+}, function (props) {
+  return props.fill && '\n    width: 100%;\n    height: 100%;\n  ';
 });
