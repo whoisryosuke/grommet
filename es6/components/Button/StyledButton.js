@@ -32,7 +32,7 @@ function getHoverIndicatorStyle(hoverIndicator, theme) {
   } else {
     background = hoverIndicator;
   }
-  return css(['', ' color:', ';'], backgroundStyle(background, theme), theme.global.hover.color);
+  return css(['', ' color:', ';'], backgroundStyle(background, theme), normalizeColor(theme.global.hover.color, theme));
 }
 
 var hoverStyle = css(['&:hover{', ' ', ' ', '}'], function (props) {

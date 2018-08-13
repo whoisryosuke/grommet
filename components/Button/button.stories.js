@@ -50,13 +50,13 @@ var IconButton = function IconButton() {
   );
 };
 
-var PlainButton = function PlainButton() {
+var PlainButton = function PlainButton(props) {
   return _react2.default.createElement(
     _Grommet2.default,
     { theme: _themes.grommet },
     _react2.default.createElement(
       _Button2.default,
-      { hoverIndicator: true, onClick: function onClick() {} },
+      _extends({ hoverIndicator: true, onClick: function onClick() {} }, props),
       _react2.default.createElement(
         _Box2.default,
         { pad: 'small', direction: 'row', align: 'center', gap: 'small' },
@@ -135,6 +135,8 @@ var CustomThemeButton = function CustomThemeButton() {
   return _react2.default.createElement(AnchorButton, null);
 }).add('RoutedButton', function () {
   return _react2.default.createElement(RouteButton, null);
+}).add('Active', function () {
+  return _react2.default.createElement(PlainButton, { active: true });
 }).add('Custom theme', function () {
   return _react2.default.createElement(CustomThemeButton, null);
 });

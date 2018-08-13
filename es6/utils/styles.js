@@ -1,11 +1,13 @@
 import { css } from 'styled-components';
 
+import { normalizeColor } from './colors';
 import { palm, parseMetricToNum } from './mixins';
+import { backgroundStyle } from './background';
 
-export var activeStyle = css(['background:', ';color:', ';'], function (props) {
-  return props.theme.global.hover.backgroundColor;
+export var activeStyle = css(['', ' color:', ';'], function (props) {
+  return backgroundStyle(normalizeColor(props.theme.global.hover.background, props.theme), props.theme);
 }, function (props) {
-  return props.theme.global.hover.textColor;
+  return normalizeColor(props.theme.global.hover.color, props.theme);
 });
 
 export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';', ' ', ' box-sizing:border-box;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;'], function (props) {

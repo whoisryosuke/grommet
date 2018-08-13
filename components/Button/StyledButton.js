@@ -40,7 +40,7 @@ function getHoverIndicatorStyle(hoverIndicator, theme) {
   } else {
     background = hoverIndicator;
   }
-  return (0, _styledComponents.css)(['', ' color:', ';'], (0, _utils.backgroundStyle)(background, theme), theme.global.hover.color);
+  return (0, _styledComponents.css)(['', ' color:', ';'], (0, _utils.backgroundStyle)(background, theme), (0, _utils.normalizeColor)(theme.global.hover.color, theme));
 }
 
 var hoverStyle = (0, _styledComponents.css)(['&:hover{', ' ', ' ', '}'], function (props) {

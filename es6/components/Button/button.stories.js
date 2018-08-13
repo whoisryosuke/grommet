@@ -27,13 +27,13 @@ var IconButton = function IconButton() {
   );
 };
 
-var PlainButton = function PlainButton() {
+var PlainButton = function PlainButton(props) {
   return React.createElement(
     Grommet,
     { theme: grommet },
     React.createElement(
       Button,
-      { hoverIndicator: true, onClick: function onClick() {} },
+      _extends({ hoverIndicator: true, onClick: function onClick() {} }, props),
       React.createElement(
         Box,
         { pad: 'small', direction: 'row', align: 'center', gap: 'small' },
@@ -112,6 +112,8 @@ storiesOf('Button', module).add('Default', function () {
   return React.createElement(AnchorButton, null);
 }).add('RoutedButton', function () {
   return React.createElement(RouteButton, null);
+}).add('Active', function () {
+  return React.createElement(PlainButton, { active: true });
 }).add('Custom theme', function () {
   return React.createElement(CustomThemeButton, null);
 });
