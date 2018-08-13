@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 
 import { baseStyle } from '../../utils';
 
-var fullStyle = css(['width:100vw;height:100vh;']);
+var fullStyle = css(['width:100vw;height:100vh;overflow:auto;']);
 
 var StyledGrommet = styled.div.withConfig({
   displayName: 'StyledGrommet'

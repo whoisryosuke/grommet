@@ -6,6 +6,7 @@ export default (function (Paragraph) {
   var DocumentedParagraph = describe(Paragraph).availableAt(getAvailableAtBadge('Paragraph')).description('A paragraph of text.').usage('import { Paragraph } from \'grommet\';\n<Paragraph />');
 
   DocumentedParagraph.propTypes = {
+    color: PropTypes.string.description('A color identifier to use for the text color. For example:\n\'status-critical\'.'),
     margin: PropTypes.oneOfType([PropTypes.oneOf(['none', 'small', 'medium', 'large']), PropTypes.shape({
       bottom: PropTypes.oneOf(['small', 'medium', 'large']),
       top: PropTypes.oneOf(['small', 'medium', 'large'])

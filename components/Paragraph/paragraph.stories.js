@@ -41,17 +41,18 @@ var All = function (_Component) {
     return _react2.default.createElement(
       _Grommet2.default,
       { theme: _themes.grommet },
+      sizes.map(function (size) {
+        return _react2.default.createElement(
+          _Paragraph2.default,
+          { size: size },
+          'Paragraph ' + size,
+          paragraphFiller
+        );
+      }),
       _react2.default.createElement(
-        'div',
-        null,
-        sizes.map(function (size) {
-          return _react2.default.createElement(
-            _Paragraph2.default,
-            { size: size },
-            'Paragraph ' + size,
-            paragraphFiller
-          );
-        })
+        _Paragraph2.default,
+        { color: 'status-critical' },
+        'This is an error message.'
       )
     );
   };

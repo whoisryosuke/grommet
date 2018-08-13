@@ -28,17 +28,18 @@ var All = function (_Component) {
     return React.createElement(
       Grommet,
       { theme: grommet },
+      sizes.map(function (size) {
+        return React.createElement(
+          Paragraph,
+          { size: size },
+          'Paragraph ' + size,
+          paragraphFiller
+        );
+      }),
       React.createElement(
-        'div',
-        null,
-        sizes.map(function (size) {
-          return React.createElement(
-            Paragraph,
-            { size: size },
-            'Paragraph ' + size,
-            paragraphFiller
-          );
-        })
+        Paragraph,
+        { color: 'status-critical' },
+        'This is an error message.'
       )
     );
   };

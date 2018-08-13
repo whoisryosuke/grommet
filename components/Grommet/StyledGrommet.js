@@ -14,7 +14,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
 
-var fullStyle = (0, _styledComponents.css)(['width:100vw;height:100vh;']);
+var fullStyle = (0, _styledComponents.css)(['width:100vw;height:100vh;overflow:auto;']);
 
 var StyledGrommet = _styledComponents2.default.div.withConfig({
   displayName: 'StyledGrommet'

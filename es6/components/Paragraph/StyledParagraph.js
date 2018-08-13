@@ -4,6 +4,12 @@ function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return s
 
 import styled, { css } from 'styled-components';
 
+import { colorForName } from '../../utils';
+
+var colorStyle = css(['color:', ';'], function (props) {
+  return colorForName(props.color, props.theme);
+});
+
 var marginStyle = function marginStyle(props) {
   if (typeof props.margin === 'string') {
     var margin = props.theme.global.edgeSize[props.margin];
@@ -36,12 +42,14 @@ var textAlignStyle = css(['text-align:', ';'], function (props) {
 
 var StyledParagraph = styled.p.withConfig({
   displayName: 'StyledParagraph'
-})(['', ' ', ' ', ''], function (props) {
+})(['', ' ', ' ', ' ', ''], function (props) {
   return sizeStyle(props);
 }, function (props) {
   return props.margin && marginStyle(props);
 }, function (props) {
   return props.textAlign && textAlignStyle;
+}, function (props) {
+  return props.color && colorStyle;
 });
 
 export default StyledParagraph.extend(_templateObject, function (props) {
