@@ -291,61 +291,51 @@ var RichAccordion = function (_Component3) {
                   icon: _react2.default.createElement(_grommetIcons.Bookmark, { color: 'accent-1' }),
                   label: 'Highlights'
                 },
-                _react2.default.createElement(
-                  _.CollapsibleContext,
-                  null,
-                  function (_ref) {
-                    var reset = _ref.reset;
-
-                    _this5.reset = reset;
-
-                    return highlightLoaded ? _react2.default.createElement(
-                      _.Box,
-                      {
-                        pad: { bottom: 'medium', horizontal: 'small', top: 'small' },
-                        gap: 'medium',
-                        overflow: 'auto',
-                        style: { maxHeight: '400px' }
-                      },
-                      _react2.default.createElement(
-                        _.Text,
-                        { color: 'dark-5' },
-                        'Below is the top message in ',
-                        _react2.default.createElement(
-                          'strong',
-                          null,
-                          '#announcements'
-                        ),
-                        '.'
-                      ),
-                      _react2.default.createElement(
-                        _.Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      ),
-                      _react2.default.createElement(
-                        _.Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      ),
-                      _react2.default.createElement(
-                        _.Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      ),
-                      _react2.default.createElement(
-                        _.Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      ),
-                      _react2.default.createElement(
-                        _.Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      )
-                    ) : loading;
-                  }
-                )
+                highlightLoaded ? _react2.default.createElement(
+                  _.Box,
+                  {
+                    pad: { bottom: 'medium', horizontal: 'small', top: 'small' },
+                    gap: 'medium',
+                    overflow: 'auto',
+                    style: { maxHeight: '400px' }
+                  },
+                  _react2.default.createElement(
+                    _.Text,
+                    { color: 'dark-5' },
+                    'Below is the top message in ',
+                    _react2.default.createElement(
+                      'strong',
+                      null,
+                      '#announcements'
+                    ),
+                    '.'
+                  ),
+                  _react2.default.createElement(
+                    _.Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ),
+                  _react2.default.createElement(
+                    _.Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ),
+                  _react2.default.createElement(
+                    _.Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ),
+                  _react2.default.createElement(
+                    _.Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ),
+                  _react2.default.createElement(
+                    _.Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  )
+                ) : loading
               ),
               _react2.default.createElement(
                 RichPanel,

@@ -11,7 +11,7 @@ import { storiesOf } from '@storybook/react';
 
 import { Bookmark, CircleInformation, FormSubtract, FormAdd, User } from 'grommet-icons';
 
-import { Accordion, AccordionPanel, Box, CollapsibleContext, Grommet, Heading, Text, TextInput, ThemeContext } from '../../';
+import { Accordion, AccordionPanel, Box, Grommet, Heading, Text, TextInput, ThemeContext } from '../../';
 import { grommet } from '../../themes';
 
 var richAccordionTheme = {
@@ -283,61 +283,51 @@ var RichAccordion = function (_Component3) {
                   icon: React.createElement(Bookmark, { color: 'accent-1' }),
                   label: 'Highlights'
                 },
-                React.createElement(
-                  CollapsibleContext,
-                  null,
-                  function (_ref) {
-                    var reset = _ref.reset;
-
-                    _this5.reset = reset;
-
-                    return highlightLoaded ? React.createElement(
-                      Box,
-                      {
-                        pad: { bottom: 'medium', horizontal: 'small', top: 'small' },
-                        gap: 'medium',
-                        overflow: 'auto',
-                        style: { maxHeight: '400px' }
-                      },
-                      React.createElement(
-                        Text,
-                        { color: 'dark-5' },
-                        'Below is the top message in ',
-                        React.createElement(
-                          'strong',
-                          null,
-                          '#announcements'
-                        ),
-                        '.'
-                      ),
-                      React.createElement(
-                        Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      ),
-                      React.createElement(
-                        Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      ),
-                      React.createElement(
-                        Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      ),
-                      React.createElement(
-                        Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      ),
-                      React.createElement(
-                        Text,
-                        null,
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                      )
-                    ) : loading;
-                  }
-                )
+                highlightLoaded ? React.createElement(
+                  Box,
+                  {
+                    pad: { bottom: 'medium', horizontal: 'small', top: 'small' },
+                    gap: 'medium',
+                    overflow: 'auto',
+                    style: { maxHeight: '400px' }
+                  },
+                  React.createElement(
+                    Text,
+                    { color: 'dark-5' },
+                    'Below is the top message in ',
+                    React.createElement(
+                      'strong',
+                      null,
+                      '#announcements'
+                    ),
+                    '.'
+                  ),
+                  React.createElement(
+                    Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ),
+                  React.createElement(
+                    Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ),
+                  React.createElement(
+                    Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ),
+                  React.createElement(
+                    Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ),
+                  React.createElement(
+                    Text,
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  )
+                ) : loading
               ),
               React.createElement(
                 RichPanel,

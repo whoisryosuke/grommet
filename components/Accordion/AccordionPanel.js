@@ -82,8 +82,8 @@ var AccordionPanel = function (_Component) {
         var AccordionIcon = active ? theme.accordion.icons.collapse : theme.accordion.icons.expand;
 
         return _react2.default.createElement(
-          _react.Fragment,
-          null,
+          _Box.Box,
+          { flex: false },
           _react2.default.createElement(
             _Button.Button,
             {
@@ -115,7 +115,6 @@ var AccordionPanel = function (_Component) {
             header || _react2.default.createElement(
               _Box.Box,
               _extends({
-                flex: false,
                 align: 'center',
                 direction: 'row',
                 justify: 'between'
@@ -142,7 +141,6 @@ var AccordionPanel = function (_Component) {
           _react2.default.createElement(
             _Box.Box,
             {
-              flex: false,
               border: { side: 'bottom', color: dark ? 'border-dark' : 'border-light' }
             },
             animate ? _react2.default.createElement(

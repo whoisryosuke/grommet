@@ -1,168 +1,126 @@
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import React, { Component } from 'react';
+import React, { createRef, Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import Transition from 'react-transition-group/Transition';
+import styled from 'styled-components';
 
 import { withTheme } from '../hocs';
 
 import { Box } from '../Box';
 
-import CollapsibleContext from './CollapsibleContext';
 import doc from './doc';
 
-var getBaseStyle = function getBaseStyle(props) {
-  var _props$theme$collapsi = props.theme.collapsible,
-      minSpeed = _props$theme$collapsi.minSpeed,
-      baseHeight = _props$theme$collapsi.baseHeight;
-
-  var baseAnimation = {
-    transition: 'max-height ' + minSpeed + 'ms, visibility 50ms',
-    visibility: 'hidden',
-    overflow: 'hidden'
-  };
-
-  var baseTransitionStyles = {
-    entering: { visibility: 'hidden', overflow: 'hidden' },
-    entered: { visibility: 'visible', overflow: 'unset' },
-    exiting: { visibility: 'hidden', overflow: 'unset' }
-  };
-
-  return {
-    animation: _extends({}, baseAnimation),
-    transitionStyles: _extends({}, baseTransitionStyles),
-    containerHeight: undefined,
-    minSpeed: minSpeed,
-    baseHeight: baseHeight
-  };
-};
+var AnimatedBox = styled(Box).withConfig({
+  displayName: 'Collapsible__AnimatedBox'
+})(['', ''], function (props) {
+  return !props.animate && (props.open ? '\n    max-height: unset;\n    visibility: visible;\n  ' : '\n    max-height: 0;\n    visibility: hidden;\n  ');
+});
 
 var Collapsible = function (_Component) {
   _inherits(Collapsible, _Component);
 
-  function Collapsible() {
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, Collapsible);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.reset = function () {
-      var containerHeight = _this.state.containerHeight;
-      // preserve original height
-
-      _this.setState({ forceClose: true, previousHeight: containerHeight });
-    }, _this.onEntering = function () {
-      var _this$state = _this.state,
-          previousHeight = _this$state.previousHeight,
-          baseHeight = _this$state.baseHeight,
-          minSpeed = _this$state.minSpeed;
-
-
-      var height = findDOMNode(_this.animateContainerRef).clientHeight;
-      var speed = Math.max(height / baseHeight * minSpeed, minSpeed);
-
-      var baseStyle = getBaseStyle(_this.props);
-
-      _this.setState({
-        containerHeight: height,
-        speed: speed,
-        animation: _extends({}, baseStyle.animation, {
-          transition: 'max-height ' + speed + 'ms, ' + (!previousHeight ? ', visibility 50ms' : ''),
-          maxHeight: 0
-        }),
-        transitionStyles: _extends({}, baseStyle.transitionStyles, {
-          entering: _extends({}, baseStyle.transitionStyles.entering, {
-            maxHeight: previousHeight || 0
-          }),
-          entered: _extends({}, baseStyle.transitionStyles.entered, {
-            maxHeight: height + 'px'
-          }),
-          exiting: _extends({}, baseStyle.transitionStyles.exiting, {
-            maxHeight: 0
-          })
-        })
-      });
-    }, _this.onEnter = function () {
-      _this.setState(getBaseStyle(_this.props));
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
   Collapsible.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
-    var _nextProps$theme$coll = nextProps.theme.collapsible,
-        minSpeed = _nextProps$theme$coll.minSpeed,
-        baseHeight = _nextProps$theme$coll.baseHeight;
+    var open = nextProps.open;
 
-    if (minSpeed !== prevState.minSpeed || baseHeight !== prevState.baseHeight) {
-      return getBaseStyle(nextProps);
+    if (open !== prevState.open) {
+      return {
+        animate: true,
+        open: open
+      };
     }
     return null;
   };
 
-  Collapsible.prototype.componentDidUpdate = function componentDidUpdate() {
-    if (this.state.forceClose) {
-      /* eslint-disable react/no-did-update-set-state */
-      this.setState({ forceClose: undefined });
-      /* eslint-enable react/no-did-update-set-state */
+  function Collapsible(props, context) {
+    _classCallCheck(this, Collapsible);
+
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+
+    _this.ref = createRef();
+
+    _this.getSnapshotBeforeUpdate = function () {
+      return _this.ref.current && findDOMNode(_this.ref.current).getBoundingClientRect();
+    };
+
+    _this.state = {
+      open: props.open,
+      animate: false
+    };
+    return _this;
+  }
+
+  Collapsible.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState, snapshot) {
+    var _this2 = this;
+
+    var _props$theme$collapsi = this.props.theme.collapsible,
+        minSpeed = _props$theme$collapsi.minSpeed,
+        baseHeight = _props$theme$collapsi.baseHeight;
+    var _state = this.state,
+        animate = _state.animate,
+        open = _state.open;
+
+
+    var container = findDOMNode(this.ref.current);
+
+    var shouldAnimate = animate && prevState.open !== open;
+
+    if (snapshot.height && container.getBoundingClientRect().height !== snapshot.height) {
+      shouldAnimate = true;
+    }
+
+    if (shouldAnimate) {
+      if (this.animationTimeout) {
+        clearTimeout(this.animationTimeout);
+      }
+
+      var height = container.clientHeight;
+      var speed = Math.max(height / baseHeight * minSpeed, minSpeed);
+
+      container.style['max-height'] = snapshot.height + 'px';
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          container.style.transition = 'max-height ' + speed + 'ms, visibility 50ms';
+          container.style['max-height'] = open ? height + 'px' : '0px';
+
+          _this2.animationTimeout = setTimeout(function () {
+            container.style = '';
+            _this2.setState({
+              animate: false
+            });
+          }, speed);
+        });
+      });
+    }
+  };
+
+  Collapsible.prototype.componentWillUnmount = function componentWillUnmount() {
+    if (this.animationTimeout) {
+      clearTimeout(this.animationTimeout);
     }
   };
 
   Collapsible.prototype.render = function render() {
-    var _this2 = this;
-
-    var _props = this.props,
-        children = _props.children,
-        open = _props.open;
-    var _state = this.state,
-        animation = _state.animation,
-        forceClose = _state.forceClose,
-        previousHeight = _state.previousHeight,
-        transitionStyles = _state.transitionStyles,
-        speed = _state.speed;
+    var children = this.props.children;
+    var _state2 = this.state,
+        animate = _state2.animate,
+        open = _state2.open;
 
 
     return React.createElement(
-      CollapsibleContext.Provider,
+      AnimatedBox,
       {
-        value: {
-          reset: this.reset
-        }
+        overflow: 'hidden',
+        'aria-hidden': !open,
+        ref: this.ref,
+        open: open,
+        animate: animate
       },
-      React.createElement(
-        Transition,
-        {
-          'in': !forceClose && open,
-          appear: true,
-          timeout: { enter: 0, exit: !previousHeight ? speed : 0 },
-          onEnter: this.onEnter,
-          onEntering: this.onEntering,
-          onEntered: function onEntered() {
-            return _this2.setState({ previousHeight: undefined });
-          }
-        },
-        function (state) {
-          return React.createElement(
-            Box,
-            {
-              flex: false,
-              'aria-hidden': !open,
-              ref: function ref(_ref) {
-                _this2.animateContainerRef = _ref;
-              },
-              style: _extends({}, animation, transitionStyles[state])
-            },
-            state !== 'exited' && children
-          );
-        }
-      )
+      children
     );
   };
 

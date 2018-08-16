@@ -416,7 +416,7 @@ var generate = exports.generate = function generate() {
       }
     },
     collapsible: {
-      minSpeed: 150,
+      minSpeed: 200,
       baseHeight: 500
     },
     dataTable: {
