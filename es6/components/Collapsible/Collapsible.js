@@ -68,7 +68,7 @@ var Collapsible = function (_Component) {
 
     var shouldAnimate = animate && prevState.open !== open;
 
-    if (snapshot.height && container.getBoundingClientRect().height !== snapshot.height) {
+    if (open && snapshot.height && container.getBoundingClientRect().height !== snapshot.height) {
       shouldAnimate = true;
     }
 
