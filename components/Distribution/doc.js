@@ -14,7 +14,7 @@ exports.default = function (Distribution) {
     gap: _reactDesc.PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']).description('The amount of spacing between child elements.'),
     values: _reactDesc.PropTypes.arrayOf(_reactDesc.PropTypes.shape({
       value: _reactDesc.PropTypes.number.isRequired
-    })).description('Array of objects containing a value. The caller can put other\n      properties in the object. The children function will be called to\n      render the contents of each value.').isRequired
+    })).description('Array of objects containing a value. The array should already be\n      sorted from largest to smallest value. The caller can put other\n      properties in the object. The children function will be called to\n      render the contents of each value.').isRequired
   };
 
   return DocumentedDistribution;
