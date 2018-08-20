@@ -136,7 +136,6 @@ var Menu = function (_Component) {
     var controlMirror = React.createElement(
       Button,
       {
-        fill: true,
         a11yTitle: messages.closeMenu || 'Close Menu',
         onClick: this.onDropClose
       },
