@@ -106,7 +106,8 @@ var generate = exports.generate = function generate() {
       colors: colors,
       control: {
         border: {
-          width: '2px',
+          width: '1px',
+          radius: '4px',
           color: {
             dark: (0, _styledComponents.css)(['', ''], function (props) {
               return props.theme.global.colors['border-dark'];
@@ -200,11 +201,6 @@ var generate = exports.generate = function generate() {
         }
       },
       input: {
-        border: {
-          width: '1px',
-          radius: '4px'
-          // color: { dark: undefined, light: undefined },
-        },
         weight: 600
       },
       opacity: {
@@ -574,7 +570,10 @@ var generate = exports.generate = function generate() {
         down: _grommetIcons.FormDown
       },
       // searchInput: undefined,
-      step: 20
+      step: 20,
+      control: {
+        // extend: undefined,
+      }
     },
     text: {
       xsmall: _extends({}, fontSizing(-1.5)),

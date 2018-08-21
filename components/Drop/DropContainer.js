@@ -10,6 +10,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
+var _grommetIcons = require('grommet-icons');
+
+var _contexts = require('../../contexts');
+
 var _FocusedContainer = require('../FocusedContainer');
 
 var _FocusedContainer2 = _interopRequireDefault(_FocusedContainer);
@@ -44,7 +48,7 @@ var DropContainer = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.dropRef = _react2.default.createRef(), _this.addScrollListener = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.dropRef = _react2.default.createRef(), _this.addScrollListener = function () {
       var dropTarget = _this.props.dropTarget;
 
       _this.scrollParents = (0, _utils.findScrollParents)((0, _reactDom.findDOMNode)(dropTarget));
@@ -194,6 +198,31 @@ var DropContainer = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
+  DropContainer.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    // Since the drop background can be different from the current theme context,
+    // we update the theme to set the dark background context.
+    var propsTheme = nextProps.theme;
+    var stateTheme = prevState.theme,
+        priorTheme = prevState.priorTheme;
+
+
+    var dark = (0, _utils.backgroundIsDark)(propsTheme.global.drop.background, propsTheme);
+
+    if (dark === propsTheme.dark && stateTheme) {
+      return { theme: undefined, priorTheme: undefined };
+    }
+    if (dark !== propsTheme.dark && (!stateTheme || dark !== stateTheme.dark || propsTheme !== priorTheme)) {
+      return {
+        theme: _extends({}, propsTheme, {
+          dark: dark,
+          icon: dark ? propsTheme.iconThemes.dark : propsTheme.iconThemes.light
+        }),
+        priorTheme: propsTheme
+      };
+    }
+    return null;
+  };
+
   DropContainer.prototype.componentDidMount = function componentDidMount() {
     var restrictFocus = this.props.restrictFocus;
 
@@ -224,8 +253,37 @@ var DropContainer = function (_Component) {
         onClickOutside = _props.onClickOutside,
         onEsc = _props.onEsc,
         onKeyDown = _props.onKeyDown,
-        theme = _props.theme,
+        propsTheme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'onClickOutside', 'onEsc', 'onKeyDown', 'theme']);
+
+    var stateTheme = this.state.theme;
+
+    var theme = stateTheme || propsTheme;
+
+    var content = _react2.default.createElement(
+      _StyledDrop2.default,
+      _extends({
+        tabIndex: '-1',
+        ref: this.dropRef,
+        theme: theme
+      }, rest),
+      children
+    );
+
+    if (stateTheme) {
+      if (stateTheme.dark !== propsTheme.dark && stateTheme.icon) {
+        content = _react2.default.createElement(
+          _grommetIcons.ThemeContext.Provider,
+          { value: stateTheme.icon },
+          content
+        );
+      }
+      content = _react2.default.createElement(
+        _contexts.ThemeContext.Provider,
+        { value: stateTheme },
+        content
+      );
+    }
 
     return _react2.default.createElement(
       _FocusedContainer2.default,
@@ -233,15 +291,7 @@ var DropContainer = function (_Component) {
       _react2.default.createElement(
         _Keyboard.Keyboard,
         { onEsc: onEsc, onKeyDown: onKeyDown },
-        _react2.default.createElement(
-          _StyledDrop2.default,
-          _extends({
-            tabIndex: '-1',
-            ref: this.dropRef,
-            theme: theme
-          }, rest),
-          children
-        )
+        content
       )
     );
   };

@@ -47,6 +47,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SelectTextInput = (0, _styledComponents2.default)(_TextInput.TextInput).withConfig({
   displayName: 'Select__SelectTextInput'
 })(['cursor:pointer;']);
+var StyledSelectBox = (0, _styledComponents2.default)(_Box.Box).withConfig({
+  displayName: 'Select__StyledSelectBox'
+})(['', ';', ''], function (props) {
+  return !props.plain && _utils.controlBorderStyle;
+}, function (props) {
+  return props.theme.select && props.theme.select.control && props.theme.select.control.extend;
+});
 
 var Select = function (_Component) {
   _inherits(Select, _Component);
@@ -164,13 +171,14 @@ var Select = function (_Component) {
           dropContent: _react2.default.createElement(_SelectContainer2.default, _extends({}, this.props, { onChange: onSelectChange }))
         }),
         _react2.default.createElement(
-          _Box.Box,
+          StyledSelectBox,
           {
             align: 'center',
-            border: !plain ? 'all' : undefined,
             direction: 'row',
             justify: 'between',
-            background: theme.select.background
+            background: theme.select.background,
+            plain: plain,
+            theme: theme
           },
           _react2.default.createElement(
             _Box.Box,

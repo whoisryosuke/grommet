@@ -17,6 +17,34 @@ import { grommet } from '../../../themes';
 
 import customSearchTheme from './theme';
 import SearchInputContext from './components/SearchInputContext';
+import { deepMerge } from '../../../utils';
+
+var customRoundedTheme = deepMerge(grommet, {
+  global: {
+    control: {
+      border: {
+        radius: '24px'
+      }
+    },
+    input: {
+      weight: 400
+    },
+    font: {
+      size: '12px'
+    }
+  },
+  text: {
+    medium: '13px'
+  },
+  textInput: {
+    extend: 'padding: 0 12px;'
+  },
+  select: {
+    control: {
+      extend: 'padding: 3px 6px;'
+    }
+  }
+});
 
 var SimpleSelect = function (_Component) {
   _inherits(SimpleSelect, _Component);
@@ -39,13 +67,14 @@ var SimpleSelect = function (_Component) {
   SimpleSelect.prototype.render = function render() {
     var _this2 = this;
 
+    var theme = this.props.theme;
     var _state = this.state,
         options = _state.options,
         value = _state.value;
 
     return React.createElement(
       Grommet,
-      { theme: grommet },
+      { theme: theme || grommet },
       React.createElement(Select, {
         placeholder: 'Select',
         value: value,
@@ -534,4 +563,6 @@ storiesOf('Select', module).add('Simple Select', function () {
   return React.createElement(DarkSelect, null);
 }).add('Custom Colors', function () {
   return React.createElement(DarkSelect, { theme: { global: { font: { family: 'Arial' } }, select: { background: '#000000', iconColor: '#d3d3d3' } } });
+}).add('Custom Rounded', function () {
+  return React.createElement(SimpleSelect, { theme: customRoundedTheme });
 });

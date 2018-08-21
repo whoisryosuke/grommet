@@ -32,7 +32,7 @@ export var StyledTextInputContainer = styled.div.withConfig({
 export var StyledPlaceholder = styled.div.withConfig({
   displayName: 'StyledTextInput__StyledPlaceholder'
 })(['position:absolute;left:', 'px;top:50%;transform:translateY(-50%);display:flex;justify-content:center;'], function (props) {
-  return parseMetricToNum(props.theme.global.spacing) / 2 - parseMetricToNum(props.theme.global.input.border.width);
+  return parseMetricToNum(props.theme.global.spacing) / 2 - parseMetricToNum(props.theme.global.control.border.width);
 });
 
 export var StyledSuggestions = styled.ol.withConfig({

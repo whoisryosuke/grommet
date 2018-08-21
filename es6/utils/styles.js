@@ -22,6 +22,14 @@ export var baseStyle = css(['font-family:', ';font-size:', ';line-height:', ';',
   return props.theme.global.colors.background && 'background: ' + props.theme.global.colors.background + ';';
 });
 
+export var controlBorderStyle = css(['border:', ' solid ', ';border-radius:', ';'], function (props) {
+  return props.theme.global.control.border.width;
+}, function (props) {
+  return (props.theme.global.control.border.color || props.theme.global.control.border.color)[props.theme.dark ? 'dark' : 'light'];
+}, function (props) {
+  return props.theme.global.control.border.radius;
+});
+
 export var edgeStyle = function edgeStyle(kind, data, responsive, theme) {
   if (typeof data === 'string') {
     return css(['', ':', ';', ''], kind, theme.global.edgeSize[data], responsive ? palm('\n        ' + kind + ': ' + theme.global.edgeSize.narrow[data] + ';\n      ') : '');
@@ -57,19 +65,13 @@ export var focusStyle = css(['> circle,> ellipse,> line,> path,> polygon,> polyl
   return props.theme.global.focus.border.color;
 });
 
-export var inputStyle = css(['box-sizing:border-box;font-size:inherit;padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background:transparent;color:inherit;', ' margin:0;', ''], function (props) {
-  return parseMetricToNum(props.theme.global.spacing) / 2 - parseMetricToNum(props.theme.global.input.border.width);
-}, function (props) {
-  return props.theme.global.input.border.width;
-}, function (props) {
-  return (props.theme.global.input.border.color || props.theme.global.control.border.color)[props.theme.dark ? 'dark' : 'light'];
-}, function (props) {
-  return props.theme.global.input.border.radius;
+export var inputStyle = css(['box-sizing:border-box;font-size:inherit;padding:', 'px;outline:none;background:transparent;color:inherit;', ' margin:0;', ' ', ''], function (props) {
+  return parseMetricToNum(props.theme.global.spacing) / 2 - parseMetricToNum(props.theme.global.control.border.width);
 }, function (props) {
   return props.theme.global.input.weight && css(['font-weight:', ';'], props.theme.global.input.weight);
 }, function (props) {
   return props.focus && (!props.plain || props.focusIndicator) && focusStyle;
-});
+}, controlBorderStyle);
 
 export var evalStyle = function evalStyle(arg, theme) {
   if (arg && Array.isArray(arg) && typeof arg[0] === 'function') {
@@ -81,6 +83,7 @@ export var evalStyle = function evalStyle(arg, theme) {
 export default {
   activeStyle: activeStyle,
   baseStyle: baseStyle,
+  controlBorderStyle: controlBorderStyle,
   evalStyle: evalStyle,
   edgeStyle: edgeStyle,
   focusStyle: focusStyle,

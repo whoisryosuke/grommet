@@ -24,6 +24,8 @@ var _SearchInputContext = require('./components/SearchInputContext');
 
 var _SearchInputContext2 = _interopRequireDefault(_SearchInputContext);
 
+var _utils = require('../../../utils');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31,6 +33,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var customRoundedTheme = (0, _utils.deepMerge)(_themes.grommet, {
+  global: {
+    control: {
+      border: {
+        radius: '24px'
+      }
+    },
+    input: {
+      weight: 400
+    },
+    font: {
+      size: '12px'
+    }
+  },
+  text: {
+    medium: '13px'
+  },
+  textInput: {
+    extend: 'padding: 0 12px;'
+  },
+  select: {
+    control: {
+      extend: 'padding: 3px 6px;'
+    }
+  }
+});
 
 var SimpleSelect = function (_Component) {
   _inherits(SimpleSelect, _Component);
@@ -53,13 +82,14 @@ var SimpleSelect = function (_Component) {
   SimpleSelect.prototype.render = function render() {
     var _this2 = this;
 
+    var theme = this.props.theme;
     var _state = this.state,
         options = _state.options,
         value = _state.value;
 
     return _react2.default.createElement(
       _.Grommet,
-      { theme: _themes.grommet },
+      { theme: theme || _themes.grommet },
       _react2.default.createElement(_.Select, {
         placeholder: 'Select',
         value: value,
@@ -548,4 +578,6 @@ var DarkSelect = function (_Component5) {
   return _react2.default.createElement(DarkSelect, null);
 }).add('Custom Colors', function () {
   return _react2.default.createElement(DarkSelect, { theme: { global: { font: { family: 'Arial' } }, select: { background: '#000000', iconColor: '#d3d3d3' } } });
+}).add('Custom Rounded', function () {
+  return _react2.default.createElement(SimpleSelect, { theme: customRoundedTheme });
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.evalStyle = exports.inputStyle = exports.focusStyle = exports.edgeStyle = exports.baseStyle = exports.activeStyle = undefined;
+exports.evalStyle = exports.inputStyle = exports.focusStyle = exports.edgeStyle = exports.controlBorderStyle = exports.baseStyle = exports.activeStyle = undefined;
 
 var _styledComponents = require('styled-components');
 
@@ -27,6 +27,14 @@ var baseStyle = exports.baseStyle = (0, _styledComponents.css)(['font-family:', 
   return props.theme.global.colors.text && 'color: ' + props.theme.global.colors.text + ';';
 }, function (props) {
   return props.theme.global.colors.background && 'background: ' + props.theme.global.colors.background + ';';
+});
+
+var controlBorderStyle = exports.controlBorderStyle = (0, _styledComponents.css)(['border:', ' solid ', ';border-radius:', ';'], function (props) {
+  return props.theme.global.control.border.width;
+}, function (props) {
+  return (props.theme.global.control.border.color || props.theme.global.control.border.color)[props.theme.dark ? 'dark' : 'light'];
+}, function (props) {
+  return props.theme.global.control.border.radius;
 });
 
 var edgeStyle = exports.edgeStyle = function edgeStyle(kind, data, responsive, theme) {
@@ -64,19 +72,13 @@ var focusStyle = exports.focusStyle = (0, _styledComponents.css)(['> circle,> el
   return props.theme.global.focus.border.color;
 });
 
-var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['box-sizing:border-box;font-size:inherit;padding:', 'px;border:', ' solid ', ';border-radius:', ';outline:none;background:transparent;color:inherit;', ' margin:0;', ''], function (props) {
-  return (0, _mixins.parseMetricToNum)(props.theme.global.spacing) / 2 - (0, _mixins.parseMetricToNum)(props.theme.global.input.border.width);
-}, function (props) {
-  return props.theme.global.input.border.width;
-}, function (props) {
-  return (props.theme.global.input.border.color || props.theme.global.control.border.color)[props.theme.dark ? 'dark' : 'light'];
-}, function (props) {
-  return props.theme.global.input.border.radius;
+var inputStyle = exports.inputStyle = (0, _styledComponents.css)(['box-sizing:border-box;font-size:inherit;padding:', 'px;outline:none;background:transparent;color:inherit;', ' margin:0;', ' ', ''], function (props) {
+  return (0, _mixins.parseMetricToNum)(props.theme.global.spacing) / 2 - (0, _mixins.parseMetricToNum)(props.theme.global.control.border.width);
 }, function (props) {
   return props.theme.global.input.weight && (0, _styledComponents.css)(['font-weight:', ';'], props.theme.global.input.weight);
 }, function (props) {
   return props.focus && (!props.plain || props.focusIndicator) && focusStyle;
-});
+}, controlBorderStyle);
 
 var evalStyle = exports.evalStyle = function evalStyle(arg, theme) {
   if (arg && Array.isArray(arg) && typeof arg[0] === 'function') {
@@ -88,6 +90,7 @@ var evalStyle = exports.evalStyle = function evalStyle(arg, theme) {
 exports.default = {
   activeStyle: activeStyle,
   baseStyle: baseStyle,
+  controlBorderStyle: controlBorderStyle,
   evalStyle: evalStyle,
   edgeStyle: edgeStyle,
   focusStyle: focusStyle,

@@ -100,7 +100,8 @@ export var generate = function generate() {
       colors: colors,
       control: {
         border: {
-          width: '2px',
+          width: '1px',
+          radius: '4px',
           color: {
             dark: css(['', ''], function (props) {
               return props.theme.global.colors['border-dark'];
@@ -194,11 +195,6 @@ export var generate = function generate() {
         }
       },
       input: {
-        border: {
-          width: '1px',
-          radius: '4px'
-          // color: { dark: undefined, light: undefined },
-        },
         weight: 600
       },
       opacity: {
@@ -568,7 +564,10 @@ export var generate = function generate() {
         down: FormDown
       },
       // searchInput: undefined,
-      step: 20
+      step: 20,
+      control: {
+        // extend: undefined,
+      }
     },
     text: {
       xsmall: _extends({}, fontSizing(-1.5)),

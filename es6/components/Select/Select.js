@@ -17,7 +17,7 @@ import { DropButton } from '../DropButton';
 import { Keyboard } from '../Keyboard';
 import { TextInput } from '../TextInput';
 import { withForwardRef, withTheme } from '../hocs';
-import { colorIsDark, evalStyle } from '../../utils';
+import { controlBorderStyle, colorIsDark, evalStyle } from '../../utils';
 
 import SelectContainer from './SelectContainer';
 import doc from './doc';
@@ -25,6 +25,13 @@ import doc from './doc';
 var SelectTextInput = styled(TextInput).withConfig({
   displayName: 'Select__SelectTextInput'
 })(['cursor:pointer;']);
+var StyledSelectBox = styled(Box).withConfig({
+  displayName: 'Select__StyledSelectBox'
+})(['', ';', ''], function (props) {
+  return !props.plain && controlBorderStyle;
+}, function (props) {
+  return props.theme.select && props.theme.select.control && props.theme.select.control.extend;
+});
 
 var Select = function (_Component) {
   _inherits(Select, _Component);
@@ -142,13 +149,14 @@ var Select = function (_Component) {
           dropContent: React.createElement(SelectContainer, _extends({}, this.props, { onChange: onSelectChange }))
         }),
         React.createElement(
-          Box,
+          StyledSelectBox,
           {
             align: 'center',
-            border: !plain ? 'all' : undefined,
             direction: 'row',
             justify: 'between',
-            background: theme.select.background
+            background: theme.select.background,
+            plain: plain,
+            theme: theme
           },
           React.createElement(
             Box,

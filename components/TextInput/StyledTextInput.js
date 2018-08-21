@@ -41,7 +41,7 @@ var StyledTextInputContainer = exports.StyledTextInputContainer = _styledCompone
 var StyledPlaceholder = exports.StyledPlaceholder = _styledComponents2.default.div.withConfig({
   displayName: 'StyledTextInput__StyledPlaceholder'
 })(['position:absolute;left:', 'px;top:50%;transform:translateY(-50%);display:flex;justify-content:center;'], function (props) {
-  return (0, _utils.parseMetricToNum)(props.theme.global.spacing) / 2 - (0, _utils.parseMetricToNum)(props.theme.global.input.border.width);
+  return (0, _utils.parseMetricToNum)(props.theme.global.spacing) / 2 - (0, _utils.parseMetricToNum)(props.theme.global.control.border.width);
 });
 
 var StyledSuggestions = exports.StyledSuggestions = _styledComponents2.default.ol.withConfig({
