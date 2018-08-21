@@ -6,11 +6,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _base = require('../themes/base');
+var _base = require('../../themes/base');
 
 var _base2 = _interopRequireDefault(_base);
 
-var _utils = require('../utils');
+var _utils = require('../../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

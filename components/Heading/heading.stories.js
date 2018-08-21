@@ -18,9 +18,7 @@ var _Grid = require('../Grid/Grid');
 
 var _Grid2 = _interopRequireDefault(_Grid);
 
-var _ThemeContext = require('../../contexts/ThemeContext');
-
-var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
+var _contexts = require('../../contexts');
 
 var _themes = require('../../themes');
 
@@ -68,7 +66,7 @@ var All = function (_Component) {
       _Grommet2.default,
       { theme: _themes.grommet },
       _react2.default.createElement(
-        _ThemeContext2.default.Consumer,
+        _contexts.ThemeContext.Consumer,
         null,
         function (theme) {
           return _react2.default.createElement(

@@ -10,7 +10,7 @@ import { storiesOf } from '@storybook/react';
 import Heading from '../Heading/Heading';
 import Grommet from '../Grommet/Grommet';
 import Grid from '../Grid/Grid';
-import ThemeContext from '../../contexts/ThemeContext';
+import { ThemeContext } from '../../contexts';
 import { grommet } from '../../themes';
 
 var H = function H(_ref) {

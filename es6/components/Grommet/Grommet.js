@@ -11,8 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { ThemeContext as IconThemeContext } from 'grommet-icons';
 
-import ThemeContext from '../../contexts/ThemeContext';
-import ResponsiveContext from '../../contexts/ResponsiveContext';
+import { ResponsiveContext, ThemeContext } from '../../contexts';
 import baseTheme from '../../themes/base';
 import { colorIsDark, deepMerge } from '../../utils';
 import { withIconTheme } from '../hocs';

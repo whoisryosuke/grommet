@@ -12,9 +12,7 @@ var _recompose = require('recompose');
 
 var _grommetIcons = require('grommet-icons');
 
-var _ThemeContext = require('../../contexts/ThemeContext');
-
-var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
+var _contexts = require('../../contexts');
 
 var _utils = require('../../utils');
 
@@ -157,7 +155,7 @@ var Box = function (_Component) {
         );
       }
       content = _react2.default.createElement(
-        _ThemeContext2.default.Provider,
+        _contexts.ThemeContext.Provider,
         { value: stateTheme },
         content
       );

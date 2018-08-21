@@ -44,6 +44,7 @@ var Responsive = function (_Component) {
   }
 
   Responsive.prototype.componentDidMount = function componentDidMount() {
+    console.warn('Responsive is deprecated. You should use ResponsiveContext.Consumer instead.');
     window.addEventListener('resize', this.onResize);
     this.onResize();
   };
