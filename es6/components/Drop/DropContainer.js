@@ -10,11 +10,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import { ThemeContext as IconThemeContext } from 'grommet-icons';
 
-import { ThemeContext } from '../../contexts';
 import FocusedContainer from '../FocusedContainer';
-import { backgroundIsDark, findScrollParents, findVisibleParent, parseMetricToNum } from '../../utils';
+import { findScrollParents, findVisibleParent, parseMetricToNum } from '../../utils';
 import { Keyboard } from '../Keyboard';
 
 import StyledDrop from './StyledDrop';
@@ -31,7 +29,7 @@ var DropContainer = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _this.dropRef = React.createRef(), _this.addScrollListener = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.dropRef = React.createRef(), _this.addScrollListener = function () {
       var dropTarget = _this.props.dropTarget;
 
       _this.scrollParents = findScrollParents(findDOMNode(dropTarget));
@@ -181,31 +179,6 @@ var DropContainer = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  DropContainer.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
-    // Since the drop background can be different from the current theme context,
-    // we update the theme to set the dark background context.
-    var propsTheme = nextProps.theme;
-    var stateTheme = prevState.theme,
-        priorTheme = prevState.priorTheme;
-
-
-    var dark = backgroundIsDark(propsTheme.global.drop.background, propsTheme);
-
-    if (dark === propsTheme.dark && stateTheme) {
-      return { theme: undefined, priorTheme: undefined };
-    }
-    if (dark !== propsTheme.dark && (!stateTheme || dark !== stateTheme.dark || propsTheme !== priorTheme)) {
-      return {
-        theme: _extends({}, propsTheme, {
-          dark: dark,
-          icon: dark ? propsTheme.iconThemes.dark : propsTheme.iconThemes.light
-        }),
-        priorTheme: propsTheme
-      };
-    }
-    return null;
-  };
-
   DropContainer.prototype.componentDidMount = function componentDidMount() {
     var restrictFocus = this.props.restrictFocus;
 
@@ -236,37 +209,8 @@ var DropContainer = function (_Component) {
         onClickOutside = _props.onClickOutside,
         onEsc = _props.onEsc,
         onKeyDown = _props.onKeyDown,
-        propsTheme = _props.theme,
+        theme = _props.theme,
         rest = _objectWithoutProperties(_props, ['children', 'onClickOutside', 'onEsc', 'onKeyDown', 'theme']);
-
-    var stateTheme = this.state.theme;
-
-    var theme = stateTheme || propsTheme;
-
-    var content = React.createElement(
-      StyledDrop,
-      _extends({
-        tabIndex: '-1',
-        ref: this.dropRef,
-        theme: theme
-      }, rest),
-      children
-    );
-
-    if (stateTheme) {
-      if (stateTheme.dark !== propsTheme.dark && stateTheme.icon) {
-        content = React.createElement(
-          IconThemeContext.Provider,
-          { value: stateTheme.icon },
-          content
-        );
-      }
-      content = React.createElement(
-        ThemeContext.Provider,
-        { value: stateTheme },
-        content
-      );
-    }
 
     return React.createElement(
       FocusedContainer,
@@ -274,7 +218,15 @@ var DropContainer = function (_Component) {
       React.createElement(
         Keyboard,
         { onEsc: onEsc, onKeyDown: onKeyDown },
-        content
+        React.createElement(
+          StyledDrop,
+          _extends({
+            tabIndex: '-1',
+            ref: this.dropRef,
+            theme: theme
+          }, rest),
+          children
+        )
       )
     );
   };
