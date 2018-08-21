@@ -12,6 +12,10 @@ var _reactDom = require('react-dom');
 
 var _recompose = require('recompose');
 
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
 var _Box = require('../Box');
 
 var _Button = require('../Button');
@@ -39,6 +43,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ContainerBox = (0, _styledComponents2.default)(_Box.Box).withConfig({
+  displayName: 'Menu__ContainerBox'
+})(['max-height:inherit;@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){width:100%;}']);
 
 var Menu = function (_Component) {
   _inherits(Menu, _Component);
@@ -151,12 +159,16 @@ var Menu = function (_Component) {
     );
 
     var controlMirror = _react2.default.createElement(
-      _Button.Button,
-      {
-        a11yTitle: messages.closeMenu || 'Close Menu',
-        onClick: this.onDropClose
-      },
-      content
+      _Box.Box,
+      { flex: false },
+      _react2.default.createElement(
+        _Button.Button,
+        {
+          a11yTitle: messages.closeMenu || 'Close Menu',
+          onClick: this.onDropClose
+        },
+        content
+      )
     );
 
     return _react2.default.createElement(
@@ -190,35 +202,39 @@ var Menu = function (_Component) {
               return _this2.setState({ open: false });
             },
             dropContent: _react2.default.createElement(
-              _Box.Box,
+              ContainerBox,
               { background: dropBackground },
               dropAlign.top === 'top' ? controlMirror : undefined,
               _react2.default.createElement(
                 _Box.Box,
-                null,
+                { overflow: 'auto' },
                 items.map(function (item, index) {
                   return _react2.default.createElement(
-                    _Button.Button,
-                    {
-                      ref: function ref(_ref) {
-                        _this2.buttonRefs[index] = _ref;
-                      },
-                      active: activeItemIndex === index,
-                      key: 'menuItem_' + index,
-                      hoverIndicator: 'background',
-                      onClick: item.onClick ? function () {
-                        item.onClick.apply(item, arguments);
-                        if (item.close !== false) {
-                          _this2.onDropClose();
-                        }
-                      } : undefined,
-                      href: item.href
-                    },
+                    _Box.Box,
+                    { flex: false },
                     _react2.default.createElement(
-                      _Box.Box,
-                      { align: 'start', pad: 'small', direction: 'row' },
-                      item.icon,
-                      item.label
+                      _Button.Button,
+                      {
+                        ref: function ref(_ref) {
+                          _this2.buttonRefs[index] = _ref;
+                        },
+                        active: activeItemIndex === index,
+                        key: 'menuItem_' + index,
+                        hoverIndicator: 'background',
+                        onClick: item.onClick ? function () {
+                          item.onClick.apply(item, arguments);
+                          if (item.close !== false) {
+                            _this2.onDropClose();
+                          }
+                        } : undefined,
+                        href: item.href
+                      },
+                      _react2.default.createElement(
+                        _Box.Box,
+                        { align: 'start', pad: 'small', direction: 'row' },
+                        item.icon,
+                        item.label
+                      )
                     )
                   );
                 })

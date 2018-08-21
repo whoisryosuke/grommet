@@ -11,6 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { compose } from 'recompose';
+import styled from 'styled-components';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
@@ -22,6 +23,10 @@ import { withForwardRef, withTheme } from '../hocs';
 import { evalStyle } from '../../utils';
 
 import doc from './doc';
+
+var ContainerBox = styled(Box).withConfig({
+  displayName: 'Menu__ContainerBox'
+})(['max-height:inherit;@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){width:100%;}']);
 
 var Menu = function (_Component) {
   _inherits(Menu, _Component);
@@ -134,12 +139,16 @@ var Menu = function (_Component) {
     );
 
     var controlMirror = React.createElement(
-      Button,
-      {
-        a11yTitle: messages.closeMenu || 'Close Menu',
-        onClick: this.onDropClose
-      },
-      content
+      Box,
+      { flex: false },
+      React.createElement(
+        Button,
+        {
+          a11yTitle: messages.closeMenu || 'Close Menu',
+          onClick: this.onDropClose
+        },
+        content
+      )
     );
 
     return React.createElement(
@@ -173,35 +182,39 @@ var Menu = function (_Component) {
               return _this2.setState({ open: false });
             },
             dropContent: React.createElement(
-              Box,
+              ContainerBox,
               { background: dropBackground },
               dropAlign.top === 'top' ? controlMirror : undefined,
               React.createElement(
                 Box,
-                null,
+                { overflow: 'auto' },
                 items.map(function (item, index) {
                   return React.createElement(
-                    Button,
-                    {
-                      ref: function ref(_ref) {
-                        _this2.buttonRefs[index] = _ref;
-                      },
-                      active: activeItemIndex === index,
-                      key: 'menuItem_' + index,
-                      hoverIndicator: 'background',
-                      onClick: item.onClick ? function () {
-                        item.onClick.apply(item, arguments);
-                        if (item.close !== false) {
-                          _this2.onDropClose();
-                        }
-                      } : undefined,
-                      href: item.href
-                    },
+                    Box,
+                    { flex: false },
                     React.createElement(
-                      Box,
-                      { align: 'start', pad: 'small', direction: 'row' },
-                      item.icon,
-                      item.label
+                      Button,
+                      {
+                        ref: function ref(_ref) {
+                          _this2.buttonRefs[index] = _ref;
+                        },
+                        active: activeItemIndex === index,
+                        key: 'menuItem_' + index,
+                        hoverIndicator: 'background',
+                        onClick: item.onClick ? function () {
+                          item.onClick.apply(item, arguments);
+                          if (item.close !== false) {
+                            _this2.onDropClose();
+                          }
+                        } : undefined,
+                        href: item.href
+                      },
+                      React.createElement(
+                        Box,
+                        { align: 'start', pad: 'small', direction: 'row' },
+                        item.icon,
+                        item.label
+                      )
                     )
                   );
                 })

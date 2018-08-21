@@ -40,6 +40,9 @@ var Box = function (_Component) {
   }
 
   Box.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+    // Since Box can change the background color for its contents,
+    // we update the theme to indicate whether the current context is `dark`
+    // and what icon theme to use.
     var background = nextProps.background,
         propsTheme = nextProps.theme;
     var stateTheme = prevState.theme,
