@@ -7,11 +7,11 @@ import styled, { css } from 'styled-components';
 import { activeStyle, backgroundStyle, colorForName, colorIsDark, focusStyle, lapAndUp, normalizeColor } from '../../utils';
 
 var basicStyle = function basicStyle(props) {
-  return css(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, props.color ? colorForName(props.color, props.theme) : normalizeColor(props.theme.button.border.color || props.theme.global.control.color, props.theme), props.theme.button.border.radius, (props.theme.button.color || props.theme.global.text.color)[props.theme.dark ? 'dark' : 'light']);
+  return css(['border:', ' solid ', ';border-radius:', ';color:', ';'], props.theme.button.border.width, colorForName(normalizeColor(props.color || props.theme.button.border.color || props.theme.global.control.color || 'brand', props.theme), props.theme), props.theme.button.border.radius, (props.theme.button.color || props.theme.global.text.color)[props.theme.dark ? 'dark' : 'light']);
 };
 
 var primaryStyle = function primaryStyle(props) {
-  return css(['', ' border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], backgroundStyle(normalizeColor(props.color || props.theme.button.primary.color || 'brand', props.theme), props.theme), props.theme.button.border.radius, props.theme.global.text.color[colorIsDark(colorForName('brand', props.theme)) ? 'dark' : 'light'], props.theme.global.text.color[colorIsDark(colorForName('brand', props.theme)) ? 'dark' : 'light']);
+  return css(['', ' border-radius:', ';svg{fill:', ';stroke:', ';transition:none;}'], backgroundStyle(normalizeColor(props.color || props.theme.button.primary.color || props.theme.global.control.color || 'brand', props.theme), props.theme), props.theme.button.border.radius, props.theme.global.text.color[colorIsDark(colorForName('brand', props.theme)) ? 'dark' : 'light'], props.theme.global.text.color[colorIsDark(colorForName('brand', props.theme)) ? 'dark' : 'light']);
 };
 
 var disabledStyle = css(['opacity:', ';cursor:default;'], function (props) {

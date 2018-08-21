@@ -255,14 +255,7 @@ export var generate = function generate() {
       },
       // color: { dark: undefined, light: undefined }
       primary: {
-        color: {
-          dark: css(['', ''], function (props) {
-            return props.theme.global.colors['accent-1'];
-          }),
-          light: css(['', ''], function (props) {
-            return props.theme.global.colors.brand;
-          })
-        }
+        // color: { dark: undefined, light: undefined }
       },
       disabled: {
         opacity: 0.3
