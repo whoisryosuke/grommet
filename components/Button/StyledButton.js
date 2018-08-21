@@ -76,7 +76,7 @@ var StyledButton = _styledComponents2.default.button.withConfig({
 }, (0, _utils.lapAndUp)('\n    transition: 0.1s ease-in-out;\n  '), function (props) {
   return props.fillContainer && fillStyle;
 }, function (props) {
-  return props.icon && !props.label && !props.plain && '\n    padding: ' + props.theme.global.edgeSize.small + ';\n  ';
+  return props.hasIcon && !props.label && !props.plain && '\n    padding: ' + props.theme.global.edgeSize.small + ';\n  ';
 });
 
 exports.default = StyledButton.extend(_templateObject, function (props) {

@@ -98,7 +98,7 @@ var Button = function (_Component) {
         innerRef: forwardRef,
         'aria-label': a11yTitle,
         disabled: disabled,
-        icon: icon,
+        hasIcon: !!icon,
         fillContainer: fill,
         focus: focus,
         href: href,
