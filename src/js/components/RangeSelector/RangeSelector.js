@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'recompose';
 import styled from 'styled-components';
 
-import { ThemeContext } from '../../contexts';
+import { ThemeContext } from '../../contexts/ThemeContext/ThemeContext';
 
 import { Box } from '../Box';
 import { withForwardRef } from '../hocs';
