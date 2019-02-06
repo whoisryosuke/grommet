@@ -3,7 +3,8 @@ import { compose } from 'recompose';
 
 import { withTheme } from 'styled-components';
 
-import { normalizeColor, parseMetricToNum } from '../../utils';
+import { normalizeColor } from '../../utils/colors';
+import { parseMetricToNum } from '../../utils/mixins';
 import { defaultProps } from '../../default-props';
 
 import { StyledChart } from './StyledChart';

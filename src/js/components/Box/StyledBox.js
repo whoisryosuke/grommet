@@ -1,15 +1,10 @@
 import styled, { css, keyframes } from 'styled-components';
 
 import { defaultProps } from '../../default-props';
-
-import {
-  backgroundStyle,
-  breakpointStyle,
-  edgeStyle,
-  genericStyles,
-  normalizeColor,
-  overflowStyle,
-} from '../../utils';
+import { backgroundStyle } from '../../utils/background';
+import { breakpointStyle } from '../../utils/mixins';
+import { edgeStyle, genericStyles, overflowStyle } from '../../utils/styles';
+import { normalizeColor } from '../../utils/colors';
 
 const ALIGN_MAP = {
   baseline: 'baseline',

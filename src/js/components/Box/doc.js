@@ -1,6 +1,7 @@
 import { describe, PropTypes } from 'react-desc';
 
-import { getAvailableAtBadge, genericProps } from '../../utils';
+import { getAvailableAtBadge } from '../../utils/mixins';
+import { genericProps } from '../../utils/prop-types';
 
 const PAD_SIZES = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge'];
 const OVERFLOW_VALUES = ['auto', 'hidden', 'scroll', 'visible'];

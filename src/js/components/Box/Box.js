@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { withForwardRef, withDocs } from '../hocs';
 import { ThemeContext } from '../../contexts';
 import { defaultProps } from '../../default-props';
-import { backgroundIsDark } from '../../utils';
+import { backgroundIsDark } from '../../utils/background';
 
 import { StyledBox, StyledBoxGap } from './StyledBox';
 

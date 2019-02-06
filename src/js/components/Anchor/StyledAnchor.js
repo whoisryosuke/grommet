@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { focusStyle, genericStyles, normalizeColor } from '../../utils';
+import { focusStyle, genericStyles } from '../../utils/styles';
+import { normalizeColor } from '../../utils/colors';
 import { defaultProps } from '../../default-props';
 
 const disabledStyle = `

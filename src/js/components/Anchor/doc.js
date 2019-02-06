@@ -1,6 +1,7 @@
 import { describe, PropTypes } from 'react-desc';
 
-import { colorPropType, genericProps, getAvailableAtBadge } from '../../utils';
+import { colorPropType, genericProps } from '../../utils/prop-types';
+import { getAvailableAtBadge } from '../../utils/mixins';
 
 export const doc = Anchor => {
   const DocumentedAnchor = describe(Anchor)

@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 
 import { withTheme } from 'styled-components';
 
-import { normalizeColor } from '../../utils';
+import { normalizeColor } from '../../utils/colors';
 import { defaultProps } from '../../default-props';
 
 import { Box } from '../Box';
