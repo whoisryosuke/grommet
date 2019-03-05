@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
 export const withDocs = doc;
 
 export const withFocus = ({ focusWithMouse } = {}) => WrappedComponent => {
-  class FocusableComponent extends Component {
+  class FocusableComponent extends React.Component {
     static getDerivedStateFromProps(nextProps, prevState) {
       const { withFocusRef } = nextProps;
       const { wrappedRef } = prevState;

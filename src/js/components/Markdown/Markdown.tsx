@@ -6,7 +6,6 @@ import { deepMerge } from '../../utils';
 import { Anchor } from '../Anchor';
 import { Heading } from '../Heading';
 import { Paragraph } from '../Paragraph';
-import { Anchor } from '../Anchor';
 import { Image } from '../Image';
 import { Table } from '../Table';
 import { TableBody } from '../TableBody';
