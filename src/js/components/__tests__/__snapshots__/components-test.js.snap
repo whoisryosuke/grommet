@@ -2446,6 +2446,25 @@ string",
         "name": "step",
       },
       Object {
+        "description": "The control range.",
+        "format": "{
+  before: 
+    string
+    {
+      dark: string,
+      light: string
+    },
+  after: 
+    string
+    {
+      dark: string,
+      light: string
+    }
+}
+string",
+        "name": "track",
+      },
+      Object {
         "description": "The current value.",
         "format": "number
 string",

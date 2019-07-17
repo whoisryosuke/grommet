@@ -29,6 +29,25 @@ export const doc = RangeInput => {
       via 'event.target.value'.`,
     ),
     step: PropTypes.number.description('The step interval between values.'),
+    track: PropTypes.oneOfType([
+      PropTypes.shape({
+        before: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.shape({
+            dark: PropTypes.string,
+            light: PropTypes.string,
+          }),
+        ]),
+        after: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.shape({
+            dark: PropTypes.string,
+            light: PropTypes.string,
+          }),
+        ]),
+      }),
+      PropTypes.string,
+    ]).description('The control range.'),
     value: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
@@ -60,9 +79,14 @@ export const themeDoc = {
     type: 'string | (props) => {}',
     defaultValue: undefined,
   },
+  'rangeInput.thumb.type': {
+    description: 'The type of the thumb control.',
+    type: "'bar' | 'disc' | node",
+    defaultValue: undefined,
+  },
   'rangeInput.track.color': {
     description: 'The color of the track.',
-    type: 'string',
+    type: 'string | { dark: string, light: string }',
     defaultValue:
       '{ dark: rgba(255, 255, 255, 0.33), light: rgba(0, 0, 0, 0.33) }',
   },

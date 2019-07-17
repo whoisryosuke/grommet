@@ -63,6 +63,28 @@ The step interval between values.
 number
 ```
 
+**track**
+
+The control range.
+
+```
+{
+  before: 
+    string
+    {
+      dark: string,
+      light: string
+    },
+  after: 
+    string
+    {
+      dark: string,
+      light: string
+    }
+}
+string
+```
+
 **value**
 
 The current value.
@@ -129,9 +151,19 @@ Defaults to
 undefined
 ```
 
+**rangeInput.thumb.type**
+
+The type of the thumb control. Expects `'bar' | 'disc' | node`.
+
+Defaults to
+
+```
+undefined
+```
+
 **rangeInput.track.color**
 
-The color of the track. Expects `string`.
+The color of the track. Expects `string | { dark: string, light: string }`.
 
 Defaults to
 

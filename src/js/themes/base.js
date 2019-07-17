@@ -681,6 +681,7 @@ export const generate = (baseSpacing = 24, scale = 6) => {
         `,
       },
       thumb: {
+        type: 'disc',
         // color: { dark: undefined, light: undefined },
       },
     },

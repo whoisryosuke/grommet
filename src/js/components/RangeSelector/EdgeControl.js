@@ -7,7 +7,8 @@ import { defaultProps } from '../../default-props';
 
 import { Box } from '../Box';
 import { Keyboard } from '../Keyboard';
-import { normalizeColor, parseMetricToNum } from '../../utils';
+import { normalizeColor } from '../../utils/colors';
+import { parseMetricToNum } from '../../utils/mixins';
 import { withForwardRef } from '../hocs';
 
 const DIRECTION_PROPS = {
