@@ -169,6 +169,7 @@ string",
         "name": "reverse",
       },
       Object {
+        "defaultValue": "medium",
         "description": "The font size is typically driven by the components containing
 this component. But, it can be adjusted directly via this size property, typically
 when it is not contained in a 'Heading', 'Paragraph', or 'Text'.",
