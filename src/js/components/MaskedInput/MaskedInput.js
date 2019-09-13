@@ -157,8 +157,11 @@ class MaskedInput extends Component {
           }
           return false;
         });
-        if (maskIndex === undefined && valueParts.length < mask.length) {
-          maskIndex = valueParts.length; // first unused one
+        if (maskIndex === undefined && valueParts.length <= mask.length) {
+          maskIndex =
+            valueParts.length === mask.length
+              ? valueParts.length - 1
+              : valueParts.length; // first unused one
         }
         if (maskIndex && mask[maskIndex].fixed) {
           maskIndex -= 1; // fixed mask parts are never "active"
