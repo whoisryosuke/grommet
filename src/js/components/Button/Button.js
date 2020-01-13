@@ -7,13 +7,24 @@ import React, {
 } from 'react';
 
 import { ThemeContext } from 'styled-components';
-import { colorIsDark, normalizeBackground, normalizeColor } from '../../utils';
+import PropTypes from 'prop-types';
+import {
+  colorIsDark,
+  normalizeBackground,
+  normalizeColor,
+  colorPropType,
+  genericProps,
+  hoverIndicatorPropType,
+} from '../../utils';
 import { defaultProps } from '../../default-props';
 
 import { Box } from '../Box';
 
 import { StyledButton } from './StyledButton';
 
+/**
+ * This is a button
+ */
 const Button = forwardRef(
   (
     {
@@ -149,11 +160,137 @@ const Button = forwardRef(
 
 Button.displayName = 'Button';
 
-let ButtonDoc;
-if (process.env.NODE_ENV !== 'production') {
-  // eslint-disable-next-line global-require
-  ButtonDoc = require('./doc').doc(Button);
-}
-const ButtonWrapper = ButtonDoc || Button;
+export default Button;
 
-export { ButtonWrapper as Button };
+Button.propTypes = {
+  ...genericProps,
+  /**
+   * Whether the button is active.
+   */
+  active: PropTypes.bool,
+
+  /**
+   * Fill color for primary, label color for plain, border color otherwise.
+   */
+  color: colorPropType,
+
+  /**
+   * Whether the button is disabled.
+   */
+  disabled: PropTypes.bool,
+
+  /**
+     * Whether the button expands to fill all of the available width and/or 
+        height.
+     */
+  fill: PropTypes.oneOfType([
+    PropTypes.oneOf(['horizontal', 'vertical']),
+    PropTypes.bool,
+  ]),
+
+  /**
+   * Whether when 'plain' it should receive a focus outline.
+   */
+  focusIndicator: PropTypes.bool,
+
+  /**
+     * The hover indicator to apply when the user is mousing over the
+button. An object can be also be specified for color index support:
+{background: 'neutral-2'}. This prop is meant to be used only
+with plain Buttons.
+     */
+  hoverIndicator: hoverIndicatorPropType,
+
+  /**
+   * If specified, the button will behave like an anchor tag.
+   */
+  href: PropTypes.string,
+
+  /**
+   * Specifies where to display the URL defined in the href property.
+   */
+  target: PropTypes.oneOf(['_self', '_blank', '_parent', '_top']),
+
+  /**
+   * Icon element to place in the button.
+   */
+  icon: PropTypes.element,
+
+  /**
+   * The amount of spacing between icon and label in the button.
+   */
+  gap: PropTypes.oneOfType([
+    PropTypes.oneOf([
+      'none',
+      'xxsmall',
+      'xsmall',
+      'small',
+      'medium',
+      'large',
+      'xlarge',
+    ]),
+    PropTypes.string,
+  ]),
+
+  /**
+   * Label text to place in the button.
+   */
+  label: PropTypes.node,
+
+  /**
+   * Click handler. Not setting this property and not specifying a href
+causes the Button to be disabled.
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Whether this is a plain button with no border or pad.
+Non plain button will show both pad and border.
+The plain button has no border and unless the icon prop exist it has no pad as 
+well
+   */
+  plain: PropTypes.bool,
+
+  /**
+   * Whether this is a primary button. There should be at most one per page
+         or screen.
+   */
+  primary: PropTypes.bool,
+
+  /**
+   * Whether an icon and label should be reversed so that the icon is at the
+end of the anchor.
+   */
+  reverse: PropTypes.bool,
+
+  /**
+   * The type of button. Set the type to submit for the default button on 
+        forms.
+   */
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
+
+  /**
+   * The DOM tag or react component to use for the element.
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+};
+
+Button.defaultProps = {
+  active: false,
+  as: 'button',
+  color: 'brand',
+  disabled: false,
+  fill: false,
+  href: '#',
+  hoverIndicator: false,
+  icon: [],
+  focusIndicator: true,
+  gap: 'small',
+  label: 'Text',
+  onClick: () => {},
+  plain: false,
+  primary: false,
+  reverse: false,
+  target: 'self',
+  type: 'button',
+};

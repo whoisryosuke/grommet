@@ -1,0 +1,49 @@
+---
+title: Button
+date: '2019-10-14'
+section: component
+---
+
+import { Button } from 'grommet';
+
+You can provide a single function child that will be called with 'hover' and 'focus' keys. This allows you to customize the rendering of the Button in those cases.
+
+```jsx live
+<Button primary label="Label" />
+```
+
+## Active:
+
+```jsx live
+<Button active label="Submit" onClick={() => {}} />
+```
+
+## Color:
+
+```jsx live
+<Button color="status-critical" label="Submit" onClick={() => {}} />
+```
+
+## Icon:
+
+```jsx
+<Button icon={<Close />} onClick={() => {}} />
+```
+
+## Label:
+
+```jsx live
+<Button label="Submit" onClick={() => {}} />
+```
+
+## Primary:
+
+```jsx live
+<Button primary label="Submit" onClick={() => {}} />
+```
+
+## Reverse:
+
+```jsx
+<Button reverse icon={<Edit />} label="Edit" onClick={() => {}} />
+```
